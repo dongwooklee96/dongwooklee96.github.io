@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on 꾸준한 프로그래머</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on 꾸준한 프로그래머</description>
+    <title>코딩 테스트 on 꾸준한 프로그래머</title>
+    <link>/categories/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8/</link>
+    <description>Recent content in 코딩 테스트 on 꾸준한 프로그래머</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Sat, 27 Feb 2021 22:56:33 +0900</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -38,25 +38,6 @@
       
       <guid>/post/2021/02/27/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</guid>
       <description>내가 코딩 테스트를 준비하는 이유  당장 구직하지 않더라도, 이러한 준비를 미리 해두어야 좋은 기회를 잡을 수 있다. 대기업이나, 누구나 가고 싶은 기업에는 코딩 테스트가 존재한다. 항상 서류에서 통과가 되더라도, 코딩 테스트에서 떨어지곤 했는데 이번에는 떨어지지 않고 면접까지 가는 것이 목표이다. 대기업 면접을 통해서 합격하지 못하더라도 내가 미쳐 생각하지 못했던 부분과, 부족한 부분을 배울 수 있는 기회로 삼고 싶은데 코딩 테스트때문에 면접까지 갈 수가 없기 때문에 배울 기회가 없다. 물론 코딩 테스트를 통해서 테스트 코드를 작성하는 법과 사고력을 키울 수 있을 것 같다.</description>
-    </item>
-    
-    <item>
-      <title>일일 회고</title>
-      <link>/post/2021/02/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
-      <pubDate>Sat, 27 Feb 2021 12:29:39 +0900</pubDate>
-      
-      <guid>/post/2021/02/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
-      <description>facts (사실, 객관)  오늘 개발 블로그를 만들었다. 오늘 회사에 일찍 일어나서, 출근을 하였다. 테스트 주도 개발 시작하기라는 책을 3장까지 읽었다.  feelings (느낌, 주관)  블로그 서비스를 이용하는 것보다는 많은 시간이 들었다. 아직 많은 기능이 필요하지만, 실제로 그 기능이 필요할 때 까지는 최대한 늦추도록 해야겠다. 일찍자고, 일찍 일어나는 것이 늦게까지 개발을 하다가 늦게 일어나는 것 보다 효율이 좋은 것 같다. 하지만, 회사에 출근을 했을 때, 무엇을 해야할지 계획을 세우지 않아서 조금 헤메였다.</description>
-    </item>
-    
-    <item>
-      <title>테스트 코드를 작성하는 순서</title>
-      <link>/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C/</link>
-      <pubDate>Sat, 27 Feb 2021 12:29:39 +0900</pubDate>
-      
-      <guid>/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C/</guid>
-      <description>테스트 코드를 작성하는 순서 테스트 코드를 작성하는 것도 무작성 작성하는 것보다는 순서를 지켜가면서 작성하는 것이 훨씬 좋다.
-테스트는 다음과 같은 순서를 따르면서 작성 해야한다.   쉬운 경우에서, 어려운 경우로 진행 예외적인 경우에서, 정상적인 경우로 진행   한번에 완벽한 코드를 만들면 좋겠지만, 모두가 슈퍼 개발자인 것은 아니다. 보통의 개발자는 한 번에 많은 코드를 만들다 보면 나도 모르게 버그를 만들고 나중에 버그를 잡기 위해 많은 시간을 허비하게 된다. 당연히 테스트 통과 시간도 길어진다.</description>
     </item>
     
   </channel>

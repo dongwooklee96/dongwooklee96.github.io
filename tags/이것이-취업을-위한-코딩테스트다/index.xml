@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>이것이 취업을 위한 코딩테스트다 on 꾸준한 프로그래머</title>
+    <link>/tags/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%B7%A8%EC%97%85%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</link>
+    <description>Recent content in 이것이 취업을 위한 코딩테스트다 on 꾸준한 프로그래머</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 27 Feb 2021 22:28:35 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%B7%A8%EC%97%85%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>코딩 테스트 출제 경향 및 준비 방향</title>
+      <link>/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5/</link>
+      <pubDate>Sat, 27 Feb 2021 22:28:35 +0900</pubDate>
+      
+      <guid>/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5/</guid>
+      <description>최신 출제 경향과 준비 방향  정확한 알고리즘을 사용하여 얼마나 빠르게 많은 문제를 풀었는지를 토대로 순위를 매긴다. 기업은 코딩 테스트를 통해서 취업 준비생들에게 뛰어난 프로그래밍 실력을 원하는 것이 아니라, 기초 알고리즘에 기반하는 문제들이 출제된다. 가장 출제 빈도가 높은 문제는 그리디, 구현(implementation), DFS/BFS를 활용한 탐색 문제이다. 또한 상대적으로 높은 사고력을 요구하는 다이나믹 프로그래밍이나, 그래프 이론 문제도 출제된다.  다음은 카카오 기술 블로그에 언급된 코딩 테스트 문제 난이도에 대한 내용이다.
+ ACM-ICPC 같은 어려운 알고리즘 설계 능력을 겨루는 문제가 아닌, 업무에서 있을만한 상황을 가정하여 독창적이고 다양한 분야의 문제를 출제했고 난이도 또한 비교적 쉬운 수준으로 조정하였습니다.</description>
+    </item>
+    
+    <item>
+      <title>이것이 코딩 테스트다</title>
+      <link>/post/2021/02/27/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</link>
+      <pubDate>Sat, 27 Feb 2021 12:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/02/27/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</guid>
+      <description>내가 코딩 테스트를 준비하는 이유  당장 구직하지 않더라도, 이러한 준비를 미리 해두어야 좋은 기회를 잡을 수 있다. 대기업이나, 누구나 가고 싶은 기업에는 코딩 테스트가 존재한다. 항상 서류에서 통과가 되더라도, 코딩 테스트에서 떨어지곤 했는데 이번에는 떨어지지 않고 면접까지 가는 것이 목표이다. 대기업 면접을 통해서 합격하지 못하더라도 내가 미쳐 생각하지 못했던 부분과, 부족한 부분을 배울 수 있는 기회로 삼고 싶은데 코딩 테스트때문에 면접까지 갈 수가 없기 때문에 배울 기회가 없다. 물론 코딩 테스트를 통해서 테스트 코드를 작성하는 법과 사고력을 키울 수 있을 것 같다.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,11 @@
     <description>Recent content in 책 on 꾸준한 프로그래머</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Feb 2021 12:29:39 +0900</lastBuildDate><atom:link href="/categories/%EC%B1%85/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Feb 2021 12:29:39 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/%EC%B1%85/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>테스트 코드를 작성하는 순서</title>
       <link>/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C/</link>
