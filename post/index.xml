@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on 꾸준한 프로그래머</title>
+    <link>/post/</link>
+    <description>Recent content in Posts on 꾸준한 프로그래머</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 27 Feb 2021 12:29:39 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/02/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 27 Feb 2021 12:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/02/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>facts (사실, 객관)  오늘 개발 블로그를 만들었다. 오늘 회사에 일찍 일어나서, 출근을 하였다. 테스트 주도 개발 시작하기라는 책을 4장까지 읽었다.  feelings (느낌, 주관)  블로그 서비스를 이용하는 것보다는 많은 시간이 들었다. 아직 많은 기능이 필요하지만, 실제로 그 기능이 필요할 때 까지는 최대한 늦추도록 해야겠다. 일찍자고, 일찍 일어나는 것이 늦게까지 개발을 하다가 늦게 일어나는 것 보다 효율이 좋은 것 같다. 하지만, 회사에 출근을 했을 때, 무엇을 해야할지 계획을 세우지 않아서 조금 헤메였다.</description>
+    </item>
+    
+  </channel>
+</rss>
