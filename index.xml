@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Home on 꾸준한 프로그래머</title>
+    <title>Home on 개발자 이동욱</title>
     <link>/</link>
-    <description>Recent content in Home on 꾸준한 프로그래머</description>
+    <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Feb 2021 22:56:33 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 28 Feb 2021 12:29:39 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>주간 회고</title>
+      <link>/post/2021/02/28/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 28 Feb 2021 12:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/02/28/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>주간 회고 이번주에 있던 일들을 종합해서 회고를 해보고 정리를 해보았습니다.
+출근 방식의 변화  이번주에는 새벽까지 할 일을 하고 아침에 늦게 출근하느 방식에서 벗어나 차라리 일찍 일어나서 일찍 출근하고 일찍 취침하는 방식을 택했다. 무엇보다 마음에 드는 것은 활용할 수 있는 시간이 훨씬 많아진 것이다. 새벽에 출근을 하니까 교통이 막히자 않아서 전에는 버스를 타고 1시간 20분 걸리던 거리가 40분 만에 도착할 수 있었다. 그리고 남는 시간에 개인적인 공부를 하니 시간 확보를 하는데 많은 도움이 되었다.</description>
+    </item>
     
     <item>
       <title>개발자 채용 프로세스</title>
