@@ -6,10 +6,20 @@
     <description>Recent content in 코딩 테스트 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Feb 2021 22:28:35 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 28 Feb 2021 12:29:39 +0900</lastBuildDate>
     
 	<atom:link href="/tags/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>그리디 알고리즘</title>
+      <link>/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</link>
+      <pubDate>Sun, 28 Feb 2021 12:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</guid>
+      <description>그리디 알고리즘  현재 상황에서 좋아 보이는 것만을 선택하는 알고리즘
+ 어떤 문제가 있을 때 단순 무식하게 탐욕적으로 푸는 알고리즘이다. 여기서 탐욕적이라는 말은 &amp;lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&amp;rsquo;을 의미한다. &amp;lsquo;사전에 외우고 있지 않아도 풀 수 있을 가능성이 높은 유형&amp;rsquo; 이라는 특징이 있다. 그리디 알고리즘 유형의 문제는 매우 다양하기 때문에, 암기한다고 해서 항상 잘 풀수 있는 것은 아니다. 많은 유형을 접해보고 문제를 풀어보며 훈련을 해야한다. 코딩 테스트에서 출제되는 그리디 알고리즘 유형의 문제는 창의력, 즉 문제를 풀기 위한 최소한의 아이디어를 떠올릴 수 있는 능력을 요구한다.</description>
+    </item>
     
     <item>
       <title>코딩 테스트 출제 경향 및 준비 방향</title>

@@ -6,10 +6,29 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Feb 2021 12:29:39 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 02 Mar 2021 12:29:39 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 02 Mar 2021 12:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  코드숨 강의를 들엇다. (JWT 토큰에 대해서 알게 되었다.) 오늘 회사에서 일을 할 때, 적극적으로 의사소통을 하려고 노력하였다. 플라스크 관련된 문서를 정리해보았다. 퇴근하는 길에, 라인 개발자 채용 관련 QnA 영상을 보았다.  Feelings (느낌, 주관)  적극적으로 의사소통을 하니, 동료들과 소통이 더 잘되는 느낌이였다. 라인 채용 유튜브 영상을 보니, 컴퓨터공학 기반 지식과 알고리즘 그리고 코딩테스트를 중요하게 여기는 것 같았다.  Findings (배운 점)  소통하려는 의지만 있어도 동료들이 알아차리고 좋게 봐주는 것 같다.</description>
+    </item>
+    
+    <item>
+      <title>그리디 알고리즘</title>
+      <link>/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</link>
+      <pubDate>Sun, 28 Feb 2021 12:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</guid>
+      <description>그리디 알고리즘  현재 상황에서 좋아 보이는 것만을 선택하는 알고리즘
+ 어떤 문제가 있을 때 단순 무식하게 탐욕적으로 푸는 알고리즘이다. 여기서 탐욕적이라는 말은 &amp;lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&amp;rsquo;을 의미한다. &amp;lsquo;사전에 외우고 있지 않아도 풀 수 있을 가능성이 높은 유형&amp;rsquo; 이라는 특징이 있다. 그리디 알고리즘 유형의 문제는 매우 다양하기 때문에, 암기한다고 해서 항상 잘 풀수 있는 것은 아니다. 많은 유형을 접해보고 문제를 풀어보며 훈련을 해야한다. 코딩 테스트에서 출제되는 그리디 알고리즘 유형의 문제는 창의력, 즉 문제를 풀기 위한 최소한의 아이디어를 떠올릴 수 있는 능력을 요구한다.</description>
+    </item>
     
     <item>
       <title>주간 회고</title>
@@ -57,6 +76,16 @@
       
       <guid>/post/2021/02/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
       <description>facts (사실, 객관)  오늘 개발 블로그를 만들었다. 오늘 회사에 일찍 일어나서, 출근을 하였다. 테스트 주도 개발 시작하기라는 책을 3장까지 읽었다.  feelings (느낌, 주관)  블로그 서비스를 이용하는 것보다는 많은 시간이 들었다. 아직 많은 기능이 필요하지만, 실제로 그 기능이 필요할 때 까지는 최대한 늦추도록 해야겠다. 일찍자고, 일찍 일어나는 것이 늦게까지 개발을 하다가 늦게 일어나는 것 보다 효율이 좋은 것 같다. 하지만, 회사에 출근을 했을 때, 무엇을 해야할지 계획을 세우지 않아서 조금 헤메였다.</description>
+    </item>
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/02/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 27 Feb 2021 12:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/02/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>README.md   buffers
+TIL 양식 Facts (사실, 객관)  코딩 테스트 공부를 했다.  Feelings (느낌, 주관)  정답을 맞추는 것 뿐만 아니라, 더 좋은 방법은 없는지 생각을 해보는 것이 중요하다는 것을 느꼈다. 더 좋은 방법이 없는지 생각해보는 것은 실제로 코딩을 할 때, 지금보다 나은 방법이 없는지 꾸준히 고민하게 해주는 습관을 기를 수 있게 될 것이다.  Findings (배운 점)  코딩 테스트 문제를 풀 때, 입력 값을 받는 코드를 넣으면 테스트 하기 불편해진다.</description>
     </item>
     
     <item>
