@@ -52,6 +52,13 @@
   </url>
   
   <url>
+    <loc>/post/2021/03/01/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
+    <lastmod>2021-03-01T12:29:39+09:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</loc>
     <lastmod>2021-02-28T12:29:39+09:00</lastmod>
     <changefreq>monthly</changefreq>
@@ -144,13 +151,6 @@
   
   <url>
     <loc>/post/2021/02/27/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</loc>
-    <lastmod>2021-02-27T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/post/2021/02/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-27T12:29:39+09:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
