@@ -6,10 +6,22 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 03 Mar 2021 20:09:39 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 03 Mar 2021 21:49:39 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>라인 개발자 입사기를 읽고 느낀점</title>
+      <link>/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</link>
+      <pubDate>Wed, 03 Mar 2021 21:49:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</guid>
+      <description>지원서 작성할 때, 참고할 부분    대외 활동을 했다는 사실 그 자체보다는 그 활동에서 배우고 얼마나 성장했는지를 위주로 적자
+  무엇을 했는지가 중요한 것이 아니다, 무엇을 얻었고, 배웠는지를 위주로 작성하자.
+  어떤 활동을 하더라도, 자신의 성장을 연결하는 것이 중요하다, 자신의 성장을 감춰두고 혼자만 아는 것 보다는 어떠한 방식으로도 그것을 드러내서 어필하는 것이 중요하다.
+  신입 개발자가 아닌 경우  스스로 공부해 왔던 내용과, 더불어 내가 어떤 개발자가 되고 싶은지 목표를 설정 지금 근무하는 곳에서 책임감을 가지고 근무하는 모습이 중요하다.</description>
+    </item>
     
     <item>
       <title>데이터베이스 스키마를 관리하는 도구, Flyway</title>
@@ -23,11 +35,11 @@
     </item>
     
     <item>
-      <title>파이썬에서의 클래스 메서드와 스택틱 메서드</title>
-      <link>/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90%EC%84%9C%EC%9D%98-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%A9%94%EC%84%9C%EB%93%9C%EC%99%80-%EC%8A%A4%ED%83%9D%ED%8B%B1-%EB%A9%94%EC%84%9C%EB%93%9C/</link>
+      <title>파이썬 @classmethod와 @staticmethod 차이</title>
+      <link>/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4/</link>
       <pubDate>Wed, 03 Mar 2021 08:45:13 +0900</pubDate>
       
-      <guid>/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90%EC%84%9C%EC%9D%98-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%A9%94%EC%84%9C%EB%93%9C%EC%99%80-%EC%8A%A4%ED%83%9D%ED%8B%B1-%EB%A9%94%EC%84%9C%EB%93%9C/</guid>
+      <guid>/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4/</guid>
       <description>파이썬을 코딩을 하다가 @classmethod 데코레이터가 붙어 있는 메서드를 볼 수 있었다. 정확히 어떤 역할을 하는지 몰라서 문서에서 찾아보았다.
 @classmethod  메서드를 클래스 메서드로 변환합니다. 클래스 메서드는 인스턴스 메서드가 인스턴스를 받는 것 처럼 클래스를 암시적인 첫 번째 인수로 수신한다.1  클래스 메서드는 다음과 같이 사용한다.
 class C: @classmethod def f(cls, arg1, arg2, ...): ...  클래스 메서드는 다음과 같이 호출 될 수 있다.  C.f(), C().f()   앞의 경우에는 클래스에서 호출 된 것이고, 뒤의 경우에는 인스턴스에서 호출 된 것이다.</description>

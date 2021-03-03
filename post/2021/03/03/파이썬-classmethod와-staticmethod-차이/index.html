@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>파이썬 @classmethod와 @staticmethod 차이 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">파이썬 @classmethod와 @staticmethod 차이</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/03</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC">프로그래밍 - 파이썬</a> 
+  
+  
+  
+  Tags: <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> <a href="/tags/%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC">플라스크</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>파이썬을 코딩을 하다가 <code>@classmethod</code> 데코레이터가 붙어 있는 메서드를 볼 수 있었다. 정확히 어떤 역할을 하는지 몰라서 문서에서 찾아보았다.</p>
+<h4 id="classmethod">@classmethod</h4>
+<p><img src="https://user-images.githubusercontent.com/14002238/109730703-420ca780-7bfd-11eb-9a41-47561874c29e.png" alt="Screen Shot 2021-03-03 at 8 48 29 AM"></p>
+<ul>
+<li>메서드를 클래스 메서드로 변환합니다.</li>
+<li>클래스 메서드는 인스턴스 메서드가 인스턴스를 받는 것 처럼 클래스를 암시적인 첫 번째 인수로 수신한다.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+</ul>
+<p>클래스 메서드는 다음과 같이 사용한다.</p>
+<pre><code>class C:
+    @classmethod
+    def f(cls, arg1, arg2, ...): ...
+</code></pre><ul>
+<li>클래스 메서드는 다음과 같이 호출 될 수 있다.
+<ul>
+<li><code>C.f()</code>, <code>C().f()</code></li>
+</ul>
+</li>
+<li>앞의 경우에는 클래스에서 호출 된 것이고, 뒤의 경우에는 인스턴스에서 호출 된 것이다.</li>
+<li>클래스 메서드가 상속 받은 클래스에서 호출되면 상속 받은 클래스가 첫 번째 인수로 전달된다.</li>
+<li>클래스 메서드는 <code>C++</code>, <code>Java</code>의 스태틱 메서드와는 다르다, 만약 앞의 경우로 스태틱 메서드를 사용하고 싶다면, <code>@staticmethod</code> 를 사용하라.</li>
+</ul>
+<p>여기까지만 봐서는 정적 메서드랑 무슨 차이인지 알기 힘들었다. 따라서 정적 메서드 관련된 문서를 확인해봤다.</p>
+<h4 id="staticmethod">@staticmethod</h4>
+<p><img src="https://user-images.githubusercontent.com/14002238/109732266-3a9acd80-7c00-11eb-98b4-bd34b94a81fb.png" alt="Screen Shot 2021-03-03 at 9 09 51 AM"></p>
+<ul>
+<li>메서드를 정적 메서드로 변환시켜 줍니다.</li>
+<li>정적 메서드는 암시적으로 첫 번째 인수를 받지 않습니다.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+</ul>
+<p>사용하는 방법은 다음과 같다.</p>
+<pre><code>class C:
+    @staticmethod
+    def f(arg1, arg2, ...): ...
+</code></pre><ul>
+<li>정적 메서드는 다음과 같이 호출 될 수 있습니다.
+<ul>
+<li><code>C.f()</code>, <code>C().f()</code></li>
+</ul>
+</li>
+<li>데코레이터와 마찬가지로, 정적 메서드를 <code>regular</code> 함수 처럼 호출 할 수 있다.</li>
+<li>클래스 바디에 함수에 대한 참조가 필요하고 인스턴스 메서드로 자동 변환하지 않으려는 경우에 사용한다.</li>
+</ul>
+<pre><code>class C:
+    builtin_open = staticmethod(open)
+</code></pre><h4 id="차이점">차이점</h4>
+<p>얼핏봐서는 차이점을 크게 못느껴서 인터넷을 찾아본 결과 좋은 글을 볼 수 있었다. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<p><code>@classmethod</code>와 <code>@staticmethod</code>는 상속에서 차이가 난다.</p>
+<pre><code>class Person:
+    default= &quot;아빠&quot;
+
+     def __init__(self):
+        self.data = self.default
+
+    @classmethod
+    def class_person(cls):
+        return cls()
+
+    @staticmethod
+    def static_person():
+        return Person()
+
+class WhatPerson(Person):
+    default = &quot;엄마&quot;
+person1 = WhatPerson.class_person()    # return 엄마
+person2 = WhatPerson.static_person()   # return 아빠
+</code></pre><p>위와 같이 <code>@staticmethod</code>인 경우에는 부모 클래스의 속성 값을 가져오지만, <code>@classmethod</code>의 경우 cls 인자를 활용하여 클래스의 클래스 속성을 가져온다.</p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://docs.python.org/3/library/functions.html#classmethod">https://docs.python.org/3/library/functions.html#classmethod</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://docs.python.org/3/library/functions.html#staticmethod">https://docs.python.org/3/library/functions.html#staticmethod</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p><a href="https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372">https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
