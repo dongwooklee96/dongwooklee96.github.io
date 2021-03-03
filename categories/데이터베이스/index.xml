@@ -6,10 +6,22 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 03 Mar 2021 20:09:39 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 03 Mar 2021 23:32:24 +0900</lastBuildDate>
     
 	<atom:link href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DBMS를 분석하는 방법</title>
+      <link>/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</link>
+      <pubDate>Wed, 03 Mar 2021 23:32:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</guid>
+      <description>KCD 2020    막 오픈소스 컨트리뷰톤을 끝마치고, 오픈소스 개발에 재미를 붙였을 때, KDC 2020이라는 세미나가 열렸다. 오픈소스 데이터베이스 큐브리드에 기여하기라는 제목의 세션을 보았을 때, 오픈소스 DBMS를 개발한다는 부분이 신기했고, 궁금한 점이 있어서 메일을 보내게 되었는데, 친절하게도 아주 장문의 답장을 해주셨다.
+메일  내가 보낸 메일을 다시 보니까, 많이 부끄럽다;;
+매우 유용한 조언을 해주셨고, 실제로 많은 도움이 되었다. 이를 요약하자면 다음과 같다.
+  코드 레벨에서부터 접근하면 분석하기 쉽지 않다.</description>
+    </item>
     
     <item>
       <title>데이터베이스 스키마를 관리하는 도구, Flyway</title>
