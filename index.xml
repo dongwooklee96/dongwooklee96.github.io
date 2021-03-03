@@ -6,10 +6,21 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 03 Mar 2021 08:45:13 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 03 Mar 2021 20:09:39 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>데이터베이스 스키마를 관리하는 도구, Flyway</title>
+      <link>/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway/</link>
+      <pubDate>Wed, 03 Mar 2021 20:09:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway/</guid>
+      <description>데이터베이스 스키마 관리의 필요성  최근에 회사에서 기존에 AWS에서 서비스하던 서비스를 ALI 클라우드에서 제공해야하는 일이 있었다. 따라서 데이터베이스 스키마와 마스터 데이터를 새로운 클라우드 환경으로 이전을 시켜줘야 했다.
+비교적 규모가 큰 서비스는 아니여서, 덤프를 이용해서 간단하게 이전하였고, 데이터베이스 스키마 및 마스터 데이터를 쿼리문 형태로 만들어서 GIT으로 형상관리를 하였다.
+이 정도로 모든 일이 마무리 되기는 하였지만, 어딘가 부족한 느낌이 들었다. 왜냐하면 개발을 하면서 DB 스키마가 변경할 일이 있는데 그럴 때마다 쿼리문으로 테이블 스키마를 변경하고, 스키마 파일을 업데이트 해야했기 때문이다.</description>
+    </item>
     
     <item>
       <title>파이썬에서의 클래스 메서드와 스택틱 메서드</title>
