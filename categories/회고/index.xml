@@ -6,10 +6,19 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 02 Mar 2021 12:29:39 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 03 Mar 2021 08:00:39 +0900</lastBuildDate>
     
 	<atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Wed, 03 Mar 2021 08:00:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 WSGI에 대해서 정리를 해보았다. 오늘 @staticmethod, @classmethod에 대해서 조사 및 정리를 하였다. 이슈를 진행하던 도중에 @classmethod를 사용하는 코드를 보았고, 무슨 역할을 하는지 몰라서 찾아보았다.  Feelings (느낌, 주관)  그냥 모르고 관성적으로 쓰는 것보다 이게 왜 사용되었는지 알고 생각하면서 사용하니까 훨씬 많이 배우는 느낌이고 자신감이 생긴것 같다. 오늘 이슈를 진행하다가 비슷한 예외가 많이 발생하여, 이러한 예외가 발생하고 있다고 말했는데 실제로는 그러한 예외가 호출되지 않고 다른 예외가 호출되었다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>

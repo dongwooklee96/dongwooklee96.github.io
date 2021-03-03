@@ -6,10 +6,41 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 02 Mar 2021 12:29:39 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 03 Mar 2021 08:45:13 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>파이썬에서의 클래스 메서드와 스택틱 메서드</title>
+      <link>/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90%EC%84%9C%EC%9D%98-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%A9%94%EC%84%9C%EB%93%9C%EC%99%80-%EC%8A%A4%ED%83%9D%ED%8B%B1-%EB%A9%94%EC%84%9C%EB%93%9C/</link>
+      <pubDate>Wed, 03 Mar 2021 08:45:13 +0900</pubDate>
+      
+      <guid>/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90%EC%84%9C%EC%9D%98-%ED%81%B4%EB%9E%98%EC%8A%A4-%EB%A9%94%EC%84%9C%EB%93%9C%EC%99%80-%EC%8A%A4%ED%83%9D%ED%8B%B1-%EB%A9%94%EC%84%9C%EB%93%9C/</guid>
+      <description>파이썬을 코딩을 하다가 @classmethod 데코레이터가 붙어 있는 메서드를 볼 수 있었다. 정확히 어떤 역할을 하는지 몰라서 문서에서 찾아보았다.
+@classmethod  메서드를 클래스 메서드로 변환합니다. 클래스 메서드는 인스턴스 메서드가 인스턴스를 받는 것 처럼 클래스를 암시적인 첫 번째 인수로 수신한다.1  클래스 메서드는 다음과 같이 사용한다.
+class C: @classmethod def f(cls, arg1, arg2, ...): ...  클래스 메서드는 다음과 같이 호출 될 수 있다.  C.f(), C().f()   앞의 경우에는 클래스에서 호출 된 것이고, 뒤의 경우에는 인스턴스에서 호출 된 것이다.</description>
+    </item>
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Wed, 03 Mar 2021 08:00:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 WSGI에 대해서 정리를 해보았다. 오늘 @staticmethod, @classmethod에 대해서 조사 및 정리를 하였다. 이슈를 진행하던 도중에 @classmethod를 사용하는 코드를 보았고, 무슨 역할을 하는지 몰라서 찾아보았다.  Feelings (느낌, 주관)  그냥 모르고 관성적으로 쓰는 것보다 이게 왜 사용되었는지 알고 생각하면서 사용하니까 훨씬 많이 배우는 느낌이고 자신감이 생긴것 같다. 오늘 이슈를 진행하다가 비슷한 예외가 많이 발생하여, 이러한 예외가 발생하고 있다고 말했는데 실제로는 그러한 예외가 호출되지 않고 다른 예외가 호출되었다.</description>
+    </item>
+    
+    <item>
+      <title>WSGI</title>
+      <link>/post/2021/03/02/wsgi/</link>
+      <pubDate>Tue, 02 Mar 2021 14:39:13 +0900</pubDate>
+      
+      <guid>/post/2021/03/02/wsgi/</guid>
+      <description>플라스크와 WSGI 플라스크 문서를 살펴보다가 다음과 같은 문장을 보았다.
+ 플라스크는 Jinja 템플릿 엔진과 Werkzeug WSGI 툴킷에 의존하고 있다. 1  Werkzeug가 무엇을 하는 툴인지 몰라서 검색을 해본 결과 다음과 같았다.
+ Werkzeug는 포괄적인 WSGI 웹 애플리케이션 라이브러리이다. WSGI 응용 프로그램을 위한 단순한 유틸리티에서 시작하였지만, 현재는 가장 진보한 WSGI 유틸리티 라이브러가 되었다. 플라스크는 Werkzeug를 감싸 WSGI의 세부사항을 처리하는 동시에 강력한 애플리케이션을 위한 더 많은 구조와 패턴을 제공한다. 2  Werkzeug는 다음을 포함하고 있다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
@@ -18,6 +49,24 @@
       
       <guid>/post/2021/03/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
       <description>TIL 양식 Facts (사실, 객관)  코드숨 강의를 들엇다. (JWT 토큰에 대해서 알게 되었다.) 오늘 회사에서 일을 할 때, 적극적으로 의사소통을 하려고 노력하였다. 플라스크 관련된 문서를 정리해보았다. 퇴근하는 길에, 라인 개발자 채용 관련 QnA 영상을 보았다.  Feelings (느낌, 주관)  적극적으로 의사소통을 하니, 동료들과 소통이 더 잘되는 느낌이였다. 라인 채용 유튜브 영상을 보니, 컴퓨터공학 기반 지식과 알고리즘 그리고 코딩테스트를 중요하게 여기는 것 같았다.  Findings (배운 점)  소통하려는 의지만 있어도 동료들이 알아차리고 좋게 봐주는 것 같다.</description>
+    </item>
+    
+    <item>
+      <title>동시성 프로그래밍 및 자바 (2) - Executor Interfaces</title>
+      <link>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces/</link>
+      <pubDate>Mon, 01 Mar 2021 14:40:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces/</guid>
+      <description>Executor Interfaces  Executor, 태스크를 관리하는 인터페이스 입니다. ExecutorService는 Executor의 하위 인터페이스이며 태스트와 Exector의 라이프 사이클을 관리하는 기능을 포함하고 있다. ScheduledExecutorService는 ExecutorService의 하위 인터페이스이며 미래의 태스트에 대한 주기적인 실행을 관리한다.  Executor 인터페이스  Executor 인터페이스는 저수준의 스레드 생성문을 대체할 수 있다. Executor는 저수준의 스레드 생성문과 동일한 작업을 수행할 수 있지만 차이점은 워크 스레드가 사용 가능해질때까지 큐에 배치할 가능성이 더 크다.  ExecutorService 인터페이스 import java.util.concurrent.ExecutorService; import java.util.concurrent.Executors; public class Main { public static void main(String[] args) throws InterruptedException { ExecutorService executorService = Executors.</description>
+    </item>
+    
+    <item>
+      <title>동시성 프로그래밍 및 자바 (1) - 프로세스와 쓰레드의 차이</title>
+      <link>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4/</link>
+      <pubDate>Mon, 01 Mar 2021 12:40:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4/</guid>
+      <description>동시성이란? (Concurrency)  동시성 프로그래밍이란? 동시성에 대해서 자바 문서에서는 이렇게 설명하고 있다. 유저는 컴퓨터를 사용하면서 한 번에 한 가지 이상의 작업을 수행할 수 있다는 사실을 당연하게 여긴다. 그들은 워드 프로세서 작업을 하면서 파일을 다운로드 받거나, 프린트 인쇄 대기열을 관리하거나, 오디오 스트리밍을 할 수 있는다고 생각한다. 심지어 단일 응용 어플리케이션의 경우에도 한 번에 둘 이상의 작업을 해야할 때가 많다. 예를 들어서 스트리밍 오디오 애플리케이션은 네트워크에서 디지털 오디오를 동시에 읽고 압축을 풀고, 재생을 관리하고 디스플레이를 업데이트 해야합니다.</description>
     </item>
     
     <item>

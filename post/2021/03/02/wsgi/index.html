@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>WSGI | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">WSGI</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/02</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC">파이썬 - 플라스크</a> 
+  
+  
+  
+  Tags: <a href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> <a href="/tags/%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC">플라스크</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h1 id="플라스크와-wsgi">플라스크와 WSGI</h1>
+<p><img src="https://user-images.githubusercontent.com/14002238/109603667-7896e380-7b65-11eb-8e62-961951e0c969.png" alt="Screen Shot 2021-03-02 at 2 42 04 PM"></p>
+<p>플라스크 문서를 살펴보다가 다음과 같은 문장을 보았다.</p>
+<ul>
+<li>플라스크는 <code>Jinja</code> 템플릿 엔진과 <code>Werkzeug WSGI</code> 툴킷에 의존하고 있다. <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/109604060-37530380-7b66-11eb-8217-e8c8a95ae4ec.png" alt="Screen Shot 2021-03-02 at 2 47 21 PM"></p>
+<p><code>Werkzeug</code>가 무엇을 하는 툴인지 몰라서 검색을 해본 결과 다음과 같았다.</p>
+<ul>
+<li><code>Werkzeug</code>는 포괄적인 <code>WSGI</code> 웹 애플리케이션 라이브러리이다.</li>
+<li><code>WSGI</code> 응용 프로그램을 위한 단순한 유틸리티에서 시작하였지만, 현재는 가장 진보한 <code>WSGI</code> 유틸리티 라이브러가 되었다.</li>
+<li>플라스크는 <code>Werkzeug</code>를 감싸 <code>WSGI</code>의 세부사항을 처리하는 동시에 강력한 애플리케이션을 위한 더 많은 구조와 패턴을 제공한다. <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+</ul>
+<p><code>Werkzeug</code>는 다음을 포함하고 있다.</p>
+<ul>
+<li>브라우저에 있는 스택 트레이스와 코드를 검사할 수 있는 디버거를 포함한다.</li>
+<li>헤더, 쿼리 인자, 폼 데이터, 파일 및 쿠키와 상호 작용할 수 있는 요청 객체이다.</li>
+</ul>
+<p>플라스크는 내부적으로 <code>Werkzeug</code>로 구현되어 있고, <code>Werkzeug</code>는 <code>WSGI</code>를 구현하는 라이브러리이다.
+그렇다면 자연스럽게 <code>WSGI</code>가 무엇인지 궁금하였다.</p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="https://flask.palletsprojects.com/en/1.1.x/">https://flask.palletsprojects.com/en/1.1.x/</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="https://palletsprojects.com/p/werkzeug/">https://palletsprojects.com/p/werkzeug/</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

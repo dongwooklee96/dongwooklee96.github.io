@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>자바 on 개발자 이동욱</title>
+    <link>/tags/%EC%9E%90%EB%B0%94/</link>
+    <description>Recent content in 자바 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Mon, 01 Mar 2021 14:40:33 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>동시성 프로그래밍 및 자바 (2) - Executor Interfaces</title>
+      <link>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces/</link>
+      <pubDate>Mon, 01 Mar 2021 14:40:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces/</guid>
+      <description>Executor Interfaces  Executor, 태스크를 관리하는 인터페이스 입니다. ExecutorService는 Executor의 하위 인터페이스이며 태스트와 Exector의 라이프 사이클을 관리하는 기능을 포함하고 있다. ScheduledExecutorService는 ExecutorService의 하위 인터페이스이며 미래의 태스트에 대한 주기적인 실행을 관리한다.  Executor 인터페이스  Executor 인터페이스는 저수준의 스레드 생성문을 대체할 수 있다. Executor는 저수준의 스레드 생성문과 동일한 작업을 수행할 수 있지만 차이점은 워크 스레드가 사용 가능해질때까지 큐에 배치할 가능성이 더 크다.  ExecutorService 인터페이스 import java.util.concurrent.ExecutorService; import java.util.concurrent.Executors; public class Main { public static void main(String[] args) throws InterruptedException { ExecutorService executorService = Executors.</description>
+    </item>
+    
+    <item>
+      <title>동시성 프로그래밍 및 자바 (1) - 프로세스와 쓰레드의 차이</title>
+      <link>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4/</link>
+      <pubDate>Mon, 01 Mar 2021 12:40:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4/</guid>
+      <description>동시성이란? (Concurrency)  동시성 프로그래밍이란? 동시성에 대해서 자바 문서에서는 이렇게 설명하고 있다. 유저는 컴퓨터를 사용하면서 한 번에 한 가지 이상의 작업을 수행할 수 있다는 사실을 당연하게 여긴다. 그들은 워드 프로세서 작업을 하면서 파일을 다운로드 받거나, 프린트 인쇄 대기열을 관리하거나, 오디오 스트리밍을 할 수 있는다고 생각한다. 심지어 단일 응용 어플리케이션의 경우에도 한 번에 둘 이상의 작업을 해야할 때가 많다. 예를 들어서 스트리밍 오디오 애플리케이션은 네트워크에서 디지털 오디오를 동시에 읽고 압축을 풀고, 재생을 관리하고 디스플레이를 업데이트 해야합니다.</description>
+    </item>
+    
+  </channel>
+</rss>
