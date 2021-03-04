@@ -1,418 +1,160 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2021-03-05T07:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2021-03-05T07:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2021-03-05T07:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2021-03-05T07:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/03/05/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-03-05T07:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%ED%9A%8C%EA%B3%A0/</loc>
-    <lastmod>2021-03-05T07:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%ED%9A%8C%EA%B3%A0/</loc>
-    <lastmod>2021-03-05T07:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/tdd/</loc>
-    <lastmod>2021-03-04T18:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%EB%AC%B8%EC%84%9C%ED%99%94/</loc>
-    <lastmod>2021-03-04T18:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%EC%9C%A0%ED%8B%B8/</loc>
-    <lastmod>2021-03-04T18:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/03/04/%ED%85%8C%ED%81%AC%EB%8B%88%EC%BB%AC-%EB%9D%BC%EC%9D%B4%ED%8C%85-4%EB%8C%80-%EC%9B%90%EC%B9%99%EC%9D%B4%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</loc>
     <lastmod>2021-03-04T18:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/03/04/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-03-04T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</loc>
     <lastmod>2021-03-03T23:32:24+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/</loc>
-    <lastmod>2021-03-03T23:32:24+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/</loc>
-    <lastmod>2021-03-03T23:32:24+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/03/03/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%85%8C%ED%81%AC-%EC%BD%94%EB%93%9C-%EC%A7%80%EC%9B%90-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-03-03T23:15:14+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%EC%BB%A4%EB%A6%AC%EC%96%B4/</loc>
-    <lastmod>2021-03-03T23:15:14+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%EC%BB%A4%EB%A6%AC%EC%96%B4/</loc>
-    <lastmod>2021-03-03T23:15:14+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</loc>
     <lastmod>2021-03-03T21:49:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%EB%A9%B4%EC%A0%91/</loc>
-    <lastmod>2021-03-03T21:49:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%EC%B7%A8%EC%97%85/</loc>
-    <lastmod>2021-03-03T21:49:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway/</loc>
     <lastmod>2021-03-03T20:09:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/</loc>
-    <lastmod>2021-03-03T08:45:13+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4/</loc>
     <lastmod>2021-03-03T08:45:13+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC/</loc>
-    <lastmod>2021-03-03T08:45:13+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC/</loc>
-    <lastmod>2021-03-03T08:45:13+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/03/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-03-03T08:00:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/03/02/wsgi/</loc>
     <lastmod>2021-03-02T14:39:13+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/03/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-03-02T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces/</loc>
     <lastmod>2021-03-01T14:40:33+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%EC%9E%90%EB%B0%94/</loc>
-    <lastmod>2021-03-01T14:40:33+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/</loc>
-    <lastmod>2021-03-01T14:40:33+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4/</loc>
     <lastmod>2021-03-01T12:40:33+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/03/01/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-03-01T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</loc>
     <lastmod>2021-02-28T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</loc>
-    <lastmod>2021-02-28T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</loc>
-    <lastmod>2021-02-28T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%B7%A8%EC%97%85%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</loc>
-    <lastmod>2021-02-28T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</loc>
-    <lastmod>2021-02-28T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/02/28/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-28T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8/</loc>
-    <lastmod>2021-02-28T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/02/27/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/</loc>
     <lastmod>2021-02-27T22:56:33+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EB%A9%B4%EC%A0%91/</loc>
-    <lastmod>2021-02-27T22:56:33+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5/</loc>
     <lastmod>2021-02-27T22:28:35+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/27/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</loc>
     <lastmod>2021-02-27T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-27T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
-  <url>
-    <loc>/tags/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8/</loc>
-    <lastmod>2021-02-27T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A3%BC%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/</loc>
-    <lastmod>2021-02-27T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
+
   <url>
     <loc>/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C/</loc>
     <lastmod>2021-02-27T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-26T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/25/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-25T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/24/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-24T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-23T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/22/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-22T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/21/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-21T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/20/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-20T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/19/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-19T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/18/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-18T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
   <url>
     <loc>/post/2021/02/17/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</loc>
     <lastmod>2021-02-17T12:29:39+09:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
   </url>
-  
+
 </urlset>
