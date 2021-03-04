@@ -6,10 +6,17 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 04 Mar 2021 12:29:39 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Fri, 05 Mar 2021 07:29:39 +0900</lastBuildDate><atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/05/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Fri, 05 Mar 2021 07:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/05/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  기계인간님의 DRY 원칙에 대해서 쓴 글을 읽었다. 1   기계인간님의 디미터 법칙에 관한 글을 읽었다. 2  Feelings (느낌, 주관)   DRY 원칙은 모든 곳에 적용할 수 있을 것이다. (코드, 테스트, 문서화) 그리고 내가 DRY 원칙을 잘 지키고 있는지 생각하면 그렇지 못한 것 같다.
+   Findings (배운 점)   실용주의 프로그래머에서는 중복을 4가지로 분리한다.
+ 강요된 중복 : 개발자들은 다른 선택이 없어 보인다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>

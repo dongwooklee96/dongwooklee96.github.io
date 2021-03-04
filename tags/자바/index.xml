@@ -6,11 +6,7 @@
     <description>Recent content in 자바 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 01 Mar 2021 14:40:33 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 01 Mar 2021 14:40:33 +0900</lastBuildDate><atom:link href="/tags/%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>동시성 프로그래밍 및 자바 (2) - Executor Interfaces</title>
       <link>/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces/</link>
