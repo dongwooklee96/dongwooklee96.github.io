@@ -6,10 +6,19 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 03 Mar 2021 23:32:24 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 04 Mar 2021 12:29:39 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/04/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 04 Mar 2021 12:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/04/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 PM 분이 맡은 일을 언제까지 끝낼 수 있는지 공유를 해주면 일정 조율을 하기 편할 것 같다는 말씀을 하셨다. 오늘 이슈를 진행하면서, 전체적인 기능을 보고 코드를 보면서 어떻게 구현할지 생각하지 않고, 코드부터 보면서 어떻게 구현할지 생각을 했다. 오늘 이슈를 진행하면서 메서드 주석 및 클래스 주석을 작성하려고 하였다.  Feelings (느낌, 주관)  여태까지 팀 안에서 개발자들과의 소통만 생각했었는데, PM 분과의 소통 하는 방법에 대해서도 생각을 해봐야겠다.</description>
+    </item>
     
     <item>
       <title>DBMS를 분석하는 방법</title>
