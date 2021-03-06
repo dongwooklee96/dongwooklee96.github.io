@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>파이썬 on 개발자 이동욱</title>
+    <link>/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC/</link>
+    <description>Recent content in 파이썬 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 06 Mar 2021 14:50:40 +0900</lastBuildDate><atom:link href="/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬에 AOP 적용하기라는 글을 읽고 느낀점</title>
+      <link>/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90-aop-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</link>
+      <pubDate>Sat, 06 Mar 2021 14:50:40 +0900</pubDate>
+      
+      <guid>/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90-aop-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</guid>
+      <description>배경  내가 현재 맡고 있는 솔루션에는 일일이 데이터베이스를 열어주고 쿼리를 실행하고 데이터베이스를 닫아주는 과정을 거치고 있었다. 매우 비효율적이고 중복된 코드가 많아져 이를 수정하고자 하였다. 따라서, 어떻게 수정할까 고민하는 과정에서 스프링에 있는 AOP 개념이 파이썬에도 있을 것이라고 확신하고 검색을 했다. 그러던 중에, 브랜디 개발 블로그에서 좋은 글을 발견하여 이를 읽고 느낀점을 적어보았다.
+본문   다양한 관점에서 고려해보는 모습이 인상 깊었다. 나도 물론 최선의 방법을 생각해보려고 고민을 해보지만, 이렇게까지 다양한 과점을 고려해보지는 않은 것 같다.</description>
+    </item>
+    
+  </channel>
+</rss>
