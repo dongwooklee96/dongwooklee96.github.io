@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>itertools on 개발자 이동욱</title>
+    <link>/tags/itertools/</link>
+    <description>Recent content in itertools on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 06 Mar 2021 13:15:35 +0900</lastBuildDate><atom:link href="/tags/itertools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬 itertools 모듈의 group by 함수</title>
+      <link>/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC-itertools-%EB%AA%A8%EB%93%88%EC%9D%98-group-by-%ED%95%A8%EC%88%98/</link>
+      <pubDate>Sat, 06 Mar 2021 13:15:35 +0900</pubDate>
+      
+      <guid>/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC-itertools-%EB%AA%A8%EB%93%88%EC%9D%98-group-by-%ED%95%A8%EC%88%98/</guid>
+      <description>group by 함수  회사에서 이슈를 하다가, 키 값을 기준으로 하위 리스트를 처리할 일이 있었다. 자바였으면 groupingBy()를 이용하여 처리를 할 수 있겠다라는 생각을 하고 있었던 참에 파이썬도 이와같은 함수를 지원하지 않을까라는 생각이 들어서 검색을 해보니 비슷한 함수가 있었다.
+ 연속된 키와 그룹을 반환하는 이터레이터를 만든다. 인자중에, 키는 각 요소의 키 값을 계산하는 함수이다. 일반적으로 해당 항목은 동일한 키 함수에 대해서 이미 정렬되어야 한다. 키 함수의 값이 변경될 때마다 중단하거나 새 그룹을 생성하기 때문에 동일한 키 함수를 이용하여 데이터를 정렬해줘야한다.</description>
+    </item>
+    
+  </channel>
+</rss>
