@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>프로그래밍 on 개발자 이동욱</title>
+    <link>/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/</link>
+    <description>Recent content in 프로그래밍 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 06 Mar 2021 15:50:23 +0900</lastBuildDate><atom:link href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>동시성 프로그래밍 및 자바 (3) - Callable과 Future</title>
+      <link>/post/2021/03/06/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-3-callable%EA%B3%BC-future/</link>
+      <pubDate>Sat, 06 Mar 2021 15:50:23 +0900</pubDate>
+      
+      <guid>/post/2021/03/06/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-3-callable%EA%B3%BC-future/</guid>
+      <description>Callable과 Future   Callable과 Runnable의 차이점은 작업의 결과를 받을 수 있다는 사실이다. Future는 비동기적인 작업의 현재 상태를 조회하거나 결과를 가져올 수 있다.  다음은 Future에 대해 설명한 API 주석이다.
+ Future는 비동기식 계산의 결과를 나타냅니다. 계산이 완료되었는지 확인하고, 완료되기를 기다리며, 결과를 확인할 수 있는 방법이 제공됩니다. 결과는 계산이 완료된 경우에만 메서드 get을 사용하여 검색할 수 있으며, 작업이 완료될 때까지 블록킹 됩니다. 또한 작업이 정상적으로 완료되었는지 또는 취소되었는지 확인할 수 있는 추가적인 방법이 제공된다.</description>
+    </item>
+    
+  </channel>
+</rss>

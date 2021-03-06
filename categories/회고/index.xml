@@ -6,7 +6,16 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 05 Mar 2021 07:29:39 +0900</lastBuildDate><atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 15:14:39 +0900</lastBuildDate><atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/06/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 06 Mar 2021 15:14:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/06/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  파이썬 AOP라는 글을 읽어보았다. 1  Feelings (느낌, 주관)    Findings (배운 점)  어떤한 기능을 도입할 때, 프로젝트에 정말로 필요한 기능인가를 생각해보고 프로젝트에 필요한 부분만 선택하는 능력이 필요하다는 것을 느꼈다. 항상 다양한 관점에서 생각을 해보고 이를 목록으로 정리하여 내가 선택한 이유를 정리하는 것을 보았다.  Good (잘한점)    Bad (개선할 점)    Affimation (자기 선언)    회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/03/05/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
