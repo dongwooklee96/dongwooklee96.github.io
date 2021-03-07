@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>Deprecated 된 MediaType.APPLICATION_JSON_UTF8 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">Deprecated 된 MediaType.APPLICATION_JSON_UTF8</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/08</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94">프로그래밍 - 자바</a> 
+  
+  
+  
+  Tags: <a href="/tags/%EC%9E%90%EB%B0%94">자바</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="mediatypeapplication_json_utf8">MediaType.APPLICATION_JSON_UTF8</h2>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/110257472-75767a00-7fe1-11eb-82e2-0f1db1ca3886.png" alt="Screen Shot 2021-03-08 at 7 39 39 AM"></p>
+<p><img src="https://user-images.githubusercontent.com/14002238/110257431-38aa8300-7fe1-11eb-8389-34b865de421b.png" alt="deprecated"></p>
+<p>테스트 코드를 작성하다가, <code>MediaType.APPLICATION_JSON_UTF8</code> 부분이 <code>Deprecated</code> 된 것을 확인할 수 있었다.</p>
+<p>밑줄로 표시까지 해줬는데, 그냥 대수롭지 않게 생각했던 것 같다. 그리고 개발자로서 이러한 부분을 보고도 지나친게 조금은 부끄러웠다. 다음부터는 이러한 부분을 발견하면 지나치지 말고 왜 <code>Deprecated</code> 되었는지 알아보고 <code>API</code> 개발자가 의도한 방향으로 사용을 하도록 노력해야겠다.</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/110257623-11a08100-7fe2-11eb-93fc-771900030db8.png" alt="Screen Shot 2021-03-08 at 7 44 02 AM"></p>
+<p><code>API</code> 주석을 읽어보니 이유는 다음과 같았다.</p>
+<ul>
+<li>크롬 같은 주요 브라우저가 스펙을 준수하고, 이제 <code>UTF-8</code> 같은 파라미터 값을 넣어주지 않아도 올바르게 해석 되기 때문이다.</li>
+</ul>
+<p>따라서 이제는 <code>APPLICATION_JSON_UTF8</code>을 사용하는 것 보다는 그냥 <code>APPLICATION_JSON</code> 을 사용하면 된다.</p>
+<h2 id="배경">배경</h2>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/110258251-fe42e500-7fe4-11eb-8fb8-06b332bf7b95.png" alt="Screen Shot 2021-03-08 at 8 04 51 AM"></p>
+<ul>
+<li>
+<p><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=438464">discussion</a></p>
+</li>
+<li>
+<p>위의 링크에 나와있듯이, <code>Content-Type</code>을 <code>application/json</code>으로 명시를 해도 인코딩이 깨진다고 버그 리포팅을 하였다.</p>
+</li>
+<li>
+<p><code>charset=utf-8</code>로 명시했을 때는 동작하지만 <code>charset</code> 은  <code>application/json</code>에 명시되어있지 않고 무시 되어야 한다고 문제를 제기하고 있다.</p>
+</li>
+</ul>
+<h4 id="rfc4627">RFC4627</h4>
+<p><img src="https://user-images.githubusercontent.com/14002238/110258583-a7d6a600-7fe6-11eb-8654-5aa39d132d55.png" alt="Screen Shot 2021-03-08 at 8 16 46 AM"></p>
+<p><img src="https://user-images.githubusercontent.com/14002238/110258530-6b0aaf00-7fe6-11eb-969c-b32776e629cd.png" alt="Screen Shot 2021-03-08 at 8 15 10 AM"></p>
+<ul>
+<li>인코딩 부분을 살펴보면, <code>JSON</code> 타입은 유니코드로 인코딩 되어야 하며 디폴트로 <code>UTF-8</code>이 적용된다는 부분을 살펴볼 수 있다.</li>
+</ul>
+<h2 id="느낀점">느낀점</h2>
+<hr>
+<ul>
+<li>
+<p>만약 나였으면 그냥 내가 잘못 한 거구나라고 하면서 <code>charset</code> 옵션을 주고 스펙까지 확인해볼 생각을 하지 않을 것 같다.</p>
+</li>
+<li>
+<p>이런 점은 나도 배워야겠다는 생각을 했다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://tools.ietf.org/html/rfc4627">RFC4627</a></li>
+<li><a href="https://bugs.chromium.org/p/chromium/issues/detail?id=438464">discussion</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

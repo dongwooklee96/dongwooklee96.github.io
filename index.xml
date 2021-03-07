@@ -6,10 +6,18 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 07 Mar 2021 22:15:14 +0900</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Mon, 08 Mar 2021 07:20:33 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deprecated 된 MediaType.APPLICATION_JSON_UTF8</title>
+      <link>/post/2021/03/08/deprecated-%EB%90%9C-mediatype.application_json_utf8/</link>
+      <pubDate>Mon, 08 Mar 2021 07:20:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/08/deprecated-%EB%90%9C-mediatype.application_json_utf8/</guid>
+      <description>MediaType.APPLICATION_JSON_UTF8  테스트 코드를 작성하다가, MediaType.APPLICATION_JSON_UTF8 부분이 Deprecated 된 것을 확인할 수 있었다.
+밑줄로 표시까지 해줬는데, 그냥 대수롭지 않게 생각했던 것 같다. 그리고 개발자로서 이러한 부분을 보고도 지나친게 조금은 부끄러웠다. 다음부터는 이러한 부분을 발견하면 지나치지 말고 왜 Deprecated 되었는지 알아보고 API 개발자가 의도한 방향으로 사용을 하도록 노력해야겠다.
+API 주석을 읽어보니 이유는 다음과 같았다.
+ 크롬 같은 주요 브라우저가 스펙을 준수하고, 이제 UTF-8 같은 파라미터 값을 넣어주지 않아도 올바르게 해석 되기 때문이다.</description>
+    </item>
     
     <item>
       <title>네이버 신입 공채 체크 포인트 및 준비해야할 것들</title>
