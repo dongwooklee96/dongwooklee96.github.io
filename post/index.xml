@@ -6,7 +6,22 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 07 Mar 2021 15:50:23 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Mar 2021 22:15:14 +0900</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>네이버 신입 공채 체크 포인트 및 준비해야할 것들</title>
+      <link>/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4/</link>
+      <pubDate>Sun, 07 Mar 2021 22:15:14 +0900</pubDate>
+      
+      <guid>/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4/</guid>
+      <description>네이버에서 신입을 뽑을 때 고려하는 부분을 알 수 있을 것 같아서 읽어보았다. 물론 다른 기업들도 이러한 점을 고려해서 신입을 뽑을 것이다.
+ 2020신입개발공채체크포인트!  네이버가 강조하는 세가지의 키워드  기본기! 커뮤니케이션! 성장가능성!  기본기   기술 생태계가 빠르기 때문에, 의욕만 앞서 모두 다 경험해보겠다는 태도는 그다지 효율적인 접근 방법이 아니다. 따라서 이럴 수록 기본기에 충실해야만 새로운 기술 흐름에 압도되지 않고, 스스로의 방향성과 페이스로 앞으로 나갈 수 있다.
+   새로운 기술을 배웠다거나, 사용할 수 있다고 어필을 하는 것 보다는 기본기가 탄탄하다는 인상을 주는 것이 유리할 것이다.</description>
+    </item>
+    
     <item>
       <title>동시성 프로그래밍 및 자바 (4) - ComputableFuture</title>
       <link>/post/2021/03/07/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-4-computablefuture/</link>
