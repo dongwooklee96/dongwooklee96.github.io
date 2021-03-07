@@ -6,7 +6,18 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 07 Mar 2021 12:29:39 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Mar 2021 15:50:23 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>동시성 프로그래밍 및 자바 (4) - ComputableFuture</title>
+      <link>/post/2021/03/07/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-4-computablefuture/</link>
+      <pubDate>Sun, 07 Mar 2021 15:50:23 +0900</pubDate>
+      
+      <guid>/post/2021/03/07/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-4-computablefuture/</guid>
+      <description>ComputableFuture란   자바에서 비동기(Asynchronous)를 가능케 하는 인터페이스이다.  자바에서는 Future를 통해서 어느정도의 비동기 프로그래밍이 가능하기는 했지만, 하기 힘든 일들이 많았다.
+ Future를 외부에서 완료시킬 수 없다. 작업을 취소하거나, get()에 타임아웃을 설정할 수 없다. 블럭킹 코드를 사용하지 않고서는 작업이 끝났을 때 콜백을 실행할 수 없다. 예외처리용 API를 제공하지 않았다.  비동기로 작업 실행하기  비동기로 작업을 실행하는 방법은 두가지가 있다.
+ runAsync(): 리턴값이 없는 경우 사용한다. supplyAsync(): 리턴 값이 있는 경우 사용한다.</description>
+    </item>
+    
     <item>
       <title>주간 회고</title>
       <link>/post/2021/03/07/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
