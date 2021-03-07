@@ -6,7 +6,17 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 06 Mar 2021 15:50:23 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Mar 2021 12:29:39 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>주간 회고</title>
+      <link>/post/2021/03/07/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 07 Mar 2021 12:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/07/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>주간 회고  한 주간에 있었던 일과 생각을 정리해보았습니다.
+JWT 토큰에 대해서 알게 되었다.   코드숨 과제를 하면서 JWT 토큰에 대해서 조사를 해보았다. JWT 토큰에 대해서 들어본적은 기억은 있었지만, 로그인을 할 때 사용한다 정도로만 알고 있었다.   과제를 제출하기 전에, 내가 사용하는 라이브러리에 대해서 최소한의 조사를 하고 PR을 하자는 목표를 가지고 조사를 하게 되었다. RFC 문서까지 읽고 공부를 했으면 더 좋았을 것 같다. 따라서 투두 리스트에 넣어두고 시간이 되는대로 읽고 정리하도록 해야겠다.</description>
+    </item>
+    
     <item>
       <title>동시성 프로그래밍 및 자바 (3) - Callable과 Future</title>
       <link>/post/2021/03/06/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-3-callable%EA%B3%BC-future/</link>
