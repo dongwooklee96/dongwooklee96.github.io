@@ -6,7 +6,20 @@
     <description>Recent content in Categories on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 08 Mar 2021 07:20:33 +0900</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 08 Mar 2021 15:20:39 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>회고</title>
+      <link>/categories/%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Mon, 08 Mar 2021 15:20:39 +0900</pubDate>
+      
+      <guid>/categories/%ED%9A%8C%EA%B3%A0/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>프로그래밍 - 자바</title>
       <link>/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/</link>
@@ -22,15 +35,6 @@
       <pubDate>Sun, 07 Mar 2021 22:15:14 +0900</pubDate>
       
       <guid>/categories/%EC%BB%A4%EB%A6%AC%EC%96%B4/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>회고</title>
-      <link>/categories/%ED%9A%8C%EA%B3%A0/</link>
-      <pubDate>Sun, 07 Mar 2021 12:29:39 +0900</pubDate>
-      
-      <guid>/categories/%ED%9A%8C%EA%B3%A0/</guid>
       <description></description>
     </item>
     
