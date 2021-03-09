@@ -6,7 +6,20 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 09 Mar 2021 09:20:24 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Mar 2021 15:22:39 +0900</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/09/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 09 Mar 2021 15:22:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/09/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 회사에서 동료가 나에게 한 말 조금 화가났다. 코드숨 시큐리티 강의를 들었다. 회사 세미나에서 스프링에 대한 주제로 세미나를 했다.  Feelings (느낌, 주관)  그 순간에는 뭐라고 한 소리 할까라고 생각을 했지만, 집에와서 다시 생각해보니까 안하길 잘한 것 같다. 그리고 퇴근 하기전에 오해가 풀려서 다행이다.  Findings (배운 점)  내가 되고 싶은 개발자는 같이 일하고 싶은 개발자라는 것을 명심해야겠다. 감정에 휩쓸리지 말자.   중요한 결정을 나중으로 미룰 수 있는 것이 바로 실력이다.</description>
+    </item>
+    
     <item>
       <title>mariadb 유니크 인덱스</title>
       <link>/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4/</link>
