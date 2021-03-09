@@ -6,10 +6,28 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 09 Mar 2021 15:22:39 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 10 Mar 2021 08:00:33 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>스프링의 세 가지 특징</title>
+      <link>/post/2021/03/10/%EC%8A%A4%ED%94%84%EB%A7%81%EC%9D%98-%EC%84%B8-%EA%B0%80%EC%A7%80-%ED%8A%B9%EC%A7%95/</link>
+      <pubDate>Wed, 10 Mar 2021 08:00:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/10/%EC%8A%A4%ED%94%84%EB%A7%81%EC%9D%98-%EC%84%B8-%EA%B0%80%EC%A7%80-%ED%8A%B9%EC%A7%95/</guid>
+      <description>스프링의 세 가지 특징  회사에서 하는 세미나에서, 자바 세미나가 끝나고 이어서 스프링 세미나를 시작하였다.
+세미나를 진행하면서, 강조했던 스프링의 세 가지 특징에 대해서 설명한 부분을 정리해보겠다.
+1. IoC / DI, DL   스프링 프레임워크는 DL (Dependency Look-up)과 DI(Dependency Injection)를 통해서 IoC (Inversion of Control)을 구현합니다.
+  프로젝트를 진행하면서, 많은 라이브러리를 사용할 것이다. 특정 라이브러리에서 원하는 기능을 사용하려면 new 를 통해서 객체를 생성해야하는데, 이 객체를 생성하기 위해서는 다른 객체를 생성해야하는 등 복잡한 의존 관계가 발생하고 사용자는 파악하기 힘들다.</description>
+    </item>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/10/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Wed, 10 Mar 2021 07:07:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/10/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  코드숨 강의를 들었다.  Feelings (느낌, 주관)  강의를 들으면서, 내가 바꿀 부분에 주석으로 표시하고 진행을 하는 것을 보고 나도 배워야겠다는 생각을 했다. 왜냐하면, 내가 어떤 것을 하고 있는지 까먹을 때가 많이 때문이다.  Findings (배운 점)   기능 개선이나, 유지보수를 할 때, 주석으로 변경되어야하는 범위를 먼저 체크하고 나서 실제 기능 개발을 시작한다.
+  이는 내가 코드 레벨부터 보는 안좋은 습관이 있는데, 주석으로 전체적인 변경 범위 및 파악을 하면 나의 안좋은 습관을 고칠 수 있을 것이다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>

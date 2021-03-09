@@ -6,10 +6,18 @@
     <description>Recent content in 프로그래밍 - 자바 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 08 Mar 2021 07:20:33 +0900</lastBuildDate>
-    
-	<atom:link href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Wed, 10 Mar 2021 08:00:33 +0900</lastBuildDate><atom:link href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>스프링의 세 가지 특징</title>
+      <link>/post/2021/03/10/%EC%8A%A4%ED%94%84%EB%A7%81%EC%9D%98-%EC%84%B8-%EA%B0%80%EC%A7%80-%ED%8A%B9%EC%A7%95/</link>
+      <pubDate>Wed, 10 Mar 2021 08:00:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/10/%EC%8A%A4%ED%94%84%EB%A7%81%EC%9D%98-%EC%84%B8-%EA%B0%80%EC%A7%80-%ED%8A%B9%EC%A7%95/</guid>
+      <description>스프링의 세 가지 특징  회사에서 하는 세미나에서, 자바 세미나가 끝나고 이어서 스프링 세미나를 시작하였다.
+세미나를 진행하면서, 강조했던 스프링의 세 가지 특징에 대해서 설명한 부분을 정리해보겠다.
+1. IoC / DI, DL   스프링 프레임워크는 DL (Dependency Look-up)과 DI(Dependency Injection)를 통해서 IoC (Inversion of Control)을 구현합니다.
+  프로젝트를 진행하면서, 많은 라이브러리를 사용할 것이다. 특정 라이브러리에서 원하는 기능을 사용하려면 new 를 통해서 객체를 생성해야하는데, 이 객체를 생성하기 위해서는 다른 객체를 생성해야하는 등 복잡한 의존 관계가 발생하고 사용자는 파악하기 힘들다.</description>
+    </item>
     
     <item>
       <title>Deprecated 된 MediaType.APPLICATION_JSON_UTF8</title>

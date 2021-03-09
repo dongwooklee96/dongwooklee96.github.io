@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>스프링의 세 가지 특징 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">스프링의 세 가지 특징</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/10</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94">프로그래밍 - 자바</a> 
+  
+  
+  
+  Tags: <a href="/tags/%EC%8A%A4%ED%94%84%EB%A7%81">스프링</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h1 id="스프링의-세-가지-특징">스프링의 세 가지 특징</h1>
+<hr>
+<p>회사에서 하는 세미나에서, 자바 세미나가 끝나고 이어서 스프링 세미나를 시작하였다.</p>
+<p>세미나를 진행하면서, 강조했던 스프링의 세 가지 특징에 대해서 설명한 부분을 정리해보겠다.</p>
+<h2 id="1-ioc--di-dl">1. IoC / DI, DL</h2>
+<hr>
+<blockquote>
+<p>스프링 프레임워크는 DL (Dependency Look-up)과 DI(Dependency Injection)를 통해서 IoC (Inversion of Control)을 구현합니다.</p>
+</blockquote>
+<ul>
+<li>프로젝트를 진행하면서, 많은 라이브러리를 사용할 것이다.</li>
+<li>특정 라이브러리에서 원하는 기능을 사용하려면 <code>new</code> 를 통해서 객체를 생성해야하는데, 이 객체를 생성하기 위해서는 다른 객체를 생성해야하는 등 복잡한 의존 관계가 발생하고 사용자는 파악하기 힘들다.</li>
+<li>따라서 스프링 프레임워크는 이러한 객체에 대한 생성과 객체간의 의존관계에 대한 관리를 개발자가 스프링에게 위임하게 된다.</li>
+<li>개발자는 스프링이 요구하는 대로 설정만 하면, 설정에 따라서 <code>Bean</code>을 생성하여 컨테이너에 담고 <code>Bean</code>간의 의존관계를 파악(<code>Dependency Look-up</code>)하여 주입 (<code>Dependency Injection</code>)해준다.</li>
+</ul>
+<p><strong>POJO (Plain Java Object)</strong></p>
+<ul>
+<li>스프링에서 생성되어 관리되는 POJO 기반의 객체를 우리는 <code>Spring Bean</code>이라고 한다.</li>
+<li>여기서 <code>POJO</code>는 단순 <code>getter/setter</code>만으로 구성되어 있으며 단순히 <code>new</code>를 통해서 생성 가능한 형태를 말한다.</li>
+<li>핵심은 특정 기술에 종속되는 어떤 클래스도 상속하지 않고 있으며 어떠한 인터페이스도 구현하고 있지 않은 자바 클래스이다.</li>
+</ul>
+<h2 id="2-aop-aspect-oriented-programming">2. AOP (Aspect Oriented Programming)</h2>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/110551571-16e40400-8179-11eb-87cd-901053f4404b.png" alt="image2021-3-8_18-35-52"></p>
+<ul>
+<li>
+<p>AOP는 관점지향 프로그래밍을 말한다.</p>
+</li>
+<li>
+<p>대부분의 프로젝트는 고유한 핵심 기능 외에 트랜잭션, 보안처리(인증, 인가), 로깅 등의 공통 기능을 반드시 포함할 것이다.</p>
+</li>
+<li>
+<p>별다른 정책이 없다면, 우리는 매번 프로젝트에서 똑같은 로직을 계속해서 개발할 것이고 버그가 발생하면 여기저기서 수정 작업을 할 것이다.</p>
+</li>
+<li>
+<p><strong>AOP는 어플리케이션의 기능을 핵심 기능과 공통 기능을 각각 종단 관심사와 횡단 관심사로 분리하고 공통 기능을 적절히 끼워넣을 수 있게 한다.</strong></p>
+</li>
+</ul>
+<h2 id="psa-portable-service-abstraction">PSA (Portable Service Abstraction)</h2>
+<hr>
+<ul>
+<li><strong>환경의 변화와 관계없이 일관된 방식으로 기술에 접근할 수 있는 환경을 제공하려는 추상화 구조를 말한다.</strong></li>
+<li>스프링은 언어가 아닌 기술(구현체의 기술)에 얽메이는 것에 큰 반감을 가짐 (<code>EJB</code>, <code>Servlet</code>)</li>
+<li>스프링에서 동작할 수 있는 라이브러리들은 <code>POJO</code> 형태로 되어 있음</li>
+<li>대표적인 추상화의 예
+<ul>
+<li>JPA의 구현체(<code>Hibernate</code>, <code>Eclipse Link</code>)를 추상화하는 <code>Spring Data JPA</code></li>
+<li><code>Mybatis</code>를 추상화하는 <code>Spring-mybatis</code></li>
+<li><code>Spring Transaction Manager</code>, <code>Spring Cache Manager</code></li>
+<li>서비스가 구동되는 환경(<code>Web MVC</code>, <code>Web Flux</code>)에 대해서도 추상화를 지원한다.</li>
+</ul>
+</li>
+<li>버전에 따라서 라이브러리 혹은 프레임워크의 내부 API의 설계나 인터페이스가 달라지더라도, <code>Sping</code>에서 적절히 감싸 추상화를 하기 때문에 우리의 소스코드는 변경될 일이 없다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
