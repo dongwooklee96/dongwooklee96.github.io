@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CSRF on 개발자 이동욱</title>
+    <link>/tags/csrf/</link>
+    <description>Recent content in CSRF on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Wed, 10 Mar 2021 22:20:39 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/csrf/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>CSRF 란 무엇일까?</title>
+      <link>/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <pubDate>Wed, 10 Mar 2021 22:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <description>CSRF    CSRF(Cross-Site Request Forgery)는 신뢰할 수 있는 사용자를 가장하여 웹 사이트에 원치않는 명령을 보내는 공격입니다.
+  예를 들어, 다른 곳으로 이동하기 위해 사용하는 링크 뒤에 있는 URL에 악의적인 매겨변수를 포함시킴으로써 다음을 수행할 수 있다.
+  &amp;lt;img src=&amp;quot;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;quot;&amp;gt;   해당 도메인에 수정 권한이 있는 사용자의 경우 &amp;lt;img&amp;gt; 요소가, 사용자 모르게 동작을 수행한다.
+  심지어, 요소가 https://www.example.com에 없는 경우에도 실행된다.
+  CSRF를 방지하는 방법은 RestfulAPI 구현 및 시큐어 토큰을 추가하는 등 많은 방법이 있다.</description>
+    </item>
+    
+  </channel>
+</rss>
