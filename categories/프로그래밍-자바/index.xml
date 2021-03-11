@@ -6,10 +6,16 @@
     <description>Recent content in 프로그래밍 - 자바 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 10 Mar 2021 08:00:33 +0900</lastBuildDate>
-    
-	<atom:link href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 11 Mar 2021 07:20:33 +0900</lastBuildDate><atom:link href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>스프링 시큐리티 아키텍처 (미완성)</title>
+      <link>/post/2021/03/11/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%AF%B8%EC%99%84%EC%84%B1/</link>
+      <pubDate>Thu, 11 Mar 2021 07:20:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/11/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%AF%B8%EC%99%84%EC%84%B1/</guid>
+      <description>인증(Authentication)과 인과(Authorization)   어플리케이션 보안은 두가지의 독립적인 문제로 나뉜다. 바로 인증(authentication)과 인가(authorization)이다. 인증은 (who are you?) 이고, 인가는 (what are you allowed to do?) 스프링 시큐리티는 인증과 인과를 분리하도록 설계된 아키텍처를 가지고 있으며, 두 가지 모두에 대한 전략과 확장 할 수 있는 포인트가 존재한다.  인증 (Authentication)  public interface AuthenticationManager { Authentication authenticate(Authentication authentication) throws AuthenticationException; }   인증을 위한, AuthenticationManager 라는 인터페이스를 제공한다.
+  AuthenticationManager는 authenticate 라는 메서드를 제공하는데, 다음과 같은 3가지 일을 한다.</description>
+    </item>
     
     <item>
       <title>스프링의 세 가지 특징</title>
