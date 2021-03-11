@@ -6,7 +6,29 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 10 Mar 2021 07:07:39 +0900</lastBuildDate><atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Mar 2021 23:20:39 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/12/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Fri, 12 Mar 2021 23:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/12/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  현상보다는 원인을 분석할 수 있어야 할 것 같다.  Feelings (느낌, 주관)  오늘 성급하게 기존 소스코드에 문제가 있다고 생각 했는데, 사실 그게 아니였고 URS 스펙 문서를 보면서, 도메인 로직을 모르고 있어서 발생한 문제인 것을 알게 되었다. 도메인 지식을 무시하지 말고, 코딩 실력보다 사실 업무를 하는데 있어서는 도메인 로직이 중요하다는 것을 알게 되었다.  Findings (배운 점)  도메인 로직을 코드 상에서 드러낼 수 있도록 하는 것이 중요함과 동시에, 그렇지 못하다면 직접 검증하는 자세가 필요하다.</description>
+    </item>
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/11/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 11 Mar 2021 23:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/11/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 다른 사람의 소스 코드를 내 마음대로 수정했다가, 조심해달라는 이야기를 들었다. 기존의 소스 코드가 잘못되어 있더라도, 최소한의 영향을 주는 방향으로 코딩하는 것이 좋을 수도 있다는 생각을 했다.  Feelings (느낌, 주관)  상대방의 입장에서는 기분이 나쁠 수도 있는데, 화내지 않고 말해줘서 고마웠다.  Findings (배운 점)   다른 사람의 소스코드를 고칠 때는, 의견을 물어보고 고치도록하고, 어떠한 부탁을 할 때는 최대한 감정을 들어내지 않고 말하도록 해야겠다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/03/10/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
