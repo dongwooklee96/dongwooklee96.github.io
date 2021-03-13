@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>디자인 - 객체지향 on 개발자 이동욱</title>
+    <link>/categories/%EB%94%94%EC%9E%90%EC%9D%B8-%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5/</link>
+    <description>Recent content in 디자인 - 객체지향 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 13 Mar 2021 13:40:33 +0900</lastBuildDate><atom:link href="/categories/%EB%94%94%EC%9E%90%EC%9D%B8-%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>객체지향 5원칙 (SOLID)</title>
+      <link>/post/2021/03/13/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-5%EC%9B%90%EC%B9%99-solid/</link>
+      <pubDate>Sat, 13 Mar 2021 13:40:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/13/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-5%EC%9B%90%EC%B9%99-solid/</guid>
+      <description>회사에서 객체지향 및 SOLID 원칙에 대해서 설명하는 세미나를 진행하였다.
+ 사내 세미나 과제  객체지향 5원칙 (SOLID) 원칙  SRP (Single Responsiblity Principle) - 단일 책임 원칙  하나의 클래스는 하나의 책임만 가져야 한다. 어떤 변화 (요구 사항등의 변화)에 의해서 클래스를 변경해야하는 이유는 오직 하나여야 한다. 나머지 4원칙의 기초가 되는 원칙으로 SRP만 잘 지키면 다른 책임의 변경으로 인한 연쇄 작용을 방지할 수 있다.  OCP (Open-Closed Principle) - 개방, 폐쇄 원칙   SW의 구성 요소 (모듈, 컴포넌트, 클래스, 메서드)는 확장에는 열려있고 변경에는 닫쳐있어야 한다.</description>
+    </item>
+    
+  </channel>
+</rss>
