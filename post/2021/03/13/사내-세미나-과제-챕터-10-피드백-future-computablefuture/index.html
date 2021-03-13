@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>사내 세미나 과제 챕터 10 피드백 - Future, ComputableFuture | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">사내 세미나 과제 챕터 10 피드백 - Future, ComputableFuture</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/13</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94">프로그래밍 - 자바</a> 
+  
+  
+  
+  Tags: <a href="/tags/%EC%9E%90%EB%B0%94">자바</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>회사에서 자바 비동기 처리 및 <code>Future</code>, <code>CompletableFuture</code>에 대해서 세미나를 진행하였다.</p>
+<p>과제를 진행하면서, 비동기 프로그래밍 및 자바에서 비동기 프로그래밍을 어떻게 사용하는지 생각해 볼 수 있었다.</p>
+<ul>
+<li><a href="https://github.com/dongwooklee96/java-chap10-assignment">사내 세미나 과제 - java-chap10-assignment</a></li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/111016625-5a957280-83f2-11eb-847c-b5e8deaf3ac7.png" alt="Screen Shot 2021-03-13 at 11 50 40 AM"></p>
+<p>친절하게 피드백을 해주셨기 때문에, 내가 <code>ComputableFuture</code>를 잘못사용하고 있다는 사실을 알게 되었다.</p>
+<pre><code class="language-java8" data-lang="java8">repository.retrieveCategories().parallelStream()
+                .map(category -&gt; CompletableFuture.supplyAsync(() -&gt; repository.retrieveBooksByCategory(category)))
+                .collect(Collectors.toList())
+        .parallelStream()
+        .map(CompletableFuture::join)     // (1)
+        .flatMap(Collection::parallelStream)
+        .collect(Collectors.toList())
+        .parallelStream()
+        .map(book -&gt; CompletableFuture.runAsync(() -&gt; repository.updateAuthor(book, author), executors))
+        .collect(Collectors.toList())
+        .forEach(CompletableFuture::join); // (2)
+        executors.shutdown();
+</code></pre><p>위의 코드는 내가 처음에 제출한 코드이다. 문제점을 보면 다음과 같다.</p>
+<ul>
+<li>
+<p>코드에서 <code>join</code>을 사용한 곳이 2개정도 존재한다.</p>
+</li>
+<li>
+<p><code>join</code>은 현재 <code>Thread</code>를 블록킹 하여 결과를 기다리는 연산이다.</p>
+</li>
+<li>
+<p>따라서 <code>ComputableFuture</code>는 이러한 <code>join</code> 없이 <code>CompletionStage</code>라는 약속을 기반으로 <code>Non blocking</code> 기반의 비동기 처리를 할 수 있게 도와준다.</p>
+</li>
+<li>
+<p>하지만, 나는 이러한 특징을 이해하지 못하고, <code>join</code>을 남발하였다.</p>
+</li>
+<li>
+<p>따라서 <code>join</code> 연산은 스트림의 수집이 <code>List</code>와 같이 완료된 후에 개별적으로 루프를 돌면서 수행하는 것이 좋다.</p>
+</li>
+<li>
+<p>또한 스트림의 중간 연산 단계에서 <code>join</code>을 호출하면, 게으른 연산을 하는 특성으로 인해서 순차적인 <code>blocking</code>이 걸릴 수 있다. 따라서 <code>join</code> 연산은 스트림의 수집이 <code>List</code>와 같이 완료된 후에 개별적으로 루프를 돌면서 수행하는 것이 좋다.</p>
+</li>
+<li>
+<p><code>stream</code>으로 변환할 때, <code>parallelStream</code>은 조심해서 사용을 해야한다. <code>parallelStream</code> 작업을 멀티코어에서 병렬처리 하는 것은 일반적으로 데이터가 많을 때 유리하다. 데이터가 적으면 오히려 분할하는데 시간이 더 걸린다.</p>
+</li>
+<li>
+<p>따라서 이러한 최적화는 여러번 수행해보면서 반드시 측정을 기반으로 선택이 되어야한다. 그러한 경우가 아니라면 <code>stream</code>도 충분하다.</p>
+</li>
+<li>
+<p>꼭 필요한 곳이 아니라면, <code>join</code> 연산은 최종적으로 &ldquo;동기&quot;가 필요한 곳에서 사용하는 것이 좋다.</p>
+</li>
+</ul>
+<p>따라서 피드백을 받은 부분을 개선한 결과는 다음과 같다.</p>
+<pre><code>final List&lt;CompletableFuture&lt;List&lt;Book&gt;&gt;&gt; futures
+            = repository.retrieveCategories().stream()
+            .map(category -&gt; supplyAsync(() -&gt; repository.retrieveBooksByCategory(category), executors))
+            .collect(toList());
+
+        final List&lt;CompletableFuture&lt;Void&gt;&gt; updateFutures
+            = futures.stream()
+            .map(future -&gt; future.thenCompose(books -&gt; allOf(
+                books.stream()
+                    .map(book -&gt; runAsync(() -&gt; repository.updateAuthor(book, author), executors))
+                    .toArray(CompletableFuture[]::new)
+            )))
+            .collect(toList());
+        updateFutures.forEach(CompletableFuture::join);
+</code></pre><ul>
+<li><code>ComputableFuture</code>로 작업을 처리한 후에, 최종적으로 한꺼번에  <code>join</code> 을 해주고 있다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=200069290">모던 자바 인 액션, 책, 한빛미디어</a></li>
+<li><a href="https://www.inflearn.com/course/the-java-java8/dashboard">더 자바, Java8, 프로그래밍 강의, 백기선</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

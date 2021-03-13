@@ -6,10 +6,18 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 12 Mar 2021 23:20:39 +0900</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sat, 13 Mar 2021 11:40:33 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>사내 세미나 과제 피드백 CH10 - Future, ComputableFuture</title>
+      <link>/post/2021/03/13/%EC%82%AC%EB%82%B4-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C-%ED%94%BC%EB%93%9C%EB%B0%B1-ch10-future-computablefuture/</link>
+      <pubDate>Sat, 13 Mar 2021 11:40:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/13/%EC%82%AC%EB%82%B4-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C-%ED%94%BC%EB%93%9C%EB%B0%B1-ch10-future-computablefuture/</guid>
+      <description>회사에서 자바 비동기 처리 및 Future, CompletableFuture에 대해서 세미나를 진행하였다.
+과제를 진행하면서, 비동기 프로그래밍 및 자바에서 비동기 프로그래밍을 어떻게 사용하는지 생각해 볼 수 있었다.
+ 사내 세미나 과제  친절하게 피드백을 해주셨기 때문에, 내가 ComputableFuture를 잘못사용하고 있다는 사실을 알게 되었다.
+repository.retrieveCategories().parallelStream() .map(category -&amp;gt; CompletableFuture.supplyAsync(() -&amp;gt; repository.retrieveBooksByCategory(category))) .collect(Collectors.toList()) .parallelStream() .map(CompletableFuture::join) // (1) .flatMap(Collection::parallelStream) .collect(Collectors.toList()) .parallelStream() .map(book -&amp;gt; CompletableFuture.runAsync(() -&amp;gt; repository.updateAuthor(book, author), executors)) .collect(Collectors.toList()) .forEach(CompletableFuture::join); // (2) executors.shutdown(); 위의 코드는 내가 처음에 제출한 코드이다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
