@@ -6,10 +6,21 @@
     <description>Recent content in 주간 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Feb 2021 12:29:39 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 14 Mar 2021 20:20:39 +0900</lastBuildDate>
     
 	<atom:link href="/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>주간 회고</title>
+      <link>/post/2021/03/14/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 14 Mar 2021 20:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/14/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>주간 회고 이번주에 있던 일들을 종합해서 회고를 해보고 정리를 해보았습니다.
+커뮤니케이션 및 협업 능력  업무를 할 때, 상황 설명 및 커뮤니케이션을 조리있게 하지 못하고 이로 인해서 협업에 여려움을 느끼고 있었다. 어떻게 하면 내가 말을 좀 더 조리있게 잘하고 다른 사람들이 이해할 수 있을까라는 고민을 하던 중에, 다음과 같은 프레임워크를 알게 되었다.
+ Situation, task, action, result  쉽게 말하면서 어떤 상황 및 이야기를 할 때, 다음과 같은 순서에 따라서 말을 하는 것이다.</description>
+    </item>
     
     <item>
       <title>주간 회고</title>
