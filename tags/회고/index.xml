@@ -6,10 +6,15 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 14 Mar 2021 20:20:39 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Mon, 15 Mar 2021 07:37:39 +0900</lastBuildDate><atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Mon, 15 Mar 2021 07:37:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  Javadoc을 영어로 작성할 때에는, 3인칭 단수로 작성한다. 자바독을 많이 읽어보면서 어떻게 작성했는지 알아보는 것이 좋다. 코딩을 하면서, 부주의한 실수를 하였다.  Feelings (느낌, 주관)  어떻게 보면 별것 아니라고 생각을 할지 모르겠지만, 다른 사람들의 시간을 많이 낭비하였다.  Findings (배운 점)  나의 사소한 실수로 인해서, 다른 사람들의 시간을 낭비시키지 말자.  Bad (개선할 점)  코드를 작성하고 나서, 실수를 한 것이 없는지 꼼꼼히 살펴보자.</description>
+    </item>
     
     <item>
       <title>주간 회고</title>
