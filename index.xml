@@ -6,7 +6,20 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 15 Mar 2021 07:37:39 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Mar 2021 12:37:39 +0900</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/16/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 16 Mar 2021 12:37:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/16/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 내가 정말 아는 것이 없구나라는 것을 깨닫게 되었다. 내가 아는 것도 없고 설명도 잘 못한다는 것을 알게 되었다. 코드 리뷰를 통해서, 개인의 역량에 모든 것을 맡기지 않는 방법도 알게 되었다.  Feelings (느낌, 주관)  어렴풋이 들어봤던 것 같은데, 설명하려고 애를 쓰니까 굉장히 힘들었다. 내가 어떤 것을 안다고 생각하는 기준이 다른 사람에 비해서 터무니 없이 낮고, 얕았다. 코드 리뷰를 한다고 해서, 대충짜도 된다고 생각하지 말고, 다른 사람에게 내가 작성한 의도와 왜 이렇게 작성했냐고 물어보았을 때 항상 대답할 수 있게 알고 작성하자.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/03/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
