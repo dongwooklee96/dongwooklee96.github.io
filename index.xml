@@ -6,7 +6,20 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 18 Mar 2021 13:20:24 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Mar 2021 22:11:39 +0900</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/18/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 18 Mar 2021 22:11:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/18/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘은 회사에서 배포를 기다리고 문제가 생겼을 때, 대응하기 위해서 대기하는 시간이 많았고, 이때 평소에 궁금했던 것과 현재 프로젝트에 적용하면 좋을 기술들을 찾아보고 정리하였다. 같은 솔루션을 진행하는 선배에게 프로젝트에 트랜잭션 처리를 위해서 조사를 하고 있다고 솔직하게 말하고 공부를 하였다.  Feelings (느낌, 주관)  트랜잭션에 대해서 공부하게 되었는데, SQLAlchemy 에서 트랙잭션을 사용하느 법과 세션마다 고립 레벨을 설정하는 법에 대해서 배우게 되었다. 하지만, 현재 프로젝트에 어떻게 적용하면 좋을지 조금 막막했다.</description>
+    </item>
+    
     <item>
       <title>SQLAlchemy에서 트랜잭션 사용법</title>
       <link>/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95/</link>
