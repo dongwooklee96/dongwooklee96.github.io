@@ -6,10 +6,16 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 17 Mar 2021 22:37:39 +0900</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 18 Mar 2021 13:20:24 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQLAlchemy에서 트랜잭션 사용법</title>
+      <link>/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95/</link>
+      <pubDate>Thu, 18 Mar 2021 13:20:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95/</guid>
+      <description>회사에서 이슈 진행을 하다가, 트랜잭션를 이용하여 처리해야하는 부분을 발견하였다. 따라서 SQLAlchemy에서는 트랜잭션을 어떻게 사용하는지 정리해보도록 하겟다.
+트랜잭션 관리하기  새롭게 생성된 세션은 begin() 상태이다. begin() 상태에서 Session은 아직 어떠한 Connection 및 Transactional과 연관되지 않았다. 그러한 다음에, Session 은 데이터베이스 커넥션 요청을 수신한다. 일반적으로, 이것은 Engine을 이용하여, 특정 SQL 문을 수행해야하는 것을 의미한다. 특정 SQL문의 수행은 Session.query(), Session.execute() 통해 이루어지고 Session.commit(), Session.flush()를 할 때 보류된 변경 사항을 비우고 커밋하면서 발생합니다. 이러한 요청이 수신되면, 새로운 엔진 각각이 세션에서 유지되고 관리하는 트랜잭션 상태와 연결이 된다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>

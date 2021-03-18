@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>SQLAlchemy에서 트랜잭션 사용법 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">SQLAlchemy에서 트랜잭션 사용법</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/18</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+  
+  Tags: <a href="/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>회사에서 이슈 진행을 하다가, 트랜잭션를 이용하여 처리해야하는 부분을 발견하였다.
+따라서 <code>SQLAlchemy</code>에서는 트랜잭션을 어떻게 사용하는지 정리해보도록 하겟다.</p>
+<h2 id="트랜잭션-관리하기">트랜잭션 관리하기</h2>
+<p><img src="https://user-images.githubusercontent.com/14002238/111575492-ce1ff100-87f1-11eb-9999-bef313b83749.png" alt="Screen Shot 2021-03-18 at 1 56 50 PM"></p>
+<ul>
+<li>새롭게 생성된 세션은 <code>begin()</code> 상태이다.</li>
+<li><code>begin()</code> 상태에서 <code>Session</code>은 아직 어떠한  <code>Connection</code> 및  <code>Transactional</code>과 연관되지 않았다.</li>
+<li>그러한 다음에, <code>Session</code> 은 데이터베이스 커넥션 요청을 수신한다.</li>
+<li>일반적으로, 이것은 <code>Engine</code>을 이용하여, 특정 <code>SQL</code> 문을 수행해야하는 것을 의미한다.</li>
+<li>특정 <code>SQL</code>문의 수행은 <code>Session.query()</code>, <code>Session.execute()</code> 통해 이루어지고  <code>Session.commit()</code>, <code>Session.flush()</code>를 할 때 보류된 변경 사항을 비우고 커밋하면서 발생합니다.</li>
+<li>이러한 요청이 수신되면, 새로운 엔진 각각이 세션에서 유지되고 관리하는 트랜잭션 상태와 연결이 된다.</li>
+<li>첫 번째, 엔진이 작동하면 세션은 <code>begin</code> 상태를 떠나서, <code>transactional</code> 상태로 전환되었다고 할 수 있다.</li>
+<li>각각의 엔진에 대해서 연결이 되어 있으며, 이러한 연결은 <code>Engine.contextual_connect()</code> 메서드를 통해서 획득된다.</li>
+<li>롤백 또는 커밋 후에 트랜잭션 상태가 완료되면 모든 트랜잭션 및 연결 리소스를 해제하고, <code>begin</code> 상태로 돌아간다.</li>
+<li><code>begin</code> 상태로 돌아가면, 다시 새로운 <code>SQL</code> 문을 내보내는 새 요청이 수신될 때 새로운 <code>Connection</code> 및 <code>Transaction</code> 객체를 다시 호출합니다.</li>
+</ul>
+<p>다음은 위의 라이프 사이클을 보여주는 예제이다.</p>
+<pre><code>engine = create_engine(&quot;...&quot;)
+Session = sessionmaker(bind=engine)
+
+# 새로운 세션, 어떤 커넥션도 사용중이지 않다.
+session = Session()
+try:
+    # 첫 번째 쿼리를 수행하면, 커넥션을 엔진으로 부터 획득하고
+    # 트랜잭션이 시작된다.    
+    item1 = session.query(Item).get(1)
+
+    # 두 번째 쿼리이다. 같은 커넥션과 트랜젝션이 사용된다.
+    item2 = session.query(Item).get(2)
+
+    # 아직 반영되지 않은 변경 사항이 생성된다.
+    item1.foo = 'bar'
+    item2.bar = 'foo'
+    
+    # 커밋을 수행한다.
+    # 아직 반영되지 않은 변경사항이 모두 `flush` 된다.
+    # 트랜잭션이 커밋되고, 연결 객체가 닫치고 사라진다.
+    # DBAPI 연결이 커넥션 풀로 반환된다.
+    session.commit()
+except:
+    # 롤백시에도, 커미과 동일한 상태 종료가 진행된다.
+    session.rollback()
+    raise
+finally:
+    # 세션을 닫는다, 이렇게 하면 남아 있는 모든 객체가 영구적으로 삭제되며, 기존 SessionTransaction 상태가 재설정 된다.
+    # 일반적으로 이러한 단계는 필수는 아니지만,
+    # commit() 또는 rollback() 자체에 예기치 않은 내부 오류가
+    # 발생한 경우 close()는 유효하지 않은 상태가 제거되도록 한다.
+    session.close()
+</code></pre><h3 id="savepoint-사용하기">SAVEPOINT 사용하기</h3>
+<hr>
+<p>기본 엔진에서 지원하는 경우, <code>SAVEPOINT</code> 트랜잭션은 <code>Session.begin_nested()</code> 메서드를 사용할 수 있다.</p>
+<pre><code>Session = sessionmaker()
+session = Session()
+session.add(u1)
+session.add(u2)
+
+session.begin_nested() # establish a savepoint
+session.add(u3)
+session.rollback()  # rolls back u3, keeps u1 and u2
+
+session.commit() # commits u1 and u2
+</code></pre><ul>
+<li>
+<p><code>Session.begin_nested()</code>는 여러 번 호출 될 수 있으며, 각 호출에 대해서 고유한 식별자가 있는 새로운 SAVEPOINT를 발행합니다.</p>
+</li>
+<li>
+<p>각각의 <code>Session.begin_nested()</code> 호출에 대해서, <code>Session.rollback()</code>또는, <code>Session.commit()</code>을 수행 해야 합니다.</p>
+</li>
+<li>
+<p>그러나 반환 값이 컨텍스트 매니저에 의해서 사용되는 경우 예를 들어서 <code>with</code> 문에서 <code>rollback</code> 및 <code>commit</code>은 컨텍스트를 종료할 때, 컨텍스트 관리자가 실행하므로 명시적으로 추가해서는 안된다.</p>
+</li>
+<li>
+<p><code>Session.begin_nested()</code> 메서드는 <code>Session.begin()</code>을 덜 사용하기 위해서 사용하며 컨텍스트 매니저로 작동하는 <code>SessionTransaction</code>을 반환한다.</p>
+</li>
+<li>
+<p>개발 레코드를 삽입할 때, 유용하게 사용할 수 있다.</p>
+</li>
+</ul>
+<pre><code>for record in records:
+    try:
+        with session.begin_nested():
+            session.merge(record)
+    except:
+        print(&quot;Skipped record %s&quot; % record)
+session.commit()
+</code></pre><h3 id="트랜잭션-격리-수준-설정--dbapi-autocommit">트랜잭션 격리 수준 설정 / DBAPI AUTOCOMMIT</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/111587615-d08c4600-8805-11eb-8a03-8f3379b7a441.png" alt="Screen Shot 2021-03-18 at 4 20 02 PM"></p>
+<ul>
+<li>대부분의 <code>DBAPI</code>는 설정할 수 있는 트랜잭션 격리 수준의 개념을 지원한다.</li>
+<li>전통적으로 <code>READ UNCOMMITED</code>, <code>READ COMMITED</code>, <code>REPEATABLE READ</code>, 및 <code>SERIALIZABLE</code>의 네 가지 수준이 있다.</li>
+<li>이는 일반적으로 새로운 트랜잭션을 사용하기 전에, <code>DBAPI</code> 연결에 적용되며 대부분의 DBAPI는 SQL문이 처음 생성될 때, 트랜잭션을 암시적으로 시작한다.</li>
+<li><code>SQLAlchemy</code>는 <code>create_engine</code> 수준과, <code>Connection.execution_options()</code> 수준 모두에서 플래그를 사용하여 엔진 별 또는 연결 별로 설정 가능한 격리 모드를 지원한다.</li>
+</ul>
+<h4 id="세션-메이커-및-엔진-전체에-대한-고립-수준-설정">세션 메이커 및 엔진 전체에 대한 고립 수준 설정</h4>
+<p>전역 적으로 특정 고립 수준으로 <code>Session</code> 또는 <code>Session Maker</code>를 설정하려면 첫 번째 기술은 모든 경우에 특정 격리 수준에 대해서 엔진을 설정한 다음에, 세션 메이커의 연결 소스로 사용하는 것이다.</p>
+<pre><code>from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+eng = create_engine(
+    &quot;postgresql://scott:tiger@localhost/test&quot;,
+    isolation_level='REPEATABLE READ'
+)
+
+Session = sessionmaker(eng)
+</code></pre><p>서로 다른 격리 수준을 가진 두 개의 엔진이 있는 경우 유용한 다른 옵션은 <code>Engine.execution_options()</code> 메서드를 사용하는 것입니다.</p>
+<pre><code>from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+eng = create_engine(&quot;postgresql://scott:tiger@localhost/test&quot;)
+
+autocommit_engine = eng.execution_options(isolation_level=&quot;AUTOCOMMIT&quot;)
+
+transactional_session = sessionmaker(eng)
+autocommit_session = sessionmaker(autocommit_engine)
+</code></pre><ul>
+<li>위의 <code>eng</code>과 <code>autocommit_engine</code>은 동일한 연결 풀을 공유합니다.</li>
+<li><code>AUTOCOMMIT</code> 모드는 <code>autocommit_engine</code>에서 연결할 때 따로 설정된다.</li>
+</ul>
+<h4 id="각각의-세션에-대한-고립-수준-설정">각각의 세션에 대한, 고립 수준 설정</h4>
+<p>생성자를 직접 사용하거나, 세션 메이커가 생성한 호출 가능한 객체를 호출 할 때, <code>bind</code> 인자로 바로 전달 할 수 있다.
+예를 들어, <code>transactional_session</code>에서 세션을 만들고, <code>autocommit_engine</code>을 전달할 수 있다.</p>
+<pre><code>session = transactional_session(bind=autocommit_engine)
+# work with session
+session.close()
+</code></pre><h4 id="각각의-트랜잭션에-대한-고립-수준-설정">각각의 트랜잭션에 대한 고립 수준 설정</h4>
+<p>격리 수준과 관련된 주요한 주의 사항은 트랜잭션이 이미 시작된 연결에서 설정을 안전하게 수정할 수 없다는 것이다.</p>
+<p>데이터베이스는 진행중인 트랜잭션의 격리 수준을 변경할 수 없으며 일부 <code>DBAPI</code> 및 <code>SQLALchemy</code> 언어에서는 이러한 영역에서 일관적이지 않은 동작이 있다.</p>
+<p>따라서 원하는 격리 수준을 가진 엔진 앞쪽에 바인딩 된 세션을 사용하는 것이 좋다.</p>
+<p>그러나 연결 단위의 격리 수준은 트랜잭션이 시작될 때 <code>Session.commection()</code> 메서드를 사용하여 영향 받을 수 있다.</p>
+<pre><code>from sqlalchemy.orm import Session
+
+sess = Session(bind=engine)
+with sess.begin():
+    sess.connection(execution_options={'isolation_level': 'SERIALIZABLE'})
+
+# commits transaction.  the connection is released
+# and reverted to its previous isolation level.
+</code></pre><p>위에서 먼저, 생성자 또는 세션 메이커를 사용하여 세션을 생성한다. 그런 다음에 트랜잭션이 시작되기 전에 연결에 전달되는 실행 옵션을 제공하는 <code>Session.connection()</code>을 호출하여 트랜잭션 시작을 명시적으로 설정한다.</p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://docs.sqlalchemy.org/en/13/orm/session_transaction.html#transactions-and-connection-management">Transactions and Connection Management</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
