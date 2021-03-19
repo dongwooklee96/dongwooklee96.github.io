@@ -6,14 +6,22 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 19 Mar 2021 07:07:36 +0900</lastBuildDate><atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Mar 2021 07:07:36 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/03/19/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
       <pubDate>Fri, 19 Mar 2021 07:07:36 +0900</pubDate>
       
       <guid>/post/2021/03/19/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
-      <description>TIL 양식 Facts (사실, 객관)  테스트 코드를 REST DOCS를 이용해서 문서화하는 법에 대해서 배울 수 있었다.  Feelings (느낌, 주관) Findings (배운 점)  자바독을 작성할 때는, 문장이 자연스럽게 읽히는 형태로 만들어야 한다.   위의 사진을 보면, Returns 항목에 중복되어서 Returns 라는 문장으로 시작하는데 이는 별로 좋지 않다.  Bad (개선할 점) Affimation (자기 선언) 회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.</description>
+      <description>TIL 양식 Facts (사실, 객관)   테스트 코드를 REST DOCS를 이용해서 문서화하는 법에 대해서 배울 수 있었다.
+  웹 애플리케이션 보안에 대해서 더 많이 배우기 위해서 다음과 같은 책을 구매했다.웹 애플리케이션 보안
+  이번에 GC 및 JVM에 대해서 더 자세히 알고 싶어서 책을 구매 하였다. 자바 성능 튜닝이야기
+  서버와 브라우저에 대해서 앞으로 더 깊게 공부를 해야겠다는 마음을 먹었다.
+  Feelings (느낌, 주관)  나의 부족한 점을 채우기 위해서 더 열심히 공부를 해야겠다.</description>
     </item>
     
     <item>
