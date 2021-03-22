@@ -6,10 +6,62 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 19 Mar 2021 07:07:36 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 22 Mar 2021 23:20:39 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TCP/IP 및 네트워크 계층</title>
+      <link>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5/</link>
+      <pubDate>Mon, 22 Mar 2021 23:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5/</guid>
+      <description>네트워크 통신   네트워크 통신은 관점에 따라 OSI 7 모델과 TCP/IP 모델 두가지로 설명할 수 있다. OSI 7 모델은 1984년에 ISO (국제 표준화 기술)에 의해 표준화되었고, 통신이 이루어지는 과정을 단계별로, 파악할 수 있도록 7 개의 계층인 물리, 데이터링크, 네트워크, 전송, 세션, 표현, 응용 계층으로 구분되어 있으며 네트워크 구현을 연구하고 배우기에 적합한 구조다. 반면에, TCP/IP 모델은 현장에 많이 사용하는 기술 위주로 4계층으로 단순화한 모델로, 실제 사용하는 프로토콜 규약은 이 모델을 따르고 있다.</description>
+    </item>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>최근에 애플리케이션 보안에 관심을 가지게 된 이유</title>
+      <link>/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</link>
+      <pubDate>Mon, 22 Mar 2021 23:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</guid>
+      <description>최근에 내가 웹 애플리케이션 보안에 대해서 굉장히 무관심함을 알게 됨과 동시에 데이터베이트 연결이 끊어지는 네트워크 통신과 관련된 장애가 있었다.
+장애의 이유를 알지 못하니까 굉장히 답답함과 동시에 문제를 해결할 수 없었다. 따라서 디버깅을 하듯이 네트워크 패킷을 분석해서 원인을 알아 낼 수 있으면 굉장히 좋을 것 같다는 생각을 함과 동시에 내가 주도하면서 진행하는 토이 프로젝트가 보안에 대해서 굉장히 견고한 애플리케이션이 되었으면 하는 마음이 있다. 따라서, 앞으로 웹 애플리케이션 보안에 대해서 공부하고 견고한 시스템을 구축해나갈 생각이다.</description>
+    </item>
     
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/22/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Mon, 22 Mar 2021 20:07:36 +0900</pubDate>
+      
+      <guid>/post/2021/03/22/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  아커스 이슈 구현을 하는데, 전체적인 흐름 및 구현 위치는 파악을 하였으나, 자료구조를 정확히 파악하지 못해서, 어디서부터 손대야할지 감이오지 않고, 깊은 이해를 하기 힘들었다. 대학교 동기들과 토이프로젝트를 시작했다. 회사에서 일하면서 소프트웨어 스펙을 정하고 어떤 것을 만들지 구체화 하는 과정이 중요하다는 것을 깨달았기 때문에, 지루하기는 하지만 작성하고 있다.  Feelings (느낌, 주관)  프로젝트를 주관해서 이끌어 가는 일이 힘들것이라고 예상했지만 생각보다 많은 공수가 들었다. 그래도 처음이 가장 힘들것이라고 생각하고 프로세스가 정립되면 쉬워질 것이다.</description>
+    </item>
+    
+    <item>
+      <title>주간 회고</title>
+      <link>/post/2021/03/21/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 21 Mar 2021 17:15:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/21/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>주간 회고 이번주에 있던 일들을 종합해서 회고를 해보고 정리를 해보았습니다.
+Facts (사실, 객관)  코딩을 하면서, 사소한 실수가 발견되었고 재배포를 해야하는 상황이 되었다. 내가 아는 것을 다른사람에게 설명하는데 생각보다 말이 잘 나오지 않았고, 더듬더듬 말하고 있었다. 오랜만에 코딩 테스트 문제를 풀어보았다.  Feelings (느낌, 주관)  다른 사람들에게 미안하기도 했고, 시간이 많이 소모되었다. 다른 사람에게 쉽게 설명할 수 없으면 제대로 아는 것이 아니라는 생각이 들었다. 남들이 꺼려하는 일을 먼저 나서서 하려고 하는 자세가 동료들에게 신뢰를 줄 수 있을 것같다.</description>
+    </item>
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/20/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 20 Mar 2021 07:07:36 +0900</pubDate>
+      
+      <guid>/post/2021/03/20/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오랜만에 코딩 테스트 문제를 풀어봤다.  Feelings (느낌, 주관)  직장을 구하기 전에는 코딩 테스트가 그저 스트레스였는데, 오랜만에 풀어보니까 매우 재미있었다.  Findings (배운 점)  재귀를 활용해서 푸는 문제가 있었는데 재귀를 이용하니까 너무 시간이 오래 걸렸다. 따라서 메모이제이션을 공부하고 이를 이용해서 풀 수 있는지 생각을 해봐야할 것 같다. 추가로 다이나믹 프로그래밍을 이용해서 문제를 푸는 방법 및 DFS BFS 문제를 공부해야겠다.  Bad (개선할 점)  알고리즘 문제를 평소에 풀어보자.</description>
+    </item>
+    
+    <item>
+      <title>SQLAlchemy 세션</title>
+      <link>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98/</link>
+      <pubDate>Fri, 19 Mar 2021 16:40:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98/</guid>
+      <description>참고 문헌  Transactions and Connection Management  </description>
+    </item>
     
     <item>
       <title>일일 회고</title>

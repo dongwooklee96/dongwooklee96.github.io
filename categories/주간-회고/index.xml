@@ -6,10 +6,16 @@
     <description>Recent content in 주간 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 14 Mar 2021 20:20:39 +0900</lastBuildDate>
-    
-	<atom:link href="/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sun, 21 Mar 2021 17:15:39 +0900</lastBuildDate><atom:link href="/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>주간 회고</title>
+      <link>/post/2021/03/21/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 21 Mar 2021 17:15:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/21/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>주간 회고 이번주에 있던 일들을 종합해서 회고를 해보고 정리를 해보았습니다.
+Facts (사실, 객관)  코딩을 하면서, 사소한 실수가 발견되었고 재배포를 해야하는 상황이 되었다. 내가 아는 것을 다른사람에게 설명하는데 생각보다 말이 잘 나오지 않았고, 더듬더듬 말하고 있었다. 오랜만에 코딩 테스트 문제를 풀어보았다.  Feelings (느낌, 주관)  다른 사람들에게 미안하기도 했고, 시간이 많이 소모되었다. 다른 사람에게 쉽게 설명할 수 없으면 제대로 아는 것이 아니라는 생각이 들었다. 남들이 꺼려하는 일을 먼저 나서서 하려고 하는 자세가 동료들에게 신뢰를 줄 수 있을 것같다.</description>
+    </item>
     
     <item>
       <title>주간 회고</title>

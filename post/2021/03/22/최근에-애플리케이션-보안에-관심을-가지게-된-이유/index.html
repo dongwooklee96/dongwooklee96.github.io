@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>최근에 애플리케이션 보안에 관심을 가지게 된 이유 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">최근에 애플리케이션 보안에 관심을 가지게 된 이유</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/22</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  Tags: <a href="/tags/%EB%B3%B4%EC%95%88">보안</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>최근에 내가 웹 애플리케이션 보안에 대해서 굉장히 무관심함을 알게 됨과 동시에 데이터베이트 연결이 끊어지는 네트워크 통신과 관련된 장애가 있었다.</p>
+<p>장애의 이유를 알지 못하니까 굉장히 답답함과 동시에 문제를 해결할 수 없었다. 따라서 디버깅을 하듯이 네트워크 패킷을 분석해서 원인을 알아 낼 수 있으면 굉장히 좋을 것 같다는 생각을 함과 동시에 내가 주도하면서 진행하는 토이 프로젝트가 보안에 대해서 굉장히 견고한 애플리케이션이 되었으면 하는 마음이 있다.
+따라서, 앞으로 웹 애플리케이션 보안에 대해서 공부하고 견고한 시스템을 구축해나갈 생각이다.</p>
+<p>책에서는 다루는 대부분의 내용이 네트워크 공격을 패킷 단위로 분석하고 있다. 실제로도 공격 대응을 위한 분석 단계에서 패킷을 분석하는 빈도가 상당히 높다고 한다. 나는 보안 전문가보다는 웹 애플리케이션 개발자에 가깝기 때문에 실무적으로 패킷을 분석해서 보안 위협을 감지하는 일은 없을 확률이 높지만, 네트워크에 대해서 내부 원리까지 깊게 이해하는 것이 목표이므로, 많은 도움이 될 것 같다.</p>
+<p>첫 장에서는 인터넷 통신의 표준 프로토콜인 <code>TCP/IP</code>의 계층별 헤더의 구조에 대해서 패킷 단위로 소개하고 있고, 주로 네트워크 공격에 사용되는 네트워크 계층의 <code>IP</code> 프로토콜과 전송 계층의 <code>TCP</code>, <code>UDP</code> 프로토콜의 구조에 대해서 설명하고 있다.</p>
+<p>책에서는 한 번에 모든 개념을 숙지하기 보다는, 필요할 때, 찾아보며 각 헤더의 구조를 조금씩 명확히 새기는 것을 권장하고 있다.</p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=217703927">네트워크 공격 패킷 분석, 프리렉</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

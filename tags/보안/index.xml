@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>보안 on 개발자 이동욱</title>
+    <link>/tags/%EB%B3%B4%EC%95%88/</link>
+    <description>Recent content in 보안 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Mon, 22 Mar 2021 23:20:39 +0900</lastBuildDate><atom:link href="/tags/%EB%B3%B4%EC%95%88/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>최근에 애플리케이션 보안에 관심을 가지게 된 이유</title>
+      <link>/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</link>
+      <pubDate>Mon, 22 Mar 2021 23:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</guid>
+      <description>최근에 내가 웹 애플리케이션 보안에 대해서 굉장히 무관심함을 알게 됨과 동시에 데이터베이트 연결이 끊어지는 네트워크 통신과 관련된 장애가 있었다.
+장애의 이유를 알지 못하니까 굉장히 답답함과 동시에 문제를 해결할 수 없었다. 따라서 디버깅을 하듯이 네트워크 패킷을 분석해서 원인을 알아 낼 수 있으면 굉장히 좋을 것 같다는 생각을 함과 동시에 내가 주도하면서 진행하는 토이 프로젝트가 보안에 대해서 굉장히 견고한 애플리케이션이 되었으면 하는 마음이 있다. 따라서, 앞으로 웹 애플리케이션 보안에 대해서 공부하고 견고한 시스템을 구축해나갈 생각이다.</description>
+    </item>
+    
+  </channel>
+</rss>

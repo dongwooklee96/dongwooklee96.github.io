@@ -6,11 +6,7 @@
     <description>Recent content in SOLID 원칙 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 13 Mar 2021 13:40:33 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/solid-%EC%9B%90%EC%B9%99/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 13 Mar 2021 13:40:33 +0900</lastBuildDate><atom:link href="/tags/solid-%EC%9B%90%EC%B9%99/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>객체지향 5원칙 (SOLID)</title>
       <link>/post/2021/03/13/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-5%EC%9B%90%EC%B9%99-solid/</link>
