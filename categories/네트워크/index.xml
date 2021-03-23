@@ -8,11 +8,11 @@
     <language>ko-KR</language>
     <lastBuildDate>Mon, 22 Mar 2021 23:20:39 +0900</lastBuildDate><atom:link href="/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>TCP/IP 및 네트워크 계층</title>
-      <link>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5/</link>
+      <title>TCP/IP 및 네트워크 계층 및 RFC 791</title>
+      <link>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791/</link>
       <pubDate>Mon, 22 Mar 2021 23:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5/</guid>
+      <guid>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791/</guid>
       <description>네트워크 통신   네트워크 통신은 관점에 따라 OSI 7 모델과 TCP/IP 모델 두가지로 설명할 수 있다. OSI 7 모델은 1984년에 ISO (국제 표준화 기술)에 의해 표준화되었고, 통신이 이루어지는 과정을 단계별로, 파악할 수 있도록 7 개의 계층인 물리, 데이터링크, 네트워크, 전송, 세션, 표현, 응용 계층으로 구분되어 있으며 네트워크 구현을 연구하고 배우기에 적합한 구조다. 반면에, TCP/IP 모델은 현장에 많이 사용하는 기술 위주로 4계층으로 단순화한 모델로, 실제 사용하는 프로토콜 규약은 이 모델을 따르고 있다.</description>
     </item>
     
