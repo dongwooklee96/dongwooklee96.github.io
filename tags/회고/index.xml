@@ -6,7 +6,20 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 22 Mar 2021 20:07:36 +0900</lastBuildDate><atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Mar 2021 21:07:36 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 23 Mar 2021 21:07:36 +0900</pubDate>
+      
+      <guid>/post/2021/03/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  내가 정리했던 블로그 글을 정해서, 남이 궁금해서 물어볼 때, 설명을 할 수 있는지 알아보기 위해, 녹화를 해보았다. 웹 애플리케이션 보안이라는 책을 읽었다.  Feelings (느낌, 주관)  분명히 알고 있다고 생각한 것인데도 불구하고 정리가 되지 않아 버벅거리고 힘들었다.  Findings (배운 점)  블로그에 기술적인 내용을 정리하고, 스스로 제대로 이해하고 있는지 문제를 만들어서 직접 풀어보도록 해야겠다. 그리고, 이를 스스로 녹화해보면서 다른 사람이 내 설명을 어떻게 들었는지 테스트 해본다면 좋을 것이다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/03/22/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
