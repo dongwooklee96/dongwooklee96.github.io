@@ -6,7 +6,19 @@
     <description>Recent content in 스프링 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 10 Mar 2021 08:00:33 +0900</lastBuildDate><atom:link href="/tags/%EC%8A%A4%ED%94%84%EB%A7%81/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Mar 2021 18:13:23 +0900</lastBuildDate><atom:link href="/tags/%EC%8A%A4%ED%94%84%EB%A7%81/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IoC 컨테이너란 무엇일까</title>
+      <link>/post/2021/03/24/ioc-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <pubDate>Wed, 24 Mar 2021 18:13:23 +0900</pubDate>
+      
+      <guid>/post/2021/03/24/ioc-%EC%BB%A8%ED%85%8C%EC%9D%B4%EB%84%88%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <description>스프링 전반적인 기술을 주제로 사내 세미나를 하였다. 따라서 이를 공식 문서를 보면서 복습하면서 다시 정리해보았다.
+  스프링 코어 문서 가장 첫 부분에 나와있는 문구이다. 전체적인 기술을 다루지만 특히 스프링 프레임워크의 IoC(Inversion of Control) 컨테이너가 가장 중요하다고 나와있다.
+  Spring Framework의 IoC 컨테이너에 대한 처리는 Spring의 AOP(Aspect-Oriented Programmin) 기술을 밀접하게 따르고 있다고 한다.
+  스프링 프레임워크는 개념적으로 이해하기 쉽고 자바 엔터프라이즈 프로그래밍에서 AOP 요구사항의 80%를 성공적으로 해결하는 AOP 프레임워크가 있다.</description>
+    </item>
+    
     <item>
       <title>스프링의 세 가지 특징</title>
       <link>/post/2021/03/10/%EC%8A%A4%ED%94%84%EB%A7%81%EC%9D%98-%EC%84%B8-%EA%B0%80%EC%A7%80-%ED%8A%B9%EC%A7%95/</link>
