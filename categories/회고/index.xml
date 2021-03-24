@@ -6,14 +6,18 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 24 Mar 2021 09:07:36 +0900</lastBuildDate><atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Mar 2021 09:07:36 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/03/24/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
       <pubDate>Wed, 24 Mar 2021 09:07:36 +0900</pubDate>
       
       <guid>/post/2021/03/24/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
-      <description>TIL 양식 Facts (사실, 객관)  SOP에 대해서 정리해보았다.  Feelings (느낌, 주관)  SOP에 대해서 정리하면서 CORS에 대해서도 알게 되었는데, 퍼즐이 맞춰지는 기분이였다. 이전에는 CORS 에러가 발생했을 때, 왜 발생했는지 원인을 파악하고 해결 방법만 찾고나서 끝이였다. 하지만 중요한 것은 왜 브라우저에서 CORS 에러를 나게 했을까라는 근본적인 물음을 가지고, 해결하는 것이 중요하다는 생각을 했다.  Findings (배운 점)  브라우저에서 보안을 위한 다양한 정책을 알 수 있었고, 어떠한 에러가 발생했을 때, 왜 이러한 에러를 발생시켰는지 브라우저, 운영체제, 프레임워크 설계자 관점에서 생각을 해봐야한다는 것을 느끼게 되었다.</description>
+      <description>TIL 양식 Facts (사실, 객관)  SOP에 대해서 정리해보았다. 스프링 문서를 보면서, 세미나에서 들었던 내용을 다시 한번 보았다. 빈 펙토리와 애플리케이션 컨텍스트의 차이에 대해서 알게 되었다.  Feelings (느낌, 주관)  SOP에 대해서 정리하면서 CORS에 대해서도 알게 되었는데, 퍼즐이 맞춰지는 기분이였다. 이전에는 CORS 에러가 발생했을 때, 왜 발생했는지 원인을 파악하고 해결 방법만 찾고나서 끝이였다. 하지만 중요한 것은 왜 브라우저에서 CORS 에러를 나게 했을까라는 근본적인 물음을 가지고, 해결하는 것이 중요하다는 생각을 했다.</description>
     </item>
     
     <item>
