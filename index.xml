@@ -6,10 +6,22 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 24 Mar 2021 18:13:23 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 24 Mar 2021 23:30:23 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>빈 펙토리와 애플리케이션 컨텍스트의 차이</title>
+      <link>/post/2021/03/24/%EB%B9%88-%ED%8E%99%ED%86%A0%EB%A6%AC%EC%99%80-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%EC%9D%98-%EC%B0%A8%EC%9D%B4/</link>
+      <pubDate>Wed, 24 Mar 2021 23:30:23 +0900</pubDate>
+      
+      <guid>/post/2021/03/24/%EB%B9%88-%ED%8E%99%ED%86%A0%EB%A6%AC%EC%99%80-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EC%BB%A8%ED%85%8D%EC%8A%A4%ED%8A%B8%EC%9D%98-%EC%B0%A8%EC%9D%B4/</guid>
+      <description>궁금증을 가지게 된 이유    스프링 문서를 보면서 공부하다가 위와 같은 문구를 보게 되었다. ApplicationContext가 BeanFactory의 서브 타입의 인터페이스라는 것이다.
+  그렇다면 무슨 차이가 있을까라는 생각을 하게 되었다.
+  BEAN FACOTRY  다행스럽게도 위와 같은 문서가 스프링 공식문서에서 제공되고 있었다. 차이점은 아래와 같다.
+ BeanFactory API는 Spring IoC 기능을 위한 기초적인 기반을 제공한다. 이것의 구체적인 계약은, 주로 스프링의 다른 부분과 관련된 써드 파티 프레임워크와의 통합에 사용된다. BeanFactory 및 관련 인터페이스 (예: BeanFactoryAware, Initializing Bean, DispisableBean)는 다른 프레임워크 구성 요소의 중요한 통합지점이다.</description>
+    </item>
     
     <item>
       <title>IoC 컨테이너란 무엇일까</title>
