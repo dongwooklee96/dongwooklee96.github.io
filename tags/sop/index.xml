@@ -6,18 +6,17 @@
     <description>Recent content in SOP on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 23 Mar 2021 22:20:39 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/sop/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 23 Mar 2021 22:20:39 +0900</lastBuildDate><atom:link href="/tags/sop/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SOP(Same-origin policy) 란 무엇일까?</title>
       <link>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
       <guid>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
-      <description>참고 문헌   MDN - SOP  </description>
+      <description>브라우저 보안 정책에 SOP(same-origin-policy) 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.
+Same-Origin-Policy(동일 출처 정책)    SOP는 한 Origin에서 로드된 문서 또는 스크립트가 다른 Origin의 리소스와 상호 작용할 수 있는 방법을 제한하는 중요한 보안 메커니즘이다.
+  보안을 위협하는 문서를 격리하여, 보안 위협으로부터 보호할 수 있다.
+  출처(Origin)의 정의    두개의 URL이 존재할 때 프로토콜, 포트(지정된 경우), 호스트가 동일한 경우 두 URL의 Origin이 같다.</description>
     </item>
     
   </channel>

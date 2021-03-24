@@ -6,11 +6,7 @@
     <description>Recent content in Tags on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 23 Mar 2021 22:20:39 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 23 Mar 2021 22:20:39 +0900</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CSP</title>
       <link>/tags/csp/</link>
