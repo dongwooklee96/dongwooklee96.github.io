@@ -6,10 +6,16 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 24 Mar 2021 23:30:23 +0900</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 25 Mar 2021 19:03:23 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IoC의 여러가지 구현 방식</title>
+      <link>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D/</link>
+      <pubDate>Thu, 25 Mar 2021 19:03:23 +0900</pubDate>
+      
+      <guid>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D/</guid>
+      <description>스프링 문서를 보면서, IoC에 대해서 공부를 하다가, 서비스 로케이터 패턴을 알게 되었다. 서비스 로케이터 패턴을 조사하다가 자연스럽게 다른 IoC 구현 방식도 알게 되었는데 정리를 해보았다.
+참고 문헌  IOC 구현 방식  </description>
+    </item>
     
     <item>
       <title>빈 펙토리와 애플리케이션 컨텍스트의 차이</title>
