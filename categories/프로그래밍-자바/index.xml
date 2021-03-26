@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>IoC의 여러가지 구현 방식</title>
-      <link>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D/</link>
+      <title>IoC의 여러가지 구현 방식(draft)</title>
+      <link>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9Ddraft/</link>
       <pubDate>Thu, 25 Mar 2021 19:03:23 +0900</pubDate>
       
-      <guid>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D/</guid>
+      <guid>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9Ddraft/</guid>
       <description>스프링 문서를 보면서, IoC에 대해서 공부를 하다가, 서비스 로케이터 패턴을 알게 되었다. 서비스 로케이터 패턴을 조사하다가 자연스럽게 다른 IoC 구현 방식도 알게 되었는데 정리를 해보았다.
 참고 문헌  IOC 구현 방식  </description>
     </item>

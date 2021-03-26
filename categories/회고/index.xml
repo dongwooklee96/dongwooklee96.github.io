@@ -6,10 +6,19 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 25 Mar 2021 18:07:36 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 26 Mar 2021 20:07:36 +0900</lastBuildDate>
     
 	<atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Fri, 26 Mar 2021 20:07:36 +0900</pubDate>
+      
+      <guid>/post/2021/03/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 일을 하기전에, 내가 어떤 일을 할 계획이고 그 일이 마감되었다면 내가 구현한 것을 녹화하여 공유하였다. 내가 경험해보지 못한 생소한 업계에는 어떤 기술을 사용하고, 어떤 고민을 할까라는 생각을 해봤다.  Feelings (느낌, 주관)  그렇게 하니까 동료들이 내가 무엇을 했는지 쉽게 이해할 수 있고, 개발자 뿐만 아니라 PM 및 QA 분들도 작업이 어떻게 진행되고 있는지 쉽게 이해하시는 것 같았다. 내가 어떤 일을 하고 있는지 설명하기가 더 쉬워지고 상대방도 더 빠르게 이해하는 것 같았다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>

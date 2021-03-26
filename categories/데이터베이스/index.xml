@@ -53,11 +53,11 @@
     </item>
     
     <item>
-      <title>SQLAlchemy 세션</title>
-      <link>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98/</link>
+      <title>SQLAlchemy 세션(draft)</title>
+      <link>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</link>
       <pubDate>Fri, 19 Mar 2021 16:40:24 +0900</pubDate>
       
-      <guid>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98/</guid>
+      <guid>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</guid>
       <description>참고 문헌  Transactions and Connection Management  </description>
     </item>
     

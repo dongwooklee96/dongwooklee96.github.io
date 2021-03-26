@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>SOP(Same-origin policy) 란 무엇일까? (draft) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">SOP(Same-origin policy) 란 무엇일까? (draft)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/23</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%EB%B3%B4%EC%95%88">보안</a> 
+  
+  
+  
+  Tags: <a href="/tags/sop">SOP</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>브라우저 보안 정책에 <code>SOP(same-origin-policy)</code> 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.</p>
+<h3 id="same-origin-policy동일-출처-정책">Same-Origin-Policy(동일 출처 정책)</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112231170-8974d980-8c79-11eb-99e5-4a9b5f85513d.png" alt="sop"></p>
+<ul>
+<li>
+<p><code>SOP</code>는 한 <code>Origin</code>에서 로드된 문서 또는 스크립트가 다른 <code>Origin</code>의 리소스와 상호 작용할 수 있는 방법을 제한하는 중요한 보안 메커니즘이다.</p>
+</li>
+<li>
+<p>보안을 위협하는 문서를 격리하여, 보안 위협으로부터 보호할 수 있다.</p>
+</li>
+</ul>
+<h3 id="출처origin의-정의">출처(Origin)의 정의</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112231662-78789800-8c7a-11eb-8897-048e15a11d65.png" alt="origin"></p>
+<ul>
+<li>
+<p>두개의 URL이 존재할 때 프로토콜, 포트(지정된 경우), 호스트가 동일한 경우 두 URL의 <code>Origin</code>이 같다.</p>
+</li>
+<li>
+<p>위의 표를 보면 <strong><a href="http://store.company.com/dir/page.html">http://store.company.com/dir/page.html</a></strong> 과 비교하여, 같은 <code>Origin</code>인지 아닌지를 나타내고 있다.</p>
+</li>
+</ul>
+<h3 id="상속된-출처origin">상속된 출처(Origin)</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112232063-47e52e00-8c7b-11eb-8f7a-918fd0885a8a.png" alt="inherited origins"></p>
+<ul>
+<li>
+<p><code>about:blank</code>, <code>javascript:URL</code>과 같은 URL이 포함된 페이지에서 실행되는 스크립트는 해당 URL에 포함된 문서의 원본을 상속합니다.</p>
+</li>
+<li>
+<p>이러한 유형의 URL에는 원본 서버에 대한 정보가 포함되어 있지 않기 때문입니다.</p>
+</li>
+</ul>
+<p><strong>Internet Explorer의 예외</strong></p>
+<p>항상 인터넷 익스플로러는 표준을 지키지 않아서 문제가 생기는 것 같다.</p>
+<h4 id="trust-zones">Trust Zones</h4>
+<p>만약 두 도메인이 모두 신뢰도가 높은 영역 (예: 회사 인트라넷 도메인)에 있는 경우 동일한 오리진 제한이 적용되지 않는다.</p>
+<h4 id="port">Port</h4>
+<p>IE는 동일 출처 검사에 포트를 포함하지 않는다. 따라서 <code>https://company.com:81/index.html</code>과 <code>https://company.com/index.html</code>은 같은 오리진으로 간주되며 제한은 적용되지 않는다.</p>
+<h3 id="출처origin를-변경하기">출처(Origin)를 변경하기</h3>
+<hr>
+<ul>
+<li>일부 제한 사항이 있는 페이지는 자체 출처를 변경할 수 있다.</li>
+<li>스크립트는 <code>document.domain</code>의 값을 현재 도메인 또는 현재 도메인의 슈퍼 도메인으로 설정할 수 있다.</li>
+<li>하지만 이 기능은 동일한 출처 정책에서 제공하는 보안 보호 기능을 약화시키고 브라우저의 출처 모델을 복잡하게 하여, 상호 운용성 문제와 보안 버그를 유발하기 때문에 더 이상 사용되지 않는다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112233574-0c982e80-8c7e-11eb-9ddb-0804823875c0.png" alt="Document.domain"></p>
+<ul>
+<li>
+<p>API 문서를 보더라도, 몇몇의 브라우저가 지원을 하더라도, 지금은 표준에서 제외되었고 사용하지 않는게 좋다고 나와있다.</p>
+</li>
+<li>
+<p>현재 디프리케이트 상태이다.</p>
+</li>
+</ul>
+<h3 id="서로-다른-출처-접근cross-origin-network-access">서로 다른 출처 접근(Cross-origin network access)</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112234075-08b8dc00-8c7f-11eb-8c8b-293057534eff.png" alt="another origin"></p>
+<p>동일 출처 정책은 <code>XMLHttpRequest</code> 또는 <code>img</code> 요소를 사용하는 경우와 같이 서로 다른 두 출처 간의 상호 작용을 제어한다. 이러한 상호작용은 다음과 같은 세 가지의 범주로 나누어진다.</p>
+<ul>
+<li>일반적으로는 교차 오리진 쓰기가 허용된다, 예를 들어 링크, 리디렉션 및 <code>form</code> 제출이 있다. 일부 HTTP 요청에서는 <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests">preflight</a> 가 필요하다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112240206-402d8580-8c8b-11eb-9c2c-849a644bfdd7.png" alt="preflight_correct"></p>
+<ul>
+<li><code>preflight</code> 요청이란 일반적인 요청과 다르게, 먼저 <code>OPTIONS</code> 메서드를 사용하여 HTTP 요청을 다른 출처(<code>Origin</code>) 리소스로 전송하여 실제 요청이 안전한지 확인하는 것이다.</li>
+<li>교차 사이트 요청은 사용자 데이터에 영향을 미칠 수 있으므로 <code>preflight</code>을 사용한다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy">MDN - SOP</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

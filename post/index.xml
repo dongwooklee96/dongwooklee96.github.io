@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 26 Mar 2021 09:20:24 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 26 Mar 2021 20:07:36 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Fri, 26 Mar 2021 20:07:36 +0900</pubDate>
+      
+      <guid>/post/2021/03/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 일을 하기전에, 내가 어떤 일을 할 계획이고 그 일이 마감되었다면 내가 구현한 것을 녹화하여 공유하였다. 내가 경험해보지 못한 생소한 업계에는 어떤 기술을 사용하고, 어떤 고민을 할까라는 생각을 해봤다.  Feelings (느낌, 주관)  그렇게 하니까 동료들이 내가 무엇을 했는지 쉽게 이해할 수 있고, 개발자 뿐만 아니라 PM 및 QA 분들도 작업이 어떻게 진행되고 있는지 쉽게 이해하시는 것 같았다. 내가 어떤 일을 하고 있는지 설명하기가 더 쉬워지고 상대방도 더 빠르게 이해하는 것 같았다.</description>
+    </item>
     
     <item>
       <title>CAP 이론이란?(draft)</title>
@@ -53,11 +62,11 @@
     </item>
     
     <item>
-      <title>IoC의 여러가지 구현 방식</title>
-      <link>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D/</link>
+      <title>IoC의 여러가지 구현 방식(draft)</title>
+      <link>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9Ddraft/</link>
       <pubDate>Thu, 25 Mar 2021 19:03:23 +0900</pubDate>
       
-      <guid>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9D/</guid>
+      <guid>/post/2021/03/25/ioc%EC%9D%98-%EC%97%AC%EB%9F%AC%EA%B0%80%EC%A7%80-%EA%B5%AC%ED%98%84-%EB%B0%A9%EC%8B%9Ddraft/</guid>
       <description>스프링 문서를 보면서, IoC에 대해서 공부를 하다가, 서비스 로케이터 패턴을 알게 되었다. 서비스 로케이터 패턴을 조사하다가 자연스럽게 다른 IoC 구현 방식도 알게 되었는데 정리를 해보았다.
 참고 문헌  IOC 구현 방식  </description>
     </item>
@@ -114,11 +123,11 @@
     </item>
     
     <item>
-      <title>SOP(Same-origin policy) 란 무엇일까?</title>
-      <link>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <title>SOP(Same-origin policy) 란 무엇일까? (draft)</title>
+      <link>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <guid>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
       <description>브라우저 보안 정책에 SOP(same-origin-policy) 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.
 Same-Origin-Policy(동일 출처 정책)    SOP는 한 Origin에서 로드된 문서 또는 스크립트가 다른 Origin의 리소스와 상호 작용할 수 있는 방법을 제한하는 중요한 보안 메커니즘이다.
   보안을 위협하는 문서를 격리하여, 보안 위협으로부터 보호할 수 있다.
@@ -135,11 +144,11 @@ Same-Origin-Policy(동일 출처 정책)    SOP는 한 Origin에서 로드된 �
     </item>
     
     <item>
-      <title>TCP/IP 및 네트워크 계층 및 RFC 791</title>
-      <link>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791/</link>
+      <title>TCP/IP 및 네트워크 계층 및 RFC 791 (draft)</title>
+      <link>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791-draft/</link>
       <pubDate>Mon, 22 Mar 2021 23:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791/</guid>
+      <guid>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791-draft/</guid>
       <description>네트워크 통신   네트워크 통신은 관점에 따라 OSI 7 모델과 TCP/IP 모델 두가지로 설명할 수 있다. OSI 7 모델은 1984년에 ISO (국제 표준화 기술)에 의해 표준화되었고, 통신이 이루어지는 과정을 단계별로, 파악할 수 있도록 7 개의 계층인 물리, 데이터링크, 네트워크, 전송, 세션, 표현, 응용 계층으로 구분되어 있으며 네트워크 구현을 연구하고 배우기에 적합한 구조다. 반면에, TCP/IP 모델은 현장에 많이 사용하는 기술 위주로 4계층으로 단순화한 모델로, 실제 사용하는 프로토콜 규약은 이 모델을 따르고 있다.</description>
     </item>
     
@@ -182,11 +191,11 @@ Facts (사실, 객관)  코딩을 하면서, 사소한 실수가 발견되었고
     </item>
     
     <item>
-      <title>SQLAlchemy 세션</title>
-      <link>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98/</link>
+      <title>SQLAlchemy 세션(draft)</title>
+      <link>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</link>
       <pubDate>Fri, 19 Mar 2021 16:40:24 +0900</pubDate>
       
-      <guid>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98/</guid>
+      <guid>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</guid>
       <description>참고 문헌  Transactions and Connection Management  </description>
     </item>
     
