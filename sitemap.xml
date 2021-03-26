@@ -18,6 +18,11 @@
   </url>
 
   <url>
+    <loc>/post/2021/03/26/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1/</loc>
+    <lastmod>2021-03-26T09:20:24+09:00</lastmod>
+  </url>
+
+  <url>
     <loc>/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</loc>
     <lastmod>2021-03-26T09:20:24+09:00</lastmod>
   </url>

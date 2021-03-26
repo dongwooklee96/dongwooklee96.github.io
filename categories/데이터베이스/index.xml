@@ -37,6 +37,15 @@
     </item>
     
     <item>
+      <title>CONCURRENCY(동시성)와 PARALLELISM(병행성)</title>
+      <link>/post/2021/03/26/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1/</link>
+      <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/26/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1/</guid>
+      <description>CONCURRENCY(동시성)와 PARALLELISM(병행성)  참고 문헌  모바일 서버 프로그래밍 입문, 얼랭으로 만들며 배운다  </description>
+    </item>
+    
+    <item>
       <title>MVCC(다중 버전 동시성 제어)란 (draft)</title>
       <link>/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
