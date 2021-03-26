@@ -6,7 +6,34 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 19 Mar 2021 16:40:24 +0900</lastBuildDate><atom:link href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Mar 2021 09:20:24 +0900</lastBuildDate><atom:link href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CAP 이론이란?(draft)</title>
+      <link>/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80draft/</link>
+      <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80draft/</guid>
+      <description>참고 문헌 </description>
+    </item>
+    
+    <item>
+      <title>MVCC(다중 버전 동시성 제어)란 (draft)</title>
+      <link>/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</link>
+      <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</guid>
+      <description>참고 문헌 </description>
+    </item>
+    
+    <item>
+      <title>TWO-PHASE COMMIT 이란?(draft)</title>
+      <link>/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80draft/</link>
+      <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80draft/</guid>
+      <description>참고 문헌 </description>
+    </item>
+    
     <item>
       <title>SQLAlchemy 세션</title>
       <link>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98/</link>
