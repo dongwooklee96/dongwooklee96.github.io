@@ -6,7 +6,11 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 26 Mar 2021 09:20:24 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Mar 2021 09:20:24 +0900</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>CAP 이론이란?(draft)</title>
       <link>/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80draft/</link>
@@ -101,11 +105,11 @@
     </item>
     
     <item>
-      <title>CSP(Content Security Policy) 란 무엇일까?</title>
-      <link>/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <title>CSP(Content Security Policy) 란 무엇일까? (draft)</title>
+      <link>/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <guid>/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
       <description>참고 문헌   MDN - CSP  </description>
     </item>
     
