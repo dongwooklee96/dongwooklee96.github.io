@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>CONCURRENCY(동시성)와 PARALLELISM(병행성) (draft) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">CONCURRENCY(동시성)와 PARALLELISM(병행성) (draft)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/27</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+  
+  Tags: <a href="/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="concurrency동시성와-parallelism병행성">CONCURRENCY(동시성)와 PARALLELISM(병행성)</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112660338-af2bf980-8e98-11eb-8aec-e165f24e7fde.png" alt="download"></p>
+<h3 id="병행성">병행성</h3>
+<hr>
+<h3 id="동시성">동시성</h3>
+<hr>
+<ul>
+<li>
+<p><strong>CONCURRENCY(동시성)</strong> 에서 가장 중요한 것은 동시에 수행되는 기능들의 빠른 반응이다.</p>
+</li>
+<li>
+<p>이러한 빠른 반응은, 운영체제의 핵심인 커널에서 프로세스 스케줄러가 선점형(<code>Preemption</code>)으로 동작하느냐가 관건이다.</p>
+</li>
+<li>
+<p>CPU 자원은 한정되어 있는데 반해서 작업 진행이 필요한 프로세스들은 여러 개가 생길 수 있다. 이때 CPU 자원을 어떻게 분배하느냐가 스케줄링이 필요한 이유이다.</p>
+</li>
+<li>
+<p>컴퓨터에서 사용자가 파일을 다운로드 받을 때 파일을 다운로드 받는 프로세스가 <code>CPU</code> 자원을 할당 받아서 작업을 진행하게 된다.</p>
+</li>
+<li>
+<p>이때 사용자가 뮤직 플레이를 실행 시켜서 또 다른 프로세스가 생성되었다고 할 때 비선점형의 경우에는 파일을 다운로드 받는 프로세스 작업이 끝나야 음악을 플레이 하는 프로세스가 CPU 자원을 할당 받아서 작업을 진행할 수 있다.</p>
+</li>
+<li>
+<p>즉 파일 다운로드가 완료될 때까지 음악이 나오지 않을 것이다.</p>
+</li>
+<li>
+<p>선점형 스케줄링의 경우에는 스케줄러가 강제로 그 즉시 음악을 플레이하는 프로세스에게 자원을 할당해주고, 상황에 따라서 적당히 <code>CPU</code> 자원을 분배하여 두 개의 프로세스가 작업을 진행하는데 문제가 없도록 하게 된다.</p>
+</li>
+<li>
+<p>물론 자세히 들어가면 비선점형 스케줄링 방식을 사용하더라도 여러 가지 방법을 통해서 동시에 실행되는 것 처럼 보이게 할 수 있다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62639053">모바일 서버 프로그래밍 입문, 얼랭으로 만들며 배운다</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
