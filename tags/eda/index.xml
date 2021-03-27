@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>EDA on 개발자 이동욱</title>
+    <link>/tags/eda/</link>
+    <description>Recent content in EDA on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 27 Mar 2021 13:40:33 +0900</lastBuildDate><atom:link href="/tags/eda/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MSA와 이벤트 드리븐 아키텍처</title>
+      <link>/post/2021/03/27/msa%EC%99%80-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%9C%EB%A6%AC%EB%B8%90-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</link>
+      <pubDate>Sat, 27 Mar 2021 13:40:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/27/msa%EC%99%80-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%9C%EB%A6%AC%EB%B8%90-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</guid>
+      <description>참고 문헌 </description>
+    </item>
+    
+  </channel>
+</rss>
