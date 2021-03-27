@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>REST on 개발자 이동욱</title>
+    <link>/tags/rest/</link>
+    <description>Recent content in REST on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 27 Mar 2021 17:20:39 +0900</lastBuildDate><atom:link href="/tags/rest/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>REST 및 베스트 프랙티스</title>
+      <link>/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</link>
+      <pubDate>Sat, 27 Mar 2021 17:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</guid>
+      <description>REST    REST는 웹의 창시자 중의 한 사람인 로이 필딩이 2000년에 발표한 논문에 의해서 처음 소개되었다.
+  현대의 아키텍처가 웹의 장점을 잘 활용하지 못하고 있다고 판단했기 때문에 웹의 장점을 최대한 활용할 수 있는 네트워크 기반의 아키텍처를 소개했는데 그것이바로 Representational Safe Transfer(REST) 이다.
+  REST는 근래에 들어 HTTP와 JSON을 함께 사용하여 OPEN API를 구현하는 방법으로 주류를 이루고 있으며, 대부분의 OPEN API는 이 REST 아키텍처를 기반으로 설계 및 구현되고 있다.</description>
+    </item>
+    
+  </channel>
+</rss>

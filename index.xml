@@ -6,14 +6,66 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Mar 2021 13:40:33 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Mar 2021 17:29:39 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>MSA와 이벤트 드리븐 아키텍처</title>
-      <link>/post/2021/03/27/msa%EC%99%80-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%9C%EB%A6%AC%EB%B8%90-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</link>
+      <title>인코딩과 캐릭터 셋의 차이(draft)</title>
+      <link>/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4draft/</link>
+      <pubDate>Sat, 27 Mar 2021 17:29:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4draft/</guid>
+      <description>참고 문헌   테스트 주도 개발 시작하기, (최범균, 가메출판사)  </description>
+    </item>
+    
+    <item>
+      <title>REST 및 베스트 프랙티스</title>
+      <link>/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</link>
+      <pubDate>Sat, 27 Mar 2021 17:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</guid>
+      <description>REST    REST는 웹의 창시자 중의 한 사람인 로이 필딩이 2000년에 발표한 논문에 의해서 처음 소개되었다.
+  현대의 아키텍처가 웹의 장점을 잘 활용하지 못하고 있다고 판단했기 때문에 웹의 장점을 최대한 활용할 수 있는 네트워크 기반의 아키텍처를 소개했는데 그것이바로 Representational Safe Transfer(REST) 이다.
+  REST는 근래에 들어 HTTP와 JSON을 함께 사용하여 OPEN API를 구현하는 방법으로 주류를 이루고 있으며, 대부분의 OPEN API는 이 REST 아키텍처를 기반으로 설계 및 구현되고 있다.</description>
+    </item>
+    
+    <item>
+      <title>리버스 프록시란 무엇일까? (draft)</title>
+      <link>/post/2021/03/27/%EB%A6%AC%EB%B2%84%EC%8A%A4-%ED%94%84%EB%A1%9D%EC%8B%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
+      <pubDate>Sat, 27 Mar 2021 14:47:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/27/%EB%A6%AC%EB%B2%84%EC%8A%A4-%ED%94%84%EB%A1%9D%EC%8B%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
+      <description>참고 문헌  </description>
+    </item>
+    
+    <item>
+      <title>메시지 교환 패턴이란(MESSAGE EXCHNAGE PATTERN) (draft)</title>
+      <link>/post/2021/03/27/%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B5%90%ED%99%98-%ED%8C%A8%ED%84%B4%EC%9D%B4%EB%9E%80message-exchnage-pattern-draft/</link>
+      <pubDate>Sat, 27 Mar 2021 14:47:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/27/%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B5%90%ED%99%98-%ED%8C%A8%ED%84%B4%EC%9D%B4%EB%9E%80message-exchnage-pattern-draft/</guid>
+      <description>참고 문헌   MEP 패턴  </description>
+    </item>
+    
+    <item>
+      <title>아키텍처란 무엇인가?</title>
+      <link>/post/2021/03/27/%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80/</link>
+      <pubDate>Sat, 27 Mar 2021 14:23:33 +0900</pubDate>
+      
+      <guid>/post/2021/03/27/%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80/</guid>
+      <description>아키텍처란 무엇인가?  아키텍처에 대한 정의는 다음과 같다.
+ &amp;ldquo;아키텍처는 비즈니스 요구사항을 만족하는 시스템을 구축하기 위해서 전체 시스템에 대한 구조를 정의한 문서로, 시스템을 구성하는 컴포넌트와 그 컴포넌트 간의 관계, 그리고 컴포넌트가 다루는 정보(데이터)를 정의한다&amp;rdquo;
+ 아키텍처 설계 프로세스    아키텍처 설계 방법론은 여러 가지가 있으나, 주로 사용되는 프레임워크로는 Zachman, TOGAF, Federal Enterprise Architecture등이 있다.
+  그러나 이러한 전통적인 방법론은 학문적이고, 그 깊이가 매우 깊어서 일반적인 개발자들이 실무에 적용하기가 매우 어렵다.</description>
+    </item>
+    
+    <item>
+      <title>SOA, 모놀리틱, 그리고 MSA 아키텍처</title>
+      <link>/post/2021/03/27/soa-%EB%AA%A8%EB%86%80%EB%A6%AC%ED%8B%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-msa-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</link>
       <pubDate>Sat, 27 Mar 2021 13:40:33 +0900</pubDate>
       
-      <guid>/post/2021/03/27/msa%EC%99%80-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%9C%EB%A6%AC%EB%B8%90-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</guid>
-      <description>참고 문헌 </description>
+      <guid>/post/2021/03/27/soa-%EB%AA%A8%EB%86%80%EB%A6%AC%ED%8B%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-msa-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</guid>
+      <description>SOA    SOA(Service Oriented Architecture)는 1990년대에 정의되어, 2008년에 유행했던 아키텍처 스타일이다.
+  현대의 서버 아키텍처는 SOA 사상에 많은 영향을 받았고 많은 분산 아키텍처가 거의 이 SOA 사상에 기인한다고 해도 될 만큼 중요한 아키텍처이다.
+  SOA의 기본 개념    SOA란 기존 애플리케이션들의 기능을 비즈니스적인 의미가 있는 기능 단위로 묶고, 표준화된 호출 인터페이스를 통해 서비스라는 소프트웨어 컴포넌트 단위로 재조합한 후, 이 서비스들을 서로 조합(Orchestration)하여 업무 기능을 구현한 애플리케이션을 만들어내는 소프트웨어 아키텍처이다.</description>
     </item>
     
     <item>

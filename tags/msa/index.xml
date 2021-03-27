@@ -8,12 +8,14 @@
     <language>ko-KR</language>
     <lastBuildDate>Sat, 27 Mar 2021 13:40:33 +0900</lastBuildDate><atom:link href="/tags/msa/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>MSA와 이벤트 드리븐 아키텍처</title>
-      <link>/post/2021/03/27/msa%EC%99%80-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%9C%EB%A6%AC%EB%B8%90-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</link>
+      <title>SOA, 모놀리틱, 그리고 MSA 아키텍처</title>
+      <link>/post/2021/03/27/soa-%EB%AA%A8%EB%86%80%EB%A6%AC%ED%8B%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-msa-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</link>
       <pubDate>Sat, 27 Mar 2021 13:40:33 +0900</pubDate>
       
-      <guid>/post/2021/03/27/msa%EC%99%80-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%9C%EB%A6%AC%EB%B8%90-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</guid>
-      <description>참고 문헌 </description>
+      <guid>/post/2021/03/27/soa-%EB%AA%A8%EB%86%80%EB%A6%AC%ED%8B%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-msa-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</guid>
+      <description>SOA    SOA(Service Oriented Architecture)는 1990년대에 정의되어, 2008년에 유행했던 아키텍처 스타일이다.
+  현대의 서버 아키텍처는 SOA 사상에 많은 영향을 받았고 많은 분산 아키텍처가 거의 이 SOA 사상에 기인한다고 해도 될 만큼 중요한 아키텍처이다.
+  SOA의 기본 개념    SOA란 기존 애플리케이션들의 기능을 비즈니스적인 의미가 있는 기능 단위로 묶고, 표준화된 호출 인터페이스를 통해 서비스라는 소프트웨어 컴포넌트 단위로 재조합한 후, 이 서비스들을 서로 조합(Orchestration)하여 업무 기능을 구현한 애플리케이션을 만들어내는 소프트웨어 아키텍처이다.</description>
     </item>
     
   </channel>
