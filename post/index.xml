@@ -6,11 +6,7 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Mar 2021 23:24:39 +0900</lastBuildDate>
-    
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 28 Mar 2021 23:24:39 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>성능 엔지니어링 및 절차</title>
       <link>/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/</link>
@@ -118,12 +114,15 @@ API 인가 방식  권한 인가(Authorization) 방식에는 여러 가지 방�
     </item>
     
     <item>
-      <title>인코딩과 캐릭터 셋의 차이(draft)</title>
-      <link>/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4draft/</link>
+      <title>인코딩과 캐릭터 셋의 차이</title>
+      <link>/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4/</link>
       <pubDate>Sat, 27 Mar 2021 17:29:39 +0900</pubDate>
       
-      <guid>/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4draft/</guid>
-      <description>참고 문헌   테스트 주도 개발 시작하기, (최범균, 가메출판사)  </description>
+      <guid>/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4/</guid>
+      <description>최근에 인코딩과 캐릭터 셋의 차이를 아는지에 대한 질문을 받았고, 제대로 답변하지 못한 기억이 난다. 따라서 이 두개의 차이점 및 추가적인 궁금증에 대해서 조사를 해보았다.
+유니코드와 UTF-8, UTF-16은 무엇이 다른가   유니코드는 문자 집합으로, 문자 집합만 의미하며, 실제로 저장되는 방식(바이트로 맵핑)에 대해서는 아무런 설명을 하지 않는다.
+  UTF-8, UTF-16 은 문자열 또는 바이트 배열에서 바이트로 문자를 맵핑하는 방법을 정의하는 인코딩이다.
+  UTF-8, UTF-16, UTF-32는 기본적으로 일부 문자를 인코딩하는데, 사용되는 바이트의 양이 다르다.</description>
     </item>
     
     <item>

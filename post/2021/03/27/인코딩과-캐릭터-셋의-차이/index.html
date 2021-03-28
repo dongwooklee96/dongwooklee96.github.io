@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>유틸 | 개발자 이동욱</title>
+    <title>인코딩과 캐릭터 셋의 차이 | 개발자 이동욱</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
@@ -28,7 +28,7 @@
       </li>
       
       
-      <li class="pull-left current">
+      <li class="pull-left ">
         <a href="/categories/">categories</a>
       </li>
       
@@ -50,39 +50,57 @@
   <body>
     <br/>
 
+<div class="article-meta">
+<h1><span class="title">인코딩과 캐릭터 셋의 차이</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/27</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%EC%9C%A0%ED%8B%B8">유틸</a> 
+  
+  
+  
+  
+</p>
+</div>
+
 
 <div class="content-wrapper">
+  <main>
+    <p>최근에 인코딩과 캐릭터 셋의 차이를 아는지에 대한 질문을 받았고, 제대로 답변하지 못한 기억이 난다. 따라서 이 두개의 차이점 및 추가적인 궁금증에 대해서 조사를 해보았다.</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/112772028-8c9d0a80-9069-11eb-85a4-adb185619b6b.png" alt="Screen Shot 2021-03-29 at 8 33 54 AM"></p>
+<h3 id="유니코드와-utf-8-utf-16은-무엇이-다른가">유니코드와 <code>UTF-8</code>, <code>UTF-16</code>은 무엇이 다른가</h3>
+<ul>
+<li>
+<p>유니코드는 문자 집합으로, 문자 집합만 의미하며, 실제로 저장되는 방식(바이트로 맵핑)에 대해서는 아무런 설명을 하지 않는다.</p>
+</li>
+<li>
+<p>UTF-8, UTF-16 은 문자열 또는 바이트 배열에서 바이트로 문자를 맵핑하는 방법을 정의하는 인코딩이다.</p>
+</li>
+<li>
+<p>UTF-8, UTF-16, UTF-32는 기본적으로 일부 문자를 인코딩하는데, 사용되는 바이트의 양이 다르다.</p>
+</li>
+<li>
+<p>UTF-8은 ASCII에 정의된 문자에 대해서 1바이트를 사용하고, 다른 문자에 대해서는 2~4 사이의 바이트를 사용합니다. UTF-32는 각 문자에 대해서 4바이트를 지속적으로 사용하므로 문자열의 문자에 대한 반복은 사소한 것이지만 공통 문자열의 경우에는 더 많은 공간을 사용한다.</p>
+</li>
+</ul>
+<h3 id="캐릭터-셋과-인코딩의-차이점">캐릭터 셋과 인코딩의 차이점</h3>
+<ul>
+<li>캐릭터 셋은 단순히 특정 인코딩으로 나타낼 수 있는, 문자의 집합을 의미한다.</li>
+<li>예를 들면, &lsquo;☯&rsquo; 같은 문자는 유니코드 문자 집합과 다른 문자 집합에도 사용할 수 있다. 하지만 이 문자에 대한 인코딩을 서로 다를 수 있다.</li>
+</ul>
+<pre><code>Unicode character: ☯
+UTF-8 encoded: 0xE2 0x98 0xAF
+UTF-16 encoded: 0x26 0x2F
+</code></pre><h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://kore-nordmann.de/blog/php_charset_encoding_FAQ.html#what-is-the-difference-between-a-charset-and-an-encoding">what is the difference between a charset and an encoding</a></li>
+</ul>
 
-  <h1>유틸</h1>
-  
-
-  
-
-  <ul>
-     
-     
-     
-     <li>
-       <span class="date">2021/03/28</span>
-       <a href="/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/">성능 엔지니어링 및 절차</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/03/27</span>
-       <a href="/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4/">인코딩과 캐릭터 셋의 차이</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/03/04</span>
-       <a href="/post/2021/03/04/%ED%85%8C%ED%81%AC%EB%8B%88%EC%BB%AC-%EB%9D%BC%EC%9D%B4%ED%8C%85-4%EB%8C%80-%EC%9B%90%EC%B9%99%EC%9D%B4%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/">테크니컬 라이팅 4대 원칙이라는 글을 읽고 느낀점</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/02/27</span>
-       <a href="/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C/">테스트 코드를 작성하는 순서</a>
-     </li>
-     
-   </ul>
+    <a href="/"> >> Home</a>
+  </main>
 </div>
     <footer>
       
