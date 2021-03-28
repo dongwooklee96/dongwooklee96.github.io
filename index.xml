@@ -6,7 +6,25 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Mar 2021 17:29:39 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Mar 2021 23:20:24 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데이터베이스 스토리지 티어링이란 (draft)</title>
+      <link>/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft/</link>
+      <pubDate>Sat, 27 Mar 2021 23:20:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>스토리지 티어링이란  참고 문헌 </description>
+    </item>
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 27 Mar 2021 20:07:36 +0900</pubDate>
+      
+      <guid>/post/2021/03/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  네이버 기술 블로그를 대략적으로 보면서, 시스템 성능 분석 및 디버깅을 통해서 객관적인 자료를 수집하는 것을 보았다.  Feelings (느낌, 주관)  개발을 잘하기 위해서는 호기심을 가지고 실험을 많이 해보고, 이를 확인할 수 있는 디버깅 툴을 많이 알아두고 적재 적소에 사용할 수 있어야겠다. 나도 네트워크 패킷을 분석하면서 문제점을 빠르게 찾고 개선해나갈 수 있는 개발자가 될 것이다.  Findings (배운 점)  리눅스 도구 및 성능 측정 도구를 많이 사용해봐야겠다.</description>
+    </item>
+    
     <item>
       <title>인코딩과 캐릭터 셋의 차이(draft)</title>
       <link>/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4draft/</link>
