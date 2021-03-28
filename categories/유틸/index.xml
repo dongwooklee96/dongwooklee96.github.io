@@ -6,7 +6,22 @@
     <description>Recent content in 유틸 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Mar 2021 17:29:39 +0900</lastBuildDate><atom:link href="/categories/%EC%9C%A0%ED%8B%B8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 23:24:39 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/%EC%9C%A0%ED%8B%B8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>성능 엔지니어링 및 절차</title>
+      <link>/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/</link>
+      <pubDate>Sun, 28 Mar 2021 23:24:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/</guid>
+      <description>1.성능 엔지니어링이란    성능 엔지니어링은 시스템의 목표 성능 (응답 시간과 동시 접속자 수)를 정의하고 이를 달성하기 위해서 시스템의 구조를 반복적으로 개선하는 작업을 이야기 한다.
+  좁게 생각하면 코드 상의 병목을 잡고 시스템의 설정을 바꿔서 성능을 높이는 튜닝으로 생각할 수 있지만, 성능 목표의 정의부터 최적의 성능을 위한 디자인 및 구현 같은 개발 초기의 설계 부분과 개발 후의 운영 단계 그리고 모니터링까지 전 과정을 포함한다.
+  성능 엔지니어링을 해야하는 시기  1.</description>
+    </item>
+    
     <item>
       <title>인코딩과 캐릭터 셋의 차이(draft)</title>
       <link>/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4draft/</link>

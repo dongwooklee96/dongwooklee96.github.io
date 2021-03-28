@@ -6,7 +6,11 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Mar 2021 18:15:49 +0900</lastBuildDate><atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 18:15:49 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>주간 회고</title>
       <link>/post/2021/03/28/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
