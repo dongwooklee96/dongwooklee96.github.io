@@ -6,7 +6,74 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Mar 2021 23:20:24 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 17:43:24 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>리플리케이션이란 (draft)</title>
+      <link>/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft/</link>
+      <pubDate>Sun, 28 Mar 2021 17:43:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>참고 문헌 </description>
+    </item>
+    
+    <item>
+      <title>쿼리 오프 로딩이란 (draft)</title>
+      <link>/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft/</link>
+      <pubDate>Sun, 28 Mar 2021 17:20:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>참고 문헌 </description>
+    </item>
+    
+    <item>
+      <title>네트워크 메시지 암호화 및 방식 (중간자 공격, HMAC, 대칭, 비대칭 키)</title>
+      <link>/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4/</link>
+      <pubDate>Sun, 28 Mar 2021 16:17:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4/</guid>
+      <description>네트워크(전송) 레벨 암호화    가장 기본적이고 필수적인 REST API 보안 방법은 네트워크 전송 프로토콜에서 HTTPS 보안 프로토콜을 사용하는 방법이다.
+  HTTPS 프로토콜을 사용한다 하더라도, 메세지 자체를 암호화해서 전송하기 때문에 해킹으로 말미암은 메시지 누출 위협을 해소할 수 있다.
+  그러나 HTTPS를 사용하더라도 메시지를 낚아 채거나 변조하는 방법이 있는데 이러한 해킹 방법을 바로 중간자 공격 (Man-In-The-Middle-Attack)이라고 한다.
+  정상적인 HTTPS 통신의 경우 다음과 같이 서버에서 제공하는 인증서를 이용하여 API와 서버 상호간에 암호화된 신뢰할 수 있는 새로운 네트워크 연결을 만든다.</description>
+    </item>
+    
+    <item>
+      <title>REST API 보안 및 인가 방식</title>
+      <link>/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D/</link>
+      <pubDate>Sun, 28 Mar 2021 15:17:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D/</guid>
+      <description>권한 인가  인증이 끝나면 다음 단계는 권한에 대한 인증, 즉 인가(Authoriation) 과정이 필요하다. 사용자가 인증을 받고 로그인을 했더라도, 해당 API를 호출할 수 있는 권한이 있는가를 확인 해야 한다.
+API 인가 방식  권한 인가(Authorization) 방식에는 여러 가지 방식이 있는데, 대표적인 방식 몇 가지만 보면 가장 일반적인 권한 인증 방식으로는 사용자의 역할을 기반으로 하는 RBAC (Role Based Access Control) 이라는 방식이 있다. 이 방식은 정해진 연결에 권한을 연결해놓고, 이 역할을 가진 사용자에게 해당 권한을 부여하는 것이다.</description>
+    </item>
+    
+    <item>
+      <title>HTTP란 무엇일까? (draft)</title>
+      <link>/post/2021/03/28/http%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
+      <pubDate>Sun, 28 Mar 2021 13:18:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/28/http%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
+      <description>참고 문헌  </description>
+    </item>
+    
+    <item>
+      <title>HTTP와 HTTPS의 차이점 (draft)</title>
+      <link>/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft/</link>
+      <pubDate>Sun, 28 Mar 2021 13:18:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft/</guid>
+      <description>참고 문헌   RFC - 2818  </description>
+    </item>
+    
+    <item>
+      <title>REST API 보안 및 인증 방식</title>
+      <link>/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D/</link>
+      <pubDate>Sun, 28 Mar 2021 13:17:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D/</guid>
+      <description>REST API 보안   보안에 관해서는 백번, 천번을 강조해도 과함이 없다. 근래의 대부분의 서비스 시스템들은 API를 기반으로 통신한다. 앱과 서버 간의 통신 또는 자바 스크립트 웹 클라이언트와 서버 간 대부분의 통신이 이 API들을 이용해서, 이루어지기 때문에 한번 보안이 뚫리면 개인 정보가 탈취되는 것 뿐만 아니라, 더 많은 문제를 일으킬 수 있다.  REST API 보안 관점 및 개요  인증(Authentication)  인증은 누가 서비스를 사용하는지를 확인하는 절차이다. 쉽게 생각하면 웹 사이트에 사용자 아이디와 비밀번호를 넣어서 사용자를 확인하는 과정이 인증이다.</description>
+    </item>
+    
     <item>
       <title>데이터베이스 스토리지 티어링이란 (draft)</title>
       <link>/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft/</link>
@@ -256,15 +323,15 @@
     </item>
     
     <item>
-      <title>SOP(Same-origin policy) 란 무엇일까? (draft)</title>
-      <link>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
+      <title>SOP(Same-origin policy) 란 무엇일까?</title>
+      <link>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
+      <guid>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
       <description>브라우저 보안 정책에 SOP(same-origin-policy) 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.
 Same-Origin-Policy(동일 출처 정책)    SOP는 한 Origin에서 로드된 문서 또는 스크립트가 다른 Origin의 리소스와 상호 작용할 수 있는 방법을 제한하는 중요한 보안 메커니즘이다.
   보안을 위협하는 문서를 격리하여, 보안 위협으로부터 보호할 수 있다.
-  출처(Origin)의 정의    두개의 URL이 존재할 때 프로토콜, 포트(지정된 경우), 호스트가 동일한 경우 두 URL의 Origin이 같다.</description>
+  한마디로 말해서 웹 브라우저에서 동작하는 프로그램은 로딩된 위치에 있는 리소스만 접근 할 수 있다는 정책이다.</description>
     </item>
     
     <item>

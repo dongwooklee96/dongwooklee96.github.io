@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>REST API 보안 및 인증 방식 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">REST API 보안 및 인증 방식</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/28</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%EB%B3%B4%EC%95%88">보안</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="rest-api-보안">REST API 보안</h3>
+<hr>
+<ul>
+<li>보안에 관해서는 백번, 천번을 강조해도 과함이 없다.</li>
+<li>근래의 대부분의 서비스 시스템들은 API를 기반으로 통신한다.</li>
+<li>앱과 서버 간의 통신 또는 자바 스크립트 웹 클라이언트와 서버 간 대부분의 통신이 이 API들을 이용해서, 이루어지기 때문에 한번 보안이 뚫리면 개인 정보가 탈취되는 것 뿐만 아니라, 더 많은 문제를 일으킬 수 있다.</li>
+</ul>
+<h3 id="rest-api-보안-관점-및-개요">REST API 보안 관점 및 개요</h3>
+<hr>
+<h4 id="인증authentication">인증(Authentication)</h4>
+<ul>
+<li>인증은 누가 서비스를 사용하는지를 확인하는 절차이다.</li>
+<li>쉽게 생각하면 웹 사이트에 사용자 아이디와 비밀번호를 넣어서 사용자를 확인하는 과정이 인증이다.</li>
+<li>API도 마찬가지로 API를 호출하는 대상 (단말이 되었던 다른 서버가 되었던 사용자가 되었건) 확인하는 절차가 필요하다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112742701-a5ef7980-8fcb-11eb-8813-b50f905cdefe.png" alt="Screen Shot 2021-03-28 at 1 43 14 PM"></p>
+<ul>
+<li>스프링 시큐리티에서는 인증을 <code>who are you?</code> 라고 표현하고 인가를 <code>what are you allow to do?</code> 라는 문장으로 비유하고 있다.</li>
+</ul>
+<h4 id="인가authorization">인가(Authorization)</h4>
+<ul>
+<li>
+<p>인가는 해당 리소스에 대해서 사용자가 그 리소스를 사용할 권한이 있는지 확인하는 권한 체크 과정이다.</p>
+</li>
+<li>
+<p>예를 들어서, <code>/users</code> 라는 리소스가 있을 때, 일반 사용자 권한으로는 내 사용자 권한만 볼 수 있지만, 관리자 권한으로는 다른 사용자 정보를 볼 수 있는 것과 같은 권한의 차이를 의미한다.</p>
+</li>
+</ul>
+<h4 id="네트워크-레벨-암호화">네트워크 레벨 암호화</h4>
+<ul>
+<li>
+<p>인증과 인가 과정이 끝나서 API를 호출하게 되면, 네트워크를 통해서 데이터가 오가는데, 해커나 누군가 중간에서 이 네트워크 통신을 낚아채 (감청) 데이터를 볼 수 없게 할 필요가 있다.</p>
+</li>
+<li>
+<p>이를 네트워크 프로토콜단에서 처리하는 것을 네트워크 암호화라고 하는데, <code>HTTP</code>에서의 네트워크 암호화는 일반적으로 <code>HTTPS</code> 기반의 프로토콜을 사용한다.</p>
+</li>
+</ul>
+<h4 id="메시지-무결성-보장">메시지 무결성 보장</h4>
+<ul>
+<li>
+<p>메시지 무결성이란, 메시지가 해커와 같은 외부 요인에 의해서 중간에 변조가 되지 않게 방지하는 것을 말한다.</p>
+</li>
+<li>
+<p>무결성을 보장하기 위해서 많이 사용하는 방식은 메시지에 대한 서명(Signature)를 생성해서 메시지와 같이 보내고 검증하는 방식이다.</p>
+</li>
+<li>
+<p>예를 들어 메시지 문자열이 있을 때, 이 문자열에 대한 해시 코드를 생성해서 문자열과 함께 보내고 이 받은 문자열로 생성한 해시 코드를 문자열과 함께 온 해시 코드와 비교하는 방법이다.</p>
+</li>
+<li>
+<p>만약에 문자열이 중간에 변조되었으면 원래 문자열과 함께 전송된 해시 코드와 맞지 않기 때문에 메시지가 중간에 변조되었는지 확인할 수 있다.</p>
+</li>
+<li>
+<p>메시지 무결성의 경우 앞에서 언급한 네트워크 레벨의 암호화를 완벽하게 사용한다면 외부적인 요인(해커)에 의해서 메시지를 해석당할 염려가 없으므로 사용할 필요가 없다.</p>
+</li>
+</ul>
+<h4 id="메시지-본문-암호화">메시지 본문 암호화</h4>
+<ul>
+<li>
+<p>네트워크 레벨의 암호화를 사용할 수 없거나, 또는 이를 신뢰할 수 없는 상황에서 추가로 메시지 자체를 암호화하는 방법을 사용한다.</p>
+</li>
+<li>
+<p>이는 애플리케이션 단에서 구현하는데, 전체 메시지를 암호화하는 방법과 특정 필드만 암호화하는 방식 두 가지로 접근할 수 있다.</p>
+</li>
+<li>
+<p>전체 메시지를 암호화할 경우 암호화에 드는 비용이 많은 뿐더러 중간에 <code>API Gateway</code>를 통해서 메시지를 열어보고 메시지 기반으로 라우팅 변환 작업이 어렵기 때문에 일반적으로 전체 암호화보다는 보안이 필요한 특정 필드만 암호화하는 방식을 사용한다.</p>
+</li>
+</ul>
+<h3 id="인증authentication-방식의-종류">인증(Authentication) 방식의 종류</h3>
+<hr>
+<ul>
+<li><code>API</code>에 대한 인증 방식은 여러 가지 방식이 있으며 각 방식에 따라 보안 수준과 구현 난도가 달라서 각 방식의 장단점을 잘 이해하여 서비스 수준에 맞는 적절한 API 인증 방식을 선택하도록 할 필요가 있다.</li>
+</ul>
+<h4 id="api-키-방식">API 키 방식</h4>
+<ul>
+<li>가장 기초적인 방법은 <code>API</code> 키를 이용하는 방법이다.</li>
+<li>API 키(Key)란 특정 사용자만 알 수 있는 일종의 문자열이다.</li>
+<li><code>API</code>를 호출하고자 할 때, 개발자는 <code>API</code> 제공사의 포탈 페이지에서 <code>API</code> 키를 발급 받고 API를 호출 할 때 API 키를 메시지 안에 넣어 호출한다.</li>
+<li>서버는 메시지 안에서 API 키를 읽어서 이 API를 누가 호출한 API인지를 인증하는 흐름이다.</li>
+<li>모든 클라이언트가 같은 API 키를 공유하기 때문에, 한번 API 키가 노출되면 전체 API가 뚫려버리는 문제가 있으므로 높은 보안 인증이 필요할 때에는 권장하지 않는다.</li>
+</ul>
+<h4 id="api-토큰-방식">API 토큰 방식</h4>
+<p><img src="https://user-images.githubusercontent.com/14002238/112743016-a5a4ad80-8fce-11eb-9511-bf6a22147f08.png" alt="img1 daumcdn"></p>
+<ul>
+<li>
+<p>API 토큰(<code>Token</code>)을 발급하는 방식이 있는데, ID, 비빌번호 등으로 사용자를 인증한 다음에 그 사용자가 API 호출에 사용할 기간이 유효한 API 토큰을 발급해서 API 토큰으로 사용자를 인증하는 방식이다.</p>
+</li>
+<li>
+<p>매번 API 호출 시 사용자 ID, 비밀번호를 보내지 않고 API 토큰을 사용하는 이유는 사용자 비밀번호는 주기적으로 바뀔 수 있기 때문이고, 매번 네트워크를 통해서 사용자 ID와 비밀번호를 보내는 것은 보안상 사용자 계정 정보를 탈취당할 가능성이 크기 때문에 API 토큰을 별도로 발급해서 사용하는 것이다.</p>
+</li>
+<li>
+<p><code>API</code> 토큰을 탈취당하면, <code>API</code>를 호출할 수는 있지만, 반대로 사용자 ID와 비밀번호는 탈취당하지 않는다.</p>
+</li>
+<li>
+<p>사용자 비밀번호를 탈취당하면 일반적으로 사용자들은 다른 서비스에도 같은 비밀번호를 사용하는 경우가 많아서 연쇄적으로 공격을 당할 가능성이 커진다. 따라서 이러한 연쇄적인 피해를 최소화 할 수 있다.</p>
+</li>
+<li>
+<p>위의 그림을 보면 다음과 같은 형태로 인증이 이루어진다.</p>
+<ul>
+<li>
+<ol>
+<li>API 클라이언트가 사용자 ID, 비밀번호를 보내서 API 호출을 위한 API 토큰을 요청한다.</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>API 인증 서버는 사용자 ID, 비밀번호를 바탕으로 사용자를 인증한다.</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>인증된 사용자에 대해서 API 토큰을 발급한다 (유효시간을 가지고 있다.)</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>API 클라이언트는 이 API 토큰으로 API를 호출한다. API 서버는 API 토큰이 유효한지를 API 토큰 관리 서버에 문의하고 API 토큰이 유효하면 API 호출을 받아들인다.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="보안-수준에-따른-사용자-인증-방식">보안 수준에 따른 사용자 인증 방식</h3>
+<hr>
+<h4 id="http-basic-auth">HTTP Basic Auth</h4>
+<p><img src="https://user-images.githubusercontent.com/14002238/112743145-bc97cf80-8fcf-11eb-9784-08fb6ffbd620.png" alt="img"></p>
+<ul>
+<li>
+<p>가장 기본적이고 단순한 형태의 인증 방식으로, 사용자 ID와 비밀번호를 가지고, HTTP 헤더에 <code>Base64</code> 인코딩 형태로 넣어서 인증을 요청한다.</p>
+</li>
+<li>
+<p>예를 들어서 사용자 ID가 &ldquo;terry&quot;이고 비밀번호가 &ldquo;hello world&rdquo; 일 때 다음과 같이 <code>HTTP</code> 헤더에 &ldquo;terry: hello world&rdquo; 라는 문자열을 <code>Base64</code> 인코딩을 해서 <code>Authorization</code> 라는 이름의 헤더로 서버에 전송하여 인증을 요청한다.</p>
+</li>
+</ul>
+<pre><code>Authorization: Basic ZG9uZ3dvb2s6cGFzc3dvcmQ=
+</code></pre><p><img src="https://user-images.githubusercontent.com/14002238/112743286-f0272980-8fd0-11eb-9871-dc55b2ee30f2.png" alt="img"></p>
+<ul>
+<li>다음은 Base64 인코딩을 도와주는 사이트이다. <a href="https://www.base64decode.org/">https://www.base64decode.org/</a></li>
+<li>중간에 패킷을 가로채서 이 헤더를 Base64로 디코딩하면 사용자 ID와 비밀번호가 그대로 노출되기 때문에, 반드시 <code>HTTPS</code> 프로토콜을 사용해야한다.</li>
+</ul>
+<h4 id="digest-access-authentication">Digest Access Authentication</h4>
+<ul>
+<li>
+<p>HTTP Basic Auth가 Base64 형태로 비밀번호를 실어서 보내는 단점을 보강하여 나온 인증 프로토콜이 <code>Digest Access Authentication</code> 이라는 방법으로, 기본 원리는 클라이언트가 인증을 요청할 때, 클라이언트가 서버로부터 <code>nonce</code> 라는 일종의 난수 값을 받고 (클라이언트와 서버가 이 난수 값을 알 고 있다.) 사용자 ID와 비밀번호를 이 난수 값을 이용해서 해시화하여 서버로 전송하는 방식</p>
+</li>
+<li>
+<p>이 경우에는 직접 ID와 비밀번호가 평문 형태로 날아가지 않기 때문에, 해커가 중간에 비밀번호를 탈취할 수 없고, 설령 <code>HASH</code> 알고리즘을 알고 있다고 하더라도 해시된 값에서 반대로 비밀번호를 추출하기가 어려워서 <code>Basic Auth</code> 방식보다 향상된 보안을 제공한다.</p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112743403-f23db800-8fd1-11eb-9e18-ce8415bf64d9.gif" alt="digest-auth1"></p>
+<ul>
+<li>
+<p>흐름은 다음과 같다.</p>
+<ul>
+<li>
+<ol>
+<li>클라이언트가 서버에 특정 리소스를 요청한다.</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>서버는 해당 세션에 대한 <code>nonce</code> 값을 생성하여 저장하고, 클라이언트에게 반환한다. 이때 <code>realm</code>을 같이 반환하는데, <code>realm</code>은 인증의 범위로, 예를 들어 웹 서버에 car.war, market.war가 각각 <code>http://myweb/car</code>, <code>http://myweb/market</code>이라는 <code>URL</code>로 배포되었다고 하면, 이 웹사이트는 각각 애플리케이션 <code>car.war</code>와 <code>market.war</code>에 대해서 서로 다른 인증 <code>realm</code>을 가진다.</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>클라이언트는 앞에서 서버로 부터 받은 <code>realm</code>과 <code>nonce</code> 값으로 해시 값을 생성하는데 다음을 통해서 응답 해시 값을 생성한다.</li>
+</ol>
+</li>
+</ul>
+<pre><code>HA1 = MD5(사용자 이름:realm:비밀번호)
+HA2 = MD5(HTTP method:HTTP URL)
+  response hash = MD5(HA1:nonce:HA2)
+</code></pre><ul>
+<li>
+<ol start="4">
+<li>서버는 3번에서 전달된 <code>nonce</code> 값을 이 세션을 위해서 서버에 저장된 <code>nonce</code> 값과 같은지 비교를 한 후, 전달된 사용자 이름인 <code>terry</code>와 <code>nonce</code>값 그리고 서버에 저장된 사용자 비밀번호를 이용해서 같은 3번과 같은 방식으로 해시 값을 계산하여 클라이언트에서 전달된 해시 값과 같은지를 비교한다.</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="클라이언트-인증-추가">클라이언트 인증 추가</h4>
+<ul>
+<li>추가적인 보안 강화를 위해서 사용자 인증 뿐만 아니라, 클라이언트 인증 방식을 추가할 수 있다.</li>
+<li>페이스북은 API 토큰을 발급 받도록 사용자 ID, 비밀번호 뿐만 아니라, <code>Client ID</code>와 <code>Client Secret</code>이라는 것을 같이 입력받도록 하는데, <code>Client ID</code>는 특정 앱에 대한 등록 ID이고 <code>Client Secret</code>은 특정 앱에 대한 비밀번호로, 앱을 등록하면 앱 별로 발급되는 일종의 비밀번호이다.</li>
+<li>API 토큰을 발급 받을 때, Client ID와 Client Secret을 이용하여 클라이언트 앱을 인증하고, 사용자 ID와 비밀번호를 추가적으로 받아서 사용자를 인증하여 API 액세스 토큰을 발급한다.</li>
+</ul>
+<h4 id="ip-화이트-리스트를-이용한-터널링">IP 화이트 리스트를 이용한 터널링</h4>
+<ul>
+<li>
+<p>만약 API를 호출하는 클라이언트의 API가 일정하다면 사용할 수 있는 손쉬운 방법인데, 서버 간의 통신이나 타사 서버와 자사 서버 간의 통신 같은 경우에 API 서버는 특정 API URL에 대해서 들어오는 IP 주소를 화이트 리스트로 유지하는 방법이 있다.</p>
+</li>
+<li>
+<p>API 서버 앞단에 <code>HAProxy</code>나 <code>Apache</code>와 같은 웹 서버를 배치하여서 특정 URL로 들어올 수 있는 IP 목록을 제한하거나 아니면 전체 <code>API</code>가 특정 서버와의 통신에만 사용된다면 아예 하드웨어 방화벽 자체에 들어올 수 있는 IP 목록을 제한할 수 있다.</p>
+</li>
+<li>
+<p>설정만으로 가능한 방법이기 때문에, 서버간의 통신이 있을 때 적용할 것을 권장한다.</p>
+</li>
+</ul>
+<h4 id="bi-directional-certification-mutual-ssl">Bi-directional Certification (Mutual SSL)</h4>
+<ul>
+<li>
+<p>보통은 <code>HTTPS</code> 통신을 할 때, 서버에 공인 인증서를 놓고 단방향으로 <code>SSL</code>을 제공하는데, <code>Bi-directional Certification</code> (양방향 인증서 방식) 방식은 클라이언트에도 인증서를 놓고 양방향으로 <code>SSL</code>을 제공하면서 <code>API</code> 호출에 대한 인증을 클라이언트의 인증서를 이용하는 방식이다.</p>
+</li>
+<li>
+<p>구현 방법이 가장 복잡한 방식이기는 하지만, 공인 기관에서 발생된 인증서를 사용한다면 <code>API</code>를 호출하는 쪽의 신원을 확실하게 할 수 있고 메세지까지 암호화되기 때문에, 가장 높은 수준의 인증을 제공한다.</p>
+</li>
+<li>
+<p>이런 인증 방식은 일반 서비스에서는 사용되지 않으며 높은 인증 수준을 제공하는 몇몇 서비스나 특정 서버 통신에 사용하는 것이 좋다.</p>
+</li>
+</ul>
+<h4 id="제-3자-인증-방식-oauth-20-authorization-grant-type">제 3자 인증 방식 (OAuth 2.0 Authorization grant type)</h4>
+<ul>
+<li>제 3자 인증 방식은 페이스북이나, 구글, 트위터 같은 API 서비스 제공자들이 인증을 대신 해주는 것이다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112743810-704f8e00-8fd5-11eb-8a83-905f69044f67.jpg" alt="maxresdefault"></p>
+<h4 id="claim-기반의-jwt-방식">Claim 기반의 JWT 방식</h4>
+<p><strong>Claim 기반 토큰의 개념</strong></p>
+<ul>
+<li>
+<p><code>OAuth</code>에 의해서 발급되는 <code>access_token</code>은 랜덤 문자열로, 토큰 자체에는 특별한 정보를 가지고 있지 않은 일반적인 스트링 형태이다.</p>
+</li>
+<li>
+<p>따라서 <code>access_token</code>을 통해서 사용자와 연관된 정보를 구별하여 이를 허용해주는 구조인데, 서버 입장에서는 토큰을 가지고 그 토큰과 연관된 정보를 서버 쪽에서 찾아야 한다.</p>
+</li>
+<li>
+<p>하지만 <code>JWT</code>는 <code>Claim</code> 기반이라는 방식을 사용하는데, <code>Claim</code>은 사용자에 대한 프로퍼티나 속성을 말한다.</p>
+</li>
+<li>
+<p>토큰 자체가 정보를 가지는 방식인데, <code>JWT</code>는 이 클레임을 <code>JSON</code>을 이용해서 정리한다. 아래와 같은 형태로 표현된다.</p>
+</li>
+</ul>
+<pre><code>{
+  &quot;id&quot;: &quot;terry&quot;,
+  &quot;role&quot;: &quot;[&quot;admin&quot;, &quot;user&quot;]&quot;,
+  &quot;company&quot;: &quot;pepsi&quot;
+}
+</code></pre><ul>
+<li>이 토큰을 이용해서 요청을 받는 서버나 서비스 입장에서는 이 서비스를 호출한 사용자에 대한 추가 정보는 이미 토큰 안에 다 들어가 있기 때문에, 다른 곳에서 가져올 필요가 없다는 장점이 있다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112743985-0d5ef680-8fd7-11eb-955b-80b7a9778016.png" alt="img1 daumcdn"></p>
+<ul>
+<li>
+<p>결과적으로 토큰을 생성하는 단계에서는 생성된 토큰을 별도로 서버에서 유지할 필요가 없으며, 토큰을 사용하는 <code>API</code> 서버 입장에서는 API 요청을 검증하기 위해서 토큰을 가지고 사용자 정보를 별도로 계정 시스템 등에서 조회할 필요가 없다는 것이다.</p>
+</li>
+<li>
+<p><code>JWT</code>는 이 <code>JSON Claim</code>을 <code>Base64</code>로 인코딩하여 <code>HTTP</code> 헤더에 쉽게 넣을 수 있으며, <code>JSON</code> 기반이기 때문에 파싱과 사용이 쉽다.</p>
+</li>
+<li>
+<p>결과적으로 <code>Claim</code> 기반의 토큰은 토큰 자체가 정보를 담음으로써 토큰으로 서비스나 <code>API</code> 접근을 제어할 때, 별도의 작업이 서버에서 필요하지 않으며, 토큰 자체를 서버에서 관리할 필요가 없어서 구현이 상대적으로 단순해진다.</p>
+</li>
+</ul>
+<h4 id="jwt의-단점">JWT의 단점</h4>
+<ul>
+<li>
+<p>길이 : <code>Claim</code>에 넣는 데이터가 많아질 수록 <code>JWT</code> 토큰의 길이가 길어진다. <code>API</code> 호출에 사용할 시에 호출마다 헤더에 붙어서 가야하기 때문에 길이가 길다는 것은 그만큼 네트워크 대역폭 낭비가 심하다는 것이다.</p>
+</li>
+<li>
+<p>한번 발급된 토큰은 값을 수정하거나 폐기가 불가 : <code>JWT</code>는 토큰 내에 모든 정보를 다 가지고 있기 때문에 한 번 발급된 토큰에 대한 변경은 서버에서는 더는 불가능하다. 예를 들어서, 토큰을 잘못 발행해서 삭제하고 싶더라도 서명만 맞으면 맞는 토큰으로 인식하기 때문에 서버에서는 한번 발급된 토큰의 정보를 바꾸는 일이 불가능하다.</p>
+</li>
+<li>
+<p>따라서 만약 <code>JWT</code>를 사용한다면 만료 시간(<code>Expire Time</code>)을 꼭 명시적으로 두도록 하고 <code>Refresh Token</code>등을 이용하여 중간마다 토큰을 재발행하도록 해야한다.</p>
+</li>
+<li>
+<p>암호화 : <code>JWT</code>는 기본적으로 <code>Claim</code>에 대한 정보를 암호화하지 않는다, 단순히 <code>Base64</code>로 인코딩만 하기 때문에, 중간에 패킷을 가로채거나 기타 방법으로 토큰을 취득했으면 토큰 내부 정보를 통해서 사용자 정보가 노출될 가능성이 있다. 따라서 이를 보완하는 방법으로 토큰 자체를 암호화하는 방법이 있고, <code>JSON</code>을 암호화하기 위한 스펙으로는 <code>JWE</code>가 있다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://grooveshark.tistory.com/25">https://grooveshark.tistory.com/25</a></li>
+<li><a href="https://bcho.tistory.com/955">https://bcho.tistory.com/955</a></li>
+<li><a href="https://tools.ietf.org/html/rfc7617">RFC - 7617</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
