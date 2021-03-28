@@ -6,7 +6,16 @@
     <description>Recent content in Categories on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Mar 2021 17:43:24 +0900</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 18:15:49 +0900</lastBuildDate><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>주간 회고</title>
+      <link>/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 28 Mar 2021 18:15:49 +0900</pubDate>
+      
+      <guid>/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>데이터베이스</title>
       <link>/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/</link>
@@ -85,15 +94,6 @@
       <pubDate>Thu, 25 Mar 2021 19:03:23 +0900</pubDate>
       
       <guid>/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>주간 회고</title>
-      <link>/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
-      <pubDate>Sun, 21 Mar 2021 17:15:39 +0900</pubDate>
-      
-      <guid>/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
       <description></description>
     </item>
     
