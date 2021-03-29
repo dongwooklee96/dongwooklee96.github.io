@@ -6,7 +6,11 @@
     <description>Recent content in 서버 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Mar 2021 14:47:39 +0900</lastBuildDate><atom:link href="/categories/%EC%84%9C%EB%B2%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Mar 2021 14:47:39 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/%EC%84%9C%EB%B2%84/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>리버스 프록시란 무엇일까? (draft)</title>
       <link>/post/2021/03/27/%EB%A6%AC%EB%B2%84%EC%8A%A4-%ED%94%84%EB%A1%9D%EC%8B%9C%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
@@ -17,12 +21,14 @@
     </item>
     
     <item>
-      <title>메시지 교환 패턴이란(MESSAGE EXCHNAGE PATTERN) (draft)</title>
-      <link>/post/2021/03/27/%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B5%90%ED%99%98-%ED%8C%A8%ED%84%B4%EC%9D%B4%EB%9E%80message-exchnage-pattern-draft/</link>
+      <title>메시지 교환 패턴이란(MESSAGE EXCHNAGE PATTERN)</title>
+      <link>/post/2021/03/27/%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B5%90%ED%99%98-%ED%8C%A8%ED%84%B4%EC%9D%B4%EB%9E%80message-exchnage-pattern/</link>
       <pubDate>Sat, 27 Mar 2021 14:47:39 +0900</pubDate>
       
-      <guid>/post/2021/03/27/%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B5%90%ED%99%98-%ED%8C%A8%ED%84%B4%EC%9D%B4%EB%9E%80message-exchnage-pattern-draft/</guid>
-      <description>참고 문헌   MEP 패턴  </description>
+      <guid>/post/2021/03/27/%EB%A9%94%EC%8B%9C%EC%A7%80-%EA%B5%90%ED%99%98-%ED%8C%A8%ED%84%B4%EC%9D%B4%EB%9E%80message-exchnage-pattern/</guid>
+      <description>비동기 메시지 패턴  비동기 메시지 패턴은 앞서 살펴보았듯이 중간에 큐를 두어서 구현하기 때문에, 여러 가지 메시지 전달 패턴을 구현할 수 있다. 몇 가지 대표적인 패턴에 대해서 알아보자.
+Fire &amp;amp; Forgot 패턴   메시지 큐를 사용하는 패턴 중에 가장 일반적인 비동기 호출 패턴으로, 클라이언트가 호출한 후 큐에 메시지가 제대로 들어갔을면 메시지의 처리 결과에 관계없이 응답을 기다리지 않고 바로 반환한다.
+  큐에 저장된 메시지는 비즈니스 컴포넌트에 의해서 나중에 처리된다.</description>
     </item>
     
   </channel>
