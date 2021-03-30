@@ -6,7 +6,20 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 29 Mar 2021 21:53:36 +0900</lastBuildDate><atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Mar 2021 22:09:36 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/30/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 30 Mar 2021 22:09:36 +0900</pubDate>
+      
+      <guid>/post/2021/03/30/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘은 어제 발생했던 이슈의 원인을 찾아보았다.  Feelings (느낌, 주관)  오늘 하루 우울하고 힘이 없었던 것 같다. 오늘 밤에는 조금 쉬기로 하였다. 내일이면 팀이 새롭게 개편되어서 자리를 옮길 것 같다. 팀원들이랑 정들었는데 조금 아쉽다. 새로운 팀이랑 일을 잘 할 수 있을지 조금은 걱정되기도 한다. 이슈가 발생한 정확한 원인을 파악해서 기쁘다.  Findings (배운 점)  오픈 소스 커뮤니티에 가면, 대부분 발생했던 문제들의 해결책이 있고 만약 없더라도 내가 이슈를 만들어서 보고하도록 하자.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/03/29/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>

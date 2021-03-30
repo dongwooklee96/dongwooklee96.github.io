@@ -6,7 +6,20 @@
     <description>Recent content in Tags on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 30 Mar 2021 13:20:39 +0900</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Mar 2021 22:09:36 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>회고</title>
+      <link>/tags/%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 30 Mar 2021 22:09:36 +0900</pubDate>
+      
+      <guid>/tags/%ED%9A%8C%EA%B3%A0/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>프론트엔드</title>
       <link>/tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/</link>
@@ -40,15 +53,6 @@
       <pubDate>Mon, 29 Mar 2021 22:04:24 +0900</pubDate>
       
       <guid>/tags/%EC%95%84%EC%BB%A4%EC%8A%A4/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>회고</title>
-      <link>/tags/%ED%9A%8C%EA%B3%A0/</link>
-      <pubDate>Mon, 29 Mar 2021 21:53:36 +0900</pubDate>
-      
-      <guid>/tags/%ED%9A%8C%EA%B3%A0/</guid>
       <description></description>
     </item>
     
