@@ -6,10 +6,17 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 29 Mar 2021 22:55:39 +0900</lastBuildDate>
-    
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 30 Mar 2021 13:20:39 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>리액트에서 구글 번역기가 번역하면서, DOM 트리를 변경해 렌더링이 되지 않는 현상</title>
+      <link>/post/2021/03/30/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EA%B5%AC%EA%B8%80-%EB%B2%88%EC%97%AD%EA%B8%B0%EA%B0%80-%EB%B2%88%EC%97%AD%ED%95%98%EB%A9%B4%EC%84%9C-dom-%ED%8A%B8%EB%A6%AC%EB%A5%BC-%EB%B3%80%EA%B2%BD%ED%95%B4-%EB%A0%8C%EB%8D%94%EB%A7%81%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81/</link>
+      <pubDate>Tue, 30 Mar 2021 13:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/03/30/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EA%B5%AC%EA%B8%80-%EB%B2%88%EC%97%AD%EA%B8%B0%EA%B0%80-%EB%B2%88%EC%97%AD%ED%95%98%EB%A9%B4%EC%84%9C-dom-%ED%8A%B8%EB%A6%AC%EB%A5%BC-%EB%B3%80%EA%B2%BD%ED%95%B4-%EB%A0%8C%EB%8D%94%EB%A7%81%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81/</guid>
+      <description>문제 상황 개발을 진행하다가, PM에서 데이터가 이상하다고, 확인해달라는 요청을 받았다. 확인을 해본 결과, 데이터베이스 및 서버에서 내려오는 데이터는 정상이였다. 하지만 화면에서 업데이트를 시키지 않고, 기존에 데이터가 그대로 남아있어 화면 업데이트가 안되는 상황이였다. 재현을 해봤을 때는 아무런 문제가 없어서 혹시나 하고 구글 번역기를 켜고 재현을 해보았을 때 버그가 발생하였다.
+원인 검색을 해보니, 비슷한 현상이 이미 보고가 되어있었고, 원인을 파악하기 위해서 살펴보았다.
+구글 번역기를 켰을 때 변경된 텍스트가 업데이트 되지 않는 이유는 다음과 같다.</description>
+    </item>
     
     <item>
       <title>클라우드 이벤트 스펙이란? (draft)</title>
