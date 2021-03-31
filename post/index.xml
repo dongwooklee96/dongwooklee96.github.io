@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 30 Mar 2021 22:09:36 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 31 Mar 2021 22:25:36 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/03/31/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Wed, 31 Mar 2021 22:25:36 +0900</pubDate>
+      
+      <guid>/post/2021/03/31/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  어제는 한 시간정도 일찍 취침을 했다. 오늘 회사에서, 모바일 개발을 위한 API 정리를 하였다. 팀이 변경되어서 자리를 옮기게 되었다.  Feelings (느낌, 주관)  API 문서가 현재와 맞지 않는 것들이 많아서 어지러웠다. 그리고 어떻게 해야지 모바일 개발자들이 더 쉽게 API를 사용할 수 있을까 그리고 쉽게 사용하려면 사실 컨트롤러 부분을 수정해야하는것이 아닌지 고민을 하게 되었다. 새로운 팀에서 새롭게 시작한 기분이 되어서 조금 기분 전환이 되었다.  Findings (배운 점)  API 문서를 제대로 관리하고 되도록이면 소스 코드랑 동떨어지지 않도록 노력해야겠다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
