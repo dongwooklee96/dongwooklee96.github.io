@@ -6,11 +6,7 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 01 Apr 2021 20:10:36 +0900</lastBuildDate>
-    
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 01 Apr 2021 20:10:36 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>일일 회고</title>
       <link>/post/2021/04/01/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
@@ -150,7 +146,10 @@ Facts (사실, 객관)  토이 프로젝트를 시작했다. 내가 여태까지
       <pubDate>Sun, 28 Mar 2021 17:43:24 +0900</pubDate>
       
       <guid>/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft/</guid>
-      <description>참고 문헌 </description>
+      <description>Gelera 리플리케이션    MariaDB 클러스터에서, 서버는 트랜잭션과 관련된 쓰기를 클러스터의 모든 노드에 브로드캐스트해서 커밋을 할 때, 모든 노드에 트랜잭션을 복사한다.
+  클라이언트는 DBMS에 직접 연결하여 대부분의 경우 기본의 MariaDB와 유사한 동작을 경험할 수 있다.
+  wsrep(write set replication API)를 이용하여 Galera 리플리케이션과 MariaDB 사이의 인터페이스를 정의한다.
+  동기 vs 비동기 리플리케이션   동기식 복제와 비동기식 복제의 기본적인 차이점은 동기식 복제는 클러스터에서 한 노드에서 변경이 발생한 경우에, 클러스터의 다른 노드에서 동기적으로 변경이 발생한다는 점이다.</description>
     </item>
     
     <item>
@@ -324,6 +323,7 @@ Fire &amp;amp; Forgot 패턴   메시지 큐를 사용하는 패턴 중에 가�
       <guid>/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft/</guid>
       <description>클러스터링  참고 문헌   Understanding MariaDB Enterprise Cluster
   MariaDB cluster setup
+  What is MariaDB Galera Cluster?
   How to deploy a MySQL Cluster from Scratch with Docker
   </description>
     </item>

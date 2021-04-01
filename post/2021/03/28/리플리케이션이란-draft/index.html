@@ -70,7 +70,49 @@
 
 <div class="content-wrapper">
   <main>
-    <h3 id="참고-문헌">참고 문헌</h3>
+    <h3 id="gelera-리플리케이션">Gelera 리플리케이션</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/113364491-a05caf80-938e-11eb-8a11-e5933db7f28d.png" alt="Screen Shot 2021-04-02 at 8 36 21 AM"></p>
+<ul>
+<li>
+<p><code>MariaDB</code> 클러스터에서, 서버는 트랜잭션과 관련된 쓰기를 클러스터의 모든 노드에 브로드캐스트해서 커밋을 할 때, 모든 노드에 트랜잭션을 복사한다.</p>
+</li>
+<li>
+<p>클라이언트는 <code>DBMS</code>에 직접 연결하여 대부분의 경우 기본의 <code>MariaDB</code>와 유사한 동작을 경험할 수 있다.</p>
+</li>
+<li>
+<p><code>wsrep(write set replication API)</code>를 이용하여 <code>Galera</code> 리플리케이션과 <code>MariaDB</code> 사이의 인터페이스를 정의한다.</p>
+</li>
+</ul>
+<h4 id="동기-vs-비동기-리플리케이션">동기 vs 비동기 리플리케이션</h4>
+<ul>
+<li>
+<p>동기식 복제와 비동기식 복제의 기본적인 차이점은 동기식 복제는 클러스터에서 한 노드에서 변경이 발생한 경우에, 클러스터의 다른 노드에서 동기적으로 변경이 발생한다는 점이다.</p>
+</li>
+<li>
+<p>비동기적인 복제는 마스터 노드에 변경사항을 적용하는 것과 슬레이브 노드에 변경사항을 전파 하는 도중에 데이터가 다를 수 있다.</p>
+</li>
+<li>
+<p>이는 마스터 노드가 비동기적인 복제 중에 오류가 생기면 변경 사항중에 일부가 손상 될 수 있다는 것을 의미한다.</p>
+</li>
+</ul>
+<p><strong>동기식 복제가 가지는 이점</strong></p>
+<ul>
+<li>동기식 복제를 사용하는 클러스터는 가용성이 높다.</li>
+<li>노드중에 하나가 손실 되더라도 데이터는 손실되지 않으며 모든 클러스터 노드는 항상 일관적이다.</li>
+<li>동기식 복제를 사용하는 클러스터를 사용하면, 모든 노드에 동시에 트랜잭션을 실행할 수 있다.</li>
+<li>동기식 복제를 사용하는 클러스터는 전체 클러스터에서 인과 관계를 보장할 수 있다. 즉, 클러스터 노드에서 트랜잭션을 실행한 후에 하나의 클러스터 노드에서 <code>SELECT</code>가 실행되는 경우 해당 트랜잭션의 영향을 확인해야한다.</li>
+</ul>
+<p><strong>동기식 복제가 가지는 단점</strong></p>
+<ul>
+<li>하지만, 동기식 데이터베이스 복제는 전통적으로 매우 느린것으로 판명된 <code>2PC(two phase commit)</code>또는 분산 잠금을 통해서 구현되었다.</li>
+<li>동기식 복제의 낮은 성능과 구현의 복잡성으로 인해서 비동기식 복제가 데이터베이스 성능 확장성 및 가용성의 주요 수단으로 사용되었다.</li>
+</ul>
+<p>하지만, <code>Galera</code>의 리플리케이션은 완전하게 동기화된 것은 아니지만 이것은 가상 동기 리플리케이션이라고 불린다.</p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://mariadb.com/kb/en/about-galera-replication/">About Galera Replication</a></li>
+</ul>
 
     <a href="/"> >> Home</a>
   </main>
