@@ -6,10 +6,19 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 31 Mar 2021 22:56:24 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 01 Apr 2021 20:10:36 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/01/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 01 Apr 2021 20:10:36 +0900</pubDate>
+      
+      <guid>/post/2021/04/01/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  이제 곧 있으면 자바스크립트 관련 사내 세미나 발표를 한다.  Feelings (느낌, 주관)  곧 회사 사람들 앞에서 발표를 한다고 생각하니까 떨리고 살짝 무섭기도 하다. 최근 팀에 새로운 분이 들어왔는데, 뭔가 부끄럽지 않은 모습과 배울 점이 있는 사람으로 느껴졌으면 하는 마음이 있다.  Findings (배운 점)  발표 할 수 있는 것을 좋은 기회라고 생각하고, 회고를 작성했던 것 처럼, 말하는 연습을 하는데 좋은 동기로 작용했으면 좋겠다.</description>
+    </item>
     
     <item>
       <title>ARIES란 (draft)</title>
