@@ -6,14 +6,18 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 02 Apr 2021 17:25:36 +0900</lastBuildDate><atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 02 Apr 2021 17:25:36 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/04/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
       <pubDate>Fri, 02 Apr 2021 17:25:36 +0900</pubDate>
       
       <guid>/post/2021/04/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
-      <description>TIL 양식 Facts (사실, 객관)  오늘 자바스크립트 세미나를 들었다.  Feelings (느낌, 주관)  자신감 있게 발표하는 것이 중요할 것 같다. 내용 뿐만 아니라 자신감 있는 목소리는 우선 집중이 되기 때문이다. 따라서 비언어적인 요소에도 신경을 많이 쓰자  Findings (배운 점)  발표를 하는데, 내용도 중요하지만, 맺음말, 그리고 발성 시선 처리 또한 무시못하는 것 같다.  Bad (개선할 점)  나의 발성을 바꾸도록 노력해봐야겠다.  Affimation (자기 선언)  매일 작은 발표를 해보자.</description>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 자바스크립트 세미나를 들었다. 내가 개발하고 있는 솔루션에서 이제 슬슬 성능 문제가 나오고 있다. 엔지닉스 및 톰캣에 대해서 자세히 공부를 해야겠다는 생각을 했다.  Feelings (느낌, 주관)  자신감 있게 발표하는 것이 중요할 것 같다. 내용 뿐만 아니라 자신감 있는 목소리는 우선 집중이 되기 때문이다. 따라서 비언어적인 요소에도 신경을 많이 쓰자 발표 연습을 할 주제를 정하기가 어려워서 자꾸 발표 연습을 하는 것을 꺼리게 된다. 그리고 발표 자료를 만들어야한다는 마음에 자꾸 발표를 미루게 되는 것 같다.</description>
     </item>
     
     <item>
