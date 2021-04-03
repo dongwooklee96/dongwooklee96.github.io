@@ -13,7 +13,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>Categories | 개발자 이동욱</title>
+    <title>프로그램 실행시 메모리 구조 및 실제로 확인해보는 방법 | 개발자 이동욱</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/fonts.css" />
     <link rel="stylesheet" href="/css/theme-override.css">
@@ -28,7 +28,7 @@
       </li>
       
       
-      <li class="pull-left current">
+      <li class="pull-left ">
         <a href="/categories/">categories</a>
       </li>
       
@@ -50,85 +50,47 @@
   <body>
     <br/>
 
+<div class="article-meta">
+<h1><span class="title">프로그램 실행시 메모리 구조 및 실제로 확인해보는 방법</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/04/03</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C">운영체제</a> 
+  
+  
+  
+  Tags: <a href="/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C">운영체제</a> 
+  
+  
+</p>
+</div>
 
-<h1>Categories</h1>
 
-<ul class="terms">
-  
-  <li>
-    <a href="/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/">네트워크</a> (5)
-  </li>
-  
-  <li>
-    <a href="/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/">데이터베이스</a> (19)
-  </li>
-  
-  <li>
-    <a href="/categories/%EB%94%94%EC%9E%90%EC%9D%B8/">디자인</a> (2)
-  </li>
-  
-  <li>
-    <a href="/categories/%EB%94%94%EC%9E%90%EC%9D%B8-%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5/">디자인 - 객체지향</a> (1)
-  </li>
-  
-  <li>
-    <a href="/categories/%EB%A6%AC%EC%95%A1%ED%8A%B8/">리액트</a> (1)
-  </li>
-  
-  <li>
-    <a href="/categories/%EB%B3%B4%EC%95%88/">보안</a> (7)
-  </li>
-  
-  <li>
-    <a href="/categories/%EC%84%9C%EB%B2%84/">서버</a> (2)
-  </li>
-  
-  <li>
-    <a href="/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/">알고리즘</a> (1)
-  </li>
-  
-  <li>
-    <a href="/categories/%EC%95%A0%ED%94%84%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98/">애프리케이션</a> (1)
-  </li>
-  
-  <li>
-    <a href="/categories/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/">오픈소스</a> (1)
-  </li>
-  
-  <li>
-    <a href="/categories/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/">운영체제</a> (4)
-  </li>
-  
-  <li>
-    <a href="/categories/%EC%9C%A0%ED%8B%B8/">유틸</a> (4)
-  </li>
-  
-  <li>
-    <a href="/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/">주간 회고</a> (4)
-  </li>
-  
-  <li>
-    <a href="/categories/%EC%BB%A4%EB%A6%AC%EC%96%B4/">커리어</a> (7)
-  </li>
-  
-  <li>
-    <a href="/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC/">파이썬</a> (1)
-  </li>
-  
-  <li>
-    <a href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/">프로그래밍 - 자바</a> (11)
-  </li>
-  
-  <li>
-    <a href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC/">프로그래밍 - 파이썬</a> (3)
-  </li>
-  
-  <li>
-    <a href="/categories/%ED%9A%8C%EA%B3%A0/">회고</a> (41)
-  </li>
-  
+<div class="content-wrapper">
+  <main>
+    <p>컴퓨터 구조 시간때 배웠듯이 프로그램이 메모리에 올라가면 다음과 같은 구조로 메모리가 할당되고 실행이 된다.</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/113474822-3d156f00-94ad-11eb-815d-f3bc78df9d97.png" alt="FdJ8Xbd"></p>
+<ul>
+<li>디스크에 저장되어 있는 프로그램이 메모리에 올라가게 된다.</li>
+<li>메모리에는 크게 코드, 스택, 힙 영역이 있다.</li>
+</ul>
+<p>이를 리눅스에서 확인해보려면 다음과 같은 명령어를 사용하면 된다.</p>
+<pre><code>cat /proc/self/maps
+</code></pre><ul>
+<li>이 명령어가 뜻하는 바는 <code>cat</code>이라는 프로그램을 실행했을 때의 메모리 구조를 의미한다.</li>
+<li>여기서 <code>self</code>는 자기 자신을 의미한다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/113474795-10f9ee00-94ad-11eb-9b69-e7ec306975b3.png" alt="Screen Shot 2021-04-03 at 6 46 26 PM"></p>
+<ul>
+<li>위에서부터 코드 영역, 힙 영역, 스택이 메모리에 할당되어 있는 것을 확인할 수 있다.</li>
+<li>개념으로만 알고 있던 것을 실제로 눈으로 확인해보니까 더 와닿았다.</li>
 </ul>
 
+    <a href="/"> >> Home</a>
+  </main>
+</div>
     <footer>
       
 <script>
