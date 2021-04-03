@@ -6,10 +6,19 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 03 Apr 2021 21:21:24 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 03 Apr 2021 22:25:36 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 03 Apr 2021 22:25:36 +0900</pubDate>
+      
+      <guid>/post/2021/04/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  예전에 리눅스 커널을 보면서 공부했던 내용을 블로그에 정리하고 있다.  Feelings (느낌, 주관)  아쉽게도 공부한 직후에 바로 기록하여 내용이 정리 되어 있지는 않았다. 블로그를 예전 부터 시작하고, 기록 했으면 편했을 것 같다.  Findings (배운 점)  오랜만에 운영체제에 대해서 공부하게 되었고, 지금은 잊어버린 시스템 코드를 분석하는 툴 및 방법을 다시 확인해볼 수 있었다.  Bad (개선할 점)  시스템 개발에 대한 열정을 일어버리지는 말자.</description>
+    </item>
     
     <item>
       <title>메모리 액세스 과정</title>
