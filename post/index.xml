@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 04 Apr 2021 15:25:36 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 04 Apr 2021 20:20:39 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>그림으로 공부하는 IT 인프라 구조를 읽고나서 느낀점</title>
+      <link>/post/2021/04/04/%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C-%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94-it-%EC%9D%B8%ED%94%84%EB%9D%BC-%EA%B5%AC%EC%A1%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0%EB%82%98%EC%84%9C-%EB%8A%90%EB%82%80%EC%A0%90/</link>
+      <pubDate>Sun, 04 Apr 2021 20:20:39 +0900</pubDate>
+      
+      <guid>/post/2021/04/04/%EA%B7%B8%EB%A6%BC%EC%9C%BC%EB%A1%9C-%EA%B3%B5%EB%B6%80%ED%95%98%EB%8A%94-it-%EC%9D%B8%ED%94%84%EB%9D%BC-%EA%B5%AC%EC%A1%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0%EB%82%98%EC%84%9C-%EB%8A%90%EB%82%80%EC%A0%90/</guid>
+      <description>데브옵스 팀이 따로 있기 때문에, 실무에서 인프라 지식을 접할 기회가 별로 없었다. 따라서 이 책을 읽게 되었다. 웹 애플리케이션 시스템을 구축하는 기반 지식들을 배울 수 있었다. 특히 웹 데이터 흐름이라는 파트가 많은 도움이 되었는데, 내가 어떤 웹 사이트에 접속을 하였을 때, 내부적으로 어떻게 동작하는지 알 수 있었다. 특히 네트워크에 대한 지식이 많이 부족했는데, 네트워크의 흐름에 대해서 알게 되었다. 다양한 계층에서의 이중화 전략에 대해서 알게 되었다. 현재 나에게도 도움이 많이 되었던 책이지만, 나 말고도 많은 신입 개발자들에게 많은 도움이 될 것 같다.</description>
+    </item>
     
     <item>
       <title>주간 회고</title>
