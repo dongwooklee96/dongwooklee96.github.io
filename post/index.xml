@@ -6,10 +6,20 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 04 Apr 2021 20:20:39 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 04 Apr 2021 20:30:23 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GC(Garbage Collector) 종류 및 내부 원리</title>
+      <link>/post/2021/04/04/gcgarbage-collector-%EC%A2%85%EB%A5%98-%EB%B0%8F-%EB%82%B4%EB%B6%80-%EC%9B%90%EB%A6%AC/</link>
+      <pubDate>Sun, 04 Apr 2021 20:30:23 +0900</pubDate>
+      
+      <guid>/post/2021/04/04/gcgarbage-collector-%EC%A2%85%EB%A5%98-%EB%B0%8F-%EB%82%B4%EB%B6%80-%EC%9B%90%EB%A6%AC/</guid>
+      <description>모든 자바 애플리케이션은 JVM(Java Virtual Machine) 위에서 작동한다. 따라서, JVM이 작동하는데 있어서 메모리 구조와 GC는 애플리케이션의 응답 시간과 성능에 밀접한 관계를 맺고 있다.
+GC란 무엇인가?   GC(Garbage Collection)는 자바 애플리케이션에서 사용하지 않는 메모리를 자동으로 수거하는 기능을 말한다. C/C++ 같은 언어는 메모리를 할당하고 직접 해제해야했지만, 자바에서는 GC를 이용하여 개발자들이 메모리 관리를 비교적 신경쓰지 않아도 된다.  JVM 메모리 영역   GC의 동작 방법을 이해하려면, 먼저 자바의 메모리 구조를 이해할 필요가 있다.</description>
+    </item>
     
     <item>
       <title>그림으로 공부하는 IT 인프라 구조를 읽고나서 느낀점</title>

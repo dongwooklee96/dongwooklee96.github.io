@@ -6,10 +6,19 @@
     <description>Recent content in Categories on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 04 Apr 2021 20:20:39 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 04 Apr 2021 20:30:23 +0900</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>프로그래밍 - 자바</title>
+      <link>/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/</link>
+      <pubDate>Sun, 04 Apr 2021 20:30:23 +0900</pubDate>
+      
+      <guid>/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>책</title>
@@ -134,15 +143,6 @@
       <pubDate>Sat, 27 Mar 2021 10:31:33 +0900</pubDate>
       
       <guid>/categories/%EC%BB%A4%EB%A6%AC%EC%96%B4/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>프로그래밍 - 자바</title>
-      <link>/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/</link>
-      <pubDate>Thu, 25 Mar 2021 19:03:23 +0900</pubDate>
-      
-      <guid>/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94/</guid>
       <description></description>
     </item>
     
