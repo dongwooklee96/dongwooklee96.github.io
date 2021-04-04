@@ -6,10 +6,19 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 03 Apr 2021 22:25:36 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 04 Apr 2021 15:25:36 +0900</lastBuildDate>
     
 	<atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>주간 회고</title>
+      <link>/post/2021/04/04/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 04 Apr 2021 15:25:36 +0900</pubDate>
+      
+      <guid>/post/2021/04/04/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  서버 성능 튜닝 및 성능 개선에 관련된 책을 읽었다. 구글 번역기 관련 이슈가 발생하였다. API 문서가 업데이트 되지 않는 문제가 있어서, 이를 수정하는 작업을 하였다. 사내 세미나가 거의 코 앞으로 다가 왔다. 예전에 리눅스 공부 및 정리한 내용을 블로그에 옮겨서 적어보았다.  Feelings (느낌, 주관)  서버 성능 튜닝을 제대로 이해하려면 학부 때 배운 운영체제 지식 및 데이터베이스에 대한 이해가 필수라는 것을 느끼게 되었다. 이론으로만 배운 지식이 어떤 원리로 나타나는지 확인하는 과정이 재미있었다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
