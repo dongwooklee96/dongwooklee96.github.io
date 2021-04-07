@@ -137,12 +137,16 @@
     </item>
     
     <item>
-      <title>TWO-PHASE COMMIT 이란?(draft)</title>
-      <link>/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80draft/</link>
+      <title>TWO-PHASE COMMIT 이란?</title>
+      <link>/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80/</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80draft/</guid>
-      <description>참고 문헌  Two-phase commit protocol  </description>
+      <guid>/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80/</guid>
+      <description>TWO-PHASE 커밋이란?    투 페이즈 커밋은 여러 노드에 거쳐서 원자성 트랜잭션 커밋을 달성하기 위한 알고리즘이다.
+  분산 데이터베이스의 트랜잭션 처리를 위해서 사용하는 고전적인 방법이다.
+  2PC에서는 일반적으로 단일 노드 트랜잭션에서는 나타나지 않는 새로운 구성 요소인 코디네이터(트랜잭션 관리자)를 사용한다.
+  2PC 트랜잭션은 애플리케이션이 정상적으로 여러 데이터베이스 노드에서 데이터를 읽고 쓰는 것으로부터 시작된다.
+  커밋할 준비가 되면 트랜잭션 관리자는 1 단계를 시작한다. 그런 다음에 각 노드에 준비 요청을 보내서 커밋 가능 여부를 묻게 되며, 참가자의 응답에 따라서 커밋을 할지, 롤백을 할지 결정을 한다.</description>
     </item>
     
     <item>
