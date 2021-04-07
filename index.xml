@@ -6,7 +6,17 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 07 Apr 2021 09:01:36 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Apr 2021 18:05:24 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TWO-PHASE-LOCK(2PL)이란 (draft)</title>
+      <link>/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft/</link>
+      <pubDate>Wed, 07 Apr 2021 18:05:24 +0900</pubDate>
+      
+      <guid>/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>TWO PHASE LOCK  2PC(TWO PHASE COMMIT)과 헷갈리는 개념이 있다. 그것은 바로 2PL(TWO PHASE LOCK)이다.
+참고 문헌  Two Phase Locking protocol  </description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/04/07/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
