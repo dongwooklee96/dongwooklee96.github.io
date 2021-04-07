@@ -6,7 +6,16 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 06 Apr 2021 17:25:36 +0900</lastBuildDate><atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 07 Apr 2021 09:01:36 +0900</lastBuildDate><atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/07/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Wed, 07 Apr 2021 09:01:36 +0900</pubDate>
+      
+      <guid>/post/2021/04/07/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  전에 레디스에 구현되어 있는 SORTED SET 연산이 어떻게 구현되어 있는지 찾아보다가, SKIP LIST 까지 조사하게 되었다. 대충 돌아가는 구현은 파악하였지만, 실제 구현된 코드를 보고 이해하기는 힘들었고, 내가 이를 실제로 코드로 구현할 생각을 하니까 자신이 없었다.  Feelings (느낌, 주관)  따라서 이때 부터 개념을 내가 실제로 코드로 옮길 수 있는 능력을 키워야겠다는 생각을 했다. 논문에 나와있는 개념을 익혀서 실제로 코드로 옮기는 작업을 전부터 해보고 싶다는 생각을 하였다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/04/06/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
