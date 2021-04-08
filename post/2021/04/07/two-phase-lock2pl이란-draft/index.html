@@ -72,10 +72,51 @@
   <main>
     <h3 id="two-phase-lock">TWO PHASE LOCK</h3>
 <hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/113949645-b4028d00-984a-11eb-98e5-e1d592569831.png" alt="100518_0439_DBMSConcurr1"></p>
+<p><img src="https://user-images.githubusercontent.com/14002238/113949641-b238c980-984a-11eb-8ae0-64619edcf82c.png" alt="2PL"></p>
+<ul>
+<li>
 <p><code>2PC(TWO PHASE COMMIT)</code>과 헷갈리는 개념이 있다. 그것은 바로 <code>2PL(TWO PHASE LOCK)</code>이다.</p>
+</li>
+<li>
+<p>2단계 잠금 프로토콜은 트랜잭션 도줌에 락을 걸어서 동일한 데이터에 동시에 접근하려는 트랜잭션을 차단하여 직렬화를 보장하는 <code>DBMS</code>의 동시 제어 방법이다.</p>
+</li>
+<li>
+<p><code>DBMS</code>의 동시성 문제를 해결하는데 도움이 된다.</p>
+</li>
+<li>
+<p>이 잠금 프로토콜은 트랜잭션의 실행 단계를 세 단계로 나눈다.</p>
+<ul>
+<li>
+<p>첫 번째 단계에서는 트랜잭션이 실행되기 시작할 때 필요한 락에 대한 권한을 요청한다.</p>
+</li>
+<li>
+<p>두 번째 부분은 트랜잭션이 모든 락 권한을 얻는 부분이다. 트랜잭션이 첫 번째 락을 해제할 때 세번째 단계가 실행된다.</p>
+</li>
+<li>
+<p>이 세 번째 단계에서는 트랜잭션이 새로운 락을 요청할 수 없으며, 대신 획득한 락을 해제할 수 만 있다.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>따라서 <code>2PL</code>에서는 각 트랜잭션이 두 단계로 락 획득 또는 해제 요청을 할 수 있다.</p>
+<ul>
+<li><strong>Growing Phase</strong>: 이 단계에서는 오직 잠금을 획득할 수 있고, 해제할 수는 없다.</li>
+<li><strong>Shrinking Phase</strong>: 이 단계에서는 트랜잭션이 잠금을 해제할 수는 있지만 새로운 잠금을 획득하지는 못한다.</li>
+</ul>
+</li>
+<li>
+<p><code>2PL</code> 프로토콜 방식은 직렬화는 보장하지만, 교착 상태가 발생하지 않도록 보장하지 못한다는 특징이 있다.</p>
+</li>
+</ul>
 <h3 id="참고-문헌">참고 문헌</h3>
 <ul>
-<li><a href="https://www.geeksforgeeks.org/two-phase-locking-protocol/">Two Phase Locking protocol</a></li>
+<li>
+<p><a href="https://www.geeksforgeeks.org/two-phase-locking-protocol/">Two Phase Locking protocol</a></p>
+</li>
+<li>
+<p><a href="https://www.guru99.com/dbms-concurrency-control.html#5">dbms-concurrency-control</a></p>
+</li>
 </ul>
 
     <a href="/"> >> Home</a>

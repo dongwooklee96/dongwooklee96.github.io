@@ -40,8 +40,11 @@
       <pubDate>Wed, 07 Apr 2021 18:05:24 +0900</pubDate>
       
       <guid>/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft/</guid>
-      <description>TWO PHASE LOCK  2PC(TWO PHASE COMMIT)과 헷갈리는 개념이 있다. 그것은 바로 2PL(TWO PHASE LOCK)이다.
-참고 문헌  Two Phase Locking protocol  </description>
+      <description>TWO PHASE LOCK    2PC(TWO PHASE COMMIT)과 헷갈리는 개념이 있다. 그것은 바로 2PL(TWO PHASE LOCK)이다.
+  2단계 잠금 프로토콜은 트랜잭션 도줌에 락을 걸어서 동일한 데이터에 동시에 접근하려는 트랜잭션을 차단하여 직렬화를 보장하는 DBMS의 동시 제어 방법이다.
+  DBMS의 동시성 문제를 해결하는데 도움이 된다.
+  이 잠금 프로토콜은 트랜잭션의 실행 단계를 세 단계로 나눈다.
+  첫 번째 단계에서는 트랜잭션이 실행되기 시작할 때 필요한 락에 대한 권한을 요청한다.</description>
     </item>
     
     <item>
