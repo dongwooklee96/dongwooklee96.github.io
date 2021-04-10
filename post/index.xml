@@ -6,7 +6,20 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 08 Apr 2021 09:03:36 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Apr 2021 21:03:36 +0900</lastBuildDate>
+    
+	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/10/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 10 Apr 2021 21:03:36 +0900</pubDate>
+      
+      <guid>/post/2021/04/10/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  이제 다시 마음을 다잡고 공부를 이어가야겠다. 사내 세미나 준비를 하였다.  Feelings (느낌, 주관)  이번 주말에 재충전을 하였고, 다시 앞으로 나갈 힘을 얻은 것 같다.  Findings (배운 점)  많은 것을 배울 수 있었으며, 나에게 현재 어떤점이 부족한지를 파악할 수 있었다. 사내 세미나 준비를 하면서, 나의 발표 실력을 키울 수 있는 기회로 삼아야겠다. 영어 공부를 하여서, 인생에서 내가 선택할 수 있는 선택지를 늘려야겠다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/04/08/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>

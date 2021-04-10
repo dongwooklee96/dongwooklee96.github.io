@@ -6,7 +6,11 @@
     <description>Recent content in REST on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Mar 2021 17:20:39 +0900</lastBuildDate><atom:link href="/tags/rest/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Mar 2021 17:20:39 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/rest/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>REST 및 베스트 프랙티스</title>
       <link>/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</link>
