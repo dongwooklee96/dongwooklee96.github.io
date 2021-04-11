@@ -6,10 +6,22 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 10 Apr 2021 21:03:36 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 11 Apr 2021 12:00:36 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>주간 회고</title>
+      <link>/post/2021/04/11/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 11 Apr 2021 12:00:36 +0900</pubDate>
+      
+      <guid>/post/2021/04/11/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)   우아한 형제들에서 일하고 있는 박재성 개발자의 10년차 이상의 개발자는 어떤 준비를 하면 좋을까라는 영상을 시청하였다.
+  회사에서 이슈를 처리하다가, 각각의 이슈의 경우에는 해결이 되었지만, 그 이슈들이 조합되어서 나타났을 때의 상황을 고려하지 못했던 것 같다.
+  이전에 레디스에서 Sorted Set이 어떻게 구현되어있는지 궁금해서 직접 찾아보고, SKIP LIST 자료구조를 이용해서 구현을 했다는 것을 알게 되었다.
+  Feelings (느낌, 주관)   나도 언젠가는 회사에서 개발 능력 뿐만 아니라, 다른 사람들을 이끌고 설계할 수 있는 리더십 역량이 필요할텐데 시니어 때가 되서 부랴부랴 준비하려면 늦을 것 같다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
@@ -26,7 +38,7 @@
       <pubDate>Thu, 08 Apr 2021 09:03:36 +0900</pubDate>
       
       <guid>/post/2021/04/08/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
-      <description>TIL 양식 Facts (사실, 객관) Feelings (느낌, 주관) Findings (배운 점) Bad (개선할 점) Affimation (자기 선언) 회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다. Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다. Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다. Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지 하고 개선할지를 적는다.  </description>
+      <description>TIL 양식 Facts (사실, 객관)  정신없는 하루를 보냈다.  Feelings (느낌, 주관)  이번 주말에 재정비를 하고, 다시 앞으로 나가야할 것 같다.  Findings (배운 점)  평소에 준비를 하지 않으면 기회를 잡을 수 없다.  Bad (개선할 점)  상황에 닥쳐서 하지 말고, 미리미리 준비하자.  Affimation (자기 선언)  나는 기술 블로그에 내가 배운 것들을 차곡차곡 준비할 것이다. 어떤 기술을 익힐 때, 내부 원리에 대해서 이해하려고 노력할 것이다.</description>
     </item>
     
     <item>
