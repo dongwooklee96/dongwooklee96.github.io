@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 11 Apr 2021 12:00:36 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 12 Apr 2021 21:03:36 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/12/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Mon, 12 Apr 2021 21:03:36 +0900</pubDate>
+      
+      <guid>/post/2021/04/12/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 친구랑 같이 밥을 먹었다.  Feelings (느낌, 주관)  예상은 했지만, 그래도 기대를 해서 그런지 기분이 조금 꿀꿀한 하루였다. 친구랑 밥먹으면서 얘기를 하니까 기분이 조금은 풀렸다. 오늘 일이 쉽게 풀려서 기분이 좋았다. 목표한 기간내에 마감을 할 수 있을 것 같다.  Findings (배운 점)  나의 부족한 점을 알 수 있는 소중한 기회였다. 진행하고 있는 프로젝트를 열심히 해보고, 꾸준히 해야겠다. 매주 일요일마다. 조금씩 하는 것을 계획하고 있다.</description>
+    </item>
     
     <item>
       <title>주간 회고</title>
