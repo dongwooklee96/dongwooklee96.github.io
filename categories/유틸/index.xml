@@ -6,7 +6,11 @@
     <description>Recent content in 유틸 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 13 Apr 2021 15:47:39 +0900</lastBuildDate><atom:link href="/categories/%EC%9C%A0%ED%8B%B8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Apr 2021 15:47:39 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/%EC%9C%A0%ED%8B%B8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>문서화를 코드로 관리하는 법 (draft)</title>
       <link>/post/2021/04/13/%EB%AC%B8%EC%84%9C%ED%99%94%EB%A5%BC-%EC%BD%94%EB%93%9C%EB%A1%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%B2%95-draft/</link>

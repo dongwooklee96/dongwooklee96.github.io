@@ -3,6 +3,36 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>/post/2021/04/13/dns%EB%9E%80-draft/</loc>
+    <lastmod>2021-04-13T23:15:39+09:00</lastmod>
+  </url>
+
+  <url>
+    <loc>/post/2021/04/13/arp%EB%9E%80-draft/</loc>
+    <lastmod>2021-04-13T23:01:39+09:00</lastmod>
+  </url>
+
+  <url>
+    <loc>/post/2021/04/13/icmp%EB%9E%80-draft/</loc>
+    <lastmod>2021-04-13T22:52:39+09:00</lastmod>
+  </url>
+
+  <url>
+    <loc>/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</loc>
+    <lastmod>2021-04-13T22:21:39+09:00</lastmod>
+  </url>
+
+  <url>
+    <loc>/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</loc>
+    <lastmod>2021-04-13T22:20:48+09:00</lastmod>
+  </url>
+
+  <url>
+    <loc>/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</loc>
+    <lastmod>2021-04-13T22:20:39+09:00</lastmod>
+  </url>
+
+  <url>
     <loc>/post/2021/04/13/%EB%AC%B8%EC%84%9C%ED%99%94%EB%A5%BC-%EC%BD%94%EB%93%9C%EB%A1%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%B2%95-draft/</loc>
     <lastmod>2021-04-13T15:47:39+09:00</lastmod>
   </url>

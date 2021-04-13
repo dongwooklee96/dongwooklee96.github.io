@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>DNS란? (draft) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">DNS란? (draft)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/04/13</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  Tags: <a href="/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="dnsdomain-name-system">DNS(Domain Name System)</h3>
+<hr>
+<h3 id="내가-활용중인-dns-ip-주소-확인하기">내가 활용중인 DNS IP 주소 확인하기</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/114567743-7bc9d700-9cae-11eb-82f9-9dcf503ef717.png" alt="dns"></p>
+<ul>
+<li>위의 명령어를 통해서, 내가 사용하고 있는 <code>DNS</code> 서버의 <code>IP</code> 주소를 알아낼 수 있다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/114568053-c4819000-9cae-11eb-8d25-3a8be64a3411.png" alt="dns-2"></p>
+<ul>
+<li>위에 명령어를 통해서 나온 주소를 구글에 검색하면, 어떤 <code>DNS</code> 서버를 사용하는지 대략적으로 알 수 있다.</li>
+</ul>
+<h3 id="dns-동작과정-추적하기">DNS 동작과정 추적하기</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/114568459-1b876500-9caf-11eb-8ffb-d43a61af1ffe.png" alt="dns-1"></p>
+<p><img src="https://user-images.githubusercontent.com/14002238/114568479-1e825580-9caf-11eb-8d1e-4165d8c43077.png" alt="dns-3"></p>
+<ul>
+<li>위와 같은 과정을 통해서, DNS 서버에 요청하고, 도메인 주소를 통해서 <code>IP</code> 정보를 받아오는 것을 확인할 수 있다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/114569074-a4060580-9caf-11eb-9311-dff133504ae0.png" alt="flush"></p>
+<pre><code>sudo systemd-resolve --flush-caches
+</code></pre><ul>
+<li>DNS 캐시 정보를 지우고 싶다면 위의 명령어를 입력하면 된다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
