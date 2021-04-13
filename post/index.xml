@@ -69,6 +69,15 @@ ARP 패킷 추적하기   위의 명령어를 통해서, 패킷 추적을 시작
     </item>
     
     <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/13/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 13 Apr 2021 21:23:30 +0900</pubDate>
+      
+      <guid>/post/2021/04/13/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  네트워크에 대해서 공부를 하였다. 자바 스크립트 세미나 자료를 작성하였다.  Feelings (느낌, 주관)  네트워크에 대한 지식이 부족함을 알게 되었고, 부족한 점을 채우기 위해서 노력해야겠다는 생각이 들었다. 생각보다 대략적으로 알고 있는 내용이 많았고, 제대로 알고 넘어가야하는 점이 많다는 것을 알게 되었다. 생각보다 발표준비를 할 시간이 많이 남지 않았다는 것을 알게 되었다.  Findings (배운 점)  네트워크 지식이 나중에 문제를 해결할 때 많은 도움을 줄 것이라고 생각한다.</description>
+    </item>
+    
+    <item>
       <title>문서화를 코드로 관리하는 법 (draft)</title>
       <link>/post/2021/04/13/%EB%AC%B8%EC%84%9C%ED%99%94%EB%A5%BC-%EC%BD%94%EB%93%9C%EB%A1%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%B2%95-draft/</link>
       <pubDate>Tue, 13 Apr 2021 15:47:39 +0900</pubDate>
