@@ -6,11 +6,7 @@
     <description>Recent content in 자바 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 13 Mar 2021 11:40:33 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 13 Mar 2021 11:40:33 +0900</lastBuildDate><atom:link href="/tags/%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>사내 세미나 과제 피드백 CH10 - Future, ComputableFuture</title>
       <link>/post/2021/03/13/%EC%82%AC%EB%82%B4-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C-%ED%94%BC%EB%93%9C%EB%B0%B1-ch10-future-computablefuture/</link>

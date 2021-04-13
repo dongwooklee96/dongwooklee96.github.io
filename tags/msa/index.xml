@@ -6,11 +6,7 @@
     <description>Recent content in MSA on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Mar 2021 13:40:33 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/msa/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 27 Mar 2021 13:40:33 +0900</lastBuildDate><atom:link href="/tags/msa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SOA, 모놀리틱, 그리고 MSA 아키텍처</title>
       <link>/post/2021/03/27/soa-%EB%AA%A8%EB%86%80%EB%A6%AC%ED%8B%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-msa-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</link>
