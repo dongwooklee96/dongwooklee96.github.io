@@ -6,7 +6,17 @@
     <description>Recent content in 문서화 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 04 Mar 2021 18:29:39 +0900</lastBuildDate><atom:link href="/tags/%EB%AC%B8%EC%84%9C%ED%99%94/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 13 Apr 2021 15:47:39 +0900</lastBuildDate><atom:link href="/tags/%EB%AC%B8%EC%84%9C%ED%99%94/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>문서화를 코드로 관리하는 법 (draft)</title>
+      <link>/post/2021/04/13/%EB%AC%B8%EC%84%9C%ED%99%94%EB%A5%BC-%EC%BD%94%EB%93%9C%EB%A1%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%B2%95-draft/</link>
+      <pubDate>Tue, 13 Apr 2021 15:47:39 +0900</pubDate>
+      
+      <guid>/post/2021/04/13/%EB%AC%B8%EC%84%9C%ED%99%94%EB%A5%BC-%EC%BD%94%EB%93%9C%EB%A1%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%B2%95-draft/</guid>
+      <description>이전에 프로젝트를 진행할 때는 문서화에 대한 고민이 정말로 많았다. 왜냐하면 요구사항은 나날이 변경되는데, 요구사항에 맞춰서 문서화를 변경하는 일은 손이 많이가고 귀찮은 일이었기 때문이다. 또한 변경사항이 변경할 때마다, 어느 부분을 어떤 이유로 수정하였는지 추적하기도 힘이 들었다.
+따라서 추후에 프로젝트를 다시 시작할 때 무조건 문서화를 코드에 가깝게 두려고 노력을 했다. 또한 깃으로 상태 관리를 할 수 있었으면 좋겠다는 생각을 하기도 하였다. 그러던 중에, plantuml 이라는 도구를 알게 되었다. 이 도구는 아키텍처를 도식화할 때 사용할 수 있는 툴로써 다양한 다이어그램을 그릴 수 있다.</description>
+    </item>
+    
     <item>
       <title>테크니컬 라이팅 4대 원칙이라는 글을 읽고 느낀점</title>
       <link>/post/2021/03/04/%ED%85%8C%ED%81%AC%EB%8B%88%EC%BB%AC-%EB%9D%BC%EC%9D%B4%ED%8C%85-4%EB%8C%80-%EC%9B%90%EC%B9%99%EC%9D%B4%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</link>
