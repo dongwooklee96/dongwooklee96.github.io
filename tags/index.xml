@@ -6,10 +6,15 @@
     <description>Recent content in Tags on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 13 Apr 2021 23:15:39 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Wed, 14 Apr 2021 18:54:39 +0900</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>프론트엔드</title>
+      <link>/tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/</link>
+      <pubDate>Wed, 14 Apr 2021 18:54:39 +0900</pubDate>
+      
+      <guid>/tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>네트워크</title>
@@ -80,15 +85,6 @@
       <pubDate>Sat, 03 Apr 2021 21:21:24 +0900</pubDate>
       
       <guid>/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>프론트엔드</title>
-      <link>/tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/</link>
-      <pubDate>Tue, 30 Mar 2021 13:20:39 +0900</pubDate>
-      
-      <guid>/tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/</guid>
       <description></description>
     </item>
     

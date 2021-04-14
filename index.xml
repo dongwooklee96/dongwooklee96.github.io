@@ -6,10 +6,15 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 13 Apr 2021 23:15:39 +0900</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Wed, 14 Apr 2021 18:54:39 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>디바운스란? (draft)</title>
+      <link>/post/2021/04/14/%EB%94%94%EB%B0%94%EC%9A%B4%EC%8A%A4%EB%9E%80-draft/</link>
+      <pubDate>Wed, 14 Apr 2021 18:54:39 +0900</pubDate>
+      
+      <guid>/post/2021/04/14/%EB%94%94%EB%B0%94%EC%9A%B4%EC%8A%A4%EB%9E%80-draft/</guid>
+      <description>디바운스란? 참고 문헌  </description>
+    </item>
     
     <item>
       <title>DNS란? (draft)</title>
