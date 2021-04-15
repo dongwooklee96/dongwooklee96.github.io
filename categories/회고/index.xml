@@ -6,7 +6,16 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 13 Apr 2021 21:23:30 +0900</lastBuildDate><atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 15 Apr 2021 18:23:30 +0900</lastBuildDate><atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 15 Apr 2021 18:23:30 +0900</pubDate>
+      
+      <guid>/post/2021/04/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 자바스크립트 세미나 발표를 했다.  Feelings (느낌, 주관) Findings (배운 점) Bad (개선할 점) Affimation (자기 선언) 회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다. Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다. Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다. Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지 하고 개선할지를 적는다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/04/13/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
