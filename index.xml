@@ -6,10 +6,19 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 15 Apr 2021 22:07:39 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 18 Apr 2021 20:02:36 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>주간 회고</title>
+      <link>/post/2021/04/18/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 18 Apr 2021 20:02:36 +0900</pubDate>
+      
+      <guid>/post/2021/04/18/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  기대했던 결과가 나오지 않아서 조금 실망하기는 했다. 졸업 작품으로 했던 프로젝트를 다시 만들어가고 있다. 네트워크에 대한 기반 지식이 부족한 것을 알게 되었서, 관련된 공부를 하면서 기본기를 쌓고 있다. 자바스크립트 프로토타입에 대해서 세미나 준비 및 세미나를 하였다.  Findings (배운 점)  그래도 내가 어떤 점이 부족하고, 채워가야하는지 시야가 넓어져서 좋은 것 같다. 평소에 발표 연습을 많이 하고, 녹화하면서 안좋은 습관들을 고치도록 해야겠다. 다시 한번 복습하며서, 부족한 점을 채워나가고 있다.</description>
+    </item>
     
     <item>
       <title>SHADOW DOM 이란 (draft)</title>
