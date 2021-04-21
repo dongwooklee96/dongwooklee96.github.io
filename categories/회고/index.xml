@@ -6,10 +6,19 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 20 Apr 2021 17:01:30 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 21 Apr 2021 23:01:30 +0900</lastBuildDate>
     
 	<atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/21/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Wed, 21 Apr 2021 23:01:30 +0900</pubDate>
+      
+      <guid>/post/2021/04/21/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 정신이 없어서 생각하지 않고 동료에게 잘못된 정보를 전달하였다.  Feelings (느낌, 주관)  아무리 바뻐도, 확인을 완전히 하고 전달을 해야겠다. 구현을 할 때 일정을 고려해서 코딩하는 것과 정석대로 구현하는 것의 균형을 잡기 어렵다는 느낌을 받았다. 최대한 기존 소스 코드에 영향을 주지 않는 방향으로 구현을 해야하는 것인지 아니면, 과감하게 구현해야할때는 언제인지가 궁금했다.  Bad (개선할 점)  아무리 바쁘더라도, 제대로 확인을 하고 정보를 전달하고 헷갈린다면 확인해보고 알려준다고 말을 하자.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
