@@ -6,10 +6,19 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 21 Apr 2021 23:01:30 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 22 Apr 2021 22:00:30 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/22/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 22 Apr 2021 22:00:30 +0900</pubDate>
+      
+      <guid>/post/2021/04/22/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)    오늘 출근을 할 때, 프로그래밍 왕초식 시리즈중에 하나인 왕파라미터를 사용하지 말자라는 영상을 보았다. 오늘은 회사에서 코딩을 할 때, 비교적 일이 잘 풀린 편인 것 같다.  Feelings (느낌, 주관)  회사에서 코드를 작성할 때, 위와 같은 왕파라미터를 사용하는 경우를 많이 보았고 이 경우에, 파이썬에서 지원하는 네임드 튜플을 사용하면 좋겠다는 생각이 들었다. 이제 마지막 이슈만을 남겨 놓고 있다. 이 이슈를 잘 처리하여 문제 없이 이관을 할 수 있으면 좋겠다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
