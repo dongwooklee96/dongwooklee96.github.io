@@ -6,10 +6,19 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 22 Apr 2021 22:00:30 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 23 Apr 2021 23:00:30 +0900</lastBuildDate>
     
 	<atom:link href="/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Fri, 23 Apr 2021 23:00:30 +0900</pubDate>
+      
+      <guid>/post/2021/04/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  클린 파이썬이라는 책을 읽었다. 배포날이 다가오니까, 야근을 하였다.  Feelings (느낌, 주관)  확실히 베스트 프랙티스를 보니까, 그동안 작성되었던 코드들의 개선사항이 눈에 보였다. 아직은 회사 생활을 할만하다고 느끼지만, 구조를 개선하려는 노력이 없어서 아쉽고, 코드가 망가지는 것을 볼 때마다 가슴이 아프다.  Bad (개선할 점)  어떻게 하면, 코드를 깔끔하게 개선할 수 있고, 구조를 더 좋게 만들 수 있을지를 고민해봐야겠다. 다른 회사에서는 이러한 상황에 처해있을 때, 어떻게 변화를 하는지 알아봐야겠다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
