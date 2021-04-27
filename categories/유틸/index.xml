@@ -6,7 +6,16 @@
     <description>Recent content in 유틸 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 13 Apr 2021 15:47:39 +0900</lastBuildDate><atom:link href="/categories/%EC%9C%A0%ED%8B%B8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Apr 2021 18:00:39 +0900</lastBuildDate><atom:link href="/categories/%EC%9C%A0%ED%8B%B8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데이트 타임 및 표준 규격에 대해서 (draft)</title>
+      <link>/post/2021/04/27/%EB%8D%B0%EC%9D%B4%ED%8A%B8-%ED%83%80%EC%9E%84-%EB%B0%8F-%ED%91%9C%EC%A4%80-%EA%B7%9C%EA%B2%A9%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-draft/</link>
+      <pubDate>Tue, 27 Apr 2021 18:00:39 +0900</pubDate>
+      
+      <guid>/post/2021/04/27/%EB%8D%B0%EC%9D%B4%ED%8A%B8-%ED%83%80%EC%9E%84-%EB%B0%8F-%ED%91%9C%EC%A4%80-%EA%B7%9C%EA%B2%A9%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-draft/</guid>
+      <description>참고 문헌   ISO 8061 - WIKI RFC 2822 RFC 3339  </description>
+    </item>
+    
     <item>
       <title>문서화를 코드로 관리하는 법 (draft)</title>
       <link>/post/2021/04/13/%EB%AC%B8%EC%84%9C%ED%99%94%EB%A5%BC-%EC%BD%94%EB%93%9C%EB%A1%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%B2%95-draft/</link>
