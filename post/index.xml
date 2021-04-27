@@ -6,10 +6,42 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 27 Apr 2021 18:00:39 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 28 Apr 2021 00:12:39 +0900</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>리눅스 네트워크 도구 (테스트, 추적, 모니터링 명령어)</title>
+      <link>/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</link>
+      <pubDate>Wed, 28 Apr 2021 00:12:39 +0900</pubDate>
+      
+      <guid>/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</guid>
+      <description>hping3  hping3 -S www.daum.net -p 80   TCP/UDP, ICMP 및 다양한 종류의 패킷을 전송할 수 있다.
+  좀 더 빠른 주기로 패킷을 보내고 싶다면 --fast 옵션을 줄 수 있다.
+  iptables   이 명령어는 특정 IP 주소의 요청을 막을 수 있는 명령이다.  # localhost의 UDP 요청을 차단하는 규칙을 추가하였다. iptables -I OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP # iptables 설정을 확인해본다.</description>
+    </item>
+    
+    <item>
+      <title>가상 파일 시스템(VFS)이란? (draft)</title>
+      <link>/post/2021/04/28/%EA%B0%80%EC%83%81-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9Cvfs%EC%9D%B4%EB%9E%80-draft/</link>
+      <pubDate>Wed, 28 Apr 2021 00:09:24 +0900</pubDate>
+      
+      <guid>/post/2021/04/28/%EA%B0%80%EC%83%81-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9Cvfs%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>가상 파일 시스템(Virtual File System)    리눅스가 하는 일을 생각해보면 크게 하드웨어 자원 관리 및 소프트웨어의 자원을 관리한다고 생각을 해볼 수 있다.
+  리눅스는 이러한 자원을 파일로써 관리하게 되며 모든 것이 가상 파일 시스템을 통해서 접근하게 된다.
+  예를 들어서, NGINX 같은 웹 서버 프로그램이 시스템 자원을 요청할 때, 시스템 콜을 호출하게 되며 (open, read, write) 이러한 자원은 가상 파일 시스템(VFS)를 통해서 자원에 접근하게 된다.
+  </description>
+    </item>
+    
+    <item>
+      <title>MSS 그리고 MTU (draft)</title>
+      <link>/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</link>
+      <pubDate>Tue, 27 Apr 2021 23:44:39 +0900</pubDate>
+      
+      <guid>/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</guid>
+      <description>MSS (Maximun Segment Size)   MSS는 TCP 상에서 전송할 수 있는 사용자의 데이터(payload) 크기를 말한다. MSS는 TCP 헤더를 제외한 데이터의 크기이다. MSS는 TCP(L4) 계층에서 데이터의 크기를 말한다. 위의 사진을 보면, TCP 헤더를 제외한 데이터 부분을 MSS라고 말한다.  MTU (Maximun Transmission Unit)   MTU는 네트워크에서 전송 될 수 있는 최대 패킷의 크기를 말한다. MTU는 IP(L3) 계층에서 패킷이라고도 불리운다. MTU에서 IP 헤더와 TCP 헤더를 제외하면 그것이 바로 MSS가 된다. MTU를 패킷이라고 부른다.</description>
+    </item>
     
     <item>
       <title>데이트 타임 및 표준 규격에 대해서 (draft)</title>
