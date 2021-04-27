@@ -6,10 +6,15 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 26 Apr 2021 23:30:30 +0900</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 27 Apr 2021 13:30:30 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 27 Apr 2021 13:30:30 +0900</pubDate>
+      
+      <guid>/post/2021/04/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)    출근길에, 소프트웨어 엔지니어를 평가하는 4가지 항목이라는 영상을 보았다. 기존에 느리게 동작하던 코드를 개선하였다. 오픈 소스 분석 방법 이라는 블로그 글을 읽었다. 강연: 호갱노노 이렇게 만듭니다 이라는 글을 읽었다. 오늘 사내 메신저에서 이해하지도 못했는데, 대충 이해했다고 생각하여 넘어갔지만, 실제로는 다른 이야기였다.  Feelings (느낌, 주관)   성능 개선을 할 때, 코드를 이해하지 못해서 이 부분이 필요한 부분인지를 미쳐 파악하지 못했던 것 같다. 따라서, 사실 필요없는 부분 이었음에도 불구하고, 필요하다고 생각하여 어려웠던 것이다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
