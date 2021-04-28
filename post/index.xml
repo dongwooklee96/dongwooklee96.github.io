@@ -6,7 +6,20 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 28 Apr 2021 09:30:30 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Apr 2021 11:00:39 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>마크다운으로 슬라이드 쇼 만드는 방법 (draft)</title>
+      <link>/post/2021/04/28/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4%EC%9C%BC%EB%A1%9C-%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C-%EC%87%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95-draft/</link>
+      <pubDate>Wed, 28 Apr 2021 11:00:39 +0900</pubDate>
+      
+      <guid>/post/2021/04/28/%EB%A7%88%ED%81%AC%EB%8B%A4%EC%9A%B4%EC%9C%BC%EB%A1%9C-%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C-%EC%87%BC-%EB%A7%8C%EB%93%9C%EB%8A%94-%EB%B0%A9%EB%B2%95-draft/</guid>
+      <description>기존에 슬라이드 쇼를 만드는데, 콘텐츠에 집중하기 보다는 부가적인 요소에 집중할 때가 많았다.
+  개발 발표 자료는 사실, 슬라이드 디자인이 크게 영향을 미치지 않는 경우가 많다.
+  따라서 프레젠테이션을 만들때 드는 비용을 많이 줄여줄 수 있다고 생각을 한다.
+  그리고 웹에서 동작하기 때문에, 커스터 마이징을 할 수 있고 더 실험적인 동작을 할 수 있을 것 같다. (예제 코드를 실행해보기)
+  아래에 비슷한 툴들이 많이 있다. 따라서 이를 통해서 슬라이드를 만들어보면 좋을 것 같다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/04/28/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
