@@ -6,10 +6,17 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 28 Apr 2021 00:12:39 +0900</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Wed, 28 Apr 2021 09:30:30 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/28/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Wed, 28 Apr 2021 09:30:30 +0900</pubDate>
+      
+      <guid>/post/2021/04/28/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)   네이버에서 NDTI라는 맞춤 채용 제안을 확인할 수 있었다. 재미있고 좋은 아이디어인 것 같다.
+  지도 서비스를 구축하는데 도움이 되는 라이브러리 및 도구를 발견하였다. 토이 프로젝트를 하는데 많은 도움이 될 것 같다. OPEN STREET MAP으로 나만의 지도시스템 만들기
+  Feelings (느낌, 주관) Learning (배운점) Bad (개선할 점) Affimation (자기 선언) 회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.</description>
+    </item>
     
     <item>
       <title>리눅스 네트워크 도구 (테스트, 추적, 모니터링 명령어)</title>
@@ -677,6 +684,20 @@ API 인가 방식  권한 인가(Authorization) 방식에는 여러 가지 방�
       
       <guid>/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D/</guid>
       <description>REST API 보안   보안에 관해서는 백번, 천번을 강조해도 과함이 없다. 근래의 대부분의 서비스 시스템들은 API를 기반으로 통신한다. 앱과 서버 간의 통신 또는 자바 스크립트 웹 클라이언트와 서버 간 대부분의 통신이 이 API들을 이용해서, 이루어지기 때문에 한번 보안이 뚫리면 개인 정보가 탈취되는 것 뿐만 아니라, 더 많은 문제를 일으킬 수 있다.  REST API 보안 관점 및 개요  인증(Authentication)  인증은 누가 서비스를 사용하는지를 확인하는 절차이다. 쉽게 생각하면 웹 사이트에 사용자 아이디와 비밀번호를 넣어서 사용자를 확인하는 과정이 인증이다.</description>
+    </item>
+    
+    <item>
+      <title>나만의 지도 시스템을 만드는데 유용한 도구 (draft)</title>
+      <link>/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft/</link>
+      <pubDate>Sun, 28 Mar 2021 10:45:24 +0900</pubDate>
+      
+      <guid>/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft/</guid>
+      <description>지도 시스템을 만드는데, 추천하는 도구    지도 시스템을 만드는데 추천하는 도구들은 다음과 같다.
+  우선 프론트엔드로는, Leaflet, Openlayers, GeoExt, Turf.js 등이 있다.
+  벡엔드로는 GEODjango, GeoServer 등이 있다.
+  데이터베이스는 PostGIS를 많이 사용한다.
+  데이터는 QGIS, Mapshaper 등이 있고, 데이터소스로는 OpenStreetMap을 사용한다.
+  참고 문헌   Tools I recommend for building Geospatial Web Applications  </description>
     </item>
     
     <item>
