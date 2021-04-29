@@ -6,10 +6,18 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 28 Apr 2021 11:00:39 +0900</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 29 Apr 2021 10:00:30 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/04/29/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 29 Apr 2021 10:00:30 +0900</pubDate>
+      
+      <guid>/post/2021/04/29/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관) Feelings (느낌, 주관)   우연히, 우아한 테크 코스 영상을 보았는데, 이를 보면서 블로그에 정리하고 실제로 녹화를 해보면서 발표 연습을 하자라는 마음을 먹었던게 기억이 났다.
+  해야할 일을 일일 회고에는 많이 기록을 해두었는데, 막상 기억이 나지 않을 때가 있으므로, 따로 투두 리스트를 정리해야겠다.
+  이와 비슷한 일로, 백기선님의 자바 강의를 듣고, 이를 기술 블로그에 정리하도록 해야겠다.
+  Learning (배운점) Bad (개선할 점) Affimation (자기 선언) 회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.</description>
+    </item>
     
     <item>
       <title>마크다운으로 슬라이드 쇼 만드는 방법 (draft)</title>
