@@ -6,10 +6,19 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 30 Apr 2021 10:00:30 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 02 May 2021 22:00:36 +0900</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>주간 회고</title>
+      <link>/post/2021/05/02/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 02 May 2021 22:00:36 +0900</pubDate>
+      
+      <guid>/post/2021/05/02/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  숫자 야구를 구현하는 간단한 과제를 하였다. 오픈 소스 분석 방법이라는 블로그 글을 읽었다. 회사에서 성능 개선 이슈를 맡아서 진행을 하였다. 회사에서 진행하고 있는 솔루션에서 개선해야할 점들을 발표 자료로 만들어서, 발표를 해보았다. 파이썬으로 클린 아키텍처를 만드는 방법에 대해서, 배울 수 있었다. 장기적으로 보았을 때, 체력과 건강이 중요하기 때문에, 복싱 도장에 등록을 하였다.  Feelings (느낌, 주관)  아직 함수나, 클래스를 나누는 연습이 많이 부족한 것을 느낄 수 있었다.</description>
+    </item>
     
     <item>
       <title>일일 회고</title>
