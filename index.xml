@@ -6,10 +6,15 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 02 May 2021 22:00:36 +0900</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Mon, 03 May 2021 16:00:30 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/05/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Mon, 03 May 2021 16:00:30 +0900</pubDate>
+      
+      <guid>/post/2021/05/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 클린 아키텍처 파이썬이라는 책을 읽었다.  Feelings (느낌, 주관)  시스템 디자인에서 중요한 컨셉중에 관심사의 분리와 제어의 역전이 중요하다는 것을 알게 되었다. 추상화를 할 때, 웹 프레임워크는 웹을 통해서 프로그램을 이용할 수 있게 해주는 것이며 분리가 잘 되어 있다면, CLI를 통해서 비즈니스 로직의 변경없이 프로그램을 사용할 수 있어야한다. 데이터베이스 역시, 관계형 데이터베이스 뿐만 아니라, NoSQL도 빠르게 바꿔서 사용할 수 있도록 해야한다.  Learning (배운점) Bad (개선할 점) Affimation (자기 선언) 회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.</description>
+    </item>
     
     <item>
       <title>주간 회고</title>
