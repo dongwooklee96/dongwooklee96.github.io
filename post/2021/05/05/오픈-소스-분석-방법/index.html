@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>오픈 소스 분석 방법 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">오픈 소스 분석 방법</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/05/05</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4">오픈 소스</a> 
+  
+  
+  
+  Tags: <a href="/tags/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4">오픈 소스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="오픈-소스-분석-방법">오픈 소스 분석 방법</h2>
+<hr>
+<p>머리속 한켠에는 오픈 소스 활동을 다시 하고 싶다는 생각을 가지고 있지만, 바쁘다는 핑계로 미뤄왔다. 우연히 어떤 블로그에서 <a href="https://zzsza.github.io/development/2020/07/19/opensource-analysis/#open-source%EB%9E%80">오픈 소스 분석 방법</a> 이라는 글을 읽고나서, 오픈 소스 개발을 하고 싶다는 생각이 들었다. 또한 오픈 소스 활동은 시간이 날때 하는 것이 아니라, 평소에 시간을 쪼개가면서, 짜투리 시간을 만들어야 가능하다는 것을 느끼게 되었다. 다음은 오픈 소스 분석하는데 좋은 팁이다.</p>
+<h3 id="공식-문서를-통해-파악하기">공식 문서를 통해 파악하기</h3>
+<hr>
+<ul>
+<li>
+<p>오픈 소스를 분석하기 전에, 공식 문서를 통해서 사용법을 익히면 좋다.</p>
+</li>
+<li>
+<p>이는 나도 공감하는 내용이다. 오픈 소스라는 것이 평소에 많이 사용해보고 어떤 기능이 있는지 파악을 해야한다. 또한 이러한 기능이 생기게 된 이유 및 내부 동작 원리를 파악할 수 있으므로 공식 문서는 반드시 읽어보는 것이 좋다.</p>
+</li>
+</ul>
+<h3 id="아키텍처-분석-큰-숲-바라보기">아키텍처 분석 (큰 숲 바라보기)</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/117116687-9e40a300-adc9-11eb-9873-4357a112947d.jpg" alt="download"></p>
+<ul>
+<li>
+<p>소스코드의 폴더 구성을 보면서, 대략적인 기능들과 아키텍처를 파악해볼 수 있다.</p>
+</li>
+<li>
+<p>처음에는 오픈 소스의 아키텍처를 파악한 후에, 디테일한 부분으로 이동하는 것이 좋다.</p>
+</li>
+<li>
+<p>각 모듈들이 어떤 역할을 하고 있는지 살펴보고 상호간에 어떻게 연결되어 있는지 파악하자.</p>
+</li>
+<li>
+<p>큰 아키텍처를 연필이나, 다이어 그램 도구로 직접 그려보면서 파악하는 것이 좋다.</p>
+</li>
+</ul>
+<h3 id="디테일-분석-나무-바라보기">디테일 분석 (나무 바라보기)</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/117116755-b57f9080-adc9-11eb-8f79-d17a216cd422.jpg" alt="download"></p>
+<ul>
+<li>
+<p>큰 숲을 파악한 후에, 디테일한 부분을 분석한다.</p>
+</li>
+<li>
+<p>클래스는 어떤 정보를 담고 있으며, 어디서 사용되는지, 그리고 어떤 방식으로 동작하는지 등을 파악하는 것이 좋다.</p>
+</li>
+<li>
+<p>모든 함수를 파악하려고 하지 말고, 조금씩 자신이 살펴보려는 기능과 관련된 함수 들을 파악하는 것이 좋다.</p>
+</li>
+<li>
+<p>디버거를 통해서, BP (<code>Break Point</code>)를 걸어놓고 직접 실행해보면서, 코드의 흐름을 파악해보는 것도 많은 도움이 된다.</p>
+</li>
+<li>
+<p>함수의 인풋(<code>Input</code>)에는 어떤 데이터가 들어오고, 아웃풋(<code>Output</code>)은 어떤 데이터를 반환하는지 파악하는 것이 좋다.</p>
+</li>
+<li>
+<p>테스트 코드를 통해서, 각 함수의 사용법 및 인풋, 아웃풋을 파악하는 것이 좋다.</p>
+</li>
+</ul>
+<h3 id="오픈-소스-활동을-지속하기-위한-팁-tip">오픈 소스 활동을 지속하기 위한 팁 (TIP)</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/117116845-cfb96e80-adc9-11eb-94a8-9a1bbb70c697.jpg" alt="images"></p>
+<ul>
+<li>
+<p>포기 하지 않는 것이 중요하다.</p>
+</li>
+<li>
+<p>오픈 소스 분석은 익숙하지 않다면, 매우 힘들고 고된 작업이다.</p>
+</li>
+<li>
+<p>혼자서 하기 힘들면, 다른 사람들과 같이 분석하는 방법이 있고, <strong>힘들어도 싸이클을 정하고 싸이클을 도는 것이 중요하다!!!</strong></p>
+</li>
+<li>
+<p>오픈 소스 메인테이너의 문서 및 논문, 그리고 유튜브 영상을 보는 것이 중요하다.</p>
+</li>
+<li>
+<p>코드를 무조건 많이 보는 것이 좋다. 코드를 인쇄하여 보는 사람들도 있다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://zzsza.github.io/development/2020/07/19/opensource-analysis/#open-source%EB%9E%80">오픈 소스 분석 방법</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+    <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

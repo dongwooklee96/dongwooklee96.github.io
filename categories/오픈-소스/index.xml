@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>오픈 소스 on 개발자 이동욱</title>
+    <link>/categories/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4/</link>
+    <description>Recent content in 오픈 소스 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Wed, 05 May 2021 17:30:39 +0900</lastBuildDate><atom:link href="/categories/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>오픈 소스 분석 방법</title>
+      <link>/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</link>
+      <pubDate>Wed, 05 May 2021 17:30:39 +0900</pubDate>
+      
+      <guid>/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</guid>
+      <description>오픈 소스 분석 방법  머리속 한켠에는 오픈 소스 활동을 다시 하고 싶다는 생각을 가지고 있지만, 바쁘다는 핑계로 미뤄왔다. 우연히 어떤 블로그에서 오픈 소스 분석 방법 이라는 글을 읽고나서, 오픈 소스 개발을 하고 싶다는 생각이 들었다. 또한 오픈 소스 활동은 시간이 날때 하는 것이 아니라, 평소에 시간을 쪼개가면서, 짜투리 시간을 만들어야 가능하다는 것을 느끼게 되었다. 다음은 오픈 소스 분석하는데 좋은 팁이다.
+공식 문서를 통해 파악하기    오픈 소스를 분석하기 전에, 공식 문서를 통해서 사용법을 익히면 좋다.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -6,7 +6,17 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 05 May 2021 16:00:30 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 May 2021 17:30:39 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>오픈 소스 분석 방법</title>
+      <link>/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</link>
+      <pubDate>Wed, 05 May 2021 17:30:39 +0900</pubDate>
+      
+      <guid>/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</guid>
+      <description>오픈 소스 분석 방법  머리속 한켠에는 오픈 소스 활동을 다시 하고 싶다는 생각을 가지고 있지만, 바쁘다는 핑계로 미뤄왔다. 우연히 어떤 블로그에서 오픈 소스 분석 방법 이라는 글을 읽고나서, 오픈 소스 개발을 하고 싶다는 생각이 들었다. 또한 오픈 소스 활동은 시간이 날때 하는 것이 아니라, 평소에 시간을 쪼개가면서, 짜투리 시간을 만들어야 가능하다는 것을 느끼게 되었다. 다음은 오픈 소스 분석하는데 좋은 팁이다.
+공식 문서를 통해 파악하기    오픈 소스를 분석하기 전에, 공식 문서를 통해서 사용법을 익히면 좋다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/05/05/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
