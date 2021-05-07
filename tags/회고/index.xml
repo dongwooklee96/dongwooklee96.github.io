@@ -6,7 +6,18 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 06 May 2021 08:00:30 +0900</lastBuildDate><atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 May 2021 09:00:30 +0900</lastBuildDate><atom:link href="/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/05/07/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Fri, 07 May 2021 09:00:30 +0900</pubDate>
+      
+      <guid>/post/2021/05/07/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)   큐브리드 세미나 발표에 댓글을 달았는데, 유용한 링크를 주었다. CUBRID의 개발 문화: CUBRID DBMS는 어떻게 개발되고 있을까?
+  CUBRID Developer Guide
+  Feelings (느낌, 주관)  컨트리뷰터에게 관심을 가져주어서 너무 좋았다. 포기하지 말고 틈틈히 소통하여, 개발을 할 수 있도록 해야겠다.  Learning (배운점) Bad (개선할 점) Affimation (자기 선언) 회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/05/06/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
