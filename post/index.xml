@@ -6,7 +6,25 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 06 May 2021 08:00:30 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 May 2021 09:00:30 +0900</lastBuildDate><atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/05/07/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Fri, 07 May 2021 09:00:30 +0900</pubDate>
+      
+      <guid>/post/2021/05/07/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  큐브리드에서, 답글을 남겨주었다. 그리고 큐브리드 개발에 도움이 될만한 링크를 남겨주었다. CUBRID의 개발 문화: CUBRID DBMS는 어떻게 개발되고 있을까?  Learning (배운점)  적극적으로, 컨트리뷰터와 소통하는 모습에 기여하고 싶은 마음이 커졌다. 포기하지 않고, 한 싸이클을 돌기를 목표로 잡고, 천천히 기여를 하자  Bad (개선할 점) Affimation (자기 선언) 회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다. Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.</description>
+    </item>
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/05/06/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 06 May 2021 08:00:30 +0900</pubDate>
+      
+      <guid>/post/2021/05/06/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)    포트폴리오를 작성할 때, 중점적으로 생각할 점에 대한 영상을 보았다.  Feelings (느낌, 주관) Learning (배운점)  프로젝트를 자가 진단해볼 수 있는 주요 항목이다.  실제 서비스를 공개적으로 배포하고 운영해보는 경험을 해보았다. 유저의 피드백에 따라서, 성능 및 사용성을 개선해보고 신규 기능들을 추가해보았다. 발견되는 버그와 개선사항을 정리하고 쌓인 이슈들을 체계적으로 관리 해 보았다. 코드를 지속적으로 리펙토링하고 디자인 패턴을 적용해 보았다. 위의 시도에서 더 좋은 설계와 더 빠른 개발 사이의 트레이드 오프를 고민해보았다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/05/06/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
@@ -24,19 +42,6 @@
       <guid>/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</guid>
       <description>오픈 소스 분석 방법  머리속 한켠에는 오픈 소스 활동을 다시 하고 싶다는 생각을 가지고 있지만, 바쁘다는 핑계로 미뤄왔다. 우연히 어떤 블로그에서 오픈 소스 분석 방법 이라는 글을 읽고나서, 오픈 소스 개발을 하고 싶다는 생각이 들었다. 또한 오픈 소스 활동은 시간이 날때 하는 것이 아니라, 평소에 시간을 쪼개가면서, 짜투리 시간을 만들어야 가능하다는 것을 느끼게 되었다. 다음은 오픈 소스 분석하는데 좋은 팁이다.
 공식 문서를 통해 파악하기    코드를 분석하기 전에, 먼저 해당 솔루션에 대한 지식을 먼저 익혀야 한다.</description>
-    </item>
-    
-    <item>
-      <title>일일 회고</title>
-      <link>/post/2021/05/05/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
-      <pubDate>Wed, 05 May 2021 16:00:30 +0900</pubDate>
-      
-      <guid>/post/2021/05/05/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
-      <description>TIL 양식 Facts (사실, 객관)   나의 핵심 역량 및 성취 그리고 주요 프로젝트 및 성과에 대해서 생각을 해보았다.
-  API를 컨슈머를 위주로 작성하는 법에 대해서 알게 되었다.
-  유용한 블로그 글 및 좋은 소식을 들을 수 있는 사이트를 발견하였다. 어썸 데브 블로그
-  작은 오픈소스 프로그램을 분석해서 실력을 쌓아 나간 사례 라는 글을 읽어 보게 되었다.
-  libuv에 대해서 분석한 글을 읽어 볼 수 있었다.</description>
     </item>
     
     <item>
