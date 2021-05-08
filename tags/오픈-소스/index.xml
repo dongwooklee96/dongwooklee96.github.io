@@ -6,7 +6,11 @@
     <description>Recent content in 오픈 소스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 05 May 2021 17:30:39 +0900</lastBuildDate><atom:link href="/tags/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 May 2021 17:30:39 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>오픈 소스 분석 방법</title>
       <link>/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</link>

@@ -6,7 +6,30 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 07 May 2021 09:00:30 +0900</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 May 2021 15:00:30 +0900</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>일일 회고</title>
+      <link>/post/2021/05/08/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 08 May 2021 15:00:30 +0900</pubDate>
+      
+      <guid>/post/2021/05/08/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>TIL 양식 Facts (사실, 객관)  오늘 오라클 성능 고도화 SQLP 강의를 들었다.  Feelings (느낌, 주관)  REDO, UNDO 로그에 대해서 배울 수 있어서 좋았다. 실행 계획을 확인하는 것이 아직은 많이 어색했다.  Learning (배운점)  앞으로 개발을 하면서, 항상 실행 계획을 확인하는 습관을 들이고, 눈에 익숙해져야겠다.  Bad (개선할 점) Affimation (자기 선언) 회고 작성법  Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다. Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.</description>
+    </item>
+    
+    <item>
+      <title>오라클 성능 고도화 강의 (1)</title>
+      <link>/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1/</link>
+      <pubDate>Sat, 08 May 2021 09:20:24 +0900</pubDate>
+      
+      <guid>/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1/</guid>
+      <description>오라클 성능 고도화 강의  이전에, 한번 튜닝 수업을 들은 적이 있었지만, 아직 경험이 부족한 상태에서 들어서 그런지 이해가 가지 않는 부분이 많았다. 실무를 조금 해보면서, 어느정도 쿼리에 익숙해진 상태에서 강의를 들으면 어떨까라는 생각이 들어서 강의를 수강하게 되었다.
+SQLP 시험에 실패하는 이유   SQLP 시험에 실패하는 이유는 주로 글로만 학습해서 그렇다. SQLP 시험 설계는 실무 전문가임을 인정해주는 자격증이다. 따라서 책으로만 학습해서 통과는 어렵고, 실무와 경험을 같이 쌓아야한다.  SQLP 시험에 합격하기 위한 방법   정확히 알아야한다.</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>/post/2021/05/07/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
