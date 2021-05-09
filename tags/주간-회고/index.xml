@@ -2,19 +2,94 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>주간 회고 on 개발자 이동욱</title>
-    <link>/tags/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+    <link>https://dongwooklee96.github.io/tags/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
     <description>Recent content in 주간 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 07 Mar 2021 12:29:39 +0900</lastBuildDate><atom:link href="/tags/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Mar 2021 12:29:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>주간 회고</title>
-      <link>/post/2021/03/07/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/07/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
       <pubDate>Sun, 07 Mar 2021 12:29:39 +0900</pubDate>
       
-      <guid>/post/2021/03/07/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
-      <description>주간 회고  한 주간에 있었던 일과 생각을 정리해보았습니다.
-JWT 토큰에 대해서 알게 되었다.   코드숨 과제를 하면서 JWT 토큰에 대해서 조사를 해보았다. JWT 토큰에 대해서 들어본적은 기억은 있었지만, 로그인을 할 때 사용한다 정도로만 알고 있었다.   과제를 제출하기 전에, 내가 사용하는 라이브러리에 대해서 최소한의 조사를 하고 PR을 하자는 목표를 가지고 조사를 하게 되었다. RFC 문서까지 읽고 공부를 했으면 더 좋았을 것 같다. 따라서 투두 리스트에 넣어두고 시간이 되는대로 읽고 정리하도록 해야겠다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/07/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h2 id=&#34;주간-회고&#34;&gt;주간 회고&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;한 주간에 있었던 일과 생각을 정리해보았습니다.&lt;/p&gt;
+&lt;h2 id=&#34;jwt-토큰에-대해서-알게-되었다&#34;&gt;JWT 토큰에 대해서 알게 되었다.&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;코드숨 과제를 하면서 JWT 토큰에 대해서 조사를 해보았다.&lt;/li&gt;
+&lt;li&gt;JWT 토큰에 대해서 들어본적은 기억은 있었지만, 로그인을 할 때 사용한다 정도로만 알고 있었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110233686-e0d03580-7f68-11eb-8721-07699d334efc.png&#34; alt=&#34;Screen Shot 2021-03-07 at 5 16 14 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;과제를 제출하기 전에, 내가 사용하는 라이브러리에 대해서 최소한의 조사를 하고 PR을 하자는 목표를 가지고 조사를 하게 되었다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;RFC&lt;/code&gt; 문서까지 읽고 공부를 했으면 더 좋았을 것 같다. 따라서 투두 리스트에 넣어두고 시간이 되는대로 읽고 정리하도록 해야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;커뮤니케이션&#34;&gt;커뮤니케이션&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;적극적으로 내가 어떤 일을 어디까지 진행했고, 어떤 일을 하려고 하는지 이야기 하였다. 일부러 조금 오버해서 &lt;code&gt;TMI&lt;/code&gt; 일정도로 동료들에게 내가 하고있는 일을 이야기했다.&lt;/li&gt;
+&lt;li&gt;동료들이 알아주는 것 같아서 기뻣다.&lt;/li&gt;
+&lt;li&gt;하지만, 말하다보니 생각이 완전히 정리되지 않을 때가 많다고 느꼈다.&lt;/li&gt;
+&lt;li&gt;따라서 이야기를 하기 전에 미리 할 이야기를 정리하고 얘기를 하도록 해야겠다.&lt;/li&gt;
+&lt;li&gt;회사에서 일을 잘 하려면 소프트 스킬이 중요하다는 사실을 깨닫게 되었다.&lt;/li&gt;
+&lt;li&gt;회사를 다니기 전에는 커뮤니케이션 능력의 중요성에 대해서 간과하고 있었다.&lt;/li&gt;
+&lt;li&gt;따라서 소프트 스킬 능력을 키우기 위해서 많이 노력해야겠다.&lt;/li&gt;
+&lt;li&gt;개발자 뿐만 아니라, 업무와 연관된 모든 사람들에게 내가 여태까지 어떤일을 진행하고 있고 현재 어떤 업무를 하고 있는지 적극적으로 알려야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;고쳐야-할점&#34;&gt;고쳐야 할점&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;내가 발견한 사실 및 해결책이 나올 것 같을 때, 흥분해서 성급하게 짐작해서 말하는 습관이 있다. 이를 고치도록 해야겠다. 예를 들어서 비슷한 예외가 많이 발생하여 이번에도 이 예외가 발생하고 있다고 말했는데 다시 확인해보니 아니였다.&lt;/li&gt;
+&lt;li&gt;이때의 부끄러운 기억을 간직하고 다시는 같은 실수를 반복하지말고 때로는 시간이 조금 걸리더라도 정확하게 확인하는 습관을 들이자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;잘한-점&#34;&gt;잘한 점&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;이슈를 진행하면서 내가 모르는 옵션이나, 기능이 나올 때 공식문서를 찾아보고 있다.&lt;/li&gt;
+&lt;li&gt;최근에는 &lt;code&gt;groupby&lt;/code&gt; 함수를 사용할 일이 있었는데, 공식 문서를 보지 않고 사용했으면 버그를 발생시킬 수 있는 일이 있었다. 왜냐하면 파이썬의 &lt;code&gt;groupby&lt;/code&gt; 함수는 SQL 문과 달리 사용하기전에 키로 한번 정렬을 해주어야 하기 때문이다. 아마도 문서를 읽어보지 않았더라면 버그가 발생했을 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;라인-신입-개발자-채용이라는-글을-읽고-느낀점&#34;&gt;라인 신입 개발자 채용이라는 글을 읽고 느낀점&amp;hellip;&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;라인 신입 개발자 채용이라는 기술 블로그에 있는 글을 읽고 정리를 했다. &lt;a href=&#34;https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/&#34;&gt;라인 개발자 입사기를 읽고 느낀점&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;코딩 테스트를 준비는 꾸준히 해야겠다는 생각을 했다.&lt;/li&gt;
+&lt;li&gt;이번 기회에 운영체제, 자료구조, 네트워크, 데이터베이스와 같은 컴퓨터공학 기초 지식들을 블로그에 틈틈히 정리를 해야겠다.&lt;/li&gt;
+&lt;li&gt;포트폴리오에서는 내가 얼마만큼 알고 있는지보다는, 내가 얼마만큼 고민 했다는 것을 어필하라고 했다.&lt;/li&gt;
+&lt;li&gt;프로젝트를 할 때, 문제 발생 - 문제 원인 파악 - 해결책 적용 - 결과 라는 절차를 두고 프로젝트 문제 과정을 서술했다고 했고 좋은 방법인것 같다.&lt;/li&gt;
+&lt;li&gt;코드숨에서 이제 곧 프로젝트를 할 텐데, 이러한 점을 놓치지 않아야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;오랜만에-주고-받았던-메일을-보면서-많은-것을-느낄-수-있었다&#34;&gt;오랜만에 주고 받았던 메일을 보면서 많은 것을 느낄 수 있었다.&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/&#34;&gt;DBMS를 분석하는 방법&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;회사 코드를 작성하면서 내가 코드 레벨부터 확인하려는 습관이 있는데 시간이 오래걸리고 놓친 부분이 많아서 코드를 수정하는 일이 많았는데, 이를 고치도록 해야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;회사-코드에-클래스-주석-메서드-주석을-적고-있다&#34;&gt;회사 코드에, 클래스 주석, 메서드 주석을 적고 있다.&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;코드숨 과제를 하면서 자신감이 생겨서 클래스 주석 및 메서드 주석을 회사 코드에 작성하였다.&lt;/li&gt;
+&lt;li&gt;다만, DRY 원칙에 어긋나지 않고 제대로 작성을 하기 위해서 노력해야겠다.&lt;/li&gt;
+&lt;li&gt;더 나아가서, 중복된 코드를 제거하고 테스트 코드까지 작성할 수 있도록 해야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;코드숨&#34;&gt;코드숨&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;이번주에는 딴짓도 많이 하고(블로그에 쓰고 싶은 글이 많아 손이 근질근질 해서 블로그에 글을 많이 작성했다.) 시간도 부족해서 강의에 집중하지 못했다.&lt;/li&gt;
+&lt;li&gt;게다가 회사 세미나 과제를 부랴부랴 하느라 시간이 부족했다.&lt;/li&gt;
+&lt;li&gt;이번주에는 많이 부족했지만 리프레시 했다고 생각하고 다음주에는 열심히 과제를 해야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
     </item>
     
   </channel>

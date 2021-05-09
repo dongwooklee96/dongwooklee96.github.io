@@ -2,20 +2,395 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>REST on 개발자 이동욱</title>
-    <link>/tags/rest/</link>
+    <link>https://dongwooklee96.github.io/tags/rest/</link>
     <description>Recent content in REST on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Mar 2021 17:20:39 +0900</lastBuildDate><atom:link href="/tags/rest/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Mar 2021 17:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/rest/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>REST 및 베스트 프랙티스</title>
-      <link>/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</link>
       <pubDate>Sat, 27 Mar 2021 17:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</guid>
-      <description>REST    REST는 웹의 창시자 중의 한 사람인 로이 필딩이 2000년에 발표한 논문에 의해서 처음 소개되었다.
-  현대의 아키텍처가 웹의 장점을 잘 활용하지 못하고 있다고 판단했기 때문에 웹의 장점을 최대한 활용할 수 있는 네트워크 기반의 아키텍처를 소개했는데 그것이바로 Representational Safe Transfer(REST) 이다.
-  REST는 근래에 들어 HTTP와 JSON을 함께 사용하여 OPEN API를 구현하는 방법으로 주류를 이루고 있으며, 대부분의 OPEN API는 이 REST 아키텍처를 기반으로 설계 및 구현되고 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</guid>
+      <description>&lt;h3 id=&#34;rest&#34;&gt;REST&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt;는 웹의 창시자 중의 한 사람인 로이 필딩이 2000년에 발표한 논문에 의해서 처음 소개되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현대의 아키텍처가 웹의 장점을 잘 활용하지 못하고 있다고 판단했기 때문에 웹의 장점을 최대한 활용할 수 있는 네트워크 기반의 아키텍처를 소개했는데 그것이바로 &lt;code&gt;Representational Safe Transfer(REST)&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt;는 근래에 들어 &lt;code&gt;HTTP&lt;/code&gt;와 &lt;code&gt;JSON&lt;/code&gt;을 함께 사용하여 OPEN API를 구현하는 방법으로 주류를 이루고 있으며, 대부분의 &lt;code&gt;OPEN API&lt;/code&gt;는 이 &lt;code&gt;REST&lt;/code&gt; 아키텍처를 기반으로 설계 및 구현되고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest의-기본&#34;&gt;REST의 기본&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;REST는 크게 리소스, 메서드, 메시지의 3가지 요소로 구성된다.&lt;/li&gt;
+&lt;li&gt;예를 들어서, &amp;ldquo;이름이 Terry인 사용자를 생성했을 때&amp;rdquo; 사용자는 생성되는 리소스, 생성한다라는 행위는 메서드 그리고, 이름이 &lt;code&gt;Terry&lt;/code&gt;는 메시지가 된다.&lt;/li&gt;
+&lt;li&gt;이를 REST로 표현해보면 다음과 같은 형태가 된다, &amp;lsquo;생성한다&amp;rsquo;라는 의미가 있는 메서드는 &lt;code&gt;HTTP&lt;/code&gt; &lt;code&gt;POST&lt;/code&gt;가 되고, 생성하고자 하는 대상이 되는 사용자라는 리소스는 &lt;code&gt;http://myweb/users&lt;/code&gt;라는 형태의 URI로 표현되며, 생성하고자 하는 사용자의 구체적인 내용은 &lt;code&gt;JSON&lt;/code&gt; 문서를 이용하여 표현된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;HTTP POST, http://myweb/users/
+{
+  &amp;quot;users&amp;quot;: {
+    &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;http-메서드&#34;&gt;HTTP 메서드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;행위에 대한 메서드는 HTTP 메서드를 그대로 사용한다.&lt;/li&gt;
+&lt;li&gt;HTTP에는 여러가지 메서드가 있지만, &lt;code&gt;REST&lt;/code&gt;에서는 &lt;code&gt;CRUD(CREATE, READ, UPDATE, DELETE)&lt;/code&gt;에 해당하는 4가지의 메서드만 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112715716-53f41880-8f25-11eb-96a0-52dc9613dc36.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;멱등성은 여러 번 수행해도 결과가 같은 경우를 의미한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;POST&lt;/code&gt; 연산은 리소스를 추가하는 연산이기 때문에, 멱등성을 성립하지 않지만, 나머지 &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;PUT&lt;/code&gt;, &lt;code&gt;DELETE&lt;/code&gt;는 반복수행하더라도, 멱등하다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET&lt;/code&gt;의 경우 게시물의 조회 카운트를 늘려준다거나 하는 기능을 같이 수행했을 때는 멱등하지 않은 메서드로 정의해야 한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;REST&lt;/code&gt;는 개별 &lt;code&gt;API&lt;/code&gt;를 상태 없이 수행하게 된다, 따라서 해당 &lt;code&gt;REST&lt;/code&gt; API를 다른 API와 함께 호출하다가 실패했을 때 트랜잭션 복구를 위해서 다시 실행해야하는 경우가 있는데, 멱등하지 않은 메서드의 경우에는 기존 상태를 저장했다가 다시 원상 복구시켜줘야 하는 경우가 있지만, 멱등한 메서드의 경우에는 반복적으로 다시 메서드를 수행하면 된다.&lt;/li&gt;
+&lt;li&gt;멱등성을 충족하지 않는 메서드에 대해서는 트랜잭션에 대한 처리에 주의가 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest의-리소스&#34;&gt;REST의 리소스&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt;는 리소스 지향 아키텍처 스타일이라는 정의 답게 모든 것을 리소스, 즉 명사로 표현하며, 각 세부 리소스에는 &lt;code&gt;ID&lt;/code&gt;를 붙인다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리소스가 명사의 형태를 띄우다 보니 명령 성격의 API를 정의하는데 혼동이 올 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;동사형을 명사형으로 바꿔서 적용해보면 리소스 형태로 표현하기가 조금 더 수월해진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest-api의-간단한-예제&#34;&gt;REST API의 간단한 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;사용자 생성&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HTTP POST, http://myweb/users/
+{
+  &amp;quot;name&amp;quot;:&amp;quot;terry&amp;quot;,
+  &amp;quot;address&amp;quot;:&amp;quot;seoul&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;조회&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HTTP GET, http://myweb/users/terry
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;업데이트&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HTTP PUT, http://myweb/users/terry 
+{
+  &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;,
+  &amp;quot;address&amp;quot;: &amp;quot;suwon&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;삭제&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HTTP DELETE, http://myweb/users/terry
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;상당히 간단하다, 단순하게 리소스를 URI로 정해주고, 거기에 HTTP 메서드를 이용해서 CRUD를 구현하고 메세지를 &lt;code&gt;JSON&lt;/code&gt;으로 표현하여 &lt;code&gt;HTTP&lt;/code&gt; 바디에 실어서 보내면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;POST&lt;/code&gt; 에 리소스 ID가 없다는 것을 빼면 크게 신경쓸 부분이 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest의-특성&#34;&gt;REST의 특성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;유니폼-인터페이스uniform-interface&#34;&gt;유니폼 인터페이스(Uniform Interface)&lt;/h4&gt;
+&lt;p&gt;REST는 HTTP 표준에만 따른다면 어떤 기술이든지 사용할 수 있는 인터페이스 스타일이다. 예를 들어, HTTP + JSON으로 REST APII를 정의했다면, 안드로이드 플랫폼이건 IOS 플랫폼이건 특정 언어나 기술에 종속받지 않고, HTTP와 JSON을 모든 플랫폼에서 사용할 수 있는 느슨한 결합이다.&lt;/p&gt;
+&lt;h4 id=&#34;무상태성스테이트리스stateless&#34;&gt;무상태성/스테이트리스(Stateless)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt;는 Representational State Transfer의 약어로 Stateless(상태를 유지하지 않음)란ㄴ 특징을 가진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상태가 있다 없다는 사용자나 클라이언트의 컨텍스트를 서버에 유지하지 않는다는 의미로, 쉽게 표현하면 HTTP 세션과 같은 컨텍스트 저장소에 상태 정보를 저장하지 않는 형태를 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상태 정보를 저장하지 않으면 각 API 서버는 들어오는 요청만을 들어오는 메시지로 처리하면 되며, 세션과 같은 컨텍스트 정보를 신경쓸 필요가 없으므로 구현이 단순해진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;캐시-가능cacheable&#34;&gt;캐시 가능(Cacheable)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;REST의 큰 특징 중에 하나는 HTTP라는 기존의 웹 표준을 그대로 사용하기 때문에, 웹에서 사용하는 기존의 인프라를 그대로 활용할 수 있다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP 프로토콜 기반의 로드 밸런서나 SSL은 물론이고, HTTP가 가진 가장 강력한 기능중에 하나인 캐싱 기능을 적용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일반적인 서비스 시스템에서 &lt;code&gt;60%&lt;/code&gt;에서 많게는 &lt;code&gt;80%&lt;/code&gt; 가량의 트랜잭션이 &lt;code&gt;SELECT&lt;/code&gt;와 같은 조회성 트랜잭션인 것을 고려하면, &lt;code&gt;HTTP&lt;/code&gt;의 리소스들은 웹 캐시 서버 등에 캐싱하는 것은 용량이나 성능 면에서 많은 장점이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현재 HTTP 프로토콜 표준에서 사용하는 &lt;code&gt;Last-Modified&lt;/code&gt; 태그나 &lt;code&gt;E-Tag&lt;/code&gt;를 이용하면 캐싱을 구현할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다음과 같이 클라이언트가 HTTP GET을 &lt;code&gt;Last-Modified&lt;/code&gt; 값과 함께 보냈을 때 콘텐츠에 변화가 없으면 &lt;code&gt;REST&lt;/code&gt; 컴포넌트는 &lt;code&gt;304 Not Modified&lt;/code&gt;를 반환하며 클라이언트는 자체 캐시에 저장된 값을 사용하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112716331-0d082200-8f29-11eb-95d1-21b0a40accbe.png&#34; alt=&#34;267E914554241E6512&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이렇게 캐시를 사용하게 되면 네트워크 응답 시간뿐만 아니라, &lt;code&gt;REST&lt;/code&gt; 컴포넌트가 위치한 서버에 트랜잭션을 발생시키지 않기 때문에 전체 응답 시간과 성능 그리고 자원 사용률을 비약적으로 향상시킬 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;자체-표현-구조self-descriptiveness&#34;&gt;자체 표현 구조(Self-descriptiveness)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;REST의 가장 큰 특징중의 하나는 REST API 자체가 쉬워서 API 메시지만 보고도 이를 이해할 수 있는 자체 표현 구조로 되어 있다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리소스와 메서드를 이용해서, 어떤 메서드에 무슨 행위를 하는지 알 수 있으며, 또한 메시지 포맷 역시 JSON을 이용해서 직관적으로 이해할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대부분의 REST 기반 Open API가 API 문서를 제공하고는 있지만, 디자인 사상은 최소한의 문서의 도움만으로 API 자체를 이해할 수 있어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;클라이언트-서버-구조client-server&#34;&gt;클라이언트 서버 구조(Client-Server)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;REST 서버는 API를 제공하고 제공된 API를 이용해서 비즈니스 로직 처리 및 저장을 책임 진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 각자의 역할이 확실하게 구분되면서 개발 관점에서 클라이언트와 서버에서 개발해야 할 내용이 명확해지고, 서로의 개발에서 의존성이 줄어들게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;계층형-구조layered-system&#34;&gt;계층형 구조(Layered System)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;클라이언트로서는 REST API 서버만 호출한다. 그러나 서버는 다중 계층으로 이루어질 수 있다.&lt;/li&gt;
+&lt;li&gt;순수 비즈니스 로직을 수행하는 &lt;code&gt;API&lt;/code&gt; 서버와 그 앞단에 사용자 인증(Authentication), 암호화(SSL), 로드 밸런싱을 하는 계층을 추가해서 구조상의 유연성을 둘 수 있다.&lt;/li&gt;
+&lt;li&gt;이는 마이크로서비스의 API GATEWAY나 간단한 기능은 리버스 프록시를 이용해서 구현하는 경우가 많다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest-안티-패턴&#34;&gt;REST 안티 패턴&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;다음은 REST API를 디자인할 때 하지 말아야 할 것들이다.&lt;/p&gt;
+&lt;h4 id=&#34;getpost를-이용한-터널링&#34;&gt;GET/POST를 이용한 터널링&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;가장 나쁜 디자인 중에 하나가 &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;POST&lt;/code&gt;를 이용한 터널링이다. 메서드의 실제 동작은 리소스를 업데이트 하는 내용인데, HTTP PUT을 사용하지 않고, GET에 쿼리 파라미터로 이 메서드가 수정 메서드임을 표시하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대단히 안좋은 디자인인데, &lt;code&gt;HTTP&lt;/code&gt; 메서드 사상을 따르지 않았기 때문에 REST라고 부를 수 없고, 또한 웹 캐시 인프라도 사용할 수 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 많이 사용하는 안좋은 예는 &lt;code&gt;POST&lt;/code&gt;를 이용한 터널링이다. 생성 요청이 아닌데도 바디에 명령을 넘겨서 호출하는 방식인데 좋지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;HTTP POST, http://myweb/users/
+{
+  &amp;quot;getuser&amp;quot;: {
+    &amp;quot;id&amp;quot;: &amp;quot;terry&amp;quot;,
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;self-descriptiveness-속성을-사용하지-않음&#34;&gt;Self-descriptiveness 속성을 사용하지 않음&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;REST의 특성 중 하나는 자체 표현 구조로, REST URI와 메서드, 그리고 정의된 메시지 포맷에 의해서 쉽게 API를 이해할 수 있는 기능이 되어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특히나 자체 표현 구조를 갉아 먹는 가장 대표적인 사례가 앞서 언급한 &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;POST&lt;/code&gt;를 이용한 터널링이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;http-응답-코드를-사용하지-않음&#34;&gt;HTTP 응답 코드를 사용하지 않음&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;다음으로 많이 하는 실수가 HTTP 응답 코드를 충실하게 따르지 않고, 성공은 200, 실패는 500 같이 1 ~ 2개의 HTTP 응답 코드만 사용하는 경우이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;심한 경우에는 에러도 &lt;code&gt;200&lt;/code&gt; 응답 코드와 함께 보내는 경우인데, 이는 &lt;code&gt;REST&lt;/code&gt; 디자인 사상에도 어긋남은 물론이고 자기 표현 구조에도 어긋난다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest-api-디자인-가이드&#34;&gt;REST API 디자인 가이드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;단순하고-직관적으로-만들어라&#34;&gt;단순하고 직관적으로 만들어라&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;URI에 리소스명은 동사보다는 명사를 사용하라.&lt;/li&gt;
+&lt;li&gt;REST API는 리소스에 대해서, 행동을 정의하는 형태를 사용한다.&lt;/li&gt;
+&lt;li&gt;예를 들어서, &lt;code&gt;/dogs&lt;/code&gt;는 리소스를 생성하라는 의미고, URL은 HTTP 메서드에 의해서 CRUD(생성, 수정, 수정, 삭제)의 대상이 되는 개체(명사)라야 한다.&lt;/li&gt;
+&lt;li&gt;그리고 될 수 있으면 단수형 명사보다는 복수형 명사를 사용하는 것이 의미상 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;리소스-간의-관계를-표현하는-방법&#34;&gt;리소스 간의 관계를 표현하는 방법&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;REST 리소스 간에는 연관 관계가 있을 수 있다.&lt;/li&gt;
+&lt;li&gt;예를 들어서 사용자가 소유한 디바이스 목록이나, 사용자가 가진 강아지들이 예가 될 수 있다.&lt;/li&gt;
+&lt;li&gt;사용자 - 디바이스 또는 사용자 - 강아지 등 각각의 리소스 간의 관계를 표현하는 방법에는 여러가지가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;1. 서브 리소스로 표현하는 방법
+/&amp;quot;리소스명&amp;quot;/&amp;quot;리소스 아이디&amp;quot;/&amp;quot;관계가 있는 다른 리소스명&amp;quot;
+HTTP GET, /users/{userId}/devices
+예) /users/1/devices
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;2. 서브 리소스에 관계를 명시하는 방법
+HTTP GET, /users/{userid}/likes/devices
+예) /uesrs/1/likes/devices
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;에러-처리&#34;&gt;에러 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;에러 처리의 기본은 &lt;code&gt;HTTP&lt;/code&gt; 응답 코드를 사용한 후 응답 바디(&lt;code&gt;Response Body&lt;/code&gt;)에 에러에 대한 자세한 내용을 서술하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대표적인 &lt;code&gt;API&lt;/code&gt; 서비스들이 어떤 응답 코드를 사용하는지를 살펴보면 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;구글 : &lt;code&gt;200, 201, 304, 400, 401, 403, 404, 409, 410, 500&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;넷플릭스 : &lt;code&gt;200, 201, 304, 400, 403, 404, 412, 500&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여러 개의 응답 코드를 사용하면 명시적이긴 하지만, 코드 체계 관리가 복잡해져서 다음과 같이 몇 가지 응답 코드만 사용하는 것을 권장한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;200 - 성공
+400 Bad Request - field validation 실패 시
+401 Unauthorized - API 인증, 인가 실패
+404 Not Found - 해당 리소스가 없음
+500 Internal Server Error - 서버 에러
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;에러에는 에러 내용에 대한 구체적인 내용을 HTTP 바디에 정의해서 상세한 에러의 원인을 전달하는 것이 디버깅에 유리하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Twillo&lt;/code&gt;의 에러 메시지 형식은 다음과 같은데, 에러 코드 번호와 이 번호에 대한, &lt;code&gt;Error dictionary link&lt;/code&gt;를 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;개발자나 트러블 슈팅하는 사람에게 많은 정보를 제공해서 디버깅을 손쉽게 해주는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;에러 발생시에 스택 정보를 포함시킬 수 있지만, 이는 대단히 위험한 일이다. 내부적인 코드 구조와 프레임워크 구조를 외부에 노출함으로써, 해커들에게 해킹을 할 수 있는 정보를 제공해주기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일반적인 서비스 구조에서는 이를 제공하지 않는 것이 일반적이지만 내부 개발중이거나 서비스 개발할 때는 매우 유용하다. 따라서 API 서비스를 개발할 때 프로덕션과 데브 환경을 분리해서 개발하면 디버깅에 매우 유용하게 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;api-버전-관리&#34;&gt;API 버전 관리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;API 정의에서 중요한 것은 버전 관리이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이미 배포된 API 경우에는 계속해서 서비스를 제공하면서 새로운 기능이 들어간 API를 배포할 때는 하위 호환성을 보장하면서 서비스를 제공해야하기 때문에, 같은 &lt;code&gt;API&lt;/code&gt;라도 버전에 따라서는 다른 기능을 제공하도록 하는 것이 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API 버전을 정의하는 방법에는 여러가지가 있는데, 다음과 같은 형태를 추천한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;{servicename}/{version}/{REST URL}
+예) api.server.com/account/v2.0/groups
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이는 서비스의 배포 모델과 관계가 있는데, 자바 애플리케이션의 경우 &lt;code&gt;account.v1.0.war&lt;/code&gt;, &lt;code&gt;account.v2.0.war&lt;/code&gt;와 같이 다른 &lt;code&gt;war&lt;/code&gt;로 각각 배포하여 버전별로 배포 바이너리를 관리할 수 있고, 앞단에 서비스명을 별도로 &lt;code&gt;URL&lt;/code&gt;로 떼어 놓은 것은 서비스가 확장되었을 때, &lt;code&gt;account&lt;/code&gt; 서비스만 별도의 서버로 분리해서 배포하는 경우를 대비하기 위함이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;페이징&#34;&gt;페이징&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;큰 사이즈의 리스트 형태의 응답을 처리하려면 페이징 처리와 부분 응답(Partial Response) 처리가 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반환되는 리스트가 &lt;code&gt;100,000,000&lt;/code&gt; 개인데, 이를 하나의 HTTP 응답으로  처리하는 것은 서버 성능, 네트워크 비용도 문제지만, 무엇보다 비현실적이다. 그래서 페이징을 고려하는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페이징을 처리하려면 여러가지 디자인이 있다. 예를 들어서 100번째부터 125번째 레코드까지 받는 API를 정의하면 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;페이스북 API 스타일 : &lt;code&gt;/record?offset=100&amp;amp;limit=25&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;트위터 API 스타일 : &lt;code&gt;/record?page=5&amp;amp;rpp=25&lt;/code&gt; (RPP는 Record Per Page)로 페이지 당 레코드 수로 RPP=25이면 페이지 5는 100~125가 된다.&lt;/li&gt;
+&lt;li&gt;링크드인 API 스타일 : &lt;code&gt;/record?start=50&amp;amp;count=25&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;부분-응답-처리&#34;&gt;부분 응답 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;리소스에 대한 응답 메시지에 대해서 굳이 모든 필드를 포함할 필요는 없다.&lt;/li&gt;
+&lt;li&gt;예를 들어서 페이스북 피드에는 사용자 ID, 이름, 글, 내용, 날짜, 좋아요, 카운트, 댓글, 사용자 사진 등 여러가지 정보를 갖는데, API를 요청하는 클라이언트의 용도에 따라서 선별적으로 몇 가지 필드만이 필요할 수 있다.&lt;/li&gt;
+&lt;li&gt;필드를 제한하는 것은 전체 응답의 양을 줄여서 네트워크 대역폭 (특히 모바일에서) 절약할 수 있고, 응답 메시지를 간소화하여 파싱 등을 간략화 할 수 있다.&lt;/li&gt;
+&lt;li&gt;이러한 부분 응답 기능을 제공하는 주요 서비스를 보면 다음과 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;링크드인 : /people:(id, first-name, last-name, industry)
+페이스북 : /terry/friends?fields=id, name
+구글 : ?fields=title, media:group(media:thumnail)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;검색-전역-검색과-지역-검색&#34;&gt;검색 (전역 검색과 지역 검색)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;검색은 &lt;code&gt;HTTP&lt;/code&gt; GET에서 쿼리 스트링 검색 조건을 정의하는 경우가 일반적인데, 이 경우 검색 조건이 다른 쿼리 스트링이랑 섞여 버릴 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어, &lt;code&gt;name=lee&lt;/code&gt; 이고 &lt;code&gt;region=seoul&lt;/code&gt;인 사용자를 검색하는 검색을 쿼리 스트링만 사용하게 되면 다음과 같이 표현할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;/users?name=lee&amp;amp;region=seoul
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;추가적으로 페이징 처리를 추가하면 다음과 같이 된다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/users?name=cho&amp;amp;region=seoul&amp;amp;offset=20&amp;amp;limit=10
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;페이징 처리에 의해서 정의된 offset과 limit 가 검색조건인지 페이징 조건인지 잘 분간이 가지 않으므로 따라서 쿼리 조건은 하나의 쿼리 스트링으로 정의하는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;/user?q=name=lee, region=seoul&amp;amp;offset=20&amp;amp;limit=10
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이런식으로 구분자를 사용하면, 검색 조건은 다른 쿼리스트링과 분리된다.&lt;/li&gt;
+&lt;li&gt;물론 이 검색 조건은 서버에 의해서 토큰 단위로 파싱 되어야 한다.&lt;/li&gt;
+&lt;li&gt;다음으로는 검색 범위에 대해서 고민할 필요가 있는데, 전역 검색은 전체 리소스에 대한 검색을, 리소스에 대한 검색은 특정 리소스에 대한 검색을 정의한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;예를 들어서 특정 리소스 안에 대한 검색은 다음과 같이 리소스명에 쿼리 조건을 붙이는 식으로 표현할 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/users?q=id=seoul
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;전역 검색은 다음과 같은 식으로 정의할 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/search?q=id=lee
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;hateoas를-이용한-처리&#34;&gt;HATEOAS를 이용한 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;HATEOS는 &lt;code&gt;Hypermedia as the engine of application data&lt;/code&gt;의 약자로 하이퍼미디어의 특징을 이용하여, &lt;code&gt;HTTP&lt;/code&gt; 응답에 다음 액션이나 관계된 리소스에 대한 &lt;code&gt;HTTP&lt;/code&gt; 링크를 함께 반환하는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;{
+  [
+    {
+      &amp;quot;id&amp;quot;: &amp;quot;user1&amp;quot;,
+      &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;
+    },
+    {
+      &amp;quot;id&amp;quot;: &amp;quot;user2&amp;quot;,
+      &amp;quot;name&amp;quot;: &amp;quot;carry&amp;quot;
+    }
+  ],
+  &amp;quot;links&amp;quot;: [
+    {
+      &amp;quot;rel&amp;quot;: &amp;quot;pre_page&amp;quot;,
+      &amp;quot;href&amp;quot;: &amp;quot;http://xxx/users?offset=6&amp;amp;limit=5&amp;quot;
+    },
+    {
+      &amp;quot;rel&amp;quot;: &amp;quot;next_page&amp;quot;,
+      &amp;quot;href&amp;quot;: &amp;quot;http://xxx/users?offset=11&amp;amp;limit=5&amp;quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;페이징 처리의 경우 반환 시 페이지에 대한 링크를 제공하거나, 위와 같이 표현하거나 연관된 리소스에 대한 디테일한 링크를 표시하는 것에 이용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;HATEOAS&lt;/code&gt;를 API에 적용하게 되면, 자체 표현 구조 특성이 증대되어 API에 대한 가독성이 증가하는 장점을 가지고 있는데 반해서, 응답 메시지가 다른 리소스 &lt;code&gt;URI&lt;/code&gt;에 대한 의존성을 가지기 때문에 구현이 다소 까다롭다는 단점이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;단일-api-엔드-포인트-활용&#34;&gt;단일 API 엔드 포인트 활용&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;API 서버가 물리적으로 분리된 여러 개의 서버에서 작동하고 있을 때, &lt;code&gt;user.apiserver.com&lt;/code&gt;, &lt;code&gt;car.apiserver.com&lt;/code&gt;과 같이 API 서버마다 URL이 분리되어 있으면 개발자가 사용하기 불편하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;매번 다른 서버로 연결해야 하거나와 중간에 방화벽이라도 있으면 일일히 이를 해제해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;API&lt;/code&gt; 서비스는 물리적으로 서버가 분리되어 있더라도 단일 URL을 사용하는 것이 좋은데, 방법은 &lt;code&gt;HAProxy&lt;/code&gt;와 &lt;code&gt;Reverse Proxy&lt;/code&gt;를 사용하는 방법이 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;api.apiserver.com/user/&lt;/code&gt;는 user.apiserver.com으로 라우팅하고&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;api.apiserver.com/car/&lt;/code&gt;는 car.apiserver.com으로 라우팅하도록 구현하면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 할 경우 향후 뒷단에 API 서버 들이 확장되도라도 &lt;code&gt;API&lt;/code&gt;를 사용하는 클라이언트로서는 단일 엔드포인트를 보면 되고, 관리 관점에서도 단일 엔드 포인트를 통해서 부하 분산 및 로그를 통해서 감사(Audit)을 할 수 있기 때문에 편리하며, API에 대한 라우팅을 Reverse Proxy를 이용해서 함으로써 조금 더 유연한 운영이 가능하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=54438883&#34;&gt;대용량 아키텍처와 성능 튜닝&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

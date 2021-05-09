@@ -2,165 +2,1191 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>네트워크 on 개발자 이동욱</title>
-    <link>/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/</link>
+    <link>https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/</link>
     <description>Recent content in 네트워크 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 28 Apr 2021 00:12:39 +0900</lastBuildDate><atom:link href="/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Apr 2021 00:12:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>리눅스 네트워크 도구 (테스트, 추적, 모니터링 명령어)</title>
-      <link>/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</link>
       <pubDate>Wed, 28 Apr 2021 00:12:39 +0900</pubDate>
       
-      <guid>/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</guid>
-      <description>hping3  hping3 -S www.daum.net -p 80   TCP/UDP, ICMP 및 다양한 종류의 패킷을 전송할 수 있다.
-  좀 더 빠른 주기로 패킷을 보내고 싶다면 --fast 옵션을 줄 수 있다.
-  iptables   이 명령어는 특정 IP 주소의 요청을 막을 수 있는 명령이다.  # localhost의 UDP 요청을 차단하는 규칙을 추가하였다. iptables -I OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP # iptables 설정을 확인해본다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</guid>
+      <description>&lt;h3 id=&#34;hping3&#34;&gt;hping3&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;hping3 -S www.daum.net -p 80
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TCP/UDP, ICMP 및 다양한 종류의 패킷을 전송할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;좀 더 빠른 주기로 패킷을 보내고 싶다면 &lt;code&gt;--fast&lt;/code&gt; 옵션을 줄 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;iptables&#34;&gt;iptables&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;이 명령어는 특정 IP 주소의 요청을 막을 수 있는 명령이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;# localhost의 UDP 요청을 차단하는 규칙을 추가하였다.
+iptables -I OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP
+
+# iptables 설정을 확인해본다.
+iptables -L -n
+
+# 다른 터미널에서 실제 요청을 보내보지만 응답이 오지 않는다.
+hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
+
+# 위의 설정을 삭제한다.
+iptables -D OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP
+
+iptables -L -n
+
+# 요청이 정상적으로 보내짐을 확인할 수 있다.
+
+hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;iptables&lt;/code&gt; 도구를 사용하는 것은 내부적으로 커널의 기능을 사용하는 것이고, 리눅스 커널 안에 넷 필터(&lt;code&gt;NET FILTER&lt;/code&gt;) 라는 기능을 이용하여 구현하고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;설정이 늘어날수록 점점 느려진다는 단점이 있어서, 요즘에는 &lt;code&gt;BPF&lt;/code&gt;라는 툴을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;nslookup&#34;&gt;nslookup&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;도메인 이름을 IP 주소로 변환해주는 명령어이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116270076-bd33a980-a7b9-11eb-83fc-a8ffaef46022.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 36 08 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이와 비슷한 도구로 &lt;code&gt;dig&lt;/code&gt; 라는 도구가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116270202-dccad200-a7b9-11eb-9f82-fa515cebecdd.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 36 45 AM&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;nmap&#34;&gt;nmap&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;포트 스캔을 도와주는 툴이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116270489-18fe3280-a7ba-11eb-8d79-95571243f764.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 38 40 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어 및 결과는 &lt;code&gt;localhost&lt;/code&gt;에 열려있는 포트들을 터미널에 출력한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;iftop&#34;&gt;iftop&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 I/O 트래픽 모니터링을 도와주는 툴이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116270960-89a54f00-a7ba-11eb-9c44-38576b8ffebf.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 41 42 AM&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;bmon&#34;&gt;bmon&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116271227-c113fb80-a7ba-11eb-8473-232acc8656c2.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 42 55 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 I/O 트래픽 모니터링을 도와주는 툴이다.&lt;/li&gt;
+&lt;li&gt;특이한 점은 TUI 그래픽으로 보여준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dstat&#34;&gt;dstat&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116271795-47304200-a7bb-11eb-9aea-bbeba62def27.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 47 14 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;테이블 형태로 시스템 정보와 같이 보여준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ss&#34;&gt;ss&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116272077-8fe7fb00-a7bb-11eb-869c-6110b9b5a938.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 49 12 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;다양한 옵션으로 현재 소켓 상태를 확인할 수 있다.&lt;/li&gt;
+&lt;li&gt;소켓의 리시브 큐와 센드 큐를 모니터링 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;netstat&#34;&gt;netstat&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116272413-d76e8700-a7bb-11eb-9726-d953b812550b.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 50 57 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;다양한 옵션으로 현재 소켓 상태를 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>MSS 그리고 MTU (draft)</title>
-      <link>/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</link>
       <pubDate>Tue, 27 Apr 2021 23:44:39 +0900</pubDate>
       
-      <guid>/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</guid>
-      <description>MSS (Maximun Segment Size)   MSS는 TCP 상에서 전송할 수 있는 사용자의 데이터(payload) 크기를 말한다. MSS는 TCP 헤더를 제외한 데이터의 크기이다. MSS는 TCP(L4) 계층에서 데이터의 크기를 말한다. 위의 사진을 보면, TCP 헤더를 제외한 데이터 부분을 MSS라고 말한다.  MTU (Maximun Transmission Unit)   MTU는 네트워크에서 전송 될 수 있는 최대 패킷의 크기를 말한다. MTU는 IP(L3) 계층에서 패킷이라고도 불리운다. MTU에서 IP 헤더와 TCP 헤더를 제외하면 그것이 바로 MSS가 된다. MTU를 패킷이라고 부른다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116261520-b0f81e00-a7b2-11eb-96dd-03ae4f909358.png&#34; alt=&#34;images&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mss-maximun-segment-size&#34;&gt;MSS (Maximun Segment Size)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116262109-3aa7eb80-a7b3-11eb-8648-27d4cdfb5779.png&#34; alt=&#34;Screen Shot 2021-04-27 at 11 48 40 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MSS는 TCP 상에서 전송할 수 있는 사용자의 데이터(&lt;code&gt;payload&lt;/code&gt;) 크기를 말한다.&lt;/li&gt;
+&lt;li&gt;MSS는 TCP 헤더를 제외한 데이터의 크기이다.&lt;/li&gt;
+&lt;li&gt;MSS는 TCP(L4) 계층에서 데이터의 크기를 말한다.&lt;/li&gt;
+&lt;li&gt;위의 사진을 보면, TCP 헤더를 제외한 데이터 부분을 MSS라고 말한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mtu-maximun-transmission-unit&#34;&gt;MTU (Maximun Transmission Unit)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116262489-8bb7df80-a7b3-11eb-8254-7a56a5d13018.png&#34; alt=&#34;Screen Shot 2021-04-27 at 11 51 49 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MTU는 네트워크에서 전송 될 수 있는 최대 패킷의 크기를 말한다.&lt;/li&gt;
+&lt;li&gt;MTU는 IP(L3) 계층에서 패킷이라고도 불리운다.&lt;/li&gt;
+&lt;li&gt;MTU에서 IP 헤더와 TCP 헤더를 제외하면 그것이 바로 MSS가 된다.&lt;/li&gt;
+&lt;li&gt;MTU를 패킷이라고 부른다.&lt;/li&gt;
+&lt;li&gt;참고로 L2는 프레임이라는 용어로 부른다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;설정된-mtu-크기를-확인하는-방법&#34;&gt;설정된 MTU 크기를 확인하는 방법&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116263219-27e1e680-a7b4-11eb-90c7-995a0ef1d0e5.png&#34; alt=&#34;test&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ip link&lt;/code&gt; 라는 명령어를 치면 현재 리눅스 환경에서 설정된 MTU 값을 확인할 수 있다.&lt;/li&gt;
+&lt;li&gt;MTU 값이 1500 BYTES 으로 잡혀 있는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;패킷을-보내고-이를-트레이싱-해보자&#34;&gt;패킷을 보내고 이를 트레이싱 해보자&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;패킷을 보내기 위해서 &lt;code&gt;ping&lt;/code&gt; 이라는 도구를 통해서 구글 DNS 서버 (8.8.8.8)에 요청을 보내보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ping -M do -s 68 8.8.8.8&lt;/code&gt; 이 명령어는 서버에 68 바이트를 보내는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116264144-03d2d500-a7b5-11eb-8d04-05da9a3b3b39.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 02 18 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;사진을 보면 데이터는 68바이트를 보냈지만 실제로는 96 바이트가 전송된 것을 확인할 수 있다. 이유는 데이터에 헤더 부분이 포함되었기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;추가로 &lt;code&gt;ping -M do -s 1500 8.8.8.8&lt;/code&gt; 명령어로 패킷의 최대 크기인 1500 MTU 만큼 데이터를 전송해본다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116264626-6926c600-a7b5-11eb-9487-b472c8c1264a.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 05 06 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;에러가 발생하는 것을 확인해볼 수 있는데, 그 이유는 헤더가 포함되었기 때문이다. 하지만 이 에러는 커널 레벨에서 발생한 것은 아니고 &lt;code&gt;ping&lt;/code&gt; 도구에서 발생시킨 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 확인해보기 위해서, &lt;code&gt;ping&lt;/code&gt; 보다 많은 기능을 지원하는 &lt;code&gt;hping3&lt;/code&gt; 도구를 이용해서 테스트 해보겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sudo tshark -i enp0s3 -f icmp -Y &amp;quot;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 명령어를 이용해서 패킷을 캡처하고 아래 명령어를 다른 터미널에서 입력을 해본다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sudo hping3 -d 2000 --icmp 8.8.8.8
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116265856-61b3ec80-a7b6-11eb-9333-e8b070648840.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 12 05 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같은 결과를 확인해 볼 수 있다. 자세히 살펴보면, 패킷이 정상적으로 전송이 된 것을 확인해볼 수 있지만 서버로 부터 응답이 오지 않는 것을 확인할 수 있다. 이로서 구글 도메인 서버에 요청할 수 있는 최대 패킷 크기는 1500 bytes 라는 것을 확인할 수 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 2000 바이트를 데이터로 전송을 하였는데 MTU는 최대 1500 바이트이다. 따라서 패킷이 쪼개져서 전송되고 있다는 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>TCP 통신과정 추적해보기 (draft)</title>
-      <link>/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</link>
       <pubDate>Tue, 20 Apr 2021 23:51:39 +0900</pubDate>
       
-      <guid>/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</guid>
-      <description>추적 과정  추적하기 전에 클라이언트와 서버 코드를 컴파일 한다.
-client.c
-#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/socket.h&amp;gt; #include &amp;lt;arpa/inet.h&amp;gt; #include &amp;lt;string.h&amp;gt; #include &amp;lt;unistd.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #define MAXLINE 1024 int main(int argc, char **argv) { struct sockaddr_in serveraddr; int server_sockfd; int client_len; char buf[MAXLINE]; if((server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) { perror(&amp;quot;error : &amp;quot;); return 1; } serveraddr.sin_family = AF_INET; serveraddr.sin_addr.s_addr = inet_addr(&amp;quot;127.0.0.1&amp;quot;); serveraddr.sin_port = htons(4000); client_len = sizeof(serveraddr); if(connect(server_sockfd, (struct sockaddr*)&amp;amp;serveraddr, client_len) == -1) { perror(&amp;quot;connect error : &amp;quot;); return 1; } memset(buf, 0x00, MAXLINE); read(0, buf, MAXLINE); if(write(server_sockfd, buf, MAXLINE) &amp;lt;= 0) { perror(&amp;quot;write error : &amp;quot;); return 1; } memset(buf, 0x00, MAXLINE); if(read(server_sockfd, buf, MAXLINE) &amp;lt;= 0) { perror(&amp;quot;read error: &amp;quot;); return 1; } close(server_sockfd); printf(&amp;quot;server:%s\n&amp;quot;, buf); return 0; } server.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</guid>
+      <description>&lt;h3 id=&#34;추적-과정&#34;&gt;추적 과정&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;추적하기 전에 클라이언트와 서버 코드를 컴파일 한다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;client.c&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#define MAXLINE 1024
+
+int main(int argc, char **argv) {
+        struct sockaddr_in serveraddr;
+        int server_sockfd;
+        int client_len;
+        char buf[MAXLINE];
+
+        if((server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+                perror(&amp;quot;error : &amp;quot;);
+                return 1;
+        }
+        serveraddr.sin_family = AF_INET;
+        serveraddr.sin_addr.s_addr = inet_addr(&amp;quot;127.0.0.1&amp;quot;);
+        serveraddr.sin_port = htons(4000);
+
+        client_len = sizeof(serveraddr);
+
+        if(connect(server_sockfd, (struct sockaddr*)&amp;amp;serveraddr, client_len) == -1) {
+                perror(&amp;quot;connect error : &amp;quot;);
+                return 1;
+        }
+        memset(buf, 0x00, MAXLINE);
+        read(0, buf, MAXLINE);
+        if(write(server_sockfd, buf, MAXLINE) &amp;lt;= 0) {
+                perror(&amp;quot;write error : &amp;quot;);
+                return 1;
+        }
+        memset(buf, 0x00, MAXLINE);
+        if(read(server_sockfd, buf, MAXLINE) &amp;lt;= 0) {
+                perror(&amp;quot;read error: &amp;quot;);
+                return 1;
+        }
+        close(server_sockfd);
+        printf(&amp;quot;server:%s\n&amp;quot;, buf);
+        return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;server.c&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+
+#define BUFF_SIZE 1024
+
+int main(void){
+   int server_socket;
+   int client_socket;
+   int client_addr_size;
+   struct sockaddr_in server_addr;
+   struct sockaddr_in client_addr;
+   char buff_rcv[BUFF_SIZE+5];
+   char buff_snd[BUFF_SIZE+5];
+
+   server_socket = socket(PF_INET, SOCK_STREAM, 0);
+   if(-1 == server_socket){
+      printf( &amp;quot;server socket 생성 실패n&amp;quot;);
+      exit( 1);
+   }
+
+   memset(&amp;amp;server_addr, 0, sizeof(server_addr));
+   server_addr.sin_family     = AF_INET;
+   server_addr.sin_port       = htons(4000);
+   server_addr.sin_addr.s_addr= htonl(INADDR_ANY);
+
+   if(-1 == bind(server_socket, (struct sockaddr*)&amp;amp;server_addr, sizeof(server_addr))){
+      printf( &amp;quot;bind() 실행 에러n&amp;quot;);
+      exit(1);
+   }
+
+   while(1){
+      if(-1 == listen(server_socket, 5)){
+         printf( &amp;quot;대기상태 모드 설정 실패n&amp;quot;);
+         exit(1);
+      }
+
+      client_addr_size  = sizeof( client_addr);
+      client_socket     = accept( server_socket, (struct sockaddr*)&amp;amp;client_addr, &amp;amp;client_addr_size);
+
+      if (-1 == client_socket){
+         printf( &amp;quot;클라이언트 연결 수락 실패n&amp;quot;);
+         exit(1);
+      }
+
+      read (client_socket, buff_rcv, BUFF_SIZE);
+      printf(&amp;quot;receive: %s\n&amp;quot;, buff_rcv);
+
+      sprintf(buff_snd, &amp;quot;%ld : %s&amp;quot;, strlen(buff_rcv), buff_rcv);
+      write(client_socket, buff_snd, strlen(buff_snd)+1);          // +1: NULL까지 포함해서 전송
+      close(client_socket);
+   }
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 소스 코드를 복사하여, 파일을 만든다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;gcc -pg -g -o client client.c
+gcc -pg -g -o server server.c
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;그리고 위의 명령어를 통해서 컴파일을 해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;uftrace&#34;&gt;UFTRACE&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115418135-35d3bc80-a234-11eb-898d-50f3f8eb093e.png&#34; alt=&#34;Screen Shot 2021-04-20 at 11 57 42 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 나서는 &lt;a href=&#34;https://github.com/namhyung/uftrace&#34;&gt;ufrace&lt;/a&gt;를 이용하여 함수를 추적할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;UFTACE는 C/C++로 작성된 프로그램의 실행을 추적하고 분석하는 도구이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/namhyung/uftrace&#34;&gt;uftrace&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>TCP 통신에 대해서 알아보자...</title>
-      <link>/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</link>
       <pubDate>Tue, 20 Apr 2021 23:01:39 +0900</pubDate>
       
-      <guid>/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</guid>
-      <description>TCP (Transmission Control Protocol)    TCP는 응용 프로그램이 데이터를 교환할 수 있는 네트워크 대화를 설정하고 유지하는 방법을 정의하는 표준이다.
-  TCP는 IP 네트워크를 통해서 통신하는 호스트에서 실행되는 애플리케이션 간에 신뢰할 수 있고, 순서가 정해져있으며, 오류를 체크하고 전송할 수 있다.
-  월드 와이드 웹, 이메일, 원격 관리, 파일 전송과 같은 주요 인터넷 애플리케이션은 전송 계층의 일부인 TCP에 의존한다.
-  SSL/TLS 또한 TCP 위에서 동작한다.
-  TCP는 인터넷 프로토콜 (IP)과 작동하여 컴퓨터가 서로 데이터 패킷을 보내는 방법을 정의한다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</guid>
+      <description>&lt;h3 id=&#34;tcp-transmission-control-protocol&#34;&gt;TCP (Transmission Control Protocol)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115409556-cf976b80-a22c-11eb-9c4c-c2f61110b0e2.png&#34; alt=&#34;tcp&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TCP는 응용 프로그램이 데이터를 교환할 수 있는 네트워크 대화를 설정하고 유지하는 방법을 정의하는 표준이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TCP는 IP 네트워크를 통해서 통신하는 호스트에서 실행되는 애플리케이션 간에 신뢰할 수 있고, 순서가 정해져있으며, 오류를 체크하고 전송할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;월드 와이드 웹, 이메일, 원격 관리, 파일 전송과 같은 주요 인터넷 애플리케이션은 전송 계층의 일부인 TCP에 의존한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SSL/TLS 또한 TCP 위에서 동작한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TCP는 인터넷 프로토콜 (IP)과 작동하여 컴퓨터가 서로 데이터 패킷을 보내는 방법을 정의한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;연결을-맺는-과정&#34;&gt;연결을 맺는 과정&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115411131-2d788300-a22e-11eb-8557-0eb3e42d1096.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SYN: 클라이언트가 서버에 SYN를 전송한다. 클라이언트는 세그먼트의 시퀀스 번호를 임의의 값으로 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SYN-ACK: 응답으로 서버는 SYN-ACK로 응답을 한다. 수신된 시퀀스 보다 많은 숫자로 설정 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ACK: 마지막으로 클라이언트가 서버에 다시 ACK를 보낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 과정을 통해서 서버와 클라이언트는 연결을 맺으며 &lt;code&gt;3 Way HandShake&lt;/code&gt;라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;직접 확인하기&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo tshark -i enp0s3 -f &amp;quot;tcp port 80&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 명령어를 입력하여 포트 번호 80의 TCP 패킷들을 필터링 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이어서 다른 터미널에서 &lt;code&gt;curl www.google.com&lt;/code&gt; 으로 구글 서버에 요청을 날린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115414010-a2e55300-a230-11eb-8c2d-07636049b212.png&#34; alt=&#34;today&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;정상적으로 연결이 맺어진 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;연결을-끊는-과정&#34;&gt;연결을 끊는 과정&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115411888-d58e4c00-a22e-11eb-82d0-c47393198d7f.png&#34; alt=&#34;520px-TCP_CLOSE svg&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;연결을 종료하는 과정은 &lt;code&gt;4 Way HandShake&lt;/code&gt; 라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;연결이 끊겼음에도 클라이언트에서 &lt;code&gt;TIME WAIT&lt;/code&gt;을 하는 이유는 지연되거나 유실된 패킷이 뒤늦게 전송되는 경우가 있기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;확인해보기&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115414505-0c656180-a231-11eb-98de-cdabc90dba20.png&#34; alt=&#34;4way&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위에서 했던 것과 같이 패킷을 캡처링 했을 때, 실제로 위와 같은 과정으로 커넥션을 끊는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tcp-헤더-구조&#34;&gt;TCP 헤더 구조&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115412590-6bc27200-a22f-11eb-85e4-619fcac22d79.png&#34; alt=&#34;header&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위에서 전송하는 SYN 패킷과 ACK 패킷은 TCP 헤더에서 위치에 해당하는 비트가 켜져서 전송된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tcp-연결이-맺음과-끊어짐에-따른-소켓의-변화&#34;&gt;TCP 연결이 맺음과 끊어짐에 따른 소켓의 변화&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115415800-294e6480-a232-11eb-85f8-ad556e694641.png&#34; alt=&#34;1920px-Tcp_state_diagram_fixed_new svg&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;연결을 맺고 끊을 때마다 소켓의 내부 상태가 변하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클라이언트에서 요청을 보내기 위해서 소켓을 생성할 때 파일 디스크립터가 생성되며 연결을 끊고 싶을 때 파일을 닫게 되며, FIN 패킷을 날리게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115415367-d07ecc00-a231-11eb-86cb-2b5c569c07f1.png&#34; alt=&#34;Screen Shot 2021-04-20 at 11 40 13 PM&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;watch -n0.6 &amp;quot;netstat -atnp&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위는 watch 명령어를 통해서 0.6초마다 netstat의 결과를 모니터링 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고, CURL을 통해서 서버에 요청을 날리면 클라이언트 소캣의 상태를 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&#34;&gt;Transmission Control Protocol&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>DNS란? (draft)</title>
-      <link>/post/2021/04/13/dns%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/dns%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 23:15:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/dns%EB%9E%80-draft/</guid>
-      <description>DNS(Domain Name System)  내가 활용중인 DNS IP 주소 확인하기   위의 명령어를 통해서, 내가 사용하고 있는 DNS 서버의 IP 주소를 알아낼 수 있다.   위에 명령어를 통해서 나온 주소를 구글에 검색하면, 어떤 DNS 서버를 사용하는지 대략적으로 알 수 있다.  DNS 동작과정 추적하기   위와 같은 과정을 통해서, DNS 서버에 요청하고, 도메인 주소를 통해서 IP 정보를 받아오는 것을 확인할 수 있다.  sudo systemd-resolve --flush-caches  DNS 캐시 정보를 지우고 싶다면 위의 명령어를 입력하면 된다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/dns%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;dnsdomain-name-system&#34;&gt;DNS(Domain Name System)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;내가-활용중인-dns-ip-주소-확인하기&#34;&gt;내가 활용중인 DNS IP 주소 확인하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114567743-7bc9d700-9cae-11eb-82f9-9dcf503ef717.png&#34; alt=&#34;dns&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어를 통해서, 내가 사용하고 있는 &lt;code&gt;DNS&lt;/code&gt; 서버의 &lt;code&gt;IP&lt;/code&gt; 주소를 알아낼 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114568053-c4819000-9cae-11eb-8d25-3a8be64a3411.png&#34; alt=&#34;dns-2&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위에 명령어를 통해서 나온 주소를 구글에 검색하면, 어떤 &lt;code&gt;DNS&lt;/code&gt; 서버를 사용하는지 대략적으로 알 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dns-동작과정-추적하기&#34;&gt;DNS 동작과정 추적하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114568459-1b876500-9caf-11eb-8ffb-d43a61af1ffe.png&#34; alt=&#34;dns-1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114568479-1e825580-9caf-11eb-8d1e-4165d8c43077.png&#34; alt=&#34;dns-3&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위와 같은 과정을 통해서, DNS 서버에 요청하고, 도메인 주소를 통해서 &lt;code&gt;IP&lt;/code&gt; 정보를 받아오는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114569074-a4060580-9caf-11eb-9311-dff133504ae0.png&#34; alt=&#34;flush&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemd-resolve --flush-caches
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;DNS 캐시 정보를 지우고 싶다면 위의 명령어를 입력하면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>ARP란? (draft)</title>
-      <link>/post/2021/04/13/arp%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/arp%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 23:01:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/arp%EB%9E%80-draft/</guid>
-      <description>ARP(Address Resolution Protocol)   L2(데이터 링크 계층) 통신 프로토콜이다. IP 네트워크 주소를 데이터 링크 프로토콜에서 사용하는 하드웨어 주소(Mac ADDRESS)에 맵핑하기 위해서 사용하는 프로토콜이다.  arp -n 위의 명령어를 통해서, ARP 테이블을 확인할 수 있다.
-ARP 패킷 추적하기   위의 명령어를 통해서, 패킷 추적을 시작한다. 그리고 MAC 주소를 확인하기 위해서 PING 명령어를 자신의 IP 주소로 보내며, 네트워크 패킷이 호출되는 것을 확인한다.   ffff:ffff:ffff는 목적지 주소를 나타내며, 브로드 캐스트의 의미이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/arp%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;arpaddress-resolution-protocol&#34;&gt;ARP(Address Resolution Protocol)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;L2(데이터 링크 계층) 통신 프로토콜이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IP&lt;/code&gt; 네트워크 주소를 데이터 링크 프로토콜에서 사용하는 하드웨어 주소(Mac ADDRESS)에 맵핑하기 위해서 사용하는 프로토콜이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114565725-84211280-9cac-11eb-9fa7-fef4c8b44361.png&#34; alt=&#34;arp&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;arp -n
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위의 명령어를 통해서, ARP 테이블을 확인할 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;arp-패킷-추적하기&#34;&gt;ARP 패킷 추적하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114566386-2ccf7200-9cad-11eb-8ace-088abe48ea0e.png&#34; alt=&#34;arp-1&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어를 통해서, 패킷 추적을 시작한다. 그리고 MAC 주소를 확인하기 위해서 &lt;code&gt;PING&lt;/code&gt; 명령어를 자신의 IP 주소로 보내며, 네트워크 패킷이 호출되는 것을 확인한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114566398-2fca6280-9cad-11eb-9b7e-13eb549a4a3c.png&#34; alt=&#34;arp-2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114566393-2e993580-9cad-11eb-8886-2ee5ee935ad9.png&#34; alt=&#34;arp-3&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ffff:ffff:ffff는 목적지 주소를 나타내며, 브로드 캐스트의 의미이다. 바로 뒤에오는 주소가 바로 송신지의 주소이며 목적지의 MAC 주소를 나타낸다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114567037-d0b91d80-9cad-11eb-81a4-dc9aea24b583.png&#34; alt=&#34;arp-4&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;MAC&lt;/code&gt; 주소를 확인하면, 나의 &lt;code&gt;MAC&lt;/code&gt; 주소와 일치하는 것을 알 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>ICMP란 (draft)</title>
-      <link>/post/2021/04/13/icmp%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/icmp%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 22:52:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/icmp%EB%9E%80-draft/</guid>
-      <description>ICMP(Internet Control Message Protocol)    L3(네트워크 계층) 통신 프로토콜로서, 라우터를 포함한 네트워크 장치가 다른 IP 주소와 통신을 할 때 성공 또는 실패를 나타내는 오류 메시지 및 운영정보를 보내는데 사용된다.
-  흔히 사용하는 PING 명령어가 ICMP 프로토콜을 사용하고 있다.
-  네트워크 패킷 추적하기 sudo apt-get install tshark  위의 명령어를 입력하여 tshark를 설치한다, 네트워크 패킷 분석을 할 수 있는 툴이다.   위의 명령어를 입력해서, ICMP 패킷을 분석을 시작한다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/icmp%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;icmpinternet-control-message-protocol&#34;&gt;ICMP(Internet Control Message Protocol)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;L3(네트워크 계층) 통신 프로토콜로서, 라우터를 포함한 네트워크 장치가 다른 IP 주소와 통신을 할 때 성공 또는 실패를 나타내는 오류 메시지 및 운영정보를 보내는데 사용된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;흔히 사용하는 &lt;code&gt;PING&lt;/code&gt; 명령어가 &lt;code&gt;ICMP&lt;/code&gt; 프로토콜을 사용하고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114564433-45d72380-9cab-11eb-88c5-8529a0adb7ee.png&#34; alt=&#34;ping&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;네트워크-패킷-추적하기&#34;&gt;네트워크 패킷 추적하기&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install tshark
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 명령어를 입력하여 &lt;code&gt;tshark&lt;/code&gt;를 설치한다, 네트워크 패킷 분석을 할 수 있는 툴이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114565051-e299c100-9cab-11eb-8c29-8c0c4a1f914f.png&#34; alt=&#34;ping-1&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어를 입력해서, &lt;code&gt;ICMP&lt;/code&gt; 패킷을 분석을 시작한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114564927-c3029880-9cab-11eb-8081-63f0837202a8.png&#34; alt=&#34;ping-2&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실제로 &lt;code&gt;PING&lt;/code&gt;을 8.8.8.8 주소로 날리게 되면, 패킷 추적이 되는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>MAC 주소란 (draft)</title>
-      <link>/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 22:21:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</guid>
-      <description>MAC 주소란?  MAC 주소 알아내는 법   위의 명령어를 이용하면 사용하고 있는 하드웨어의 MAC 주소 및 네트워크 카드 ID, 제조사를 알아낼 수 있다.  참고 문헌  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;mac-주소란&#34;&gt;MAC 주소란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;mac-주소-알아내는-법&#34;&gt;MAC 주소 알아내는 법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114561564-a0bb4b80-9ca8-11eb-822e-f5123ca09728.png&#34; alt=&#34;mac&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어를 이용하면 사용하고 있는 하드웨어의 &lt;code&gt;MAC&lt;/code&gt; 주소 및 네트워크 카드 &lt;code&gt;ID&lt;/code&gt;, 제조사를 알아낼 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>라우팅이란 (draft)</title>
-      <link>/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 22:20:48 +0900</pubDate>
       
-      <guid>/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</guid>
-      <description>라우팅이란?   네트워크 패킷이 목적지를 찾아가기 위한, 최적의 경로이다.  요청한 서버까지 라우터를 추적하는 방법   구글 서버까지 굉장히 많은 라우터를 거쳐간다는 것을 확인할 수 있다. 네이버 서버에 요청하였을 때는 보안상의 이유로 라우터가 가려진 것을 확인할 수 있다. 모든 라우터의 주소를 확인할 수 있는 것은 아니다.  참고 문헌  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;라우팅이란&#34;&gt;라우팅이란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 패킷이 목적지를 찾아가기 위한, 최적의 경로이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;요청한-서버까지-라우터를-추적하는-방법&#34;&gt;요청한 서버까지 라우터를 추적하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114563693-98fca680-9caa-11eb-85d8-1ea7de69d92a.png&#34; alt=&#34;router&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;구글 서버까지 굉장히 많은 라우터를 거쳐간다는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;li&gt;네이버 서버에 요청하였을 때는 보안상의 이유로 라우터가 가려진 것을 확인할 수 있다. 모든 라우터의 주소를 확인할 수 있는 것은 아니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>웹 클라이언트(브라우저) 부터 웹서버까지의 구조 (draft)</title>
-      <link>/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</link>
       <pubDate>Tue, 13 Apr 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</guid>
-      <description> 브라우저에서 주소를 입력하면 HTTP 통신이 일어나게 되고, DNS 서버에서, 도메인 주소를 IP 주소로 변환하는 요청을 하게 된다. IP 주소를 알아내면, 라우터를 통해서 TCP / IP 통신을 하게 된다. 웹 서버에 도착했을 때는 최종적으로 HTTP 통신이 이루어지게 된다.  참고 문헌   리얼 리눅스  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114560424-a5333480-9ca7-11eb-9929-ae4566a72689.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;브라우저에서 주소를 입력하면 &lt;code&gt;HTTP&lt;/code&gt; 통신이 일어나게 되고, DNS 서버에서, 도메인 주소를 &lt;code&gt;IP&lt;/code&gt; 주소로 변환하는 요청을 하게 된다.&lt;/li&gt;
+&lt;li&gt;IP 주소를 알아내면, 라우터를 통해서 &lt;code&gt;TCP / IP&lt;/code&gt; 통신을 하게 된다.&lt;/li&gt;
+&lt;li&gt;웹 서버에 도착했을 때는 최종적으로 &lt;code&gt;HTTP&lt;/code&gt; 통신이 이루어지게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://reallinux.co.kr/&#34;&gt;리얼 리눅스&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>클라우드 이벤트 스펙이란?</title>
-      <link>/post/2021/03/29/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%8A%A4%ED%8E%99%EC%9D%B4%EB%9E%80/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/29/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%8A%A4%ED%8E%99%EC%9D%B4%EB%9E%80/</link>
       <pubDate>Mon, 29 Mar 2021 22:55:39 +0900</pubDate>
       
-      <guid>/post/2021/03/29/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%8A%A4%ED%8E%99%EC%9D%B4%EB%9E%80/</guid>
-      <description>클라우드 이벤트 스펙이란?    이벤트는 어디에서든지 발생하지만, 이벤트를 생산하는 생산자에 따라서 이벤트를 다르게 정의하는 경향이 있다.
-  이벤트를 설명하는 표준이 없기 때문에, 개발자는 이벤트 사용방법을 계속해서 배워야 한다. 또한 SDK, 이벤트 라우터 또는 추적 시스템과 같은 환경에서 이벤트 데이터를 전달하는데 도움이 되는 도구 및 인프라의 잠재력을 제한한다.
-  클라우드 이벤트는 서비스, 플랫폼 및 시스템간에 상호 운영성을 제공하기 위해서 이벤트 데이터를 공통 형시으로 설명하기 위한 스펙이다.
-    문서를 보면 프로토콜 별로 스펙과 문서를 정의한 것을 확인할 수 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/29/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%8A%A4%ED%8E%99%EC%9D%B4%EB%9E%80/</guid>
+      <description>&lt;h3 id=&#34;클라우드-이벤트-스펙이란&#34;&gt;클라우드 이벤트 스펙이란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112941452-927a1500-9169-11eb-9947-5291c6d27c86.png&#34; alt=&#34;Screen Shot 2021-03-30 at 3 06 29 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트는 어디에서든지 발생하지만, 이벤트를 생산하는 생산자에 따라서 이벤트를 다르게 정의하는 경향이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트를 설명하는 표준이 없기 때문에, 개발자는 이벤트 사용방법을 계속해서 배워야 한다. 또한 &lt;code&gt;SDK&lt;/code&gt;, 이벤트 라우터 또는 추적 시스템과 같은 환경에서 이벤트 데이터를 전달하는데 도움이 되는 도구 및 인프라의 잠재력을 제한한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클라우드 이벤트는 서비스, 플랫폼 및 시스템간에 상호 운영성을 제공하기 위해서 이벤트 데이터를 공통 형시으로 설명하기 위한 스펙이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112941821-277d0e00-916a-11eb-83bd-4a426cf9ea86.png&#34; alt=&#34;Screen Shot 2021-03-30 at 3 11 01 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;문서를 보면 프로토콜 별로 스펙과 문서를 정의한 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 카프카에 관심이 있으므로 카프카 메시지에 대한 문서를 살펴보도록 하겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;카프카-메시지-맵핑&#34;&gt;카프카 메시지 맵핑&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112943105-01f10400-916c-11eb-88a1-546ffe6c47a1.png&#34; alt=&#34;Screen Shot 2021-03-30 at 3 24 17 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;카프카 &lt;code&gt;0.11.0.0&lt;/code&gt; 이상에서는 이벤트 발신자가 콘텐츠 모드를 선택한다, 특정 콘텐츠 모드를 사용해서 이벤틀르 요청을 허용할 수 있는 프로토콜 사용 패턴은 응용 프로그램에서 정의 할 수 있지만, 여기에서는 정의되지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트 수신자는 카프카 메시지의 &lt;code&gt;Content-type&lt;/code&gt; 헤더를 검사하여 두 콘첸츠 모드를 구분할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;미디어 타입이 &lt;code&gt;application/cloudevents&lt;/code&gt; 인 경우에는 이벤트 형식의 사용을 나타내고 수신자는 구조화된 모드를 사용합니다. 그렇지 않은 경우에는 디폴트로 바이너리 모드입니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;따라서 다음과 같은 &lt;code&gt;JSON&lt;/code&gt; 형태로 작성하면 된다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;예제&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;------------------ Message -------------------
+
+Topic Name: mytopic
+
+------------------- key ----------------------
+
+Key: mykey
+
+------------------ headers -------------------
+
+content-type: application/cloudevents+json; charset=UTF-8
+
+------------------- value --------------------
+
+{
+    &amp;quot;specversion&amp;quot; : &amp;quot;1.0&amp;quot;,
+    &amp;quot;type&amp;quot; : &amp;quot;com.example.someevent&amp;quot;,
+    &amp;quot;source&amp;quot; : &amp;quot;/mycontext/subcontext&amp;quot;,
+    &amp;quot;id&amp;quot; : &amp;quot;1234-1234-1234&amp;quot;,
+    &amp;quot;time&amp;quot; : &amp;quot;2018-04-05T03:56:24Z&amp;quot;,
+    &amp;quot;datacontenttype&amp;quot; : &amp;quot;application/xml&amp;quot;,
+
+    ... further attributes omitted ...
+
+    &amp;quot;data&amp;quot; : {
+        ... application data encoded in XML ...
+    }
+}
+
+-----------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudevents/spec&#34;&gt;cloudevents&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cloudevents/spec/blob/v1.0.1/kafka-protocol-binding.md&#34;&gt;cloudevents - kafka spec&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>HTTP란 무엇일까? (draft)</title>
-      <link>/post/2021/03/28/http%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/http%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
       <pubDate>Sun, 28 Mar 2021 13:18:39 +0900</pubDate>
       
-      <guid>/post/2021/03/28/http%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
-      <description>HTTP    HTTP(Hyper Text Transfer Protocol)의 약자로서, 웹 상에서 정보를 주고 받을 수 있는 프로토콜이다.
-  HTTP는 요청(REQUEST), 응답(RESPONSE)을 통해서 정보를 주고 받으며, HTTP 메시지 구조는 크게 헤더(HEADER)와 바디(BODY)로 나누어진다.
-  CURL 명령어를 통한 요청  요청 헤더 및 응답 헤더
- 다음은 curl 명령어를 통해서 구글 서버에 GET 요청을 날려보았다. 요청 헤더 및 응답 헤더를 확인할 수 있다.  응답 바디
- HTML, CSS, JS 파일을 응답한 것을 확인할 수 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/http%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
+      <description>&lt;h3 id=&#34;http&#34;&gt;HTTP&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP(Hyper Text Transfer Protocol)의 약자로서, 웹 상에서 정보를 주고 받을 수 있는 프로토콜이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP는 요청(&lt;code&gt;REQUEST&lt;/code&gt;), 응답(&lt;code&gt;RESPONSE&lt;/code&gt;)을 통해서 정보를 주고 받으며, HTTP 메시지 구조는 크게 헤더(&lt;code&gt;HEADER&lt;/code&gt;)와 바디(&lt;code&gt;BODY&lt;/code&gt;)로 나누어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;curl-명령어를-통한-요청&#34;&gt;CURL 명령어를 통한 요청&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;요청 헤더 및 응답 헤더&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114562451-79b14980-9ca9-11eb-9b65-dcee73144654.png&#34; alt=&#34;google&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;다음은 &lt;code&gt;curl&lt;/code&gt; 명령어를 통해서 구글 서버에 &lt;code&gt;GET&lt;/code&gt; 요청을 날려보았다.&lt;/li&gt;
+&lt;li&gt;요청 헤더 및 응답 헤더를 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;응답 바디&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114562913-e62c4880-9ca9-11eb-9df8-b399eaa6e1da.png&#34; alt=&#34;response&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;HTML&lt;/code&gt;, &lt;code&gt;CSS&lt;/code&gt;, &lt;code&gt;JS&lt;/code&gt; 파일을 응답한 것을 확인할 수 있다.&lt;/li&gt;
+&lt;li&gt;웹 서버가 응답하는 파일은 이것이 전부이고, 브라우저에는 응답받은 파일을 통해서 화면에 그려주는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>REST 및 베스트 프랙티스</title>
-      <link>/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</link>
       <pubDate>Sat, 27 Mar 2021 17:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</guid>
-      <description>REST    REST는 웹의 창시자 중의 한 사람인 로이 필딩이 2000년에 발표한 논문에 의해서 처음 소개되었다.
-  현대의 아키텍처가 웹의 장점을 잘 활용하지 못하고 있다고 판단했기 때문에 웹의 장점을 최대한 활용할 수 있는 네트워크 기반의 아키텍처를 소개했는데 그것이바로 Representational Safe Transfer(REST) 이다.
-  REST는 근래에 들어 HTTP와 JSON을 함께 사용하여 OPEN API를 구현하는 방법으로 주류를 이루고 있으며, 대부분의 OPEN API는 이 REST 아키텍처를 기반으로 설계 및 구현되고 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/rest-%EB%B0%8F-%EB%B2%A0%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%9E%99%ED%8B%B0%EC%8A%A4/</guid>
+      <description>&lt;h3 id=&#34;rest&#34;&gt;REST&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt;는 웹의 창시자 중의 한 사람인 로이 필딩이 2000년에 발표한 논문에 의해서 처음 소개되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현대의 아키텍처가 웹의 장점을 잘 활용하지 못하고 있다고 판단했기 때문에 웹의 장점을 최대한 활용할 수 있는 네트워크 기반의 아키텍처를 소개했는데 그것이바로 &lt;code&gt;Representational Safe Transfer(REST)&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt;는 근래에 들어 &lt;code&gt;HTTP&lt;/code&gt;와 &lt;code&gt;JSON&lt;/code&gt;을 함께 사용하여 OPEN API를 구현하는 방법으로 주류를 이루고 있으며, 대부분의 &lt;code&gt;OPEN API&lt;/code&gt;는 이 &lt;code&gt;REST&lt;/code&gt; 아키텍처를 기반으로 설계 및 구현되고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest의-기본&#34;&gt;REST의 기본&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;REST는 크게 리소스, 메서드, 메시지의 3가지 요소로 구성된다.&lt;/li&gt;
+&lt;li&gt;예를 들어서, &amp;ldquo;이름이 Terry인 사용자를 생성했을 때&amp;rdquo; 사용자는 생성되는 리소스, 생성한다라는 행위는 메서드 그리고, 이름이 &lt;code&gt;Terry&lt;/code&gt;는 메시지가 된다.&lt;/li&gt;
+&lt;li&gt;이를 REST로 표현해보면 다음과 같은 형태가 된다, &amp;lsquo;생성한다&amp;rsquo;라는 의미가 있는 메서드는 &lt;code&gt;HTTP&lt;/code&gt; &lt;code&gt;POST&lt;/code&gt;가 되고, 생성하고자 하는 대상이 되는 사용자라는 리소스는 &lt;code&gt;http://myweb/users&lt;/code&gt;라는 형태의 URI로 표현되며, 생성하고자 하는 사용자의 구체적인 내용은 &lt;code&gt;JSON&lt;/code&gt; 문서를 이용하여 표현된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;HTTP POST, http://myweb/users/
+{
+  &amp;quot;users&amp;quot;: {
+    &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;http-메서드&#34;&gt;HTTP 메서드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;행위에 대한 메서드는 HTTP 메서드를 그대로 사용한다.&lt;/li&gt;
+&lt;li&gt;HTTP에는 여러가지 메서드가 있지만, &lt;code&gt;REST&lt;/code&gt;에서는 &lt;code&gt;CRUD(CREATE, READ, UPDATE, DELETE)&lt;/code&gt;에 해당하는 4가지의 메서드만 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112715716-53f41880-8f25-11eb-96a0-52dc9613dc36.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;멱등성은 여러 번 수행해도 결과가 같은 경우를 의미한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;POST&lt;/code&gt; 연산은 리소스를 추가하는 연산이기 때문에, 멱등성을 성립하지 않지만, 나머지 &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;PUT&lt;/code&gt;, &lt;code&gt;DELETE&lt;/code&gt;는 반복수행하더라도, 멱등하다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET&lt;/code&gt;의 경우 게시물의 조회 카운트를 늘려준다거나 하는 기능을 같이 수행했을 때는 멱등하지 않은 메서드로 정의해야 한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;REST&lt;/code&gt;는 개별 &lt;code&gt;API&lt;/code&gt;를 상태 없이 수행하게 된다, 따라서 해당 &lt;code&gt;REST&lt;/code&gt; API를 다른 API와 함께 호출하다가 실패했을 때 트랜잭션 복구를 위해서 다시 실행해야하는 경우가 있는데, 멱등하지 않은 메서드의 경우에는 기존 상태를 저장했다가 다시 원상 복구시켜줘야 하는 경우가 있지만, 멱등한 메서드의 경우에는 반복적으로 다시 메서드를 수행하면 된다.&lt;/li&gt;
+&lt;li&gt;멱등성을 충족하지 않는 메서드에 대해서는 트랜잭션에 대한 처리에 주의가 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest의-리소스&#34;&gt;REST의 리소스&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt;는 리소스 지향 아키텍처 스타일이라는 정의 답게 모든 것을 리소스, 즉 명사로 표현하며, 각 세부 리소스에는 &lt;code&gt;ID&lt;/code&gt;를 붙인다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리소스가 명사의 형태를 띄우다 보니 명령 성격의 API를 정의하는데 혼동이 올 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;동사형을 명사형으로 바꿔서 적용해보면 리소스 형태로 표현하기가 조금 더 수월해진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest-api의-간단한-예제&#34;&gt;REST API의 간단한 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;사용자 생성&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HTTP POST, http://myweb/users/
+{
+  &amp;quot;name&amp;quot;:&amp;quot;terry&amp;quot;,
+  &amp;quot;address&amp;quot;:&amp;quot;seoul&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;조회&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HTTP GET, http://myweb/users/terry
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;업데이트&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HTTP PUT, http://myweb/users/terry 
+{
+  &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;,
+  &amp;quot;address&amp;quot;: &amp;quot;suwon&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;삭제&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HTTP DELETE, http://myweb/users/terry
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;상당히 간단하다, 단순하게 리소스를 URI로 정해주고, 거기에 HTTP 메서드를 이용해서 CRUD를 구현하고 메세지를 &lt;code&gt;JSON&lt;/code&gt;으로 표현하여 &lt;code&gt;HTTP&lt;/code&gt; 바디에 실어서 보내면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;POST&lt;/code&gt; 에 리소스 ID가 없다는 것을 빼면 크게 신경쓸 부분이 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest의-특성&#34;&gt;REST의 특성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;유니폼-인터페이스uniform-interface&#34;&gt;유니폼 인터페이스(Uniform Interface)&lt;/h4&gt;
+&lt;p&gt;REST는 HTTP 표준에만 따른다면 어떤 기술이든지 사용할 수 있는 인터페이스 스타일이다. 예를 들어, HTTP + JSON으로 REST APII를 정의했다면, 안드로이드 플랫폼이건 IOS 플랫폼이건 특정 언어나 기술에 종속받지 않고, HTTP와 JSON을 모든 플랫폼에서 사용할 수 있는 느슨한 결합이다.&lt;/p&gt;
+&lt;h4 id=&#34;무상태성스테이트리스stateless&#34;&gt;무상태성/스테이트리스(Stateless)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt;는 Representational State Transfer의 약어로 Stateless(상태를 유지하지 않음)란ㄴ 특징을 가진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상태가 있다 없다는 사용자나 클라이언트의 컨텍스트를 서버에 유지하지 않는다는 의미로, 쉽게 표현하면 HTTP 세션과 같은 컨텍스트 저장소에 상태 정보를 저장하지 않는 형태를 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상태 정보를 저장하지 않으면 각 API 서버는 들어오는 요청만을 들어오는 메시지로 처리하면 되며, 세션과 같은 컨텍스트 정보를 신경쓸 필요가 없으므로 구현이 단순해진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;캐시-가능cacheable&#34;&gt;캐시 가능(Cacheable)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;REST의 큰 특징 중에 하나는 HTTP라는 기존의 웹 표준을 그대로 사용하기 때문에, 웹에서 사용하는 기존의 인프라를 그대로 활용할 수 있다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP 프로토콜 기반의 로드 밸런서나 SSL은 물론이고, HTTP가 가진 가장 강력한 기능중에 하나인 캐싱 기능을 적용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일반적인 서비스 시스템에서 &lt;code&gt;60%&lt;/code&gt;에서 많게는 &lt;code&gt;80%&lt;/code&gt; 가량의 트랜잭션이 &lt;code&gt;SELECT&lt;/code&gt;와 같은 조회성 트랜잭션인 것을 고려하면, &lt;code&gt;HTTP&lt;/code&gt;의 리소스들은 웹 캐시 서버 등에 캐싱하는 것은 용량이나 성능 면에서 많은 장점이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현재 HTTP 프로토콜 표준에서 사용하는 &lt;code&gt;Last-Modified&lt;/code&gt; 태그나 &lt;code&gt;E-Tag&lt;/code&gt;를 이용하면 캐싱을 구현할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다음과 같이 클라이언트가 HTTP GET을 &lt;code&gt;Last-Modified&lt;/code&gt; 값과 함께 보냈을 때 콘텐츠에 변화가 없으면 &lt;code&gt;REST&lt;/code&gt; 컴포넌트는 &lt;code&gt;304 Not Modified&lt;/code&gt;를 반환하며 클라이언트는 자체 캐시에 저장된 값을 사용하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112716331-0d082200-8f29-11eb-95d1-21b0a40accbe.png&#34; alt=&#34;267E914554241E6512&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이렇게 캐시를 사용하게 되면 네트워크 응답 시간뿐만 아니라, &lt;code&gt;REST&lt;/code&gt; 컴포넌트가 위치한 서버에 트랜잭션을 발생시키지 않기 때문에 전체 응답 시간과 성능 그리고 자원 사용률을 비약적으로 향상시킬 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;자체-표현-구조self-descriptiveness&#34;&gt;자체 표현 구조(Self-descriptiveness)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;REST의 가장 큰 특징중의 하나는 REST API 자체가 쉬워서 API 메시지만 보고도 이를 이해할 수 있는 자체 표현 구조로 되어 있다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리소스와 메서드를 이용해서, 어떤 메서드에 무슨 행위를 하는지 알 수 있으며, 또한 메시지 포맷 역시 JSON을 이용해서 직관적으로 이해할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대부분의 REST 기반 Open API가 API 문서를 제공하고는 있지만, 디자인 사상은 최소한의 문서의 도움만으로 API 자체를 이해할 수 있어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;클라이언트-서버-구조client-server&#34;&gt;클라이언트 서버 구조(Client-Server)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;REST 서버는 API를 제공하고 제공된 API를 이용해서 비즈니스 로직 처리 및 저장을 책임 진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 각자의 역할이 확실하게 구분되면서 개발 관점에서 클라이언트와 서버에서 개발해야 할 내용이 명확해지고, 서로의 개발에서 의존성이 줄어들게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;계층형-구조layered-system&#34;&gt;계층형 구조(Layered System)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;클라이언트로서는 REST API 서버만 호출한다. 그러나 서버는 다중 계층으로 이루어질 수 있다.&lt;/li&gt;
+&lt;li&gt;순수 비즈니스 로직을 수행하는 &lt;code&gt;API&lt;/code&gt; 서버와 그 앞단에 사용자 인증(Authentication), 암호화(SSL), 로드 밸런싱을 하는 계층을 추가해서 구조상의 유연성을 둘 수 있다.&lt;/li&gt;
+&lt;li&gt;이는 마이크로서비스의 API GATEWAY나 간단한 기능은 리버스 프록시를 이용해서 구현하는 경우가 많다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest-안티-패턴&#34;&gt;REST 안티 패턴&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;다음은 REST API를 디자인할 때 하지 말아야 할 것들이다.&lt;/p&gt;
+&lt;h4 id=&#34;getpost를-이용한-터널링&#34;&gt;GET/POST를 이용한 터널링&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;가장 나쁜 디자인 중에 하나가 &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;POST&lt;/code&gt;를 이용한 터널링이다. 메서드의 실제 동작은 리소스를 업데이트 하는 내용인데, HTTP PUT을 사용하지 않고, GET에 쿼리 파라미터로 이 메서드가 수정 메서드임을 표시하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대단히 안좋은 디자인인데, &lt;code&gt;HTTP&lt;/code&gt; 메서드 사상을 따르지 않았기 때문에 REST라고 부를 수 없고, 또한 웹 캐시 인프라도 사용할 수 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 많이 사용하는 안좋은 예는 &lt;code&gt;POST&lt;/code&gt;를 이용한 터널링이다. 생성 요청이 아닌데도 바디에 명령을 넘겨서 호출하는 방식인데 좋지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;HTTP POST, http://myweb/users/
+{
+  &amp;quot;getuser&amp;quot;: {
+    &amp;quot;id&amp;quot;: &amp;quot;terry&amp;quot;,
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;self-descriptiveness-속성을-사용하지-않음&#34;&gt;Self-descriptiveness 속성을 사용하지 않음&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;REST의 특성 중 하나는 자체 표현 구조로, REST URI와 메서드, 그리고 정의된 메시지 포맷에 의해서 쉽게 API를 이해할 수 있는 기능이 되어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특히나 자체 표현 구조를 갉아 먹는 가장 대표적인 사례가 앞서 언급한 &lt;code&gt;GET&lt;/code&gt;, &lt;code&gt;POST&lt;/code&gt;를 이용한 터널링이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;http-응답-코드를-사용하지-않음&#34;&gt;HTTP 응답 코드를 사용하지 않음&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;다음으로 많이 하는 실수가 HTTP 응답 코드를 충실하게 따르지 않고, 성공은 200, 실패는 500 같이 1 ~ 2개의 HTTP 응답 코드만 사용하는 경우이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;심한 경우에는 에러도 &lt;code&gt;200&lt;/code&gt; 응답 코드와 함께 보내는 경우인데, 이는 &lt;code&gt;REST&lt;/code&gt; 디자인 사상에도 어긋남은 물론이고 자기 표현 구조에도 어긋난다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest-api-디자인-가이드&#34;&gt;REST API 디자인 가이드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;단순하고-직관적으로-만들어라&#34;&gt;단순하고 직관적으로 만들어라&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;URI에 리소스명은 동사보다는 명사를 사용하라.&lt;/li&gt;
+&lt;li&gt;REST API는 리소스에 대해서, 행동을 정의하는 형태를 사용한다.&lt;/li&gt;
+&lt;li&gt;예를 들어서, &lt;code&gt;/dogs&lt;/code&gt;는 리소스를 생성하라는 의미고, URL은 HTTP 메서드에 의해서 CRUD(생성, 수정, 수정, 삭제)의 대상이 되는 개체(명사)라야 한다.&lt;/li&gt;
+&lt;li&gt;그리고 될 수 있으면 단수형 명사보다는 복수형 명사를 사용하는 것이 의미상 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;리소스-간의-관계를-표현하는-방법&#34;&gt;리소스 간의 관계를 표현하는 방법&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;REST 리소스 간에는 연관 관계가 있을 수 있다.&lt;/li&gt;
+&lt;li&gt;예를 들어서 사용자가 소유한 디바이스 목록이나, 사용자가 가진 강아지들이 예가 될 수 있다.&lt;/li&gt;
+&lt;li&gt;사용자 - 디바이스 또는 사용자 - 강아지 등 각각의 리소스 간의 관계를 표현하는 방법에는 여러가지가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;1. 서브 리소스로 표현하는 방법
+/&amp;quot;리소스명&amp;quot;/&amp;quot;리소스 아이디&amp;quot;/&amp;quot;관계가 있는 다른 리소스명&amp;quot;
+HTTP GET, /users/{userId}/devices
+예) /users/1/devices
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;2. 서브 리소스에 관계를 명시하는 방법
+HTTP GET, /users/{userid}/likes/devices
+예) /uesrs/1/likes/devices
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;에러-처리&#34;&gt;에러 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;에러 처리의 기본은 &lt;code&gt;HTTP&lt;/code&gt; 응답 코드를 사용한 후 응답 바디(&lt;code&gt;Response Body&lt;/code&gt;)에 에러에 대한 자세한 내용을 서술하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대표적인 &lt;code&gt;API&lt;/code&gt; 서비스들이 어떤 응답 코드를 사용하는지를 살펴보면 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;구글 : &lt;code&gt;200, 201, 304, 400, 401, 403, 404, 409, 410, 500&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;넷플릭스 : &lt;code&gt;200, 201, 304, 400, 403, 404, 412, 500&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여러 개의 응답 코드를 사용하면 명시적이긴 하지만, 코드 체계 관리가 복잡해져서 다음과 같이 몇 가지 응답 코드만 사용하는 것을 권장한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;200 - 성공
+400 Bad Request - field validation 실패 시
+401 Unauthorized - API 인증, 인가 실패
+404 Not Found - 해당 리소스가 없음
+500 Internal Server Error - 서버 에러
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;에러에는 에러 내용에 대한 구체적인 내용을 HTTP 바디에 정의해서 상세한 에러의 원인을 전달하는 것이 디버깅에 유리하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Twillo&lt;/code&gt;의 에러 메시지 형식은 다음과 같은데, 에러 코드 번호와 이 번호에 대한, &lt;code&gt;Error dictionary link&lt;/code&gt;를 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;개발자나 트러블 슈팅하는 사람에게 많은 정보를 제공해서 디버깅을 손쉽게 해주는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;에러 발생시에 스택 정보를 포함시킬 수 있지만, 이는 대단히 위험한 일이다. 내부적인 코드 구조와 프레임워크 구조를 외부에 노출함으로써, 해커들에게 해킹을 할 수 있는 정보를 제공해주기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일반적인 서비스 구조에서는 이를 제공하지 않는 것이 일반적이지만 내부 개발중이거나 서비스 개발할 때는 매우 유용하다. 따라서 API 서비스를 개발할 때 프로덕션과 데브 환경을 분리해서 개발하면 디버깅에 매우 유용하게 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;api-버전-관리&#34;&gt;API 버전 관리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;API 정의에서 중요한 것은 버전 관리이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이미 배포된 API 경우에는 계속해서 서비스를 제공하면서 새로운 기능이 들어간 API를 배포할 때는 하위 호환성을 보장하면서 서비스를 제공해야하기 때문에, 같은 &lt;code&gt;API&lt;/code&gt;라도 버전에 따라서는 다른 기능을 제공하도록 하는 것이 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API 버전을 정의하는 방법에는 여러가지가 있는데, 다음과 같은 형태를 추천한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;{servicename}/{version}/{REST URL}
+예) api.server.com/account/v2.0/groups
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이는 서비스의 배포 모델과 관계가 있는데, 자바 애플리케이션의 경우 &lt;code&gt;account.v1.0.war&lt;/code&gt;, &lt;code&gt;account.v2.0.war&lt;/code&gt;와 같이 다른 &lt;code&gt;war&lt;/code&gt;로 각각 배포하여 버전별로 배포 바이너리를 관리할 수 있고, 앞단에 서비스명을 별도로 &lt;code&gt;URL&lt;/code&gt;로 떼어 놓은 것은 서비스가 확장되었을 때, &lt;code&gt;account&lt;/code&gt; 서비스만 별도의 서버로 분리해서 배포하는 경우를 대비하기 위함이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;페이징&#34;&gt;페이징&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;큰 사이즈의 리스트 형태의 응답을 처리하려면 페이징 처리와 부분 응답(Partial Response) 처리가 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반환되는 리스트가 &lt;code&gt;100,000,000&lt;/code&gt; 개인데, 이를 하나의 HTTP 응답으로  처리하는 것은 서버 성능, 네트워크 비용도 문제지만, 무엇보다 비현실적이다. 그래서 페이징을 고려하는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페이징을 처리하려면 여러가지 디자인이 있다. 예를 들어서 100번째부터 125번째 레코드까지 받는 API를 정의하면 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;페이스북 API 스타일 : &lt;code&gt;/record?offset=100&amp;amp;limit=25&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;트위터 API 스타일 : &lt;code&gt;/record?page=5&amp;amp;rpp=25&lt;/code&gt; (RPP는 Record Per Page)로 페이지 당 레코드 수로 RPP=25이면 페이지 5는 100~125가 된다.&lt;/li&gt;
+&lt;li&gt;링크드인 API 스타일 : &lt;code&gt;/record?start=50&amp;amp;count=25&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;부분-응답-처리&#34;&gt;부분 응답 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;리소스에 대한 응답 메시지에 대해서 굳이 모든 필드를 포함할 필요는 없다.&lt;/li&gt;
+&lt;li&gt;예를 들어서 페이스북 피드에는 사용자 ID, 이름, 글, 내용, 날짜, 좋아요, 카운트, 댓글, 사용자 사진 등 여러가지 정보를 갖는데, API를 요청하는 클라이언트의 용도에 따라서 선별적으로 몇 가지 필드만이 필요할 수 있다.&lt;/li&gt;
+&lt;li&gt;필드를 제한하는 것은 전체 응답의 양을 줄여서 네트워크 대역폭 (특히 모바일에서) 절약할 수 있고, 응답 메시지를 간소화하여 파싱 등을 간략화 할 수 있다.&lt;/li&gt;
+&lt;li&gt;이러한 부분 응답 기능을 제공하는 주요 서비스를 보면 다음과 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;링크드인 : /people:(id, first-name, last-name, industry)
+페이스북 : /terry/friends?fields=id, name
+구글 : ?fields=title, media:group(media:thumnail)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;검색-전역-검색과-지역-검색&#34;&gt;검색 (전역 검색과 지역 검색)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;검색은 &lt;code&gt;HTTP&lt;/code&gt; GET에서 쿼리 스트링 검색 조건을 정의하는 경우가 일반적인데, 이 경우 검색 조건이 다른 쿼리 스트링이랑 섞여 버릴 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어, &lt;code&gt;name=lee&lt;/code&gt; 이고 &lt;code&gt;region=seoul&lt;/code&gt;인 사용자를 검색하는 검색을 쿼리 스트링만 사용하게 되면 다음과 같이 표현할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;/users?name=lee&amp;amp;region=seoul
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;추가적으로 페이징 처리를 추가하면 다음과 같이 된다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/users?name=cho&amp;amp;region=seoul&amp;amp;offset=20&amp;amp;limit=10
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;페이징 처리에 의해서 정의된 offset과 limit 가 검색조건인지 페이징 조건인지 잘 분간이 가지 않으므로 따라서 쿼리 조건은 하나의 쿼리 스트링으로 정의하는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;/user?q=name=lee, region=seoul&amp;amp;offset=20&amp;amp;limit=10
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이런식으로 구분자를 사용하면, 검색 조건은 다른 쿼리스트링과 분리된다.&lt;/li&gt;
+&lt;li&gt;물론 이 검색 조건은 서버에 의해서 토큰 단위로 파싱 되어야 한다.&lt;/li&gt;
+&lt;li&gt;다음으로는 검색 범위에 대해서 고민할 필요가 있는데, 전역 검색은 전체 리소스에 대한 검색을, 리소스에 대한 검색은 특정 리소스에 대한 검색을 정의한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;예를 들어서 특정 리소스 안에 대한 검색은 다음과 같이 리소스명에 쿼리 조건을 붙이는 식으로 표현할 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/users?q=id=seoul
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;전역 검색은 다음과 같은 식으로 정의할 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;/search?q=id=lee
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;hateoas를-이용한-처리&#34;&gt;HATEOAS를 이용한 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;HATEOS는 &lt;code&gt;Hypermedia as the engine of application data&lt;/code&gt;의 약자로 하이퍼미디어의 특징을 이용하여, &lt;code&gt;HTTP&lt;/code&gt; 응답에 다음 액션이나 관계된 리소스에 대한 &lt;code&gt;HTTP&lt;/code&gt; 링크를 함께 반환하는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;{
+  [
+    {
+      &amp;quot;id&amp;quot;: &amp;quot;user1&amp;quot;,
+      &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;
+    },
+    {
+      &amp;quot;id&amp;quot;: &amp;quot;user2&amp;quot;,
+      &amp;quot;name&amp;quot;: &amp;quot;carry&amp;quot;
+    }
+  ],
+  &amp;quot;links&amp;quot;: [
+    {
+      &amp;quot;rel&amp;quot;: &amp;quot;pre_page&amp;quot;,
+      &amp;quot;href&amp;quot;: &amp;quot;http://xxx/users?offset=6&amp;amp;limit=5&amp;quot;
+    },
+    {
+      &amp;quot;rel&amp;quot;: &amp;quot;next_page&amp;quot;,
+      &amp;quot;href&amp;quot;: &amp;quot;http://xxx/users?offset=11&amp;amp;limit=5&amp;quot;
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;페이징 처리의 경우 반환 시 페이지에 대한 링크를 제공하거나, 위와 같이 표현하거나 연관된 리소스에 대한 디테일한 링크를 표시하는 것에 이용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;HATEOAS&lt;/code&gt;를 API에 적용하게 되면, 자체 표현 구조 특성이 증대되어 API에 대한 가독성이 증가하는 장점을 가지고 있는데 반해서, 응답 메시지가 다른 리소스 &lt;code&gt;URI&lt;/code&gt;에 대한 의존성을 가지기 때문에 구현이 다소 까다롭다는 단점이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;단일-api-엔드-포인트-활용&#34;&gt;단일 API 엔드 포인트 활용&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;API 서버가 물리적으로 분리된 여러 개의 서버에서 작동하고 있을 때, &lt;code&gt;user.apiserver.com&lt;/code&gt;, &lt;code&gt;car.apiserver.com&lt;/code&gt;과 같이 API 서버마다 URL이 분리되어 있으면 개발자가 사용하기 불편하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;매번 다른 서버로 연결해야 하거나와 중간에 방화벽이라도 있으면 일일히 이를 해제해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;API&lt;/code&gt; 서비스는 물리적으로 서버가 분리되어 있더라도 단일 URL을 사용하는 것이 좋은데, 방법은 &lt;code&gt;HAProxy&lt;/code&gt;와 &lt;code&gt;Reverse Proxy&lt;/code&gt;를 사용하는 방법이 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;api.apiserver.com/user/&lt;/code&gt;는 user.apiserver.com으로 라우팅하고&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;api.apiserver.com/car/&lt;/code&gt;는 car.apiserver.com으로 라우팅하도록 구현하면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 할 경우 향후 뒷단에 API 서버 들이 확장되도라도 &lt;code&gt;API&lt;/code&gt;를 사용하는 클라이언트로서는 단일 엔드포인트를 보면 되고, 관리 관점에서도 단일 엔드 포인트를 통해서 부하 분산 및 로그를 통해서 감사(Audit)을 할 수 있기 때문에 편리하며, API에 대한 라우팅을 Reverse Proxy를 이용해서 함으로써 조금 더 유연한 운영이 가능하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=54438883&#34;&gt;대용량 아키텍처와 성능 튜닝&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>TCP/IP 및 네트워크 계층 및 RFC 791 (draft)</title>
-      <link>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791-draft/</link>
       <pubDate>Mon, 22 Mar 2021 23:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791-draft/</guid>
-      <description>네트워크 통신   네트워크 통신은 관점에 따라 OSI 7 모델과 TCP/IP 모델 두가지로 설명할 수 있다. OSI 7 모델은 1984년에 ISO (국제 표준화 기술)에 의해 표준화되었고, 통신이 이루어지는 과정을 단계별로, 파악할 수 있도록 7 개의 계층인 물리, 데이터링크, 네트워크, 전송, 세션, 표현, 응용 계층으로 구분되어 있으며 네트워크 구현을 연구하고 배우기에 적합한 구조다. 반면에, TCP/IP 모델은 현장에 많이 사용하는 기술 위주로 4계층으로 단순화한 모델로, 실제 사용하는 프로토콜 규약은 이 모델을 따르고 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/22/tcp/ip-%EB%B0%8F-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B3%84%EC%B8%B5-%EB%B0%8F-rfc-791-draft/</guid>
+      <description>&lt;h3 id=&#34;네트워크-통신&#34;&gt;네트워크 통신&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112009913-2ba59c00-8b6a-11eb-96f4-c8e28e12bb05.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 통신은 관점에 따라 &lt;code&gt;OSI 7&lt;/code&gt; 모델과 &lt;code&gt;TCP/IP&lt;/code&gt; 모델 두가지로 설명할 수 있다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;OSI 7&lt;/code&gt; 모델은 1984년에 &lt;code&gt;ISO&lt;/code&gt; (국제 표준화 기술)에 의해 표준화되었고, 통신이 이루어지는 과정을 단계별로, 파악할 수 있도록 7 개의 계층인 물리, 데이터링크, 네트워크, 전송, 세션, 표현, 응용 계층으로 구분되어 있으며 네트워크 구현을 연구하고 배우기에 적합한 구조다.&lt;/li&gt;
+&lt;li&gt;반면에, &lt;code&gt;TCP/IP&lt;/code&gt; 모델은 현장에 많이 사용하는 기술 위주로 4계층으로 단순화한 모델로, 실제 사용하는 프로토콜 규약은 이 모델을 따르고 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;네트워크-계층&#34;&gt;네트워크 계층&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;네트워크 계층은 데이터를 전송할 수 있는 여러 경로 중 가장 안전하고 빠른 경로를 찾아주는 역할을 하는 라우팅을 수행하며, 데이터를 다른 네트워크로 전달하여 인터넷을 가능하게 만들어주는 계층이다.&lt;/p&gt;
+&lt;h4 id=&#34;ip-프로토콜&#34;&gt;IP 프로토콜&lt;/h4&gt;
+&lt;p&gt;네트워크 계층에서 운영되는 IP 프로토콜에는 목적지 위치를 알려주는 고유한 32비트의 주소 값이 있으며, 이를 IP 주소라고 한다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112010844-036a6d00-8b6b-11eb-984e-082bf51904f7.jpg&#34; alt=&#34;addressing-design-network-host-1024x576&#34;&gt;&lt;/p&gt;
+&lt;p&gt;IP 주소는 네트워크 부분과 호스트로 구분되는데, 위의 그림과 같이 지역을 대표하는 부분을 네트워크, 지역별 사용자 PC에 할당하는 것을 호스트라고 한다.&lt;/p&gt;
+&lt;h4 id=&#34;rfc-791&#34;&gt;RFC 791&lt;/h4&gt;
+&lt;p&gt;더 자세히 알아보고 싶은 마음에 RFC 791 문서를 살펴보았다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112071041-5e738280-8bb2-11eb-80a8-472ff7e6aef9.png&#34; alt=&#34;Screen Shot 2021-03-23 at 8 32 38 AM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;위의 문서는 개요 및 동기 그리고, 범위, 인터페이스에 대해서 설명하고 있다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;동기&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;인터넷 프로토콜은 패킷을 교환을 통해 상호 연결된 시스템에서 사용하도록 설계 되었다.&lt;/li&gt;
+&lt;li&gt;이러한 시스템을 &lt;code&gt;catenet&lt;/code&gt; 이라고 부른다.&lt;/li&gt;
+&lt;li&gt;인터넷 프로토콜은 데이터그램(&lt;code&gt;datagram&lt;/code&gt;)이라는 데이터 블록들을 소스에서부터 목적지까지 전송한다.&lt;/li&gt;
+&lt;li&gt;여기서 말하는 소스 및 목적지는 고정된 길이의 주소로 식별되는 호스트다.&lt;/li&gt;
+&lt;li&gt;또한 인터넷 프로토콜은 작은 패킷을 다루는 네트워크를 위해 긴 데이터그램을 조각화하여 나누거나 및 작게 나누어진 데이터그램을 재조립을 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;범위&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;인터넷 프로토콜은 특별히 범위를 한정하여 다음과 같은 기능을 제공한다.&lt;/li&gt;
+&lt;li&gt;상호 연결된 네트워크 시스템을 통해서 소스에서 목적지까지 비트 패키지(데이터그램)을 전달하는데 필요한 기능이다.&lt;/li&gt;
+&lt;li&gt;호스트 간의 프로토콜에서 일반적으로 볼 수 있는 엔드 투 엔드 데이터 신뢰성, 흐름 제어, 시퀀싱, 그리고 기타 서비스를 강화하는 메커니즘은 없다.&lt;/li&gt;
+&lt;li&gt;인터넷 프로토콜은 지원 네트워크의 서비스를 활용하여 다양한 서비스 유형과 품질을 제공할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;인터페이스&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이 프로토콜은 네트워크 환경에서 호스트 대 호스트 프로토콜에 의해서 호출된다.&lt;/li&gt;
+&lt;li&gt;이 프로토콜은 인터넷 데이터그램을 다음 게이트웨이 또는 대상 호스트로 이동하기 위해 로컬 네트워크 프로토콜을 호출한다.&lt;/li&gt;
+&lt;li&gt;예를 들어, TCP 모듈이 네트워크 모듈을 호출하여, TCP 세그먼트(TCP 헤더 및 사용자 정보를 포함)를 사용한다.&lt;/li&gt;
+&lt;li&gt;TCP 세그먼트는 데이터 그램의 일부이다.&lt;/li&gt;
+&lt;li&gt;TCP 모듈은 인터넷 헤더의 주소와 기타 매개변수를 인수로 네트워크 모듈에게 제공한다.&lt;/li&gt;
+&lt;li&gt;그러면 네트워크 모듈은 데이터 그램을 만들고 데이터그램을 전송하기 위해서 로컬 네트워크 인터페이스를 호출한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=217703927&#34;&gt;네트워크 공격 패킷 분석, 프리렉&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://tools.ietf.org/html/rfc791&#34;&gt;RFC 791&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>최근에 애플리케이션 보안에 관심을 가지게 된 이유</title>
-      <link>/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</link>
       <pubDate>Mon, 22 Mar 2021 23:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</guid>
-      <description>최근에 내가 웹 애플리케이션 보안에 대해서 굉장히 무관심함을 알게 됨과 동시에 데이터베이트 연결이 끊어지는 네트워크 통신과 관련된 장애가 있었다.
-장애의 이유를 알지 못하니까 굉장히 답답함과 동시에 문제를 해결할 수 없었다. 따라서 디버깅을 하듯이 네트워크 패킷을 분석해서 원인을 알아 낼 수 있으면 굉장히 좋을 것 같다는 생각을 함과 동시에 내가 주도하면서 진행하는 토이 프로젝트가 보안에 대해서 굉장히 견고한 애플리케이션이 되었으면 하는 마음이 있다. 따라서, 앞으로 웹 애플리케이션 보안에 대해서 공부하고 견고한 시스템을 구축해나갈 생각이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</guid>
+      <description>&lt;p&gt;최근에 내가 웹 애플리케이션 보안에 대해서 굉장히 무관심함을 알게 됨과 동시에 데이터베이트 연결이 끊어지는 네트워크 통신과 관련된 장애가 있었다.&lt;/p&gt;
+&lt;p&gt;장애의 이유를 알지 못하니까 굉장히 답답함과 동시에 문제를 해결할 수 없었다. 따라서 디버깅을 하듯이 네트워크 패킷을 분석해서 원인을 알아 낼 수 있으면 굉장히 좋을 것 같다는 생각을 함과 동시에 내가 주도하면서 진행하는 토이 프로젝트가 보안에 대해서 굉장히 견고한 애플리케이션이 되었으면 하는 마음이 있다.
+따라서, 앞으로 웹 애플리케이션 보안에 대해서 공부하고 견고한 시스템을 구축해나갈 생각이다.&lt;/p&gt;
+&lt;p&gt;책에서는 다루는 대부분의 내용이 네트워크 공격을 패킷 단위로 분석하고 있다. 실제로도 공격 대응을 위한 분석 단계에서 패킷을 분석하는 빈도가 상당히 높다고 한다. 나는 보안 전문가보다는 웹 애플리케이션 개발자에 가깝기 때문에 실무적으로 패킷을 분석해서 보안 위협을 감지하는 일은 없을 확률이 높지만, 네트워크에 대해서 내부 원리까지 깊게 이해하는 것이 목표이므로, 많은 도움이 될 것 같다.&lt;/p&gt;
+&lt;p&gt;첫 장에서는 인터넷 통신의 표준 프로토콜인 &lt;code&gt;TCP/IP&lt;/code&gt;의 계층별 헤더의 구조에 대해서 패킷 단위로 소개하고 있고, 주로 네트워크 공격에 사용되는 네트워크 계층의 &lt;code&gt;IP&lt;/code&gt; 프로토콜과 전송 계층의 &lt;code&gt;TCP&lt;/code&gt;, &lt;code&gt;UDP&lt;/code&gt; 프로토콜의 구조에 대해서 설명하고 있다.&lt;/p&gt;
+&lt;p&gt;책에서는 한 번에 모든 개념을 숙지하기 보다는, 필요할 때, 찾아보며 각 헤더의 구조를 조금씩 명확히 새기는 것을 권장하고 있다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=217703927&#34;&gt;네트워크 공격 패킷 분석, 프리렉&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

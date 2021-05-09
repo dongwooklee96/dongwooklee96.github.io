@@ -2,19 +2,83 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>알고리즘 on 개발자 이동욱</title>
-    <link>/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</link>
+    <link>https://dongwooklee96.github.io/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</link>
     <description>Recent content in 알고리즘 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Feb 2021 12:29:39 +0900</lastBuildDate><atom:link href="/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Feb 2021 12:29:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>그리디 알고리즘</title>
-      <link>/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</link>
+      <link>https://dongwooklee96.github.io/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</link>
       <pubDate>Sun, 28 Feb 2021 12:29:39 +0900</pubDate>
       
-      <guid>/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</guid>
-      <description>그리디 알고리즘  현재 상황에서 좋아 보이는 것만을 선택하는 알고리즘
- 어떤 문제가 있을 때 단순 무식하게 탐욕적으로 푸는 알고리즘이다. 여기서 탐욕적이라는 말은 &amp;lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&amp;rsquo;을 의미한다. &amp;lsquo;사전에 외우고 있지 않아도 풀 수 있을 가능성이 높은 유형&amp;rsquo; 이라는 특징이 있다. 그리디 알고리즘 유형의 문제는 매우 다양하기 때문에, 암기한다고 해서 항상 잘 풀수 있는 것은 아니다. 많은 유형을 접해보고 문제를 풀어보며 훈련을 해야한다. 코딩 테스트에서 출제되는 그리디 알고리즘 유형의 문제는 창의력, 즉 문제를 풀기 위한 최소한의 아이디어를 떠올릴 수 있는 능력을 요구한다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</guid>
+      <description>&lt;h1 id=&#34;그리디-알고리즘&#34;&gt;그리디 알고리즘&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;현재 상황에서 좋아 보이는 것만을 선택하는 알고리즘&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;어떤 문제가 있을 때 단순 무식하게 탐욕적으로 푸는 알고리즘이다.&lt;/li&gt;
+&lt;li&gt;여기서 탐욕적이라는 말은 &amp;lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&amp;rsquo;을 의미한다.&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;사전에 외우고 있지 않아도 풀 수 있을 가능성이 높은 유형&amp;rsquo; 이라는 특징이 있다.&lt;/li&gt;
+&lt;li&gt;그리디 알고리즘 유형의 문제는 매우 다양하기 때문에, 암기한다고 해서 항상 잘 풀수 있는 것은 아니다.&lt;/li&gt;
+&lt;li&gt;많은 유형을 접해보고 문제를 풀어보며 훈련을 해야한다.&lt;/li&gt;
+&lt;li&gt;코딩 테스트에서 출제되는 그리디 알고리즘 유형의 문제는 창의력, 즉 문제를 풀기 위한 최소한의 아이디어를 떠올릴 수 있는 능력을 요구한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;문제-1-거스름돈&#34;&gt;문제 1: 거스름돈&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;당신은 음식점의 계산을 도와주는 점원이다. 카운터에는 거스름돈으로 사용할 500원, 100원, 50원, 10원짜리 동전이 무한이 존재한다고 가정한다. 손님에게 거슬러 줘야 할 돈이 N원일 때 거슬러줘야 할 동전의 최소 개수를 구하라. 단, 거슬러 줘야할 돈 N은 항상 10의 배수이다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;def solve(money):
+    ret = 0
+    if money &amp;gt;= 500:
+        ret += money // 500
+        money %= 500
+
+    if money &amp;gt;= 100:
+        ret += money // 100
+        money %= 100
+
+    if money &amp;gt;= 50:
+        ret += money // 50
+        money %= 50
+
+    if money &amp;gt;= 10:
+        ret += money // 10
+        money %= 10
+
+    return ret
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;from problem import solve
+
+
+def test_solve1():
+    assertMoney(1300, 5)
+    assertMoney(1260, 6)
+    assertMoney(500, 1)
+    assertMoney(260, 4)
+    assertMoney(200, 2)
+    assertMoney(150, 2)
+    assertMoney(110, 2)
+    assertMoney(100, 1)
+    assertMoney(90, 4)
+    assertMoney(80, 4)
+    assertMoney(60, 2)
+    assertMoney(50, 1)
+    assertMoney(40, 4)
+    assertMoney(10, 1)
+    assertMoney(0, 0)
+
+
+def assertMoney(money, count):
+    assert (solve(money), count)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;코드를 보면 화폐의 종류 만큼 반복을 수행해야하는 것을 알 수 있다. 따라서 화폐의 종류가 &lt;code&gt;K&lt;/code&gt;개라고 할 때, 위 소스 코드의 시간 복잡도는 &lt;code&gt;O(K)&lt;/code&gt;이다.&lt;/li&gt;
+&lt;li&gt;탐욕적으로 문제에 접근했을 때 정확한 답을 찾을 수 있다는 보장이 있을 때는 매우 효과적이고 직관적이다.&lt;/li&gt;
+&lt;li&gt;그리디 알고리즘으로 문제의 해법을 찾았을 때는 그 해법이 정당한지 검토를 해야한다.&lt;/li&gt;
+&lt;li&gt;어떤 코딩 테스트 문제를 만났을 때, 바로 문제 유형을 파악하기 어렵다면 그리디 알고리즘을 의심하고 문제를 해결할 수 있는 탐욕적인 해결책이 있는지 고민을 해보자.&lt;/li&gt;
+&lt;li&gt;만약 오랜 시간을 고민해도 그리디 알고리즘으로 해결 방법을 찾을 수 없다면, 그때는 다이나믹 프로그래밍이나 그래프 알고리즘 등으로 문제를 해결 할 수 있는지를 재차 고민해보는 것도 한 방법이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118&#34;&gt;이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
   </channel>

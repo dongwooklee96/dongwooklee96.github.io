@@ -2,21 +2,159 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SOP on 개발자 이동욱</title>
-    <link>/tags/sop/</link>
+    <link>https://dongwooklee96.github.io/tags/sop/</link>
     <description>Recent content in SOP on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 23 Mar 2021 22:20:39 +0900</lastBuildDate><atom:link href="/tags/sop/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Mar 2021 22:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/sop/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SOP(Same-origin policy) 란 무엇일까?</title>
-      <link>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
-      <description>브라우저 보안 정책에 SOP(same-origin-policy) 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.
-Same-Origin-Policy(동일 출처 정책)    SOP는 한 Origin에서 로드된 문서 또는 스크립트가 다른 Origin의 리소스와 상호 작용할 수 있는 방법을 제한하는 중요한 보안 메커니즘이다.
-  보안을 위협하는 문서를 격리하여, 보안 위협으로부터 보호할 수 있다.
-  한마디로 말해서 웹 브라우저에서 동작하는 프로그램은 로딩된 위치에 있는 리소스만 접근 할 수 있다는 정책이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <description>&lt;p&gt;브라우저 보안 정책에 &lt;code&gt;SOP(same-origin-policy)&lt;/code&gt; 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.&lt;/p&gt;
+&lt;h3 id=&#34;same-origin-policy동일-출처-정책&#34;&gt;Same-Origin-Policy(동일 출처 정책)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112231170-8974d980-8c79-11eb-99e5-4a9b5f85513d.png&#34; alt=&#34;sop&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;SOP&lt;/code&gt;는 한 &lt;code&gt;Origin&lt;/code&gt;에서 로드된 문서 또는 스크립트가 다른 &lt;code&gt;Origin&lt;/code&gt;의 리소스와 상호 작용할 수 있는 방법을 제한하는 중요한 보안 메커니즘이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;보안을 위협하는 문서를 격리하여, 보안 위협으로부터 보호할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;한마디로 말해서 웹 브라우저에서 동작하는 프로그램은 로딩된 위치에 있는 리소스만 접근 할 수 있다는 정책이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;출처origin의-정의&#34;&gt;출처(Origin)의 정의&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112231662-78789800-8c7a-11eb-8897-048e15a11d65.png&#34; alt=&#34;origin&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;두개의 URL이 존재할 때 프로토콜, 포트(지정된 경우), 호스트가 동일한 경우 두 URL의 &lt;code&gt;Origin&lt;/code&gt;이 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 표를 보면 &lt;strong&gt;&lt;a href=&#34;http://store.company.com/dir/page.html&#34;&gt;http://store.company.com/dir/page.html&lt;/a&gt;&lt;/strong&gt; 과 비교하여, 같은 &lt;code&gt;Origin&lt;/code&gt;인지 아닌지를 나타내고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;상속된-출처origin&#34;&gt;상속된 출처(Origin)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112232063-47e52e00-8c7b-11eb-8f7a-918fd0885a8a.png&#34; alt=&#34;inherited origins&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;about:blank&lt;/code&gt;, &lt;code&gt;javascript:URL&lt;/code&gt;과 같은 URL이 포함된 페이지에서 실행되는 스크립트는 해당 URL에 포함된 문서의 원본을 상속합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 유형의 URL에는 원본 서버에 대한 정보가 포함되어 있지 않기 때문입니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Internet Explorer의 예외&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;항상 인터넷 익스플로러는 표준을 지키지 않아서 문제가 생기는 것 같다.&lt;/p&gt;
+&lt;h4 id=&#34;trust-zones&#34;&gt;Trust Zones&lt;/h4&gt;
+&lt;p&gt;만약 두 도메인이 모두 신뢰도가 높은 영역 (예: 회사 인트라넷 도메인)에 있는 경우 동일한 오리진 제한이 적용되지 않는다.&lt;/p&gt;
+&lt;h4 id=&#34;port&#34;&gt;Port&lt;/h4&gt;
+&lt;p&gt;IE는 동일 출처 검사에 포트를 포함하지 않는다. 따라서 &lt;code&gt;https://company.com:81/index.html&lt;/code&gt;과 &lt;code&gt;https://company.com/index.html&lt;/code&gt;은 같은 오리진으로 간주되며 제한은 적용되지 않는다.&lt;/p&gt;
+&lt;h3 id=&#34;출처origin를-변경하기&#34;&gt;출처(Origin)를 변경하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;일부 제한 사항이 있는 페이지는 자체 출처를 변경할 수 있다.&lt;/li&gt;
+&lt;li&gt;스크립트는 &lt;code&gt;document.domain&lt;/code&gt;의 값을 현재 도메인 또는 현재 도메인의 슈퍼 도메인으로 설정할 수 있다.&lt;/li&gt;
+&lt;li&gt;하지만 이 기능은 동일한 출처 정책에서 제공하는 보안 보호 기능을 약화시키고 브라우저의 출처 모델을 복잡하게 하여, 상호 운용성 문제와 보안 버그를 유발하기 때문에 더 이상 사용되지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112233574-0c982e80-8c7e-11eb-9ddb-0804823875c0.png&#34; alt=&#34;Document.domain&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;API 문서를 보더라도, 몇몇의 브라우저가 지원을 하더라도, 지금은 표준에서 제외되었고 사용하지 않는게 좋다고 나와있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현재 디프리케이트 상태이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서로-다른-출처-접근cross-origin-network-access&#34;&gt;서로 다른 출처 접근(Cross-origin network access)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112234075-08b8dc00-8c7f-11eb-8c8b-293057534eff.png&#34; alt=&#34;another origin&#34;&gt;&lt;/p&gt;
+&lt;p&gt;동일 출처 정책은 &lt;code&gt;XMLHttpRequest&lt;/code&gt; 또는 &lt;code&gt;img&lt;/code&gt; 요소를 사용하는 경우와 같이 서로 다른 두 출처 간의 상호 작용을 제어한다. 이러한 상호작용은 다음과 같은 세 가지의 범주로 나누어진다.&lt;/p&gt;
+&lt;h3 id=&#34;동일-출처-정책에-대한-처리&#34;&gt;동일 출처 정책에 대한 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112746418-a39c1800-8fe9-11eb-8c98-afc0d95db147.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;만약 웹 사이트 &lt;code&gt;http://sitea.com&lt;/code&gt;에서 자바스크립트를 로딩 한 다음에 이 스크립트에서, &lt;code&gt;http://api.my.com&lt;/code&gt;을 호출한다면 동일 출처 정책에 의해서 호출한다면 호출 에러가 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 해결하는 방법으로는 인프라 측면에서 프록시를 사용하는 방법이나 &lt;code&gt;JSONP&lt;/code&gt;와 &lt;code&gt;CORS(Cross Origin Resource Sharing)&lt;/code&gt;이라는 방법이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;프록시를-이용하는-방법&#34;&gt;프록시를 이용하는 방법&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프록시를 이용하는 경우에는 간단하게 해결된다. 동일 출처 정책의 문제는 &lt;code&gt;API&lt;/code&gt; 서버와 자바 스크립트가 호스팅 되는 서버의 URL이 달라서 문제가 발생하게 된다. 이를 앞단에 &lt;code&gt;Reverse Proxy&lt;/code&gt;를 넣어서 전체 URL이 같게 만들어주면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 구조가 되면, 자바 스크립트가 로딩된 사이트도 &lt;code&gt;mysite.com&lt;/code&gt;이 되고 자바스크립트에서 호출하고자 하는 &lt;code&gt;API&lt;/code&gt; URL도 &lt;code&gt;mysite.com&lt;/code&gt;이 되기 때문에 동일 출처 정책에 위배되지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 방식은 간단하지만, 자사의 웹 사이트를 서비스하느 경우에만 가능하다. 그래서 자사의 서비스용 &lt;code&gt;API&lt;/code&gt;를 만드는 경우에는 괜찮지만, 파트나사나 일반 개발자에게 자바스크립트용 &lt;code&gt;REST API&lt;/code&gt;를 공개하는 경우에는 적절하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;특정-사이트에-대한-접근-허용-방식&#34;&gt;특정 사이트에 대한 접근 허용 방식&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;CROS 방식 중 이 방식은 가장 간단한 방식으로, &lt;code&gt;API&lt;/code&gt; 서버의 설정에서 모든 소스에서 들어오는 &lt;code&gt;API&lt;/code&gt; 호출을 허용하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 &lt;code&gt;HTTP&lt;/code&gt;로 &lt;code&gt;API&lt;/code&gt;를 호출하였을 때 HTTP에 요청에 응답을 주면서 HTTP 헤더에 &lt;code&gt;Request Origin&lt;/code&gt;(요청을 처리해 줄 수 있는 출처)를 명시하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;api.my.com&lt;/code&gt;에서 응답 헤더에 다음과 같이 명시해주면 &lt;code&gt;sitea.com&lt;/code&gt;에 의해서 로딩된 자바스크립트 클라이언트 요청에 대해서만 &lt;code&gt;api.my.com&lt;/code&gt;이 요청해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;Access-Controll-Allow-Origin: sitea.com
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;만약에 다음과 같이 &lt;code&gt;*&lt;/code&gt;로 해주면 &lt;code&gt;Request Origin&lt;/code&gt;에 관계없이 사이트에서 로딩된 자바스크립트 요청에 대해서 처리해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;Access-Control-Allow-Origin: *
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;pre-flight를-이용한-세세한-cors-통제&#34;&gt;Pre-flight를 이용한 세세한 CORS 통제&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt; 리소스(URL)당 섬세한 &lt;code&gt;CORS&lt;/code&gt; 통제가 필요한 경우에는 &lt;code&gt;Pre-Flight&lt;/code&gt; 호출이라는 것을 이용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 방식은 &lt;code&gt;REST&lt;/code&gt; 리소스를 호출하기 전에, 웹 브라우저가 &lt;code&gt;HTTP OPTIONS&lt;/code&gt; 요청을 보내면 해당 &lt;code&gt;REST&lt;/code&gt; 리소스에 대해서 가능한 &lt;code&gt;CORS&lt;/code&gt; 정보를 보내준다. (접근이 허용된 사이트, 접근이 허용된 메서드 등)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;웹 브라우저에서는 &lt;code&gt;XMLHttpRequest&lt;/code&gt;를 특정 &lt;code&gt;URL&lt;/code&gt;로 요청하기 전에, &lt;code&gt;HTTP OPTIONS&lt;/code&gt;를 호출한다. 그러면 서버는 해당 &lt;code&gt;URL&lt;/code&gt;에 접근할 수 있는 &lt;code&gt;Origin URL&lt;/code&gt;과 &lt;code&gt;HTTP&lt;/code&gt; 메서드를 반환해준다. 이를 &lt;code&gt;Pre-flight&lt;/code&gt; 호출이라고 하는데, 이 정보를 바탕으로 해당 &lt;code&gt;URL&lt;/code&gt;에 &lt;code&gt;XMLHttpRequest&lt;/code&gt;를 보낼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일반적으로는 교차 오리진 쓰기가 허용된다, 예를 들어 링크, 리디렉션 및 &lt;code&gt;form&lt;/code&gt; 제출이 있다. 일부 HTTP 요청에서는 &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests&#34;&gt;preflight&lt;/a&gt; 가 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112240206-402d8580-8c8b-11eb-9c2c-849a644bfdd7.png&#34; alt=&#34;preflight_correct&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;preflight&lt;/code&gt; 요청이란 일반적인 요청과 다르게, 먼저 &lt;code&gt;OPTIONS&lt;/code&gt; 메서드를 사용하여 HTTP 요청을 다른 출처(&lt;code&gt;Origin&lt;/code&gt;) 리소스로 전송하여 실제 요청이 안전한지 확인하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;교차 사이트 요청은 사용자 데이터에 영향을 미칠 수 있으므로 &lt;code&gt;preflight&lt;/code&gt;을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버는 이 &lt;code&gt;URL&lt;/code&gt;에 대한 접근 권한을 반환한다, &lt;code&gt;CORS&lt;/code&gt; 접근이 가능한 &lt;code&gt;Origin&lt;/code&gt; 사이트를 반환하고 사용할 수 있는 메서드를 반환한다. 그리고 &lt;code&gt;Pre-flight&lt;/code&gt; 호출은, &lt;code&gt;Access-Control-Max-Age&lt;/code&gt;에 정의된 &lt;code&gt;86400&lt;/code&gt; 초 동안 유효하다. (한번 &lt;code&gt;Pre-flight&lt;/code&gt; 호출을 하고 나면, 이 시간 동안은 다시 &lt;code&gt;Pre-flight 호출을 할 필요가 없다&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 &lt;code&gt;CORS&lt;/code&gt; 설정은 &lt;code&gt;API&lt;/code&gt; 호출 코드에서 직접 구현할 수 도 있고 로드 밸런서 역할을 하는 &lt;code&gt;HAProxy&lt;/code&gt;나 &lt;code&gt;Nginx&lt;/code&gt; 같은 리버스 프록시 설정을 통해서 간단하게 처리할 수도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 &lt;code&gt;API&lt;/code&gt; 단에서 구현이 필요하더라도, &lt;code&gt;HTTP&lt;/code&gt; 헤더를 직접 건드리지 않아도 스프링 등의 프레임워크에서 이미 &lt;code&gt;CORS&lt;/code&gt; 구현을 지원하고 있으므로 프레임워크를 통해서 간단하게 구현하는 것을 추천한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy&#34;&gt;MDN - SOP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

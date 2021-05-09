@@ -2,31 +2,197 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>파이썬 on 개발자 이동욱</title>
-    <link>/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/</link>
+    <link>https://dongwooklee96.github.io/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/</link>
     <description>Recent content in 파이썬 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 03 Mar 2021 08:45:13 +0900</lastBuildDate><atom:link href="/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Mar 2021 08:45:13 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>파이썬 @classmethod와 @staticmethod 차이</title>
-      <link>/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4/</link>
       <pubDate>Wed, 03 Mar 2021 08:45:13 +0900</pubDate>
       
-      <guid>/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4/</guid>
-      <description>파이썬을 코딩을 하다가 @classmethod 데코레이터가 붙어 있는 메서드를 볼 수 있었다. 정확히 어떤 역할을 하는지 몰라서 문서에서 찾아보았다.
-@classmethod  메서드를 클래스 메서드로 변환합니다. 클래스 메서드는 인스턴스 메서드가 인스턴스를 받는 것 처럼 클래스를 암시적인 첫 번째 인수로 수신한다.1  클래스 메서드는 다음과 같이 사용한다.
-class C: @classmethod def f(cls, arg1, arg2, ...): ...  클래스 메서드는 다음과 같이 호출 될 수 있다.  C.f(), C().f()   앞의 경우에는 클래스에서 호출 된 것이고, 뒤의 경우에는 인스턴스에서 호출 된 것이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4/</guid>
+      <description>&lt;p&gt;파이썬을 코딩을 하다가 &lt;code&gt;@classmethod&lt;/code&gt; 데코레이터가 붙어 있는 메서드를 볼 수 있었다. 정확히 어떤 역할을 하는지 몰라서 문서에서 찾아보았다.&lt;/p&gt;
+&lt;h4 id=&#34;classmethod&#34;&gt;@classmethod&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109730703-420ca780-7bfd-11eb-9a41-47561874c29e.png&#34; alt=&#34;Screen Shot 2021-03-03 at 8 48 29 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;메서드를 클래스 메서드로 변환합니다.&lt;/li&gt;
+&lt;li&gt;클래스 메서드는 인스턴스 메서드가 인스턴스를 받는 것 처럼 클래스를 암시적인 첫 번째 인수로 수신한다.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;클래스 메서드는 다음과 같이 사용한다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class C:
+    @classmethod
+    def f(cls, arg1, arg2, ...): ...
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;클래스 메서드는 다음과 같이 호출 될 수 있다.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;C.f()&lt;/code&gt;, &lt;code&gt;C().f()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;앞의 경우에는 클래스에서 호출 된 것이고, 뒤의 경우에는 인스턴스에서 호출 된 것이다.&lt;/li&gt;
+&lt;li&gt;클래스 메서드가 상속 받은 클래스에서 호출되면 상속 받은 클래스가 첫 번째 인수로 전달된다.&lt;/li&gt;
+&lt;li&gt;클래스 메서드는 &lt;code&gt;C++&lt;/code&gt;, &lt;code&gt;Java&lt;/code&gt;의 스태틱 메서드와는 다르다, 만약 앞의 경우로 스태틱 메서드를 사용하고 싶다면, &lt;code&gt;@staticmethod&lt;/code&gt; 를 사용하라.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;여기까지만 봐서는 정적 메서드랑 무슨 차이인지 알기 힘들었다. 따라서 정적 메서드 관련된 문서를 확인해봤다.&lt;/p&gt;
+&lt;h4 id=&#34;staticmethod&#34;&gt;@staticmethod&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109732266-3a9acd80-7c00-11eb-98b4-bd34b94a81fb.png&#34; alt=&#34;Screen Shot 2021-03-03 at 9 09 51 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;메서드를 정적 메서드로 변환시켜 줍니다.&lt;/li&gt;
+&lt;li&gt;정적 메서드는 암시적으로 첫 번째 인수를 받지 않습니다.&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;사용하는 방법은 다음과 같다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class C:
+    @staticmethod
+    def f(arg1, arg2, ...): ...
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;정적 메서드는 다음과 같이 호출 될 수 있습니다.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;C.f()&lt;/code&gt;, &lt;code&gt;C().f()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;데코레이터와 마찬가지로, 정적 메서드를 &lt;code&gt;regular&lt;/code&gt; 함수 처럼 호출 할 수 있다.&lt;/li&gt;
+&lt;li&gt;클래스 바디에 함수에 대한 참조가 필요하고 인스턴스 메서드로 자동 변환하지 않으려는 경우에 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;class C:
+    builtin_open = staticmethod(open)
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;차이점&#34;&gt;차이점&lt;/h4&gt;
+&lt;p&gt;얼핏봐서는 차이점을 크게 못느껴서 인터넷을 찾아본 결과 좋은 글을 볼 수 있었다. &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;@classmethod&lt;/code&gt;와 &lt;code&gt;@staticmethod&lt;/code&gt;는 상속에서 차이가 난다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class Person:
+    default= &amp;quot;아빠&amp;quot;
+
+     def __init__(self):
+        self.data = self.default
+
+    @classmethod
+    def class_person(cls):
+        return cls()
+
+    @staticmethod
+    def static_person():
+        return Person()
+
+class WhatPerson(Person):
+    default = &amp;quot;엄마&amp;quot;
+person1 = WhatPerson.class_person()    # return 엄마
+person2 = WhatPerson.static_person()   # return 아빠
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위와 같이 &lt;code&gt;@staticmethod&lt;/code&gt;인 경우에는 부모 클래스의 속성 값을 가져오지만, &lt;code&gt;@classmethod&lt;/code&gt;의 경우 cls 인자를 활용하여 클래스의 클래스 속성을 가져온다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://julien.danjou.info/guide-python-static-class-abstract-methods/&#34;&gt;The definitive guide on how to use static, class or abstract methods in Python&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.python.org/3/library/functions.html#classmethod&#34;&gt;https://docs.python.org/3/library/functions.html#classmethod&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.python.org/3/library/functions.html#staticmethod&#34;&gt;https://docs.python.org/3/library/functions.html#staticmethod&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372&#34;&gt;https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372&lt;/a&gt; &lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
     </item>
     
     <item>
       <title>WSGI</title>
-      <link>/post/2021/03/02/wsgi/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/02/wsgi/</link>
       <pubDate>Tue, 02 Mar 2021 14:39:13 +0900</pubDate>
       
-      <guid>/post/2021/03/02/wsgi/</guid>
-      <description>플라스크와 WSGI 플라스크 문서를 살펴보다가 다음과 같은 문장을 보았다.
- 플라스크는 Jinja 템플릿 엔진과 Werkzeug WSGI 툴킷에 의존하고 있다. 1  Werkzeug가 무엇을 하는 툴인지 몰라서 검색을 해본 결과 다음과 같았다.
- Werkzeug는 포괄적인 WSGI 웹 애플리케이션 라이브러리이다. WSGI 응용 프로그램을 위한 단순한 유틸리티에서 시작하였지만, 현재는 가장 진보한 WSGI 유틸리티 라이브러가 되었다. 플라스크는 Werkzeug를 감싸 WSGI의 세부사항을 처리하는 동시에 강력한 애플리케이션을 위한 더 많은 구조와 패턴을 제공한다. 2  Werkzeug는 다음을 포함하고 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/02/wsgi/</guid>
+      <description>&lt;h1 id=&#34;플라스크와-wsgi&#34;&gt;플라스크와 WSGI&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109603667-7896e380-7b65-11eb-8e62-961951e0c969.png&#34; alt=&#34;Screen Shot 2021-03-02 at 2 42 04 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;플라스크 문서를 살펴보다가 다음과 같은 문장을 보았다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;플라스크는 &lt;code&gt;Jinja&lt;/code&gt; 템플릿 엔진과 &lt;code&gt;Werkzeug WSGI&lt;/code&gt; 툴킷에 의존하고 있다. &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109604060-37530380-7b66-11eb-8217-e8c8a95ae4ec.png&#34; alt=&#34;Screen Shot 2021-03-02 at 2 47 21 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Werkzeug&lt;/code&gt;가 무엇을 하는 툴인지 몰라서 검색을 해본 결과 다음과 같았다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Werkzeug&lt;/code&gt;는 포괄적인 &lt;code&gt;WSGI&lt;/code&gt; 웹 애플리케이션 라이브러리이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;WSGI&lt;/code&gt; 응용 프로그램을 위한 단순한 유틸리티에서 시작하였지만, 현재는 가장 진보한 &lt;code&gt;WSGI&lt;/code&gt; 유틸리티 라이브러가 되었다.&lt;/li&gt;
+&lt;li&gt;플라스크는 &lt;code&gt;Werkzeug&lt;/code&gt;를 감싸 &lt;code&gt;WSGI&lt;/code&gt;의 세부사항을 처리하는 동시에 강력한 애플리케이션을 위한 더 많은 구조와 패턴을 제공한다. &lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;Werkzeug&lt;/code&gt;는 다음을 포함하고 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;브라우저에 있는 스택 트레이스와 코드를 검사할 수 있는 디버거를 포함한다.&lt;/li&gt;
+&lt;li&gt;헤더, 쿼리 인자, 폼 데이터, 파일 및 쿠키와 상호 작용할 수 있는 요청 객체이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;플라스크는 내부적으로 &lt;code&gt;Werkzeug&lt;/code&gt;로 구현되어 있고, &lt;code&gt;Werkzeug&lt;/code&gt;는 &lt;code&gt;WSGI&lt;/code&gt;를 구현하는 라이브러리이다.
+그렇다면 자연스럽게 &lt;code&gt;WSGI&lt;/code&gt;가 무엇인지 궁금하였다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109774010-38a62e00-7c43-11eb-9a90-3e95c3090c30.png&#34; alt=&#34;Screen Shot 2021-03-03 at 5 09 08 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;WSGI&lt;/code&gt;는 웹 서버 게이트웨이 인터페이스이다.&lt;/li&gt;
+&lt;li&gt;웹 서버가 웹 애플리케이션과 통신하는 방법과 웹 애플리케이션을 연결하여 하나의 요청을 처리하는 방법을 설명하는 규격 입니다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;WSGI&lt;/code&gt;는 &lt;a href=&#34;https://www.python.org/dev/peps/pep-3333/&#34;&gt;PEP 3333&lt;/a&gt;에 설명되어 있는 파이썬 표준이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;문서의 양이 방대하므로 지금 모두 설명하는 것보다는 따로 나중에 관련된 페이지를 만들어서 공부를 해야겠다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109775165-81aab200-7c44-11eb-8455-d5db0d39f127.png&#34; alt=&#34;Screen Shot 2021-03-03 at 5 18 38 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬은 다양한 웹 애플리케이션 프레임워크가 있고 웹 프레임 워크의 선택이 사용가능한 웹 서버 선택을 제한할 수 있고 그 반대의 경우도 마찬가지이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이와 대조적으로, 자바의 서블릿 API를 지원하는 웹 서버에서 자바 웹 애플리케이션 프레임워크로 작성된 애플리케이션을 실행할 수 있게 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프레임워크 선택과 웹 서버 선택을 분리함으로써, 사용자는 자신에게 맞는 조합을 선택할 수 있고, 프레임워크와 서버 개발자는 원하는 분야에 집중할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 이 &lt;code&gt;PEP&lt;/code&gt; 문서는 웹 서버와 웹 애플리케이션 또는 프레임워크 사이의 단순하고 보편적인 인터페이스인 파이썬 웹 서버 게이트웨이 인터페이스를 제안하는 문서이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;WSGI&lt;/code&gt;의 목표는 새로운 웹 프레임워크를 만드는 것이 아니라 기존 서버, 애플리케이션 또는 프레임워크의 쉬운 상호 연결을 촉진하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;wsgi-개요&#34;&gt;WSGI 개요&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109776796-52954000-7c46-11eb-93eb-f622fd14dccf.png&#34; alt=&#34;Screen Shot 2021-03-03 at 5 31 36 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;WSGI 인터페이스는 서버, 게이트웨이 측면과 애플리케이션, 프레임워크 측면이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버 측에서 응용 프로그램이 제공하는 &lt;code&gt;Callable&lt;/code&gt; 객체를 호출한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 객체의 제공 방법은 서버 또는 게이트웨이에 따라서 다르다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;순수한 서버/게이트웨이 및 애플리케이션/프레임워크 외에도, 이 규격 양쪽을 모두 구현하는 &amp;ldquo;중간 소프트웨어&amp;rdquo; 컴포넌트를 만들 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 규격에서 &lt;code&gt;Callable&lt;/code&gt; 이라는 용어는 &lt;code&gt;__call__&lt;/code&gt; 메서드를 가지는 함수, 메서드, 클래스, 그리고 인스턴스를 말한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;필요에 따라 적절한 구현 기술을 선택하는 것은 &lt;code&gt;Callable&lt;/code&gt;을 구현하는 서버, 게이트웨이 또는 애플리케이션에 달려 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반대로 &lt;code&gt;Callable&lt;/code&gt;을 호출하는 서버, 게이트웨이 또는 응용 프로그램은 &lt;code&gt;Callable&lt;/code&gt; 타입에 종속되지 않아야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;결론&#34;&gt;결론&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;웹 서버와 프레임워크를 분리하기 위해서 생겨났다.&lt;/li&gt;
+&lt;li&gt;WSGI는 웹 서버와 애플리케이션이 통신하는 방법과 요청을 처리하는 방법을 설명한 규약이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://flask.palletsprojects.com/en/1.1.x/&#34;&gt;https://flask.palletsprojects.com/en/1.1.x/&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://palletsprojects.com/p/werkzeug/&#34;&gt;https://palletsprojects.com/p/werkzeug/&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</description>
     </item>
     
   </channel>

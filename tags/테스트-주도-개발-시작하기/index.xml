@@ -2,19 +2,97 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>테스트 주도 개발 시작하기 on 개발자 이동욱</title>
-    <link>/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A3%BC%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/</link>
+    <link>https://dongwooklee96.github.io/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A3%BC%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/</link>
     <description>Recent content in 테스트 주도 개발 시작하기 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Feb 2021 12:29:39 +0900</lastBuildDate><atom:link href="/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A3%BC%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Feb 2021 12:29:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A3%BC%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>테스트 코드를 작성하는 순서</title>
-      <link>/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C/</link>
+      <link>https://dongwooklee96.github.io/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C/</link>
       <pubDate>Sat, 27 Feb 2021 12:29:39 +0900</pubDate>
       
-      <guid>/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C/</guid>
-      <description>테스트 코드를 작성하는 순서 테스트 코드를 작성하는 것도 무작성 작성하는 것보다는 순서를 지켜가면서 작성하는 것이 훨씬 좋다.
-테스트는 다음과 같은 순서를 따르면서 작성 해야한다.   쉬운 경우에서, 어려운 경우로 진행 예외적인 경우에서, 정상적인 경우로 진행   한번에 완벽한 코드를 만들면 좋겠지만, 모두가 슈퍼 개발자인 것은 아니다. 보통의 개발자는 한 번에 많은 코드를 만들다 보면 나도 모르게 버그를 만들고 나중에 버그를 잡기 위해 많은 시간을 허비하게 된다. 당연히 테스트 통과 시간도 길어진다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C/</guid>
+      <description>&lt;h3 id=&#34;테스트-코드를-작성하는-순서&#34;&gt;테스트 코드를 작성하는 순서&lt;/h3&gt;
+&lt;p&gt;테스트 코드를 작성하는 것도 무작성 작성하는 것보다는 순서를 지켜가면서 작성하는 것이 훨씬 좋다.&lt;/p&gt;
+&lt;h4 id=&#34;테스트는-다음과-같은-순서를-따르면서-작성-해야한다&#34;&gt;테스트는 다음과 같은 순서를 따르면서 작성 해야한다.&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;쉬운 경우에서, 어려운 경우로 진행&lt;/li&gt;
+&lt;li&gt;예외적인 경우에서, 정상적인 경우로 진행&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;한번에 완벽한 코드를 만들면 좋겠지만, 모두가 슈퍼 개발자인 것은 아니다. 보통의 개발자는 한 번에 많은 코드를 만들다 보면 나도 모르게 버그를 만들고
+나중에 버그를 잡기 위해 많은 시간을 허비하게 된다. 당연히 테스트 통과 시간도 길어진다.&lt;br&gt;
+그 뿐만 아니라, 코드 작성 시간이 길어지면 집중력도 떨어져서 흐름도 자주 끊기게 된다.&lt;br&gt;
+중간에 화장실도 다녀오고 커피도 마시게 된다. 자리에 돌아오면 이전까지 했던 흐름을 이어가 기 위한 시간도 필요하다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;따라서 테스트를 코드를 작성할 때, 순서에 유의해서 작성 해야 한다 가장 구현하기 쉬운 경우부터 시작하고, 보통 수 분에서 십여 분 이내에 구현을 완료해서 테스트를 통과시킬 수 있을 만큼 쉬운 것을 선택한다. 그래야만 점진적으로 구현을 완성해갈 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;한번에 구현하는 시간이 짧아지면 디버깅 할 때에 유리하다.&lt;/li&gt;
+&lt;li&gt;작성한 코드가 많지 않고 작성 시간도 짧으면 머리속에 코드에 대한 내용이 생생하게 남아있기 때문에, 디버깅할 때 문제의 원인을 쉽게 찾을 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;위의 문장을 읽고 나서 &amp;ldquo;내가 지금 작성하고 있는 코드를 어떻게 하면 가장 빨리 실행할 수 있을까&amp;rdquo; 라는 생각이 들었고
+가장 빠르게 실행 시킬 수 있는 방법은 테스트 코드를 작성하는 것이라는 결론을 내릴 수 있었다.&lt;/p&gt;
+&lt;h4 id=&#34;예외-상황을-먼저-테스트해야-하는-이유&#34;&gt;예외 상황을 먼저 테스트해야 하는 이유&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;다양한 예외 상황은 복잡한 &lt;code&gt;if-else&lt;/code&gt; 블록을 동반하기 때문에 예외 상황을 전혀 고려하지 않은 코드에 예외 상황을 반영하려면, 코드의 구조를 뒤집거나 코드 중간에 예외 상황을 처리하기 위해 조건문을 중복해서 추가하는 일이 벌어진다.&lt;/li&gt;
+&lt;li&gt;TDD를 하는 동안 예외 상황을 찾고 테스트에 반영하면 예외 상황을 처리하지 않아 발생하는 버그도 줄여준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;완급-조절&#34;&gt;완급 조절&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;처음에 테스트 코드를 작성할 때, 어려운 것 중 하나는 한 번에 얼마만큼의 코드를 작성할 것인가이다.&lt;/li&gt;
+&lt;li&gt;다음의 순서를 시키면서 TDD를 진행하는 것이 좋다.&lt;/li&gt;
+&lt;li&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;정해진 값을 리턴&lt;/li&gt;
+&lt;li&gt;값 비교를 이용해서 정해진 값을 리턴&lt;/li&gt;
+&lt;li&gt;다양한 테스트를 추가하면서 구현을 일반화 시킨다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;뻔한 구현이라도 위 단계를 거쳐서 연습하는 것과 바로 구현하는 것과는 차이가 있다.&lt;/li&gt;
+&lt;li&gt;테스트를 만들고 통과시키는 과정에서 구현이 막힐 때가 있다. 이럴 때 위 단계를 이용해서 TDD를 연습한 개발자는 조금씩 기능을 구현해 나갈 수 있는 반면에 그렇지 못한 개발자는 구현에 실패하게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;지속적인-리팩토링&#34;&gt;지속적인 리팩토링&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;테스트를 통과한 후에는 리펙토링을 진행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드 중복은 대표적인 리팩토링 대상이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드가 길어지면 메서드 추출과 같은 기법을 사용해서, 메서드 이름으로 코드의 의미를 표현할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TDD를 진행하는 과정에서 지속적으로 리펙토링을 진행하면 코드 가독성이 높아진다. 코드 가독성이 높아지면 개발자는 빠르게 코드를 분석할 수 있어 변경할 코드를 빠르게 찾을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드 변경의 어려움을 줄여주어 향후 유지보수에 도움이 된다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  테스트 대상 코드에서 상수를 변수로 바꾸거나 변수 이름을 추출하는 것과 같은 작은 
+  리펙토링은 발견하면 바로 실시하는데 반해서 메서드 추출과 같이 메서드의 구조에
+  영향을 주는 리펙토링은 큰 틀에서 구현 흐름이 눈에 들어오기 시작한 후에 진행한다.
+    
+  구현 초기에는 아직 구현의 전반적인 흐름을 모르기 때문에, 메서드 추출과 같은 
+  리펙토링을 진행하면 코드 구조를 잘못 잡을 가능성이 있기 때문이다. 코드 구조를 잘못 잡으면
+  테스트를 통과 시키는 과정에서 코드가 복잡해지거나 구현을 더는 진행하지 못하고 막힐 수 있다.
+  이런 상황이 오면 구현을 멈추고 메서드 추출 리팩토링을 되돌려야 한다. 
+  리팩토링을  취소해서 코드를 원상 복구한 뒤에 다음 테스트를 진행하고
+   코드의 의미나 구조가 더 명확해지면 그때 다시 리펙토링을 실시한다.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=233614629&#34;&gt;테스트 주도 개발 시작하기, (최범균, 가메출판사)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

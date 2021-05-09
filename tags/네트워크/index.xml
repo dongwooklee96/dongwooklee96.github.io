@@ -2,110 +2,604 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>네트워크 on 개발자 이동욱</title>
-    <link>/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/</link>
+    <link>https://dongwooklee96.github.io/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/</link>
     <description>Recent content in 네트워크 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 28 Apr 2021 00:12:39 +0900</lastBuildDate><atom:link href="/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Apr 2021 00:12:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>리눅스 네트워크 도구 (테스트, 추적, 모니터링 명령어)</title>
-      <link>/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</link>
       <pubDate>Wed, 28 Apr 2021 00:12:39 +0900</pubDate>
       
-      <guid>/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</guid>
-      <description>hping3  hping3 -S www.daum.net -p 80   TCP/UDP, ICMP 및 다양한 종류의 패킷을 전송할 수 있다.
-  좀 더 빠른 주기로 패킷을 보내고 싶다면 --fast 옵션을 줄 수 있다.
-  iptables   이 명령어는 특정 IP 주소의 요청을 막을 수 있는 명령이다.  # localhost의 UDP 요청을 차단하는 규칙을 추가하였다. iptables -I OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP # iptables 설정을 확인해본다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</guid>
+      <description>&lt;h3 id=&#34;hping3&#34;&gt;hping3&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;hping3 -S www.daum.net -p 80
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TCP/UDP, ICMP 및 다양한 종류의 패킷을 전송할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;좀 더 빠른 주기로 패킷을 보내고 싶다면 &lt;code&gt;--fast&lt;/code&gt; 옵션을 줄 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;iptables&#34;&gt;iptables&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;이 명령어는 특정 IP 주소의 요청을 막을 수 있는 명령이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;# localhost의 UDP 요청을 차단하는 규칙을 추가하였다.
+iptables -I OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP
+
+# iptables 설정을 확인해본다.
+iptables -L -n
+
+# 다른 터미널에서 실제 요청을 보내보지만 응답이 오지 않는다.
+hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
+
+# 위의 설정을 삭제한다.
+iptables -D OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP
+
+iptables -L -n
+
+# 요청이 정상적으로 보내짐을 확인할 수 있다.
+
+hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;iptables&lt;/code&gt; 도구를 사용하는 것은 내부적으로 커널의 기능을 사용하는 것이고, 리눅스 커널 안에 넷 필터(&lt;code&gt;NET FILTER&lt;/code&gt;) 라는 기능을 이용하여 구현하고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;설정이 늘어날수록 점점 느려진다는 단점이 있어서, 요즘에는 &lt;code&gt;BPF&lt;/code&gt;라는 툴을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;nslookup&#34;&gt;nslookup&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;도메인 이름을 IP 주소로 변환해주는 명령어이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116270076-bd33a980-a7b9-11eb-83fc-a8ffaef46022.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 36 08 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이와 비슷한 도구로 &lt;code&gt;dig&lt;/code&gt; 라는 도구가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116270202-dccad200-a7b9-11eb-9f82-fa515cebecdd.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 36 45 AM&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;nmap&#34;&gt;nmap&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;포트 스캔을 도와주는 툴이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116270489-18fe3280-a7ba-11eb-8d79-95571243f764.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 38 40 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어 및 결과는 &lt;code&gt;localhost&lt;/code&gt;에 열려있는 포트들을 터미널에 출력한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;iftop&#34;&gt;iftop&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 I/O 트래픽 모니터링을 도와주는 툴이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116270960-89a54f00-a7ba-11eb-9c44-38576b8ffebf.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 41 42 AM&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;bmon&#34;&gt;bmon&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116271227-c113fb80-a7ba-11eb-8473-232acc8656c2.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 42 55 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 I/O 트래픽 모니터링을 도와주는 툴이다.&lt;/li&gt;
+&lt;li&gt;특이한 점은 TUI 그래픽으로 보여준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dstat&#34;&gt;dstat&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116271795-47304200-a7bb-11eb-9aea-bbeba62def27.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 47 14 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;테이블 형태로 시스템 정보와 같이 보여준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ss&#34;&gt;ss&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116272077-8fe7fb00-a7bb-11eb-869c-6110b9b5a938.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 49 12 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;다양한 옵션으로 현재 소켓 상태를 확인할 수 있다.&lt;/li&gt;
+&lt;li&gt;소켓의 리시브 큐와 센드 큐를 모니터링 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;netstat&#34;&gt;netstat&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116272413-d76e8700-a7bb-11eb-9726-d953b812550b.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 50 57 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;다양한 옵션으로 현재 소켓 상태를 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>MSS 그리고 MTU (draft)</title>
-      <link>/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</link>
       <pubDate>Tue, 27 Apr 2021 23:44:39 +0900</pubDate>
       
-      <guid>/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</guid>
-      <description>MSS (Maximun Segment Size)   MSS는 TCP 상에서 전송할 수 있는 사용자의 데이터(payload) 크기를 말한다. MSS는 TCP 헤더를 제외한 데이터의 크기이다. MSS는 TCP(L4) 계층에서 데이터의 크기를 말한다. 위의 사진을 보면, TCP 헤더를 제외한 데이터 부분을 MSS라고 말한다.  MTU (Maximun Transmission Unit)   MTU는 네트워크에서 전송 될 수 있는 최대 패킷의 크기를 말한다. MTU는 IP(L3) 계층에서 패킷이라고도 불리운다. MTU에서 IP 헤더와 TCP 헤더를 제외하면 그것이 바로 MSS가 된다. MTU를 패킷이라고 부른다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116261520-b0f81e00-a7b2-11eb-96dd-03ae4f909358.png&#34; alt=&#34;images&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mss-maximun-segment-size&#34;&gt;MSS (Maximun Segment Size)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116262109-3aa7eb80-a7b3-11eb-8648-27d4cdfb5779.png&#34; alt=&#34;Screen Shot 2021-04-27 at 11 48 40 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MSS는 TCP 상에서 전송할 수 있는 사용자의 데이터(&lt;code&gt;payload&lt;/code&gt;) 크기를 말한다.&lt;/li&gt;
+&lt;li&gt;MSS는 TCP 헤더를 제외한 데이터의 크기이다.&lt;/li&gt;
+&lt;li&gt;MSS는 TCP(L4) 계층에서 데이터의 크기를 말한다.&lt;/li&gt;
+&lt;li&gt;위의 사진을 보면, TCP 헤더를 제외한 데이터 부분을 MSS라고 말한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mtu-maximun-transmission-unit&#34;&gt;MTU (Maximun Transmission Unit)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116262489-8bb7df80-a7b3-11eb-8254-7a56a5d13018.png&#34; alt=&#34;Screen Shot 2021-04-27 at 11 51 49 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MTU는 네트워크에서 전송 될 수 있는 최대 패킷의 크기를 말한다.&lt;/li&gt;
+&lt;li&gt;MTU는 IP(L3) 계층에서 패킷이라고도 불리운다.&lt;/li&gt;
+&lt;li&gt;MTU에서 IP 헤더와 TCP 헤더를 제외하면 그것이 바로 MSS가 된다.&lt;/li&gt;
+&lt;li&gt;MTU를 패킷이라고 부른다.&lt;/li&gt;
+&lt;li&gt;참고로 L2는 프레임이라는 용어로 부른다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;설정된-mtu-크기를-확인하는-방법&#34;&gt;설정된 MTU 크기를 확인하는 방법&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116263219-27e1e680-a7b4-11eb-90c7-995a0ef1d0e5.png&#34; alt=&#34;test&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ip link&lt;/code&gt; 라는 명령어를 치면 현재 리눅스 환경에서 설정된 MTU 값을 확인할 수 있다.&lt;/li&gt;
+&lt;li&gt;MTU 값이 1500 BYTES 으로 잡혀 있는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;패킷을-보내고-이를-트레이싱-해보자&#34;&gt;패킷을 보내고 이를 트레이싱 해보자&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;패킷을 보내기 위해서 &lt;code&gt;ping&lt;/code&gt; 이라는 도구를 통해서 구글 DNS 서버 (8.8.8.8)에 요청을 보내보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ping -M do -s 68 8.8.8.8&lt;/code&gt; 이 명령어는 서버에 68 바이트를 보내는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116264144-03d2d500-a7b5-11eb-8d04-05da9a3b3b39.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 02 18 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;사진을 보면 데이터는 68바이트를 보냈지만 실제로는 96 바이트가 전송된 것을 확인할 수 있다. 이유는 데이터에 헤더 부분이 포함되었기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;추가로 &lt;code&gt;ping -M do -s 1500 8.8.8.8&lt;/code&gt; 명령어로 패킷의 최대 크기인 1500 MTU 만큼 데이터를 전송해본다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116264626-6926c600-a7b5-11eb-9487-b472c8c1264a.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 05 06 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;에러가 발생하는 것을 확인해볼 수 있는데, 그 이유는 헤더가 포함되었기 때문이다. 하지만 이 에러는 커널 레벨에서 발생한 것은 아니고 &lt;code&gt;ping&lt;/code&gt; 도구에서 발생시킨 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 확인해보기 위해서, &lt;code&gt;ping&lt;/code&gt; 보다 많은 기능을 지원하는 &lt;code&gt;hping3&lt;/code&gt; 도구를 이용해서 테스트 해보겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sudo tshark -i enp0s3 -f icmp -Y &amp;quot;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 명령어를 이용해서 패킷을 캡처하고 아래 명령어를 다른 터미널에서 입력을 해본다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sudo hping3 -d 2000 --icmp 8.8.8.8
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116265856-61b3ec80-a7b6-11eb-9333-e8b070648840.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 12 05 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같은 결과를 확인해 볼 수 있다. 자세히 살펴보면, 패킷이 정상적으로 전송이 된 것을 확인해볼 수 있지만 서버로 부터 응답이 오지 않는 것을 확인할 수 있다. 이로서 구글 도메인 서버에 요청할 수 있는 최대 패킷 크기는 1500 bytes 라는 것을 확인할 수 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 2000 바이트를 데이터로 전송을 하였는데 MTU는 최대 1500 바이트이다. 따라서 패킷이 쪼개져서 전송되고 있다는 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>TCP 통신과정 추적해보기 (draft)</title>
-      <link>/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</link>
       <pubDate>Tue, 20 Apr 2021 23:51:39 +0900</pubDate>
       
-      <guid>/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</guid>
-      <description>추적 과정  추적하기 전에 클라이언트와 서버 코드를 컴파일 한다.
-client.c
-#include &amp;lt;stdio.h&amp;gt; #include &amp;lt;sys/socket.h&amp;gt; #include &amp;lt;arpa/inet.h&amp;gt; #include &amp;lt;string.h&amp;gt; #include &amp;lt;unistd.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; #define MAXLINE 1024 int main(int argc, char **argv) { struct sockaddr_in serveraddr; int server_sockfd; int client_len; char buf[MAXLINE]; if((server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) { perror(&amp;quot;error : &amp;quot;); return 1; } serveraddr.sin_family = AF_INET; serveraddr.sin_addr.s_addr = inet_addr(&amp;quot;127.0.0.1&amp;quot;); serveraddr.sin_port = htons(4000); client_len = sizeof(serveraddr); if(connect(server_sockfd, (struct sockaddr*)&amp;amp;serveraddr, client_len) == -1) { perror(&amp;quot;connect error : &amp;quot;); return 1; } memset(buf, 0x00, MAXLINE); read(0, buf, MAXLINE); if(write(server_sockfd, buf, MAXLINE) &amp;lt;= 0) { perror(&amp;quot;write error : &amp;quot;); return 1; } memset(buf, 0x00, MAXLINE); if(read(server_sockfd, buf, MAXLINE) &amp;lt;= 0) { perror(&amp;quot;read error: &amp;quot;); return 1; } close(server_sockfd); printf(&amp;quot;server:%s\n&amp;quot;, buf); return 0; } server.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</guid>
+      <description>&lt;h3 id=&#34;추적-과정&#34;&gt;추적 과정&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;추적하기 전에 클라이언트와 서버 코드를 컴파일 한다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;client.c&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#define MAXLINE 1024
+
+int main(int argc, char **argv) {
+        struct sockaddr_in serveraddr;
+        int server_sockfd;
+        int client_len;
+        char buf[MAXLINE];
+
+        if((server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+                perror(&amp;quot;error : &amp;quot;);
+                return 1;
+        }
+        serveraddr.sin_family = AF_INET;
+        serveraddr.sin_addr.s_addr = inet_addr(&amp;quot;127.0.0.1&amp;quot;);
+        serveraddr.sin_port = htons(4000);
+
+        client_len = sizeof(serveraddr);
+
+        if(connect(server_sockfd, (struct sockaddr*)&amp;amp;serveraddr, client_len) == -1) {
+                perror(&amp;quot;connect error : &amp;quot;);
+                return 1;
+        }
+        memset(buf, 0x00, MAXLINE);
+        read(0, buf, MAXLINE);
+        if(write(server_sockfd, buf, MAXLINE) &amp;lt;= 0) {
+                perror(&amp;quot;write error : &amp;quot;);
+                return 1;
+        }
+        memset(buf, 0x00, MAXLINE);
+        if(read(server_sockfd, buf, MAXLINE) &amp;lt;= 0) {
+                perror(&amp;quot;read error: &amp;quot;);
+                return 1;
+        }
+        close(server_sockfd);
+        printf(&amp;quot;server:%s\n&amp;quot;, buf);
+        return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;server.c&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+
+#define BUFF_SIZE 1024
+
+int main(void){
+   int server_socket;
+   int client_socket;
+   int client_addr_size;
+   struct sockaddr_in server_addr;
+   struct sockaddr_in client_addr;
+   char buff_rcv[BUFF_SIZE+5];
+   char buff_snd[BUFF_SIZE+5];
+
+   server_socket = socket(PF_INET, SOCK_STREAM, 0);
+   if(-1 == server_socket){
+      printf( &amp;quot;server socket 생성 실패n&amp;quot;);
+      exit( 1);
+   }
+
+   memset(&amp;amp;server_addr, 0, sizeof(server_addr));
+   server_addr.sin_family     = AF_INET;
+   server_addr.sin_port       = htons(4000);
+   server_addr.sin_addr.s_addr= htonl(INADDR_ANY);
+
+   if(-1 == bind(server_socket, (struct sockaddr*)&amp;amp;server_addr, sizeof(server_addr))){
+      printf( &amp;quot;bind() 실행 에러n&amp;quot;);
+      exit(1);
+   }
+
+   while(1){
+      if(-1 == listen(server_socket, 5)){
+         printf( &amp;quot;대기상태 모드 설정 실패n&amp;quot;);
+         exit(1);
+      }
+
+      client_addr_size  = sizeof( client_addr);
+      client_socket     = accept( server_socket, (struct sockaddr*)&amp;amp;client_addr, &amp;amp;client_addr_size);
+
+      if (-1 == client_socket){
+         printf( &amp;quot;클라이언트 연결 수락 실패n&amp;quot;);
+         exit(1);
+      }
+
+      read (client_socket, buff_rcv, BUFF_SIZE);
+      printf(&amp;quot;receive: %s\n&amp;quot;, buff_rcv);
+
+      sprintf(buff_snd, &amp;quot;%ld : %s&amp;quot;, strlen(buff_rcv), buff_rcv);
+      write(client_socket, buff_snd, strlen(buff_snd)+1);          // +1: NULL까지 포함해서 전송
+      close(client_socket);
+   }
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 소스 코드를 복사하여, 파일을 만든다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;gcc -pg -g -o client client.c
+gcc -pg -g -o server server.c
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;그리고 위의 명령어를 통해서 컴파일을 해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;uftrace&#34;&gt;UFTRACE&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115418135-35d3bc80-a234-11eb-898d-50f3f8eb093e.png&#34; alt=&#34;Screen Shot 2021-04-20 at 11 57 42 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 나서는 &lt;a href=&#34;https://github.com/namhyung/uftrace&#34;&gt;ufrace&lt;/a&gt;를 이용하여 함수를 추적할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;UFTACE는 C/C++로 작성된 프로그램의 실행을 추적하고 분석하는 도구이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/namhyung/uftrace&#34;&gt;uftrace&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>TCP 통신에 대해서 알아보자...</title>
-      <link>/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</link>
       <pubDate>Tue, 20 Apr 2021 23:01:39 +0900</pubDate>
       
-      <guid>/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</guid>
-      <description>TCP (Transmission Control Protocol)    TCP는 응용 프로그램이 데이터를 교환할 수 있는 네트워크 대화를 설정하고 유지하는 방법을 정의하는 표준이다.
-  TCP는 IP 네트워크를 통해서 통신하는 호스트에서 실행되는 애플리케이션 간에 신뢰할 수 있고, 순서가 정해져있으며, 오류를 체크하고 전송할 수 있다.
-  월드 와이드 웹, 이메일, 원격 관리, 파일 전송과 같은 주요 인터넷 애플리케이션은 전송 계층의 일부인 TCP에 의존한다.
-  SSL/TLS 또한 TCP 위에서 동작한다.
-  TCP는 인터넷 프로토콜 (IP)과 작동하여 컴퓨터가 서로 데이터 패킷을 보내는 방법을 정의한다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</guid>
+      <description>&lt;h3 id=&#34;tcp-transmission-control-protocol&#34;&gt;TCP (Transmission Control Protocol)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115409556-cf976b80-a22c-11eb-9c4c-c2f61110b0e2.png&#34; alt=&#34;tcp&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TCP는 응용 프로그램이 데이터를 교환할 수 있는 네트워크 대화를 설정하고 유지하는 방법을 정의하는 표준이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TCP는 IP 네트워크를 통해서 통신하는 호스트에서 실행되는 애플리케이션 간에 신뢰할 수 있고, 순서가 정해져있으며, 오류를 체크하고 전송할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;월드 와이드 웹, 이메일, 원격 관리, 파일 전송과 같은 주요 인터넷 애플리케이션은 전송 계층의 일부인 TCP에 의존한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SSL/TLS 또한 TCP 위에서 동작한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TCP는 인터넷 프로토콜 (IP)과 작동하여 컴퓨터가 서로 데이터 패킷을 보내는 방법을 정의한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;연결을-맺는-과정&#34;&gt;연결을 맺는 과정&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115411131-2d788300-a22e-11eb-8557-0eb3e42d1096.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SYN: 클라이언트가 서버에 SYN를 전송한다. 클라이언트는 세그먼트의 시퀀스 번호를 임의의 값으로 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SYN-ACK: 응답으로 서버는 SYN-ACK로 응답을 한다. 수신된 시퀀스 보다 많은 숫자로 설정 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ACK: 마지막으로 클라이언트가 서버에 다시 ACK를 보낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 과정을 통해서 서버와 클라이언트는 연결을 맺으며 &lt;code&gt;3 Way HandShake&lt;/code&gt;라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;직접 확인하기&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo tshark -i enp0s3 -f &amp;quot;tcp port 80&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 명령어를 입력하여 포트 번호 80의 TCP 패킷들을 필터링 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이어서 다른 터미널에서 &lt;code&gt;curl www.google.com&lt;/code&gt; 으로 구글 서버에 요청을 날린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115414010-a2e55300-a230-11eb-8c2d-07636049b212.png&#34; alt=&#34;today&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;정상적으로 연결이 맺어진 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;연결을-끊는-과정&#34;&gt;연결을 끊는 과정&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115411888-d58e4c00-a22e-11eb-82d0-c47393198d7f.png&#34; alt=&#34;520px-TCP_CLOSE svg&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;연결을 종료하는 과정은 &lt;code&gt;4 Way HandShake&lt;/code&gt; 라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;연결이 끊겼음에도 클라이언트에서 &lt;code&gt;TIME WAIT&lt;/code&gt;을 하는 이유는 지연되거나 유실된 패킷이 뒤늦게 전송되는 경우가 있기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;확인해보기&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115414505-0c656180-a231-11eb-98de-cdabc90dba20.png&#34; alt=&#34;4way&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위에서 했던 것과 같이 패킷을 캡처링 했을 때, 실제로 위와 같은 과정으로 커넥션을 끊는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tcp-헤더-구조&#34;&gt;TCP 헤더 구조&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115412590-6bc27200-a22f-11eb-85e4-619fcac22d79.png&#34; alt=&#34;header&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위에서 전송하는 SYN 패킷과 ACK 패킷은 TCP 헤더에서 위치에 해당하는 비트가 켜져서 전송된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tcp-연결이-맺음과-끊어짐에-따른-소켓의-변화&#34;&gt;TCP 연결이 맺음과 끊어짐에 따른 소켓의 변화&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115415800-294e6480-a232-11eb-85f8-ad556e694641.png&#34; alt=&#34;1920px-Tcp_state_diagram_fixed_new svg&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;연결을 맺고 끊을 때마다 소켓의 내부 상태가 변하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클라이언트에서 요청을 보내기 위해서 소켓을 생성할 때 파일 디스크립터가 생성되며 연결을 끊고 싶을 때 파일을 닫게 되며, FIN 패킷을 날리게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115415367-d07ecc00-a231-11eb-86cb-2b5c569c07f1.png&#34; alt=&#34;Screen Shot 2021-04-20 at 11 40 13 PM&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;watch -n0.6 &amp;quot;netstat -atnp&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위는 watch 명령어를 통해서 0.6초마다 netstat의 결과를 모니터링 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고, CURL을 통해서 서버에 요청을 날리면 클라이언트 소캣의 상태를 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Transmission_Control_Protocol&#34;&gt;Transmission Control Protocol&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>DNS란? (draft)</title>
-      <link>/post/2021/04/13/dns%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/dns%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 23:15:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/dns%EB%9E%80-draft/</guid>
-      <description>DNS(Domain Name System)  내가 활용중인 DNS IP 주소 확인하기   위의 명령어를 통해서, 내가 사용하고 있는 DNS 서버의 IP 주소를 알아낼 수 있다.   위에 명령어를 통해서 나온 주소를 구글에 검색하면, 어떤 DNS 서버를 사용하는지 대략적으로 알 수 있다.  DNS 동작과정 추적하기   위와 같은 과정을 통해서, DNS 서버에 요청하고, 도메인 주소를 통해서 IP 정보를 받아오는 것을 확인할 수 있다.  sudo systemd-resolve --flush-caches  DNS 캐시 정보를 지우고 싶다면 위의 명령어를 입력하면 된다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/dns%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;dnsdomain-name-system&#34;&gt;DNS(Domain Name System)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;내가-활용중인-dns-ip-주소-확인하기&#34;&gt;내가 활용중인 DNS IP 주소 확인하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114567743-7bc9d700-9cae-11eb-82f9-9dcf503ef717.png&#34; alt=&#34;dns&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어를 통해서, 내가 사용하고 있는 &lt;code&gt;DNS&lt;/code&gt; 서버의 &lt;code&gt;IP&lt;/code&gt; 주소를 알아낼 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114568053-c4819000-9cae-11eb-8d25-3a8be64a3411.png&#34; alt=&#34;dns-2&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위에 명령어를 통해서 나온 주소를 구글에 검색하면, 어떤 &lt;code&gt;DNS&lt;/code&gt; 서버를 사용하는지 대략적으로 알 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dns-동작과정-추적하기&#34;&gt;DNS 동작과정 추적하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114568459-1b876500-9caf-11eb-8ffb-d43a61af1ffe.png&#34; alt=&#34;dns-1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114568479-1e825580-9caf-11eb-8d1e-4165d8c43077.png&#34; alt=&#34;dns-3&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위와 같은 과정을 통해서, DNS 서버에 요청하고, 도메인 주소를 통해서 &lt;code&gt;IP&lt;/code&gt; 정보를 받아오는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114569074-a4060580-9caf-11eb-9311-dff133504ae0.png&#34; alt=&#34;flush&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo systemd-resolve --flush-caches
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;DNS 캐시 정보를 지우고 싶다면 위의 명령어를 입력하면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>ARP란? (draft)</title>
-      <link>/post/2021/04/13/arp%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/arp%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 23:01:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/arp%EB%9E%80-draft/</guid>
-      <description>ARP(Address Resolution Protocol)   L2(데이터 링크 계층) 통신 프로토콜이다. IP 네트워크 주소를 데이터 링크 프로토콜에서 사용하는 하드웨어 주소(Mac ADDRESS)에 맵핑하기 위해서 사용하는 프로토콜이다.  arp -n 위의 명령어를 통해서, ARP 테이블을 확인할 수 있다.
-ARP 패킷 추적하기   위의 명령어를 통해서, 패킷 추적을 시작한다. 그리고 MAC 주소를 확인하기 위해서 PING 명령어를 자신의 IP 주소로 보내며, 네트워크 패킷이 호출되는 것을 확인한다.   ffff:ffff:ffff는 목적지 주소를 나타내며, 브로드 캐스트의 의미이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/arp%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;arpaddress-resolution-protocol&#34;&gt;ARP(Address Resolution Protocol)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;L2(데이터 링크 계층) 통신 프로토콜이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IP&lt;/code&gt; 네트워크 주소를 데이터 링크 프로토콜에서 사용하는 하드웨어 주소(Mac ADDRESS)에 맵핑하기 위해서 사용하는 프로토콜이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114565725-84211280-9cac-11eb-9fa7-fef4c8b44361.png&#34; alt=&#34;arp&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;arp -n
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위의 명령어를 통해서, ARP 테이블을 확인할 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;arp-패킷-추적하기&#34;&gt;ARP 패킷 추적하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114566386-2ccf7200-9cad-11eb-8ace-088abe48ea0e.png&#34; alt=&#34;arp-1&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어를 통해서, 패킷 추적을 시작한다. 그리고 MAC 주소를 확인하기 위해서 &lt;code&gt;PING&lt;/code&gt; 명령어를 자신의 IP 주소로 보내며, 네트워크 패킷이 호출되는 것을 확인한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114566398-2fca6280-9cad-11eb-9b7e-13eb549a4a3c.png&#34; alt=&#34;arp-2&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114566393-2e993580-9cad-11eb-8886-2ee5ee935ad9.png&#34; alt=&#34;arp-3&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ffff:ffff:ffff는 목적지 주소를 나타내며, 브로드 캐스트의 의미이다. 바로 뒤에오는 주소가 바로 송신지의 주소이며 목적지의 MAC 주소를 나타낸다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114567037-d0b91d80-9cad-11eb-81a4-dc9aea24b583.png&#34; alt=&#34;arp-4&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;MAC&lt;/code&gt; 주소를 확인하면, 나의 &lt;code&gt;MAC&lt;/code&gt; 주소와 일치하는 것을 알 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>ICMP란 (draft)</title>
-      <link>/post/2021/04/13/icmp%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/icmp%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 22:52:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/icmp%EB%9E%80-draft/</guid>
-      <description>ICMP(Internet Control Message Protocol)    L3(네트워크 계층) 통신 프로토콜로서, 라우터를 포함한 네트워크 장치가 다른 IP 주소와 통신을 할 때 성공 또는 실패를 나타내는 오류 메시지 및 운영정보를 보내는데 사용된다.
-  흔히 사용하는 PING 명령어가 ICMP 프로토콜을 사용하고 있다.
-  네트워크 패킷 추적하기 sudo apt-get install tshark  위의 명령어를 입력하여 tshark를 설치한다, 네트워크 패킷 분석을 할 수 있는 툴이다.   위의 명령어를 입력해서, ICMP 패킷을 분석을 시작한다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/icmp%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;icmpinternet-control-message-protocol&#34;&gt;ICMP(Internet Control Message Protocol)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;L3(네트워크 계층) 통신 프로토콜로서, 라우터를 포함한 네트워크 장치가 다른 IP 주소와 통신을 할 때 성공 또는 실패를 나타내는 오류 메시지 및 운영정보를 보내는데 사용된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;흔히 사용하는 &lt;code&gt;PING&lt;/code&gt; 명령어가 &lt;code&gt;ICMP&lt;/code&gt; 프로토콜을 사용하고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114564433-45d72380-9cab-11eb-88c5-8529a0adb7ee.png&#34; alt=&#34;ping&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;네트워크-패킷-추적하기&#34;&gt;네트워크 패킷 추적하기&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install tshark
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 명령어를 입력하여 &lt;code&gt;tshark&lt;/code&gt;를 설치한다, 네트워크 패킷 분석을 할 수 있는 툴이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114565051-e299c100-9cab-11eb-8c29-8c0c4a1f914f.png&#34; alt=&#34;ping-1&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어를 입력해서, &lt;code&gt;ICMP&lt;/code&gt; 패킷을 분석을 시작한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114564927-c3029880-9cab-11eb-8081-63f0837202a8.png&#34; alt=&#34;ping-2&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실제로 &lt;code&gt;PING&lt;/code&gt;을 8.8.8.8 주소로 날리게 되면, 패킷 추적이 되는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>MAC 주소란 (draft)</title>
-      <link>/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 22:21:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</guid>
-      <description>MAC 주소란?  MAC 주소 알아내는 법   위의 명령어를 이용하면 사용하고 있는 하드웨어의 MAC 주소 및 네트워크 카드 ID, 제조사를 알아낼 수 있다.  참고 문헌  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;mac-주소란&#34;&gt;MAC 주소란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;mac-주소-알아내는-법&#34;&gt;MAC 주소 알아내는 법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114561564-a0bb4b80-9ca8-11eb-822e-f5123ca09728.png&#34; alt=&#34;mac&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 명령어를 이용하면 사용하고 있는 하드웨어의 &lt;code&gt;MAC&lt;/code&gt; 주소 및 네트워크 카드 &lt;code&gt;ID&lt;/code&gt;, 제조사를 알아낼 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>라우팅이란 (draft)</title>
-      <link>/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</link>
       <pubDate>Tue, 13 Apr 2021 22:20:48 +0900</pubDate>
       
-      <guid>/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</guid>
-      <description>라우팅이란?   네트워크 패킷이 목적지를 찾아가기 위한, 최적의 경로이다.  요청한 서버까지 라우터를 추적하는 방법   구글 서버까지 굉장히 많은 라우터를 거쳐간다는 것을 확인할 수 있다. 네이버 서버에 요청하였을 때는 보안상의 이유로 라우터가 가려진 것을 확인할 수 있다. 모든 라우터의 주소를 확인할 수 있는 것은 아니다.  참고 문헌  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;라우팅이란&#34;&gt;라우팅이란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 패킷이 목적지를 찾아가기 위한, 최적의 경로이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;요청한-서버까지-라우터를-추적하는-방법&#34;&gt;요청한 서버까지 라우터를 추적하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114563693-98fca680-9caa-11eb-85d8-1ea7de69d92a.png&#34; alt=&#34;router&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;구글 서버까지 굉장히 많은 라우터를 거쳐간다는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;li&gt;네이버 서버에 요청하였을 때는 보안상의 이유로 라우터가 가려진 것을 확인할 수 있다. 모든 라우터의 주소를 확인할 수 있는 것은 아니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
     </item>
     
     <item>
       <title>웹 클라이언트(브라우저) 부터 웹서버까지의 구조 (draft)</title>
-      <link>/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</link>
       <pubDate>Tue, 13 Apr 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</guid>
-      <description> 브라우저에서 주소를 입력하면 HTTP 통신이 일어나게 되고, DNS 서버에서, 도메인 주소를 IP 주소로 변환하는 요청을 하게 된다. IP 주소를 알아내면, 라우터를 통해서 TCP / IP 통신을 하게 된다. 웹 서버에 도착했을 때는 최종적으로 HTTP 통신이 이루어지게 된다.  참고 문헌   리얼 리눅스  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114560424-a5333480-9ca7-11eb-9929-ae4566a72689.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;브라우저에서 주소를 입력하면 &lt;code&gt;HTTP&lt;/code&gt; 통신이 일어나게 되고, DNS 서버에서, 도메인 주소를 &lt;code&gt;IP&lt;/code&gt; 주소로 변환하는 요청을 하게 된다.&lt;/li&gt;
+&lt;li&gt;IP 주소를 알아내면, 라우터를 통해서 &lt;code&gt;TCP / IP&lt;/code&gt; 통신을 하게 된다.&lt;/li&gt;
+&lt;li&gt;웹 서버에 도착했을 때는 최종적으로 &lt;code&gt;HTTP&lt;/code&gt; 통신이 이루어지게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://reallinux.co.kr/&#34;&gt;리얼 리눅스&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

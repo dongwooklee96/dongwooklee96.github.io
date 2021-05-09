@@ -2,248 +2,906 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>데이터베이스 on 개발자 이동욱</title>
-    <link>/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/</link>
+    <link>https://dongwooklee96.github.io/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/</link>
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 08 May 2021 09:20:24 +0900</lastBuildDate><atom:link href="/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 May 2021 09:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>오라클 성능 고도화 강의 (1)</title>
-      <link>/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1/</link>
+      <link>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1/</link>
       <pubDate>Sat, 08 May 2021 09:20:24 +0900</pubDate>
       
-      <guid>/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1/</guid>
-      <description>오라클 성능 고도화 강의  이전에, 한번 튜닝 수업을 들은 적이 있었지만, 아직 경험이 부족한 상태에서 들어서 그런지 이해가 가지 않는 부분이 많았다. 실무를 조금 해보면서, 어느정도 쿼리에 익숙해진 상태에서 강의를 들으면 어떨까라는 생각이 들어서 강의를 수강하게 되었다.
-SQLP 시험에 실패하는 이유   SQLP 시험에 실패하는 이유는 주로 글로만 학습해서 그렇다. SQLP 시험 설계는 실무 전문가임을 인정해주는 자격증이다. 따라서 책으로만 학습해서 통과는 어렵고, 실무와 경험을 같이 쌓아야한다.  SQLP 시험에 합격하기 위한 방법   정확히 알아야한다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1/</guid>
+      <description>&lt;h3 id=&#34;오라클-성능-고도화-강의&#34;&gt;오라클 성능 고도화 강의&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/117525284-6ec5ac80-affc-11eb-8e4f-f245c5ef8828.jpeg&#34; alt=&#34;IMG_5C71B9160877-1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;이전에, 한번 튜닝 수업을 들은 적이 있었지만, 아직 경험이 부족한 상태에서 들어서 그런지 이해가 가지 않는 부분이 많았다. 실무를 조금 해보면서, 어느정도 쿼리에 익숙해진 상태에서 강의를 들으면 어떨까라는 생각이 들어서 강의를 수강하게 되었다.&lt;/p&gt;
+&lt;h3 id=&#34;sqlp-시험에-실패하는-이유&#34;&gt;SQLP 시험에 실패하는 이유&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;SQLP 시험에 실패하는 이유는 주로 글로만 학습해서 그렇다.&lt;/li&gt;
+&lt;li&gt;SQLP 시험 설계는 실무 전문가임을 인정해주는 자격증이다.&lt;/li&gt;
+&lt;li&gt;따라서 책으로만 학습해서 통과는 어렵고, 실무와 경험을 같이 쌓아야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sqlp-시험에-합격하기-위한-방법&#34;&gt;SQLP 시험에 합격하기 위한 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;정확히 알아야한다.&lt;/li&gt;
+&lt;li&gt;상황에 따라서 답이 달라짐을 알아야한다. (DBMS 버전, 데이터 량, 데이터 분포 등등&amp;hellip;)&lt;/li&gt;
+&lt;li&gt;집합적 사고를 할 줄 알아야한다. 이러한 능력은 실무에서 반복을 통해서 체화된다.&lt;/li&gt;
+&lt;li&gt;모델링에 대한 이해가 같이 이루어져야한다. 따라서 모델링도 어느정도는 같이 공부를 해야한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;sqlp-시험에-합격하기-위한-전략&#34;&gt;SQLP 시험에 합격하기 위한 전략&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;무조건 서술형을 다 맞춰야지 합격이 가능하다. 점수 분포가 서술형에 많은 점수가 있기 때문에 서술형을 다 맞지 않으면 합격이 힘들어진다.&lt;/li&gt;
+&lt;li&gt;서술형을 먼저 풀고, 객관식을 풀고 객관식 중에서 쉬운 문제를 먼저 풀고 어려운 문제는 나중에 푼다.&lt;/li&gt;
+&lt;li&gt;서술형을 답안을 작성할 때, 정확한 진단을 하고 핵심만 간결하게 그리고 절대로 길게 작성하면 안된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;chap-01-데이터베이스-아키텍처-sql-처리-과정-및-io&#34;&gt;CHAP 01. 데이터베이스 아키텍처, SQL 처리 과정 및 IO&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일단 오라클 아키텍처에 대해서, 제대로 알지 못해서 많이 당황스러웠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;REDO로그 및 UNDO 로그에 대해서 자세히 공부를 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;버퍼 캐시 및, 버퍼 캐시 탐색 과정, 그리고 버퍼 캐시 히트율을 계산하는 방법에 대해서, 공부를 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시퀀셜 액세스와 랜덤 액세스의 원리 및 &lt;code&gt;Single Block IO&lt;/code&gt;와 &lt;code&gt;Multi Block IO&lt;/code&gt;의 차이에 대해서도 남에게 설명할 수 있을 정도로 공부를 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오라클 힌트에 대해서 자세히 공부하고 힌트가 적용되지 않는 경우에 내부적으로 쿼리가 변환되는 경우가 있는데, 이러한 경우에 대해서도 들어본 기억은 있는데 확실하게 개념이 잡혀있지는 않았다. 따라서 힌트 관련해서 많은 것을 배워야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mvcc-milti-version-concurrency-control&#34;&gt;MVCC (Milti Version Concurrency Control)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Dirty Read : 다른 트랜잭션이 변경중인 데이터를 읽었는데, 그 트랜잭션이 최종 롤백 됨으로써 비일관성 상태에 놓이는 현상&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Non-Repetable Read : 한 트랜잭션 내에서 같은 데이터를 두 번 이상 읽을 때, 다른 트랜잭션이 값을 수정 또는 삭제 함으로써 읽은 값들이 서로 달라지는 현상&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Phantom Read : 한 트랜잭션 내에서, 일정 범위의 데이터를 두 번 이상 읽을 때, 다른 트랜잭션이 새로운 데이터를 추가함으로 인해 첫 번째 읽을 때 없던 데이터가 생기는 현상&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;트랜잭션이 실행 될 때, &lt;code&gt;UNDO&lt;/code&gt; 세그 먼트 헤더에 위치한 트랜잭션 테이블에서 슬롯을 할당 받는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각 &lt;code&gt;UNDOO&lt;/code&gt; 레코드에는 &lt;code&gt;ITL SLOT&lt;/code&gt;이 있고, 블록에 속한 레코드 갱신을 위해서, &lt;code&gt;ITL&lt;/code&gt; 슬롯을 먼저 확보한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;커밋이 이루어지면, 블록 클린아웃을 하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 클린 아웃 되지 않은 블록에 작업을 하게 되면, &lt;code&gt;SNAP SHOT TOO OLD&lt;/code&gt;가 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+</description>
     </item>
     
     <item>
       <title>윈도우 함수에서 WHERE 절을 사용하지 못하는 이유(draft)</title>
-      <link>/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft/</link>
       <pubDate>Tue, 13 Apr 2021 15:20:24 +0900</pubDate>
       
-      <guid>/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft/</guid>
-      <description>참고 문헌  Why Window Functions Are Not Allowed in WHERE Clauses  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://learnsql.com/blog/window-functions-not-allowed-in-where/&#34;&gt;Why Window Functions Are Not Allowed in WHERE Clauses&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>TWO-PHASE-LOCK(2PL)이란 (draft)</title>
-      <link>/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft/</link>
       <pubDate>Wed, 07 Apr 2021 18:05:24 +0900</pubDate>
       
-      <guid>/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft/</guid>
-      <description>TWO PHASE LOCK    2PC(TWO PHASE COMMIT)과 헷갈리는 개념이 있다. 그것은 바로 2PL(TWO PHASE LOCK)이다.
-  2단계 잠금 프로토콜은 트랜잭션 도줌에 락을 걸어서 동일한 데이터에 동시에 접근하려는 트랜잭션을 차단하여 직렬화를 보장하는 DBMS의 동시 제어 방법이다.
-  DBMS의 동시성 문제를 해결하는데 도움이 된다.
-  이 잠금 프로토콜은 트랜잭션의 실행 단계를 세 단계로 나눈다.
-  첫 번째 단계에서는 트랜잭션이 실행되기 시작할 때 필요한 락에 대한 권한을 요청한다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;two-phase-lock&#34;&gt;TWO PHASE LOCK&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113949645-b4028d00-984a-11eb-98e5-e1d592569831.png&#34; alt=&#34;100518_0439_DBMSConcurr1&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113949641-b238c980-984a-11eb-8ae0-64619edcf82c.png&#34; alt=&#34;2PL&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;2PC(TWO PHASE COMMIT)&lt;/code&gt;과 헷갈리는 개념이 있다. 그것은 바로 &lt;code&gt;2PL(TWO PHASE LOCK)&lt;/code&gt;이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2단계 잠금 프로토콜은 트랜잭션 도줌에 락을 걸어서 동일한 데이터에 동시에 접근하려는 트랜잭션을 차단하여 직렬화를 보장하는 &lt;code&gt;DBMS&lt;/code&gt;의 동시 제어 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;DBMS&lt;/code&gt;의 동시성 문제를 해결하는데 도움이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 잠금 프로토콜은 트랜잭션의 실행 단계를 세 단계로 나눈다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;첫 번째 단계에서는 트랜잭션이 실행되기 시작할 때 필요한 락에 대한 권한을 요청한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;두 번째 부분은 트랜잭션이 모든 락 권한을 얻는 부분이다. 트랜잭션이 첫 번째 락을 해제할 때 세번째 단계가 실행된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 세 번째 단계에서는 트랜잭션이 새로운 락을 요청할 수 없으며, 대신 획득한 락을 해제할 수 만 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 &lt;code&gt;2PL&lt;/code&gt;에서는 각 트랜잭션이 두 단계로 락 획득 또는 해제 요청을 할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Growing Phase&lt;/strong&gt;: 이 단계에서는 오직 잠금을 획득할 수 있고, 해제할 수는 없다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Shrinking Phase&lt;/strong&gt;: 이 단계에서는 트랜잭션이 잠금을 해제할 수는 있지만 새로운 잠금을 획득하지는 못한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;2PL&lt;/code&gt; 프로토콜 방식은 직렬화는 보장하지만, 교착 상태가 발생하지 않도록 보장하지 못한다는 특징이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/two-phase-locking-protocol/&#34;&gt;Two Phase Locking protocol&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.guru99.com/dbms-concurrency-control.html#5&#34;&gt;dbms-concurrency-control&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>ARIES란 (draft)</title>
-      <link>/post/2021/03/31/aries%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft/</link>
       <pubDate>Wed, 31 Mar 2021 22:56:24 +0900</pubDate>
       
-      <guid>/post/2021/03/31/aries%EB%9E%80-draft/</guid>
-      <description>참고 문헌  WIKI - ARIES  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Algorithms_for_Recovery_and_Isolation_Exploiting_Semantics&#34;&gt;WIKI - ARIES&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>데이터베이스에 대해서 배울 수 있는 좋은 강의 (CS186Berkeley)</title>
-      <link>/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley/</link>
       <pubDate>Wed, 31 Mar 2021 20:40:24 +0900</pubDate>
       
-      <guid>/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley/</guid>
-      <description>우연히 유튜브에서 데이터베이스에 대해서 체계적이고 좋은 영상이 있는 것을 발견하였다.
-  커리큘럼을 보면, 초반에는 디스크, 버퍼, 파일 및 인덱스 B+Tree 부터 시작해서 간단한 SQL 및 간단하 쿼리 튜닝까지 배운다.
-  그리고, 트랜잭션 처리 부터 시작해서, 병렬 쿼리 실행 그리고 분산 트랜잭션 처리까지 철저하게 배운다.
-  심지어 과제 및 시험문제도 풀어볼 수 있다. CS186
-  남는시간에 틈틈히 DBMS에 대해서 공부하면서 부족했던 기본기를 튼튼하게 하면서, 오픈 소스에 기여할 때 도움이 되도록 해야겠다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley/</guid>
+      <description>&lt;p&gt;우연히 유튜브에서 데이터베이스에 대해서 체계적이고 좋은 영상이 있는 것을 발견하였다.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/ZLtwOp8pz_Q&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;커리큘럼을 보면, 초반에는 디스크, 버퍼, 파일 및 인덱스 B+Tree 부터 시작해서 간단한 &lt;code&gt;SQL&lt;/code&gt; 및 간단하 쿼리 튜닝까지 배운다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113154480-0227f700-9273-11eb-9683-6ac82864c697.png&#34; alt=&#34;dbms&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113154484-03592400-9273-11eb-8897-6de7f64fb366.png&#34; alt=&#34;dbms&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그리고, 트랜잭션 처리 부터 시작해서, 병렬 쿼리 실행 그리고 분산 트랜잭션 처리까지 철저하게 배운다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;심지어 과제 및 시험문제도 풀어볼 수 있다. &lt;a href=&#34;https://cs186.gitbook.io/project/assignments/proj0&#34;&gt;CS186&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;남는시간에 틈틈히 DBMS에 대해서 공부하면서 부족했던 기본기를 튼튼하게 하면서, 오픈 소스에 기여할 때 도움이 되도록 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;DBMS&lt;/code&gt; 프로젝트를 이해할 때, 기본기에 대한 부족함을 많이 느꼈다. 따라서 이 강의를 통해서 기본기를 다진다면 한결 흐름을 이해하기 쉬울 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/user/CS186Berkeley/videos&#34;&gt;CS186Berkeley&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>슬로우 쿼리란? (draft)</title>
-      <link>/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft/</link>
       <pubDate>Mon, 29 Mar 2021 20:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft/</guid>
-      <description>슬로우 쿼리란  참고 문헌  MySql - The Slow Query Log  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;슬로우-쿼리란&#34;&gt;슬로우 쿼리란&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://dev.mysql.com/doc/refman/5.7/en/slow-query-log.html&#34;&gt;MySql - The Slow Query Log&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>리플리케이션이란 (draft)</title>
-      <link>/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft/</link>
       <pubDate>Sun, 28 Mar 2021 17:43:24 +0900</pubDate>
       
-      <guid>/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft/</guid>
-      <description>Gelera 리플리케이션    MariaDB 클러스터에서, 서버는 트랜잭션과 관련된 쓰기를 클러스터의 모든 노드에 브로드캐스트해서 커밋을 할 때, 모든 노드에 트랜잭션을 복사한다.
-  클라이언트는 DBMS에 직접 연결하여 대부분의 경우 기본의 MariaDB와 유사한 동작을 경험할 수 있다.
-  wsrep(write set replication API)를 이용하여 Galera 리플리케이션과 MariaDB 사이의 인터페이스를 정의한다.
-  동기 vs 비동기 리플리케이션   동기식 복제와 비동기식 복제의 기본적인 차이점은 동기식 복제는 클러스터에서 한 노드에서 변경이 발생한 경우에, 클러스터의 다른 노드에서 동기적으로 변경이 발생한다는 점이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;gelera-리플리케이션&#34;&gt;Gelera 리플리케이션&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113364491-a05caf80-938e-11eb-8a11-e5933db7f28d.png&#34; alt=&#34;Screen Shot 2021-04-02 at 8 36 21 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;MariaDB&lt;/code&gt; 클러스터에서, 서버는 트랜잭션과 관련된 쓰기를 클러스터의 모든 노드에 브로드캐스트해서 커밋을 할 때, 모든 노드에 트랜잭션을 복사한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클라이언트는 &lt;code&gt;DBMS&lt;/code&gt;에 직접 연결하여 대부분의 경우 기본의 &lt;code&gt;MariaDB&lt;/code&gt;와 유사한 동작을 경험할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;wsrep(write set replication API)&lt;/code&gt;를 이용하여 &lt;code&gt;Galera&lt;/code&gt; 리플리케이션과 &lt;code&gt;MariaDB&lt;/code&gt; 사이의 인터페이스를 정의한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;동기-vs-비동기-리플리케이션&#34;&gt;동기 vs 비동기 리플리케이션&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;동기식 복제와 비동기식 복제의 기본적인 차이점은 동기식 복제는 클러스터에서 한 노드에서 변경이 발생한 경우에, 클러스터의 다른 노드에서 동기적으로 변경이 발생한다는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;비동기적인 복제는 마스터 노드에 변경사항을 적용하는 것과 슬레이브 노드에 변경사항을 전파 하는 도중에 데이터가 다를 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 마스터 노드가 비동기적인 복제 중에 오류가 생기면 변경 사항중에 일부가 손상 될 수 있다는 것을 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;동기식 복제가 가지는 이점&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;동기식 복제를 사용하는 클러스터는 가용성이 높다.&lt;/li&gt;
+&lt;li&gt;노드중에 하나가 손실 되더라도 데이터는 손실되지 않으며 모든 클러스터 노드는 항상 일관적이다.&lt;/li&gt;
+&lt;li&gt;동기식 복제를 사용하는 클러스터를 사용하면, 모든 노드에 동시에 트랜잭션을 실행할 수 있다.&lt;/li&gt;
+&lt;li&gt;동기식 복제를 사용하는 클러스터는 전체 클러스터에서 인과 관계를 보장할 수 있다. 즉, 클러스터 노드에서 트랜잭션을 실행한 후에 하나의 클러스터 노드에서 &lt;code&gt;SELECT&lt;/code&gt;가 실행되는 경우 해당 트랜잭션의 영향을 확인해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;동기식 복제가 가지는 단점&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;하지만, 동기식 데이터베이스 복제는 전통적으로 매우 느린것으로 판명된 &lt;code&gt;2PC(two phase commit)&lt;/code&gt;또는 분산 잠금을 통해서 구현되었다.&lt;/li&gt;
+&lt;li&gt;동기식 복제의 낮은 성능과 구현의 복잡성으로 인해서 비동기식 복제가 데이터베이스 성능 확장성 및 가용성의 주요 수단으로 사용되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;하지만, &lt;code&gt;Galera&lt;/code&gt;의 리플리케이션은 완전하게 동기화된 것은 아니지만 이것은 가상 동기 리플리케이션이라고 불린다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mariadb.com/kb/en/about-galera-replication/&#34;&gt;About Galera Replication&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>쿼리 오프 로딩이란 (draft)</title>
-      <link>/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft/</link>
       <pubDate>Sun, 28 Mar 2021 17:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft/</guid>
-      <description>참고 문헌 </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+</description>
     </item>
     
     <item>
       <title>데이터베이스 스토리지 티어링이란 (draft)</title>
-      <link>/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft/</link>
       <pubDate>Sat, 27 Mar 2021 23:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft/</guid>
-      <description>스토리지 티어링이란  참고 문헌 </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;스토리지-티어링이란&#34;&gt;스토리지 티어링이란&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+</description>
     </item>
     
     <item>
       <title>샤딩이란(draft)</title>
-      <link>/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft/</link>
       <pubDate>Sat, 27 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft/</guid>
-      <description>샤딩  참고 문헌  모바일 서버 프로그래밍 입문, 얼랭으로 만들며 배운다  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft/</guid>
+      <description>&lt;h3 id=&#34;샤딩&#34;&gt;샤딩&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62639053&#34;&gt;모바일 서버 프로그래밍 입문, 얼랭으로 만들며 배운다&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>클러스터링이란?(draft)</title>
-      <link>/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft/</link>
       <pubDate>Sat, 27 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft/</guid>
-      <description>클러스터링  참고 문헌   Understanding MariaDB Enterprise Cluster
-  MariaDB cluster setup
-  What is MariaDB Galera Cluster?
-  How to deploy a MySQL Cluster from Scratch with Docker
-  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft/</guid>
+      <description>&lt;h3 id=&#34;클러스터링&#34;&gt;클러스터링&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mariadb.com/docs/multi-node/galera-cluster/understand-mariadb-enterprise-cluster/#architecture&#34;&gt;Understanding MariaDB Enterprise Cluster&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://kaaproject.github.io/kaa/docs/v0.10.0/Administration-guide/System-installation/Cluster-setup/MariaDB-cluster-setup-guide/&#34;&gt;MariaDB cluster setup&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mariadb.com/kb/en/what-is-mariadb-galera-cluster/&#34;&gt;What is MariaDB Galera Cluster?&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://menakamadushanka.wordpress.com/2017/12/15/how-to-deploy-a-mysql-cluster-from-scratch-with-docker/&#34;&gt;How to deploy a MySQL Cluster from Scratch with Docker&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>CONCURRENCY(동시성)와 PARALLELISM(병행성) (draft)</title>
-      <link>/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft/</link>
       <pubDate>Sat, 27 Mar 2021 01:09:24 +0900</pubDate>
       
-      <guid>/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft/</guid>
-      <description>CONCURRENCY(동시성)와 PARALLELISM(병행성)  병행성  동시성    CONCURRENCY(동시성) 에서 가장 중요한 것은 동시에 수행되는 기능들의 빠른 반응이다.
-  이러한 빠른 반응은, 운영체제의 핵심인 커널에서 프로세스 스케줄러가 선점형(Preemption)으로 동작하느냐가 관건이다.
-  CPU 자원은 한정되어 있는데 반해서 작업 진행이 필요한 프로세스들은 여러 개가 생길 수 있다. 이때 CPU 자원을 어떻게 분배하느냐가 스케줄링이 필요한 이유이다.
-  컴퓨터에서 사용자가 파일을 다운로드 받을 때 파일을 다운로드 받는 프로세스가 CPU 자원을 할당 받아서 작업을 진행하게 된다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft/</guid>
+      <description>&lt;h3 id=&#34;concurrency동시성와-parallelism병행성&#34;&gt;CONCURRENCY(동시성)와 PARALLELISM(병행성)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112660338-af2bf980-8e98-11eb-8aec-e165f24e7fde.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;병행성&#34;&gt;병행성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;동시성&#34;&gt;동시성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CONCURRENCY(동시성)&lt;/strong&gt; 에서 가장 중요한 것은 동시에 수행되는 기능들의 빠른 반응이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 빠른 반응은, 운영체제의 핵심인 커널에서 프로세스 스케줄러가 선점형(&lt;code&gt;Preemption&lt;/code&gt;)으로 동작하느냐가 관건이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CPU 자원은 한정되어 있는데 반해서 작업 진행이 필요한 프로세스들은 여러 개가 생길 수 있다. 이때 CPU 자원을 어떻게 분배하느냐가 스케줄링이 필요한 이유이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;컴퓨터에서 사용자가 파일을 다운로드 받을 때 파일을 다운로드 받는 프로세스가 &lt;code&gt;CPU&lt;/code&gt; 자원을 할당 받아서 작업을 진행하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이때 사용자가 뮤직 플레이를 실행 시켜서 또 다른 프로세스가 생성되었다고 할 때 비선점형의 경우에는 파일을 다운로드 받는 프로세스 작업이 끝나야 음악을 플레이 하는 프로세스가 CPU 자원을 할당 받아서 작업을 진행할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;즉 파일 다운로드가 완료될 때까지 음악이 나오지 않을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;선점형 스케줄링의 경우에는 스케줄러가 강제로 그 즉시 음악을 플레이하는 프로세스에게 자원을 할당해주고, 상황에 따라서 적당히 &lt;code&gt;CPU&lt;/code&gt; 자원을 분배하여 두 개의 프로세스가 작업을 진행하는데 문제가 없도록 하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물론 자세히 들어가면 비선점형 스케줄링 방식을 사용하더라도 여러 가지 방법을 통해서 동시에 실행되는 것 처럼 보이게 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62639053&#34;&gt;모바일 서버 프로그래밍 입문, 얼랭으로 만들며 배운다&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>트랜잭션과 ACID</title>
-      <link>/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid/</link>
       <pubDate>Fri, 26 Mar 2021 23:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid/</guid>
-      <description>누군가 트랜잭션에 대해서 물어보았을 때, 분명히 알고 있다고 생각한 것인데도 제대로 답변하지 못했다. 이건 평소에 생각이 정리되지 않아서 그런 것 같다. 따라서 이참에 이에 대해서 정리를 해보도록 했다.
-트랜잭션이란  위키 백과에서는 트랜잭션을 다음과 같이 정의하고 있다.
-  데이터베이스 트랜잭션은 데이터베이스에 대해서 DBMS 내에서 수행되고 다른 트랜잭션과 무관하게 일관되고 신뢰할 수 있는 방식으로 처리되는 작업 단위를 말한다.
-  트랜잭션은 일반적으로 데이터베이스의 모든 변경 사항이 있다.
-  데이터베이스 환경의 트랜잭션에는 두 가지의 주요 목적이 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid/</guid>
+      <description>&lt;p&gt;누군가 트랜잭션에 대해서 물어보았을 때, 분명히 알고 있다고 생각한 것인데도 제대로 답변하지 못했다. 이건 평소에 생각이 정리되지 않아서 그런 것 같다. 따라서 이참에 이에 대해서 정리를 해보도록 했다.&lt;/p&gt;
+&lt;h3 id=&#34;트랜잭션이란&#34;&gt;트랜잭션이란&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112649044-6de21c80-8e8d-11eb-9e40-2f597a3555ac.png&#34; alt=&#34;트랜잭션&#34;&gt;&lt;/p&gt;
+&lt;p&gt;위키 백과에서는 트랜잭션을 다음과 같이 정의하고 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;데이터베이스 트랜잭션은 데이터베이스에 대해서 DBMS 내에서 수행되고 다른 트랜잭션과 무관하게 일관되고 신뢰할 수 있는 방식으로 처리되는 작업 단위를 말한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;트랜잭션은 일반적으로 데이터베이스의 모든 변경 사항이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터베이스 환경의 트랜잭션에는 두 가지의 주요 목적이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실행 중지 (완전 및 부분적으로) 및 데이터베이스에 대한 많은 작업이 완료되지 않은 상태로 남아있는 경우에 장래로부터 정확하게 복구하고 데이터베이스를 일관성 있게 유지할 수 있는 신뢰할 수 있는 작업 단위를 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터베이스가 동시에 액세스 하는 프로그램 간에 분리를 제공한다. 이러한 분리를 제공하지 않으면 프로그램의 결과가 잘못될 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;acid&#34;&gt;ACID&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112650101-6707d980-8e8e-11eb-8d32-a92f3bce761b.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;p&gt;ACID 트랜잭션은 관계형 데이터베이스에서 여러 개의 SQL 연산을 하나의 단일 트랜잭션으로 처리하는 것을 말한다.&lt;/p&gt;
+&lt;p&gt;여러 개의 테이블에 대해서 읽고 쓰고 하는 행동을 하나의 연산처럼 사용하는 것이다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ACID 라는 단어는 분해할 수 없이 원자적(Atomicity)이고, 일관된(Consistency) 데이터 상태를 유지하고, 고립(Isolation)되어 다른 연산이 끼어들 수 없고, 데이터가 영원히(Durability) 반영된 상태로 있는 것을 의미한다.&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;원자성(Atomicity) : 데이터베이스에서 가장 중요한 개념은 원자성일것이다, 여러개의 SQL 연산이 하나의 연산 처럼 동작해야한다. 어느 것 하나라도 실패했다면 모든 연산이 실행되지 않아야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일관성(Consistency) : 같은 시점에 접속하는 클라이언트는 항상같은 데이터를 보고 있어야 한다는 것이다. 동일한 시간에 A와 B가 요청을 할 때, A가 읽은 데이터와 B가 읽은 데이터가 다르다면 아주 기본적인 일관성이 보장되지 않은 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;고립성(Isolation) : 트랜잭션이 수행되는 동안에, 다른 연산이 끼어들지 못한다는 것이다. 이에 대해서는 고립 수준이라는 것이 있는데 이는 나중에 자세히 알아보도록 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;영속성(Durability) : 트랜잭션이 완료된 이후의 데이터는 업데이트 된 상태 그대로 영원히 반영되어 있다는 뜻이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Database_transaction&#34;&gt;WIKI - Database transaction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62639053&#34;&gt;모바일 서버 프로그래밍 입문, 얼랭으로 만들며 배운다&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>CAP 이론이란?</title>
-      <link>/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80/</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80/</guid>
-      <description>CAP 정리    CAP 정리에 의하면 시스템은 일관성(Consistency), 가용성(Availablity), 분단 허용성(Partition torlerance) 세 가지 속성중에서, 두 가지만 가질 수 있다는 것이다.
-  위의 그림에서 볼 수 있듯이, Consistency, Availablity를 합치면, CA 또는 Consistency와 Partition tolerance를 조합하면 AP가 된다.
-  이 모든 속성을 다 포함한 시스템은 절대로 존재할 수 없다는 것이 CAP 정리이다.
-  각 특징의 의미    일관성(Consistency) : 데이터를 저장하는 장비가 1대 든 100대든 모든 장비에서 동일한 데이터가 저장되어 있어야 한다는 것이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80/</guid>
+      <description>&lt;h3 id=&#34;cap-정리&#34;&gt;CAP 정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112651209-86533680-8e8f-11eb-9579-2d9a2389ce27.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;CAP 정리에 의하면 시스템은 일관성(Consistency), 가용성(Availablity), 분단 허용성(Partition torlerance) 세 가지 속성중에서, 두 가지만 가질 수 있다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 그림에서 볼 수 있듯이, Consistency, Availablity를 합치면, &lt;code&gt;CA&lt;/code&gt; 또는 Consistency와 Partition tolerance를 조합하면 &lt;code&gt;AP&lt;/code&gt;가 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 모든 속성을 다 포함한 시스템은 절대로 존재할 수 없다는 것이 CAP 정리이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;각-특징의-의미&#34;&gt;각 특징의 의미&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일관성(Consistency) : 데이터를 저장하는 장비가 1대 든 100대든 모든 장비에서 동일한 데이터가 저장되어 있어야 한다는 것이다. &lt;code&gt;ACID&lt;/code&gt; 원리에서 의미하는 것과 같다. 어떤 데이터베이스 속성에 &lt;code&gt;C&lt;/code&gt;가 있다면, 트랜잭션 기능 또는 그와 비슷한 매커니즘이 존재한다는 뜻이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가용성(Availablity) : 가용성은 죽지 않은 상태의 모든 서버는 클라이언트에게 항상 정상 처리 응답을 보애주어야 한다는 것을 의미한다. 클라이언트가 읽기, 쓰기 요청을 하면 제대로 읽고 쓰는 작업을 해야한다. 현재 시스템에 문제가 있어서 읽을 수 없다고 보내면 가용성이 보장되지 않는 것을 뜻한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;분단 허용성(Partition tolerance) : 분단 허용성은 클러스터가 여러 대 동작하고 있을 때, 해당 클러스터 사이에 접속이 단절되어 서로 통신을 할 수 없는 상황에서도 시스템이 잘 동작해야 한다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;관계형 데이터베이스는 CA 시스템이다. 일관성(C)와 가용성(A)를 보장하되, 분단 허용성(P)는 보장하지 않는다&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;관계형 데이터베이스가 동시에 다량의 서버를 운용하는 클러스터링에 적합하지 않는 이유가 여기에 있다.
+만약 10대의 서버중에서 한 서버의 접속이 끊어졌다고 가정을 하면, 분단 허용성을 지원하지 않으므로 이는 수용할 수 있지만 끊어진 서버 때문에 일관성과 가용성이 훼손되므로 아예 1번 부터 10번까지 모든 서버를 중단시켜서 어떤 클라이언트도 서버와 접속할 수 없어야한다. 일반적으로 불가능한 방법이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;해결책은 간단한데, CA를 포기하면 된다. CA를 포기한다는 뜻이 극단적으로 일관성과 가용성을 포기하는 것이 아닌 1 ~ 100까지의 수치가 있을 때 일관성과 가용성을 100% 지원하던 것에서 수치를 60%로 낮춘다고 생각을 하면 된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;대부분의 NoSQL 데이터베이스는 CA가 아닌 CP나 AP 시스템이다. 대용량의 분산 시스템을 구축하는데에는 CP보다도 AP가 알맞다. C가 들어가서 강력한 일관성 즉, ACID 트랜잭션을 지원한다고 가정하면 예를 들어 하나의 쓰기 작업을 수행한다고 가정할 때 2대가 정상 응답할 때까지 LOCK이 걸리겠지만 100대라면 너무 긴 시간동안 LOCK이 걸리게 된다.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62639053&#34;&gt;모바일 서버 프로그래밍 입문, 얼랭으로 만들며 배운다&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>MVCC(다중 버전 동시성 제어)란 (draft)</title>
-      <link>/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</guid>
-      <description>참고 문헌 </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+</description>
     </item>
     
     <item>
       <title>TWO-PHASE COMMIT 이란?</title>
-      <link>/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80/</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80/</guid>
-      <description>TWO-PHASE 커밋이란?    투 페이즈 커밋은 여러 노드에 거쳐서 원자성 트랜잭션 커밋을 달성하기 위한 알고리즘이다.
-  분산 데이터베이스의 트랜잭션 처리를 위해서 사용하는 고전적인 방법이다.
-  2PC에서는 일반적으로 단일 노드 트랜잭션에서는 나타나지 않는 새로운 구성 요소인 코디네이터(트랜잭션 관리자)를 사용한다.
-  2PC 트랜잭션은 애플리케이션이 정상적으로 여러 데이터베이스 노드에서 데이터를 읽고 쓰는 것으로부터 시작된다.
-  커밋할 준비가 되면 트랜잭션 관리자는 1 단계를 시작한다. 그런 다음에 각 노드에 준비 요청을 보내서 커밋 가능 여부를 묻게 되며, 참가자의 응답에 따라서 커밋을 할지, 롤백을 할지 결정을 한다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80/</guid>
+      <description>&lt;h3 id=&#34;two-phase-커밋이란&#34;&gt;TWO-PHASE 커밋이란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113822026-dd260d80-97b7-11eb-8ea8-b3c939d08cec.png&#34; alt=&#34;95&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;투 페이즈 커밋은 여러 노드에 거쳐서 원자성 트랜잭션 커밋을 달성하기 위한 알고리즘이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;분산 데이터베이스의 트랜잭션 처리를 위해서 사용하는 고전적인 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2PC에서는 일반적으로 단일 노드 트랜잭션에서는 나타나지 않는 새로운 구성 요소인 코디네이터(트랜잭션 관리자)를 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;2PC 트랜잭션은 애플리케이션이 정상적으로 여러 데이터베이스 노드에서 데이터를 읽고 쓰는 것으로부터 시작된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;커밋할 준비가 되면 트랜잭션 관리자는 1 단계를 시작한다. 그런 다음에 각 노드에 준비 요청을 보내서 커밋 가능 여부를 묻게 되며, 참가자의 응답에 따라서 커밋을 할지, 롤백을 할지 결정을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 노드가 &amp;ldquo;예&amp;rdquo; 라고 대답하여, 커밋할 준비가 되었다고 하면, 트랜잭션 매니저는 2단계에서 커밋 요청을 전송하고 커밋이 실제로 수행된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;참가자가 &amp;ldquo;아니오&amp;quot;라고 대답하면 코디네이터는 2단계의 모든 노드에 중단 요청을 보낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113823077-32aeea00-97b9-11eb-888f-4a5f9b9d2ae5.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 과정은 결혼식에 비유할 수 있는데, 주례자가 신랑과 신부에서 각각 결혼하고 싶은지 물어보고, 모두 결혼을 하고 싶다는 대답을 받고 나서, 결혼식을 마무리하는 과정이라고 비유를 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여기서 주례자는 트랜잭션 매니저이며, 신랑과 신부는 각 데이터베이스 노드들이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;two-phase-커밋의-단점&#34;&gt;TWO-PHASE 커밋의 단점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;2PC의 가장 큰 단점은 블록킹이라는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Two-phase_commit_protocol&#34;&gt;Two-phase commit protocol&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://ebrary.net/64872/computer_science/introduction_phase_commit&#34;&gt;introduction_phase_commit&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>합의(Consensus) 알고리즘이란(draft)</title>
-      <link>/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft/</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft/</guid>
-      <description>참고 문헌   WIKI - Consensus
-  ZOOKEEPER DOCS - CONSENSUS ALGORITHMS
-  Demystifying Consensus Algorithms and Their Implementations
-  RAFT 합의 알고리즘
-  D2 - Raft 분산 합의 알고리즘과 Python에서의 활용
-  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Consensus_(computer_science)&#34;&gt;WIKI - Consensus&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zookeeper.apache.org/doc/r3.4.13/zookeeperInternals.html&#34;&gt;ZOOKEEPER DOCS -  CONSENSUS ALGORITHMS&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://betterprogramming.pub/demystifying-consensus-algorithms-and-their-implementations-c52f8aca3020&#34;&gt;Demystifying Consensus Algorithms and Their Implementations&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://raft.github.io/&#34;&gt;RAFT 합의 알고리즘&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://d2.naver.com/helloworld/5663184&#34;&gt;D2 - Raft 분산 합의 알고리즘과 Python에서의 활용&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>SQLAlchemy 세션(draft)</title>
-      <link>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</link>
       <pubDate>Fri, 19 Mar 2021 16:40:24 +0900</pubDate>
       
-      <guid>/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</guid>
-      <description>참고 문헌  Transactions and Connection Management  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.sqlalchemy.org/en/13/orm/session_transaction.html#transactions-and-connection-management&#34;&gt;Transactions and Connection Management&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>SQLAlchemy에서 트랜잭션 사용법</title>
-      <link>/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95/</link>
       <pubDate>Thu, 18 Mar 2021 13:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95/</guid>
-      <description>회사에서 이슈 진행을 하다가, 트랜잭션를 이용하여 처리해야하는 부분을 발견하였다. 따라서 SQLAlchemy에서는 트랜잭션을 어떻게 사용하는지 정리해보도록 하겟다.
-트랜잭션 관리하기  새롭게 생성된 세션은 begin() 상태이다. begin() 상태에서 Session은 아직 어떠한 Connection 및 Transactional과 연관되지 않았다. 그러한 다음에, Session 은 데이터베이스 커넥션 요청을 수신한다. 일반적으로, 이것은 Engine을 이용하여, 특정 SQL 문을 수행해야하는 것을 의미한다. 특정 SQL문의 수행은 Session.query(), Session.execute() 통해 이루어지고 Session.commit(), Session.flush()를 할 때 보류된 변경 사항을 비우고 커밋하면서 발생합니다. 이러한 요청이 수신되면, 새로운 엔진 각각이 세션에서 유지되고 관리하는 트랜잭션 상태와 연결이 된다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95/</guid>
+      <description>&lt;p&gt;회사에서 이슈 진행을 하다가, 트랜잭션를 이용하여 처리해야하는 부분을 발견하였다.
+따라서 &lt;code&gt;SQLAlchemy&lt;/code&gt;에서는 트랜잭션을 어떻게 사용하는지 정리해보도록 하겟다.&lt;/p&gt;
+&lt;h2 id=&#34;트랜잭션-관리하기&#34;&gt;트랜잭션 관리하기&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/111575492-ce1ff100-87f1-11eb-9999-bef313b83749.png&#34; alt=&#34;Screen Shot 2021-03-18 at 1 56 50 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;새롭게 생성된 세션은 &lt;code&gt;begin()&lt;/code&gt; 상태이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;begin()&lt;/code&gt; 상태에서 &lt;code&gt;Session&lt;/code&gt;은 아직 어떠한  &lt;code&gt;Connection&lt;/code&gt; 및  &lt;code&gt;Transactional&lt;/code&gt;과 연관되지 않았다.&lt;/li&gt;
+&lt;li&gt;그러한 다음에, &lt;code&gt;Session&lt;/code&gt; 은 데이터베이스 커넥션 요청을 수신한다.&lt;/li&gt;
+&lt;li&gt;일반적으로, 이것은 &lt;code&gt;Engine&lt;/code&gt;을 이용하여, 특정 &lt;code&gt;SQL&lt;/code&gt; 문을 수행해야하는 것을 의미한다.&lt;/li&gt;
+&lt;li&gt;특정 &lt;code&gt;SQL&lt;/code&gt;문의 수행은 &lt;code&gt;Session.query()&lt;/code&gt;, &lt;code&gt;Session.execute()&lt;/code&gt; 통해 이루어지고  &lt;code&gt;Session.commit()&lt;/code&gt;, &lt;code&gt;Session.flush()&lt;/code&gt;를 할 때 보류된 변경 사항을 비우고 커밋하면서 발생합니다.&lt;/li&gt;
+&lt;li&gt;이러한 요청이 수신되면, 새로운 엔진 각각이 세션에서 유지되고 관리하는 트랜잭션 상태와 연결이 된다.&lt;/li&gt;
+&lt;li&gt;첫 번째, 엔진이 작동하면 세션은 &lt;code&gt;begin&lt;/code&gt; 상태를 떠나서, &lt;code&gt;transactional&lt;/code&gt; 상태로 전환되었다고 할 수 있다.&lt;/li&gt;
+&lt;li&gt;각각의 엔진에 대해서 연결이 되어 있으며, 이러한 연결은 &lt;code&gt;Engine.contextual_connect()&lt;/code&gt; 메서드를 통해서 획득된다.&lt;/li&gt;
+&lt;li&gt;롤백 또는 커밋 후에 트랜잭션 상태가 완료되면 모든 트랜잭션 및 연결 리소스를 해제하고, &lt;code&gt;begin&lt;/code&gt; 상태로 돌아간다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;begin&lt;/code&gt; 상태로 돌아가면, 다시 새로운 &lt;code&gt;SQL&lt;/code&gt; 문을 내보내는 새 요청이 수신될 때 새로운 &lt;code&gt;Connection&lt;/code&gt; 및 &lt;code&gt;Transaction&lt;/code&gt; 객체를 다시 호출합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;다음은 위의 라이프 사이클을 보여주는 예제이다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;engine = create_engine(&amp;quot;...&amp;quot;)
+Session = sessionmaker(bind=engine)
+
+# 새로운 세션, 어떤 커넥션도 사용중이지 않다.
+session = Session()
+try:
+    # 첫 번째 쿼리를 수행하면, 커넥션을 엔진으로 부터 획득하고
+    # 트랜잭션이 시작된다.    
+    item1 = session.query(Item).get(1)
+
+    # 두 번째 쿼리이다. 같은 커넥션과 트랜젝션이 사용된다.
+    item2 = session.query(Item).get(2)
+
+    # 아직 반영되지 않은 변경 사항이 생성된다.
+    item1.foo = &#39;bar&#39;
+    item2.bar = &#39;foo&#39;
+    
+    # 커밋을 수행한다.
+    # 아직 반영되지 않은 변경사항이 모두 `flush` 된다.
+    # 트랜잭션이 커밋되고, 연결 객체가 닫치고 사라진다.
+    # DBAPI 연결이 커넥션 풀로 반환된다.
+    session.commit()
+except:
+    # 롤백시에도, 커미과 동일한 상태 종료가 진행된다.
+    session.rollback()
+    raise
+finally:
+    # 세션을 닫는다, 이렇게 하면 남아 있는 모든 객체가 영구적으로 삭제되며, 기존 SessionTransaction 상태가 재설정 된다.
+    # 일반적으로 이러한 단계는 필수는 아니지만,
+    # commit() 또는 rollback() 자체에 예기치 않은 내부 오류가
+    # 발생한 경우 close()는 유효하지 않은 상태가 제거되도록 한다.
+    session.close()
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;savepoint-사용하기&#34;&gt;SAVEPOINT 사용하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;기본 엔진에서 지원하는 경우, &lt;code&gt;SAVEPOINT&lt;/code&gt; 트랜잭션은 &lt;code&gt;Session.begin_nested()&lt;/code&gt; 메서드를 사용할 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Session = sessionmaker()
+session = Session()
+session.add(u1)
+session.add(u2)
+
+session.begin_nested() # establish a savepoint
+session.add(u3)
+session.rollback()  # rolls back u3, keeps u1 and u2
+
+session.commit() # commits u1 and u2
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Session.begin_nested()&lt;/code&gt;는 여러 번 호출 될 수 있으며, 각 호출에 대해서 고유한 식별자가 있는 새로운 SAVEPOINT를 발행합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각각의 &lt;code&gt;Session.begin_nested()&lt;/code&gt; 호출에 대해서, &lt;code&gt;Session.rollback()&lt;/code&gt;또는, &lt;code&gt;Session.commit()&lt;/code&gt;을 수행 해야 합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 반환 값이 컨텍스트 매니저에 의해서 사용되는 경우 예를 들어서 &lt;code&gt;with&lt;/code&gt; 문에서 &lt;code&gt;rollback&lt;/code&gt; 및 &lt;code&gt;commit&lt;/code&gt;은 컨텍스트를 종료할 때, 컨텍스트 관리자가 실행하므로 명시적으로 추가해서는 안된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Session.begin_nested()&lt;/code&gt; 메서드는 &lt;code&gt;Session.begin()&lt;/code&gt;을 덜 사용하기 위해서 사용하며 컨텍스트 매니저로 작동하는 &lt;code&gt;SessionTransaction&lt;/code&gt;을 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;개발 레코드를 삽입할 때, 유용하게 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;for record in records:
+    try:
+        with session.begin_nested():
+            session.merge(record)
+    except:
+        print(&amp;quot;Skipped record %s&amp;quot; % record)
+session.commit()
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;트랜잭션-격리-수준-설정--dbapi-autocommit&#34;&gt;트랜잭션 격리 수준 설정 / DBAPI AUTOCOMMIT&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/111587615-d08c4600-8805-11eb-8a03-8f3379b7a441.png&#34; alt=&#34;Screen Shot 2021-03-18 at 4 20 02 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;대부분의 &lt;code&gt;DBAPI&lt;/code&gt;는 설정할 수 있는 트랜잭션 격리 수준의 개념을 지원한다.&lt;/li&gt;
+&lt;li&gt;전통적으로 &lt;code&gt;READ UNCOMMITED&lt;/code&gt;, &lt;code&gt;READ COMMITED&lt;/code&gt;, &lt;code&gt;REPEATABLE READ&lt;/code&gt;, 및 &lt;code&gt;SERIALIZABLE&lt;/code&gt;의 네 가지 수준이 있다.&lt;/li&gt;
+&lt;li&gt;이는 일반적으로 새로운 트랜잭션을 사용하기 전에, &lt;code&gt;DBAPI&lt;/code&gt; 연결에 적용되며 대부분의 DBAPI는 SQL문이 처음 생성될 때, 트랜잭션을 암시적으로 시작한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;SQLAlchemy&lt;/code&gt;는 &lt;code&gt;create_engine&lt;/code&gt; 수준과, &lt;code&gt;Connection.execution_options()&lt;/code&gt; 수준 모두에서 플래그를 사용하여 엔진 별 또는 연결 별로 설정 가능한 격리 모드를 지원한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;세션-메이커-및-엔진-전체에-대한-고립-수준-설정&#34;&gt;세션 메이커 및 엔진 전체에 대한 고립 수준 설정&lt;/h4&gt;
+&lt;p&gt;전역 적으로 특정 고립 수준으로 &lt;code&gt;Session&lt;/code&gt; 또는 &lt;code&gt;Session Maker&lt;/code&gt;를 설정하려면 첫 번째 기술은 모든 경우에 특정 격리 수준에 대해서 엔진을 설정한 다음에, 세션 메이커의 연결 소스로 사용하는 것이다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+eng = create_engine(
+    &amp;quot;postgresql://scott:tiger@localhost/test&amp;quot;,
+    isolation_level=&#39;REPEATABLE READ&#39;
+)
+
+Session = sessionmaker(eng)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;서로 다른 격리 수준을 가진 두 개의 엔진이 있는 경우 유용한 다른 옵션은 &lt;code&gt;Engine.execution_options()&lt;/code&gt; 메서드를 사용하는 것입니다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+eng = create_engine(&amp;quot;postgresql://scott:tiger@localhost/test&amp;quot;)
+
+autocommit_engine = eng.execution_options(isolation_level=&amp;quot;AUTOCOMMIT&amp;quot;)
+
+transactional_session = sessionmaker(eng)
+autocommit_session = sessionmaker(autocommit_engine)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 &lt;code&gt;eng&lt;/code&gt;과 &lt;code&gt;autocommit_engine&lt;/code&gt;은 동일한 연결 풀을 공유합니다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;AUTOCOMMIT&lt;/code&gt; 모드는 &lt;code&gt;autocommit_engine&lt;/code&gt;에서 연결할 때 따로 설정된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;각각의-세션에-대한-고립-수준-설정&#34;&gt;각각의 세션에 대한, 고립 수준 설정&lt;/h4&gt;
+&lt;p&gt;생성자를 직접 사용하거나, 세션 메이커가 생성한 호출 가능한 객체를 호출 할 때, &lt;code&gt;bind&lt;/code&gt; 인자로 바로 전달 할 수 있다.
+예를 들어, &lt;code&gt;transactional_session&lt;/code&gt;에서 세션을 만들고, &lt;code&gt;autocommit_engine&lt;/code&gt;을 전달할 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;session = transactional_session(bind=autocommit_engine)
+# work with session
+session.close()
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;각각의-트랜잭션에-대한-고립-수준-설정&#34;&gt;각각의 트랜잭션에 대한 고립 수준 설정&lt;/h4&gt;
+&lt;p&gt;격리 수준과 관련된 주요한 주의 사항은 트랜잭션이 이미 시작된 연결에서 설정을 안전하게 수정할 수 없다는 것이다.&lt;/p&gt;
+&lt;p&gt;데이터베이스는 진행중인 트랜잭션의 격리 수준을 변경할 수 없으며 일부 &lt;code&gt;DBAPI&lt;/code&gt; 및 &lt;code&gt;SQLALchemy&lt;/code&gt; 언어에서는 이러한 영역에서 일관적이지 않은 동작이 있다.&lt;/p&gt;
+&lt;p&gt;따라서 원하는 격리 수준을 가진 엔진 앞쪽에 바인딩 된 세션을 사용하는 것이 좋다.&lt;/p&gt;
+&lt;p&gt;그러나 연결 단위의 격리 수준은 트랜잭션이 시작될 때 &lt;code&gt;Session.commection()&lt;/code&gt; 메서드를 사용하여 영향 받을 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from sqlalchemy.orm import Session
+
+sess = Session(bind=engine)
+with sess.begin():
+    sess.connection(execution_options={&#39;isolation_level&#39;: &#39;SERIALIZABLE&#39;})
+
+# commits transaction.  the connection is released
+# and reverted to its previous isolation level.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위에서 먼저, 생성자 또는 세션 메이커를 사용하여 세션을 생성한다. 그런 다음에 트랜잭션이 시작되기 전에 연결에 전달되는 실행 옵션을 제공하는 &lt;code&gt;Session.connection()&lt;/code&gt;을 호출하여 트랜잭션 시작을 명시적으로 설정한다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.sqlalchemy.org/en/13/orm/session_transaction.html#transactions-and-connection-management&#34;&gt;Transactions and Connection Management&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>mariadb 유니크 인덱스</title>
-      <link>/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4/</link>
       <pubDate>Tue, 09 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4/</guid>
-      <description>유니크 인덱스   유니크 키는 유일해야하지만, 널을 허용할 수 있다. 테이블을 생성한 후 CREATE INDEX 명령 또는 ALTER TABLE 명령을 사용하여, 고유 키를 추가할 수 있다.  ALTER TABLE Employees ADD UNIQUE `EmpCode`(`Employee_Code`); CREATE UNIQUE INDEX HomePhone ON Employees(Home_Phone); 참고 문헌  mariadb-unique-index  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4/</guid>
+      <description>&lt;h2 id=&#34;유니크-인덱스&#34;&gt;유니크 인덱스&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110399859-ed17d800-80b9-11eb-933e-d71a182abcb7.png&#34; alt=&#34;unique&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;유니크 키는 유일해야하지만, 널을 허용할 수 있다.&lt;/li&gt;
+&lt;li&gt;테이블을 생성한 후 &lt;code&gt;CREATE INDEX&lt;/code&gt; 명령 또는 &lt;code&gt;ALTER TABLE&lt;/code&gt; 명령을 사용하여, 고유 키를 추가할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;ALTER TABLE Employees ADD UNIQUE `EmpCode`(`Employee_Code`);
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;CREATE UNIQUE INDEX HomePhone ON Employees(Home_Phone);
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://mariadb.com/kb/en/getting-started-with-indexes/#unique-index&#34;&gt;mariadb-unique-index&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>DBMS를 분석하는 방법</title>
-      <link>/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</link>
       <pubDate>Wed, 03 Mar 2021 23:32:24 +0900</pubDate>
       
-      <guid>/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</guid>
-      <description>KCD 2020    막 오픈소스 컨트리뷰톤을 끝마치고, 오픈소스 개발에 재미를 붙였을 때, KDC 2020이라는 세미나가 열렸다. 오픈소스 데이터베이스 큐브리드에 기여하기라는 제목의 세션을 보았을 때, 오픈소스 DBMS를 개발한다는 부분이 신기했고, 궁금한 점이 있어서 메일을 보내게 되었는데, 친절하게도 아주 장문의 답장을 해주셨다.
-메일  내가 보낸 메일을 다시 보니까, 많이 부끄럽다;;
-매우 유용한 조언을 해주셨고, 실제로 많은 도움이 되었다. 이를 요약하자면 다음과 같다.
-  코드 레벨에서부터 접근하면 분석하기 쉽지 않다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</guid>
+      <description>&lt;h3 id=&#34;kcd-2020&#34;&gt;KCD 2020&lt;/h3&gt;
+&lt;hr&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/CgxiNF6xigY&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;p&gt;막 오픈소스 컨트리뷰톤을 끝마치고, 오픈소스 개발에 재미를 붙였을 때, KDC 2020이라는 세미나가 열렸다. 오픈소스 데이터베이스 큐브리드에 기여하기라는 제목의 세션을 보았을 때, 오픈소스 DBMS를 개발한다는 부분이 신기했고, 궁금한 점이 있어서 메일을 보내게 되었는데, 친절하게도 아주 장문의 답장을 해주셨다.&lt;/p&gt;
+&lt;h3 id=&#34;메일&#34;&gt;메일&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109822109-ffd57b80-7c79-11eb-878d-337a28318428.png&#34; alt=&#34;Screen Shot 2021-03-03 at 11 41 29 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;내가 보낸 메일을 다시 보니까, 많이 부끄럽다;;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109821623-82117000-7c79-11eb-9da5-7f9b3f2d2864.png&#34; alt=&#34;Screen Shot 2021-03-03 at 11 37 57 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;매우 유용한 조언을 해주셨고, 실제로 많은 도움이 되었다. 이를 요약하자면 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;코드 레벨에서부터 접근하면 분석하기 쉽지 않다. 특히 DBMS는 여러가지 큰 개념이 모두 함께 유기적으로 동작하기 때문에 (&lt;code&gt;SQL&lt;/code&gt;, &lt;code&gt;Query Rewrite/Optimization&lt;/code&gt;, &lt;code&gt;Index&lt;/code&gt;, &lt;code&gt;Transaction&lt;/code&gt;, &lt;code&gt;Logging&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;앞에서 말한 각 모듈들은 코드상으로는 &lt;code&gt;DBMS&lt;/code&gt; 마다 모두 다르게 구현되어 있을 것이다. 따라서 추상적인 개념을 코드로 된 구현체로 최대한 맵핑해보려는 시도를 하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;예를 들어, &amp;ldquo;SQL 파서 모듈은 SQL을 읽어서 파싱 트리라는 구조를 만든다&amp;quot;와 같은 개념들은 DBMS 마다 같지만 코드상으로는 다르게 구현되어 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SQL 파서 모듈과 같이, 각 모듈을 처음부터 코드를 읽어가면서 맨땅부터 이해하는 것은 쉽지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시간이 충분하다면 한줄 한줄 분석하면서 파악할 수는 있겠지만 거의 불가능하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 그 모듈이 어떻게 돌아가는지에 대한 맥락을 먼저 잡아야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;이는 현업에서 일을 할 때 도 마찬가지라는 것을 명심해야겠다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;모듈을-분석하는-법&#34;&gt;모듈을 분석하는 법&lt;/h4&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;1. 개략적인 모듈의 모양을 파악하기 위해서, 모듈의 인터페이스 또는 API나 시작점을 먼저 찾아본다.
+2. 모듈을 관통하는 주요 자료구조가 있다면 파악해둔다, (SQL 파서의 경우에는 `파싱트리`) 그 자료구조를 바탕으로 다른 엮여 있는 자료구조나 기능 구현을 파악해나간다.
+3. 분석하고 있는 모듈과 관련해서 다른 사람이 이전에 개발했던 기능, 기능/개선, 버그 수정사항에 대한 기록이 있으면 좋다. 
+  - 버그 트래킹 시스템이 있으면 먼저 찾아보고, 코드를 보다가 이해되지 않는 부분이 있으면 `git blame`기능으로 어떤 맥락으로 그 코드가 추가되었는지를 찾아보면 좋다.
+  - 찾아보았던 기능 개발/개선 기록을 검토하면서 코드 분석을 하다보면 가끔 이전 개발자가 예외 사항들을 놓치는 경우가 있는데 분석한 부분을 잘 이해했다면 기여할 수 있다.
+  - 개발자 메뉴얼이나 자료구조/모듈 간의 구조를 그려주는 문서들이 있으면 더 이해가 빠르다. (e.g. https://doxygen.postgresql.org/)
+4. 1 ~ 3번을 반복하면서 모듈들을 하나씩 이해해 가다 보면 모듈간에 어떻게 엮여 있는지 개략적으로 알아갈 수 있다. 확실히 코드를 분석하려면 어떤 새로운 기능을 개발하거나 큰 버그를 고친다면 더 자세히 이해할 수 있는 것 같다.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;이를 알려주신 개발자 분이 위의 방법대로 한 단계씩 분석을 하면서 각 부분을 접근하고 계신다고 하셨다.
+그리고 분석하는 도중에 어떤 버그가 보여서 이건 버그라고 확신할 때 커미터에게 자신이 궁금한 점을 물어보면서 토론을 해보는 것도 좋다고 생각한다고 하셨다.&lt;/p&gt;
+&lt;h4 id=&#34;마무리&#34;&gt;마무리&lt;/h4&gt;
+&lt;hr&gt;
+&lt;p&gt;아쉽게도 현재는 오픈소스 활동을 재개하고 있지 않다. 사실 다시 오픈 소스 활동을 재개하고 싶지만, 현업에서 일을 하다보니 부족한 점이 너무 많아서 부족한 부분을 채우느라 다시 시작할 엄두를 못내고 있다.&lt;/p&gt;
+&lt;p&gt;하지만 이번 글을 쓰면서 감사함을 느꼈고 이에 보답하기 위해서라도 오픈 소스 컨트리뷰션을 조만간 다시 재개할 수 있도록 노력을 해야겠다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://doxygen.postgresql.org/&#34;&gt;postgres doxygen&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>데이터베이스 스키마를 관리하는 도구, Flyway</title>
-      <link>/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway/</link>
       <pubDate>Wed, 03 Mar 2021 20:09:39 +0900</pubDate>
       
-      <guid>/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway/</guid>
-      <description>데이터베이스 스키마 관리의 필요성  최근에 회사에서 기존에 AWS에서 서비스하던 서비스를 ALI 클라우드에서 제공해야하는 일이 있었다. 따라서 데이터베이스 스키마와 마스터 데이터를 새로운 클라우드 환경으로 이전을 시켜줘야 했다.
-비교적 규모가 큰 서비스는 아니여서, 덤프를 이용해서 간단하게 이전하였고, 데이터베이스 스키마 및 마스터 데이터를 쿼리문 형태로 만들어서 GIT으로 형상관리를 하였다.
-이 정도로 모든 일이 마무리 되기는 하였지만, 어딘가 부족한 느낌이 들었다. 왜냐하면 개발을 하면서 DB 스키마가 변경할 일이 있는데 그럴 때마다 쿼리문으로 테이블 스키마를 변경하고, 스키마 파일을 업데이트 해야했기 때문이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway/</guid>
+      <description>&lt;h1 id=&#34;데이터베이스-스키마-관리의-필요성&#34;&gt;데이터베이스 스키마 관리의 필요성&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;최근에 회사에서 기존에 &lt;code&gt;AWS&lt;/code&gt;에서 서비스하던 서비스를 &lt;code&gt;ALI&lt;/code&gt; 클라우드에서 제공해야하는 일이 있었다. 따라서 데이터베이스 스키마와 마스터 데이터를 새로운 클라우드 환경으로 이전을 시켜줘야 했다.&lt;/p&gt;
+&lt;p&gt;비교적 규모가 큰 서비스는 아니여서, 덤프를 이용해서 간단하게 이전하였고, 데이터베이스 스키마 및 마스터 데이터를 쿼리문 형태로 만들어서 GIT으로 형상관리를 하였다.&lt;/p&gt;
+&lt;p&gt;이 정도로 모든 일이 마무리 되기는 하였지만, 어딘가 부족한 느낌이 들었다. 왜냐하면 개발을 하면서 DB 스키마가 변경할 일이 있는데 그럴 때마다 쿼리문으로 테이블 스키마를 변경하고, 스키마 파일을 업데이트 해야했기 때문이다. 문제는 변경해줘야 할 환경이 &lt;code&gt;AWS&lt;/code&gt;, &lt;code&gt;ALI&lt;/code&gt; 각각 &lt;code&gt;DEV&lt;/code&gt;, &lt;code&gt;EDU&lt;/code&gt;, &lt;code&gt;STG&lt;/code&gt;, &lt;code&gt;PROD&lt;/code&gt;이 존재하므로 8 개의 환경을 업데이트 해주어야 했습니다. 그리고 메일 서버가 바라보는 테이블까지 생각하면 서비스가 조금만 더 확장된다면 엄청나게 힘들어 질 것이다.&lt;/p&gt;
+&lt;p&gt;게다가 단순한 컬럼 값 추가, 삭제가 아니라 컬럼이 어떤 연산을 통해서 새로운 값을 가져야 하거나, 새로운 테이블을 만들어 기존 데이터를 옮기거나 하는 좀 더 복잡한 작업이 되면 엄청나게 복잡해 질 수 있다.&lt;/p&gt;
+&lt;p&gt;따라서 현대적인 애플리케이션 개발 환경에서는 단일 DB 스키마가 아니라, 변화를 다루는 마이그레이션 스크립트를 만들어서 사용한다. 소스 코드 저장소에 함께 포함을 시키고, 모든 환경에서 서버를 구동하기 전에 적용시키는 방법을 사용한다.&lt;/p&gt;
+&lt;h1 id=&#34;flyway&#34;&gt;Flyway&lt;/h1&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109799728-b5470580-7c5f-11eb-9f0a-6ca5e87ae745.png&#34; alt=&#34;Screen Shot 2021-03-03 at 8 32 58 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Flyway&lt;/code&gt;는 오픈소스 데이터베이스 마이그레이션 도구이다.&lt;/li&gt;
+&lt;li&gt;마이그레이션은 &lt;code&gt;SQL&lt;/code&gt; 또는 &lt;code&gt;Java&lt;/code&gt;로 작성할 수 있다.&lt;/li&gt;
+&lt;li&gt;일곱 가지의 간단한 명령어로 구성되어 있다. (&lt;code&gt;Migrate&lt;/code&gt;, &lt;code&gt;Clean&lt;/code&gt;, &lt;code&gt;Info&lt;/code&gt;, &lt;code&gt;Validate&lt;/code&gt;, &lt;code&gt;Undo&lt;/code&gt;, &lt;code&gt;Baseline&lt;/code&gt;, &lt;code&gt;Repair&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;다양한 패키지 및 빌드 도구에서 지원하며 플러그인 형태로도 이용할 수 있다.&lt;/li&gt;
+&lt;li&gt;많은 DBMS를 지원한다. (&lt;code&gt;MySQL&lt;/code&gt;, &lt;code&gt;Postgres&lt;/code&gt;, &lt;code&gt;H2&lt;/code&gt;, &amp;hellip;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;마이그레이션이-필요한-이유&#34;&gt;마이그레이션이 필요한 이유&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109800868-16bba400-7c61-11eb-9b83-9dff2469cf53.png&#34; alt=&#34;Environments&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;애플리케이션의 경우, &lt;code&gt;GIT&lt;/code&gt;과 같은 형상 관리 툴로, 재현 가능한 구조와 CI 환경을 구성할 수 있다.&lt;/li&gt;
+&lt;li&gt;릴리즈 및 배포 프로세스를 잘 정의함으로써, 이를 관리할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109801147-6ef2a600-7c61-11eb-8058-c5086b4a1522.png&#34; alt=&#34;DbRed&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;불행하게도 애플리케이션과 데이터베이스 간의 불일치가 발생할 수 있다.&lt;/li&gt;
+&lt;li&gt;하지만 여전히 많은 프로젝트가 수동으로 적용된 &lt;code&gt;SQL&lt;/code&gt; 스크립트에 의존하고 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;데이터베이스 마이그레이션은 이러한 혼란을 제어할 수 있는 좋은 방법이다. 마이그레이션은 위와 같은 문제에 대해서 다음과 같은 이점을 제공합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;처음부터 데이터베이스 다시 만들기&lt;/li&gt;
+&lt;li&gt;데이터베이스가 어떤 상태인지 확인&lt;/li&gt;
+&lt;li&gt;현재 버전의 데이터베이스에서 새로운 데이터베이스로 마이그레이션&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;flyway-작동-원리&#34;&gt;Flyway 작동 원리&lt;/h3&gt;
+&lt;p&gt;가장 간단한 경우는 &lt;code&gt;Flyway&lt;/code&gt;가 비어있는 데이터베이스를 가리킬 때입니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109801736-3bfce200-7c62-11eb-81eb-a3ea67e714dd.png&#34; alt=&#34;EmptyDb&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;데이터베이스가 비어있으므로, &lt;code&gt;Flyway&lt;/code&gt;는 데이터베이스를 찾지 못하고 대신 생성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 &lt;code&gt;Flyway&lt;/code&gt;는 마이그레이션을 위해서 파일 시스템 및 응용 프로그램의 클래스 경로를 탐색하기 시작한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그런 다음에 마이그레이션은 버전 번호를 기준으로 정렬되고 순서대로 적용될 뿐이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109801958-87af8b80-7c62-11eb-9c7d-0f55a59c44b5.png&#34; alt=&#34;Migration-1-2&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;각 마이그레이션이 적용될 때마다 스키마 기록 테이블이 업데이트 되며 이러한 이력 데이터로 특정 버전으로 쉽게 마이그레이션을 할 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109802186-d9581600-7c62-11eb-958a-c9726222a374.png&#34; alt=&#34;Screen Shot 2021-03-03 at 8 55 48 PM&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;결론&#34;&gt;결론&lt;/h1&gt;
+&lt;p&gt;현재 진행하는 프로젝트에 도입을 해도 괜찮을 것 같고, 마치 깃을 사용하는 것 같이 특정 버전의 스키마로 쉽게 돌아갈 수 있다는 것이 편리할 것 같다. 기존에는 특정 버전의 스키마를 보려면 깃으로 특정 버전의 스키마를 조회한 다음에 도커 가상 환경에서 마이그레이션을 하고 나서 테스트를 했다. 이렇게 진행하니까 테스트를 하기 위해서 준비해야할 것도 많고 번거로웠다. 지금 당장은 괜찮을지 몰라도 나중을 위해서 우선 시험삼아서 사용해보고 좋다면 팀원에게 소개를 해야겠다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://flywaydb.org/documentation/getstarted/why&#34;&gt;Flyway, documentation&lt;/a&gt;&lt;/p&gt;
+</description>
     </item>
     
   </channel>

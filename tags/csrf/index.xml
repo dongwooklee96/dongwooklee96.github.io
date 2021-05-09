@@ -2,22 +2,90 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CSRF on 개발자 이동욱</title>
-    <link>/tags/csrf/</link>
+    <link>https://dongwooklee96.github.io/tags/csrf/</link>
     <description>Recent content in CSRF on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 10 Mar 2021 22:20:39 +0900</lastBuildDate><atom:link href="/tags/csrf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Mar 2021 22:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/csrf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CSRF 란 무엇일까?</title>
-      <link>/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
       <pubDate>Wed, 10 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
-      <description>CSRF    CSRF(Cross-Site Request Forgery)는 신뢰할 수 있는 사용자를 가장하여 웹 사이트에 원치않는 명령을 보내는 공격입니다.
-  예를 들어, 다른 곳으로 이동하기 위해 사용하는 링크 뒤에 있는 URL에 악의적인 매겨변수를 포함시킴으로써 다음을 수행할 수 있다.
-  &amp;lt;img src=&amp;quot;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;quot;&amp;gt;   해당 도메인에 수정 권한이 있는 사용자의 경우 &amp;lt;img&amp;gt; 요소가, 사용자 모르게 동작을 수행한다.
-  심지어, 요소가 https://www.example.com에 없는 경우에도 실행된다.
-  CSRF를 방지하는 방법은 RestfulAPI 구현 및 시큐어 토큰을 추가하는 등 많은 방법이 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <description>&lt;h3 id=&#34;csrf&#34;&gt;CSRF&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110636756-fc00a680-81ef-11eb-8940-ee638da62fc2.png&#34; alt=&#34;Screen Shot 2021-03-10 at 10 28 45 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;CSRF(Cross-Site Request Forgery)&lt;/code&gt;는 신뢰할 수 있는 사용자를 가장하여 웹 사이트에 원치않는 명령을 보내는 공격입니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어, 다른 곳으로 이동하기 위해 사용하는 링크 뒤에 있는 &lt;code&gt;URL&lt;/code&gt;에 악의적인 매겨변수를 포함시킴으로써 다음을 수행할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;해당 도메인에 수정 권한이 있는 사용자의 경우 &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; 요소가, 사용자 모르게 동작을 수행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;심지어, 요소가 &lt;code&gt;https://www.example.com&lt;/code&gt;에 없는 경우에도 실행된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;CSRF&lt;/code&gt;를 방지하는 방법은 &lt;code&gt;RestfulAPI&lt;/code&gt; 구현 및 시큐어 토큰을 추가하는 등 많은 방법이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;위키-백과&#34;&gt;위키 백과&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;설명이 조금 부족해서 위키백과를 찾아보았다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110638080-77168c80-81f1-11eb-90a1-af13554352bb.png&#34; alt=&#34;Screen Shot 2021-03-10 at 10 39 18 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;사이트 간 요청 위조, 원 클릭 공격 또는 세션 라이딩이라고 한다.&lt;/li&gt;
+&lt;li&gt;웹 응용프로그램이 신뢰하는 사용자로서 무단 명령을 제출하는 웹 사이트의 악의적인 공격 유형이다.&lt;/li&gt;
+&lt;li&gt;악의적인 웹 사이트가 이러한 명령을 전송할 수 있는 방법은 여러가지가 있다. 예를들어, 특수하게 조작된 이미지 태그, 숨겨진 양식 및 &lt;code&gt;JavaScript XMLHttpRequest&lt;/code&gt;는 사용자의 동작에 따라서 작동되기도 하지만 전혀 알아차리지 못하게 이루어지기도 한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;XSS(Cross-site-scripting)&lt;/code&gt;과의 차이점은 &lt;code&gt;XSS&lt;/code&gt;는 특정 사이트에 대해서 사용자가 가지는 신뢰정보를 이용하는데 반해서, &lt;code&gt;CSRF&lt;/code&gt;는 사용자의 브라우저에 있는 신뢰 정보를 이용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;특징&#34;&gt;특징&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110639854-8a2a5c00-81f3-11eb-9cbb-06198496bc29.png&#34; alt=&#34;Screen Shot 2021-03-10 at 10 54 10 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;CSRF&lt;/code&gt; 공격에서 공격자의 목표는 무고한 피해자가 악의적으로 조작된 웹 공격을 대상자가 액세스 권한을 가진 웹 사이트에 몰래 제출하도록 하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자의 웹 브라우저에 저장된 쿠키에 의해 인증된 사용자는 자신도 모르게 사용자를 신뢰하는 사이트로 &lt;code&gt;HTTP&lt;/code&gt; 요청을 전송하여 원치 않는 작업을 발생시킬 수 있습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;웹 브라우저는 특정 도메인에서 사용하는 쿠키를 해당 도메인으로 보내는 웹 요청에 보이지 않게 포함시킵니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 속성 때문에, 웹 사이트에 로그인 할 때, 생성된 쿠키를 이용해 공격합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자가 브라우저를 통해서 실수로 요청을 제출한 경우 자동으로 포함된 이 쿠키로 인해서 위조된 요청이 웹 서버에 실제로 나타나며 데이터 반환, 세션 상태 조작, 피해자 계정 변경 등 적절하게 요청된 모든 작업을 수행한다&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;웹 브라우저는 특정 도메인에서 사용하는 쿠키를 해당 도메인으로 보내는 웹 요청에 보이지 않게 포함시킵니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 속성 때문에, 웹 사이트에 로그인 할 때, 생성된 쿠키를 이용해 공격합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자가 브라우저를 통해서 실수로 요청을 제출한 경우 자동으로 포함된 이 쿠키로 인해서 위조된 요청이 웹 서버에 실제로 나타나며 데이터 반환, 세션 상태 조작, 피해자 계정 변경 등 적절하게 요청된 모든 작업을 수행 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;예방법&#34;&gt;예방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110640493-379d6f80-81f4-11eb-83f4-b25ba743308a.png&#34; alt=&#34;Screen Shot 2021-03-10 at 10 59 01 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;대부분의 &lt;code&gt;CSRF&lt;/code&gt; 방지 기술은, 웹 응용 프로그램이 허가되지 않은 요청을 탐지할 수 있도록 요청해 추가 인증 데이터를 포함시킴으로서 작동한다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Glossary/CSRF&#34;&gt;MDN - CSRF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Cross-site_request_forgery&#34;&gt;위키백과 - CSRF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

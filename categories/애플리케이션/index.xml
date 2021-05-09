@@ -2,27 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>애플리케이션 on 개발자 이동욱</title>
-    <link>/categories/%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98/</link>
+    <link>https://dongwooklee96.github.io/categories/%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98/</link>
     <description>Recent content in 애플리케이션 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 08 Apr 2021 08:53:24 +0900</lastBuildDate><atom:link href="/categories/%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Apr 2021 08:53:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>주키퍼란 무엇인가? (draft)</title>
-      <link>/post/2021/04/08/%EC%A3%BC%ED%82%A4%ED%8D%BC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/08/%EC%A3%BC%ED%82%A4%ED%8D%BC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-draft/</link>
       <pubDate>Thu, 08 Apr 2021 08:53:24 +0900</pubDate>
       
-      <guid>/post/2021/04/08/%EC%A3%BC%ED%82%A4%ED%8D%BC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-draft/</guid>
-      <description>참고 문헌  What is ZooKeeper  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/08/%EC%A3%BC%ED%82%A4%ED%8D%BC%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://zookeeper.apache.org/&#34;&gt;What is ZooKeeper&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>카프카란 무엇인가? (draft)</title>
-      <link>/post/2021/04/08/%EC%B9%B4%ED%94%84%EC%B9%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/08/%EC%B9%B4%ED%94%84%EC%B9%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-draft/</link>
       <pubDate>Thu, 08 Apr 2021 08:19:24 +0900</pubDate>
       
-      <guid>/post/2021/04/08/%EC%B9%B4%ED%94%84%EC%B9%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-draft/</guid>
-      <description>참고 문헌  KafkaConsumer Client Internals  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/08/%EC%B9%B4%ED%94%84%EC%B9%B4%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://d2.naver.com/helloworld/0974525&#34;&gt;KafkaConsumer Client Internals&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

@@ -2,19 +2,138 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>오픈 소스 on 개발자 이동욱</title>
-    <link>/tags/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4/</link>
+    <link>https://dongwooklee96.github.io/tags/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4/</link>
     <description>Recent content in 오픈 소스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 05 May 2021 17:30:39 +0900</lastBuildDate><atom:link href="/tags/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 May 2021 17:30:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>오픈 소스 분석 방법</title>
-      <link>/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</link>
+      <link>https://dongwooklee96.github.io/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</link>
       <pubDate>Wed, 05 May 2021 17:30:39 +0900</pubDate>
       
-      <guid>/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</guid>
-      <description>오픈 소스 분석 방법  머리속 한켠에는 오픈 소스 활동을 다시 하고 싶다는 생각을 가지고 있지만, 바쁘다는 핑계로 미뤄왔다. 우연히 어떤 블로그에서 오픈 소스 분석 방법 이라는 글을 읽고나서, 오픈 소스 개발을 하고 싶다는 생각이 들었다. 또한 오픈 소스 활동은 시간이 날때 하는 것이 아니라, 평소에 시간을 쪼개가면서, 짜투리 시간을 만들어야 가능하다는 것을 느끼게 되었다. 다음은 오픈 소스 분석하는데 좋은 팁이다.
-공식 문서를 통해 파악하기    코드를 분석하기 전에, 먼저 해당 솔루션에 대한 지식을 먼저 익혀야 한다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/05/05/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95/</guid>
+      <description>&lt;h2 id=&#34;오픈-소스-분석-방법&#34;&gt;오픈 소스 분석 방법&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;머리속 한켠에는 오픈 소스 활동을 다시 하고 싶다는 생각을 가지고 있지만, 바쁘다는 핑계로 미뤄왔다. 우연히 어떤 블로그에서 &lt;a href=&#34;https://zzsza.github.io/development/2020/07/19/opensource-analysis/#open-source%EB%9E%80&#34;&gt;오픈 소스 분석 방법&lt;/a&gt; 이라는 글을 읽고나서, 오픈 소스 개발을 하고 싶다는 생각이 들었다. 또한 오픈 소스 활동은 시간이 날때 하는 것이 아니라, 평소에 시간을 쪼개가면서, 짜투리 시간을 만들어야 가능하다는 것을 느끼게 되었다. 다음은 오픈 소스 분석하는데 좋은 팁이다.&lt;/p&gt;
+&lt;h3 id=&#34;공식-문서를-통해-파악하기&#34;&gt;공식 문서를 통해 파악하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;코드를 분석하기 전에, 먼저 해당 솔루션에 대한 지식을 먼저 익혀야 한다. 하둡을 분석하려면, 코드를 보기 전에, 먼저 구글에서 발표한 논문을 읽어봐야 하고, &lt;code&gt;HBase&lt;/code&gt;를 분석하려면 먼저 &lt;code&gt;BigTable&lt;/code&gt; 논문을 읽어야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오픈 소스를 분석하기 전에, 공식 문서를 통해서 사용법을 익히면 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 나도 공감하는 내용이다. 오픈 소스라는 것이 평소에 많이 사용해보고 어떤 기능이 있는지 파악을 해야한다. 또한 이러한 기능이 생기게 된 이유 및 내부 동작 원리를 파악할 수 있으므로 공식 문서는 반드시 읽어보는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;자료 읽기를 먼저 해야하고, 그 뒤에 코드 분석을 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;아키텍처-분석-큰-숲-바라보기&#34;&gt;아키텍처 분석 (큰 숲 바라보기)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/117116687-9e40a300-adc9-11eb-9873-4357a112947d.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;소스코드의 폴더 구성을 보면서, 대략적인 기능들과 아키텍처를 파악해볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;처음에는 오픈 소스의 아키텍처를 파악한 후에, 디테일한 부분으로 이동하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각 모듈들이 어떤 역할을 하고 있는지 살펴보고 상호간에 어떻게 연결되어 있는지 파악하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;큰 아키텍처를 연필이나, 다이어 그램 도구로 직접 그려보면서 파악하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;분석을 할 때, 라이브러리 또는 다른 오픈 소스에 대한 지식이 필요할 때가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;디테일-분석-나무-바라보기&#34;&gt;디테일 분석 (나무 바라보기)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/117116755-b57f9080-adc9-11eb-8f79-d17a216cd422.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;큰 숲을 파악한 후에, 디테일한 부분을 분석한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특정 알고리즘에 대해서는 때로는 이론 보다는 코드가 더 보기 쉬울 때가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클래스는 어떤 정보를 담고 있으며, 어디서 사용되는지, 그리고 어떤 방식으로 동작하는지 등을 파악하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 함수를 파악하려고 하지 말고, 조금씩 자신이 살펴보려는 기능과 관련된 함수 들을 파악하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;디버거를 통해서, BP (&lt;code&gt;Break Point&lt;/code&gt;)를 걸어놓고 직접 실행해보면서, 코드의 흐름을 파악해보는 것도 많은 도움이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;함수의 인풋(&lt;code&gt;Input&lt;/code&gt;)에는 어떤 데이터가 들어오고, 아웃풋(&lt;code&gt;Output&lt;/code&gt;)은 어떤 데이터를 반환하는지 파악하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;테스트 코드를 통해서, 각 함수의 사용법 및 인풋, 아웃풋을 파악하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드 분석을 빠르게 하기 위해서는 분석에 필요한 로그를 추가하여, 재 컴파일을 한 후에 실행을 해보면서 로그를 확인하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;단순히 코드만 보면 특정 연산의 흐름이 어떻게 진행되고 있는지 파악하기 어려울 때가 많이 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;수정, 실행, 확인 사이클을 최대한 짧게 만드는 것이 좋다. 코드를 분석하기 위해서는 분석에 필요한 정보를 출력하는 코드나 확인을 위한 코드를 추가한 후에 기능을 실행하여 확인해야하는 경우가 많다. 이 경우에, (수정, 실행, 확인)을 하는 사이클이 짧아질 수록 효율이 높아지고 작업 패턴이 있다면 이를 스크립트 형태로 만드는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드 분석 방법에는 &lt;code&gt;Bottom Up&lt;/code&gt; 방식과, &lt;code&gt;Top Down&lt;/code&gt; 방식이 있다. 서로 장단점이 있고, 사람마다 스타일이 다르지만 여러명이서 같이 분석을 한다면 두 스타일을 섞어서 하되, 약간 더 레벨이 높은 사람을 한 명 끼워서 팀을 만들면 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;오픈-소스-활동을-지속하기-위한-팁-tip&#34;&gt;오픈 소스 활동을 지속하기 위한 팁 (TIP)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/117116845-cfb96e80-adc9-11eb-94a8-9a1bbb70c697.jpg&#34; alt=&#34;images&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;포기 하지 않는 것이 중요하다!!!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;자신에게 질문을 많이하는 것이 중요하다. 특정 기능에 대해서 &amp;ldquo;나라면 어떻게 개발했을까?&amp;rdquo; 라고 자신에게 질문을 던지고, 머리속에 어떻게 구현할 것인지를 먼저 생각을 해본다. 처음에는 자신이 예측한 부분이 많이 틀리겠지만 코드를 많이 보고 연습을 많이 하면 이것도 얼추 많이 맞추게 된다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;분석하면서 그림 또는 문서로 정리하면 분석하는 시점에도 도움이 되지만 나중에도 도움이 된다. 이렇게 정리하면서 중간 중간에 머리속에서만 빙빙 돌던 생각 이 정리될 때가 많고 &amp;ldquo;분석이 다 된 다음에 정리해야지&amp;quot;라는 생각이면 거의 정리는 못한다고 봐도 된다. 나중에 정리하려고 생각하면 정리도 어렵고, 잘 생각나지 않으므로 분석하면 정리하는 습관을 가지자!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;혼자서 하기 힘들면, 다른 사람들과 같이 분석하는 방법이 있고, &lt;strong&gt;힘들어도 싸이클을 정하고 싸이클을 도는 것이 중요하다!!!&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대부분의 경우 혼자서 하는 것보다 함께 하는 것이 낫다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오픈 소스 메인테이너의 문서 및 논문, 그리고 유튜브 영상을 보는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드를 무조건 많이 보는 것이 좋다. 코드를 인쇄하여 보는 사람들도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;당장 관심있는 부분부터 집중적으로 파악하라, 방대한 시스템을 보다 보면은 금방 지루해지고, 갈 곳을 잃어버리는 수가 많은데, 당장 필요한 부분부터 집중해서 보는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;느낀점&#34;&gt;느낀점&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;특정 기능에 대해서 &amp;ldquo;나라면 어떻게 개발했을까&amp;rdquo; 충분히 생각을 해 본 후에, 코드를 보면서 이를 확인하는 과정을 통해서, 개발 실력을 많이 높힐 수 있을 것이라고 생각을 한다. 또한 분석하면서 재미를 느낄 수 있는 포인트가 될 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zzsza.github.io/development/2020/07/19/opensource-analysis/#open-source%EB%9E%80&#34;&gt;오픈 소스 분석 방법&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.popit.kr/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4-%EC%BD%94%EB%93%9C-%EB%B6%84%EC%84%9D-%EC%96%B4%EB%96%BB%EA%B2%8C-%ED%95%98%EB%82%98/&#34;&gt;오픈소스: 코드 분석 어떻게 하나?&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

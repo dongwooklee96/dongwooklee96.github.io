@@ -2,83 +2,794 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>보안 on 개발자 이동욱</title>
-    <link>/categories/%EB%B3%B4%EC%95%88/</link>
+    <link>https://dongwooklee96.github.io/categories/%EB%B3%B4%EC%95%88/</link>
     <description>Recent content in 보안 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Mar 2021 16:17:39 +0900</lastBuildDate><atom:link href="/categories/%EB%B3%B4%EC%95%88/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 16:17:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%B3%B4%EC%95%88/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>네트워크 메시지 암호화 및 방식 (중간자 공격, HMAC, 대칭, 비대칭 키)</title>
-      <link>/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4/</link>
       <pubDate>Sun, 28 Mar 2021 16:17:39 +0900</pubDate>
       
-      <guid>/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4/</guid>
-      <description>네트워크(전송) 레벨 암호화    가장 기본적이고 필수적인 REST API 보안 방법은 네트워크 전송 프로토콜에서 HTTPS 보안 프로토콜을 사용하는 방법이다.
-  HTTPS 프로토콜을 사용한다 하더라도, 메세지 자체를 암호화해서 전송하기 때문에 해킹으로 말미암은 메시지 누출 위협을 해소할 수 있다.
-  그러나 HTTPS를 사용하더라도 메시지를 낚아 채거나 변조하는 방법이 있는데 이러한 해킹 방법을 바로 중간자 공격 (Man-In-The-Middle-Attack)이라고 한다.
-  정상적인 HTTPS 통신의 경우 다음과 같이 서버에서 제공하는 인증서를 이용하여 API와 서버 상호간에 암호화된 신뢰할 수 있는 새로운 네트워크 연결을 만든다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4/</guid>
+      <description>&lt;h3 id=&#34;네트워크전송-레벨-암호화&#34;&gt;네트워크(전송) 레벨 암호화&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112745214-a7c43780-8fe1-11eb-8d75-3bd315668317.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;가장 기본적이고 필수적인 &lt;code&gt;REST API&lt;/code&gt; 보안 방법은 네트워크 전송 프로토콜에서 &lt;code&gt;HTTPS&lt;/code&gt; 보안 프로토콜을 사용하는 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;HTTPS&lt;/code&gt; 프로토콜을 사용한다 하더라도, 메세지 자체를 암호화해서 전송하기 때문에 해킹으로 말미암은 메시지 누출 위협을 해소할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 &lt;code&gt;HTTPS&lt;/code&gt;를 사용하더라도 메시지를 낚아 채거나 변조하는 방법이 있는데 이러한 해킹 방법을 바로 중간자 공격 (&lt;code&gt;Man-In-The-Middle-Attack&lt;/code&gt;)이라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;정상적인 &lt;code&gt;HTTPS&lt;/code&gt; 통신의 경우 다음과 같이 서버에서 제공하는 인증서를 이용하여 API와 서버 상호간에 암호화된 신뢰할 수 있는 새로운 네트워크 연결을 만든다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112745283-1bfedb00-8fe2-11eb-8bf1-6c7de2d8fcee.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;중간자 공격의 경우에는 신뢰할 수 있는 연결을 만들려고 할 때 해커가 &lt;code&gt;API&lt;/code&gt; 클라이언트와 서버 사이에 끼어들어 온다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;신뢰할 수 있는 연결을 만들고자 서버가 인증서를 클라이언트에 내릴 때 해커가 이 인증서가 아닌 다른 인증서를 클라이언트에게 전달하고, 다른 인증서를 이용하여 &lt;code&gt;API&lt;/code&gt; 클라이언트와 해커간에 HTTPS SSL 연결을 만든다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 서버에게서 받은 인증서를 이용해서 서커와 &lt;code&gt;API&lt;/code&gt; 서버 간의 HTTP SSL 연결을 맺는다. 이렇게 되면 해커는 중간에서 API 클라이언트와 서버 사이에 메시지를 모두 열어보고 변조도 가능해진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 중간자 공격을 방지하는 방법중에는 여러가지가 있지만, 가장 손쉬운 방법은 공인인증서를 사용하고 인증서를 확인하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;공인인증서는 &lt;code&gt;Verisign&lt;/code&gt;과 같은 기관에서 인증서에 대한 공인 인증을 해준다. 즉, 이 인증서를 발급한 사람이 누구인가에 대한 신원 정보를 가지고 있다. 이를 공인 인증서라고 하는데, 공인 인증서는 인증 기관의 서명이 되어 있다. (공인 인증기관이 인증했다는 정보가 암호화 되서 들어간다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;해커가 공인인증서를 사용하려면 인증 기관에 가서 개인 정보를 등록해야하고, 자체 발급한 비공인 인증서를 사용하기 때문에 이를 이용해서 체크가 가능하다. 특히 인증서 안에는 인증서를 발급한 기관의 정보와 인증서에 대한 고유 일련번호가 들어가 있기 때문에 클라이언트에서 이 값을 확인해서 내가 발급하고 인증 받은 공인 인증서인지를 점검하도록 하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;메시지-본문-암호화&#34;&gt;메시지 본문 암호화&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;암호화가 필요한 특정 필드만 애플리케이션 단에서 암호화하여 보내는 방법이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메시지를 암호화하여 통신하려면, 클라이언트와 서버가 암호화 키를 가져야하는데, 암호화키는 크게 대칭 키와 비대칭 키 알고리즘 두 가지가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;비대칭 키 알고리즘은 암호화를 하는 키와 암호를 푸는 복호화 키가 다른 경우로, 암호화 하는 키를 공개 키(&lt;code&gt;Public Key&lt;/code&gt;)라고 하고, 암호화를 푸는 키를 비밀 키(&lt;code&gt;Private Key&lt;/code&gt;)라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 공개 키는 암호화 할 수 있지만, 반대로 암호화된 메시지는 풀 수 없으므로 누출이 되어도 안전하다. (해커가 중간에서 공개 키를 낚아 챈다하더라도 이 키로는 암호화된 메시지를 복호화할 수 없다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 처음 클라이언트가 서버에 인증이 되었을 때 클라이언트에게 이 공개 키를 내리고, 이 후에 메시지를 이 공개 키를 통해서 암호화를 하게 되면 암호화된 메시지는 비밀키를 가진 서버만이 풀 수 있어서 안전하게 서버로 메시지를 보낼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대표적인 비대칭 키 알고리즘으로는 &lt;code&gt;RSA&lt;/code&gt; 등이 있으며 익숙한 &lt;code&gt;HTTPS&lt;/code&gt;의 경우에도, 이 &lt;code&gt;RSA&lt;/code&gt; 알고리즘을 사용한다. &lt;code&gt;RSA&lt;/code&gt; 알고리즘을 사용하는 비대칭 키 암호화 로직과 라이브러리등은 공개된 것들이 많으므로 참고해서 사용하도록 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;비대칭 키 알고리즘은 클라이언트에서 서버로 보내는 단방향 메시지에 대해서는 암호화하여 사용할 수 있지만, 반대로 서버에서 클라이언트로 내려오는 응답 메시지 등에는 적용하기 어렵다. 아니면 클라이언트가 서버에 등록될 때, 위와 반대 방법으로 클라이언트가 서버로 공개 키를 보내서 향후 서버에서 클라이언트로 통신에 그 공개 키를 사용하도록 해도 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 경우에는 클라이언트와 서버 그리고 서버와 클라이언트 간의 키 쌍 두개를 관리해야 하기 때문에 복잡할 수 있는데, 이런 때에는 대칭 키 알고리즘을 고려해 볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대칭 키 알고리즘은 암호화와 복호화 키가 같은 알고리즘이다. 이 경우 &lt;code&gt;API&lt;/code&gt; 클라이언트와 서버가 같은 키를 알고 있어야 한다. 키를 네트워크를 통해서 보내면 중간에 해커에 의해서 낚아 채일 염려가 있기 때문에, 양쪽에 안전하게 키를 전송하는 방법이 필요하다. 따라서 다음과 같은 방법을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;1. 서버에서 공개 키 KA1과 비공개 키 KA2 쌍을 생성한다.
+2. 클라이언트에게 공개 키 KA1을 네트워크를 통해서 내려 보낸다.
+3. 클라이언트는 새로운 비공개 대칭 키 KB를 생성하고 KA1을 이용하여 암호화하여 서버로 전송한다.
+4. 서버는 전송된 암호화 메세지를 `KA2`로 복호화하여 그 안에 있는 비 공개 키 KB를 꺼낸다.
+5. 향후 클라이언트와 서버는 상호 API 통신시 비공개 대칭 키 KB를 이용하여 암호화와 복호화를 진행한다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;메시지-무결성-보장&#34;&gt;메시지 무결성 보장&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;무결성이란 서버에서 &lt;code&gt;API&lt;/code&gt; 호출을 받았을 때, 이 호출이 신뢰할 수 있는 호출인지 아닌지를 구별하는 방법을 말한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;즉, 해커가 중간에서 메시지를 가로채고 나서 내용을 변조하여 서버에 보냈을 때 내용이 변조되었는지를 판단하는 방법인데, 일반적으로 &lt;code&gt;HMAC&lt;/code&gt;을 이용한 방식이 널리 사용된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112745861-6c783780-8fe6-11eb-9f69-b693913434ed.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1. 먼저 클라이언트는 호출하고자 하는 REST API의 메시지를 앞에서 정의한 키를 이용하여 HMAC 알고리즘을 이용하여 해시 값을 추출한다.
+
+2. API를 호출할 때, 메시지에 추출한 HMAC을 포함해서 호출한다.
+3. 서버는 호출된 메시지를 보고 HMAC을 제외한 나머지 메시지를 미리 정의된 키를 이용해서 HMAC 알고리즘으로 해시 값을 추출한다.
+4. 서버는 3버에서 생성된 HMAC 값과 API 호출시 같이 넘어온 HMAC 갑을 비교해서 값이 같으면 이 호출이 유효한 호출이라고 판단한다.
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;만약에 해커가 메시지를 중간에 가로채 변조했을 경우 서버에서 해시를 생성하면 변조된 메시지에 대한 해시가 생성되기 때문에, 클라이언트에서 변조 전에 보낸 해시 값과 달라진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 통해서 메시지 변조의 여부를 판단할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 메시지를 변경하지 않고 해커가 같은 요청을 반복해서 보낸다면 메시지를 변조하지 않았다는 것으로, 서버는 이를 유효한 호출로 인식할 수 있는데 이를 재전송 공격(&lt;code&gt;Reply Attack&lt;/code&gt;)이라고 한다. 따라서 이를 방지하기 위해서는 &lt;code&gt;timestamp&lt;/code&gt;를 이용하는 방법이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 방법은 &lt;code&gt;HMAC&lt;/code&gt;을 생성할 때, 메시지를 이용해서 해시 값을 생성하는 것이 아니라, 타임 스탬프를 포함해서 메시지를 생성하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 &lt;code&gt;API&lt;/code&gt;를 호출할 때 &lt;code&gt;timestamp&lt;/code&gt; 값을 같이 실어 보낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;http://service.myapi.com/restapiservice?xxxxx&amp;amp;hmac={hashvalue}&amp;amp;timestamp={호출시간}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이렇게 하면 서버는 메세지가 호출된 시간을 알 수 있고, 호출된 시간 +- 10분(또는 개발자가 정한 시간 폭)만큼의 호출만 정상적인 호출로 인식하고 시간이 지난 호출의 메시지는 비정상적인 호출로 무시하면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=54438883&#34;&gt;대용량 아키텍처와 성능 튜닝&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>REST API 보안 및 인가 방식</title>
-      <link>/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D/</link>
       <pubDate>Sun, 28 Mar 2021 15:17:39 +0900</pubDate>
       
-      <guid>/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D/</guid>
-      <description>권한 인가  인증이 끝나면 다음 단계는 권한에 대한 인증, 즉 인가(Authoriation) 과정이 필요하다. 사용자가 인증을 받고 로그인을 했더라도, 해당 API를 호출할 수 있는 권한이 있는가를 확인 해야 한다.
-API 인가 방식  권한 인가(Authorization) 방식에는 여러 가지 방식이 있는데, 대표적인 방식 몇 가지만 보면 가장 일반적인 권한 인증 방식으로는 사용자의 역할을 기반으로 하는 RBAC (Role Based Access Control) 이라는 방식이 있다. 이 방식은 정해진 연결에 권한을 연결해놓고, 이 역할을 가진 사용자에게 해당 권한을 부여하는 것이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D/</guid>
+      <description>&lt;h3 id=&#34;권한-인가&#34;&gt;권한 인가&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;인증이 끝나면 다음 단계는 권한에 대한 인증, 즉 인가(&lt;code&gt;Authoriation&lt;/code&gt;) 과정이 필요하다. 사용자가 인증을 받고 로그인을 했더라도, 해당 API를 호출할 수 있는 권한이 있는가를 확인 해야 한다.&lt;/p&gt;
+&lt;h3 id=&#34;api-인가-방식&#34;&gt;API 인가 방식&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;권한 인가(Authorization) 방식에는 여러 가지 방식이 있는데, 대표적인 방식 몇 가지만 보면 가장 일반적인 권한 인증 방식으로는 사용자의 역할을 기반으로 하는 &lt;code&gt;RBAC (Role Based Access Control)&lt;/code&gt; 이라는 방식이 있다. 이 방식은 정해진 연결에 권한을 연결해놓고, 이 역할을 가진 사용자에게 해당 권한을 부여하는 것이다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 &lt;code&gt;API&lt;/code&gt; 권한 인가 체크는 인증(Authentication)이 끝난 후에 인가에 사용된 API Access Token을 이용하여 사용자 정보를 조회하고, 사용자 정보에 연관된 정보(&lt;code&gt;Permission&lt;/code&gt;이나 &lt;code&gt;Role&lt;/code&gt; 정보)를 받아서 이 권한 정보를 기반으로 &lt;code&gt;API&lt;/code&gt; 사용 권한을 인가하는 방법을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 권한 검증을 이용하여 &lt;code&gt;API Access Token&lt;/code&gt; 으로 사용자를 찾고 사용자에게 할당된 역할이나 &lt;code&gt;Access Control&lt;/code&gt;을 받아서 &lt;code&gt;API&lt;/code&gt; 인증을 처리할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;인가 방식의 종류로는 아래 두 가지 방식이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;rbacrole-based-access-control&#34;&gt;RBAC(Role Based Access Control)&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112744459-3d0ffd80-8fdb-11eb-9300-594cc1bebe93.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;일반 사용자 : 사용자 관리, 게시물 관리, 회원 가입 승인
+마스터 관리자 : 카폐 게시판, 관리, 메뉴 관리, 사용자 관리, 게시물 관리, 회원 가입 승인
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같은 권한을 만들고, 사용자에게 &lt;code&gt;마스터 관리자&lt;/code&gt;라는 역할을 부여하면, 사용자는 카페 게시판 관리, 사용자 관리, 게시물 관리, 회원 가입 승인 등의 권한을 가지게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 권한 부여의 대상이 되는 사용자나 그룹을 &lt;code&gt;Object&lt;/code&gt;라고 하고 개별 권한을 &lt;code&gt;Permission&lt;/code&gt; 이라고 정의하며 사용자의 역할을 &lt;code&gt;Role&lt;/code&gt; 이라고 정의한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;RBAC&lt;/code&gt;는 이 &lt;code&gt;Role&lt;/code&gt;에 권한을 맵핑한 다음 &lt;code&gt;Object&lt;/code&gt;에 이 &lt;code&gt;Role&lt;/code&gt;을 부여하는 방식으로, 많은 권한 인가는 사용자 역할을 기반으로 하기 때문에 사용하기 쉽다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;aclaccess-control-list&#34;&gt;ACL(Access Control List)&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112744519-c45d7100-8fdb-11eb-8ee7-9f2e073c8752.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;RBAC 방식이 권한을 &lt;code&gt;Role&lt;/code&gt;이라는 중간 매개체를 통해서 사용자에게 부여하는데 반해서 ACL 방식은 사용자 (또는 그룹과 같은 권한의 부여 대상) 에게 직접 권한을 부여하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자에게 직접 카페 게시판 관리, 메뉴 관리, 게시물 관리, 회원 가입 승인 권한을 부여하는 방식이 대표적인 &lt;code&gt;ACL&lt;/code&gt;의 예이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;api-권한-인가-처리-위치&#34;&gt;API 권한 인가 처리 위치&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;API에 대한 권한 인가 처리는 여러가지 계층에서 처리할 수 있다. 권한 인가는 API를 호출하는 쪽인 클라이언트, API를 실행하는 API 서버, 그리고 API에 대한 중간 길목 역할을 하는 게이트웨이 등 3군데에서 처리할 수 있으며 근래에는 API 서버쪽에서 처리하는 것이 가장 일반적이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;권한 인가 위치는 아래와 같은 경우가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;클라이언트에-대한-api-권한-인가-처리&#34;&gt;클라이언트에 대한 API 권한 인가 처리&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;API&lt;/code&gt;를 호출하는 클라이언트 쪽에서 사용자의 권한에 따라서 &lt;code&gt;API&lt;/code&gt;를 호출하는 방식인데, 이 방식은 클라이언트가 신뢰할 수 있는 경우에만 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 방식은 기존에 웹 &lt;code&gt;UX&lt;/code&gt; 로직이 서버에 배치된 형태 (스트러츠나 스프링 &lt;code&gt;MVC&lt;/code&gt;와 같은 웹 레이어가 있는 경우)에 주로 사용했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;앞의 사용자 &lt;code&gt;API&lt;/code&gt;를 예로 들어보면 웹 애플리케이션에서 사용자 로그인 정보(세션 정보와 같은)를 보고 사용자 권한을 조회하고 API를 호출하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자 세션에서 사용자 ID와 역할을 본 후에, 역할이 일반 사용자일 경우 세션 내의 사용자 ID와 조회하고자 하는 사용자 ID가 일치하는 경우에만 API를 호출하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112744706-69c51480-8fdd-11eb-83cf-cc16fefd7fb6.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이러한 구조를 사용할 때, 모바일 디바이스 등에 제공하는 API는 사용자 역할을 하는 API와 같이 별도의 권한 인가가 필요 없는 API를 호출하는 구조를 갖는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;게이트웨이에-의한-권한-인가-처리&#34;&gt;게이트웨이에 의한 권한 인가 처리&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 권한 인가는 모바일 클라이언트, 자바스크립트 기반의 웹 클라이언트 등 다양한 클라이언트가 지원됨에 따라서 점차 서버쪽으로 이동하게 되었는데, 특히 자바 스크립트 클라이언트는 클라이언트에서 권한에 대한 인가는 의미가 없어서 어쩔 수 없이 서버 쪽에서 권한 인가 처리를 할 수 밖에 없게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약에 자바스크립트에 권한 인가 로직을 넣은 경우, 브라우저의 디버거로 코드 수정이 가능하기 때문에 권한 처리 로직을 우회할 수도 있고, 또한 &lt;code&gt;API&lt;/code&gt; 포맷만 안다면 직접 &lt;code&gt;API&lt;/code&gt; 서버로 호출해서 권한 인가 없이 API를 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버에서 권한을 처리하는 방법은 &lt;code&gt;API&lt;/code&gt; 호출의 길목이 되는 게이트웨이나 &lt;code&gt;API&lt;/code&gt; 비즈니스 로직 두 군데서 처리할 수 있다. &lt;code&gt;API Gateway&lt;/code&gt;에 의한 권한 처리를 쉽지 않기 때문에 API 서머에서 권한 처리를 하는 것이 일반적이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API 호출이 들어오면 API 토큰 관리 정보를 이용해서, &lt;code&gt;API Access Token&lt;/code&gt;을 사용자 정보와 권한 정보로 변환하고 접근하고자 하는 &lt;code&gt;API&lt;/code&gt;에 대해서 권한 인가 처리를 한다. 이때는 &lt;code&gt;API&lt;/code&gt; 별로 &lt;code&gt;API&lt;/code&gt;에 접근하고자 하는데 필요한 권한을 확인해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어 &lt;code&gt;HTTP GET /users/{:id}&lt;/code&gt;의 API를 예로 들면 이 &lt;code&gt;URL&lt;/code&gt;에 대한 &lt;code&gt;API&lt;/code&gt;를 호출하려면 일반 사용자 권한을 가진 사용자는 호출하는 사용자 &lt;code&gt;ID&lt;/code&gt;와 &lt;code&gt;URL&lt;/code&gt;상의 {id}가 일치할 떄, 호출을 허용하고, 같지 않을 때는 호출을 거절 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 이러한 &lt;code&gt;API Gateway&lt;/code&gt;에서의 권한 인가는 쉽지 않은데, 앞의 &lt;code&gt;/users/{id}&lt;/code&gt; &lt;code&gt;API&lt;/code&gt;의 경우에는 사용자 ID가 &lt;code&gt;URL&lt;/code&gt;에 들어가 있기 때문에 &lt;code&gt;API Access Token&lt;/code&gt;과 맵핑되는 사용자 &lt;code&gt;ID&lt;/code&gt;와 그에 대한 권한을 통해서 &lt;code&gt;API&lt;/code&gt; 접근 권한을 통제할 수 있다. 하지만 &lt;code&gt;API&lt;/code&gt;에 따라서 사용자 아이디나 권한 인증에 필요한 정보가 &lt;code&gt;HTTP&lt;/code&gt; 바디에 &lt;code&gt;JSON&lt;/code&gt; 형태나 &lt;code&gt;HTTP&lt;/code&gt; 헤더 등에 들어가 있는 경우 일일히 메시지 포맷에 따라 별도의 권한 로직을 게이트 웨이 단에서 구현해야 하는 부담이 있고, 권한 통제를 위해서 &lt;code&gt;HTTP&lt;/code&gt; 메시지 전체를 일일히 파싱해야하는 오버로드가 발생하기 때문에 공통 필드 등으로 &lt;code&gt;API&lt;/code&gt; 권한 처리를 하지 않을 때에는 사용하기 어렵다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;서버에-의한-api-권한-인가-처리&#34;&gt;서버에 의한 API 권한 인가 처리&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;가장 일반적이고 보편적인 방법은 &lt;code&gt;API&lt;/code&gt; 요청을 처리하는 &lt;code&gt;API&lt;/code&gt;서버의 비즈니스 로직 단에서 권한 처리를 하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 방식은 앞에서 언급한 &lt;code&gt;API Gateway&lt;/code&gt; 방식과 비교했을 때, 각 비즈니스 로직에서 &lt;code&gt;API&lt;/code&gt; 별로 권한 인가 로직을 구현하기 용이하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 경우에는 권한 인가에 필요한 필드들을, &lt;code&gt;API Gateway&lt;/code&gt;에서 변환해서 &lt;code&gt;API&lt;/code&gt; 서버로 전달해줌으로써 구현을 간략하게 할 수 있는데, 다음 그림과 같이 &lt;code&gt;API&lt;/code&gt; 클라이언트가 &lt;code&gt;API Access Token&lt;/code&gt;을 이용해서 &lt;code&gt;API&lt;/code&gt;를 호출 했을 경우, &lt;code&gt;API Gateway&lt;/code&gt;가 이 &lt;code&gt;Access Token&lt;/code&gt;을 권한 인가에 필요한 사용자 아이디, 롤 등으로 변환해서 &lt;code&gt;API&lt;/code&gt; 서버에 전달해주게 되면, 각 비즈니스 로직은 &lt;code&gt;API&lt;/code&gt; 권한 인가에 필요한 사용자 정보를 별도의 데이터베이스에서 찾지 않고도 이 헤더의 내용만을 이용해서 API 권한 인가 처리를 할 수 있게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=54438883&#34;&gt;대용량 아키텍처와 성능 튜닝&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>HTTP와 HTTPS의 차이점 (draft)</title>
-      <link>/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft/</link>
       <pubDate>Sun, 28 Mar 2021 13:18:39 +0900</pubDate>
       
-      <guid>/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft/</guid>
-      <description>참고 문헌   RFC - 2818  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://tools.ietf.org/html/rfc2818&#34;&gt;RFC - 2818&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>REST API 보안 및 인증 방식</title>
-      <link>/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D/</link>
       <pubDate>Sun, 28 Mar 2021 13:17:39 +0900</pubDate>
       
-      <guid>/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D/</guid>
-      <description>REST API 보안   보안에 관해서는 백번, 천번을 강조해도 과함이 없다. 근래의 대부분의 서비스 시스템들은 API를 기반으로 통신한다. 앱과 서버 간의 통신 또는 자바 스크립트 웹 클라이언트와 서버 간 대부분의 통신이 이 API들을 이용해서, 이루어지기 때문에 한번 보안이 뚫리면 개인 정보가 탈취되는 것 뿐만 아니라, 더 많은 문제를 일으킬 수 있다.  REST API 보안 관점 및 개요  인증(Authentication)  인증은 누가 서비스를 사용하는지를 확인하는 절차이다. 쉽게 생각하면 웹 사이트에 사용자 아이디와 비밀번호를 넣어서 사용자를 확인하는 과정이 인증이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D/</guid>
+      <description>&lt;h3 id=&#34;rest-api-보안&#34;&gt;REST API 보안&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;보안에 관해서는 백번, 천번을 강조해도 과함이 없다.&lt;/li&gt;
+&lt;li&gt;근래의 대부분의 서비스 시스템들은 API를 기반으로 통신한다.&lt;/li&gt;
+&lt;li&gt;앱과 서버 간의 통신 또는 자바 스크립트 웹 클라이언트와 서버 간 대부분의 통신이 이 API들을 이용해서, 이루어지기 때문에 한번 보안이 뚫리면 개인 정보가 탈취되는 것 뿐만 아니라, 더 많은 문제를 일으킬 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rest-api-보안-관점-및-개요&#34;&gt;REST API 보안 관점 및 개요&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;인증authentication&#34;&gt;인증(Authentication)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;인증은 누가 서비스를 사용하는지를 확인하는 절차이다.&lt;/li&gt;
+&lt;li&gt;쉽게 생각하면 웹 사이트에 사용자 아이디와 비밀번호를 넣어서 사용자를 확인하는 과정이 인증이다.&lt;/li&gt;
+&lt;li&gt;API도 마찬가지로 API를 호출하는 대상 (단말이 되었던 다른 서버가 되었던 사용자가 되었건) 확인하는 절차가 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112742701-a5ef7980-8fcb-11eb-8813-b50f905cdefe.png&#34; alt=&#34;Screen Shot 2021-03-28 at 1 43 14 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;스프링 시큐리티에서는 인증을 &lt;code&gt;who are you?&lt;/code&gt; 라고 표현하고 인가를 &lt;code&gt;what are you allow to do?&lt;/code&gt; 라는 문장으로 비유하고 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;인가authorization&#34;&gt;인가(Authorization)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;인가는 해당 리소스에 대해서 사용자가 그 리소스를 사용할 권한이 있는지 확인하는 권한 체크 과정이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서, &lt;code&gt;/users&lt;/code&gt; 라는 리소스가 있을 때, 일반 사용자 권한으로는 내 사용자 권한만 볼 수 있지만, 관리자 권한으로는 다른 사용자 정보를 볼 수 있는 것과 같은 권한의 차이를 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;네트워크-레벨-암호화&#34;&gt;네트워크 레벨 암호화&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;인증과 인가 과정이 끝나서 API를 호출하게 되면, 네트워크를 통해서 데이터가 오가는데, 해커나 누군가 중간에서 이 네트워크 통신을 낚아채 (감청) 데이터를 볼 수 없게 할 필요가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 네트워크 프로토콜단에서 처리하는 것을 네트워크 암호화라고 하는데, &lt;code&gt;HTTP&lt;/code&gt;에서의 네트워크 암호화는 일반적으로 &lt;code&gt;HTTPS&lt;/code&gt; 기반의 프로토콜을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;메시지-무결성-보장&#34;&gt;메시지 무결성 보장&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;메시지 무결성이란, 메시지가 해커와 같은 외부 요인에 의해서 중간에 변조가 되지 않게 방지하는 것을 말한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;무결성을 보장하기 위해서 많이 사용하는 방식은 메시지에 대한 서명(Signature)를 생성해서 메시지와 같이 보내고 검증하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어 메시지 문자열이 있을 때, 이 문자열에 대한 해시 코드를 생성해서 문자열과 함께 보내고 이 받은 문자열로 생성한 해시 코드를 문자열과 함께 온 해시 코드와 비교하는 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약에 문자열이 중간에 변조되었으면 원래 문자열과 함께 전송된 해시 코드와 맞지 않기 때문에 메시지가 중간에 변조되었는지 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메시지 무결성의 경우 앞에서 언급한 네트워크 레벨의 암호화를 완벽하게 사용한다면 외부적인 요인(해커)에 의해서 메시지를 해석당할 염려가 없으므로 사용할 필요가 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;메시지-본문-암호화&#34;&gt;메시지 본문 암호화&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크 레벨의 암호화를 사용할 수 없거나, 또는 이를 신뢰할 수 없는 상황에서 추가로 메시지 자체를 암호화하는 방법을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 애플리케이션 단에서 구현하는데, 전체 메시지를 암호화하는 방법과 특정 필드만 암호화하는 방식 두 가지로 접근할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;전체 메시지를 암호화할 경우 암호화에 드는 비용이 많은 뿐더러 중간에 &lt;code&gt;API Gateway&lt;/code&gt;를 통해서 메시지를 열어보고 메시지 기반으로 라우팅 변환 작업이 어렵기 때문에 일반적으로 전체 암호화보다는 보안이 필요한 특정 필드만 암호화하는 방식을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;인증authentication-방식의-종류&#34;&gt;인증(Authentication) 방식의 종류&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;API&lt;/code&gt;에 대한 인증 방식은 여러 가지 방식이 있으며 각 방식에 따라 보안 수준과 구현 난도가 달라서 각 방식의 장단점을 잘 이해하여 서비스 수준에 맞는 적절한 API 인증 방식을 선택하도록 할 필요가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;api-키-방식&#34;&gt;API 키 방식&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;가장 기초적인 방법은 &lt;code&gt;API&lt;/code&gt; 키를 이용하는 방법이다.&lt;/li&gt;
+&lt;li&gt;API 키(Key)란 특정 사용자만 알 수 있는 일종의 문자열이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;API&lt;/code&gt;를 호출하고자 할 때, 개발자는 &lt;code&gt;API&lt;/code&gt; 제공사의 포탈 페이지에서 &lt;code&gt;API&lt;/code&gt; 키를 발급 받고 API를 호출 할 때 API 키를 메시지 안에 넣어 호출한다.&lt;/li&gt;
+&lt;li&gt;서버는 메시지 안에서 API 키를 읽어서 이 API를 누가 호출한 API인지를 인증하는 흐름이다.&lt;/li&gt;
+&lt;li&gt;모든 클라이언트가 같은 API 키를 공유하기 때문에, 한번 API 키가 노출되면 전체 API가 뚫려버리는 문제가 있으므로 높은 보안 인증이 필요할 때에는 권장하지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;api-토큰-방식&#34;&gt;API 토큰 방식&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112743016-a5a4ad80-8fce-11eb-9511-bf6a22147f08.png&#34; alt=&#34;img1 daumcdn&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;API 토큰(&lt;code&gt;Token&lt;/code&gt;)을 발급하는 방식이 있는데, ID, 비빌번호 등으로 사용자를 인증한 다음에 그 사용자가 API 호출에 사용할 기간이 유효한 API 토큰을 발급해서 API 토큰으로 사용자를 인증하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;매번 API 호출 시 사용자 ID, 비밀번호를 보내지 않고 API 토큰을 사용하는 이유는 사용자 비밀번호는 주기적으로 바뀔 수 있기 때문이고, 매번 네트워크를 통해서 사용자 ID와 비밀번호를 보내는 것은 보안상 사용자 계정 정보를 탈취당할 가능성이 크기 때문에 API 토큰을 별도로 발급해서 사용하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;API&lt;/code&gt; 토큰을 탈취당하면, &lt;code&gt;API&lt;/code&gt;를 호출할 수는 있지만, 반대로 사용자 ID와 비밀번호는 탈취당하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자 비밀번호를 탈취당하면 일반적으로 사용자들은 다른 서비스에도 같은 비밀번호를 사용하는 경우가 많아서 연쇄적으로 공격을 당할 가능성이 커진다. 따라서 이러한 연쇄적인 피해를 최소화 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 그림을 보면 다음과 같은 형태로 인증이 이루어진다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;API 클라이언트가 사용자 ID, 비밀번호를 보내서 API 호출을 위한 API 토큰을 요청한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;API 인증 서버는 사용자 ID, 비밀번호를 바탕으로 사용자를 인증한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;인증된 사용자에 대해서 API 토큰을 발급한다 (유효시간을 가지고 있다.)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;API 클라이언트는 이 API 토큰으로 API를 호출한다. API 서버는 API 토큰이 유효한지를 API 토큰 관리 서버에 문의하고 API 토큰이 유효하면 API 호출을 받아들인다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;보안-수준에-따른-사용자-인증-방식&#34;&gt;보안 수준에 따른 사용자 인증 방식&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;http-basic-auth&#34;&gt;HTTP Basic Auth&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112743145-bc97cf80-8fcf-11eb-9784-08fb6ffbd620.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;가장 기본적이고 단순한 형태의 인증 방식으로, 사용자 ID와 비밀번호를 가지고, HTTP 헤더에 &lt;code&gt;Base64&lt;/code&gt; 인코딩 형태로 넣어서 인증을 요청한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서 사용자 ID가 &amp;ldquo;terry&amp;quot;이고 비밀번호가 &amp;ldquo;hello world&amp;rdquo; 일 때 다음과 같이 &lt;code&gt;HTTP&lt;/code&gt; 헤더에 &amp;ldquo;terry: hello world&amp;rdquo; 라는 문자열을 &lt;code&gt;Base64&lt;/code&gt; 인코딩을 해서 &lt;code&gt;Authorization&lt;/code&gt; 라는 이름의 헤더로 서버에 전송하여 인증을 요청한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;Authorization: Basic ZG9uZ3dvb2s6cGFzc3dvcmQ=
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112743286-f0272980-8fd0-11eb-9871-dc55b2ee30f2.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;다음은 Base64 인코딩을 도와주는 사이트이다. &lt;a href=&#34;https://www.base64decode.org/&#34;&gt;https://www.base64decode.org/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;중간에 패킷을 가로채서 이 헤더를 Base64로 디코딩하면 사용자 ID와 비밀번호가 그대로 노출되기 때문에, 반드시 &lt;code&gt;HTTPS&lt;/code&gt; 프로토콜을 사용해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;digest-access-authentication&#34;&gt;Digest Access Authentication&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HTTP Basic Auth가 Base64 형태로 비밀번호를 실어서 보내는 단점을 보강하여 나온 인증 프로토콜이 &lt;code&gt;Digest Access Authentication&lt;/code&gt; 이라는 방법으로, 기본 원리는 클라이언트가 인증을 요청할 때, 클라이언트가 서버로부터 &lt;code&gt;nonce&lt;/code&gt; 라는 일종의 난수 값을 받고 (클라이언트와 서버가 이 난수 값을 알 고 있다.) 사용자 ID와 비밀번호를 이 난수 값을 이용해서 해시화하여 서버로 전송하는 방식&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 경우에는 직접 ID와 비밀번호가 평문 형태로 날아가지 않기 때문에, 해커가 중간에 비밀번호를 탈취할 수 없고, 설령 &lt;code&gt;HASH&lt;/code&gt; 알고리즘을 알고 있다고 하더라도 해시된 값에서 반대로 비밀번호를 추출하기가 어려워서 &lt;code&gt;Basic Auth&lt;/code&gt; 방식보다 향상된 보안을 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112743403-f23db800-8fd1-11eb-9e18-ce8415bf64d9.gif&#34; alt=&#34;digest-auth1&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;흐름은 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;클라이언트가 서버에 특정 리소스를 요청한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;서버는 해당 세션에 대한 &lt;code&gt;nonce&lt;/code&gt; 값을 생성하여 저장하고, 클라이언트에게 반환한다. 이때 &lt;code&gt;realm&lt;/code&gt;을 같이 반환하는데, &lt;code&gt;realm&lt;/code&gt;은 인증의 범위로, 예를 들어 웹 서버에 car.war, market.war가 각각 &lt;code&gt;http://myweb/car&lt;/code&gt;, &lt;code&gt;http://myweb/market&lt;/code&gt;이라는 &lt;code&gt;URL&lt;/code&gt;로 배포되었다고 하면, 이 웹사이트는 각각 애플리케이션 &lt;code&gt;car.war&lt;/code&gt;와 &lt;code&gt;market.war&lt;/code&gt;에 대해서 서로 다른 인증 &lt;code&gt;realm&lt;/code&gt;을 가진다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;클라이언트는 앞에서 서버로 부터 받은 &lt;code&gt;realm&lt;/code&gt;과 &lt;code&gt;nonce&lt;/code&gt; 값으로 해시 값을 생성하는데 다음을 통해서 응답 해시 값을 생성한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;HA1 = MD5(사용자 이름:realm:비밀번호)
+HA2 = MD5(HTTP method:HTTP URL)
+  response hash = MD5(HA1:nonce:HA2)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;서버는 3번에서 전달된 &lt;code&gt;nonce&lt;/code&gt; 값을 이 세션을 위해서 서버에 저장된 &lt;code&gt;nonce&lt;/code&gt; 값과 같은지 비교를 한 후, 전달된 사용자 이름인 &lt;code&gt;terry&lt;/code&gt;와 &lt;code&gt;nonce&lt;/code&gt;값 그리고 서버에 저장된 사용자 비밀번호를 이용해서 같은 3번과 같은 방식으로 해시 값을 계산하여 클라이언트에서 전달된 해시 값과 같은지를 비교한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;클라이언트-인증-추가&#34;&gt;클라이언트 인증 추가&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;추가적인 보안 강화를 위해서 사용자 인증 뿐만 아니라, 클라이언트 인증 방식을 추가할 수 있다.&lt;/li&gt;
+&lt;li&gt;페이스북은 API 토큰을 발급 받도록 사용자 ID, 비밀번호 뿐만 아니라, &lt;code&gt;Client ID&lt;/code&gt;와 &lt;code&gt;Client Secret&lt;/code&gt;이라는 것을 같이 입력받도록 하는데, &lt;code&gt;Client ID&lt;/code&gt;는 특정 앱에 대한 등록 ID이고 &lt;code&gt;Client Secret&lt;/code&gt;은 특정 앱에 대한 비밀번호로, 앱을 등록하면 앱 별로 발급되는 일종의 비밀번호이다.&lt;/li&gt;
+&lt;li&gt;API 토큰을 발급 받을 때, Client ID와 Client Secret을 이용하여 클라이언트 앱을 인증하고, 사용자 ID와 비밀번호를 추가적으로 받아서 사용자를 인증하여 API 액세스 토큰을 발급한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ip-화이트-리스트를-이용한-터널링&#34;&gt;IP 화이트 리스트를 이용한 터널링&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;만약 API를 호출하는 클라이언트의 API가 일정하다면 사용할 수 있는 손쉬운 방법인데, 서버 간의 통신이나 타사 서버와 자사 서버 간의 통신 같은 경우에 API 서버는 특정 API URL에 대해서 들어오는 IP 주소를 화이트 리스트로 유지하는 방법이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API 서버 앞단에 &lt;code&gt;HAProxy&lt;/code&gt;나 &lt;code&gt;Apache&lt;/code&gt;와 같은 웹 서버를 배치하여서 특정 URL로 들어올 수 있는 IP 목록을 제한하거나 아니면 전체 &lt;code&gt;API&lt;/code&gt;가 특정 서버와의 통신에만 사용된다면 아예 하드웨어 방화벽 자체에 들어올 수 있는 IP 목록을 제한할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;설정만으로 가능한 방법이기 때문에, 서버간의 통신이 있을 때 적용할 것을 권장한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;bi-directional-certification-mutual-ssl&#34;&gt;Bi-directional Certification (Mutual SSL)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;보통은 &lt;code&gt;HTTPS&lt;/code&gt; 통신을 할 때, 서버에 공인 인증서를 놓고 단방향으로 &lt;code&gt;SSL&lt;/code&gt;을 제공하는데, &lt;code&gt;Bi-directional Certification&lt;/code&gt; (양방향 인증서 방식) 방식은 클라이언트에도 인증서를 놓고 양방향으로 &lt;code&gt;SSL&lt;/code&gt;을 제공하면서 &lt;code&gt;API&lt;/code&gt; 호출에 대한 인증을 클라이언트의 인증서를 이용하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;구현 방법이 가장 복잡한 방식이기는 하지만, 공인 기관에서 발생된 인증서를 사용한다면 &lt;code&gt;API&lt;/code&gt;를 호출하는 쪽의 신원을 확실하게 할 수 있고 메세지까지 암호화되기 때문에, 가장 높은 수준의 인증을 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이런 인증 방식은 일반 서비스에서는 사용되지 않으며 높은 인증 수준을 제공하는 몇몇 서비스나 특정 서버 통신에 사용하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;제-3자-인증-방식-oauth-20-authorization-grant-type&#34;&gt;제 3자 인증 방식 (OAuth 2.0 Authorization grant type)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;제 3자 인증 방식은 페이스북이나, 구글, 트위터 같은 API 서비스 제공자들이 인증을 대신 해주는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112743810-704f8e00-8fd5-11eb-8a83-905f69044f67.jpg&#34; alt=&#34;maxresdefault&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;claim-기반의-jwt-방식&#34;&gt;Claim 기반의 JWT 방식&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Claim 기반 토큰의 개념&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;OAuth&lt;/code&gt;에 의해서 발급되는 &lt;code&gt;access_token&lt;/code&gt;은 랜덤 문자열로, 토큰 자체에는 특별한 정보를 가지고 있지 않은 일반적인 스트링 형태이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 &lt;code&gt;access_token&lt;/code&gt;을 통해서 사용자와 연관된 정보를 구별하여 이를 허용해주는 구조인데, 서버 입장에서는 토큰을 가지고 그 토큰과 연관된 정보를 서버 쪽에서 찾아야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 &lt;code&gt;JWT&lt;/code&gt;는 &lt;code&gt;Claim&lt;/code&gt; 기반이라는 방식을 사용하는데, &lt;code&gt;Claim&lt;/code&gt;은 사용자에 대한 프로퍼티나 속성을 말한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;토큰 자체가 정보를 가지는 방식인데, &lt;code&gt;JWT&lt;/code&gt;는 이 클레임을 &lt;code&gt;JSON&lt;/code&gt;을 이용해서 정리한다. 아래와 같은 형태로 표현된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &amp;quot;id&amp;quot;: &amp;quot;terry&amp;quot;,
+  &amp;quot;role&amp;quot;: &amp;quot;[&amp;quot;admin&amp;quot;, &amp;quot;user&amp;quot;]&amp;quot;,
+  &amp;quot;company&amp;quot;: &amp;quot;pepsi&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이 토큰을 이용해서 요청을 받는 서버나 서비스 입장에서는 이 서비스를 호출한 사용자에 대한 추가 정보는 이미 토큰 안에 다 들어가 있기 때문에, 다른 곳에서 가져올 필요가 없다는 장점이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112743985-0d5ef680-8fd7-11eb-955b-80b7a9778016.png&#34; alt=&#34;img1 daumcdn&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;결과적으로 토큰을 생성하는 단계에서는 생성된 토큰을 별도로 서버에서 유지할 필요가 없으며, 토큰을 사용하는 &lt;code&gt;API&lt;/code&gt; 서버 입장에서는 API 요청을 검증하기 위해서 토큰을 가지고 사용자 정보를 별도로 계정 시스템 등에서 조회할 필요가 없다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;JWT&lt;/code&gt;는 이 &lt;code&gt;JSON Claim&lt;/code&gt;을 &lt;code&gt;Base64&lt;/code&gt;로 인코딩하여 &lt;code&gt;HTTP&lt;/code&gt; 헤더에 쉽게 넣을 수 있으며, &lt;code&gt;JSON&lt;/code&gt; 기반이기 때문에 파싱과 사용이 쉽다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;결과적으로 &lt;code&gt;Claim&lt;/code&gt; 기반의 토큰은 토큰 자체가 정보를 담음으로써 토큰으로 서비스나 &lt;code&gt;API&lt;/code&gt; 접근을 제어할 때, 별도의 작업이 서버에서 필요하지 않으며, 토큰 자체를 서버에서 관리할 필요가 없어서 구현이 상대적으로 단순해진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;jwt의-단점&#34;&gt;JWT의 단점&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;길이 : &lt;code&gt;Claim&lt;/code&gt;에 넣는 데이터가 많아질 수록 &lt;code&gt;JWT&lt;/code&gt; 토큰의 길이가 길어진다. &lt;code&gt;API&lt;/code&gt; 호출에 사용할 시에 호출마다 헤더에 붙어서 가야하기 때문에 길이가 길다는 것은 그만큼 네트워크 대역폭 낭비가 심하다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;한번 발급된 토큰은 값을 수정하거나 폐기가 불가 : &lt;code&gt;JWT&lt;/code&gt;는 토큰 내에 모든 정보를 다 가지고 있기 때문에 한 번 발급된 토큰에 대한 변경은 서버에서는 더는 불가능하다. 예를 들어서, 토큰을 잘못 발행해서 삭제하고 싶더라도 서명만 맞으면 맞는 토큰으로 인식하기 때문에 서버에서는 한번 발급된 토큰의 정보를 바꾸는 일이 불가능하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 만약 &lt;code&gt;JWT&lt;/code&gt;를 사용한다면 만료 시간(&lt;code&gt;Expire Time&lt;/code&gt;)을 꼭 명시적으로 두도록 하고 &lt;code&gt;Refresh Token&lt;/code&gt;등을 이용하여 중간마다 토큰을 재발행하도록 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;암호화 : &lt;code&gt;JWT&lt;/code&gt;는 기본적으로 &lt;code&gt;Claim&lt;/code&gt;에 대한 정보를 암호화하지 않는다, 단순히 &lt;code&gt;Base64&lt;/code&gt;로 인코딩만 하기 때문에, 중간에 패킷을 가로채거나 기타 방법으로 토큰을 취득했으면 토큰 내부 정보를 통해서 사용자 정보가 노출될 가능성이 있다. 따라서 이를 보완하는 방법으로 토큰 자체를 암호화하는 방법이 있고, &lt;code&gt;JSON&lt;/code&gt;을 암호화하기 위한 스펙으로는 &lt;code&gt;JWE&lt;/code&gt;가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://grooveshark.tistory.com/25&#34;&gt;https://grooveshark.tistory.com/25&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://bcho.tistory.com/955&#34;&gt;https://bcho.tistory.com/955&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://tools.ietf.org/html/rfc7617&#34;&gt;RFC - 7617&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>CSP(Content Security Policy) 란 무엇일까? (draft)</title>
-      <link>/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
-      <description>참고 문헌   MDN - CSP  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP&#34;&gt;MDN - CSP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>SOP(Same-origin policy) 란 무엇일까?</title>
-      <link>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
-      <description>브라우저 보안 정책에 SOP(same-origin-policy) 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.
-Same-Origin-Policy(동일 출처 정책)    SOP는 한 Origin에서 로드된 문서 또는 스크립트가 다른 Origin의 리소스와 상호 작용할 수 있는 방법을 제한하는 중요한 보안 메커니즘이다.
-  보안을 위협하는 문서를 격리하여, 보안 위협으로부터 보호할 수 있다.
-  한마디로 말해서 웹 브라우저에서 동작하는 프로그램은 로딩된 위치에 있는 리소스만 접근 할 수 있다는 정책이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <description>&lt;p&gt;브라우저 보안 정책에 &lt;code&gt;SOP(same-origin-policy)&lt;/code&gt; 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.&lt;/p&gt;
+&lt;h3 id=&#34;same-origin-policy동일-출처-정책&#34;&gt;Same-Origin-Policy(동일 출처 정책)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112231170-8974d980-8c79-11eb-99e5-4a9b5f85513d.png&#34; alt=&#34;sop&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;SOP&lt;/code&gt;는 한 &lt;code&gt;Origin&lt;/code&gt;에서 로드된 문서 또는 스크립트가 다른 &lt;code&gt;Origin&lt;/code&gt;의 리소스와 상호 작용할 수 있는 방법을 제한하는 중요한 보안 메커니즘이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;보안을 위협하는 문서를 격리하여, 보안 위협으로부터 보호할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;한마디로 말해서 웹 브라우저에서 동작하는 프로그램은 로딩된 위치에 있는 리소스만 접근 할 수 있다는 정책이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;출처origin의-정의&#34;&gt;출처(Origin)의 정의&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112231662-78789800-8c7a-11eb-8897-048e15a11d65.png&#34; alt=&#34;origin&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;두개의 URL이 존재할 때 프로토콜, 포트(지정된 경우), 호스트가 동일한 경우 두 URL의 &lt;code&gt;Origin&lt;/code&gt;이 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 표를 보면 &lt;strong&gt;&lt;a href=&#34;http://store.company.com/dir/page.html&#34;&gt;http://store.company.com/dir/page.html&lt;/a&gt;&lt;/strong&gt; 과 비교하여, 같은 &lt;code&gt;Origin&lt;/code&gt;인지 아닌지를 나타내고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;상속된-출처origin&#34;&gt;상속된 출처(Origin)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112232063-47e52e00-8c7b-11eb-8f7a-918fd0885a8a.png&#34; alt=&#34;inherited origins&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;about:blank&lt;/code&gt;, &lt;code&gt;javascript:URL&lt;/code&gt;과 같은 URL이 포함된 페이지에서 실행되는 스크립트는 해당 URL에 포함된 문서의 원본을 상속합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 유형의 URL에는 원본 서버에 대한 정보가 포함되어 있지 않기 때문입니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Internet Explorer의 예외&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;항상 인터넷 익스플로러는 표준을 지키지 않아서 문제가 생기는 것 같다.&lt;/p&gt;
+&lt;h4 id=&#34;trust-zones&#34;&gt;Trust Zones&lt;/h4&gt;
+&lt;p&gt;만약 두 도메인이 모두 신뢰도가 높은 영역 (예: 회사 인트라넷 도메인)에 있는 경우 동일한 오리진 제한이 적용되지 않는다.&lt;/p&gt;
+&lt;h4 id=&#34;port&#34;&gt;Port&lt;/h4&gt;
+&lt;p&gt;IE는 동일 출처 검사에 포트를 포함하지 않는다. 따라서 &lt;code&gt;https://company.com:81/index.html&lt;/code&gt;과 &lt;code&gt;https://company.com/index.html&lt;/code&gt;은 같은 오리진으로 간주되며 제한은 적용되지 않는다.&lt;/p&gt;
+&lt;h3 id=&#34;출처origin를-변경하기&#34;&gt;출처(Origin)를 변경하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;일부 제한 사항이 있는 페이지는 자체 출처를 변경할 수 있다.&lt;/li&gt;
+&lt;li&gt;스크립트는 &lt;code&gt;document.domain&lt;/code&gt;의 값을 현재 도메인 또는 현재 도메인의 슈퍼 도메인으로 설정할 수 있다.&lt;/li&gt;
+&lt;li&gt;하지만 이 기능은 동일한 출처 정책에서 제공하는 보안 보호 기능을 약화시키고 브라우저의 출처 모델을 복잡하게 하여, 상호 운용성 문제와 보안 버그를 유발하기 때문에 더 이상 사용되지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112233574-0c982e80-8c7e-11eb-9ddb-0804823875c0.png&#34; alt=&#34;Document.domain&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;API 문서를 보더라도, 몇몇의 브라우저가 지원을 하더라도, 지금은 표준에서 제외되었고 사용하지 않는게 좋다고 나와있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현재 디프리케이트 상태이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서로-다른-출처-접근cross-origin-network-access&#34;&gt;서로 다른 출처 접근(Cross-origin network access)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112234075-08b8dc00-8c7f-11eb-8c8b-293057534eff.png&#34; alt=&#34;another origin&#34;&gt;&lt;/p&gt;
+&lt;p&gt;동일 출처 정책은 &lt;code&gt;XMLHttpRequest&lt;/code&gt; 또는 &lt;code&gt;img&lt;/code&gt; 요소를 사용하는 경우와 같이 서로 다른 두 출처 간의 상호 작용을 제어한다. 이러한 상호작용은 다음과 같은 세 가지의 범주로 나누어진다.&lt;/p&gt;
+&lt;h3 id=&#34;동일-출처-정책에-대한-처리&#34;&gt;동일 출처 정책에 대한 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112746418-a39c1800-8fe9-11eb-8c98-afc0d95db147.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;만약 웹 사이트 &lt;code&gt;http://sitea.com&lt;/code&gt;에서 자바스크립트를 로딩 한 다음에 이 스크립트에서, &lt;code&gt;http://api.my.com&lt;/code&gt;을 호출한다면 동일 출처 정책에 의해서 호출한다면 호출 에러가 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 해결하는 방법으로는 인프라 측면에서 프록시를 사용하는 방법이나 &lt;code&gt;JSONP&lt;/code&gt;와 &lt;code&gt;CORS(Cross Origin Resource Sharing)&lt;/code&gt;이라는 방법이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;프록시를-이용하는-방법&#34;&gt;프록시를 이용하는 방법&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프록시를 이용하는 경우에는 간단하게 해결된다. 동일 출처 정책의 문제는 &lt;code&gt;API&lt;/code&gt; 서버와 자바 스크립트가 호스팅 되는 서버의 URL이 달라서 문제가 발생하게 된다. 이를 앞단에 &lt;code&gt;Reverse Proxy&lt;/code&gt;를 넣어서 전체 URL이 같게 만들어주면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 구조가 되면, 자바 스크립트가 로딩된 사이트도 &lt;code&gt;mysite.com&lt;/code&gt;이 되고 자바스크립트에서 호출하고자 하는 &lt;code&gt;API&lt;/code&gt; URL도 &lt;code&gt;mysite.com&lt;/code&gt;이 되기 때문에 동일 출처 정책에 위배되지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 방식은 간단하지만, 자사의 웹 사이트를 서비스하느 경우에만 가능하다. 그래서 자사의 서비스용 &lt;code&gt;API&lt;/code&gt;를 만드는 경우에는 괜찮지만, 파트나사나 일반 개발자에게 자바스크립트용 &lt;code&gt;REST API&lt;/code&gt;를 공개하는 경우에는 적절하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;특정-사이트에-대한-접근-허용-방식&#34;&gt;특정 사이트에 대한 접근 허용 방식&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;CROS 방식 중 이 방식은 가장 간단한 방식으로, &lt;code&gt;API&lt;/code&gt; 서버의 설정에서 모든 소스에서 들어오는 &lt;code&gt;API&lt;/code&gt; 호출을 허용하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 &lt;code&gt;HTTP&lt;/code&gt;로 &lt;code&gt;API&lt;/code&gt;를 호출하였을 때 HTTP에 요청에 응답을 주면서 HTTP 헤더에 &lt;code&gt;Request Origin&lt;/code&gt;(요청을 처리해 줄 수 있는 출처)를 명시하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;api.my.com&lt;/code&gt;에서 응답 헤더에 다음과 같이 명시해주면 &lt;code&gt;sitea.com&lt;/code&gt;에 의해서 로딩된 자바스크립트 클라이언트 요청에 대해서만 &lt;code&gt;api.my.com&lt;/code&gt;이 요청해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;Access-Controll-Allow-Origin: sitea.com
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;만약에 다음과 같이 &lt;code&gt;*&lt;/code&gt;로 해주면 &lt;code&gt;Request Origin&lt;/code&gt;에 관계없이 사이트에서 로딩된 자바스크립트 요청에 대해서 처리해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;Access-Control-Allow-Origin: *
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;pre-flight를-이용한-세세한-cors-통제&#34;&gt;Pre-flight를 이용한 세세한 CORS 통제&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;REST&lt;/code&gt; 리소스(URL)당 섬세한 &lt;code&gt;CORS&lt;/code&gt; 통제가 필요한 경우에는 &lt;code&gt;Pre-Flight&lt;/code&gt; 호출이라는 것을 이용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 방식은 &lt;code&gt;REST&lt;/code&gt; 리소스를 호출하기 전에, 웹 브라우저가 &lt;code&gt;HTTP OPTIONS&lt;/code&gt; 요청을 보내면 해당 &lt;code&gt;REST&lt;/code&gt; 리소스에 대해서 가능한 &lt;code&gt;CORS&lt;/code&gt; 정보를 보내준다. (접근이 허용된 사이트, 접근이 허용된 메서드 등)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;웹 브라우저에서는 &lt;code&gt;XMLHttpRequest&lt;/code&gt;를 특정 &lt;code&gt;URL&lt;/code&gt;로 요청하기 전에, &lt;code&gt;HTTP OPTIONS&lt;/code&gt;를 호출한다. 그러면 서버는 해당 &lt;code&gt;URL&lt;/code&gt;에 접근할 수 있는 &lt;code&gt;Origin URL&lt;/code&gt;과 &lt;code&gt;HTTP&lt;/code&gt; 메서드를 반환해준다. 이를 &lt;code&gt;Pre-flight&lt;/code&gt; 호출이라고 하는데, 이 정보를 바탕으로 해당 &lt;code&gt;URL&lt;/code&gt;에 &lt;code&gt;XMLHttpRequest&lt;/code&gt;를 보낼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일반적으로는 교차 오리진 쓰기가 허용된다, 예를 들어 링크, 리디렉션 및 &lt;code&gt;form&lt;/code&gt; 제출이 있다. 일부 HTTP 요청에서는 &lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#preflighted_requests&#34;&gt;preflight&lt;/a&gt; 가 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112240206-402d8580-8c8b-11eb-9c2c-849a644bfdd7.png&#34; alt=&#34;preflight_correct&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;preflight&lt;/code&gt; 요청이란 일반적인 요청과 다르게, 먼저 &lt;code&gt;OPTIONS&lt;/code&gt; 메서드를 사용하여 HTTP 요청을 다른 출처(&lt;code&gt;Origin&lt;/code&gt;) 리소스로 전송하여 실제 요청이 안전한지 확인하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;교차 사이트 요청은 사용자 데이터에 영향을 미칠 수 있으므로 &lt;code&gt;preflight&lt;/code&gt;을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버는 이 &lt;code&gt;URL&lt;/code&gt;에 대한 접근 권한을 반환한다, &lt;code&gt;CORS&lt;/code&gt; 접근이 가능한 &lt;code&gt;Origin&lt;/code&gt; 사이트를 반환하고 사용할 수 있는 메서드를 반환한다. 그리고 &lt;code&gt;Pre-flight&lt;/code&gt; 호출은, &lt;code&gt;Access-Control-Max-Age&lt;/code&gt;에 정의된 &lt;code&gt;86400&lt;/code&gt; 초 동안 유효하다. (한번 &lt;code&gt;Pre-flight&lt;/code&gt; 호출을 하고 나면, 이 시간 동안은 다시 &lt;code&gt;Pre-flight 호출을 할 필요가 없다&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 &lt;code&gt;CORS&lt;/code&gt; 설정은 &lt;code&gt;API&lt;/code&gt; 호출 코드에서 직접 구현할 수 도 있고 로드 밸런서 역할을 하는 &lt;code&gt;HAProxy&lt;/code&gt;나 &lt;code&gt;Nginx&lt;/code&gt; 같은 리버스 프록시 설정을 통해서 간단하게 처리할 수도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 &lt;code&gt;API&lt;/code&gt; 단에서 구현이 필요하더라도, &lt;code&gt;HTTP&lt;/code&gt; 헤더를 직접 건드리지 않아도 스프링 등의 프레임워크에서 이미 &lt;code&gt;CORS&lt;/code&gt; 구현을 지원하고 있으므로 프레임워크를 통해서 간단하게 구현하는 것을 추천한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy&#34;&gt;MDN - SOP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>CSRF 란 무엇일까?</title>
-      <link>/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
       <pubDate>Wed, 10 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
-      <description>CSRF    CSRF(Cross-Site Request Forgery)는 신뢰할 수 있는 사용자를 가장하여 웹 사이트에 원치않는 명령을 보내는 공격입니다.
-  예를 들어, 다른 곳으로 이동하기 위해 사용하는 링크 뒤에 있는 URL에 악의적인 매겨변수를 포함시킴으로써 다음을 수행할 수 있다.
-  &amp;lt;img src=&amp;quot;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;quot;&amp;gt;   해당 도메인에 수정 권한이 있는 사용자의 경우 &amp;lt;img&amp;gt; 요소가, 사용자 모르게 동작을 수행한다.
-  심지어, 요소가 https://www.example.com에 없는 경우에도 실행된다.
-  CSRF를 방지하는 방법은 RestfulAPI 구현 및 시큐어 토큰을 추가하는 등 많은 방법이 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <description>&lt;h3 id=&#34;csrf&#34;&gt;CSRF&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110636756-fc00a680-81ef-11eb-8940-ee638da62fc2.png&#34; alt=&#34;Screen Shot 2021-03-10 at 10 28 45 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;CSRF(Cross-Site Request Forgery)&lt;/code&gt;는 신뢰할 수 있는 사용자를 가장하여 웹 사이트에 원치않는 명령을 보내는 공격입니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어, 다른 곳으로 이동하기 위해 사용하는 링크 뒤에 있는 &lt;code&gt;URL&lt;/code&gt;에 악의적인 매겨변수를 포함시킴으로써 다음을 수행할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;quot;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;해당 도메인에 수정 권한이 있는 사용자의 경우 &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; 요소가, 사용자 모르게 동작을 수행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;심지어, 요소가 &lt;code&gt;https://www.example.com&lt;/code&gt;에 없는 경우에도 실행된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;CSRF&lt;/code&gt;를 방지하는 방법은 &lt;code&gt;RestfulAPI&lt;/code&gt; 구현 및 시큐어 토큰을 추가하는 등 많은 방법이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;위키-백과&#34;&gt;위키 백과&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;설명이 조금 부족해서 위키백과를 찾아보았다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110638080-77168c80-81f1-11eb-90a1-af13554352bb.png&#34; alt=&#34;Screen Shot 2021-03-10 at 10 39 18 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;사이트 간 요청 위조, 원 클릭 공격 또는 세션 라이딩이라고 한다.&lt;/li&gt;
+&lt;li&gt;웹 응용프로그램이 신뢰하는 사용자로서 무단 명령을 제출하는 웹 사이트의 악의적인 공격 유형이다.&lt;/li&gt;
+&lt;li&gt;악의적인 웹 사이트가 이러한 명령을 전송할 수 있는 방법은 여러가지가 있다. 예를들어, 특수하게 조작된 이미지 태그, 숨겨진 양식 및 &lt;code&gt;JavaScript XMLHttpRequest&lt;/code&gt;는 사용자의 동작에 따라서 작동되기도 하지만 전혀 알아차리지 못하게 이루어지기도 한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;XSS(Cross-site-scripting)&lt;/code&gt;과의 차이점은 &lt;code&gt;XSS&lt;/code&gt;는 특정 사이트에 대해서 사용자가 가지는 신뢰정보를 이용하는데 반해서, &lt;code&gt;CSRF&lt;/code&gt;는 사용자의 브라우저에 있는 신뢰 정보를 이용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;특징&#34;&gt;특징&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110639854-8a2a5c00-81f3-11eb-9cbb-06198496bc29.png&#34; alt=&#34;Screen Shot 2021-03-10 at 10 54 10 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;CSRF&lt;/code&gt; 공격에서 공격자의 목표는 무고한 피해자가 악의적으로 조작된 웹 공격을 대상자가 액세스 권한을 가진 웹 사이트에 몰래 제출하도록 하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자의 웹 브라우저에 저장된 쿠키에 의해 인증된 사용자는 자신도 모르게 사용자를 신뢰하는 사이트로 &lt;code&gt;HTTP&lt;/code&gt; 요청을 전송하여 원치 않는 작업을 발생시킬 수 있습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;웹 브라우저는 특정 도메인에서 사용하는 쿠키를 해당 도메인으로 보내는 웹 요청에 보이지 않게 포함시킵니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 속성 때문에, 웹 사이트에 로그인 할 때, 생성된 쿠키를 이용해 공격합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자가 브라우저를 통해서 실수로 요청을 제출한 경우 자동으로 포함된 이 쿠키로 인해서 위조된 요청이 웹 서버에 실제로 나타나며 데이터 반환, 세션 상태 조작, 피해자 계정 변경 등 적절하게 요청된 모든 작업을 수행한다&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;웹 브라우저는 특정 도메인에서 사용하는 쿠키를 해당 도메인으로 보내는 웹 요청에 보이지 않게 포함시킵니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 속성 때문에, 웹 사이트에 로그인 할 때, 생성된 쿠키를 이용해 공격합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자가 브라우저를 통해서 실수로 요청을 제출한 경우 자동으로 포함된 이 쿠키로 인해서 위조된 요청이 웹 서버에 실제로 나타나며 데이터 반환, 세션 상태 조작, 피해자 계정 변경 등 적절하게 요청된 모든 작업을 수행 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;예방법&#34;&gt;예방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110640493-379d6f80-81f4-11eb-83f4-b25ba743308a.png&#34; alt=&#34;Screen Shot 2021-03-10 at 10 59 01 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;대부분의 &lt;code&gt;CSRF&lt;/code&gt; 방지 기술은, 웹 응용 프로그램이 허가되지 않은 요청을 탐지할 수 있도록 요청해 추가 인증 데이터를 포함시킴으로서 작동한다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://developer.mozilla.org/en-US/docs/Glossary/CSRF&#34;&gt;MDN - CSRF&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Cross-site_request_forgery&#34;&gt;위키백과 - CSRF&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

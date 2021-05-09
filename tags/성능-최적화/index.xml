@@ -2,20 +2,251 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>성능 최적화 on 개발자 이동욱</title>
-    <link>/tags/%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94/</link>
+    <link>https://dongwooklee96.github.io/tags/%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94/</link>
     <description>Recent content in 성능 최적화 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Mar 2021 23:24:39 +0900</lastBuildDate><atom:link href="/tags/%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 23:24:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>성능 엔지니어링 및 절차</title>
-      <link>/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/</link>
       <pubDate>Sun, 28 Mar 2021 23:24:39 +0900</pubDate>
       
-      <guid>/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/</guid>
-      <description>1.성능 엔지니어링이란    성능 엔지니어링은 시스템의 목표 성능 (응답 시간과 동시 접속자 수)를 정의하고 이를 달성하기 위해서 시스템의 구조를 반복적으로 개선하는 작업을 이야기 한다.
-  좁게 생각하면 코드 상의 병목을 잡고 시스템의 설정을 바꿔서 성능을 높이는 튜닝으로 생각할 수 있지만, 성능 목표의 정의부터 최적의 성능을 위한 디자인 및 구현 같은 개발 초기의 설계 부분과 개발 후의 운영 단계 그리고 모니터링까지 전 과정을 포함한다.
-  성능 엔지니어링을 해야하는 시기  1.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/</guid>
+      <description>&lt;h2 id=&#34;1성능-엔지니어링이란&#34;&gt;1.성능 엔지니어링이란&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;성능 엔지니어링은 시스템의 목표 성능 (응답 시간과 동시 접속자 수)를 정의하고 이를 달성하기 위해서 시스템의 구조를 반복적으로 개선하는 작업을 이야기 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;좁게 생각하면 코드 상의 병목을 잡고 시스템의 설정을 바꿔서 성능을 높이는 튜닝으로 생각할 수 있지만, 성능 목표의 정의부터 최적의 성능을 위한 디자인 및 구현 같은 개발 초기의 설계 부분과 개발 후의 운영 단계 그리고 모니터링까지 전 과정을 포함한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;성능-엔지니어링을-해야하는-시기&#34;&gt;성능 엔지니어링을 해야하는 시기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;1-분석-단계&#34;&gt;1. 분석 단계&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;초기 요구사항 분석 및 시스템 기획 단계에서 성능에 대한 목표를 정해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;목표시간 , 시스템을 사용할 사용자 수와 시스템을 사용하는 동시 접속자수가 어떻게 되는지와 같은 성능 목표를 정의한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 성능 모델을 만들어서, 시스템에 부하가 어떤 패턴으로 들어오는지를 정의할 필요가 있다. 예를 들어서, 주부를 대상으로 하는 사이트라면 시스템의 부하는 한국 시간으로 아이들이 학교나 유치원에 간 시간에 많이 몰릴 것이라고 추측할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-디자인-단계&#34;&gt;2. 디자인 단계&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;다음으로 디자인 단계에서는 목표 성능과 용량을 달성할 수 있는 규모로 시스템 설계를 진행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;성능 관점에서 시스템 디자인은 항상 피크 타임(최대 성능)에 맞춰서 디자인 된다. 전체 시스템이 감당할 수 있는 용량과 응답 시간을 고려해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특히 성능과 용량은 애플리케이션 디자인뿐만 아니라 기술을 결정하는 데도 많은 도움을 준다. 어떤 미들웨어나 프레임워크를 사용할 것인지에 따라서 성능의 차이가 많이 발생하기 때문에, 디자인 단계부터 성능과 용량을 고려해서 시스템을 설계 해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하드웨어 관점에서는 예전에는 성능 모델을 산정하고, 피크 타임을 기준(최대 성능 요구)으로 시스템을 설계하고 하드웨어를 구매하였으나, 근래에는 클라우드를 이용하여 필요 시에만 하드웨어를 탄력적으로 사용하는 오토 스케일 모델을 많이 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 성능이나 용량에 관련된 제품 선정이나 설계는 돌려 보지 않으면 확신하기 어렵다 따라서 사용할 기술은 선택한 다음에, 간단한 프로토타입을 구현하고 시나리오가 단순한 대규모 성능 및 용량 테스트를 해보는 &lt;code&gt;PoC(Proof of Concept)&lt;/code&gt;같은 작업을 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-개발-단계&#34;&gt;3. 개발 단계&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;개발 단계는 리스크가 높은 부분과, 아키텍처에 관련되는 부분, 난도가 높은 부분, 핵심 기능 등을 개발 초기의 스프린트에서 개발한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;초기 스프린트가 끝나고 릴리즈 돼서 성능 테스트나 가능한 &lt;code&gt;QA&lt;/code&gt;나 스테이징 환경으로 시스템이 이전되면 성능 엔지니어링 역량을 이 단계에서 집중하여 시스템의 아키텍처와 모듈들이 성능 목표를 달성할 수 있는지 지속적으로 테스트하고 튜닝을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;초기 단계에서 성능 목표의 달성 가능 여부가 판단되어야 아키텍쳐 변경이 가능하고 주요 성능 이슈들을 초반에 발견해야 성능에 대해서 같은 문제가 발생하지 않도록 디자인 가이드나 코딩 가이드를 개발자들에게 배포하여 위험을 줄인다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-최종-테스트-단계&#34;&gt;4. 최종 테스트 단계&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;앞의 단계에서 성능과 용량을 고려해서 설계했고 개발 초기 단계에서 성능과 용량 부분의 검증을 제대로 하였다면, 최종 테스트 단계에서는 개발된 최종 시스템에 대한 성능, 용량 부분의 측정, 미세 튜닝을 하는 정도로 마무리되어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 과정에서는 실수로 잘못한 설정이나, 코딩의 검증이 이루어진다. 예를 들어서 로그 파일을 &lt;code&gt;NFS&lt;/code&gt;와 같은 리모트 디스크에 쓴다든지, 인텔 계열의 &lt;code&gt;CPU&lt;/code&gt;에서 하이퍼스레딩 &lt;code&gt;ON&lt;/code&gt;을 하지 않았든지 같은 실수가 많다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이런 오류들이 해결되면 실제 미세 튜닝에 들어가는데, &lt;code&gt;JVM&lt;/code&gt; 튜닝이나 톰캣의 설정 튜닝, &lt;code&gt;SQL&lt;/code&gt; 튜닝 등이 이루어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 미세 튜닝에서 성능이 비약적으로 향상되지는 않는다, 보통 &lt;code&gt;20%&lt;/code&gt; 내외 정도의 성능이 올라간다고 생각하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;5-운영-단계&#34;&gt;5. 운영 단계&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;테스트 시에 발견되지 않은 성능 문제가 있을 수 있기 때문에, 모니터링 도구를 사용하여 지속적으로 성능을 모니터링하고 성능 상태에 문제가 있는 부분을 지속적으로 수정해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;성능 및 목표 용량 설정은 매우 중요한 과정이다. 기존 업무 시스템의 사용 패턴을 분석하는 것이 효율적이기 때문에, 운영 시스템의 로그를 수집하고 분석하여 성능 모델을 분석 및 보유해두는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2시스템-용량-산정&#34;&gt;2.시스템 용량 산정&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;response-time-응답-시간&#34;&gt;Response Time (응답 시간)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;사용자가 서버에 요청을 한 시간부터 응답을 받을 때까지의 모든 시간을 포함한다. 이 응답 시간은 내부적으로 세분화 하여 분리된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Network Time(또는 Latency Time) : 서버에 요청을 보내고 받을 때 소요되는 네트워크 시간&lt;/li&gt;
+&lt;li&gt;Transaction Time : 서버에서 실제 트랜잭션에 처리되는 시간을 의미한다.&lt;/li&gt;
+&lt;li&gt;Think Time : 사용자가 보낸 요청에 대한 응답을 받고, 웹 페이지를 보거나 화면을 보는 시간을 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;concurrent-user동시-사용자&#34;&gt;Concurrent User(동시 사용자)&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112756483-512a1e00-9020-11eb-9d33-9da5f8dac741.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;현재 시스템을 사용하는 사용자를 말한다. 웹 사이트를 사용하기 위해서 현재 브라우저를 열어놓고 웹 사이트를 보는 것과 같이 현재 시스템을 사용하는 사용자 수를 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;active-user액티브-사용자&#34;&gt;Active User(액티브 사용자)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;현재 시스템에 트랜잭션을 실행하여 부하를 주는 사용자를 정의한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Active User&lt;/code&gt;는 클릭을 통해 그 시간에 서버에 트랜잭션을 발생시키는 사용자를 의미한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Active User&lt;/code&gt;의 수는 서버에서 순간 실행되고 있는 스레드 수(스레드 기반의 자바 서버인 경우)나 프로세스의 수와 같다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Active User&lt;/code&gt;의 수는 실제로 서버가 동시에 처리할 수 있는 트랜잭션의 양을 판단할 수 있는 기준이 되기 때문에, 매우 중요한 성능 요인이 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;transaction-트랜잭션&#34;&gt;Transaction (트랜잭션)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;트랜잭션이란 사용자로부터 요청을 다루는 단위를 말한다.&lt;/li&gt;
+&lt;li&gt;이러한 트랜잭션의 정의는 무엇을 판단 기준으로 할 것인가에 따라 결정되는데, 예를 들어 리소스를 톰캣과 같은 애플리케이션 서버에서 처리하지 않고 앞단의 &lt;code&gt;CDN&lt;/code&gt;이나 웹 서버에서 처리할 때, 톰캣은 리소스에 대한 트랜잭션 요청을 받지 않는다.&lt;/li&gt;
+&lt;li&gt;리소스에 대한 로딩은 비즈니스 로직 처리보다 부하가 상대적으로 적고, 일반적으로 브라우저에 캐시 되기 때문에, 보통 서버의 성능 측정 시 이러한 리소스 로딩에 대한 부하는 트랜잭션 단위로 처리하지 않는 경우가 많다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;tpstransaction-per-second&#34;&gt;TPS(Transaction per Second)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;초당 처리할 수 있는 트랜잭션의 양을 말한다.&lt;/li&gt;
+&lt;li&gt;보통 서버의 성능 평가 기준이 된다, &lt;code&gt;Active User&lt;/code&gt;가 순간 트랜잭션을 처리한다고 하면 이는 목표 응답시간 &lt;code&gt;(Response Time)&lt;/code&gt;으로 나눈 값이 목표 &lt;code&gt;TPS&lt;/code&gt;가 된다.&lt;/li&gt;
+&lt;li&gt;예를 들어서 &lt;code&gt;Active User&lt;/code&gt;가 50 명이고 개당 응답 시간이 2초라고 하면 이 시스템의 &lt;code&gt;TPS&lt;/code&gt;는 25 &lt;code&gt;TPS&lt;/code&gt;가 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;hpshit-per-second&#34;&gt;HPS(Hit Per Second)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;시스템이 처리할 수 있는 모든 웹 요청의 초당 처리량이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;TPS&lt;/code&gt;가 비즈니스 트랜잭션에 대한 처리 시간만을 정의한다면 &lt;code&gt;HPS&lt;/code&gt;는 리소스(이미지, 자바 스크립트)에 대한 요청 처리량을 포함하기 때문에 &lt;code&gt;TPS&lt;/code&gt;보다 약 10 ~ 20 배 높게 나온다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-테스트와-모니터링&#34;&gt;3. 테스트와 모니터링&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;부하 테스트를 할 때, 주요 성능 요인을 모니터링하고 기록해야한다.&lt;/li&gt;
+&lt;li&gt;주요 모니터링 해야하는 대상 및 관점은 애플리케이션, 미들웨어, 인프라 관점으로 나눌 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;애플리케이션-관점&#34;&gt;애플리케이션 관점&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;가장 기본적으로 애플리케이션, 즉 시스템의 성능을 측정해야한다. 주요 모니터링 내용은 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Response Time&lt;/code&gt; : 요청(&lt;code&gt;Request&lt;/code&gt;)별 응답시간&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;TPS(Throughput per second)&lt;/code&gt; 초당 요청(&lt;code&gt;Request&lt;/code&gt;) 처리량&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 요인들이 성능의 궁극적인 최종 목표 값이 되기 때문에, 가장 중요한 성능 요인이 되며 부하 생성 도구를 통해서 쉽게 측정 가능하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;미들웨어-관점&#34;&gt;미들웨어 관점&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;미들웨어는 애플리케이션이 동작하기 위한 기본적인 솔루션이다.&lt;/li&gt;
+&lt;li&gt;아파치와 같은 웹 서버나 톰캣과 같은 웹 애플리케이션 서버, &lt;code&gt;RabbitMQ&lt;/code&gt;와 같은 메시지 큐, &lt;code&gt;MySQL&lt;/code&gt;과 같은 데이터베이스가 해당한다.&lt;/li&gt;
+&lt;li&gt;각 성능 시나리오 별로 거쳐가는 모든 미들웨어를 모니터링 해야하는데, 이를 위해서는 각 솔루션에 대한 깊은 이해가 필요하다.&lt;/li&gt;
+&lt;li&gt;웹 서버는 성능이 문제가 되는 부분은 거의 없다, 성능 문제는 대부분 네트워크 아웃 바운드 (&lt;code&gt;IO&lt;/code&gt;, 대역폭) 쪽에서 발생할 때가 많다.&lt;/li&gt;
+&lt;li&gt;웹 서버가 설치된 하드웨어 네트워크 아웃바운드 &lt;code&gt;IO&lt;/code&gt;의 대역폭을 모니터링하는 것이 유용하다.&lt;/li&gt;
+&lt;li&gt;대부분의 성능 문제는 실제 애플리케이션 로직이 수행되는 톰캣과 같은 애플리케이션 서버와 데이터베이스 단에서 많이 발생한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;애플리케이션 서버는 스레드의 수오 큐의 길이가 1차 모니터링 대상이 된다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;서버가 용량을 추가하게 되면 유휴 스레드(&lt;code&gt;Idle Thread&lt;/code&gt;) 수가 떨어지게 되고 유휴 스레드가 0이 되면 요청 메시지가 앞단의 큐에 저장된다.&lt;/li&gt;
+&lt;li&gt;따라서 이 두개를 모니터링 하면, 시스템이 병목 상태인지 아닌지를 판단할 수 있다.&lt;/li&gt;
+&lt;li&gt;이 값들은 &lt;code&gt;JMX(Java Management Extenstion)&lt;/code&gt; &lt;code&gt;API&lt;/code&gt;를 이용하여 모니터링 하면된다.&lt;/li&gt;
+&lt;li&gt;DB의 경우에는 슬로우 쿼리를 모니터링하면 특히 느리게 수행되는 쿼리들을 잡아서 튜닝할 수 있다.&lt;/li&gt;
+&lt;li&gt;슬로우 쿼리를 찾았으면, &lt;code&gt;EXPLAIN&lt;/code&gt; 명령어를 이용하여 쿼리의 수행 내용을 분석한 후에 인덱스 등의 튜닝을 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;인프라-관점--cpu-메모리-네트워크-io-디스크-io&#34;&gt;인프라 관점 : CPU, 메모리, 네트워크 IO, 디스크 IO&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;하드웨어 인프라 모니터링은 전문적인 인프라 모니터링 도구를 사용하거나 &lt;code&gt;top&lt;/code&gt;, &lt;code&gt;glance&lt;/code&gt;, &lt;code&gt;sar&lt;/code&gt;와 같은 기본적인 유닉스 또는 리눅스 명령어를 사용해도 가능하다.&lt;/li&gt;
+&lt;li&gt;부하 테스트 중에 &lt;code&gt;top&lt;/code&gt;을 띄워놓고 모니터링 하는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;CPU&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;일반적으로 &lt;code&gt;CPU&lt;/code&gt;는 대부분 잘 모니터링 한다.&lt;/li&gt;
+&lt;li&gt;목표 성능을 달성할 시에는 보통 70 ~ 80 퍼센트를 사용하는 것이 좋고 항상 20 ~ 30 퍼센트의 여유를 두는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;메모리&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;다음으로, 메모리 부분이다. 피크 타임시에 메모리가 얼마나 사용되느냐가 중요한데, 자바 애플리케이션은 특성상 전체 &lt;code&gt;JVM&lt;/code&gt; 프로세스가 사용할 메모리 양을 미리 정해놓기 때문에, 부하 테스트 중에도 메모리 사용량은 크게 변화지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다만, 스와핑 (&lt;code&gt;Swapping Status&lt;/code&gt;)를 자주 놓치게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스, 유닉스 시스템의 특성상 물리 메모리 이상의 메모리를 제공하기 위해서 가상 메모리라는 개념을 사용하고 스와핑 공간이라는 디스크 공간에 자주 사용하지 않는 메모리의 내용을 덤프해 저장해여, 다시 사용할 때 메모리에 로딩하는 방식을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그런데 이 메모리의 내용을 디스크에 저장 및 로드 하는 과정 (스와핑)이 실제 디스크 &lt;code&gt;IO&lt;/code&gt;를 발생시키기 때문에 실제 메모리 액세스 성능이 매우 급격하게 떨어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래서 시스템에서 스와핑이 발생하면 시스템 성능이 장애 수준으로 매우 급격하게 떨어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;디스크 IO&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;디스크 &lt;code&gt;IO&lt;/code&gt;는 파일 시스템에 파일을 저장하는 시나리오나 로그를 저장하는 모듈, 그리고 데이터베이스와 같이 뒷단에서 파일 시스템을 요구하는 모듈에서 많이 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;디스크 IO에 대한 병복은 여러 가지 해결 방법이 있다. 먼저 하드웨어 인프라 자체에서 접근하는 방식은 디스크 자체를 &lt;code&gt;SSD&lt;/code&gt;로 변경하거나, 버퍼가 크거나 &lt;code&gt;RPM&lt;/code&gt;이 높은 디스크로 변경하는 방법이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;RAID&lt;/code&gt; 구성을 스트리핑 방식으로 변경해서,&lt;code&gt;IO&lt;/code&gt;를 여러 디스크로 분산시키는 방식이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;애플리케이션 차원에서는 데이터베이스 앞에 &lt;code&gt;Memcached&lt;/code&gt;와 같은 캐싱을 사용하거나, 로깅의 경우에는 중간에 메시지 큐를 써서 로그를 다른 서버에 쓰도록 하여 &lt;code&gt;IO&lt;/code&gt;를 분산시킬 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또는 백 라이트(&lt;code&gt;Back Write&lt;/code&gt;)같은 방식으로 로그 메시지가 발생할 때마다, 디스크에 쓰는 것이 아니라, 20, 30개씩 한꺼번에 디스크로 플러싱하는 방식을 이용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;조금 더 높은 아키텍처 수준으로는, 디스크 &lt;code&gt;IO&lt;/code&gt;가 많이 발생하는 로직은 동기 처리에서, 메시지 큐를 이용하는 비동기 방식으로 시스템 설계를 변경하는 방법을 고민할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서, 사진을 올려서 변환하는 서비스는 파일을 업로드 하는 시나리오와 변경하는 모듈을 분리하여, 파일 업로드가 끝나면 사용자에게 동기 방식으로 바로 응답을 줘서 응답 시간을 빠르게 하고, 업로드된 파일은 뒷단에서 비동기 프로세스를 통한 변환 과정을 끝낸 후에 사용자에게 결과를 알려주는 방법을 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;네트워크 IO&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크 &lt;code&gt;IO&lt;/code&gt;는 특히 고용량의 파일이나 이미지 전송에서 병목이 주로 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;주로 &lt;code&gt;Reverse Proxy&lt;/code&gt;, &lt;code&gt;NAT(Network Address Translator)&lt;/code&gt;, 라우터, 로드 밸런서 등에서 많이 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여러가지 지점과 장비에 대해서 모니터링해야하기 때문에, 일반적인 유닉스, 리눅스 명령어를 사용하는 것 보다는 전문적인 툴을 사용하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래프를 보면서 추이를 지켜보는 것이 중요한데, 부하를 넣으면 일정 수준이 되어도 시스템들의 &lt;code&gt;CPU&lt;/code&gt;, 메모리, 디스크 등의 기타 자원들은 넉넉한데 네트워크 입력, 출력 수준이 일정 수준 이상으로 올라가지 않는 경우가 있다. 이러한 경우는 네트워크 병목일 가능성이 크다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특히 소프트웨어 기반의 로드 밸런서 및 소프트웨어 기반의 &lt;code&gt;NAT&lt;/code&gt; 장비에서 많이 발생하는데 이미지와 같은 정적 콘텐츠는 될 수 있으면 &lt;code&gt;CDN&lt;/code&gt;이나 분리된 웹 서버를 이용해서 서비스 하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클라우는 특히나 소프트웨어기반의 &lt;code&gt;NAT&lt;/code&gt; 및 로드밸런서를 사용해서 문제가 생기는 경우가 많은데, &lt;code&gt;NAT&lt;/code&gt;의 경우에는 여러 개의 &lt;code&gt;NAT&lt;/code&gt;을 사용해서 로드를 분산하도록 하고 로드 밸런서의 경우에도 충분히 용량이 큰 로드 밸런서를 사용하거나 두 개 이상의 로드 밸런서를 사용하고 &lt;code&gt;DNS&lt;/code&gt; 라운드 로빈을 사용하는 방법을 고려해보는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=54438883&#34;&gt;대용량 아키텍처와 성능 튜닝&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

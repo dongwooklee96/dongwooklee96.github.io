@@ -2,80 +2,297 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>운영체제 on 개발자 이동욱</title>
-    <link>/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/</link>
+    <link>https://dongwooklee96.github.io/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/</link>
     <description>Recent content in 운영체제 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 28 Apr 2021 00:09:24 +0900</lastBuildDate><atom:link href="/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Apr 2021 00:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>가상 파일 시스템(VFS)이란? (draft)</title>
-      <link>/post/2021/04/28/%EA%B0%80%EC%83%81-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9Cvfs%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/28/%EA%B0%80%EC%83%81-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9Cvfs%EC%9D%B4%EB%9E%80-draft/</link>
       <pubDate>Wed, 28 Apr 2021 00:09:24 +0900</pubDate>
       
-      <guid>/post/2021/04/28/%EA%B0%80%EC%83%81-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9Cvfs%EC%9D%B4%EB%9E%80-draft/</guid>
-      <description>가상 파일 시스템(Virtual File System)    리눅스가 하는 일을 생각해보면 크게 하드웨어 자원 관리 및 소프트웨어의 자원을 관리한다고 생각을 해볼 수 있다.
-  리눅스는 이러한 자원을 파일로써 관리하게 되며 모든 것이 가상 파일 시스템을 통해서 접근하게 된다.
-  예를 들어서, NGINX 같은 웹 서버 프로그램이 시스템 자원을 요청할 때, 시스템 콜을 호출하게 되며 (open, read, write) 이러한 자원은 가상 파일 시스템(VFS)를 통해서 자원에 접근하게 된다.
-  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/28/%EA%B0%80%EC%83%81-%ED%8C%8C%EC%9D%BC-%EC%8B%9C%EC%8A%A4%ED%85%9Cvfs%EC%9D%B4%EB%9E%80-draft/</guid>
+      <description>&lt;h3 id=&#34;가상-파일-시스템virtual-file-system&#34;&gt;가상 파일 시스템(Virtual File System)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116267696-9c6a5480-a7b7-11eb-86f3-ca2a38093928.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 20 52 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스가 하는 일을 생각해보면 크게 하드웨어 자원 관리 및 소프트웨어의 자원을 관리한다고 생각을 해볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스는 이러한 자원을 파일로써 관리하게 되며 모든 것이 가상 파일 시스템을 통해서 접근하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서, &lt;code&gt;NGINX&lt;/code&gt; 같은 웹 서버 프로그램이 시스템 자원을 요청할 때, 시스템 콜을 호출하게 되며 (open, read, write) 이러한 자원은 가상 파일 시스템(VFS)를 통해서 자원에 접근하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>메모리 액세스 과정</title>
-      <link>/post/2021/04/03/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%95%A1%EC%84%B8%EC%8A%A4-%EA%B3%BC%EC%A0%95/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/03/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%95%A1%EC%84%B8%EC%8A%A4-%EA%B3%BC%EC%A0%95/</link>
       <pubDate>Sat, 03 Apr 2021 21:21:24 +0900</pubDate>
       
-      <guid>/post/2021/04/03/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%95%A1%EC%84%B8%EC%8A%A4-%EA%B3%BC%EC%A0%95/</guid>
-      <description>메모리 액세스 과정    프로그램을 실행 할 때, 반드시 모두 물리 메모리에 있어야 할 필요는 없으므로, 일부분만 물리 메모리에 올려 놓고 실행된다.
-  따라서 프로그램은 더 이상 물리 메모리에 의해서 더 이상 제약 받지 않으며, 사용자들은 매우 큰 가상 공간을 가정하고 프로그램을 만들 수 있고, 프로그래밍 과정이 간단해진다.
-  각 사용자 프로그램이 더 작은 메모리를 차지하므로 더 많은 프로그램을 동시에 수행할 수 있다.
-  가상 메모리에서는 페이지들이 실행 과정에서 실제 필요할 때, 메모리에 적재되게 된다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/03/%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%95%A1%EC%84%B8%EC%8A%A4-%EA%B3%BC%EC%A0%95/</guid>
+      <description>&lt;h3 id=&#34;메모리-액세스-과정&#34;&gt;메모리 액세스 과정&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113478449-da7b9d80-94c3-11eb-989d-f4926b2321d5.png&#34; alt=&#34;Slide07&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그램을 실행 할 때, 반드시 모두 물리 메모리에 있어야 할 필요는 없으므로, 일부분만 물리 메모리에 올려 놓고 실행된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 프로그램은 더 이상 물리 메모리에 의해서 더 이상 제약 받지 않으며, 사용자들은 매우 큰 가상 공간을 가정하고 프로그램을 만들 수 있고, 프로그래밍 과정이 간단해진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각 사용자 프로그램이 더 작은 메모리를 차지하므로 더 많은 프로그램을 동시에 수행할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가상 메모리에서는 페이지들이 실행 과정에서 실제 필요할 때, 메모리에 적재되게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 그림을 보면, &lt;code&gt;CPU&lt;/code&gt;에서 메모리에 접근할 때, &lt;code&gt;MMU&lt;/code&gt;를 통해서 페이지 테이블에 접근한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페이지 테이블은 가상 주소와 물리 주소를 맵핑하고 있고, &lt;code&gt;MMU&lt;/code&gt;를 통해서 접근하는 메모리가 테이지 테이블에 맵핑 되어 있지 않다면 페이지 폴트(&lt;code&gt;page fault&lt;/code&gt;)를 발생 시킨다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페이지 폴트가 발생하고 나서 가상 메모리와 물리 메모리가 맵핑되고, 가상 메모리를 통해서 물리 메모리에 접근할 수 있게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;페이지-교체&#34;&gt;페이지 교체&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;기본적인 페이지 교체는 다음과 같다. 메모리에서 빈 프레임이 없다면 현재 사용되지 않는 프레임을 찾아서 그것을 비워버린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그 프레임의 내용을 스왑 (&lt;code&gt;swap&lt;/code&gt;) 공간에 쓰고 그 페이지가 메모리에 더 이상 존재하지 않는다는 것을 나타내기 위해서, 페이지 테이블을 비운다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어떤 페이지를 비울지에 대해서는 다음과 같은 알고리즘이 있다. (&lt;code&gt;FIFO&lt;/code&gt;, &lt;code&gt;LRU&lt;/code&gt;, &lt;code&gt;LFU&lt;/code&gt;, &lt;code&gt;MFU&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;세그먼트-폴트와-페이지-폴트의-차이점&#34;&gt;세그먼트 폴트와 페이지 폴트의 차이점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;세그먼트 폴트 : 세그먼트 폴트는 컴퓨터 소프트웨어의 실행중에 일어날 수 있는 오류로서, 프로그램이 허용되지 않은 메모리 영역에 접근을 시도하였을 때 발생합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페이지 폴트 : 페이지 폴트는 메모리에 적재된 페이지 중에 사용 페이지가 없을 때 발생한다. 페이지 폴트가 발생하고 나서, 페이지 테이블에 가상 주소와 물리 주소가 맵핑되고 나서는 발생하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ps-명령어를-사용하여-실제-사용하는-메모리와-가상-메모리-크기를-확인하는-방법&#34;&gt;&lt;code&gt;PS&lt;/code&gt; 명령어를 사용하여 실제 사용하는 메모리와 가상 메모리 크기를 확인하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113478868-7ad2c180-94c6-11eb-879a-bd526b1c4d86.png&#34; alt=&#34;Screen Shot 2021-04-03 at 9 49 29 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ps&lt;/code&gt; 명령어를 통해서, &lt;code&gt;RSS&lt;/code&gt; 항목을 보면 다음과 같이 설명하고 있다.&lt;/li&gt;
+&lt;li&gt;상주하고 있는 메모리 사이즈이며, 스왑되지 않은 물리적 메모리라고 설명되어 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113478927-dac96800-94c6-11eb-93d1-375419b14f4d.png&#34; alt=&#34;Screen Shot 2021-04-03 at 9 52 07 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;반면에 &lt;code&gt;VSZ&lt;/code&gt;는 프로세스의 가상 메모리 크기라고 설명되어 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;ps -eo pmem,rss,vsz,comm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위의 명령어를 실행하여, 프로세스 별 실제 사용하고 있는 물리 메모리와 가상 메모리를 확인할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113478993-3ac00e80-94c7-11eb-88a1-63a0ad9fd7f5.png&#34; alt=&#34;Screen Shot 2021-04-03 at 9 54 48 PM&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=46380306&#34;&gt;운영체제&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://reallinux.co.kr/&#34;&gt;리얼 리눅스&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>좀비 프로세스와 고아 프로세스</title>
-      <link>/post/2021/04/03/%EC%A2%80%EB%B9%84-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EA%B3%A0%EC%95%84-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/03/%EC%A2%80%EB%B9%84-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EA%B3%A0%EC%95%84-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/</link>
       <pubDate>Sat, 03 Apr 2021 18:57:24 +0900</pubDate>
       
-      <guid>/post/2021/04/03/%EC%A2%80%EB%B9%84-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EA%B3%A0%EC%95%84-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/</guid>
-      <description>좀비(zombie) 프로세스란    프로세스가 종료 될 때, 마지막 문장의 실행을 끝내고, exit() 시스템 호출을 사용하여 운영체제에게 자신의 삭제를 요청하면서 종료된다.
-  이 시점에서, 프로세스는 자신의 부모가 호출한 wait() 시스템 호출을 통해서, 상태 값을 반환할 수 있고, 물리 메모리와 가상 메모리, 열린 파일, 입출력 버퍼를 포함한 프로세스의 모든 자원이 운영체제로 반납된다.
-  부모 프로세는 wait() 시스템 호출을 사용하여 자식 프로세스가 종료할 때를 기다릴 수 있고, 부모가 자식의 종료 상태를 얻어 낼 수 있도록 하나의 인자를 전달 받는다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/03/%EC%A2%80%EB%B9%84-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EA%B3%A0%EC%95%84-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/</guid>
+      <description>&lt;h3 id=&#34;좀비zombie-프로세스란&#34;&gt;좀비(zombie) 프로세스란&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스가 종료 될 때, 마지막 문장의 실행을 끝내고, &lt;code&gt;exit()&lt;/code&gt; 시스템 호출을 사용하여 운영체제에게 자신의 삭제를 요청하면서 종료된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 시점에서, 프로세스는 자신의 부모가 호출한 &lt;code&gt;wait()&lt;/code&gt; 시스템 호출을 통해서, 상태 값을 반환할 수 있고, 물리 메모리와 가상 메모리, 열린 파일, 입출력 버퍼를 포함한 프로세스의 모든 자원이 운영체제로 반납된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;부모 프로세는 &lt;code&gt;wait()&lt;/code&gt; 시스템 호출을 사용하여 자식 프로세스가 종료할 때를 기다릴 수 있고, 부모가 자식의 종료 상태를 얻어 낼 수 있도록 하나의 인자를 전달 받는다. 이 시스템 호출은 부모가 어떤 자식이 종료되었는지 구별할 수 있도록 종료된 자식의 프로세스 식별자를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스가 종료되면 사용하던 자원은 운영체제가 되찾아가게 된다. 그러나 프로세스의 종료 상태가 저장되는 프로세스 테이블의 해당 항목은 부모 프로세스가 &lt;code&gt;wait()&lt;/code&gt;을 호출할 때까지 남아있게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 종료가 되었지만 부모 프로세스가 아직 &lt;code&gt;wait()&lt;/code&gt; 호출을 하지 않은 프로세스를 좀비 (&lt;code&gt;zombie&lt;/code&gt;) 프로세스라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 프로세스는 종료하게 되면, 좀비 상태가 되지만 아주 짧은 시간 동안 머무르게 되고, 부모가 &lt;code&gt;wait()&lt;/code&gt;를 호출하면 좀비 프로세스의 프로세스 식별자와 프로세스 테이블의 해당 항목이 운영체제에게 반환된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;고아-프로세스란orphan&#34;&gt;고아 프로세스란(orphan)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;좀비 프로세스와 비슷한 고아 프로세스라는 것이 있다.&lt;/li&gt;
+&lt;li&gt;고아 프로세스는 부모 프로세스가 &lt;code&gt;wait()&lt;/code&gt;을 호출하는 대신에 그냥 종료를 해버리는 것이다. 이러한 상황에 처한 자식 프로세스를 고아(&lt;code&gt;orphan&lt;/code&gt;) 프로세스라고 한다.&lt;/li&gt;
+&lt;li&gt;이 경우에는 고아 프로세스의 새로운 부모 프로세스로 &lt;code&gt;init&lt;/code&gt; 프로세스를 지정함으로써 이 문제를 해결한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;init&lt;/code&gt; 프로세스는 주기적으로 &lt;code&gt;wait()&lt;/code&gt; 시스템 콜을 호출하여 고아 프로세스의 종료 상태를 수집하고 프로세스 식별자와 프로세스 테이블 항목을 반환한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;실습&#34;&gt;실습&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/wait.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+
+int main ()
+{
+  pid_t child_pid;
+  int child_status;
+
+  child_pid = fork ();
+  if (child_pid &amp;gt; 0) {
+    // parent process will sleep for 30 seconds and exit, without a call to wait()
+    fprintf(stderr,&amp;quot;parent process - %d\n&amp;quot;, getpid());
+    sleep(30);
+    exit(0);
+  }
+  else if (child_pid == 0) {
+    // child process will exit immediately
+    fprintf(stderr,&amp;quot;child process - %d\n&amp;quot;, getpid());
+    exit(0);
+  }
+  else if (child_pid == -1) {
+    // fork() error
+    perror(&amp;quot;fork() call failed&amp;quot;);
+    exit (-1);
+  }
+  else {
+    // this should not happen
+    fprintf(stderr, &amp;quot;unknown return value of %d from fork() call&amp;quot;, child_pid);
+    exit (-2);
+  }
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위와 같은 소스 코드를 작성하고 컴파일을 한 뒤에 실행을 해보자.
+소스 코드의 대략적인 내용은 부모 프로세스에서 자식 프로세스를 만들고 나서, &lt;code&gt;wait()&lt;/code&gt; 호출을 하지 않고 종료 시켜버리는 것이다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;gcc -o zombie zombie.c
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;실행을 하기 전에, &lt;code&gt;top&lt;/code&gt; 명령어를 통해서 좀비 프로세스의 여부를 확인한 모습이다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113477959-c1252200-94c0-11eb-946c-384317e800aa.png&#34; alt=&#34;Screen Shot 2021-04-03 at 9 05 53 PM copy&#34;&gt;&lt;/p&gt;
+&lt;p&gt;좀비 프로세스가 없다는 것을 확인할 수 있다. 아까 작성한 프로그램을 실행 시킨 후에, 다시 한 번더 확인하였을 때는 다음과 같이 표시됨을 확인할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113478040-4a3c5900-94c1-11eb-9d54-dc99e1262648.png&#34; alt=&#34;zombie_after&#34;&gt;&lt;/p&gt;
+&lt;p&gt;아까는 존재 하지 않았던, 좀비 프로세스가 생긴 것을 확인할 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=46380306&#34;&gt;운영체제&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://reallinux.co.kr/&#34;&gt;리얼 리눅스&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>프로그램 실행시 메모리 구조 및 실제로 확인해보는 방법</title>
-      <link>/post/2021/04/03/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%8B%A4%ED%96%89%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EA%B5%AC%EC%A1%B0-%EB%B0%8F-%EC%8B%A4%EC%A0%9C%EB%A1%9C-%ED%99%95%EC%9D%B8%ED%95%B4%EB%B3%B4%EB%8A%94-%EB%B0%A9%EB%B2%95/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/03/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%8B%A4%ED%96%89%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EA%B5%AC%EC%A1%B0-%EB%B0%8F-%EC%8B%A4%EC%A0%9C%EB%A1%9C-%ED%99%95%EC%9D%B8%ED%95%B4%EB%B3%B4%EB%8A%94-%EB%B0%A9%EB%B2%95/</link>
       <pubDate>Sat, 03 Apr 2021 18:09:24 +0900</pubDate>
       
-      <guid>/post/2021/04/03/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%8B%A4%ED%96%89%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EA%B5%AC%EC%A1%B0-%EB%B0%8F-%EC%8B%A4%EC%A0%9C%EB%A1%9C-%ED%99%95%EC%9D%B8%ED%95%B4%EB%B3%B4%EB%8A%94-%EB%B0%A9%EB%B2%95/</guid>
-      <description>컴퓨터 구조 시간때 배웠듯이 프로그램이 메모리에 올라가면 다음과 같은 구조로 메모리가 할당되고 실행이 된다.
- 디스크에 저장되어 있는 프로그램이 메모리에 올라가게 된다. 메모리에는 크게 코드, 스택, 힙 영역이 있다.  이를 리눅스에서 확인해보려면 다음과 같은 명령어를 사용하면 된다.
-cat /proc/self/maps  이 명령어가 뜻하는 바는 cat이라는 프로그램을 실행했을 때의 메모리 구조를 의미한다. 여기서 self는 자기 자신을 의미한다.   위에서부터 코드 영역, 힙 영역, 스택이 메모리에 할당되어 있는 것을 확인할 수 있다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/03/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%8B%A4%ED%96%89%EC%8B%9C-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EA%B5%AC%EC%A1%B0-%EB%B0%8F-%EC%8B%A4%EC%A0%9C%EB%A1%9C-%ED%99%95%EC%9D%B8%ED%95%B4%EB%B3%B4%EB%8A%94-%EB%B0%A9%EB%B2%95/</guid>
+      <description>&lt;p&gt;컴퓨터 구조 시간때 배웠듯이 프로그램이 메모리에 올라가면 다음과 같은 구조로 메모리가 할당되고 실행이 된다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113474822-3d156f00-94ad-11eb-815d-f3bc78df9d97.png&#34; alt=&#34;FdJ8Xbd&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;디스크에 저장되어 있는 프로그램이 메모리에 올라가게 된다.&lt;/li&gt;
+&lt;li&gt;메모리에는 크게 코드, 스택, 힙 영역이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;이를 리눅스에서 확인해보려면 다음과 같은 명령어를 사용하면 된다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;cat /proc/self/maps
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이 명령어가 뜻하는 바는 &lt;code&gt;cat&lt;/code&gt;이라는 프로그램을 실행했을 때의 메모리 구조를 의미한다.&lt;/li&gt;
+&lt;li&gt;여기서 &lt;code&gt;self&lt;/code&gt;는 자기 자신을 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113474795-10f9ee00-94ad-11eb-9b69-e7ec306975b3.png&#34; alt=&#34;Screen Shot 2021-04-03 at 6 46 26 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위에서부터 코드 영역, 힙 영역, 스택이 메모리에 할당되어 있는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;li&gt;개념으로만 알고 있던 것을 실제로 눈으로 확인해보니까 더 와닿았다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
     <item>
       <title>리눅스는 특별한 프로그램인가?</title>
-      <link>/post/2021/04/03/%EB%A6%AC%EB%88%85%EC%8A%A4%EB%8A%94-%ED%8A%B9%EB%B3%84%ED%95%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%B8%EA%B0%80/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/03/%EB%A6%AC%EB%88%85%EC%8A%A4%EB%8A%94-%ED%8A%B9%EB%B3%84%ED%95%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%B8%EA%B0%80/</link>
       <pubDate>Sat, 03 Apr 2021 01:09:24 +0900</pubDate>
       
-      <guid>/post/2021/04/03/%EB%A6%AC%EB%88%85%EC%8A%A4%EB%8A%94-%ED%8A%B9%EB%B3%84%ED%95%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%B8%EA%B0%80/</guid>
-      <description>리눅스는 과연 특별한가?  리눅스 파일이 다른 실행 파일과 다른지 알아보기 위해서 커널을 실제로 빌드 해보고 일반 실행파일과 다른점이 있는지 알아보았다.
-다음은 리눅스 커널을 make 명령어를 통해서, 빌드한 모습이다. 빌드를 마치게 되면 vmlinux 라는 실행 파일이 나오게 된다.
-이를 file 도구를 통해서 알아보았다. file 도구는 파일이 어떤 타입인지를 알려주는 리눅스 도구이다.
-man을 통해서 메뉴얼을 확인해보면 더욱 자세한 사용법을 알 수 있다.
-리눅스 실행 파일과 간단한 프로그램을 만들어서 비교한 결과, 거의 같은 파일이라는 것을 확인할 수 있었다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/03/%EB%A6%AC%EB%88%85%EC%8A%A4%EB%8A%94-%ED%8A%B9%EB%B3%84%ED%95%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%B8%EA%B0%80/</guid>
+      <description>&lt;h3 id=&#34;리눅스는-과연-특별한가&#34;&gt;리눅스는 과연 특별한가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;리눅스 파일이 다른 실행 파일과 다른지 알아보기 위해서 커널을 실제로 빌드 해보고 일반 실행파일과 다른점이 있는지 알아보았다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113474362-8c0dd500-94aa-11eb-9173-aa348199400c.png&#34; alt=&#34;Screen Shot 2021-04-03 at 6 29 29 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;다음은 리눅스 커널을 &lt;code&gt;make&lt;/code&gt; 명령어를 통해서, 빌드한 모습이다. 빌드를 마치게 되면 &lt;code&gt;vmlinux&lt;/code&gt; 라는 실행 파일이 나오게 된다.&lt;/p&gt;
+&lt;p&gt;이를 &lt;code&gt;file&lt;/code&gt; 도구를 통해서 알아보았다. &lt;code&gt;file&lt;/code&gt; 도구는 파일이 어떤 타입인지를 알려주는 리눅스 도구이다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113474446-faeb2e00-94aa-11eb-8e60-54f4e516c57f.png&#34; alt=&#34;Screen Shot 2021-04-03 at 6 32 41 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;man&lt;/code&gt;을 통해서 메뉴얼을 확인해보면 더욱 자세한 사용법을 알 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113474566-a1373380-94ab-11eb-9f23-c2d46c38b3c8.png&#34; alt=&#34;Screen Shot 2021-04-03 at 6 37 15 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113474587-b57b3080-94ab-11eb-8abc-1cf19518211c.png&#34; alt=&#34;Screen Shot 2021-04-03 at 6 37 49 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;리눅스 실행 파일과 간단한 프로그램을 만들어서 비교한 결과, 거의 같은 파일이라는 것을 확인할 수 있었다. 차이가 있다면 리눅스의 경우에는 정적 링킹이 되었고 예제 프로그램의 경우에는 동적 링킹이 되어있다는 차이점 밖에는 없다. 이에 대해서는 나중에 자세하게 정리하도록 하겠다.&lt;/p&gt;
+&lt;p&gt;따라서 결론은 리눅스도 하나의 프로그램일 뿐이다.&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>운영체제의 역할 및 리눅스를 공부할 때 중요한 핵심 개념</title>
-      <link>/post/2021/04/03/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EC%9D%98-%EC%97%AD%ED%95%A0-%EB%B0%8F-%EB%A6%AC%EB%88%85%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-%EC%A4%91%EC%9A%94%ED%95%9C-%ED%95%B5%EC%8B%AC-%EA%B0%9C%EB%85%90/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/03/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EC%9D%98-%EC%97%AD%ED%95%A0-%EB%B0%8F-%EB%A6%AC%EB%88%85%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-%EC%A4%91%EC%9A%94%ED%95%9C-%ED%95%B5%EC%8B%AC-%EA%B0%9C%EB%85%90/</link>
       <pubDate>Sat, 03 Apr 2021 01:09:24 +0900</pubDate>
       
-      <guid>/post/2021/04/03/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EC%9D%98-%EC%97%AD%ED%95%A0-%EB%B0%8F-%EB%A6%AC%EB%88%85%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-%EC%A4%91%EC%9A%94%ED%95%9C-%ED%95%B5%EC%8B%AC-%EA%B0%9C%EB%85%90/</guid>
-      <description>예전에 시스템 프로그래밍을 조금 더 잘 알고 싶어서 리얼 리눅스에서 강의를 들은 적이 있는데, 그 때는 노션에 정리를 하던 시절이라서 블로그에 게시하지 못했다. 따라서 그때 정리한 개념을 블로그에 글로 작성해보고 다시 운영체제에 대해서 복습하였다.
-리눅스를 공부할 때 중요한 개념  리눅스를 공부할 때는 다음과 같은 개념이 중요하다고 했다.
-  소프트웨어 기본 원리 : 당연한 말이지만, 소프트웨어의 기본 동작 원리를 제대로 아는 것이 중요하다.
-  메모리 액세스 원리 : 운영체제에서 메모리를 어떻게 액세스 하고 관리하는지 아는 것이 중요하다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/04/03/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C%EC%9D%98-%EC%97%AD%ED%95%A0-%EB%B0%8F-%EB%A6%AC%EB%88%85%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-%EC%A4%91%EC%9A%94%ED%95%9C-%ED%95%B5%EC%8B%AC-%EA%B0%9C%EB%85%90/</guid>
+      <description>&lt;p&gt;예전에 시스템 프로그래밍을 조금 더 잘 알고 싶어서 &lt;a href=&#34;https://reallinux.co.kr&#34;&gt;리얼 리눅스&lt;/a&gt;에서 강의를 들은 적이 있는데, 그 때는 노션에 정리를 하던 시절이라서 블로그에 게시하지 못했다. 따라서 그때 정리한 개념을 블로그에 글로 작성해보고 다시 운영체제에 대해서 복습하였다.&lt;/p&gt;
+&lt;h3 id=&#34;리눅스를-공부할-때-중요한-개념&#34;&gt;리눅스를 공부할 때 중요한 개념&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;리눅스를 공부할 때는 다음과 같은 개념이 중요하다고 했다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;소프트웨어 기본 원리 : 당연한 말이지만, 소프트웨어의 기본 동작 원리를 제대로 아는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메모리 액세스 원리 : 운영체제에서 메모리를 어떻게 액세스 하고 관리하는지 아는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파일(디스크) IO : 디스크 및 파일 시스템에 대해서 아는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크 IO: 네트워크 통신 및 기초에 대해서 알아야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;운영체제의-역할&#34;&gt;운영체제의 역할&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;운영체제의 핵심 역할은 다음과 같이 나누어 볼 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;프로세스 관리 (&lt;code&gt;Process Management&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;메모리 관리 (&lt;code&gt;Memory Management&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;인터럽트(&lt;code&gt;Interrupt&lt;/code&gt;) / 예외 처리(&lt;code&gt;Exception&lt;/code&gt;) / 락킹(&lt;code&gt;Locking&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;IO 처리
+&lt;ul&gt;
+&lt;li&gt;네트워크 (L4: TCP, L3: IP, L2: DD)&lt;/li&gt;
+&lt;li&gt;스토리지 (&lt;code&gt;VFS&lt;/code&gt;/ &lt;code&gt;FS&lt;/code&gt;/ &lt;code&gt;BLOCK&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;기타 : 보안(&lt;code&gt;security&lt;/code&gt;), 도구(&lt;code&gt;tools&lt;/code&gt;), 사운드(&lt;code&gt;sounds&lt;/code&gt;), 드라이버(&lt;code&gt;drivers&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113473846-17856700-94a7-11eb-84d9-7bf3c267ec28.png&#34; alt=&#34;Screen Shot 2021-04-03 at 6 04 31 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;위의 스크린샷은 리눅스 커널 소스코드인데, 위에서 설명한 운영체제의 핵심 역할에 맞게 디렉터리가 구성되어 있는 것을 확인할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;kernel&lt;/code&gt; : 리눅스 커널 내부와 관련된 작업을 하는 곳이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mm&lt;/code&gt; : 메모리와 관련된 작업을 하는 곳이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fs&lt;/code&gt; : 파일 시스템과 관련된 작업을 하는 곳이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;net&lt;/code&gt; : 네트워크와 관련된 작업을 하는 곳이다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

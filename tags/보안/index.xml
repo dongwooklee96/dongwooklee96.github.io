@@ -2,19 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>보안 on 개발자 이동욱</title>
-    <link>/tags/%EB%B3%B4%EC%95%88/</link>
+    <link>https://dongwooklee96.github.io/tags/%EB%B3%B4%EC%95%88/</link>
     <description>Recent content in 보안 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 22 Mar 2021 23:20:39 +0900</lastBuildDate><atom:link href="/tags/%EB%B3%B4%EC%95%88/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Mar 2021 23:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%B3%B4%EC%95%88/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>최근에 애플리케이션 보안에 관심을 가지게 된 이유</title>
-      <link>/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</link>
       <pubDate>Mon, 22 Mar 2021 23:20:39 +0900</pubDate>
       
-      <guid>/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</guid>
-      <description>최근에 내가 웹 애플리케이션 보안에 대해서 굉장히 무관심함을 알게 됨과 동시에 데이터베이트 연결이 끊어지는 네트워크 통신과 관련된 장애가 있었다.
-장애의 이유를 알지 못하니까 굉장히 답답함과 동시에 문제를 해결할 수 없었다. 따라서 디버깅을 하듯이 네트워크 패킷을 분석해서 원인을 알아 낼 수 있으면 굉장히 좋을 것 같다는 생각을 함과 동시에 내가 주도하면서 진행하는 토이 프로젝트가 보안에 대해서 굉장히 견고한 애플리케이션이 되었으면 하는 마음이 있다. 따라서, 앞으로 웹 애플리케이션 보안에 대해서 공부하고 견고한 시스템을 구축해나갈 생각이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/22/%EC%B5%9C%EA%B7%BC%EC%97%90-%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EB%B3%B4%EC%95%88%EC%97%90-%EA%B4%80%EC%8B%AC%EC%9D%84-%EA%B0%80%EC%A7%80%EA%B2%8C-%EB%90%9C-%EC%9D%B4%EC%9C%A0/</guid>
+      <description>&lt;p&gt;최근에 내가 웹 애플리케이션 보안에 대해서 굉장히 무관심함을 알게 됨과 동시에 데이터베이트 연결이 끊어지는 네트워크 통신과 관련된 장애가 있었다.&lt;/p&gt;
+&lt;p&gt;장애의 이유를 알지 못하니까 굉장히 답답함과 동시에 문제를 해결할 수 없었다. 따라서 디버깅을 하듯이 네트워크 패킷을 분석해서 원인을 알아 낼 수 있으면 굉장히 좋을 것 같다는 생각을 함과 동시에 내가 주도하면서 진행하는 토이 프로젝트가 보안에 대해서 굉장히 견고한 애플리케이션이 되었으면 하는 마음이 있다.
+따라서, 앞으로 웹 애플리케이션 보안에 대해서 공부하고 견고한 시스템을 구축해나갈 생각이다.&lt;/p&gt;
+&lt;p&gt;책에서는 다루는 대부분의 내용이 네트워크 공격을 패킷 단위로 분석하고 있다. 실제로도 공격 대응을 위한 분석 단계에서 패킷을 분석하는 빈도가 상당히 높다고 한다. 나는 보안 전문가보다는 웹 애플리케이션 개발자에 가깝기 때문에 실무적으로 패킷을 분석해서 보안 위협을 감지하는 일은 없을 확률이 높지만, 네트워크에 대해서 내부 원리까지 깊게 이해하는 것이 목표이므로, 많은 도움이 될 것 같다.&lt;/p&gt;
+&lt;p&gt;첫 장에서는 인터넷 통신의 표준 프로토콜인 &lt;code&gt;TCP/IP&lt;/code&gt;의 계층별 헤더의 구조에 대해서 패킷 단위로 소개하고 있고, 주로 네트워크 공격에 사용되는 네트워크 계층의 &lt;code&gt;IP&lt;/code&gt; 프로토콜과 전송 계층의 &lt;code&gt;TCP&lt;/code&gt;, &lt;code&gt;UDP&lt;/code&gt; 프로토콜의 구조에 대해서 설명하고 있다.&lt;/p&gt;
+&lt;p&gt;책에서는 한 번에 모든 개념을 숙지하기 보다는, 필요할 때, 찾아보며 각 헤더의 구조를 조금씩 명확히 새기는 것을 권장하고 있다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=217703927&#34;&gt;네트워크 공격 패킷 분석, 프리렉&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

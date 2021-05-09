@@ -2,23 +2,42 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GIS on 개발자 이동욱</title>
-    <link>/categories/gis/</link>
+    <link>https://dongwooklee96.github.io/categories/gis/</link>
     <description>Recent content in GIS on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Mar 2021 10:45:24 +0900</lastBuildDate><atom:link href="/categories/gis/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Mar 2021 10:45:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/gis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>나만의 지도 시스템을 만드는데 유용한 도구 (draft)</title>
-      <link>/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft/</link>
       <pubDate>Sun, 28 Mar 2021 10:45:24 +0900</pubDate>
       
-      <guid>/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft/</guid>
-      <description>지도 시스템을 만드는데, 추천하는 도구    지도 시스템을 만드는데 추천하는 도구들은 다음과 같다.
-  우선 프론트엔드로는, Leaflet, Openlayers, GeoExt, Turf.js 등이 있다.
-  벡엔드로는 GEODjango, GeoServer 등이 있다.
-  데이터베이스는 PostGIS를 많이 사용한다.
-  데이터는 QGIS, Mapshaper 등이 있고, 데이터소스로는 OpenStreetMap을 사용한다.
-  참고 문헌   Tools I recommend for building Geospatial Web Applications  </description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft/</guid>
+      <description>&lt;h3 id=&#34;지도-시스템을-만드는데-추천하는-도구&#34;&gt;지도 시스템을 만드는데, 추천하는 도구&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;지도 시스템을 만드는데 추천하는 도구들은 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;우선 프론트엔드로는, &lt;a href=&#34;https://leafletjs.com/&#34;&gt;Leaflet&lt;/a&gt;, &lt;a href=&#34;https://openlayers.org/&#34;&gt;Openlayers&lt;/a&gt;, &lt;a href=&#34;https://geoext.org/&#34;&gt;GeoExt&lt;/a&gt;, &lt;a href=&#34;https://turfjs.org/&#34;&gt;Turf.js&lt;/a&gt; 등이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;벡엔드로는 &lt;a href=&#34;https://docs.djangoproject.com/en/3.2/ref/contrib/gis/&#34;&gt;GEODjango&lt;/a&gt;, &lt;a href=&#34;http://geoserver.org/&#34;&gt;GeoServer&lt;/a&gt; 등이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터베이스는 &lt;a href=&#34;https://postgis.net/&#34;&gt;PostGIS&lt;/a&gt;를 많이 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터는 &lt;a href=&#34;https://qgis.org/ko/site/&#34;&gt;QGIS&lt;/a&gt;, &lt;a href=&#34;https://mapshaper.org/&#34;&gt;Mapshaper&lt;/a&gt; 등이 있고, 데이터소스로는 &lt;a href=&#34;https://www.openstreetmap.org/#map=7/35.948/127.736&#34;&gt;OpenStreetMap&lt;/a&gt;을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/swlh/tools-i-recommend-for-building-geospatial-web-applications-274d6939536c&#34;&gt;Tools I recommend for building Geospatial Web Applications&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>

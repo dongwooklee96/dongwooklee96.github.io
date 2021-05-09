@@ -2,20 +2,248 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>EDA on 개발자 이동욱</title>
-    <link>/tags/eda/</link>
+    <link>https://dongwooklee96.github.io/tags/eda/</link>
     <description>Recent content in EDA on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 27 Mar 2021 13:40:33 +0900</lastBuildDate><atom:link href="/tags/eda/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 27 Mar 2021 13:40:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/eda/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SOA, 모놀리틱, 그리고 MSA 아키텍처</title>
-      <link>/post/2021/03/27/soa-%EB%AA%A8%EB%86%80%EB%A6%AC%ED%8B%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-msa-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/soa-%EB%AA%A8%EB%86%80%EB%A6%AC%ED%8B%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-msa-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</link>
       <pubDate>Sat, 27 Mar 2021 13:40:33 +0900</pubDate>
       
-      <guid>/post/2021/03/27/soa-%EB%AA%A8%EB%86%80%EB%A6%AC%ED%8B%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-msa-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</guid>
-      <description>SOA    SOA(Service Oriented Architecture)는 1990년대에 정의되어, 2008년에 유행했던 아키텍처 스타일이다.
-  현대의 서버 아키텍처는 SOA 사상에 많은 영향을 받았고 많은 분산 아키텍처가 거의 이 SOA 사상에 기인한다고 해도 될 만큼 중요한 아키텍처이다.
-  SOA의 기본 개념    SOA란 기존 애플리케이션들의 기능을 비즈니스적인 의미가 있는 기능 단위로 묶고, 표준화된 호출 인터페이스를 통해 서비스라는 소프트웨어 컴포넌트 단위로 재조합한 후, 이 서비스들을 서로 조합(Orchestration)하여 업무 기능을 구현한 애플리케이션을 만들어내는 소프트웨어 아키텍처이다.</description>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/soa-%EB%AA%A8%EB%86%80%EB%A6%AC%ED%8B%B1-%EA%B7%B8%EB%A6%AC%EA%B3%A0-msa-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98/</guid>
+      <description>&lt;h3 id=&#34;soa&#34;&gt;SOA&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SOA(Service Oriented Architecture)는 1990년대에 정의되어, 2008년에 유행했던 아키텍처 스타일이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현대의 서버 아키텍처는 &lt;code&gt;SOA&lt;/code&gt; 사상에 많은 영향을 받았고 많은 분산 아키텍처가 거의 이 &lt;code&gt;SOA&lt;/code&gt; 사상에 기인한다고 해도 될 만큼 중요한 아키텍처이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;soa의-기본-개념&#34;&gt;SOA의 기본 개념&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112712065-4f713500-8f10-11eb-9b36-a603fccd7e3d.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;SOA&lt;/code&gt;란 기존 애플리케이션들의 기능을 비즈니스적인 의미가 있는 기능 단위로 묶고, 표준화된 호출 인터페이스를 통해 서비스라는 소프트웨어 컴포넌트 단위로 재조합한 후, 이 서비스들을 서로 조합(&lt;code&gt;Orchestration&lt;/code&gt;)하여 업무 기능을 구현한 애플리케이션을 만들어내는 소프트웨어 아키텍처이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;기존의 시스템이 각각 독립된 업무 시스템으로 개발되어왔던 반면에 &lt;code&gt;SOA&lt;/code&gt;는 기업의 전체 업무가 하나의 거대한 &lt;code&gt;SOA&lt;/code&gt; 시스템으로 구성이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각 시스템의 기능들을 업무를 기준으로 주요 기능들로 묶어서 플랫폼에 독립적인 인터페이스(예를 들어 &lt;code&gt;XML/HTTP&lt;/code&gt;, &lt;code&gt;CORBA&lt;/code&gt;, &lt;code&gt;SOAP&lt;/code&gt;)를 구현하여 외부 서비스로 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 제공된 서비스 이벤트를 조합하여, 새로운 기능을 개발할 때, 시스템을 신규 개발하는 것이 아니라, 기존에 제공된 서비스들을 조합하여 하나의 업무를 구현할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;특징&#34;&gt;특징&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;수직적 분할(Vertical Slicing) : 수직적 분할이란 애플리케이션을 여러 개의 서비스로 나누고 각각의 서비스를 독립적으로 개발하는 것을 말한다. 따라서 각 서비스간의 의존성이 최소화 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;표준 인터페이스 기반(Has Standard Interface) : 서비스가 제공하는 인터페이스는 표준 기술로 구현되어야 한다. 서비스를 사용하고자 하는 사람이 &amp;lsquo;서비스 규약&amp;rsquo; 만을 가지고도 해당 서비스를 호출 할 수 있어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;느슨한 결합(Loosely Coupled) : 수직적 분할에서도 설명하였듯 각 서비스 컴포넌트들은 다른 서비스에 대해서 의존성이 최소화되어 있어서 서비스의 구현 내용을 변경하였을 때 다른 서비스는 이에 거의 영향을 받지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;조합 가능(Composable) : 서비스형 컴포넌트들은 서로 연결되어 하나의 조합된 형태의 애플리케이션을 구성해야하기 때문에, 서비스 간에 연결 및 조합이 가능해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;모놀리틱-아키텍처&#34;&gt;모놀리틱 아키텍처&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112713152-1b4d4280-8f17-11eb-8529-5f69c0d9b17b.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;마이크로 서비스 아키텍처를 이해하려면 먼저 모놀리틱 아키텍처 스타일에 대해서 이해해야한다.&lt;/li&gt;
+&lt;li&gt;모놀리틱 아키텍처 스타일은 기존의 전통적인 웹 시스템 개발 스타일로, 하나의 애플리케이션 내에 모든 로직이 들어가있는 &amp;lsquo;통짜 구조&amp;rsquo;이다.&lt;/li&gt;
+&lt;li&gt;각 컴포넌트는 상호 호출을 함수를 이용한 참조에 의한 호출 구조를 취한다.&lt;/li&gt;
+&lt;li&gt;전체 애플리케이션을 하나로 처리하기 때문에 개발 도구에서 하나의 애플리케이션만 개발하면 되고, 배포 역시 간편하며 테스트도 하나의 애플리케이션만 수행하면 되므로 간편하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;문제점&#34;&gt;문제점&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;작은 크기의 애플리케이션에서는 유리하지만, 규모가 큰 애플리케이션에서는 불리한 점이 많다.&lt;/li&gt;
+&lt;li&gt;크기가 커서 빌드 및 배포시간, 서버의 가동 시간이 오래 걸린다.(서버 가동에만 2시간까지 걸리는 경우도 있다)&lt;/li&gt;
+&lt;li&gt;시스템 컴포넌트들이 서로 로컬 콜 기반으로 타이트하게 연결되어 있으므로, 전체 시스템의 구조를 제대로 파악하지 않고 개발을 진행하면 특정 컴포넌트나 모듈에서의 성능 문제나 장애가 다른 컴포넌트에까지 영향을 주게 된다.&lt;/li&gt;
+&lt;li&gt;이러한 문제를 해결하려면 개발자가 대략적인 전체 시스템의 구조를 이해햐야하는데 시스템의 구조가 커질 수록 이해하기 힘들다.&lt;/li&gt;
+&lt;li&gt;특정 컴포넌트를 수정할 때, 컴포넌트 재배포 시 수정된 컴포넌트만 재배포 하는 것이 아니라 전체 애플리케이션을 재컴파일해서 전체를 다시 통을 재배포 해야한다.&lt;/li&gt;
+&lt;li&gt;이 때문에 잦은 배포가 있는 시스템은 불리하며 컴포넌트 별로 기능/비기능에 특성에 맞춰서 다른 기술을 도입하고자 할 때 유연하지 않다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;마이크로-서비스-아키텍처&#34;&gt;마이크로 서비스 아키텍처&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;마이크로 서비스 아키텍처(MSA)는 근래의 웹 기반 분산 시스템의 디자인에 많이 반영되어 있는 스타일로, 특정 사람이 정의한 아키텍처가 아니라 분산 웹 시스템과 비슷한 구조로 설계 되면서 개념적으로만 존재하던 개념이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;마이크로 서비스 아키텍처는 대용량 웹 서비스가 많아짐에 따라 정의된 아키텍처인데, 그 근간은 &lt;code&gt;SOA(Service Oriented Architecture)&lt;/code&gt;에 두고 있다. &lt;code&gt;SOA&lt;/code&gt;가 엔터프라이즈 시스템을 중심으로 고안된 아키텍처라면, 마이크로 서비스 아키텍처는 &lt;code&gt;SOA&lt;/code&gt; 사상에 근간을 두고, 대용량 웹 개발 서비스 개발에 맞는 구조로 사상이 경량화 되고 대규모 개발팀의 조직 구조에 맞도록 변형된 아키텍처이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;서비스&#34;&gt;서비스&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;마이크로 서비스 아키텍처에서는 각 컴포넌트를 서비스라는 개념으로 정의한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서비스는 데이터부터 비즈니스 로직까지 독립적으로 상호 컴포넌트 간의 의존성 없이 개발된 컴포넌트 (이를 수직 분할이라고 함)로, REST API 같은 표준 인터페이스로 그 기능을 개발한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서비스 경계는 구문 또는 도메인 (업무)의 경계를 따른다. 예를 들어 사용자 관리, 상품 관리, 주문 관리와 같이 업무별로 서비스를 나눠서 정의해도 사용자/사품 관리 처럼 여러개의 업무를 동시에 하나의 서비스로 섞어서 정의하지는 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;msa-아키텍처-구조&#34;&gt;MSA 아키텍처 구조&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112713447-6b78d480-8f18-11eb-8af4-a41448e23a94.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;배포 구조 관점에서도 각 서비스는 독립된 서버로 타 컴포넌트와의 의존성 없이 독립적으로 배포된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;확장을 위해서 서비스가 배치된 톰캣 인스턴스는 횡적으로 스케일(인스턴스를 더함으로써)이 가능하고, 앞단에 로드 밸런서를 배치하여 서비스 간의 로드를 분산 시킨다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;애플리케이션 로직을 분리해서 여러 개의 애플리케이션으로 나눠서 서비스화하고 서비스 별로 톰캣을 분산 배치한 것이 가장 큰 특징이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;데이터-분리&#34;&gt;데이터 분리&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112713617-80099c80-8f19-11eb-864a-e539715b08a5.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;데이터 저장 관점에서는 중앙 집중화된 하나의 데이터베이스를 사용하는 것이 아니라, 서비스 별로 별도의 데이터베이스를 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터베이스의 종류 자체를 다른 데이터베이스로 사용할 수도 있지만, 같은 데이터베이스를 사용하더라도 &lt;code&gt;DB&lt;/code&gt;를 나누는 방법을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 경우 다른 컴포넌트에 대한 의존성 없이 서비스를 독립적으로 개발 및 배포 / 운영 할 수 있다는 장점을 가지고 있으나, 다른 컴포넌트의 데이터를 API 통신을 통해서 가지고 와야하므로, 성능상의 문제를 일으킬 수 있고, 또한 이 기종 데이터베이스 간의 트랜잭션을 묶을 수 없다는 문제점이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;api-gateway&#34;&gt;API GATEWAY&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;마이크로 서비스 아키텍처 설계에서 가장 많이 언급되는 컴포넌트 중에 하나가 &lt;code&gt;API GATEWAY&lt;/code&gt;라는 컴포넌트이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;API GATEWAY&lt;/code&gt;는 마치 프록시 서버처럼 &lt;code&gt;API&lt;/code&gt;들 앞에서 모든 &lt;code&gt;API&lt;/code&gt;에 대한 엔드 포인트를 통합하고, 몇 가지 추가적인 기능을 제공하는 미들웨어로, 다음과 같은 기능을 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;엔드-포인트-통합-및-토폴로지-정리&#34;&gt;엔드 포인트 통합 및 토폴로지 정리&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;마이크로 서비스 아키텍처의 문제점 중 하나는 각 서비스가 다른 서버에 분리, 배포 되기 때문에 API의 엔드포인트, 즉 서버의 URL이 각기 다르다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자 컴포넌트는 &lt;code&gt;http://user.server.com&lt;/code&gt;, 상품 컴포넌트는 &lt;code&gt;http://product.server.com&lt;/code&gt;과 같은 분리된 URL을 사용하는데 이는 API 사용자 경험 관점에서도 사용하기 불편하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특히 마이크로 서비스 아키텍처는 될 수 있으면 컴포넌트를 업무 단위로 잘게 자르는 작은 덩어리(&lt;code&gt;Fine Grained&lt;/code&gt;)의 서비스를 지향하기 때문에, 컴포넌트의 &lt;code&gt;URL&lt;/code&gt;수는 더 많이 늘어날 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112713879-d1fef200-8f1a-11eb-8f72-eb90fa0360e9.png&#34; alt=&#34;t1 daumcdn&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이러한 토폴로지의 문제점을 해결하기 위해서, 중앙에 서비스 버스와 같은 역할을 하는 채널을 배치 시켜서 전체 토폴로지를 &lt;code&gt;Hub &amp;amp; Spoke&lt;/code&gt; 방식으로 변화시켜서 서비스 간 호출을 단순화 시킬 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;오케스트레이션-orchestration&#34;&gt;오케스트레이션 (Orchestration)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;여러 개의 서비스를 묶어서 하나의 새로운 서비스를 만드는 개념이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어 포인트 적립과 물품 구매라는 서비스가 있을 때, 이 두 개의 서비스를 묶어서 &amp;lsquo;물품 구매 시 포인트 적립&amp;rsquo; 이라는 새로운 서비스를 만들어 낼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 오케스트레이션 기능은 &lt;code&gt;API Gateway&lt;/code&gt;를 통해서 구현할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;공통-기능-처리cross-cutting-function-handling&#34;&gt;공통 기능 처리(Cross Cutting Function Handling)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;API&lt;/code&gt;에 대한 인증(&lt;code&gt;Authentication&lt;/code&gt;)이나 로깅과 같은 공통 기능에 대해서 서비스 컴포넌트 별로 중복 개발해야 하는 비효율성을 유발할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;API GATEWAY&lt;/code&gt;에서 이러한 공통 기능을 처리하게 되면, API 자체는 비즈니스 로직에만 집중하여 개발중에 발생할 수 있는 중복을 방지할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;중재mediation&#34;&gt;중재(Mediation)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;이외에도 &lt;code&gt;XML&lt;/code&gt;이나 네이티브 메시지 포맷을 &lt;code&gt;JSON&lt;/code&gt;으로 상호 변환해주는 메시지 변환 기능이나 프로토콜을 변환하는 기능, 서비스 간의 메시지를 라우팅해주는 여러 가지 고급 중재 기능을 제공하지만, &lt;code&gt;API GATEWAY&lt;/code&gt;를 최대한 가볍게 가져간다는 설계 원칙 아래에서 될 수 있으면 고급 중재 기술을 사용할 때는 높은 설계와 기술적인 노하우를 동반해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;배포&#34;&gt;배포&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;마이크로서비스의 큰 장점중에 하나가 바로 유연한 배포 모델이다.&lt;/li&gt;
+&lt;li&gt;각 서비스가 다른 서비스와 물리적으로 완벽하게 분리되기 때문에, 변경이 있는 서비스 부분만 부분 배포가 가능하다.&lt;/li&gt;
+&lt;li&gt;예를 들어, 사용자 관리 서비스 로직이 변경되었을 때, 모놀리틱 아키텍처는 전체 시스템을 재배포해야하지만, 마이크로 서비스 아키텍처는 변경이 있는 사용자 관리 서비스 부분만 재배포하면 되기 때문에 전체 시스템의 영향을 최소화한 수준에서 빠르게 배포를 진행할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;확장성&#34;&gt;확장성&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서비스 별로 독립된 배포 구조는 확장성에서도 많은 장점이 있는데, 부하가 많은 특정 서비스에 대해서만 확장할 수 있어서 조금 더 유연한 확장 모델을 가져갈 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모노리틱 아키텍처는 특정 서비스의 부하가 많아서 성능 확장이 필요할 때 전체 서버의 수를 늘리거나 각 서버의 &lt;code&gt;CPU&lt;/code&gt; 숫자를 늘려줘야 하지만, 마이크로 서비스 아키텍처는 부하를 많이 받는 서비스 컴포넌트만 확장시켜주면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;마이크로-서비스-아키텍처의-문제점&#34;&gt;마이크로 서비스 아키텍처의 문제점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;성능&#34;&gt;성능&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;모놀리틱 아키텍처는 하나의 프로세스 내에서, 서비스 간의 호출에 참조 호출 모델을 이용하지만, 마이크로서비스 아키텍처는 서비스 간의 호출을 &lt;code&gt;API&lt;/code&gt; 통신을 이용하기 때문에, 값을 &lt;code&gt;JSON&lt;/code&gt;이나 &lt;code&gt;XML&lt;/code&gt;에서 프로그래밍에서 사용하는 데이터 모델(자바 객체)로 변환하는 마샬링 오버헤드가 발생하고 호출을 위해서 이 메시지들이 네트워크를 통해서 전송되기 때문에 그 만큼 시간이 많이 사용된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;테스팅이-어려움&#34;&gt;테스팅이 어려움&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;마이크로 서비스 아키텍처는 서비스들이 분리되어 있고, 다른 서비스에 대한 종속성을 가지고 있어서, 특정 사용자 시나리오나 기능을 테스트하고자 할 경우 여러 서비스에 걸쳐서 테스트를 진행해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 때문에 테스트 환경 구축이나, 문제 발생시에 분리된 여러 개의 시스템을 동시에 봐야 하기 때문에 테스팅의 복잡도가 올라간다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;서비스간-트랜잭션-처리&#34;&gt;서비스간 트랜잭션 처리&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;구현상의 가장 어려운 점 중에 하나가 바로 트랜잭션 처리이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 해결하기 위한 방법으로 SAGA 패턴이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Choreography SAGA&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112714624-7df60c80-8f1e-11eb-80f9-071d84562006.png&#34; alt=&#34;0_mcZ5UcSdTd4RvlnH&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;하나의 큰 트랜잭션으로 묶지 않고, 각 서비스의 작업을 트랜잭션 단위로 처리한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각 서비스의 이벤트에 의해서 처리된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Orchestrator SAGA&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112714669-ada51480-8f1e-11eb-84f8-516e4d291a38.png&#34; alt=&#34;img1 daumcdn&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트를 통해서가 아니라, 각 서비스를 관리하는 &lt;code&gt;Orchestration&lt;/code&gt; 클래스가 직접 처리하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이전 패턴에서처럼 메시지 이벤트를 사용하지 않고 동기식 &lt;code&gt;API&lt;/code&gt;를 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://medium.com/dtevangelist/event-driven-microservice-%EB%9E%80-54b4eaf7cc4a&#34;&gt;Event Driven Architecture란?&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=54438883&#34;&gt;대용량 아키텍처와 성능 튜닝&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://jjeongil.tistory.com/1100&#34;&gt;MSA - SAGA 패턴&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
     </item>
     
   </channel>
