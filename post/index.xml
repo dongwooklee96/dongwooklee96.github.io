@@ -6,7 +6,94 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 13 May 2021 09:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 May 2021 09:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/05/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 15 May 2021 09:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/05/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/svrRov-SDNI&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;오픈 소스 개발자의 공부 방법이라는 세미나 영상을 시청하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오늘 &lt;a href=&#34;https://festa.io/events/1557&#34;&gt;스타트업을 만나다&lt;/a&gt; 라는 세미나를 참석하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오늘 쿼리 튜닝 워크샵 수업을 들으러 갔다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;되게 인상 깊었던 것은, 자신이 배운 개념을 남들에게 알기 쉽게 다시 나만의 방식으로 다른 사람들에게 설명을 해주는 것이다. 그리고 자신은 이런 기준이 제대로 알고 있는지를 설명하는 기준이라고 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;항상 어떤 개념을 알고 있다고 생각을 했는데, 사실은 제대로 알지 못하는 경우가 많았다. 하지만 제대로 이해하고 있는 개념들은 비유를 통해서 재밌게 설명할 수 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;무언가를 배울 때는 집중과 피드백 그리고 교정을 하는 것이 중요하다는 것을 배우게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;개발자 이력서에 대한 좋은 조언을 얻을 수 있었고, 스타트업에서 일하게 된 계기와 경험을 많이 배울 수 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 어떤 프로젝트나 경험을 하면서 어떤 것을 배웠는지 그리고 어떤 것을 느꼈는지를 평소에 기록으로 남겨야 겠다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;쿼리 튜닝을 할 때는 패턴을 외우지 말고, 데이터 분포 그리고 실행 계획에 의해서 판단을 해야한다는 것을 배웠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오픈 소스 개발을 꾸준히 하는 방법에는, 평소에 관심 있는 프로젝트를 개발하는 방법도 있지만, 회사에서 현재 사용하고 있는 기술들에 있는 버그나 기능 개선을 고치는 방법도 있다는 것을 알게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그냥 소스 코드를 수정하는데 그것이 자신의 코드이냐, 남의 코드이냐라는 차이라고 했을 때 굉장히 멋있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 교육 받았던 내용들 및 느낀점을 기록으로 남겨 놓는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;개발적인 실력을 많이 키워야겠다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;DBMS&lt;/code&gt;의 내부 원리에 대해서 제대로 파악하고 있지 못하다는 생각을 하였고 이를 채워나가기 위해서 노력을 많이 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;항상 느끼는 것이지만, 쉬운 쿼리라고 하더라도 평소에 실행 계획을 많이 보고 힌트를 통해서 많이 조작해보려고 노력해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이력서에 단순히 경험들을 나열하는 것이 아니라, 내가 구체적으로 어떤 활동을 했는지, 그리고 느낀점 및 배운점을 적는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;DBMS&lt;/code&gt;에 대해서 개념을 확실하게 해야겠다는 생각을 했다.&lt;/li&gt;
+&lt;li&gt;내가 제대로 배웠는지 확인하고 싶다면, 초등학생도 설명을 들으면 이해할 수 있게 설명하고 있는지 스스로 질문하고 남들에게 설명을 해보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/05/13/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
@@ -2731,22 +2818,22 @@ gcc -pg -g -o server server.c
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;영역&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;설명&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;영역&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;설명&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;New/Young 영역&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;New/Young 영역&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Old 영역&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Old 영역&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Perm 영역&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Perm 영역&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
