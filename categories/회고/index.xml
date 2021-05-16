@@ -6,7 +6,83 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 15 May 2021 09:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 May 2021 15:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>주간 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/05/16/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 16 May 2021 15:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/05/16/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h1 id=&#34;til-양식&#34;&gt;TIL 양식&lt;/h1&gt;
+&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;오늘 &lt;code&gt;fortune&lt;/code&gt; 명령어를 이용하여, 터미널이 켜질 때마다, 명언이 나오도록 설정하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이슈를 처리할 때, 잘못된 방향으로 가서 시간을 너무 많이 소모했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도커의 내부 과정에 대해서 학습하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;캘린더에 기록하는 것 보다 효율적이고 더 많이 접하게 될 것이다. 개발을 하면서 하루에 한 번 오는 알림보다 터미널에서 작업하는 시간이 더 길것이기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;회사의 소스코드를 구조 개선할 때, 필요한 디자인 패턴을 찾아보고 이를 적용해봐야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;구현을 하다가, 뭔가 이상하다고 생각이 들 때 계속 같은 방향으로 구현을 하는 것 보다는 잠시 내려놓고 다른 방법은어떨까라는 생각을 해보는 것이 장기적으로 많은 시간을 아낄 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;간단한 알고리즘 문제를 매일 저녁 풀고 있는데, 재미도 있고 보람도 있는 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사실 도커가 리눅스의 프로세스라는 사실을 알게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크 및 인프라적인 지식이 개발을 하는데 많은 도움이 되는 것 같다. 따라서 프로그래밍 뿐만 아니라 인프라적인 지식도 많이 공부를 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;안풀리는 문제를 억지로 잡고 있지 말고 되돌아볼 필요가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;코딩을 할 때, 구현보다는 설계에 많은 고민과 시간을 사용해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코딩을 하다가, 뭔가 잘 안풀린다 싶으면 되돌아가서 생각을 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;평일에 틈틈히 발표 연습을 하고 콘텐츠를 만드는 연습을 해야겠다. 발표 자료를 만들 때, 마크다운 기반의 프레젠테이션을 만드는 도구가 생산성을 많이 올려줄 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://johngrib.github.io/wiki/fortune-cmd/&#34;&gt;fortune 명령어&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/05/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
