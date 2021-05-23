@@ -6,7 +6,122 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 22 May 2021 22:43:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 May 2021 18:43:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>주간 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/05/23/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sun, 23 May 2021 18:43:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/05/23/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mailchi.mp/fae3ac97e435/20210509?fbclid=IwAR0FyYQVsjqOi62nZwlHppkB0wwtg5vVcC946SMBH47HFR910X8S_O2GEHA&#34;&gt;이직후, 적응하고 성과를 내기까지 어떤 노력을 해야하는가?&lt;/a&gt; 라는 주제의 글을 읽었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://us7.campaign-archive.com/?u=1a48fb6bb0906b04f7fc87435&amp;amp;id=e3ef5b8fd8&#34;&gt;개발/공부_우선순위를_명확히하는것&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;필자는 두 가지 노력을 하였다고 했는데, 시스템을 이해하려는 노력과 동료들과 신뢰를 쌓기 위한 노력으 했다고 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 회사에서 일하면서 궁금했던 점과 고민했던 부분을 명확히 정리해주어서 좋았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오픈 소스에 기여하려는 프로젝트에 이러한 방법을 사용하면 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일의 우선 순위를 잘 정하지 못하는 나에게, 좋은 글이었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h4 id=&#34;문서-읽기-및-시스템의-변천사-확인하기&#34;&gt;문서 읽기 및 시스템의 변천사 확인하기&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;시스템을 이해하려는 노력에는 기술적인 영역 뿐만 아니라, 팀이 하고 있는 일, 팀이 일을 하는 방법을 익히는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;회사에 누적된 문서들을 읽는 것은, 프로덕트 혹은 현재 팀이 하고 있는 업무의 배경을 알려줄 뿐만 아니라, 시스템의 현재와 변천사를 알 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일을 할 때, &amp;lsquo;왜&amp;rsquo; 해야하는지에 대해서 아는 것은 매우 중요하다. 따라서 우리팀이 어떤 문제를 해결해왔고, 또 앞으로 어떤 문제를 해결하려고 노력하는지 아는 것은 매우 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;코드의-흐름-이해&#34;&gt;코드의 흐름 이해&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;만약 &lt;code&gt;API&lt;/code&gt; 서버를 담당하게 된다면, 현재 서버에서 특정 API에 대한 요청을 받고 처리를 완료하는 일련의 과정을 따라가 보면서, 요청을 받을 때 공통으로 처리하는 로직은 무엇인지, 비즈니스 로직 및 패턴은 어떻게 구성되어 있는지 확인하면 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;이슈-티켓-및-풀-리퀘스트-확인하기&#34;&gt;이슈 티켓 및 풀 리퀘스트 확인하기&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;팀이 문제를 어떻게 해결하고 있는지, 그리고 동료들의 피드백을 살펴봄으로써, 팀이 코드를 리뷰할 때, 집중하는 부분과, 개발 문화의 일부분을 직접 확인할 수 있는 단계이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;동료들과-신뢰를-쌓기-위한-노력&#34;&gt;동료들과 신뢰를 쌓기 위한 노력&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;여태까지 시스템을 이해하려는 노력을 하면서, 정리했던 것과 궁금한 내용을 동료들에게 공유한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;공유를 받는 사람이 이해하는데 어려움이 없어야하고, 본인만의 충분한 이해와 문맥을 만든 후에 질문을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;일의-우선-순위-정하기&#34;&gt;일의 우선 순위 정하기&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;해야할 일, 혹은 해야한다고 느끼는 일, 공부 목록을 작성한다. 그리고 그 옆에 가시적인 제약 사항을 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;분산 시스템 사례 연구 : 프로젝트 시작일 3월 1일
+알고리즘 공부 : 인터뷰 날짜 3월 15일
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;그리고 나서, 기대하는 결과를 적어본다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;분산 시스템 사례 연구: 프로젝트 시작일 3월 1일: 유사한 문제를 겪고 있는 회사의 해결 전략 최소 1개 도출
+알고리즘 공부: 인터뷰 날짜 3월 15일: dynamic programming 문제 최소 20개 해결
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;그리고 나서, 내가 할애할 수 있는 시간을 추정한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;분산 시스템 사례 연구: 프로젝트 시작일 3월 1일: 유사한 문제를 겪고 있는 회사의 해결 전략 최소 1개 도출: 하루 1시간 x 20일 = 20시간
+알고리즘 공부: 인터뷰 날짜 3월 11일: dynamic programming 문제 최소 20개 해결: 하루 1.5시간 x 30일 = 45시간
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 나열하다 보면, 내가 가진 제약 사항 및, 대안 등을 고려하여 나름의 우선 순위를 정할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 내 목록에서 버릴 것을 과감히 선택하는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;5월 23일까지, &lt;code&gt;Slack&lt;/code&gt; 클론 코딩 섹션 0까지 듣겠다! (완료!)&lt;/li&gt;
+&lt;li&gt;5월 27일까지, &lt;code&gt;Slack&lt;/code&gt; 클론 코딩 섹션 1까지 듣겠다!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/05/22/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
@@ -3279,22 +3394,22 @@ gcc -pg -g -o server server.c
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;영역&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;설명&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;영역&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;설명&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;New/Young 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;New/Young 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Old 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Old 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Perm 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Perm 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
