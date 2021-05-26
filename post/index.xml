@@ -6,13 +6,74 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 25 May 2021 18:43:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 May 2021 18:43:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>주간 회고</title>
-      <link>https://dongwooklee96.github.io/post/2021/05/25/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</link>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/05/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Wed, 26 May 2021 18:43:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/05/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오늘 인프런에서 퍼블리싱 강의를 들었다.&lt;/li&gt;
+&lt;li&gt;오늘 인프런에서 스프링부트에 대한 강의를 들었다.&lt;/li&gt;
+&lt;li&gt;요즘 회사에서 개발을 하면서, 시야가 점점 좁아지는 느낌을 받았다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;둘다 기초부터 시작하지만, 이번 기회에 기초를 튼튼하게 해야겠다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;탄탄한 &lt;code&gt;API&lt;/code&gt;를 만들기 위해서 노력을 해야겠다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;배우면서 실제 프로젝트를 발전 시키고 싶다. 설계라도 해야할텐데, 우선 배울 것이 너무 많기는 하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이슈를 진행하면서 막연하게 접근하기 보다는, 내가 현재 모르는 것이 뭔지 정리를 하면서 하나씩 알아가면서 이슈에 접근을 해야할 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;급할 수록 돌아가자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;화면 명세서 및 프로토타입을 계속 만들어봐야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나의 좋은 모습을 끊임없이 상상하고, 되기 위해서 노력하자!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;나를 믿어주는 고마운 사람들에게 보답을 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;무조건 내가 기획한 토이 프로젝트 사이트를 만들것이다!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/05/25/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
       <pubDate>Tue, 25 May 2021 18:43:36 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/05/25/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/05/25/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
       <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
