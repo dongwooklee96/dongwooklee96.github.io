@@ -6,7 +6,78 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 31 May 2021 15:43:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 15:43:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/01/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 01 Jun 2021 15:43:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/01/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이제 회사에서 객체지향적으로 코드를 바꿀 수 있는 기회가 온 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=_JAqbUVbBVs&amp;amp;list=WL&amp;amp;index=8&amp;amp;t=513s&#34;&gt;초기 스타트업으 위한 사업 계획서 작성팁&lt;/a&gt; 이라는 영상을 시청하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;코드의 구조를 본격적으로 리펙토링 할 기회가 많아질 것인데, 관심사의 분리와 각 객체들의 역할이 무엇인지 그리고, 어떻게 하면 객체지향적으로 코드를 작성할 수 있는지 고민을 해보고, 책을 통해서 배워야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스타트업이 망하는 가장 큰 이유는 서비스를 원하는 시장의 수요가 작기 때문이라는 것이라고 소개를 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h4 id=&#34;인그레스-ingress가-하는-역할&#34;&gt;인그레스 (INGRESS)가 하는 역할&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;외부접속 가능한 &lt;code&gt;URL&lt;/code&gt; 경로에 따른 교통정리를 해주는 역할을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 출시하려고 하는 제품이나 서비스가, 어떤 문제로 시작되었는지, 그리고 해결할 가치가 있는 문제인지, 그리고 누구의 문제인지를 이것을 기술로 해결할 수 있는지를 충분히 고민을 해보는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;차별성 및 혁신성은 문제의 정의 및 해결 방법이 기존과 어떻게 다른지를 명확히 설명할 수 있으면 그것이 바로 차별성 및 혁신성이다. 이걸 이루기 위해서는 이미 시장에 진출한 경쟁자를 면밀하게 분석해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고, 산업에 있는 경쟁사의 한계점을 우리가 차별성 있는 방법으로 해결 할 수 있다는 설명이 바로 차별성 및 혁신성이다. 다른 경쟁사들이 가지고 있지 않은 단 하나의 강점을 말할 수 있어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시장 규모에 대해서, 이야기를 할 때, 그 근거를 기사화된 자료 및 다른 사람이 연구한 자료에서 가지고 오는 경우가 있는데, 예측되는 성장 가능성을 제시한 것이지 구체적인 시장 크기라고 보기는 힘들다. 따라서, 구체적인 해당 모델에 부합하는 숫자로 말할 수 있어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반드시 숫자와, 데이터베이스로 정량적으로 산업을 설명할 수 있어야 한다. 인터뷰나, 프로토타입이나 베타 서비스가 가능한 상태에서 순환 시뮬레이션들을 프로젝션을 돌려서 수집된 숫자들이 그 근거로 해서, 만들어진 데이터베이스가 얻어지는 것이 가장 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;고객 유지 단계 주요 지표&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;- DAU(Daily Active User)
+- WAU(Weekly Active User)
+- MAU(Monthly Active User)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;작은 일에도 최선을 다하자.&lt;/li&gt;
+&lt;li&gt;침착하게, 작은 부분을 천천히 정복하자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;좋은 서비스가 많다는 것을 느끼고, 스타트업에 대해서 관심을 가지게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/05/31/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
