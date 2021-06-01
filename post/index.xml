@@ -6,7 +6,136 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 31 May 2021 15:43:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Jun 2021 16:17:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬 - 키워드 인수로 선택적인 동작을 제어하자</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%9D%B8%EC%88%98%EB%A1%9C-%EC%84%A0%ED%83%9D%EC%A0%81%EC%9D%B8-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%A0%9C%EC%96%B4%ED%95%98%EC%9E%90/</link>
+      <pubDate>Tue, 01 Jun 2021 16:17:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%9D%B8%EC%88%98%EB%A1%9C-%EC%84%A0%ED%83%9D%EC%A0%81%EC%9D%B8-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%A0%9C%EC%96%B4%ED%95%98%EC%9E%90/</guid>
+      <description>&lt;h2 id=&#34;better-way-19-키워드-인수로-선택적인-동작을-제공하자&#34;&gt;BETTER WAY 19. 키워드 인수로 선택적인 동작을 제공하자&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬은 대부분의 다른 언어와 같이 함수를 호출할 때, 인수를 위치로 전달 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬에서는 위치 인수를 모두 키워드로 전달하는 것도 지원한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;reminder&lt;/span&gt;(number, divisor):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; number &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; divisor
+
+reminder(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;)
+reminder(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, divisor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;)
+reminder(number&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, divisor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;)
+reminder(divisor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, number&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;키워드 인수는 코드를 처음보는 사람이 함수 호출을 더 명확하게 이해할 수 있도록 도와준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;키워드 인수는 함수를 정의할 때, 기본값을 설정할 수 있다. 이렇게 하면 반복적인 코드가 줄어들고, 코드가 깔끔해진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;flow_rate&lt;/span&gt;(weight_diff, time_diff, period&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (weight_diff &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; time_diff) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; period
+
+flow_per_second &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; flow_rate(weight_diff, time_diff)
+flow_per_hour &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; flow_rate(weight_diff, period&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3600&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;키워드 인수는 기존의 코드와 호환성을 유지하면서 함수의 파라미터를 확장할 수 있는 강력한 수단이 된다. 코드의 수정 없이 추가적인 기능을 제공할 수 있으며, 버그가 생길 가능성을 줄여준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;핵심-정리&#34;&gt;핵심 정리&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;함수의 인수를 위치나 키워드로 저장할 수 있다.&lt;/li&gt;
+&lt;li&gt;위치 인수만으로는 이해하기 어려울 때, 키워드 인수를 사용하면, 각 인수를 사용하는 목적이 명확해진다.&lt;/li&gt;
+&lt;li&gt;키워드 인수에, 기본값을 지정하면, 함수에 새로운 동작을 쉽게 추가할 수 있다.&lt;/li&gt;
+&lt;li&gt;선택적인 키워드 인수는 항상 위치가 아닌 키워드로 넘겨야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728&#34;&gt;파이썬 코딩의 기술&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬 - 가변 위치 인수로 깔끔하게 보이게 하자</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B0%80%EB%B3%80-%EC%9C%84%EC%B9%98-%EC%9D%B8%EC%88%98%EB%A1%9C-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-%EB%B3%B4%EC%9D%B4%EA%B2%8C-%ED%95%98%EC%9E%90/</link>
+      <pubDate>Tue, 01 Jun 2021 14:50:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B0%80%EB%B3%80-%EC%9C%84%EC%B9%98-%EC%9D%B8%EC%88%98%EB%A1%9C-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-%EB%B3%B4%EC%9D%B4%EA%B2%8C-%ED%95%98%EC%9E%90/</guid>
+      <description>&lt;h2 id=&#34;batter-way-18-가변-위치-인수로-깔끔하게-보이게-하자&#34;&gt;BATTER WAY 18. 가변 위치 인수로 깔끔하게 보이게 하자&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;파이썬으로 코딩하다가, 가변적으로 인수를 받을 때가 있다.&lt;/li&gt;
+&lt;li&gt;이러한 경우에 사용하면 좋을 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;예제&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;(message, values):
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; values:
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(message)
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    values_str &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(str(x) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; values)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; : &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (message, values_str))
+
+log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;My number are&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
+log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/span&gt;, [])
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 코드에서는 로그로 남길 값이 없을 때, 빈 리스트로 넘겨주고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬에서는 &lt;code&gt;*&lt;/code&gt; 기호를 마지막 위치의 파라미터 이름 앞에 붙이면, 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;맨 앞에 나오는 인수는 필수적이지만, &lt;code&gt;*&lt;/code&gt; 가 붙은 인수는 가변적이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;함수 본문은 수정할 필요가 없고, 단지 호출하는 쪽만 수정하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;(message, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;values):
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; values:
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(message)
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+    values_str &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(str(x) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; values)
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; : &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (message, values_str))
+
+log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;My number are&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
+log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;인자가 필요하지 않을 때에는, 사용하지 않아도 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;가변-개수의-인수를-받는-방법의-문제점&#34;&gt;가변 개수의 인수를 받는 방법의 문제점&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;1. 가변 인수가 함수에 전달되기에 앞서, 항상 튜플로 변환된다는 점이다.
+
+-&amp;gt; 함수를 호출하는 쪽에서 제네레이터를 사용하면, 결과로 만들어 지는 튜플의 개수가 많은 경우, 메모리를 많이 차지하여 프로그램이 죽을 수 있다.
+
+2. 추후에 호출 코드를 변경하지 않고서는 새로운 위치에 인수를 추가할 수 없다는 점이다.
+
+-&amp;gt; 새로운 위치에 인수를 추가할 경우, 호출하는 코드를 변경해줘야한다. 그렇지 않으면 버그가 발생한다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;핵심-정리&#34;&gt;핵심 정리&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;def&lt;/code&gt; 문에서 &lt;code&gt;*args&lt;/code&gt;를 사용하면, 함수에서 가변 개수의 위치 인수를 받을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;*&lt;/code&gt; 연산자를 사용하면, 시퀀스에 들어 있는 아이템을 함수의 위치 인수로 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;제네레이터와 &lt;code&gt;*&lt;/code&gt; 연산자를 함께 사용하면, 프로그램이 메모리 부족으로 망가질 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;*args&lt;/code&gt;를 받는 함수에 새 위치 파라미터를 추가하면 정말 찾기 어려운 버그가 생길 수 도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728&#34;&gt;파이썬 코딩의 기술&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/05/31/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
@@ -3723,22 +3852,22 @@ gcc -pg -g -o server server.c
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;영역&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;설명&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;영역&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;설명&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;New/Young 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;New/Young 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Old 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Old 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Perm 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Perm 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
