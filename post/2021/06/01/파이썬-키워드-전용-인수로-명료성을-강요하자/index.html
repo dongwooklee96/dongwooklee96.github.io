@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>파이썬 - 키워드 전용 인수로 명료성을 강요하자 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">파이썬 - 키워드 전용 인수로 명료성을 강요하자</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/06/01</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="batter-way-21-키워드-전용-인수로-명료성을-강요하자">BATTER WAY 21. 키워드 전용 인수로 명료성을 강요하자.</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">safe_division</span>(number, divisor, <span style="color:#f92672">*</span>,
+    ignore_overflow<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
+  <span style="color:#66d9ef">try</span>:
+    <span style="color:#66d9ef">return</span> number <span style="color:#f92672">/</span> divisor
+  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">OverflowError</span>:
+    <span style="color:#66d9ef">if</span> ignore_overflow:
+      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">else</span>:
+      <span style="color:#66d9ef">raise</span>
+  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ZeroDivisionError</span>:
+    <span style="color:#66d9ef">if</span> ignore_zero_division:
+      <span style="color:#66d9ef">return</span> float(<span style="color:#e6db74">&#39;inf&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+      <span style="color:#66d9ef">raise</span>
+</code></pre></div><ul>
+<li>함수는 아래와 같은 방법으로 사용될 수 있다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">500</span>, <span style="color:#66d9ef">True</span>, <span style="color:#66d9ef">False</span>)
+print(result)
+
+result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">False</span>, <span style="color:#66d9ef">True</span>)
+print(result)
+</code></pre></div><ul>
+<li>문제는 두 인수의 위치를 혼동하기 쉽기 때문에 찾기 어려운 버그가 발생할 수 있다.</li>
+<li>따라서, 키워드 인수를 이용하여 매우 주의 깊고 항상 예외를 발생하도록 만들어 줄 수 있다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">ult <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">500</span>, ignore_overflow<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+print(result)
+
+
+result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+print(result)
+</code></pre></div><ul>
+<li>
+<p>호출하는 쪽에서, 특정 키워드 인수로 특정 연산에는 기본 값을 덮어쓰고 무시할 플래그를 지정할 할 수 있다.</p>
+</li>
+<li>
+<p>하지만 이러한 키워드 인수는 선택적인 동작이라서 함수를 호출하는 쪽에 키워드 인수로 의도를 명확하게 드러내라고 강요할 방법이 없다는 점이다.</p>
+</li>
+<li>
+<p>이러한 복잡한 함수를 작성할 때에는 호출하는 쪽에서 의도를 명확히 드러내도록 요구하는 것이 낫다.</p>
+</li>
+<li>
+<p>파이썬3 에서는 키워드 전용 인수로 함수를 정의해서 의도를 명확히 드러내도록 요구할 수 있다.</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">safe_division</span>(number, divisor, <span style="color:#f92672">*</span>,
+    ignore_overflow<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
+  <span style="color:#66d9ef">try</span>:
+    <span style="color:#66d9ef">return</span> number <span style="color:#f92672">/</span> divisor
+  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">OverflowError</span>:
+    <span style="color:#66d9ef">if</span> ignore_overflow:
+      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">else</span>:
+      <span style="color:#66d9ef">raise</span>
+  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ZeroDivisionError</span>:
+    <span style="color:#66d9ef">if</span> ignore_zero_division:
+      <span style="color:#66d9ef">return</span> float(<span style="color:#e6db74">&#39;inf&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+      <span style="color:#66d9ef">raise</span>
+</code></pre></div><ul>
+<li>키워드 인수가 아닌, 위치 인수를 사용하는 함수 호출은 더 이상 동작하지 않는다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">500</span>, <span style="color:#66d9ef">True</span>, <span style="color:#66d9ef">False</span>) <span style="color:#75715e"># 에러 발생</span>
+</code></pre></div><ul>
+<li>키워드 인수와 그 기본 값은 의도한 대로 동작한다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">safe_devision(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) <span style="color:#75715e"># 정상 동작</span>
+</code></pre></div><h3 id="핵심-정리">핵심 정리</h3>
+<ul>
+<li>키워드 인수는 함수 호출의 의도를 더 명확하게 해준다.</li>
+<li>특히 불 플래그를 여러 개 받는 함수처럼 헷갈리기 쉬운 함수를 호출할 때, 키워드 인수를 넘기게 하려면 키워드 전용 인수를 사용하자.</li>
+<li>파이썬 3는 함수의 키워드 전용 인수를 명시적으로 지원한다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728">파이썬 코딩의 기술</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
