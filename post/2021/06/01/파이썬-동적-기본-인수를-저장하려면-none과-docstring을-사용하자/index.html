@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>파이썬 - 동적 기본 인수를 저장하려면 None과 docstring을 사용하자 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">파이썬 - 동적 기본 인수를 저장하려면 None과 docstring을 사용하자</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/06/01</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="better-way-20-동적-기본-인수를-지정하려면-none과-docstring을-이용하자">BETTER WAY 20. 동적 기본 인수를 지정하려면 None과 docstring을 이용하자.</h2>
+<ul>
+<li>키워드 인수의 기본값으로 동적 타입을 사용해야할 때가 있다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">from</span> datetime <span style="color:#66d9ef">import</span> datetime
+<span style="color:#f92672">from</span> time <span style="color:#66d9ef">import</span> sleep
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(message, when<span style="color:#f92672">=</span>datetime<span style="color:#f92672">.</span>now()):
+    print(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (when, message))
+
+log(<span style="color:#e6db74">&#39;Hi there&#39;</span>)
+sleep(<span style="color:#ae81ff">0.1</span>)
+log(<span style="color:#e6db74">&#39;Hi there&#39;</span>)
+</code></pre></div><ul>
+<li>
+<p>위의 결과는 기대한 대로 나오지 않는다.</p>
+</li>
+<li>
+<p>이유는 함수를 정의할 때, 딱 한번만 실행되므로, 타임스탬프가 동일하게 출력된다.</p>
+</li>
+<li>
+<p>기본 인수의 값은 모듈이 로드될 때, 한 번만 평가되며, 보통 프로그램이 시작될 때, 일어난다.</p>
+</li>
+<li>
+<p>파이썬에서 결과가 기대한 대로 나오게 하려면 기본값을 <code>None</code>으로 설정하고 <code>docstring</code>으로 실제 동작을 문서화하는것이 관례이다.</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(message, when<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
+  <span style="color:#e6db74">&#34;&#34;&#34;
+</span><span style="color:#e6db74">    Log a message with a timestamp.
+</span><span style="color:#e6db74">    :param meessage: Message to print.
+</span><span style="color:#e6db74">    :param when: datetime fo when the message occured.
+</span><span style="color:#e6db74">    Defaults to the present time.
+</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    when <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>now() <span style="color:#66d9ef">if</span> when <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span> <span style="color:#66d9ef">else</span> when
+    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (when, message))
+
+log(<span style="color:#e6db74">&#39;Hi there&#39;</span>)
+sleep(<span style="color:#ae81ff">0.1</span>)
+log(<span style="color:#e6db74">&#39;Hi. again&#39;</span>)
+</code></pre></div><ul>
+<li>기본 인수 값으로 <code>None</code>을 사용하는 방법은 인수가 수정 가능할 때 특히 중요하다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">decode</span>(data, default<span style="color:#f92672">=</span>{}):
+  <span style="color:#66d9ef">try</span>:
+    <span style="color:#66d9ef">return</span> json<span style="color:#f92672">.</span>load(data)
+  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ValueError</span>:
+    <span style="color:#66d9ef">return</span> default
+</code></pre></div><ul>
+<li>
+<p><code>JSON</code> 데이터로 인코드된 값을 로드하는 예제를 살펴보자. 데이터 디코딩이 실패하였을 경우, 빈 딕셔너리를 반환하려고 한다.</p>
+</li>
+<li>
+<p>기본 인수 값은 (모듈이 로드될 때) 딱 한번만 평가되므로, 기본 값으로 설정한 딕셔너니를 모든 <code>decode</code> 호출하는 코드에서 공유한다.</p>
+</li>
+</ul>
+<h3 id="핵심-정리">핵심 정리</h3>
+<ul>
+<li>기본 인수는 모듈 로드 시점에 함수 정의 과정에서 딱 한번만 평가된다. 그래서 <code>{}</code>, <code>[]</code> 같은 동적 값에는 이상하게 동작하는 원인이 된다.</li>
+<li>값이 동적인 키워드 인수에는 기본적으로 <code>None</code>을 사용하자. 그러고 나서, <code>docstring</code>을 이용하여 기본 동작을 문서화하자.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728">파이썬 코딩의 기술</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
