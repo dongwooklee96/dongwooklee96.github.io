@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>책 on 개발자 이동욱</title>
+    <link>https://dongwooklee96.github.io/tags/%EC%B1%85/</link>
+    <description>Recent content in 책 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sun, 06 Jun 2021 14:44:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%B1%85/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>프로그래머처럼 생각하라 정리 (2)</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/06/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%B2%98%EB%9F%BC-%EC%83%9D%EA%B0%81%ED%95%98%EB%9D%BC-%EC%A0%95%EB%A6%AC-2/</link>
+      <pubDate>Sun, 06 Jun 2021 14:44:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/06/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%B2%98%EB%9F%BC-%EC%83%9D%EA%B0%81%ED%95%98%EB%9D%BC-%EC%A0%95%EB%A6%AC-2/</guid>
+      <description>&lt;h3 id=&#34;프로그래머는-단순하게-생각한다&#34;&gt;프로그래머는 단순하게 생각한다&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그래머는 &lt;strong&gt;항상 목적을 달성하기 위한 최단 경로를 모색한다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;쓸모없는 것을 생략하고, 사물을 단순하게 생각한다&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 단순하게 생각하기 위해서, 모델을 사용하여 생각한다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사물을 단순하게 표현하기 위해서는 복잡한 사물로부터, 본질은 남겨둔 채 쓸모없는 부분을 제거해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;모델-작성법&#34;&gt;모델 작성법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;사물을-단순화-한다&#34;&gt;사물을 단순화 한다.&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/120914101-ca0bbd00-c6d6-11eb-8ace-0bd78c36f759.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;가능한 한 불필요한 부분을 제거하고, 사물의 본질을 돋보이도록 해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;피카소의 그림에서 알 수 있듯이 처음부터, 단순화된 황소를 그리려고 한 것이 아니라, 여러 번 스케치를 해봄으로써 황소의 어떤 부분이 본질인지를 찾아내려고 노력하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모델을 만들때도, 이와 같은 현상이 일어난다. &lt;strong&gt;생각하기 위해서 모델을 만들고, 모델을 만듦으로써 더 깊이 있게 생각할 수 있다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;머리속에서 생각만 하는것만으로는 막다른 길에서 움직이지 못하는 경우가 많다. 이때 생각하고 있는 것을 바깥으로 꺼내서 표현해봄으로써 새로운 아이디어를 얻을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;맨 처음부터 훌륭한 모델을 만들자는 것이 아니라, 우선은 머리속에서 생각하고 있는 것을 머리 바깥으로 끄집어내서 모델 형태로 표현하고, 그 모델을 살펴보면서 다시 생각해보는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;모델의-기본-구조란&#34;&gt;모델의 기본 구조란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;모델은 &amp;lsquo;요소와 요소 사이의 관계&amp;rsquo;를 나타낸 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사람들은 흔히 &amp;lsquo;이해하려면 분해해보라&amp;rsquo;고 한다. 복잡한 사물을 있는 그대로 이해하는 것이 힘들기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모델을 작성할 때 중요한 점은 &lt;strong&gt;목적과 관점을 명확하게 하는 것이다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;같은 대상으로 하더라도, 목적이 다르면 관점이 달라져서 사물을 바라보는 형식이 서로 다르게 되기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어떤 사물에 관한 모델은 유일 무이하게 단 한 개만 존재하는 것이 아니라, 목적과 관점에 따라서 다양하게 만들어질 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;요소를-추출하여-작성한다&#34;&gt;요소를 추출하여 작성한다.&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;복잡한 사물은 여러 개의 요소로 구성되어 있다. &lt;strong&gt;모델링에서 가장 바람직한 방법은 각 요소를 모두 찾아내서 열거하는 작업 부터 시작해보는 것이다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;발상을 위한 사고법에서는 &amp;lsquo;발산&amp;rsquo;과 &amp;lsquo;수렴&amp;rsquo;의 사고과정을 반복한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모델의 상세한 내용을 작성하는 경우, 깊이 있게 숙고 하고, 다시 폭넓게 생각하면서 이번 작업의 목적에 부합하지 않는 요소들을 제거하여 대담하게 수렴시켜 나가는 과정을 수행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 작업의 초기에서는 무엇이든지 머리속에서 생각나는 것을 끄집어내서 표현해보도록 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;중요한-것을-요소로-만든다&#34;&gt;중요한 것을 요소로 만든다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 정말로 무엇이든지 생각나는 모든 것을 끄집어내서 표현하면 다 좋다는 의미는 아니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;복잡한 사물을 구성하는 &amp;lsquo;중요한 요소들&amp;rsquo;을 모두 열거해 보는 것&lt;/strong&gt;이 이 단계에서 해야할 작업이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;요소는-명사로-작성한다&#34;&gt;요소는 명사로 작성한다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;모델이라는 것은 사물을 단순하게 표현한 것이므로 때에 따라서는 모호함이 표함되어 있어서 그 의미를 전달하기 어려운 경우도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;lsquo;요소를 명사로 한다&amp;rsquo;라는 점을 주의해서 모델링하면 자신의 의도와 모델의 표현을 서로 일치하게 만들 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;관계를-명확하게-한다&#34;&gt;관계를 명확하게 한다&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;요소를 추출하여, 열거한 후에는 각 요소 사이의 관계를 찾아내도록 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러고 나서 요소를 사각형으로 표현하고 관계를 연결선으로 나타낸다. 이러한 작업만으로 복잡한 사항을 정리할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;배치를-조정한다&#34;&gt;배치를 조정한다.&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;모델링 작업에서 무엇을 요소로 추출할 것인가 그리고 요소들 사이의 관계를 어떻게 표현할 것인가가 가장 중요하지만, 이와 거의 같은 수준으로 중요한 작업이 바로 모델의 전체 모습(어떻게 알기 쉽게 표현할 것인가의 문제) 즉 배치문제이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;모델을-사용하면-얻게-되는-장점&#34;&gt;모델을 사용하면 얻게 되는 장점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;1. 도식화의 이점을 누릴 수 있다.
+2. 전체 모습을 파악할 수 있다.
+3. 논리적으로 생각할 수 있다.
+4. 발상을 넓힐 수 있다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;빈약한-모델에서-발견할-수-있는-네-가지-공통점&#34;&gt;빈약한 모델에서 발견할 수 있는 네 가지 공통점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;모델을 작성한다는 것은 처음에는 간단한 듯하지만 뜻밖에 깊이가 있는 작업으로 익숙해지지 않으면 좀처럼 좋은 모델을 만들어낼 수 없는 경우가 많다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;빈약한 모델의 공통점은 아래와 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;1. 목적과 관점이 정해져있지 않거나, 명확하지 않다.
+2. 요소가 망라되어 있지 않거나, 불필요한 요소를 포함하고 있다.
+3. 요소의 추상화 수준이 너무 높거나 너무 낮다.
+4. 요소들 사이의 관계를 잘 표현하고 있지 못한다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;자신의-입장을-확인한다&#34;&gt;자신의 입장을 확인한다.&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;모델링 대상에 대해서, 자신이 어떤 위치에 있는지를 의식할 수 있다면, 자연스럽게 자신이 그 대상물의 어떤 측면에 초점을 맞춰야할 것인지 (또는 맞추고 싶은지)가 명확해진다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모델링은 무엇때문에 하는가? 라는 질문에 대해서 한마디로 대답해보는 것도 목적과 관점을 명확하게 하는데 도움이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;목적과 관점은 모델을 만들어가면서 결정해간다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;처음부터 모델을 만드는 목적과 관점이 명확하게 결정된 경우는 그리 많지 않다. 따라서, 목적을 처음부터 명확하게 한마디로 대답할 수 없더라도 괜찮다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서, 모델을 만들면서 목적과 관점에 대해서 다시 생각해보고 모델을 만들고.. 이러한 과정을 반복하는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;필요한-요소들을-부족함-없이-망라하기-위한-기법&#34;&gt;필요한 요소들을 부족함 없이 망라하기 위한 기법&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;요소를 일단 삭제해보고, 그래도 모델을 이해할 수 있는지 아닌지를 확인해보는 것이다&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;요소가 부족한 경우에는, 모델의 만든 후에 위화감 또는 불안정감이 있는지를 확인하고, 시행착오를 거쳐가면서 모델을 수정해나간다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;관계를-적절하게-표현하기-위한-요령&#34;&gt;관계를 적절하게 표현하기 위한 요령&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;관계에 빠진 점이 없는지를 확인한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;문장으로 성립되는지를 확인한다. &lt;strong&gt;요소와 요소 사이의 관계가 정말로 성립하는지 논리적으로 생각해봄으로써 관계의 적절성을 확인할 수 있다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;lsquo;나무에서 떨어진다&amp;rsquo;와 같은 동사구를 명사화하여 요소로 추출하는 것이 때로는 더 좋은 모델을 만드는데 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://book.interpark.com/product/BookDisplay.do?_method=detail&amp;amp;sc.prdNo=266905788&amp;amp;gclid=Cj0KCQjwweyFBhDvARIsAA67M71SioU7M-0HZlQ00iMvRZJ8237_ixAt3Bos56hRrRlURVnzfdlnweQaAhAEEALw_wcB&#34;&gt;프로그래머처럼 생각하라&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>프로그래머처럼 생각하라 정리 (1)</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/06/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%B2%98%EB%9F%BC-%EC%83%9D%EA%B0%81%ED%95%98%EB%9D%BC-%EC%A0%95%EB%A6%AC-1/</link>
+      <pubDate>Sun, 06 Jun 2021 14:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/06/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%B2%98%EB%9F%BC-%EC%83%9D%EA%B0%81%ED%95%98%EB%9D%BC-%EC%A0%95%EB%A6%AC-1/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/120913629-646a0180-c6d3-11eb-89f0-b623930b731f.jpg&#34; alt=&#34;266905788g&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;주말에 오래전에 사놓고 읽지 않은 책을 읽고 정리를 해보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;객체지향 사고를 할 때 도움이 될 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;1. 사물을 깊게 이해하고 싶다.
+2. 어떤 사물이나 개념을 상대방이 알기 쉽게 전달하고 싶다.
+3. 새롭고 혁신적인 발상을 하고 싶다.
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같은 능력을 가지고 싶다면 방법은 하나이다. &amp;lsquo;단순하게 생각하기&amp;rsquo;를 하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;lsquo;단순하게 생각하기&amp;rsquo; 이것이 무엇인지 알기 힘들다면, 답은 프로그래머들의 사고 방식에서 찾아 볼 수 있고 이를 활용하면 위의 세가지 문제를 해결할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;프로그래머는-사물을-단순하게-생각한다&#34;&gt;프로그래머는 사물을 단순하게 생각한다.&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그래머들은, 보통 번잡하고 귀찮은 것을 싫어 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;계획성 없이 프로그램을 만들다 보면, 최종 단계에서 무엇인가 맞지 않게 되어서, 결국 쓸데 없는 작업이 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 능숙한 프로그래머들은 여러 부품을 만들고, 어떻게 배치할지를 미리 생각하면서 작업한다. 이럴때 사용하는 것이 바로 모델이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 생각을 토대로, 모델의 핵심을 추출하여 일반적으로 사용할 수 있도록 만든 최강 단순 사고법이 바로 &lt;strong&gt;모델 기반 사고법&lt;/strong&gt;이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;모델이란-무엇인가&#34;&gt;모델이란 무엇인가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;모델이란 &amp;lsquo;사물을 단순하게 표현한 것&amp;rsquo;이라고 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/120913795-beb79200-c6d4-11eb-842f-68abd4ce850c.JPG&#34; alt=&#34;IMG_5740&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;지극히 단순하게 사물을 표현하는 방법으로, 사각형(요소)과 연결선(관계)을 사용하여 모델을 표현&lt;/strong&gt; 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모델을 사용하여, 복잡한 사물들을 어느 정도 단순하고, 이해하기 쉽게 표현하고 있음을 알 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;모델을-사용하여-발상한다&#34;&gt;모델을 사용하여 발상한다.&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;사물을 정리하여 이해하거나 알기 쉽게 전달하기 위한 목적으로만 모델을 사용하는 것은 아니다, 발상하기 위해서도 사용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://book.interpark.com/product/BookDisplay.do?_method=detail&amp;amp;sc.prdNo=266905788&amp;amp;gclid=Cj0KCQjwweyFBhDvARIsAA67M71SioU7M-0HZlQ00iMvRZJ8237_ixAt3Bos56hRrRlURVnzfdlnweQaAhAEEALw_wcB&#34;&gt;프로그래머처럼 생각하라&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
