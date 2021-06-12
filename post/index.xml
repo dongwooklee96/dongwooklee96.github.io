@@ -6,7 +6,69 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 11 Jun 2021 09:17:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Jun 2021 09:17:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/12/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Sat, 12 Jun 2021 09:17:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/12/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;코딩 테스트 문제를 풀어보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 내 블로그에 방문을 해주고, 메일까지 보내주신 분이 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;문제 해결 프로세스 대로, 해결해나가다 보니까, 굉장히 재미있었을 뿐만 아니라, 생각을 더 많이 하게 된 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;알고리즘 문제들을 틈틈히 풀어보면서, 나에게 부족한 문제 분석 능력 및 해결 능력을 키우기 위해서 노력해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 작성한 글을 보고 메일을 보내주셔서 정말로 감사함을 느낌과 동시에 앞으로 글을 더욱 잘 작성해야겠다는 생각을 했다. 처음에는 내가 배운것을 정리하기 위한 목적이었다면, 이제는 다른 사람들이 내가 작성한 글을 통해서 도움을 줄 수 있도록 작성해야겠다는 마음이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;아직 나는 &lt;code&gt;OOP&lt;/code&gt;에 대한 지식이 부족하다는 것을 느끼고, 내가 맡은 솔루션의 소스 코드를 더욱 가독성 있고 유지 보수 하기 편리하게 바꾸려면 객체지향적인 설계를 하기 위해서 더 많은 것을 배워야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;업무를 진행할 때도, 알고리즘 문제를 풀듯이 문제의 제약 사항, 그리고 아이디어, 구현 및 테스트를 하면서 업무를 진행하면 좋을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;알고리즘 문제를 해결하면서, 다시 한번 기본적인 자료 구조 및 알고리즘(&lt;code&gt;Sorting&lt;/code&gt;, &lt;code&gt;Search&lt;/code&gt;, &lt;code&gt;Optimize&lt;/code&gt;)에 대해서 공부할 필요를 느꼈다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;알고리즘 문제를 해결하면서, 문제 분석력과 해결 능력을 기를 수 있도록 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;OOP&lt;/code&gt;의 핵심 설계원칙과 이를 적용해봄과 동시에 전반적인 소프트웨어 개발 펀더멘탈 (&lt;strong&gt;설계&lt;/strong&gt;, 개발, &lt;strong&gt;테스팅&lt;/strong&gt;, &lt;strong&gt;자동화&lt;/strong&gt;, 문서화) 및 &lt;strong&gt;소통능력&lt;/strong&gt;을 기르기 위해서 노력해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;시스템 개발에 대해서, 관심이 있지만, 개발 실력을 키우기 위해서 노력은 하지 않았던 것 같다. 지금부터라도, &lt;code&gt;Multi-Thread&lt;/code&gt;, &lt;code&gt;IPC(Inter-Porcess-Communication)&lt;/code&gt;, &lt;code&gt;Network Programming&lt;/code&gt;에 대해서 공부를 해야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/06/11/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
