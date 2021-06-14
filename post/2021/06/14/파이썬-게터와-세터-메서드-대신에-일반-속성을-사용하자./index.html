@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>파이썬 - 게터와 세터 메서드 대신에 일반 속성을 사용하자. | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">파이썬 - 게터와 세터 메서드 대신에 일반 속성을 사용하자.</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/06/14</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="batter-way-29-게터와-세터-메서드-대신에-일반-속성을-사용하자">BATTER WAY 29. 게터와 세터 메서드 대신에, 일반 속성을 사용하자.</h2>
+<ul>
+<li>다른 언어를 사용하다가, 파이썬으로 넘어온 프로그래머들은 자연스럽게 클래스에 게터(<code>getter</code>)와 세터(<code>setter</code>) 메서드를 명시적으로 구현하려고 한다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OldResistor</span>(object):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
+    self<span style="color:#f92672">.</span>_ohms <span style="color:#f92672">=</span> ohms
+
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_ohms</span>(self):
+    <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_ohms
+
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">set_ohms</span>(self, ohms):
+    self<span style="color:#f92672">.</span>_ohms <span style="color:#f92672">=</span> ohms
+
+
+r0 <span style="color:#f92672">=</span> OldResistor(<span style="color:#ae81ff">50e3</span>)
+print(f<span style="color:#e6db74">&#39;Before: {r0.get_ohms()}&#39;</span>) <span style="color:#75715e"># Before: 50000.0</span>
+
+r0<span style="color:#f92672">.</span>set_ohms(<span style="color:#ae81ff">10e3</span>)
+print(f<span style="color:#e6db74">&#39;Before: {r0.get_ohms()}&#39;</span>)<span style="color:#e6db74">&#39;)&#39;</span>) <span style="color:#75715e"># After: 10000.0</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">r0<span style="color:#f92672">.</span>set_ohms(r0<span style="color:#f92672">.</span>get_ohms() <span style="color:#f92672">+</span> <span style="color:#ae81ff">5e3</span>)
+</code></pre></div><ul>
+<li>사용하는 법은 간단하지만, 파이썬 스럽지 않은 코딩 방법이다.</li>
+<li>겟터와 셋터는 값을 증가시키고 그 값을 바로 반영하기 불편하다.</li>
+<li>파이썬은 명시적인 게터와 세터를 구현할 일이 거의 없다. 대신 공개 속성부터 구현하기 시작해야 한다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Register</span>(object):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
+    self<span style="color:#f92672">.</span>ohms <span style="color:#f92672">=</span> ohms
+    self<span style="color:#f92672">.</span>voltage <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    self<span style="color:#f92672">.</span>current <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+
+r1 <span style="color:#f92672">=</span> Register(<span style="color:#ae81ff">50e3</span>)
+r1<span style="color:#f92672">.</span>ohms <span style="color:#f92672">=</span> <span style="color:#ae81ff">10e3</span>
+
+r1<span style="color:#f92672">.</span>ohms <span style="color:#f92672">+=</span> <span style="color:#ae81ff">5e3</span>
+</code></pre></div><ul>
+<li>
+<p>만약 속성을 설정할 때, 특별한 동작이 일어나야 한다면 <code>@property</code> 데코레이터와 이에 대응하는 <code>setter</code> 속성을 사용하는 방법으로 바꿀 수 있다.</p>
+</li>
+<li>
+<p>여기서는 <code>Registor</code>의 새 서브 클래스를 정의하여, <code>voltage</code> 프로퍼티를 할당하면, <code>current</code> 값이 바뀌도록 해본다.</p>
+</li>
+<li>
+<p>제대로 동작하려면, 세터와 게터의 이름이 의도한 프로퍼티의 이름과 같아야한다.</p>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VoltageResistance</span>(Register):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
+    super()<span style="color:#f92672">.</span>__init__(ohms)
+    self<span style="color:#f92672">.</span>_voltage <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+  <span style="color:#a6e22e">@property</span>
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">voltage</span>(self):
+    <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_voltage
+
+  <span style="color:#a6e22e">@voltage</span><span style="color:#f92672">.</span>setter
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">voltage</span>(self, voltage):
+    self<span style="color:#f92672">.</span>_voltage <span style="color:#f92672">=</span> voltage
+    self<span style="color:#f92672">.</span>current <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_voltage <span style="color:#f92672">/</span> self<span style="color:#f92672">.</span>ohms
+
+r2 <span style="color:#f92672">=</span> VoltageResistance(<span style="color:#ae81ff">1e3</span>)
+print(f<span style="color:#e6db74">&#39;Before: </span><span style="color:#e6db74">{r2.current}</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># 0</span>
+r2<span style="color:#f92672">.</span>voltage <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
+print(f<span style="color:#e6db74">&#39;After: </span><span style="color:#e6db74">{r2.current}</span><span style="color:#e6db74">&#39;</span>)<span style="color:#e6db74">&#39;)&#39;</span>) <span style="color:#75715e"># 0.01</span>
+</code></pre></div><ul>
+<li>프로퍼티에 <code>setter</code>를 설정하면, 클래스에 전달된 값들의 타입을 체크하고 값을 검증할 수 있다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BoundedResistence</span>(Register):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
+    super()<span style="color:#f92672">.</span>__init__(ohms)
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ohms</span>(self):
+      <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_ohms
+
+    <span style="color:#a6e22e">@ohms</span><span style="color:#f92672">.</span>setter
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ohms</span>(self, ohms):
+      <span style="color:#66d9ef">if</span> ohms <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
+      <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(f<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{ohms}</span><span style="color:#e6db74"> ohms must be &gt; 0&#34;</span>)
+
+
+r3 <span style="color:#f92672">=</span> BoundedResistence(<span style="color:#ae81ff">1e3</span>)
+r3<span style="color:#f92672">.</span>ohms <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</code></pre></div><ul>
+<li>프로퍼티에 <code>setter</code>를 설정하면, 클래스에 전달된 값들의 타입을 체크하고 값을 검증할 수 있다.</li>
+<li>다음은 모든 저항값이 0옴보다 큼을 보장하는 클래스를 정의한 것이다.</li>
+<li>만약 <code>ohms</code> 속성값이 0이거나, 0보다 작으면 예외가 발생하게 된다.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FixedResistence</span>(Register):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
+    super()<span style="color:#f92672">.</span>__init__(ohms)
+
+    <span style="color:#a6e22e">@property</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ohms</span>(self):
+      <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_ohms
+
+    <span style="color:#a6e22e">@ohms</span><span style="color:#f92672">.</span>setter
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ohms</span>(self, ohms):
+      <span style="color:#66d9ef">if</span> hasattr(self, <span style="color:#e6db74">&#39;_ohms&#39;</span>):
+        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;Can&#39;t set attribute&#34;</span>)
+        self<span style="color:#f92672">.</span>_ohms <span style="color:#f92672">=</span> ohms
+</code></pre></div><ul>
+<li>부모 클래스의 속성을 불변(Immutable)로 만드는데도 @property를 사용할 수 있다.</li>
+</ul>
+<h3 id="핵심-정리">핵심 정리</h3>
+<hr>
+<ul>
+<li>
+<p>간단한 공개 속성을 사용하여 새 클래스 인터페이스를 정의하고, 세터와 게터 메서드는 사용하지 말자.</p>
+</li>
+<li>
+<p>객체의 속성에 접근할 때 특별한 동작을 정의하려면 <code>@property</code>를 사용하자.</p>
+</li>
+<li>
+<p><code>@property</code> 메서드에서 최소 놀람 규칙을 따르고 이상한 부작용을 피하자.</p>
+</li>
+<li>
+<p><code>@property</code> 메서드가 빠르게 동작하도록 만들자. 느리거나 복잡한 작업은 일반 메서드로 하자.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728">파이썬 코딩의 기술</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
