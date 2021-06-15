@@ -6,7 +6,76 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 14 Jun 2021 14:50:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 15 Jun 2021 09:17:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Tue, 15 Jun 2021 09:17:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://news.hada.io/topic?id=4442&#34;&gt;항상 그만두기&lt;/a&gt; 라는 글을 읽었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;회사에서 어떻게 생활해야하는지 막연했었는데, 조금의 힌트가 되어 주었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;직장에서 생활하는 좋은 철학은 언제라도 떠날 수 있도록 행동을 하는 것이다. 이것은 항상 퇴사 생각을 하는 것이 아니라, 자신을 대체가능하도록 만드는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;조금은 폐쇄적인 나의 단점을 상쇄 시켜줄 수 있는 좋은 기회가 될 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나중에 이 솔루션을 맡는 사람이 한명 더 늘어때를 대비하고 실제로 들어왔을 때 일을 알려주기 위한 좋은 방법인 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시니어 개발자가 되기 위해서 배워야 할 점 같다. 이러한 점들이 나의 책임을 미룬다고 생각할 수도 있지만, 위임할 줄을 알아야 할 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;1. 지식을 문서화 하라.
+-&amp;gt; 후임자가 당신이 필요하지 않도록 문서, 버그, 코드 주석등 어디에든 답을 적어라. 
+2. 장기 계획을 문서화하라.
+-&amp;gt; 당신이 뭔가를 실시간으로 알려주지 않더라도, 이 계획을 보고 프로젝트에 앞으로 어떤 일이 생길지를 알 수 있도록 하라
+3. 미팅을 문서화하라.
+-&amp;gt; 당신이 참여하는 모든 미팅을 팀내에 공유하고, 누가 참석했는지, 어떤 논의가 있었고, 어떻게 결론을 내었는지를 적어라.
+4. 다른 사람들을 회의에 초대하라.
+-&amp;gt; 1대1 미팅이 아니고, 당신이 혼자 미팅에 참가중이라면 다른 사람들을 더 초대하라.
+-&amp;gt; 다른 관점도 중요하지만, 당신이 유일한 컨텍포인트가 되는 것을 피하는 것이다.
+5. 주변 사람들을 훈련시켜라
+-&amp;gt; 목표는 그들이 독립적이 되도록 하는 것이다.
+-&amp;gt; 그들이 계획과 기술을 숙지하게 하고, 문서를 활용할 수 있도록 하라.
+6. 후임자를 찾고 교육 시켜라.
+-&amp;gt; 당신의 역할을 바꾸려면 교체할 수 있어야 한다. 당신을 대체할 사람을 찾고 적극적/지속적으로 코치하세요.
+7. 사람들에게 권한을 주어라.
+-&amp;gt; 그들이 옳은 일을 하게 믿어주어야 한다.
+-&amp;gt; 당신이 리더십 위치에 있다면, 다른 사람들이 당신에게 허락을 요청하도록 만들지 말라.
+-&amp;gt; 그들이 스스로 선택하게 하고, 올바른 데이터를 기반으로 선택하도록 가이드하라.
+8. 당신이 PoC(Point of Contact)가 되지 마세요.
+-&amp;gt; 다른 사람을 포함시킬 수 있는 메일링 리스트를 만들거나 다른 종류의 커뮤니케이션 채널을 만들고 이를 확장하라.
+9. 위임하세요 (Delegate)
+-&amp;gt; 다른 사람에게 권한을 주고, 그룹과 미팅에 포함시키고, 지식을 문서화 했다면, 당신의 일을 수행할 준비가 된 것이다.
+-&amp;gt; 그들이 성장할 수 있는 일들을 위임하고, 당신만이 할 수 있는 일에 집중하세요.
+10. 항상 배우세요.
+-&amp;gt; 관심 있는 분야에서, 지식을 키우고 재미있게 유지하세요.
+-&amp;gt; 그 분야가 당신이 가고자 하는 미래와 일치하면 보너스이다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>파이썬 - 게터와 세터 메서드 대신에 일반 속성을 사용하자.</title>
       <link>https://dongwooklee96.github.io/post/2021/06/14/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B2%8C%ED%84%B0%EC%99%80-%EC%84%B8%ED%84%B0-%EB%A9%94%EC%84%9C%EB%93%9C-%EB%8C%80%EC%8B%A0%EC%97%90-%EC%9D%BC%EB%B0%98-%EC%86%8D%EC%84%B1%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%9E%90./</link>
@@ -5019,22 +5088,22 @@ gcc -pg -g -o server server.c
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;영역&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;설명&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;영역&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;설명&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;New/Young 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;New/Young 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Old 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Old 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Perm 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Perm 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
