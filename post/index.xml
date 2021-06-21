@@ -6,7 +6,69 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 18 Jun 2021 09:02:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Jun 2021 09:02:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/21/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Mon, 21 Jun 2021 09:02:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/21/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://medium.com/deliverytechkorea/%EC%84%9C%EB%A1%9C%EA%B0%80-%EC%84%9C%EB%A1%9C%EC%9D%98-%EC%9E%90%EB%9E%91%EC%9D%B4-%EB%90%98%EB%8A%94-data-platform-squad%EC%9D%B4%EC%95%BC%EA%B8%B0-38d23fca57c6&#34;&gt;서로가 서로의 자랑이 되는 Data Platform Squad 이야기&lt;/a&gt; 를 읽어보면서, 고객이 어떤 요구를 할 떄 근본적인 이유를 파악하는 것이 중요하다는 것을 알게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://tech.kakaoenterprise.com/110&#34;&gt;개발자들을 위한 테크니컬 라이팅 10계명&lt;/a&gt;를 읽음으로써, 문서화를 할 때 참고해볼 수 있을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.kingbbode.com/52?url=https://blog.kingbbode.com/52&#34;&gt;테스트를 작성하는 방법&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://databasearchitects.blogspot.com/2021/06/what-every-programmer-should-know-about.html&#34;&gt;Database Architects &lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 간단하게 캠핑을 하였는데, 내가 스스로 결정하고 그 결정이 만족스러웠을 때 나는 높은 만족감을 가지고 행복했다는 것을 알게 되었다. 따라서 앞으로 내가 스스로 결정하고 결과를 얻을 수 있는 일을 해야겠다는 생각을 하게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;작게나마, 내가 스스로 기획하고 실행하는 일을 해봐야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;팔릴 제품이고, 상품에 경쟁력이 있다면, 네이버 카페를 개설해도 팔리지만 대부분이 앱이나, 웹 페이지를 만드는데 많은 시간과 자원을 투자한다는 말을 카페에서 듣게 되었다. 따라서, 웹 애플리케이션이나, 제품을 먼저 만들기 보다는 이것이 정말로 사용자에게 가치가 있는지를 먼저 생각하고 실행하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;친구가, 같은 말을 하더라도, 조금 더 정감이 가게 사람들에게 말하는 것을 보았는데, 나도 이런점을 배워야 겠다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;말만 하는 것이 아닌 적극적으로 행동하는 사람이 되어야 겠다. 하지만 행동을 하기 전에는 내가 무었때문에 이것을 하려는지 명확한 목표가 있어야 할 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;업무를 요청하는 &amp;lsquo;근본적인 이유&amp;rsquo;를 파악할 수 있도록 노력해야겠다. 그리고 고객이 요청하는 일이 정말로, 해결책이 아니라 우리가 고객이 원하는 목적을 찾을 수 있도록 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;사람들과 많은 대화를 해봐야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/06/18/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
