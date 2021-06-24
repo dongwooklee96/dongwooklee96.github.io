@@ -6,7 +6,101 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 23 Jun 2021 09:02:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 24 Jun 2021 11:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데드락이란? (DeadLock) (draft)</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft/</link>
+      <pubDate>Thu, 24 Jun 2021 11:20:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft/</guid>
+      <description>&lt;h2 id=&#34;배경&#34;&gt;배경&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/123192882-b8038a00-d4de-11eb-91a0-5e434f43c548.png&#34; alt=&#34;ScreenShot 2021-06-24 at 11 23 29 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;전달된 에러를 추적하다가, 아래와 같은 데드락 에러를 만나게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;InternalError: 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;정확한 문제 해결을 위해서 이번 기회에 데드락에 대해서 한번 더 정리를 해보고, 마리아 데이터베이스에서는 어떠한 경우에 데드락이 발생할 수 있는지를 알아보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;데드락이란-무엇인가&#34;&gt;데드락이란 무엇인가?&lt;/h2&gt;
+&lt;p&gt;&amp;ndash;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/123194903-31e94280-d4e2-11eb-8d24-336d333a18c3.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;교착상태 (&lt;code&gt;deadlock&lt;/code&gt;)이란 두개 이상의 작업이 서로 상대방의 작업이 끝나기만을 기다리고 있기 때문에 결과적으로는 아무것도 완료되지 못하는 상태를 말한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일반적으로 데이터베이스에서 발생하는 데드락은 &lt;code&gt;DBMS&lt;/code&gt;가 감지하여 실행되는 트랙잭션들 사이에 발생하는 데드락으로 각각의 트랜잭션이 사용하는 데이터들 사이의 데드락을 감지하여 알려준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;innodb에서-deadlock-확인하기&#34;&gt;InnoDB에서 DeadLock 확인하기&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;InnoDB&lt;/code&gt;는 트랜잭션을 실행시 데드락이 발생하게 되면 그것을 감지하고, 하나의 트랜잭션을 롤백하여 데드락을 해소하고, 그 정보를 로그로 남긴다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;SHOW ENGINE INNODB STATUS
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/123194595-bc7d7200-d4e1-11eb-9ceb-57e78504e5f6.png&#34; alt=&#34;Screen Shot 2021-06-24 at 11 45 24 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 구문을 통해서 정보를 얻을 수 있지만 비교적 최신 기록만 남아있다. 따라서 장애가 발생하였을 때 바로 확인해보는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여러가지 항목이 있는데, 항목의 자세한 값은 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/123203522-78926900-d4f1-11eb-99ae-2096e41fe46e.png&#34; alt=&#34;Screen Shot 2021-06-24 at 1 38 09 PM&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mysqldba.tistory.com/54&#34;&gt;InnoDB에서 Deadlock 발생 내역 분석하기&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mariadb.com/kb/en/show-engine-innodb-status/&#34;&gt;SHOW ENGINE INNODB STATUS&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://dev.mysql.com/doc/refman/8.0/en/innodb-deadlocks.html&#34;&gt;Deadlocks in InnoDB&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mariadb.com/kb/en/set-transaction/&#34;&gt;SET TRANSACTION&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://dev.mysql.com/doc/refman/8.0/en/innodb-deadlocks-handling.html&#34;&gt;How to Minimize and Handle Deadlocks&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://jeong-pro.tistory.com/94&#34;&gt;Exclusive Lock과 Shared Lock의 차이&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://jsonobject.tistory.com/427#recentComments&#34;&gt;트랜잭션과 격리레벨&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/24/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 24 Jun 2021 09:02:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/24/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/06/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
