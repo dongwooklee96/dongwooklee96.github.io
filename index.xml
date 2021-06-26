@@ -6,7 +6,195 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 26 Jun 2021 13:27:23 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Jun 2021 23:27:23 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C 포인터 이해와 활용 (2)</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-2/</link>
+      <pubDate>Sat, 26 Jun 2021 23:27:23 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-2/</guid>
+      <description>&lt;h2 id=&#34;chap-02-동적-메모리-관리&#34;&gt;CHAP 02. 동적 메모리 관리&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;포인터에서 강력한 기능의 대부분은 동적으로 할당된 메모리를 추적할 수 있는 포인터의 능력에서 기인한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C 프로그램은 런타임 시스템안에서 실행된다. 런타임 시스템은 일반적으로 운영체제에서 제공되는 환경이며, 많은 프로그램 기능들과 함께, 스택과 힙을 지원한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;동적-메모리-할당&#34;&gt;동적 메모리 할당&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;malloc&lt;/code&gt; 류의 함수로 메모리를 할당한다.&lt;/li&gt;
+&lt;li&gt;애플리케이션에서 할당된 메모리를 사용한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;free&lt;/code&gt; 함수를 이용해 할당된 메모리를 해제한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;위 단계는 매우 일반적인 동적 메모리 할당 순서이다. 다음 예제에선 &lt;code&gt;malloc&lt;/code&gt; 함수를 사용하여 정수를 저장할 메모리를 할당한다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int *pi = (int*)malloc(sizeof(int));
+*pi = 5;
+printf(&amp;quot;*pi: %d\n&amp;quot;, *pi);
+free(pi);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;malloc&lt;/code&gt; 함수의 유일한 인자에는 할당할 바이트 수를 저장한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메모리 할당에 성공하면 이 함수는 힙으로부터 할당된 메모리에 대한 포인터를 반환하고, 실패하면 널 포인터를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;할당할 바이트 수를 지정할 때, &lt;code&gt;sizeof&lt;/code&gt; 연산자를 사용하면 애플리케이션의 이식성을 높일 수 있고, 시스템에 할당할 정확한 바이트 수를 결정할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메모리가 해제 되는 즉시 해당 메모리에 다시 접근해서는 안된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;해제된 메모리에 대한 접근은 뜻하지 않게 발생하는데 일반적으로 해제된 포인터에는 항상 &lt;code&gt;NULL&lt;/code&gt;을 할당하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메모리가 할당되면 추가적인 정보가 힙 관리자에 의해 관리되는 데이터 구조의 일부로 저장된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;메모리-누수&#34;&gt;메모리 누수&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;메모리 누수는 할당된 메모리가 더는 사용되지 않지만, 해제되지 않을 때 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메모리의 주소를 잃어버리는 경우와 &lt;code&gt;free&lt;/code&gt; 함수가 호출되어야 하는 상황에 호출되지 않을 경우 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메모리 누수의 문제점은 해당 메모리가 반환되지 않고, 다시 사용될 수 없다는 것이다. 그 결과로 힙 관리자가 사용할 수 있는 메모리의 양이 감소하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;char *chunk;
+
+while (1) {
+  chunk = (char*)malloc(10000000);
+  printf(&amp;quot;Allocating\n&amp;quot;);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;만약 메모리를 반복적으로 사용하고 누수가 발생하면, 추가적인 메모리가 필요할 때, &lt;code&gt;malloc&lt;/code&gt; 함수가 OOM(Out of Memory) 오류로 인해서 추가 메모리를 할당할 수 없어 프로그램이 종료된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;메모리-주소-손실&#34;&gt;메모리 주소 손실&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;int *pi = (int*) malloc(sizeof(int));
+
+*pi = 5;
+
+pi = (int*) malloc(sizeof(int));
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pi&lt;/code&gt; 포인터는 해제되지 않고 새로운 메모리 주소로 재할당 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;char *name = (char*) malloc(strlen(&amp;quot;Susan&amp;quot;) + 1);
+strcpy(name, &amp;quot;Susan&amp;quot;);
+
+while (*name != 0) {
+  printf(&amp;quot;c&amp;quot;, *name);
+  name++;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 예제는 &lt;code&gt;name&lt;/code&gt; 변수의 루프를 하나씩 증가시키고 마지막에 NULL을 가리키고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;할당된 메모리의 시작 주소를 잃어버린 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;함수&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;malloc&lt;/td&gt;
+&lt;td&gt;힙에서 메모리 할당&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;realloc&lt;/td&gt;
+&lt;td&gt;기존 할당된 메모리의 크기 변경&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;calloc&lt;/td&gt;
+&lt;td&gt;힙에서 메모리 할당 그리고 0으로 설정&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;free&lt;/td&gt;
+&lt;td&gt;할당된 메모리를 힙으로 반환&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;정적-포인터-및-전역-포인터에-malloc-사용하기&#34;&gt;정적 포인터 및 전역 포인터에 &lt;code&gt;malloc&lt;/code&gt; 사용하기&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;정적 변수나 전역 변수는 선언시 초기화를 위해 함수 호출을 사용할 수 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;아래 코드는 정적 변수를 선언하고, &lt;code&gt;malloc&lt;/code&gt; 함수를 사용하여 초기화를 시도 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;static int *pi = (int*)malloc(sizeof(int));
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;따라서 위의 코드는 컴파일 시에 오류가 발생한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;static int *pi;
+pi = malloc(sizeof(int));
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 선언과 초기화를 분리함으로써, 오류를 피할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;컴파일러 관점에서 초기화 연산자 (=)의 사용과 할당 연산자의 사용은 차이가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;힙-메모리와-시스템-메모리&#34;&gt;힙 메모리와 시스템 메모리&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;힙은 일반적으로 운영체제의 기능을 이용해 메모리를 관리한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;힙의 크기는 프로그램이 실행될 때 고정된 크기로 정해지거나, 실행 도중에 크기를 늘리도록 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만, &lt;code&gt;free&lt;/code&gt; 함수가 호출되었다고 해도, 힙 관리자가 반드시 해제된 메모리를 운영체제로 반환하는 것은 아니고, 애플리케이션에서 해당 메모리를 다시 사용할 수 있게 할 뿐이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래서 프로그램이 메모리를 할당한 후에, 다시 해제한다고 해도 일반적으로 운영체제 측면에서는 해제된 메모리가 애플리케이션의 메모리 사용량에 반영되지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;댕글링-포인터-다루기&#34;&gt;댕글링 포인터 다루기&lt;/h3&gt;
+&lt;p&gt;포인터가 원인인 문제들의 디버깅은 때로 해결하기 어려울 때가 있다. 댕글링 포인터 문제를 처리하기 위한 몇 가지 접근 방법이다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;메모리 해제 후 포인터를 NULL로 설정하라. NULL로 설정한 포인터를 그 이후에 사용하면, 애플리케이션이 종료될 것이다. 그러나 해당 포인터에 대한 다수의 복사본이 존재할 경우에는 문제는 여전히 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;free&lt;/code&gt; 함수를 대체할 새로운 함수를 작성하라.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;몇몇 런타임 시스템이나 디버깅 시스템은 해제된 메모리를 특별한 값으로 덮어쓴다. 예외가 발생하지 않은 상황이라도, 프로그래머는 예상치 못한 곳에 이러한 값이 포함된 것을 보고 프로그램이 해제된 메모리에 접근한 것을 알 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;댕글링 포인터와 다른 문제들을 발견하기 위한 서드 파티 도구들을 활용하라.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;동적-메모리-할당-기술&#34;&gt;동적 메모리 할당 기술&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;힙 관리자의 메모리 할당과 해제의 구현은 컴파일러마다 다를 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대부분의 힙 관리자들은 메모리를 할당하기 위해서, 힙 또는 데이터 세그먼트를 사용하며, 이 방식은 메모리 단편화나 프로그램 스택과 충돌이 일어나기도 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=33784887&#34;&gt;C 포인터의 이해와 활용&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>C 포인터 이해와 활용 (1)</title>
       <link>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-1/</link>

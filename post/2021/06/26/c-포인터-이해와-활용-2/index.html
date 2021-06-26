@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>C 포인터 이해와 활용 (2) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">C 포인터 이해와 활용 (2)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/06/26</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">프로그래밍</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="chap-02-동적-메모리-관리">CHAP 02. 동적 메모리 관리</h2>
+<ul>
+<li>
+<p>포인터에서 강력한 기능의 대부분은 동적으로 할당된 메모리를 추적할 수 있는 포인터의 능력에서 기인한다.</p>
+</li>
+<li>
+<p>C 프로그램은 런타임 시스템안에서 실행된다. 런타임 시스템은 일반적으로 운영체제에서 제공되는 환경이며, 많은 프로그램 기능들과 함께, 스택과 힙을 지원한다.</p>
+</li>
+</ul>
+<h3 id="동적-메모리-할당">동적 메모리 할당</h3>
+<hr>
+<ul>
+<li><code>malloc</code> 류의 함수로 메모리를 할당한다.</li>
+<li>애플리케이션에서 할당된 메모리를 사용한다.</li>
+<li><code>free</code> 함수를 이용해 할당된 메모리를 해제한다.</li>
+</ul>
+<p>위 단계는 매우 일반적인 동적 메모리 할당 순서이다. 다음 예제에선 <code>malloc</code> 함수를 사용하여 정수를 저장할 메모리를 할당한다.</p>
+<pre><code>int *pi = (int*)malloc(sizeof(int));
+*pi = 5;
+printf(&quot;*pi: %d\n&quot;, *pi);
+free(pi);
+</code></pre><ul>
+<li>
+<p><code>malloc</code> 함수의 유일한 인자에는 할당할 바이트 수를 저장한다.</p>
+</li>
+<li>
+<p>메모리 할당에 성공하면 이 함수는 힙으로부터 할당된 메모리에 대한 포인터를 반환하고, 실패하면 널 포인터를 반환한다.</p>
+</li>
+<li>
+<p>할당할 바이트 수를 지정할 때, <code>sizeof</code> 연산자를 사용하면 애플리케이션의 이식성을 높일 수 있고, 시스템에 할당할 정확한 바이트 수를 결정할 수 있다.</p>
+</li>
+<li>
+<p>메모리가 해제 되는 즉시 해당 메모리에 다시 접근해서는 안된다.</p>
+</li>
+<li>
+<p>해제된 메모리에 대한 접근은 뜻하지 않게 발생하는데 일반적으로 해제된 포인터에는 항상 <code>NULL</code>을 할당하는 것이 좋다.</p>
+</li>
+<li>
+<p>메모리가 할당되면 추가적인 정보가 힙 관리자에 의해 관리되는 데이터 구조의 일부로 저장된다.</p>
+</li>
+</ul>
+<h3 id="메모리-누수">메모리 누수</h3>
+<ul>
+<li>
+<p>메모리 누수는 할당된 메모리가 더는 사용되지 않지만, 해제되지 않을 때 발생한다.</p>
+</li>
+<li>
+<p>메모리의 주소를 잃어버리는 경우와 <code>free</code> 함수가 호출되어야 하는 상황에 호출되지 않을 경우 발생한다.</p>
+</li>
+<li>
+<p>메모리 누수의 문제점은 해당 메모리가 반환되지 않고, 다시 사용될 수 없다는 것이다. 그 결과로 힙 관리자가 사용할 수 있는 메모리의 양이 감소하게 된다.</p>
+</li>
+</ul>
+<pre><code>char *chunk;
+
+while (1) {
+  chunk = (char*)malloc(10000000);
+  printf(&quot;Allocating\n&quot;);
+}
+</code></pre><ul>
+<li>만약 메모리를 반복적으로 사용하고 누수가 발생하면, 추가적인 메모리가 필요할 때, <code>malloc</code> 함수가 OOM(Out of Memory) 오류로 인해서 추가 메모리를 할당할 수 없어 프로그램이 종료된다.</li>
+</ul>
+<h4 id="메모리-주소-손실">메모리 주소 손실</h4>
+<pre><code>int *pi = (int*) malloc(sizeof(int));
+
+*pi = 5;
+
+pi = (int*) malloc(sizeof(int));
+</code></pre><ul>
+<li><code>pi</code> 포인터는 해제되지 않고 새로운 메모리 주소로 재할당 된다.</li>
+</ul>
+<pre><code>char *name = (char*) malloc(strlen(&quot;Susan&quot;) + 1);
+strcpy(name, &quot;Susan&quot;);
+
+while (*name != 0) {
+  printf(&quot;c&quot;, *name);
+  name++;
+}
+</code></pre><ul>
+<li>
+<p>위의 예제는 <code>name</code> 변수의 루프를 하나씩 증가시키고 마지막에 NULL을 가리키고 있다.</p>
+</li>
+<li>
+<p>할당된 메모리의 시작 주소를 잃어버린 것이다.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>함수</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>malloc</td>
+<td>힙에서 메모리 할당</td>
+</tr>
+<tr>
+<td>realloc</td>
+<td>기존 할당된 메모리의 크기 변경</td>
+</tr>
+<tr>
+<td>calloc</td>
+<td>힙에서 메모리 할당 그리고 0으로 설정</td>
+</tr>
+<tr>
+<td>free</td>
+<td>할당된 메모리를 힙으로 반환</td>
+</tr>
+</tbody>
+</table>
+<h3 id="정적-포인터-및-전역-포인터에-malloc-사용하기">정적 포인터 및 전역 포인터에 <code>malloc</code> 사용하기</h3>
+<ul>
+<li>
+<p>정적 변수나 전역 변수는 선언시 초기화를 위해 함수 호출을 사용할 수 없다.</p>
+</li>
+<li>
+<p>아래 코드는 정적 변수를 선언하고, <code>malloc</code> 함수를 사용하여 초기화를 시도 한다.</p>
+</li>
+</ul>
+<pre><code>static int *pi = (int*)malloc(sizeof(int));
+</code></pre><ul>
+<li>따라서 위의 코드는 컴파일 시에 오류가 발생한다.</li>
+</ul>
+<pre><code>static int *pi;
+pi = malloc(sizeof(int));
+</code></pre><ul>
+<li>
+<p>따라서 선언과 초기화를 분리함으로써, 오류를 피할 수 있다.</p>
+</li>
+<li>
+<p>컴파일러 관점에서 초기화 연산자 (=)의 사용과 할당 연산자의 사용은 차이가 있다.</p>
+</li>
+</ul>
+<h3 id="힙-메모리와-시스템-메모리">힙 메모리와 시스템 메모리</h3>
+<ul>
+<li>
+<p>힙은 일반적으로 운영체제의 기능을 이용해 메모리를 관리한다.</p>
+</li>
+<li>
+<p>힙의 크기는 프로그램이 실행될 때 고정된 크기로 정해지거나, 실행 도중에 크기를 늘리도록 할 수 있다.</p>
+</li>
+<li>
+<p>하지만, <code>free</code> 함수가 호출되었다고 해도, 힙 관리자가 반드시 해제된 메모리를 운영체제로 반환하는 것은 아니고, 애플리케이션에서 해당 메모리를 다시 사용할 수 있게 할 뿐이다.</p>
+</li>
+<li>
+<p>그래서 프로그램이 메모리를 할당한 후에, 다시 해제한다고 해도 일반적으로 운영체제 측면에서는 해제된 메모리가 애플리케이션의 메모리 사용량에 반영되지 않는다.</p>
+</li>
+</ul>
+<h3 id="댕글링-포인터-다루기">댕글링 포인터 다루기</h3>
+<p>포인터가 원인인 문제들의 디버깅은 때로 해결하기 어려울 때가 있다. 댕글링 포인터 문제를 처리하기 위한 몇 가지 접근 방법이다.</p>
+<ol>
+<li>
+<p>메모리 해제 후 포인터를 NULL로 설정하라. NULL로 설정한 포인터를 그 이후에 사용하면, 애플리케이션이 종료될 것이다. 그러나 해당 포인터에 대한 다수의 복사본이 존재할 경우에는 문제는 여전히 발생한다.</p>
+</li>
+<li>
+<p><code>free</code> 함수를 대체할 새로운 함수를 작성하라.</p>
+</li>
+<li>
+<p>몇몇 런타임 시스템이나 디버깅 시스템은 해제된 메모리를 특별한 값으로 덮어쓴다. 예외가 발생하지 않은 상황이라도, 프로그래머는 예상치 못한 곳에 이러한 값이 포함된 것을 보고 프로그램이 해제된 메모리에 접근한 것을 알 수 있다.</p>
+</li>
+<li>
+<p>댕글링 포인터와 다른 문제들을 발견하기 위한 서드 파티 도구들을 활용하라.</p>
+</li>
+</ol>
+<h3 id="동적-메모리-할당-기술">동적 메모리 할당 기술</h3>
+<ul>
+<li>
+<p>힙 관리자의 메모리 할당과 해제의 구현은 컴파일러마다 다를 수 있다.</p>
+</li>
+<li>
+<p>대부분의 힙 관리자들은 메모리를 할당하기 위해서, 힙 또는 데이터 세그먼트를 사용하며, 이 방식은 메모리 단편화나 프로그램 스택과 충돌이 일어나기도 한다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=33784887">C 포인터의 이해와 활용</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
