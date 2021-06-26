@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>C 포인터 이해와 활용 (1) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="/tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">C 포인터 이해와 활용 (1)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/06/26</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">프로그래밍</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p><img src="https://user-images.githubusercontent.com/14002238/123501837-a78c1480-d682-11eb-892e-eb7378e1ef67.jpg" alt="8994506799_1"></p>
+<ul>
+<li>포인터에 대해서 복습하고 모르던 내용을 다시 되집어 보기 위해서 다음 책을 읽고 정리한 내용이다.</li>
+</ul>
+<h3 id="시작하기">시작하기</h3>
+<hr>
+<ul>
+<li>
+<p>포인터를 얼마나 확실하게 이해하고 효율적으로 사용하는 가로 초보와 전문 C 프로그래머를 구분할 수 있다.</p>
+</li>
+<li>
+<p>사실 포인터의 기본적인 개념은 매우 간닪다. 포인터는 메모리 위치의 주소를 저장하는 변수일 뿐이다.</p>
+</li>
+</ul>
+<h3 id="포인터와-메모리">포인터와 메모리</h3>
+<hr>
+<p>컴파일된 C 프로그램은 다음 세가지 종류의 메모리를 사용한다.</p>
+<ul>
+<li>정적(Static) / 전역(Global)</li>
+</ul>
+<p>정적으로 선언된 변수들은 정적/전역 메모리에 할당된다. 또한 전역 변수들 또한 같은 메모리 공간에 할당된다.
+정적/전역 변수들은 프로그램이 시작될 때 할다오디며, 프로그램이 종료될 때까지 메모리 공간에 남아 있다. 모든 함수에서 접근할 수 있는 전역 변수와는 달리 <strong>정적 변수의 접근 범위는 해당 변수를 선언한 함수로 제한된다</strong></p>
+<ul>
+<li>자동 (Automatic) / 로컬 (Local)</li>
+</ul>
+<p>자동 변수는 함수 안에서 선언되고 함수가 호출될 때 생성된다. 자동 변수의 접근 범위는 선언된 함수로 제한되며, 함수가 호출되는 동안에만 존재한다. 일반적으로 블록문 안에서 선언된 변수의 범위는 해당 블록으로 제한한다. 이들은 종종 자동 변수라고 언급된다.</p>
+<ul>
+<li>동적 (Dynamic)</li>
+</ul>
+<p>동적 (Dynamic) 메모리는 힙(Heap) 메모리 영역에 할당되고 필요한 경우에 해제된다. 포인터를 사용하여 할당된 메모리 영역을 참조하며, 포인터에 의해 접근이 제한 된다. 메모리를 해제하지 않는 한 메모리레 존재한다.</p>
+<h4 id="포인터를-잘-알아야하는-이유">포인터를 잘 알아야하는 이유</h4>
+<ul>
+<li>빠르고 효율적인 코드 작성</li>
+<li>다양한 문제에 대한 효과적인 해결 방법 제공</li>
+<li>동적 메모리 할당 지원</li>
+<li>작고 간결한 표현의 사용</li>
+<li>큰 오버헤드 없이 데이터 구조를 포인터로 전달</li>
+<li>함수의 매개 변수로 전달된 데이터 보호</li>
+</ul>
+<p>포인터를 잘 사용하면 강력한 도구이지만, 포인터를 이용할 때는 다음과 같은 다양한 문제가 발생할 수 있다.</p>
+<ul>
+<li>배열이나 데이터 구조의 경계를 넘는 접근</li>
+<li>소멸한 자동/로컬 변수의 참조</li>
+<li>할당 해제된 힙 메모리의 참조</li>
+<li>아직 할당되지 않은 포인터에 대한 역참조</li>
+</ul>
+<h4 id="포인터-선언하기">포인터 선언하기</h4>
+<ul>
+<li>포인터 변수는 데이터 타입과 별표 그리고 변수 이름을 순서대로 나열하여 선언한다. 아래 예제 에서는 정수 변수와 정수 포인터 변수를 선언하고 있다.</li>
+</ul>
+<pre><code>int num;
+int *pi;
+</code></pre><h4 id="주소-연산자">주소 연산자</h4>
+<p>주소 연산자(&amp;)는 변수의 주소를 반환하다. 아래와 같이 주소 연산자를 사용하여 <code>pi</code> 포인터를 <code>num</code> 변수의 주소로 초기화 할 수 있다.</p>
+<pre><code>num = 0
+pi = &amp;num;
+</code></pre><h3 id="가상-메모리와-포인터">가상 메모리와 포인터</h3>
+<ul>
+<li>
+<p>주소 출력을 좀 더 복잡하게 하기 위해서 가상 운영체제에서 표시되는 포인터의 주소가 실제 물리 메모리 주소가 될 가능성은 없다.</p>
+</li>
+<li>
+<p>가상 운영체제는 프로그램이 머신의 물리 주소 공간을 나눠 사용할 수 있게 하며, 프로그램은 페이지/프레임 단위로 물리 주소 공간을 나눠 사용한다.</p>
+</li>
+<li>
+<p>애플리케이션의 페이지는 잠재적으로 연속적이지 않은 메모리 공간에 할당되거나 동시에 메모리상에 존재 하지 않을 수 도 있다.</p>
+</li>
+<li>
+<p>운영체제는 페이지에 의해 메모리를 유지할 필요가 있을 때 보조 기억장치에 기록하고 필요한 시점에 다시 읽어들이며 이전과는 다른 메모리 공간에 할당된다.</p>
+</li>
+<li>
+<p>운영체제에서 실행되는 각각의 프로그램들은 머신의 전체 물리 메모리 공간에 접근할 수 있다고 가정되지만, 실제로는 그렇지 않다.</p>
+</li>
+<li>
+<p>각각의 프로그램에서 사용하는 주소는 실제 물리 메모리 주소와는 다른 가상 주소이다.</p>
+</li>
+<li>
+<p>운영체제는 필요한 시점에 이 가상 주소를 실제 물리 메모리 주소로 변환한다.</p>
+</li>
+<li>
+<p>즉 페이지에 있는 코드와 데이터는 프로그램이 실행될 때 메모리의 서로 다른 물리 위치에 존재할 수 있다. 애플리케이션의 가상 주소는 실행중에 변경되지 않으며, 포인턴의 내용을 출력할 때 우리가 보게 되는 주소이다 또한 가상 주소는 실제 주소로 운영체제에 의해서 투명하게 변환된다.</p>
+</li>
+</ul>
+<h3 id="간접지정-연산자로-포인터-역참조하기">간접지정 연산자로 포인터 역참조하기</h3>
+<ul>
+<li>간접 지정 연산자 (<code>*</code>)는 포인터 변수가 가리키는 위치의 값을반환하며 참조 연산자로 포인터 값의 역참조를 하는 역할을 한다.</li>
+</ul>
+<pre><code>int num = 5;
+int *pi = &amp;num;
+
+
+printf(&quot;%d\n&quot;, *pi); // 5
+</code></pre><ul>
+<li>
+<p>그리고 또한 좌변값(left-value)에 의해서 참조 연산자의 결과를 사용할 수 있다.</p>
+</li>
+<li>
+<p>좌변값은 할당 연산자의 좌측에 위치한 피연산자를 말한다. 모든 좌변값은 값이 할당될 수 있도록 변경 가능한 값이어야 한다.</p>
+</li>
+</ul>
+<pre><code>*pi = 200;
+printf(&quot;%d\n&quot;, num);
+</code></pre><h3 id="함수-포인터">함수 포인터</h3>
+<ul>
+<li>포인터는 함수를 가리키도록 선언할 수 있으며 함수 포인터 선언은 일반적인 포인터 표기법에 비해서 다소 복잡하다.</li>
+</ul>
+<pre><code>void (*foo)();
+</code></pre><h3 id="null의-개념">NULL의 개념</h3>
+<ul>
+<li>널은 흥미로운 주제이다. 하지만 종종 널이 가진 다양한 개념들이 잘못 이해되거나 혼란을 일으킨다. 널은 다음과 같은 개념들을 포함한다.</li>
+</ul>
+<pre><code>- 널 개념
+- 널 포인터 상수
+- NULL 매크로
+- NUL 아스키 문자
+- 널 문자열
+- 널 문장
+</code></pre><ul>
+<li>
+<p>포인터에서 NULL이 할당되면 해당 포인터는 아무것도 가리키지 않음을 의미한다.</p>
+</li>
+<li>
+<p>널 개념은 포인터가 다른 포인터와 다른 포인터와 특별한 값을 가질 수 있다는 것을 의미한다.</p>
+</li>
+<li>
+<p>널이 할당된 포인터는 메모리의 어떤 영역도 가리키지 않으며 두 개의 널 포인터는 항상 서로 같다.</p>
+</li>
+<li>
+<p>일반적이지는 않지만, 문자 포인터나 정수 포인터와 같이 포인터 타입을 위한 널 포인터 타입이 있는 경우도 있다.</p>
+</li>
+<li>
+<p>실제 널의 개념은 널 포인터 상수에 의해 지원되는 추상적인 개념이다. 널 포인터 상수는 0이거나 0이 아닐 수 있으며, C 개발자는 널 상수의 실제 내부적인 표현에 대해서 신경쓰지 않아도 된다.</p>
+</li>
+<li>
+<p>NULL 매크로는 상수 정수 0을 <code>void</code> 포인터로 캐스팅 한 것이다. 많은 라이브러리에서 다음과 같이 정의한다.</p>
+</li>
+</ul>
+<pre><code>#define NULL ((void*) 0)
+</code></pre><ul>
+<li>
+<p>NULL 포인터는 연결 리스트에서 종종 리스트의 끝을 표시하기 위해 사용되는 것 처럼, 많은 데이터 구조의 표현에서 매우 유용하게 사용된다.</p>
+</li>
+<li>
+<p>포인터 변수 <code>pi</code>에 널 값을 할당하기 위해서는 다음과 같이 NULL 타입을 사용할 수 있다.</p>
+</li>
+</ul>
+<pre><code>pi = NULL;
+</code></pre><pre><code>널 포인터와 초기화되지 않은 포인터는 명백히 다르다. NULL을 포함한 포인터가 메모리상의 어떤 위치도 참조하지 않지만, 초기화되지 않은 포인터는 어떤 값이라도 포함될 수 있으며 참조될 수 있다.
+</code></pre><p>포인터는 논리식에서 단독으로 피연산자로 사용될 수 있다. 예를 들어서, 아래 코드처럼 포인터가 NULL로 설정되었는지 테스트 할 수 있다.</p>
+<pre><code>if (pi) {
+  // 널이 아닌 경우
+} else {
+  // 널인 경우
+}
+</code></pre><p>널 포인터가 포함한 주소는 유효한 주소가 아니므로 절대로 역참조 해서는 안되며, 널 포인터에 대한 역참조는 프로그램에 대한 비정상 종료를 초래한다.</p>
+<h3 id="void-포인터">void 포인터</h3>
+<p><code>void</code> 포인터는 어떤 타입의 데이터도 참조할 수 있는 범용 포인터이다.</p>
+<pre><code>void *pv;
+</code></pre><p><code>void</code> 포인터 선어에는 두 가지 흥미로운 것이 있다.</p>
+<ul>
+<li>
+<p><code>void</code> 포인터는 <code>char</code> 포인터와 같은 표현과 메모리 정렬 방법을 사용한다.</p>
+</li>
+<li>
+<p><code>void</code> 포인터는 다른 포인터와 절대 같지 않다. 하지만 NULL 값이 할당된 두 개의 <code>void</code> 포인터는 서로 같다. <code>void</code> 포인터의 실제 동작은 시스템에 따라서 서로 다르다.</p>
+</li>
+</ul>
+<pre><code>int num;
+int *pi = &amp;num;
+printf(&quot;Value of pi: %p\n&quot;, pi); // Value of pi: 0x7ffee6dfd9cc
+void* pv = pi;
+pi = (int*) pv;
+printf(&quot;Value of pi: %p\n&quot;, pi); // Value of pi: 0x7ffee6dfd9cc
+</code></pre><pre><code>void 포인터 사용시 주의가 필요하다.
+임의의 포인터를 void 포인터로 캐싱팅 한 후에, 기존 타입이 아닌 전혀 다른 타입의 포인터로 캐스팅하더라도 이를 막을 방법이 없다.
+</code></pre><pre><code>size_t size = sizeof(void*); // valid
+size_t size = sizeof(void); // invalid
+</code></pre><h3 id="전역-포인터와-정적-포인터">전역 포인터와 정적 포인터</h3>
+<ul>
+<li>포인터가 전역 또는 정적으로 선언되면, 해당 포인터는 프로그램 시작 시에 <code>NULL</code>로 초기화 된다.</li>
+</ul>
+<pre><code>int *globalpi;
+
+void foo() {
+  static int *staticpi;
+}
+
+int main() {
+  ...
+}
+</code></pre><h3 id="포인터의-크기와-데이터-타입">포인터의 크기와 데이터 타입</h3>
+<ul>
+<li>
+<p>포인터의 크기는 애플리케이션의 호환성과 다른 환경으로의 이식 가능성을 고민할 때 문제가 된다.</p>
+</li>
+<li>
+<p>포인터의 크기는 사용하는 장비와 컴파일러에 따라서 다르다.</p>
+</li>
+</ul>
+<h3 id="메모리-모델">메모리 모델</h3>
+<ul>
+<li>
+<p><code>64</code>비트 컴퓨터의 도입으로 C 기본 데이터 타입의 메모리 크기 차이가 더 확실해졌다.</p>
+</li>
+<li>
+<p>컴퓨터와 컴파일러들은 C 기본 데이터 타입의 메모리 할당을 위해서 저마다 다른 옵션의 메모리 모델을 가지고 있다.</p>
+</li>
+</ul>
+<pre><code>I In L Ln LL LLn P Pn
+</code></pre><p><img src="https://user-images.githubusercontent.com/14002238/123513904-c3b3a400-d6ca-11eb-8d44-66838289b5f0.png" alt="Screen Shot 2021-06-26 at 10 06 25 PM"></p>
+<h3 id="사전-정의된-포인터-관련-데이터-타입">사전 정의된 포인터 관련 데이터 타입</h3>
+<ul>
+<li>
+<p>포인터를 다룰 때, 네 가지의 사전 정의된 데이터 타입이 종종 사용된다.</p>
+</li>
+<li>
+<p><code>size_t</code>, <code>ptrdiff_t</code>, <code>intptr_t</code>, <code>uintptr_t</code></p>
+</li>
+</ul>
+<h4 id="size_t-타입의-이해"><code>size_t</code> 타입의 이해</h4>
+<ul>
+<li>
+<p><code>size_t</code> 타입은 C 언어에서 임의의 객체가 가질 수 있는 최대 크기를 나타낸다. 크기를 표현하는 데 음수의 사용은 의미가 없기 때문에, <code>size_t</code>는 부호 없는 정수를 사용한다.</p>
+</li>
+<li>
+<p><code>size_t</code> 타입을 쓰는 이유는 시스템에서 주소 지정이 가능한 메모리 영역과 일치하는 크기를 선언하는 이식 가능한 방법을 제공하기 위해서이다.</p>
+</li>
+</ul>
+<pre><code>문자의 수나 배열 인덱스와 같은 크기 변수를 선언할 때는
+size_t 타입을 사용하는 것이 좋다.
+size_t 타입은 반복문이나 카운터나 배열의 참조 그리고 때로는 포인터 연산에서 사용될 수 있다.
+</code></pre><h4 id="intptr_t-uintptr_t-사용하기"><code>intptr_t</code>, <code>uintptr_t</code> 사용하기</h4>
+<ul>
+<li>
+<p><code>intptr_t</code>, <code>uintptr_t</code> 타입은 포인터의 주소를 저장하는데 사용된다.</p>
+</li>
+<li>
+<p>이 두 타입은 다른 환경으로 이식이 가능하고, 안전한 포인터 선언 방법을 제공하며, 시스템 내부에서 사용하는 포인터와 같은 크기다.</p>
+</li>
+<li>
+<p>포인터를 정수 표현으로 변환할 때 유용하게 사용할 수 있다.</p>
+</li>
+</ul>
+<h3 id="상수와-포인터">상수와 포인터</h3>
+<ul>
+<li>
+<p><code>C</code> 에서 포인터와 <code>const</code> 키워드를 함게 사용하면 매우 강력한 기능이 제공된다.</p>
+</li>
+<li>
+<p><code>const</code> 키워드와 포인터의 사용은 몇몇 상황에 전혀 새로운 방식의 데이터 보호 방법을 제공한다.</p>
+</li>
+</ul>
+<h4 id="상수에-대한-포인터">상수에 대한 포인터</h4>
+<ul>
+<li>
+<p>포인터는 상수를 가리키도록 정의될 수 있다. 이 말은 곧 포인터가 참조하는 값을 수정하는 데 사용될 수 없음을 의미한다.</p>
+</li>
+<li>
+<p>다음 예제에서 상수 정수를 선언한다. 다음으로 정수에 대한 포인터와 상수 정수에 대한 포인터를 선언하고 각각의 정수로 초기화 한다.</p>
+</li>
+</ul>
+<pre><code>int num = 0;
+const int limit = 500;
+int *pi;
+const int *pci;
+
+pi = &amp;num;
+pci = &amp;limit;
+</code></pre><ul>
+<li>상수 포인터에 대한 역참조는 단지 정수의 값을 읽기만 한다면 문제가 없다.</li>
+</ul>
+<pre><code>printf(&quot;%d\n&quot;, *pci);
+</code></pre><ul>
+<li>
+<p>포인터가 참조하는 값을 변경하기 위해서 상수 포인터를 역참조할 수는 없다. 그러나 포인터 값 자체는 상수가 아니므로 포인터 자체의 값은 변경할 수 있다.</p>
+</li>
+<li>
+<p>즉, 포인터는 다른 상수 정수나 정수를 사용하기 위해서 변경될 수 있다. 상숭 포인터 값 자체의 변경은 전혀 문제가 되지 않는다.</p>
+</li>
+<li>
+<p>상수 포인터 선언은 단지 포인터를 통해 참조된 값의 변경만을 제한한다.</p>
+</li>
+</ul>
+<pre><code>pci = &amp;num;
+</code></pre><p>상수 정수를 가리키는 <code>pci</code> 포인터 변수의 선언은 다음을 의미한다.</p>
+<ul>
+<li><code>pci</code>는 다른 상수 정수를 가리키도록 할당될 수 있다.</li>
+<li><code>pci</code>는 다른 비상수 정수를 가리키도록 할당될 수 있다.</li>
+<li><code>pci</code>는 가리키는 정수의 값을 읽기 위해 역참조 될 수 있다.</li>
+<li><code>pci</code>는 가리키는 정수의 값을 변경하기 위해 역참조 될 수 없다.</li>
+</ul>
+<h3 id="비상수를-가리키는-상수-포인터">비상수를 가리키는 상수 포인터</h3>
+<ul>
+<li>비상수를 가리키는 상수 포인터 역시 선언할 수 있으며, 이 선언의 의미는 포인터 자체의 값, 즉 가리키는 대상은 변경할 수 없지만 포인터가 가리키는 곳의 값은 변경할 수 있음을 의미한다.</li>
+</ul>
+<pre><code>int num;
+int *const cpi = &amp;num;
+</code></pre><p>위 선언은 다음을 의미한다.</p>
+<ul>
+<li><code>cpi</code> 변수는 비상수 변수로 초기화 되어야한다.</li>
+<li><code>cpi</code> 변수는 변경될 수 없다.</li>
+<li><code>cpi</code> 포인터 변수가 가리키는 변수의 값은 변경할 수 없다.</li>
+</ul>
+<h3 id="상수를-가리키는-상수-포인터">상수를 가리키는 상수 포인터</h3>
+<p>상수를 가리키는 상수 포인터는 거의 사용되지 않는다. 포인터 값은 변경될 수 없으며, 포인터가 가리키는 값 역시 포인터를 통해 변경될 수 없다.</p>
+<pre><code>const int* const cpic = &amp;limit;
+</code></pre><h3 id="다중-수준-상수-포인터">다중 수준 상수 포인터</h3>
+<p>상수 포인터는 다중 수준의 간접 지정이 가능하다.</p>
+<pre><code>const int * const cpci = &amp;limit;
+const int * const * pcpci;
+</code></pre><table>
+<thead>
+<tr>
+<th>포인터의 종류</th>
+<th>포인터 데이터 변경</th>
+<th>포인터 대상 데이터 변경</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>비상수를 가리키는 포인터</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr>
+<td>상수를 가리키는 포인터</td>
+<td>O</td>
+<td>X</td>
+</tr>
+<tr>
+<td>비상수를 가리키는 상수 포인터</td>
+<td>X</td>
+<td>O</td>
+</tr>
+<tr>
+<td>상수를 가리키는 상수 포인터</td>
+<td>X</td>
+<td>X</td>
+</tr>
+</tbody>
+</table>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=33784887">C 포인터의 이해와 활용</a></li>
+</ul>
+
+    <a href="/"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
