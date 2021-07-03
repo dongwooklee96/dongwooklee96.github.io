@@ -6,7 +6,361 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 02 Jul 2021 23:02:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Jul 2021 11:12:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>리눅스 시스템 네트워크 프로그래밍 (1) - 프로세스 (1)</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/03/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-1/</link>
+      <pubDate>Sat, 03 Jul 2021 11:12:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/03/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-1/</guid>
+      <description>&lt;h3 id=&#34;프로세스&#34;&gt;프로세스&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;전통적인 프로세스를 복제하는 방법은 &lt;code&gt;fork&lt;/code&gt;를 사용하는 방법이다. 이때 복제할 프로세스를 부모 프로세스라고 하고, 새롭게 복제된 프로세스를 자식 프로세스라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스를 복제하는 이유는 멀티 태스킹을 위해서이다. 싱글 스레드에서, 3개의 태스크, &lt;code&gt;A, B, C&lt;/code&gt;를 실행하는 구조를 멀티 프로세스 구조로 바꾸면 3개의 복제된 자식 프로세스에 일임하는 형식으로 분리할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;복제된 프로세스는 부모 프로세스와 독립적으로 작동하기 때문에, 복수개의 CPU가 설치된 경우에는 매우 뛰어난 응답성과 성능을 보여줄 가능성이 크다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만, 복제된 프로세스 사이에 데이터를 주고 받는 구조이고, 데이터 통신 처리에 비용이 크다면 오히려 성능 하락이 발생할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스 복제가 많이 쓰이는 경우로, 셸(&lt;code&gt;SHELL&lt;/code&gt;)이 있다. 셸에서 &lt;code&gt;ls&lt;/code&gt; 명령을 실행한다고 가정할 때, 셸은 명령어를 받아들인 후에, &lt;code&gt;fork&lt;/code&gt;를 하여 자식 프로세스를 만든다. 그 후에 바로 &lt;code&gt;exec&lt;/code&gt;를 호출하여 &lt;code&gt;bin/ls&lt;/code&gt; 프로그램 이미지로 교체하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;확장된-프로세스-실행-방법&#34;&gt;확장된 프로세스 실행 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;새로운 프로세스 실행 방법이 있는데, 이 방법은 기존의 &lt;code&gt;fork-exec&lt;/code&gt;를 대체할 수 있는 기능으로서 더 가볍고 빠른 실행을 위해서 제안되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;기존의 &lt;code&gt;fork-exec&lt;/code&gt; 구조에서는 &lt;code&gt;fork&lt;/code&gt;에서 부모 프로세스를 복제할 때, 모든 정적 정보를 복제한다. 예를 들어서 부모 프로세스의 힙 메모리, 정적 메모리, IPC 자원 ID, 열린 파일, 시그널 마스크 등이 포함된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 &lt;code&gt;fork&lt;/code&gt;를 하고 나서, 곧바로 &lt;code&gt;exec&lt;/code&gt;를 호출하는 경우에는 대부분 부모 프로세스의 열린 파일이나, &lt;code&gt;IPC&lt;/code&gt; 자원을 사용하지 않는 경우가 많다. 따라서 사용하지 않는 자원을 복제하는 오버헤드가 존재한다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물론 한두 개의 프로세스가 저런 오버헤드를 가진다고 해도 시스템에 큰 문제가 없지만, 대형 시스템에서 엄청난 수의 프로세스가 실행되거나, 실시간 처리가 중요한 서비스라면 더더욱 큰 문제가 될 수 있다. 따라서 &lt;code&gt;posix_spawn&lt;/code&gt;에서는 부모 프로세스의 자원 중 6가지(&lt;code&gt;열린 파일, 프로세스 그룹 ID, 유저 및 그룹 ID, 시그널 마스크, 스케줄링&lt;/code&gt;)의 자원을 선택적으로 복제 및 관리할 수 있도록 디자인 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;fork&#34;&gt;fork()&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;fork()&lt;/code&gt; 호출이 성공하면 프로세스가 복제되어 2개가 되고, 리턴값으로 정수인 &lt;code&gt;pid_t&lt;/code&gt; 타입을 리턴한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 리턴 값은 3가지의 반환 형태를 가지며 각각에 따라서 처리 방법을 다르게 코딩해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;0 -&amp;gt; 자식 프로세스에게 리턴되는 값
+양수 -&amp;gt; 부모 프로세스에게 리턴되며, 자식 프로세스의 PID를 의미한다.
+-1 -&amp;gt; 에러, 복제 실패
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 다음과 같이 0인 경우에는, 자식 프로세스가 실행할 부분을 코딩하고 양수인 부분은 부모 프로세스가 실행할 부분으로 코딩한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 &lt;code&gt;fork()&lt;/code&gt;를 사용하면 하나의 소스코드에 부모와 자식 프로세스의 코드가 같이 들어가게 된다. 그리고 부모 프로세스에는 자식 프로세스의 종료를 기다리기 위해서 &lt;code&gt;wait&lt;/code&gt;, &lt;code&gt;waitpid&lt;/code&gt;를 이용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;switch (ret = fork()) {
+  case 0:
+    do_child(); /* 자식 프로세스인 경우에 실행될 코드 */
+    break;
+  case -1: /* 에러가 난 경우 */
+    do_errorcatc();
+    break;
+  default: /* 양수는 부모 프로세스이며 ret에 자식 프로세스의 PID가 저장됨 */
+    do_parent();
+    break;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일반적으로 위와 같이 부모 프로세스가 실행할 부분과, 자식 프로세스가 실행할 부분을 나누어서 코딩할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;주의할 점은 &lt;code&gt;fork()&lt;/code&gt; 를통해서 자식 프로세스가 분기하는 구조를 제대로 만들지 않으면 이상한 현상이 발생할 수 있다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/wait.h&amp;gt;
+
+int main() {
+  int i = 0;
+  pid_t ret;
+
+  for (i = 0; i &amp;lt; 3; i++) {
+    ret = fork();
+    printf(&amp;quot;[%d] PID(%d) PPID(%d)\n&amp;quot;, i, getpid(), getppid());
+#ifndef OMIT_SWITCH
+    switch (ret) {
+      case 0:
+        pause();
+        return 0;
+      case -1:
+        break;
+      default:
+        break;
+    }
+#endif
+  }
+  wait(NULL);
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 코드를 보면, 전처리기 분기문 처리가 되어있어, &lt;code&gt;OMIT_SWITCH&lt;/code&gt; 매크로가 정의되어 있지 않는다면, 같이 빌드되는 부분이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;gcc -DOMIT_SWITCH _Wall -o fork_omit_swich fork_process.c 
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위와 같이 매크로를 같이 빌드하면, 전처리기 분기문 처리가 빌드되지 않는다. 그리고 나서 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/124343414-2d213e80-dc06-11eb-93b1-7e6ba63954b7.png&#34; alt=&#34;result&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;총 7개의 프로세스가 실행되는 것을 확인할 수 있는데, 부모 프로세스에서 총 3개의 자식 프로세스를 생성하고, 또한 그 자식 프로세스들이 자식 프로세스를 생성하는 구조로 이루어진다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;exec3-계열-함수&#34;&gt;exec(3) 계열 함수&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;int execl(const char *path, const char *arg, ...);
+int execlp(const char *file, const char *arg, ...);
+int execle(const char *path, const char *arg, ..., char * const envp[]);
+int execv(const char *path, char *const argv[]);
+int execvp(const char *file, char *const argv[]);
+int execve(const char *path, char *const argv[], char *const envp[]);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;exec&lt;/code&gt; 계열 함수는 현재 실행중인 프로세스의 이미지를 새로운 프로세스 이미지로 대체한다. 즉 쉽게 이야기하면 현재 프로세스에 실행중인 프로그램 파일을 로딩한다는 의미이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스 이미지가 대체되면 프로세스의 실행코드는 교체되지만, 기본적인 &lt;code&gt;PID&lt;/code&gt;, &lt;code&gt;PPID&lt;/code&gt;, 파일 기술자등 프로세스의 정보는 유지된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;exec&lt;/code&gt; 계열의 첫 번째 인수는 실행되어야 하는 프로그램 파일로서절대 경로나 상대 경로를 사용할 수 있다. 만일 경로가 생략되고 파일 명만 넣으면 &lt;code&gt;execl, execle, execv, execve&lt;/code&gt;는 현재 작업 디렉터리에서 실행되어야 하는 프로그램 파일을 찾고, &lt;code&gt;execlp, exevcp&lt;/code&gt;는 환경 변수에 등록된 디렉터리를 검색하여 실행되어야 하는 프로그램 파일을 찾는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;execl&lt;/code&gt;로 시작하는 함수는 &lt;code&gt;arg&lt;/code&gt; 라는 이름을 쓰고, &lt;code&gt;execv&lt;/code&gt;로 시작하는 함수는 &lt;code&gt;argv&lt;/code&gt;를 사용하는 것을 알 수 있다. 이들의 차이는 execl&lt;code&gt;계열은 실행할 파일의 인수 목록을 리스트로 받기 때문에 가변 인수 리스트를 가진다. 따라서 인수 리스트의 마지막을 알아내기 위해서 맨 끝은&lt;/code&gt;NULL`로 끝내야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;execl 계열을 사용한 예&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;execl(&amp;quot;/bin/ls&amp;quot;, &amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL);
+execlp(&amp;quot;ls&amp;quot;, &amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;execv 계열을 사용한 예&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;char *argv_exec[] = {&amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL};
+execv(&amp;quot;/bin/ls&amp;quot;, argv_exec);
+
+char *argv_exec[] = {&amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL};
+execvp(&amp;quot;ls&amp;quot;, argv_exec);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;이 경우에는 기존의 환경변수는 모두 초기화되고 새로 넣은 환경 변수 벡터가 사용된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+int main() {
+  if (execl(&amp;quot;/bin/ls&amp;quot;, &amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL) == -1) {
+    perror(&amp;quot;excel&amp;quot;);
+  }
+  printf(&amp;quot;+ arfter execl\n&amp;quot;);
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 예제는 작동에는 문제가 없지만, 설계상의 의문이 있는 코드이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;왜냐하면, &lt;code&gt;execl&lt;/code&gt; 실행되면서 &lt;code&gt;ls&lt;/code&gt;로 프로세스 이미지를 교체하기 때문에 이후 &lt;code&gt;+ after execl&lt;/code&gt; 메시지는 화면에 출력될 일이 없기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;상속되지-않는-파일-기술자&#34;&gt;상속되지 않는 파일 기술자&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;기본적으로는 &lt;code&gt;exec&lt;/code&gt;는 부모 프로세스의 파일 기술자를 복제한다.&lt;/li&gt;
+&lt;li&gt;하지만, 부모 프로세스가 &lt;code&gt;fork&lt;/code&gt;를 하기 전에 특정 파일 기술자에 &lt;code&gt;fcntl&lt;/code&gt;로 &lt;code&gt;FD_CLOEXEC&lt;/code&gt; 플레그를 지정하면 &lt;code&gt;exec&lt;/code&gt;가 실행될 때 해당 파일 기술자는 닫히게 된다. 이를 &lt;code&gt;close-on-exec&lt;/code&gt;라고 부른다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;forkexec_parent.c&lt;/em&gt;*&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/wait.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+
+int main() {
+  pid_t pid_child;
+  printf(&amp;quot;Parent[%d]: Start\n&amp;quot;, getpid());
+  int fd = open(&amp;quot;forkexec.log&amp;quot;, O_WRONLY | O_CREAT | O_APPEND, 0644);
+
+  if (fd == -1) {
+    perror(&amp;quot;FAIL: open&amp;quot;);
+    exit(EXIT_FAILURE);
+  }
+
+  dprintf(fd, &amp;quot;Parent[%d]: Open log file(fd=%d)\n&amp;quot;, getpid(), fd);
+
+#ifdef APPLY_FD_CLOEXEC
+  int ret_fcntl;
+  if ((ret_fcntl = fcntl(fd, F_SETFD, FD_CLOEXEC)) == -1) {
+    perror(&amp;quot;FAIL: fcntl(F_SETFD, FD_CLOEXEC)&amp;quot;);
+    exit(EXIT_FAILURE);
+  }
+#endif
+
+  /* fork-exec code */
+  char *argv_exec[] = {&amp;quot;fork_exec_child&amp;quot;, (char*) NULL};
+
+  switch ((pid_child = fork())) {
+    case 0: /* child process */
+      execv(argv_exec[0], argv_exec);
+      break;
+    case -1: /* error */
+      perror(&amp;quot;FAIL: FORK&amp;quot;);
+      break;
+    default: /* parent process */
+      wait(NULL);
+      break;
+  }
+  printf(&amp;quot;Parent[%d]: Exit\n&amp;quot;, getpid());
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;forkexec_child.c&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+int main() {
+  dprintf(STDOUT_FILENO, &amp;quot;Child[%d]: Start\n&amp;quot;, getpid());
+  dprintf(3, &amp;quot;Child[%d]: fd(3): Test fd.\n&amp;quot;, getpid());
+  close(3);
+  dprintf(STDOUT_FILENO, &amp;quot;Child[%d]: Exit\n&amp;quot;, getpid());
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;다음은 부모 프로세스에서, 파일을 생성하고 기록하고 있다. 그리고 나서, 자식 프로세스에서 파일 디스크립터를 받고 종료하는 코드이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;생성된 파일을 살펴보면 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;Parent[5935]: Open log file(fd=3)
+Child[5936]: fd(3): Test fd.
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;하지만, 부모 프로세스를 하기 전에 특정 파일 기술자에 &lt;code&gt;fcntl&lt;/code&gt;로 &lt;code&gt;FD_CLOEXEC&lt;/code&gt; 플래그를 지정하면, 해당 파일 기술자는 닫히게 된다. 따라서 이를 위해서 &lt;code&gt;APPLY_FD_CLOEXEC&lt;/code&gt; 매크로를 정의하고 빌드를 해보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;gcc -DAPPLY_FD_CLOEXEC -o forkexec_parent_fdcloexec forkexec_parent.c
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;Parent[6014]: Open log file(fd=3)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;매크로를 정의하고 나서는, 부모 프로세스가 자식 프로세스에게 파일 기술자를 상속하지 않으므로, &lt;code&gt;forkexec.log&lt;/code&gt; 파일에 자식 프로세스에는 기록되지 않았음을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;결론적으로는 &lt;code&gt;fork-exec&lt;/code&gt;를 이용할 때, 자식 프로세스가 사용하지 않는 파일이 복제되는 오버헤드를 피하고 싶다면 &lt;code&gt;FD_CLOEXEC&lt;/code&gt; 플래그 사용을 고려하는 것이 좋다. 하지만 더 근본적인 방법으로는 &lt;code&gt;fork-exec&lt;/code&gt; 대신에 &lt;code&gt;posix_spawn&lt;/code&gt;을 사용하는 것이 더 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;system-함수&#34;&gt;system 함수&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;system&lt;/code&gt; 함수는 셸을 실행시켜서 명령어를 실행하는 기능으로서, &lt;code&gt;fork-exec&lt;/code&gt;를 간단하게 구현한 형태이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다만 중요한 차이가 있는데, &lt;code&gt;system&lt;/code&gt;은 실행 명령어가 작동되는 동안에 부모 프로세스가 잠시 정지되고, 자식 프로세스의 정지, 종료 상태를 통보해주는 &lt;code&gt;SIGCHILD&lt;/code&gt;도 블록되고 종료 시그널인 &lt;code&gt;SIGINT&lt;/code&gt;, &lt;code&gt;SIGQUIT&lt;/code&gt; 시ㅋ그널도 무시된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서, 중요 시그널이 블록킹 되어, 종종 부모 프로세스가 무한 대기 상태에 빠지는 경우가 발생할 수 있으므로, 정말로 간단한 경우가 아니라면 &lt;code&gt;fork-exec&lt;/code&gt;로 구현하는 것을 추천한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=82732834&#34;&gt;Advanced! 리눅스 시스템 네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>리눅스 시스템 네트워크 프로그래밍 (0) - 서문</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/03/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-0-%EC%84%9C%EB%AC%B8/</link>
+      <pubDate>Sat, 03 Jul 2021 11:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/03/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-0-%EC%84%9C%EB%AC%B8/</guid>
+      <description>&lt;h3 id=&#34;서문&#34;&gt;서문&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;책의 서문에서는 코딩이란 예술의 경지이기 때문에 반복해서 사용함으로써 익숙해지고, 좋은 경험을 토대로 새로운 것을 깨닫게 해준다고 나와있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서, 수 많은 이론을 머리에 채워넣었다고 하더라도, 절대적으로 코딩을 해본 경험이 적다면, 반쪽 짜리 프로그래머가 될 수 밖에 없다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이론만 배우고 끝나는 것이 아니라, 실제로 코딩을 하면서 손에 익을 때까지 코딩을 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;리눅스의-표준-및-역사&#34;&gt;리눅스의 표준 및 역사&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;리눅스가 표준 안을 가지기 전까지, 많은 파생된 버전이 있었다는 것을 알게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;에일리어싱과-restric-포인터&#34;&gt;에일리어싱과 RESTRIC 포인터&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;에일리어싱은 어떤 한 공간에 대해 복수개의 접근 경로가 있는 경우를 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;에일리어싱은 C언어에서, 중요한 역할을 담당하고 있으며, 가독성 향상이나, 형변환을 위해서 사용되지만 때때로, 최적화를 방해하거나, 문제를 일으킬 소지가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;몇몇 함수들은 인수로 받아들이는 주소가 에일리어싱 되었을 때 오류를 방지하기 위해 미리 검사하는 행위 때문에 성능 저하가 발생하기도 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서, 함수 인수가 다른 곳에서 참조하지 않음을 보장해준다면 내부적으로 병렬처리를 하거나, 에일리어싱에 대한 검사를 하지 않아도 되므로 상당히 효율적으로 함수를 설계할 수 있고 이를 위해서 &lt;code&gt;restrict&lt;/code&gt; 포인터가 도입되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;restrict&lt;/code&gt; 포인터는 &lt;code&gt;restrict&lt;/code&gt; 포인터가 가리키는 객체를 다른 공간에서 에일리어싱 하지 않도록 강제를 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;void *memcpy(void *dest, const void *src, size_t n);
+void *memcpy(void *restrict s1, const void *restrict s2, size_t n);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 코드에서, 상위에 있는 &lt;code&gt;memcpy&lt;/code&gt; 함수는 과거에 사용되던 함수의 원형이고, 아래쪽 &lt;code&gt;memcpy&lt;/code&gt;는 C99 이후에, 적용되는 함수의 원형이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;새롭게 적용된 &lt;code&gt;memcpy&lt;/code&gt; 에서는 사용자가 &lt;code&gt;s1&lt;/code&gt;, &lt;code&gt;s2&lt;/code&gt;의 접근이 비순차, 비동기적으로 진행되거나 병렬처리 될 수도 있음을 암시하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int *p_num, *p_alias;
+p_num = (int *) malloc(sizeof(int) * 100);
+p_alias = p_num + 20; /* 에일리어싱 되었음 */
+memcpy(p_num, p_alias, sizeof(int) * 50);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 코드에서 &lt;code&gt;p_num&lt;/code&gt;, &lt;code&gt;p_alias&lt;/code&gt;는 에일리어싱 되었으므로, &lt;code&gt;restict&lt;/code&gt; 포인터 룰을 위반한 상태이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 사이드 이펙트의 발생 가능성이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=82732834&#34;&gt;Advanced! 리눅스 시스템 네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/07/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
