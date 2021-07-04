@@ -6,7 +6,118 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 03 Jul 2021 11:12:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Jul 2021 01:12:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>리눅스 시스템 네트워크 프로그래밍 (2) - 프로세스 (2)</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/04/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-2-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-2/</link>
+      <pubDate>Sun, 04 Jul 2021 01:12:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/04/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-2-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-2/</guid>
+      <description>&lt;h3 id=&#34;posix_spawn-계열-함수&#34;&gt;posix_spawn 계열 함수&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;int posix_spawn(pid_t *restrict pid, const char *restrict path, const posix_spawn_file_actions_t *file_actions, const posix_spawnattr_t *restrict attrp, char *const argv[restrict], char *const envp[restrict]);
+
+int posix_spawnp(pid_t *restrict pid, const char *restrict file, cosnt posix_spawn_file_actions_t *file_actions, const posix_spawnattr_t *restrict attrp, char *const argv[restrict], char *const envp[restrict]);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;앞서 언급했듯이 &lt;code&gt;fork-exec&lt;/code&gt;는 부모 프로세스의 자원을 선택적으로 복제할 수 없으므로, 성능상의 문제와 추가적인 코딩이 복잡해지는 문제가 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서, &lt;code&gt;posix_spawn&lt;/code&gt; 계열에서는 부모 프로세스의 자원을 선택적으로 복제하거나, 다룰 수 있는 통합 인터페이스가 제안되었는데 이를 가능하게 하는 것이 바로 &lt;code&gt;file_actions&lt;/code&gt;, &lt;code&gt;attrp&lt;/code&gt; 인수이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 &lt;code&gt;file_actions&lt;/code&gt;, &lt;code&gt;attrp&lt;/code&gt; 인수 부분에 &lt;code&gt;NULL&lt;/code&gt;을 지정하면, &lt;code&gt;fork-exec&lt;/code&gt;와 동일한 작동, 즉 부모 프로세스의 자원을 모두 복제한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;posix_spawn&lt;/code&gt;도 기본적으로는 부모 프로세스가 열었던 파일은 모두 상속 받는다. 만약 추가로 열어야하는 파일이 있거나, 기존에 열은 파일을 닫아야 할 필요가 있는 경우에는 &lt;code&gt;file_actions&lt;/code&gt; 매개변수를 이용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;posix_spawn_file_actions_t-구조체-조작&#34;&gt;posix_spawn_file_actions_t 구조체 조작&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;int posix_spawn_file_actions_init(posix_spawn_file_actions_t *file_actions);
+int posix_spawn_file_destroy(posix_spawn_file_actions_t *file_actions);
+int posix_spawn_file_actions_addopen(posix_spawn_file_actions_t *restrict file_actions, int fildes, const char *restrict path, int oflag, mode_t mode);
+int posix_spawn_file_actions_addclose(posix_spawn_file_actions_t *file_actions, int fildes);
+int posix_spawn_file_actions_adddup2(posix_spawn_file_actions_t *file_actions, int fildes, int newfildes);
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/wait.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;spawn.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+int main() {
+	int ret_err = 0;
+	pid_t pid_child;
+	char buf_err[64];
+	posix_spawn_file_actions_t posix_faction; /* file action struct */
+	char *argv_child[] = { &amp;quot;forkexec_child&amp;quot;, NULL };
+	printf(&amp;quot;Parent[%d]: Start\n&amp;quot;, getpid());
+
+	if((ret_err = posix_spawn_file_actions_init(&amp;amp;posix_faction)) != 0) { /* init */
+		strerror_r(ret_err, buf_err, sizeof(buf_err));
+		fprintf(stderr, &amp;quot;Fail: file_actions_init :%s\n&amp;quot;, buf_err);
+		exit(EXIT_FAILURE);
+	}
+	if ((ret_err = posix_spawn_file_actions_addopen(&amp;amp;posix_faction, 3,
+					&amp;quot;pspawn.log&amp;quot;, O_WRONLY | O_CREAT | O_APPEND, 0664 )) != 0) {
+		strerror_r(ret_err, buf_err, sizeof(buf_err));
+		fprintf(stderr, &amp;quot;Fail: file_actions_addopen: %s\n&amp;quot;, buf_err);
+		exit(EXIT_FAILURE);
+	}
+	ret_err = posix_spawn(&amp;amp;pid_child,
+			argv_child[0],
+			&amp;amp;posix_faction,
+			NULL,
+			argv_child,
+			NULL);
+
+	if ((ret_err = posix_spawn_file_actions_destroy(&amp;amp;posix_faction)) != 0) {
+		strerror_r(ret_err, buf_err, sizeof(buf_err));
+		fprintf(stderr, &amp;quot;Fail: file_actions_destory: %s\n&amp;quot;, buf_err);
+		exit(EXIT_FAILURE);
+	}
+	printf(&amp;quot;Parent[%d]: Wait for child(%d)\n&amp;quot;, getpid(), (int)pid_child);
+	(void)wait(NULL);
+	printf(&amp;quot;Parent[%d]: Exit\n&amp;quot;, getpid());
+	return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;메모리를 해제하는 부분을 유의해서 보자, 예제에서는 한번 실행되고 곧바로 종료되기 때문에, 해제하지 않아도 메모리 누수를 신경 쓸 필요가 없지만, 연속적으로 실행되는 실무 프로그램에서는 민감한 문제이므로, 꼭 메모리 해제에 신경을 써야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;posix_spawnattr_t-구조체-조작&#34;&gt;posix_spawnattr_t 구조체 조작&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;int posix_spawnattr_init(posix_spawnattr_t *attr);
+int posix_spawnattr_destroy(posix_spawnattr_t *attr);
+
+int posix_spawnattr_getflags(const posix_spawnattr_t *restrict attr, short *restrict flags);
+int posix_spawnattr_setflags(posix_spawnattr_t *attr, short flags);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;posix_spawnattr_t&lt;/code&gt; 구조체는 &lt;code&gt;posix_spawnattr_init()&lt;/code&gt;로 초기화를 한 뒤에 사용해야만 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 사용이 끝난 구조체는 &lt;code&gt;posix_spawnattr_destroy()&lt;/code&gt;로 메모리를 해제해야 누수가 발생하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 메모리를 해제한 후에, 다시 사용할 필요가 있다면, 다시 &lt;code&gt;posix_spawnattr_init()&lt;/code&gt; 로 초기화를 한 후에 사용하도록 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;posix_spawnattr_t&lt;/code&gt;에는 &lt;code&gt;EUID&lt;/code&gt;, 프로세스 그룹, 기본 시그널 작동, 시그널 블록 마스크, 스케줄링 파라미터, 스케줄러를 설정할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이중에서 &lt;code&gt;EUID&lt;/code&gt; 설정을 제외한 나머지 기능들은 해당 속성의 &lt;code&gt;on/off&lt;/code&gt;를 의미하는 플래그를 설정하고 개별적으로 속성을 등록하는 함수를 사용해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=82732834&#34;&gt;Advanced! 리눅스 시스템 네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>리눅스 시스템 네트워크 프로그래밍 (1) - 프로세스 (1)</title>
       <link>https://dongwooklee96.github.io/post/2021/07/03/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-1/</link>
