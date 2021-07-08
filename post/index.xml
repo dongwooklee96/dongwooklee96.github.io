@@ -21,10 +21,36 @@
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://hamait.tistory.com/1137?url=https://hamait.tistory.com/1137&#34;&gt;코딩을 잘 한다는 것, 코더가 되지 말라는 것&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오늘 회사에서, 이사님이랑 같이 코딩을 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=Tr0cUGXDVis&amp;amp;t=4s&#34;&gt;오타를 줄이면 버그도 줄어든다&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=hWwJF-fU2Lg&#34;&gt;프로그래머라면 검증한다&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=PuSAVazO1JM&#34;&gt;성공한 사람이 죽어도 지키는 단 한가지&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;반복해서 고치고, 고민하는 끈기가 있어야한다는 말이 인상 깊었다. 예전에 작성한 코드를 삭제하지 말고, 나중에 다시 보았을 때 고칠점이 보이면 꾸준하게 고치라는 글을 본 기억이 있다. 이와 상통하는 것 같다.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반복해서 고치고, 고민하는 끈기가 있어야한다는 말이 인상 깊었다. 예전에 작성한 코드를 삭제하지 말고, 나중에 다시 보았을 때 고칠점이 보이면 꾸준하게 고치라는 글을 본 기억이 있다. 이와 상통하는 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 다른 사람이 설명하고 있는 내용을 집중하는데 어려움을 느끼고 있다고 생각을 하였고, 조인에 대해서 완전히 이해하지 못하고 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 회사에서 일을 할 때 덤벙거리면서 실수를 할 때가 있는데, 가끔 이럴 수도 있다고 생각하고 넘어가려고 했던 것 같다. 따라서 나의 이러한 자세를 반성하게 되었다. 또한 다음부터 주의해야겠다는 마음을 가지는 것보다는 일처리가 제대로 되었는지를 확인하는 프로세스를 가져야겠다고 생각을 했다. 오탈자를 살펴보는 일도, 두세번을 반복해도 찾지 못하는 경우가 있다고 했다. 따라서 처음일을 하고 나서, 바로 제출하는 것이 아니라, 시간을 두고 기다렸다가 한 번 더 확인하는 것이다. 물론 시간은 더 소모되겠지만, 나는 일단 시간을 줄이는 것보다 어떤일을 제대로 하는 연습을 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로그래머라면 어떤 것을 검증할 수 있어야한다는 말에 공감했다. 예를 들어서, 버그가 발생하거나, 시스템에서 어떻게 동작하는지 궁금할 때가 있는데 이를 어떻게 검증할 수 있을 지도 감이 오지 않을 때가 있다. 따라서 검증할 수 있는것이 실력이라고 생각을 하게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;검증을 잘하는 프로그래머라면, 테스트 코드를 작성하지 않더라도, 좋은 코드를 만들 수 있고 오히려 검증을 잘 못하는 프로그래머라면, 테스트 코드를 작성하더라도, 별로 중요하지 않은 이상한 테스트코드를 짠다는 것이다. 나도 별로 중요하지도 않은 테스트 코드를 작성하느라 시간을 낭비하는 프로그래머가 아니라, 진짜로 검증해야하고, 좋은 테스트를 작성할 수 있도록 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;1. 위험을 감수하라
@@ -40,11 +66,25 @@
 -&amp;gt; 성공은 발명, 발사, 재창조, 재도전, 다시 시작, 반복 또 반복을 통해서 온다. 성공을 향한 길은 항상 직선이 아니다.
 5. 개성을 잃지마라.
 -&amp;gt; 세상은 당신이 일반적인 사람이 되기를 원하지만, 그렇게 하지 마라. 개성을 유지하려면 지속적인 노력이 필요하지만, 개성을 유지하는 것은 그만한 가치가 있다.
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;1. 무엇을 원하는지, 무엇이 되고 싶은지를 결정하라.
+2. 명확한 목표를 세우고, 꼭 된다는 생각 될 수 있다는 확신을 가진다.
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;목표를 이룰 만한 잠재력이 충분하다는 확신이 필요하다.&lt;/li&gt;
+&lt;li&gt;나의 인생 목표가 반드시 이뤄질 것이라는 확신이 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;조인에 대해서, 알고 있다고 생각을 했는데, 완전히 이해하고 있지 못했다. 따라서, 조인을 하면 어떻게 되는지 남에게 설명할 수 있을 정도로 이해를 해야겠다.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
 &lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;어제 자신감 있고, 당당한 사람이 되려면, 일처리를 제대로 하고 꼼꼼하게 확인하는 습관이 동반되어야한다는 것을 깨달았다. 따라서, 오늘 항상 어떤일을 할 때 꼼꼼하게 확인하는 습관을 가지기 위해서 노력을 하자.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어제 자신감 있고, 당당한 사람이 되려면, 일처리를 제대로 하고 꼼꼼하게 확인하는 습관이 동반되어야한다는 것을 깨달았다. 따라서, 오늘 항상 어떤일을 할 때 꼼꼼하게 확인하는 습관을 가지기 위해서 노력을 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;처음 맡은 일이라면 잘하기 위해서 3번정도 확인한다, 그리고 이미 해보았던 일이라도, 한 번하고 나서 끝내지 말고, 다시 한번 확인하는 습관을 가진다.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
 &lt;ol&gt;
@@ -7078,22 +7118,22 @@ gcc -pg -g -o server server.c
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;영역&lt;/th&gt;
-&lt;th style=&#34;text-align:center&#34;&gt;설명&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;영역&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;설명&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;New/Young 영역&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;New/Young 영역&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Old 영역&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Old 영역&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Perm 영역&lt;/td&gt;
-&lt;td style=&#34;text-align:center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Perm 영역&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
