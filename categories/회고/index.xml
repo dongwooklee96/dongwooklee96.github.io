@@ -6,7 +6,57 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 07 Jul 2021 08:34:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 08 Jul 2021 08:34:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/08/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
+      <pubDate>Thu, 08 Jul 2021 08:34:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/08/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://techneedle.com/archives/41962&#34;&gt;27년 동안 제프 베조스가 전한 최고의 교훈 5가지&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://hamait.tistory.com/1137?url=https://hamait.tistory.com/1137&#34;&gt;코딩을 잘 한다는 것, 코더가 되지 말라는 것&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;반복해서 고치고, 고민하는 끈기가 있어야한다는 말이 인상 깊었다. 예전에 작성한 코드를 삭제하지 말고, 나중에 다시 보았을 때 고칠점이 보이면 꾸준하게 고치라는 글을 본 기억이 있다. 이와 상통하는 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;1. 위험을 감수하라
+-&amp;gt; 열정을 따르기 위해서라면 기꺼히 위험을 감수하라.
+-&amp;gt; 80세가 되었을 때 이 결정을 후회할지를 생각하면서 결정하라.
+2. 빠른 결정을 내려라.
+-&amp;gt; 혁신적인 비즈니스를 유지하기 위한 핵심이 &#39;높은 퀄리티의, 빠른 결정&#39;이다.
+-&amp;gt; 대부분의 결정은 변경 가능하고, 되돌릴 수 있다. 따라서 결정은 신속하게 내려야 한다.
+-&amp;gt; 되돌릴 수 있는 결정을 심사숙고하는데 너무 많은 시간을 소비하면 위험에 처한다.
+3. 천직을 찾아라.
+4. 방황의 비효율성을 수용하라.
+-&amp;gt; 성공을 위해서라면 건강한 비효율성은 동반된다.
+-&amp;gt; 성공은 발명, 발사, 재창조, 재도전, 다시 시작, 반복 또 반복을 통해서 온다. 성공을 향한 길은 항상 직선이 아니다.
+5. 개성을 잃지마라.
+-&amp;gt; 세상은 당신이 일반적인 사람이 되기를 원하지만, 그렇게 하지 마라. 개성을 유지하려면 지속적인 노력이 필요하지만, 개성을 유지하는 것은 그만한 가치가 있다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어제 자신감 있고, 당당한 사람이 되려면, 일처리를 제대로 하고 꼼꼼하게 확인하는 습관이 동반되어야한다는 것을 깨달았다. 따라서, 오늘 항상 어떤일을 할 때 꼼꼼하게 확인하는 습관을 가지기 위해서 노력을 하자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/07/07/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0/</link>
