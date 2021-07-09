@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>리눅스 네트워크 도구 (테스트, 추적, 모니터링 명령어) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">리눅스 네트워크 도구 (테스트, 추적, 모니터링 명령어)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/04/28</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="hping3">hping3</h3>
+<hr>
+<pre><code>hping3 -S www.daum.net -p 80
+</code></pre><ul>
+<li>
+<p>TCP/UDP, ICMP 및 다양한 종류의 패킷을 전송할 수 있다.</p>
+</li>
+<li>
+<p>좀 더 빠른 주기로 패킷을 보내고 싶다면 <code>--fast</code> 옵션을 줄 수 있다.</p>
+</li>
+</ul>
+<h3 id="iptables">iptables</h3>
+<hr>
+<ul>
+<li>이 명령어는 특정 IP 주소의 요청을 막을 수 있는 명령이다.</li>
+</ul>
+<pre><code># localhost의 UDP 요청을 차단하는 규칙을 추가하였다.
+iptables -I OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP
+
+# iptables 설정을 확인해본다.
+iptables -L -n
+
+# 다른 터미널에서 실제 요청을 보내보지만 응답이 오지 않는다.
+hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
+
+# 위의 설정을 삭제한다.
+iptables -D OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP
+
+iptables -L -n
+
+# 요청이 정상적으로 보내짐을 확인할 수 있다.
+
+hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
+</code></pre><ul>
+<li>
+<p><code>iptables</code> 도구를 사용하는 것은 내부적으로 커널의 기능을 사용하는 것이고, 리눅스 커널 안에 넷 필터(<code>NET FILTER</code>) 라는 기능을 이용하여 구현하고 있다.</p>
+</li>
+<li>
+<p>설정이 늘어날수록 점점 느려진다는 단점이 있어서, 요즘에는 <code>BPF</code>라는 툴을 사용한다.</p>
+</li>
+</ul>
+<h3 id="nslookup">nslookup</h3>
+<hr>
+<ul>
+<li>도메인 이름을 IP 주소로 변환해주는 명령어이다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/116270076-bd33a980-a7b9-11eb-83fc-a8ffaef46022.png" alt="Screen Shot 2021-04-28 at 12 36 08 AM"></p>
+<ul>
+<li>이와 비슷한 도구로 <code>dig</code> 라는 도구가 있다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/116270202-dccad200-a7b9-11eb-9f82-fa515cebecdd.png" alt="Screen Shot 2021-04-28 at 12 36 45 AM"></p>
+<h3 id="nmap">nmap</h3>
+<hr>
+<ul>
+<li>포트 스캔을 도와주는 툴이다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/116270489-18fe3280-a7ba-11eb-8d79-95571243f764.png" alt="Screen Shot 2021-04-28 at 12 38 40 AM"></p>
+<ul>
+<li>위의 명령어 및 결과는 <code>localhost</code>에 열려있는 포트들을 터미널에 출력한다.</li>
+</ul>
+<h3 id="iftop">iftop</h3>
+<hr>
+<ul>
+<li>네트워크 I/O 트래픽 모니터링을 도와주는 툴이다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/116270960-89a54f00-a7ba-11eb-9c44-38576b8ffebf.png" alt="Screen Shot 2021-04-28 at 12 41 42 AM"></p>
+<h3 id="bmon">bmon</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/116271227-c113fb80-a7ba-11eb-8473-232acc8656c2.png" alt="Screen Shot 2021-04-28 at 12 42 55 AM"></p>
+<ul>
+<li>네트워크 I/O 트래픽 모니터링을 도와주는 툴이다.</li>
+<li>특이한 점은 TUI 그래픽으로 보여준다.</li>
+</ul>
+<h3 id="dstat">dstat</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/116271795-47304200-a7bb-11eb-9aea-bbeba62def27.png" alt="Screen Shot 2021-04-28 at 12 47 14 AM"></p>
+<ul>
+<li>테이블 형태로 시스템 정보와 같이 보여준다.</li>
+</ul>
+<h3 id="ss">ss</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/116272077-8fe7fb00-a7bb-11eb-869c-6110b9b5a938.png" alt="Screen Shot 2021-04-28 at 12 49 12 AM"></p>
+<ul>
+<li>다양한 옵션으로 현재 소켓 상태를 확인할 수 있다.</li>
+<li>소켓의 리시브 큐와 센드 큐를 모니터링 할 수 있다.</li>
+</ul>
+<h3 id="netstat">netstat</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/116272413-d76e8700-a7bb-11eb-9726-d953b812550b.png" alt="Screen Shot 2021-04-28 at 12 50 57 AM"></p>
+<ul>
+<li>다양한 옵션으로 현재 소켓 상태를 확인할 수 있다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

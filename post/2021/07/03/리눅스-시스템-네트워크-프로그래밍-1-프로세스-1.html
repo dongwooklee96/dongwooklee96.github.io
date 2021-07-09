@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>리눅스 시스템 네트워크 프로그래밍 (1) - 프로세스 (1) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">리눅스 시스템 네트워크 프로그래밍 (1) - 프로세스 (1)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/07/03</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템 프로그래밍</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템 프로그래밍</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="프로세스">프로세스</h3>
+<hr>
+<ul>
+<li>
+<p>전통적인 프로세스를 복제하는 방법은 <code>fork</code>를 사용하는 방법이다. 이때 복제할 프로세스를 부모 프로세스라고 하고, 새롭게 복제된 프로세스를 자식 프로세스라고 한다.</p>
+</li>
+<li>
+<p>프로세스를 복제하는 이유는 멀티 태스킹을 위해서이다. 싱글 스레드에서, 3개의 태스크, <code>A, B, C</code>를 실행하는 구조를 멀티 프로세스 구조로 바꾸면 3개의 복제된 자식 프로세스에 일임하는 형식으로 분리할 수 있다.</p>
+</li>
+<li>
+<p>복제된 프로세스는 부모 프로세스와 독립적으로 작동하기 때문에, 복수개의 CPU가 설치된 경우에는 매우 뛰어난 응답성과 성능을 보여줄 가능성이 크다.</p>
+</li>
+<li>
+<p>하지만, 복제된 프로세스 사이에 데이터를 주고 받는 구조이고, 데이터 통신 처리에 비용이 크다면 오히려 성능 하락이 발생할 수 있다.</p>
+</li>
+<li>
+<p>프로세스 복제가 많이 쓰이는 경우로, 셸(<code>SHELL</code>)이 있다. 셸에서 <code>ls</code> 명령을 실행한다고 가정할 때, 셸은 명령어를 받아들인 후에, <code>fork</code>를 하여 자식 프로세스를 만든다. 그 후에 바로 <code>exec</code>를 호출하여 <code>bin/ls</code> 프로그램 이미지로 교체하게 된다.</p>
+</li>
+</ul>
+<h3 id="확장된-프로세스-실행-방법">확장된 프로세스 실행 방법</h3>
+<hr>
+<ul>
+<li>
+<p>새로운 프로세스 실행 방법이 있는데, 이 방법은 기존의 <code>fork-exec</code>를 대체할 수 있는 기능으로서 더 가볍고 빠른 실행을 위해서 제안되었다.</p>
+</li>
+<li>
+<p>기존의 <code>fork-exec</code> 구조에서는 <code>fork</code>에서 부모 프로세스를 복제할 때, 모든 정적 정보를 복제한다. 예를 들어서 부모 프로세스의 힙 메모리, 정적 메모리, IPC 자원 ID, 열린 파일, 시그널 마스크 등이 포함된다.</p>
+</li>
+<li>
+<p>하지만 <code>fork</code>를 하고 나서, 곧바로 <code>exec</code>를 호출하는 경우에는 대부분 부모 프로세스의 열린 파일이나, <code>IPC</code> 자원을 사용하지 않는 경우가 많다. 따라서 사용하지 않는 자원을 복제하는 오버헤드가 존재한다는 것이다.</p>
+</li>
+<li>
+<p>물론 한두 개의 프로세스가 저런 오버헤드를 가진다고 해도 시스템에 큰 문제가 없지만, 대형 시스템에서 엄청난 수의 프로세스가 실행되거나, 실시간 처리가 중요한 서비스라면 더더욱 큰 문제가 될 수 있다. 따라서 <code>posix_spawn</code>에서는 부모 프로세스의 자원 중 6가지(<code>열린 파일, 프로세스 그룹 ID, 유저 및 그룹 ID, 시그널 마스크, 스케줄링</code>)의 자원을 선택적으로 복제 및 관리할 수 있도록 디자인 되었다.</p>
+</li>
+</ul>
+<h3 id="fork">fork()</h3>
+<hr>
+<ul>
+<li>
+<p><code>fork()</code> 호출이 성공하면 프로세스가 복제되어 2개가 되고, 리턴값으로 정수인 <code>pid_t</code> 타입을 리턴한다.</p>
+</li>
+<li>
+<p>이러한 리턴 값은 3가지의 반환 형태를 가지며 각각에 따라서 처리 방법을 다르게 코딩해야 한다.</p>
+</li>
+</ul>
+<pre><code>0 -&gt; 자식 프로세스에게 리턴되는 값
+양수 -&gt; 부모 프로세스에게 리턴되며, 자식 프로세스의 PID를 의미한다.
+-1 -&gt; 에러, 복제 실패
+</code></pre><ul>
+<li>
+<p>따라서 다음과 같이 0인 경우에는, 자식 프로세스가 실행할 부분을 코딩하고 양수인 부분은 부모 프로세스가 실행할 부분으로 코딩한다.</p>
+</li>
+<li>
+<p>이렇게 <code>fork()</code>를 사용하면 하나의 소스코드에 부모와 자식 프로세스의 코드가 같이 들어가게 된다. 그리고 부모 프로세스에는 자식 프로세스의 종료를 기다리기 위해서 <code>wait</code>, <code>waitpid</code>를 이용할 수 있다.</p>
+</li>
+</ul>
+<pre><code>switch (ret = fork()) {
+  case 0:
+    do_child(); /* 자식 프로세스인 경우에 실행될 코드 */
+    break;
+  case -1: /* 에러가 난 경우 */
+    do_errorcatc();
+    break;
+  default: /* 양수는 부모 프로세스이며 ret에 자식 프로세스의 PID가 저장됨 */
+    do_parent();
+    break;
+}
+</code></pre><ul>
+<li>
+<p>일반적으로 위와 같이 부모 프로세스가 실행할 부분과, 자식 프로세스가 실행할 부분을 나누어서 코딩할 수 있다.</p>
+</li>
+<li>
+<p>주의할 점은 <code>fork()</code> 를통해서 자식 프로세스가 분기하는 구조를 제대로 만들지 않으면 이상한 현상이 발생할 수 있다는 것이다.</p>
+</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+
+int main() {
+  int i = 0;
+  pid_t ret;
+
+  for (i = 0; i &lt; 3; i++) {
+    ret = fork();
+    printf(&quot;[%d] PID(%d) PPID(%d)\n&quot;, i, getpid(), getppid());
+#ifndef OMIT_SWITCH
+    switch (ret) {
+      case 0:
+        pause();
+        return 0;
+      case -1:
+        break;
+      default:
+        break;
+    }
+#endif
+  }
+  wait(NULL);
+  return 0;
+}
+</code></pre><ul>
+<li>위의 코드를 보면, 전처리기 분기문 처리가 되어있어, <code>OMIT_SWITCH</code> 매크로가 정의되어 있지 않는다면, 같이 빌드되는 부분이다.</li>
+</ul>
+<pre><code>gcc -DOMIT_SWITCH _Wall -o fork_omit_swich fork_process.c 
+</code></pre><ul>
+<li>위와 같이 매크로를 같이 빌드하면, 전처리기 분기문 처리가 빌드되지 않는다. 그리고 나서 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/124343414-2d213e80-dc06-11eb-93b1-7e6ba63954b7.png" alt="result"></p>
+<ul>
+<li>총 7개의 프로세스가 실행되는 것을 확인할 수 있는데, 부모 프로세스에서 총 3개의 자식 프로세스를 생성하고, 또한 그 자식 프로세스들이 자식 프로세스를 생성하는 구조로 이루어진다.</li>
+</ul>
+<h3 id="exec3-계열-함수">exec(3) 계열 함수</h3>
+<hr>
+<pre><code>int execl(const char *path, const char *arg, ...);
+int execlp(const char *file, const char *arg, ...);
+int execle(const char *path, const char *arg, ..., char * const envp[]);
+int execv(const char *path, char *const argv[]);
+int execvp(const char *file, char *const argv[]);
+int execve(const char *path, char *const argv[], char *const envp[]);
+</code></pre><ul>
+<li>
+<p><code>exec</code> 계열 함수는 현재 실행중인 프로세스의 이미지를 새로운 프로세스 이미지로 대체한다. 즉 쉽게 이야기하면 현재 프로세스에 실행중인 프로그램 파일을 로딩한다는 의미이다.</p>
+</li>
+<li>
+<p>프로세스 이미지가 대체되면 프로세스의 실행코드는 교체되지만, 기본적인 <code>PID</code>, <code>PPID</code>, 파일 기술자등 프로세스의 정보는 유지된다.</p>
+</li>
+<li>
+<p><code>exec</code> 계열의 첫 번째 인수는 실행되어야 하는 프로그램 파일로서절대 경로나 상대 경로를 사용할 수 있다. 만일 경로가 생략되고 파일 명만 넣으면 <code>execl, execle, execv, execve</code>는 현재 작업 디렉터리에서 실행되어야 하는 프로그램 파일을 찾고, <code>execlp, exevcp</code>는 환경 변수에 등록된 디렉터리를 검색하여 실행되어야 하는 프로그램 파일을 찾는다.</p>
+</li>
+<li>
+<p><code>execl</code>로 시작하는 함수는 <code>arg</code> 라는 이름을 쓰고, <code>execv</code>로 시작하는 함수는 <code>argv</code>를 사용하는 것을 알 수 있다. 이들의 차이는 execl<code>계열은 실행할 파일의 인수 목록을 리스트로 받기 때문에 가변 인수 리스트를 가진다. 따라서 인수 리스트의 마지막을 알아내기 위해서 맨 끝은</code>NULL`로 끝내야 한다.</p>
+</li>
+</ul>
+<p><strong>execl 계열을 사용한 예</strong></p>
+<pre><code>execl(&quot;/bin/ls&quot;, &quot;ls&quot;, &quot;-al&quot;, NULL);
+execlp(&quot;ls&quot;, &quot;ls&quot;, &quot;-al&quot;, NULL);
+</code></pre><p><strong>execv 계열을 사용한 예</strong></p>
+<pre><code>char *argv_exec[] = {&quot;ls&quot;, &quot;-al&quot;, NULL};
+execv(&quot;/bin/ls&quot;, argv_exec);
+
+char *argv_exec[] = {&quot;ls&quot;, &quot;-al&quot;, NULL};
+execvp(&quot;ls&quot;, argv_exec);
+</code></pre><ul>
+<li></li>
+</ul>
+<ul>
+<li>이 경우에는 기존의 환경변수는 모두 초기화되고 새로 넣은 환경 변수 벡터가 사용된다.</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+
+int main() {
+  if (execl(&quot;/bin/ls&quot;, &quot;ls&quot;, &quot;-al&quot;, NULL) == -1) {
+    perror(&quot;excel&quot;);
+  }
+  printf(&quot;+ arfter execl\n&quot;);
+  return 0;
+}
+</code></pre><ul>
+<li>
+<p>위의 예제는 작동에는 문제가 없지만, 설계상의 의문이 있는 코드이다.</p>
+</li>
+<li>
+<p>왜냐하면, <code>execl</code> 실행되면서 <code>ls</code>로 프로세스 이미지를 교체하기 때문에 이후 <code>+ after execl</code> 메시지는 화면에 출력될 일이 없기 때문이다.</p>
+</li>
+</ul>
+<h3 id="상속되지-않는-파일-기술자">상속되지 않는 파일 기술자</h3>
+<hr>
+<ul>
+<li>기본적으로는 <code>exec</code>는 부모 프로세스의 파일 기술자를 복제한다.</li>
+<li>하지만, 부모 프로세스가 <code>fork</code>를 하기 전에 특정 파일 기술자에 <code>fcntl</code>로 <code>FD_CLOEXEC</code> 플레그를 지정하면 <code>exec</code>가 실행될 때 해당 파일 기술자는 닫히게 된다. 이를 <code>close-on-exec</code>라고 부른다.</li>
+</ul>
+<p><em>forkexec_parent.c</em>*</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+#include &lt;fcntl.h&gt;
+
+int main() {
+  pid_t pid_child;
+  printf(&quot;Parent[%d]: Start\n&quot;, getpid());
+  int fd = open(&quot;forkexec.log&quot;, O_WRONLY | O_CREAT | O_APPEND, 0644);
+
+  if (fd == -1) {
+    perror(&quot;FAIL: open&quot;);
+    exit(EXIT_FAILURE);
+  }
+
+  dprintf(fd, &quot;Parent[%d]: Open log file(fd=%d)\n&quot;, getpid(), fd);
+
+#ifdef APPLY_FD_CLOEXEC
+  int ret_fcntl;
+  if ((ret_fcntl = fcntl(fd, F_SETFD, FD_CLOEXEC)) == -1) {
+    perror(&quot;FAIL: fcntl(F_SETFD, FD_CLOEXEC)&quot;);
+    exit(EXIT_FAILURE);
+  }
+#endif
+
+  /* fork-exec code */
+  char *argv_exec[] = {&quot;fork_exec_child&quot;, (char*) NULL};
+
+  switch ((pid_child = fork())) {
+    case 0: /* child process */
+      execv(argv_exec[0], argv_exec);
+      break;
+    case -1: /* error */
+      perror(&quot;FAIL: FORK&quot;);
+      break;
+    default: /* parent process */
+      wait(NULL);
+      break;
+  }
+  printf(&quot;Parent[%d]: Exit\n&quot;, getpid());
+  return 0;
+}
+</code></pre><p><strong>forkexec_child.c</strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;stdlib.h&gt;
+
+int main() {
+  dprintf(STDOUT_FILENO, &quot;Child[%d]: Start\n&quot;, getpid());
+  dprintf(3, &quot;Child[%d]: fd(3): Test fd.\n&quot;, getpid());
+  close(3);
+  dprintf(STDOUT_FILENO, &quot;Child[%d]: Exit\n&quot;, getpid());
+  return 0;
+}
+</code></pre><ul>
+<li>
+<p>다음은 부모 프로세스에서, 파일을 생성하고 기록하고 있다. 그리고 나서, 자식 프로세스에서 파일 디스크립터를 받고 종료하는 코드이다.</p>
+</li>
+<li>
+<p>생성된 파일을 살펴보면 다음과 같다.</p>
+</li>
+</ul>
+<pre><code>Parent[5935]: Open log file(fd=3)
+Child[5936]: fd(3): Test fd.
+</code></pre><ul>
+<li>하지만, 부모 프로세스를 하기 전에 특정 파일 기술자에 <code>fcntl</code>로 <code>FD_CLOEXEC</code> 플래그를 지정하면, 해당 파일 기술자는 닫히게 된다. 따라서 이를 위해서 <code>APPLY_FD_CLOEXEC</code> 매크로를 정의하고 빌드를 해보자.</li>
+</ul>
+<pre><code>gcc -DAPPLY_FD_CLOEXEC -o forkexec_parent_fdcloexec forkexec_parent.c
+</code></pre><pre><code>Parent[6014]: Open log file(fd=3)
+</code></pre><ul>
+<li>
+<p>매크로를 정의하고 나서는, 부모 프로세스가 자식 프로세스에게 파일 기술자를 상속하지 않으므로, <code>forkexec.log</code> 파일에 자식 프로세스에는 기록되지 않았음을 확인할 수 있다.</p>
+</li>
+<li>
+<p>결론적으로는 <code>fork-exec</code>를 이용할 때, 자식 프로세스가 사용하지 않는 파일이 복제되는 오버헤드를 피하고 싶다면 <code>FD_CLOEXEC</code> 플래그 사용을 고려하는 것이 좋다. 하지만 더 근본적인 방법으로는 <code>fork-exec</code> 대신에 <code>posix_spawn</code>을 사용하는 것이 더 좋다.</p>
+</li>
+</ul>
+<h3 id="system-함수">system 함수</h3>
+<hr>
+<ul>
+<li>
+<p><code>system</code> 함수는 셸을 실행시켜서 명령어를 실행하는 기능으로서, <code>fork-exec</code>를 간단하게 구현한 형태이다.</p>
+</li>
+<li>
+<p>다만 중요한 차이가 있는데, <code>system</code>은 실행 명령어가 작동되는 동안에 부모 프로세스가 잠시 정지되고, 자식 프로세스의 정지, 종료 상태를 통보해주는 <code>SIGCHILD</code>도 블록되고 종료 시그널인 <code>SIGINT</code>, <code>SIGQUIT</code> 시ㅋ그널도 무시된다.</p>
+</li>
+<li>
+<p>따라서, 중요 시그널이 블록킹 되어, 종종 부모 프로세스가 무한 대기 상태에 빠지는 경우가 발생할 수 있으므로, 정말로 간단한 경우가 아니라면 <code>fork-exec</code>로 구현하는 것을 추천한다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=82732834">Advanced! 리눅스 시스템 네트워크 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

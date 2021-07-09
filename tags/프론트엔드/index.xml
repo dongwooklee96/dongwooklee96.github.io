@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>프론트엔드 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/</link>
+    <link>https://dongwooklee96.github.io/tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C.html</link>
     <description>Recent content in 프론트엔드 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Thu, 15 Apr 2021 22:07:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SHADOW DOM 이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/15/shadow-dom-%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/15/shadow-dom-%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Thu, 15 Apr 2021 22:07:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/15/shadow-dom-%EC%9D%B4%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/15/shadow-dom-%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -23,10 +23,10 @@
     
     <item>
       <title>디바운스란? (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/14/%EB%94%94%EB%B0%94%EC%9A%B4%EC%8A%A4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/14/%EB%94%94%EB%B0%94%EC%9A%B4%EC%8A%A4%EB%9E%80-draft.html</link>
       <pubDate>Wed, 14 Apr 2021 18:54:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/14/%EB%94%94%EB%B0%94%EC%9A%B4%EC%8A%A4%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/14/%EB%94%94%EB%B0%94%EC%9A%B4%EC%8A%A4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;디바운스란&#34;&gt;디바운스란?&lt;/h3&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
@@ -35,10 +35,10 @@
     
     <item>
       <title>리액트에서 구글 번역기가 번역하면서, DOM 트리를 변경해 렌더링이 되지 않는 현상</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/30/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EA%B5%AC%EA%B8%80-%EB%B2%88%EC%97%AD%EA%B8%B0%EA%B0%80-%EB%B2%88%EC%97%AD%ED%95%98%EB%A9%B4%EC%84%9C-dom-%ED%8A%B8%EB%A6%AC%EB%A5%BC-%EB%B3%80%EA%B2%BD%ED%95%B4-%EB%A0%8C%EB%8D%94%EB%A7%81%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/30/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EA%B5%AC%EA%B8%80-%EB%B2%88%EC%97%AD%EA%B8%B0%EA%B0%80-%EB%B2%88%EC%97%AD%ED%95%98%EB%A9%B4%EC%84%9C-dom-%ED%8A%B8%EB%A6%AC%EB%A5%BC-%EB%B3%80%EA%B2%BD%ED%95%B4-%EB%A0%8C%EB%8D%94%EB%A7%81%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81.html</link>
       <pubDate>Tue, 30 Mar 2021 13:20:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/30/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EA%B5%AC%EA%B8%80-%EB%B2%88%EC%97%AD%EA%B8%B0%EA%B0%80-%EB%B2%88%EC%97%AD%ED%95%98%EB%A9%B4%EC%84%9C-dom-%ED%8A%B8%EB%A6%AC%EB%A5%BC-%EB%B3%80%EA%B2%BD%ED%95%B4-%EB%A0%8C%EB%8D%94%EB%A7%81%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/30/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EA%B5%AC%EA%B8%80-%EB%B2%88%EC%97%AD%EA%B8%B0%EA%B0%80-%EB%B2%88%EC%97%AD%ED%95%98%EB%A9%B4%EC%84%9C-dom-%ED%8A%B8%EB%A6%AC%EB%A5%BC-%EB%B3%80%EA%B2%BD%ED%95%B4-%EB%A0%8C%EB%8D%94%EB%A7%81%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81.html</guid>
       <description>&lt;h3 id=&#34;문제-상황&#34;&gt;문제 상황&lt;/h3&gt;
 &lt;p&gt;개발을 진행하다가,  &lt;code&gt;PM&lt;/code&gt;에서 데이터가 이상하다고, 확인해달라는 요청을 받았다. 확인을 해본 결과, 데이터베이스 및 서버에서 내려오는 데이터는 정상이였다. 하지만 화면에서 업데이트를 시키지 않고, 기존에 데이터가 그대로 남아있어 화면 업데이트가 안되는 상황이였다. 재현을 해봤을 때는 아무런 문제가 없어서 혹시나 하고 구글 번역기를 켜고 재현을 해보았을 때 버그가 발생하였다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112934001-d82fe100-915b-11eb-917b-9405fadc17da.png&#34; alt=&#34;Screen Shot 2021-03-30 at 1 28 22 PM&#34;&gt;&lt;/p&gt;

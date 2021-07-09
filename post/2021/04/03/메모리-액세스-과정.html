@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>메모리 액세스 과정 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">메모리 액세스 과정</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/04/03</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C">운영체제</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C">운영체제</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="메모리-액세스-과정">메모리 액세스 과정</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/113478449-da7b9d80-94c3-11eb-989d-f4926b2321d5.png" alt="Slide07"></p>
+<ul>
+<li>
+<p>프로그램을 실행 할 때, 반드시 모두 물리 메모리에 있어야 할 필요는 없으므로, 일부분만 물리 메모리에 올려 놓고 실행된다.</p>
+</li>
+<li>
+<p>따라서 프로그램은 더 이상 물리 메모리에 의해서 더 이상 제약 받지 않으며, 사용자들은 매우 큰 가상 공간을 가정하고 프로그램을 만들 수 있고, 프로그래밍 과정이 간단해진다.</p>
+</li>
+<li>
+<p>각 사용자 프로그램이 더 작은 메모리를 차지하므로 더 많은 프로그램을 동시에 수행할 수 있다.</p>
+</li>
+<li>
+<p>가상 메모리에서는 페이지들이 실행 과정에서 실제 필요할 때, 메모리에 적재되게 된다.</p>
+</li>
+<li>
+<p>위의 그림을 보면, <code>CPU</code>에서 메모리에 접근할 때, <code>MMU</code>를 통해서 페이지 테이블에 접근한다.</p>
+</li>
+<li>
+<p>페이지 테이블은 가상 주소와 물리 주소를 맵핑하고 있고, <code>MMU</code>를 통해서 접근하는 메모리가 테이지 테이블에 맵핑 되어 있지 않다면 페이지 폴트(<code>page fault</code>)를 발생 시킨다.</p>
+</li>
+<li>
+<p>페이지 폴트가 발생하고 나서 가상 메모리와 물리 메모리가 맵핑되고, 가상 메모리를 통해서 물리 메모리에 접근할 수 있게 된다.</p>
+</li>
+</ul>
+<h3 id="페이지-교체">페이지 교체</h3>
+<hr>
+<ul>
+<li>
+<p>기본적인 페이지 교체는 다음과 같다. 메모리에서 빈 프레임이 없다면 현재 사용되지 않는 프레임을 찾아서 그것을 비워버린다.</p>
+</li>
+<li>
+<p>그 프레임의 내용을 스왑 (<code>swap</code>) 공간에 쓰고 그 페이지가 메모리에 더 이상 존재하지 않는다는 것을 나타내기 위해서, 페이지 테이블을 비운다.</p>
+</li>
+<li>
+<p>어떤 페이지를 비울지에 대해서는 다음과 같은 알고리즘이 있다. (<code>FIFO</code>, <code>LRU</code>, <code>LFU</code>, <code>MFU</code>)</p>
+</li>
+</ul>
+<h3 id="세그먼트-폴트와-페이지-폴트의-차이점">세그먼트 폴트와 페이지 폴트의 차이점</h3>
+<hr>
+<ul>
+<li>
+<p>세그먼트 폴트 : 세그먼트 폴트는 컴퓨터 소프트웨어의 실행중에 일어날 수 있는 오류로서, 프로그램이 허용되지 않은 메모리 영역에 접근을 시도하였을 때 발생합니다.</p>
+</li>
+<li>
+<p>페이지 폴트 : 페이지 폴트는 메모리에 적재된 페이지 중에 사용 페이지가 없을 때 발생한다. 페이지 폴트가 발생하고 나서, 페이지 테이블에 가상 주소와 물리 주소가 맵핑되고 나서는 발생하지 않는다.</p>
+</li>
+</ul>
+<h3 id="ps-명령어를-사용하여-실제-사용하는-메모리와-가상-메모리-크기를-확인하는-방법"><code>PS</code> 명령어를 사용하여 실제 사용하는 메모리와 가상 메모리 크기를 확인하는 방법</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/113478868-7ad2c180-94c6-11eb-879a-bd526b1c4d86.png" alt="Screen Shot 2021-04-03 at 9 49 29 PM"></p>
+<ul>
+<li><code>ps</code> 명령어를 통해서, <code>RSS</code> 항목을 보면 다음과 같이 설명하고 있다.</li>
+<li>상주하고 있는 메모리 사이즈이며, 스왑되지 않은 물리적 메모리라고 설명되어 있다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/113478927-dac96800-94c6-11eb-93d1-375419b14f4d.png" alt="Screen Shot 2021-04-03 at 9 52 07 PM"></p>
+<ul>
+<li>반면에 <code>VSZ</code>는 프로세스의 가상 메모리 크기라고 설명되어 있다.</li>
+</ul>
+<pre><code>ps -eo pmem,rss,vsz,comm
+</code></pre><p>위의 명령어를 실행하여, 프로세스 별 실제 사용하고 있는 물리 메모리와 가상 메모리를 확인할 수 있다.</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/113478993-3ac00e80-94c7-11eb-88a1-63a0ad9fd7f5.png" alt="Screen Shot 2021-04-03 at 9 54 48 PM"></p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=46380306">운영체제</a></li>
+<li><a href="https://reallinux.co.kr/">리얼 리눅스</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

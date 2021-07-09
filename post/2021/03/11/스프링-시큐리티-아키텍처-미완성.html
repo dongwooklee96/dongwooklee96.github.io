@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>스프링 시큐리티 아키텍처 (미완성) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">스프링 시큐리티 아키텍처 (미완성)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/11</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94">프로그래밍 - 자바</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%9E%90%EB%B0%94">자바</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="인증authentication과-인과authorization">인증(Authentication)과 인과(Authorization)</h2>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/110706470-3f343700-823b-11eb-83e4-103013be399a.png" alt="Screen Shot 2021-03-11 at 7 26 53 AM"></p>
+<ul>
+<li>어플리케이션 보안은 두가지의 독립적인 문제로 나뉜다.</li>
+<li>바로 인증(<code>authentication</code>)과 인가(<code>authorization</code>)이다.</li>
+<li>인증은 (<code>who are you?</code>) 이고, 인가는 (<code>what are you allowed to do?</code>)</li>
+<li>스프링 시큐리티는 인증과 인과를 분리하도록 설계된 아키텍처를 가지고 있으며, 두 가지 모두에 대한 전략과 확장 할 수 있는 포인트가 존재한다.</li>
+</ul>
+<h2 id="인증-authentication">인증 (Authentication)</h2>
+<hr>
+<pre><code>public interface AuthenticationManager {
+
+  Authentication authenticate(Authentication authentication)
+    throws AuthenticationException;
+}
+</code></pre><ul>
+<li>
+<p>인증을 위한, <code>AuthenticationManager</code> 라는 인터페이스를 제공한다.</p>
+</li>
+<li>
+<p><code>AuthenticationManager</code>는 <code>authenticate</code> 라는 메서드를 제공하는데, 다음과 같은 3가지 일을 한다.</p>
+<ul>
+<li>
+<p>입력이 유효한 주체를 나타내는지 확인할 수 있는 경우, <code>Authentication(authentication=true)</code>를 반환합니다.</p>
+</li>
+<li>
+<p>입력이 잘못된 주체를 나타내는 것으로 판단되는 경우에는, 예외를 던집니다.</p>
+</li>
+<li>
+<p>만약, 결정할 수 없는 경우에는, <code>null</code>을 반환합니다.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>AuthenticationException</code> 예외는 런타임 예외이다.</p>
+</li>
+<li>
+<p>일반적으로 응용 프로그램의 스타일이나 목적에 따라 응용 프로그램에서 일반적인 방식으로 처리됩니다.</p>
+</li>
+<li>
+<p>따라서 프로그래머가 이러한 예외를 처리하지 않습니다.</p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/110708504-1f524280-823e-11eb-86b2-b33bbe5d09d4.png" alt="Screen Shot 2021-03-11 at 7 48 00 AM"></p>
+<ul>
+<li>
+<p><code>Authentication Manager</code>의 가장 일반적으로 사용되는 구현은 <code>ProviderManager</code>로, <code>AuthenticationProvider</code> 인스턴스 체인을 지정합니다.</p>
+</li>
+<li>
+<p><code>AuthenticationProvider</code>는 <code>AuthenticationManager</code>와 비슷하지만, 함수를 호출하는 사람에게, <code>Authentication</code> 타입을 질의할 수 있는 메서드를 추가적으로 지원합니다.</p>
+</li>
+<li>
+<p><code>ProviderManager</code>는 선택적인 부모 요소를 가질 수 있으며, 모든 <code>ProviderManager</code>가 <code>null</code>을 반환하는 경우에 이를 확인할 수 있다.</p>
+</li>
+<li>
+<p>상위의 <code>ProviderManager</code>를 사용할 수 없는 경우에, <code>AuthenticationException</code> 예외가 발생한다.</p>
+</li>
+<li>
+<p>경우에 따라서, 애플리케이션은 접근 권한을 그룹으로 만들어야할 때가 있는데, 그룹 별 권한을 <code>AuthenticationManager</code>에 위임한다.</p>
+</li>
+<li>
+<p>때때로, 각가의 <code>ProviderManager</code>는, 상위 요소를 공유한다. 상위 요소는 글로벌 리소스의 일종으로 모든 프로바이더의 예외나 상황을 처리한다.</p>
+</li>
+</ul>
+<h4 id="authenticationmanager-커스터마이징">AuthenticationManager 커스터마이징</h4>
+<ul>
+<li>
+<p>스프링 시큐리티는 응용 프로그램에 설정된 인증과 관련된 관리자 기능을 빠르게 구성할 수 있도록 몇가지 기능을 제공합니다.</p>
+</li>
+<li>
+<p>일반적으로 사용되는 헬퍼는 <code>AuthenticationManagerBuilder</code>를 사용합니다.</p>
+</li>
+</ul>
+<pre><code>@Configuration
+public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
+
+   ... // web stuff here
+
+  @Autowired
+  public void initialize(AuthenticationManagerBuilder builder, DataSource dataSource) {
+    builder.jdbcAuthentication().dataSource(dataSource).withUser(&quot;dave&quot;)
+      .password(&quot;secret&quot;).roles(&quot;USER&quot;);
+  }
+
+}
+</code></pre><ul>
+<li><code>AuthenticationManager</code>는 <code>@Bean</code> 메서드로 <code>@Autowired</code>되므로, <code>AuthenticationManager</code>를 빌드할 수 있다.</li>
+</ul>
+<h2 id="인가-authorization">인가 (Authorization)</h2>
+<hr>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://spring.io/guides/topicals/spring-security-architecture">스프링 시큐리티 공식 문서</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

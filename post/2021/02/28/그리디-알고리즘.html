@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>그리디 알고리즘 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">그리디 알고리즘</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/02/28</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">알고리즘</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%B7%A8%EC%97%85%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4">이것이 취업을 위한 코딩테스트다</a> <a href="../../../../tags/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8">코딩 테스트</a> <a href="../../../../tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">알고리즘</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h1 id="그리디-알고리즘">그리디 알고리즘</h1>
+<hr>
+<p>현재 상황에서 좋아 보이는 것만을 선택하는 알고리즘</p>
+<ul>
+<li>어떤 문제가 있을 때 단순 무식하게 탐욕적으로 푸는 알고리즘이다.</li>
+<li>여기서 탐욕적이라는 말은 &lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&rsquo;을 의미한다.</li>
+<li>&lsquo;사전에 외우고 있지 않아도 풀 수 있을 가능성이 높은 유형&rsquo; 이라는 특징이 있다.</li>
+<li>그리디 알고리즘 유형의 문제는 매우 다양하기 때문에, 암기한다고 해서 항상 잘 풀수 있는 것은 아니다.</li>
+<li>많은 유형을 접해보고 문제를 풀어보며 훈련을 해야한다.</li>
+<li>코딩 테스트에서 출제되는 그리디 알고리즘 유형의 문제는 창의력, 즉 문제를 풀기 위한 최소한의 아이디어를 떠올릴 수 있는 능력을 요구한다.</li>
+</ul>
+<h1 id="문제-1-거스름돈">문제 1: 거스름돈</h1>
+<hr>
+<p>당신은 음식점의 계산을 도와주는 점원이다. 카운터에는 거스름돈으로 사용할 500원, 100원, 50원, 10원짜리 동전이 무한이 존재한다고 가정한다. 손님에게 거슬러 줘야 할 돈이 N원일 때 거슬러줘야 할 동전의 최소 개수를 구하라. 단, 거슬러 줘야할 돈 N은 항상 10의 배수이다.</p>
+<pre><code>def solve(money):
+    ret = 0
+    if money &gt;= 500:
+        ret += money // 500
+        money %= 500
+
+    if money &gt;= 100:
+        ret += money // 100
+        money %= 100
+
+    if money &gt;= 50:
+        ret += money // 50
+        money %= 50
+
+    if money &gt;= 10:
+        ret += money // 10
+        money %= 10
+
+    return ret
+</code></pre><pre><code>from problem import solve
+
+
+def test_solve1():
+    assertMoney(1300, 5)
+    assertMoney(1260, 6)
+    assertMoney(500, 1)
+    assertMoney(260, 4)
+    assertMoney(200, 2)
+    assertMoney(150, 2)
+    assertMoney(110, 2)
+    assertMoney(100, 1)
+    assertMoney(90, 4)
+    assertMoney(80, 4)
+    assertMoney(60, 2)
+    assertMoney(50, 1)
+    assertMoney(40, 4)
+    assertMoney(10, 1)
+    assertMoney(0, 0)
+
+
+def assertMoney(money, count):
+    assert (solve(money), count)
+</code></pre><ul>
+<li>코드를 보면 화폐의 종류 만큼 반복을 수행해야하는 것을 알 수 있다. 따라서 화폐의 종류가 <code>K</code>개라고 할 때, 위 소스 코드의 시간 복잡도는 <code>O(K)</code>이다.</li>
+<li>탐욕적으로 문제에 접근했을 때 정확한 답을 찾을 수 있다는 보장이 있을 때는 매우 효과적이고 직관적이다.</li>
+<li>그리디 알고리즘으로 문제의 해법을 찾았을 때는 그 해법이 정당한지 검토를 해야한다.</li>
+<li>어떤 코딩 테스트 문제를 만났을 때, 바로 문제 유형을 파악하기 어렵다면 그리디 알고리즘을 의심하고 문제를 해결할 수 있는 탐욕적인 해결책이 있는지 고민을 해보자.</li>
+<li>만약 오랜 시간을 고민해도 그리디 알고리즘으로 해결 방법을 찾을 수 없다면, 그때는 다이나믹 프로그래밍이나 그래프 알고리즘 등으로 문제를 해결 할 수 있는지를 재차 고민해보는 것도 한 방법이다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<p><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118">이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어</a></p>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

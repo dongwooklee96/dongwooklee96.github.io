@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>파이썬 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC/</link>
+    <link>https://dongwooklee96.github.io/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</link>
     <description>Recent content in 파이썬 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Mon, 14 Jun 2021 14:50:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>파이썬 - 게터와 세터 메서드 대신에 일반 속성을 사용하자.</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/14/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B2%8C%ED%84%B0%EC%99%80-%EC%84%B8%ED%84%B0-%EB%A9%94%EC%84%9C%EB%93%9C-%EB%8C%80%EC%8B%A0%EC%97%90-%EC%9D%BC%EB%B0%98-%EC%86%8D%EC%84%B1%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%9E%90./</link>
+      <link>https://dongwooklee96.github.io/post/2021/06/14/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B2%8C%ED%84%B0%EC%99%80-%EC%84%B8%ED%84%B0-%EB%A9%94%EC%84%9C%EB%93%9C-%EB%8C%80%EC%8B%A0%EC%97%90-%EC%9D%BC%EB%B0%98-%EC%86%8D%EC%84%B1%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%9E%90..html</link>
       <pubDate>Mon, 14 Jun 2021 14:50:40 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/06/14/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B2%8C%ED%84%B0%EC%99%80-%EC%84%B8%ED%84%B0-%EB%A9%94%EC%84%9C%EB%93%9C-%EB%8C%80%EC%8B%A0%EC%97%90-%EC%9D%BC%EB%B0%98-%EC%86%8D%EC%84%B1%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%9E%90./</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/06/14/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B2%8C%ED%84%B0%EC%99%80-%EC%84%B8%ED%84%B0-%EB%A9%94%EC%84%9C%EB%93%9C-%EB%8C%80%EC%8B%A0%EC%97%90-%EC%9D%BC%EB%B0%98-%EC%86%8D%EC%84%B1%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%9E%90..html</guid>
       <description>&lt;h2 id=&#34;batter-way-29-게터와-세터-메서드-대신에-일반-속성을-사용하자&#34;&gt;BATTER WAY 29. 게터와 세터 메서드 대신에, 일반 속성을 사용하자.&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;다른 언어를 사용하다가, 파이썬으로 넘어온 프로그래머들은 자연스럽게 클래스에 게터(&lt;code&gt;getter&lt;/code&gt;)와 세터(&lt;code&gt;setter&lt;/code&gt;) 메서드를 명시적으로 구현하려고 한다.&lt;/li&gt;
@@ -144,10 +144,10 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
     
     <item>
       <title>파이썬 - 키워드 인수로 선택적인 동작을 제어하자</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%9D%B8%EC%88%98%EB%A1%9C-%EC%84%A0%ED%83%9D%EC%A0%81%EC%9D%B8-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%A0%9C%EC%96%B4%ED%95%98%EC%9E%90/</link>
+      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%9D%B8%EC%88%98%EB%A1%9C-%EC%84%A0%ED%83%9D%EC%A0%81%EC%9D%B8-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%A0%9C%EC%96%B4%ED%95%98%EC%9E%90.html</link>
       <pubDate>Tue, 01 Jun 2021 16:17:40 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%9D%B8%EC%88%98%EB%A1%9C-%EC%84%A0%ED%83%9D%EC%A0%81%EC%9D%B8-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%A0%9C%EC%96%B4%ED%95%98%EC%9E%90/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%9D%B8%EC%88%98%EB%A1%9C-%EC%84%A0%ED%83%9D%EC%A0%81%EC%9D%B8-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%A0%9C%EC%96%B4%ED%95%98%EC%9E%90.html</guid>
       <description>&lt;h2 id=&#34;better-way-19-키워드-인수로-선택적인-동작을-제공하자&#34;&gt;BETTER WAY 19. 키워드 인수로 선택적인 동작을 제공하자&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -196,10 +196,10 @@ flow_per_hour &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; flow_rate
     
     <item>
       <title>파이썬 - 가변 위치 인수로 깔끔하게 보이게 하자</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B0%80%EB%B3%80-%EC%9C%84%EC%B9%98-%EC%9D%B8%EC%88%98%EB%A1%9C-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-%EB%B3%B4%EC%9D%B4%EA%B2%8C-%ED%95%98%EC%9E%90/</link>
+      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B0%80%EB%B3%80-%EC%9C%84%EC%B9%98-%EC%9D%B8%EC%88%98%EB%A1%9C-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-%EB%B3%B4%EC%9D%B4%EA%B2%8C-%ED%95%98%EC%9E%90.html</link>
       <pubDate>Tue, 01 Jun 2021 14:50:40 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B0%80%EB%B3%80-%EC%9C%84%EC%B9%98-%EC%9D%B8%EC%88%98%EB%A1%9C-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-%EB%B3%B4%EC%9D%B4%EA%B2%8C-%ED%95%98%EC%9E%90/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B0%80%EB%B3%80-%EC%9C%84%EC%B9%98-%EC%9D%B8%EC%88%98%EB%A1%9C-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-%EB%B3%B4%EC%9D%B4%EA%B2%8C-%ED%95%98%EC%9E%90.html</guid>
       <description>&lt;h2 id=&#34;batter-way-18-가변-위치-인수로-깔끔하게-보이게-하자&#34;&gt;BATTER WAY 18. 가변 위치 인수로 깔끔하게 보이게 하자&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;파이썬으로 코딩하다가, 가변적으로 인수를 받을 때가 있다.&lt;/li&gt;
@@ -273,10 +273,10 @@ log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/spa
     
     <item>
       <title>파이썬 - 키워드 전용 인수로 명료성을 강요하자</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%A0%84%EC%9A%A9-%EC%9D%B8%EC%88%98%EB%A1%9C-%EB%AA%85%EB%A3%8C%EC%84%B1%EC%9D%84-%EA%B0%95%EC%9A%94%ED%95%98%EC%9E%90/</link>
+      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%A0%84%EC%9A%A9-%EC%9D%B8%EC%88%98%EB%A1%9C-%EB%AA%85%EB%A3%8C%EC%84%B1%EC%9D%84-%EA%B0%95%EC%9A%94%ED%95%98%EC%9E%90.html</link>
       <pubDate>Tue, 01 Jun 2021 14:50:40 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%A0%84%EC%9A%A9-%EC%9D%B8%EC%88%98%EB%A1%9C-%EB%AA%85%EB%A3%8C%EC%84%B1%EC%9D%84-%EA%B0%95%EC%9A%94%ED%95%98%EC%9E%90/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%A0%84%EC%9A%A9-%EC%9D%B8%EC%88%98%EB%A1%9C-%EB%AA%85%EB%A3%8C%EC%84%B1%EC%9D%84-%EA%B0%95%EC%9A%94%ED%95%98%EC%9E%90.html</guid>
       <description>&lt;h2 id=&#34;batter-way-21-키워드-전용-인수로-명료성을-강요하자&#34;&gt;BATTER WAY 21. 키워드 전용 인수로 명료성을 강요하자.&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;safe_division&lt;/span&gt;(number, divisor, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;,
     ignore_overflow&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, ignore_zero_division&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;):
@@ -362,10 +362,10 @@ print(result)
     
     <item>
       <title>파이썬에 AOP 적용하기라는 글을 읽고 느낀점</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90-aop-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90-aop-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</link>
       <pubDate>Sat, 06 Mar 2021 14:50:40 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90-aop-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%97%90-aop-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</guid>
       <description>&lt;h2 id=&#34;배경&#34;&gt;배경&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;내가 현재 맡고 있는 솔루션에는 일일이 데이터베이스를 열어주고 쿼리를 실행하고 데이터베이스를 닫아주는 과정을 거치고 있었다. 매우 비효율적이고 중복된 코드가 많아져 이를 수정하고자 하였다. 따라서, 어떻게 수정할까 고민하는 과정에서 스프링에 있는 &lt;code&gt;AOP&lt;/code&gt; 개념이 파이썬에도 있을 것이라고 확신하고 검색을 했다.  그러던 중에, 브랜디 개발 블로그에서 좋은 글을 발견하여 이를 읽고 느낀점을 적어보았다.&lt;/p&gt;

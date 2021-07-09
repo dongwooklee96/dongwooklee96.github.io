@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GC on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/gc/</link>
+    <link>https://dongwooklee96.github.io/tags/gc.html</link>
     <description>Recent content in GC on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Sun, 04 Apr 2021 20:30:23 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/gc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GC(Garbage Collector) 종류 및 내부 원리</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/04/gcgarbage-collector-%EC%A2%85%EB%A5%98-%EB%B0%8F-%EB%82%B4%EB%B6%80-%EC%9B%90%EB%A6%AC/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/04/gcgarbage-collector-%EC%A2%85%EB%A5%98-%EB%B0%8F-%EB%82%B4%EB%B6%80-%EC%9B%90%EB%A6%AC.html</link>
       <pubDate>Sun, 04 Apr 2021 20:30:23 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/04/gcgarbage-collector-%EC%A2%85%EB%A5%98-%EB%B0%8F-%EB%82%B4%EB%B6%80-%EC%9B%90%EB%A6%AC/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/04/gcgarbage-collector-%EC%A2%85%EB%A5%98-%EB%B0%8F-%EB%82%B4%EB%B6%80-%EC%9B%90%EB%A6%AC.html</guid>
       <description>&lt;p&gt;모든 자바 애플리케이션은 JVM(&lt;code&gt;Java Virtual Machine&lt;/code&gt;) 위에서 작동한다. 따라서, &lt;code&gt;JVM&lt;/code&gt;이 작동하는데 있어서 메모리 구조와 &lt;code&gt;GC&lt;/code&gt;는 애플리케이션의 응답 시간과 성능에 밀접한 관계를 맺고 있다.&lt;/p&gt;
 &lt;h3 id=&#34;gc란-무엇인가&#34;&gt;GC란 무엇인가?&lt;/h3&gt;
 &lt;hr&gt;

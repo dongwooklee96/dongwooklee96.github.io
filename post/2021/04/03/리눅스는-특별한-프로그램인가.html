@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>리눅스는 특별한 프로그램인가? | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">리눅스는 특별한 프로그램인가?</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/04/03</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C">운영체제</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C">운영체제</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="리눅스는-과연-특별한가">리눅스는 과연 특별한가?</h3>
+<hr>
+<p>리눅스 파일이 다른 실행 파일과 다른지 알아보기 위해서 커널을 실제로 빌드 해보고 일반 실행파일과 다른점이 있는지 알아보았다.</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/113474362-8c0dd500-94aa-11eb-9173-aa348199400c.png" alt="Screen Shot 2021-04-03 at 6 29 29 PM"></p>
+<p>다음은 리눅스 커널을 <code>make</code> 명령어를 통해서, 빌드한 모습이다. 빌드를 마치게 되면 <code>vmlinux</code> 라는 실행 파일이 나오게 된다.</p>
+<p>이를 <code>file</code> 도구를 통해서 알아보았다. <code>file</code> 도구는 파일이 어떤 타입인지를 알려주는 리눅스 도구이다.</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/113474446-faeb2e00-94aa-11eb-8e60-54f4e516c57f.png" alt="Screen Shot 2021-04-03 at 6 32 41 PM"></p>
+<p><code>man</code>을 통해서 메뉴얼을 확인해보면 더욱 자세한 사용법을 알 수 있다.</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/113474566-a1373380-94ab-11eb-9f23-c2d46c38b3c8.png" alt="Screen Shot 2021-04-03 at 6 37 15 PM"></p>
+<p><img src="https://user-images.githubusercontent.com/14002238/113474587-b57b3080-94ab-11eb-8abc-1cf19518211c.png" alt="Screen Shot 2021-04-03 at 6 37 49 PM"></p>
+<p>리눅스 실행 파일과 간단한 프로그램을 만들어서 비교한 결과, 거의 같은 파일이라는 것을 확인할 수 있었다. 차이가 있다면 리눅스의 경우에는 정적 링킹이 되었고 예제 프로그램의 경우에는 동적 링킹이 되어있다는 차이점 밖에는 없다. 이에 대해서는 나중에 자세하게 정리하도록 하겠다.</p>
+<p>따라서 결론은 리눅스도 하나의 프로그램일 뿐이다.</p>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

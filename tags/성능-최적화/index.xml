@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>성능 최적화 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94/</link>
+    <link>https://dongwooklee96.github.io/tags/%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94.html</link>
     <description>Recent content in 성능 최적화 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Sun, 28 Mar 2021 23:24:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>성능 엔지니어링 및 절차</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8.html</link>
       <pubDate>Sun, 28 Mar 2021 23:24:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EC%84%B1%EB%8A%A5-%EC%97%94%EC%A7%80%EB%8B%88%EC%96%B4%EB%A7%81-%EB%B0%8F-%EC%A0%88%EC%B0%A8.html</guid>
       <description>&lt;h2 id=&#34;1성능-엔지니어링이란&#34;&gt;1.성능 엔지니어링이란&lt;/h2&gt;
 &lt;hr&gt;
 &lt;ul&gt;

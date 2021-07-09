@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SOP on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/sop/</link>
+    <link>https://dongwooklee96.github.io/tags/sop.html</link>
     <description>Recent content in SOP on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Tue, 23 Mar 2021 22:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/sop/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SOP(Same-origin policy) 란 무엇일까?</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C.html</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C.html</guid>
       <description>&lt;p&gt;브라우저 보안 정책에 &lt;code&gt;SOP(same-origin-policy)&lt;/code&gt; 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.&lt;/p&gt;
 &lt;h3 id=&#34;same-origin-policy동일-출처-정책&#34;&gt;Same-Origin-Policy(동일 출처 정책)&lt;/h3&gt;
 &lt;hr&gt;

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>애프리케이션 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/categories/%EC%95%A0%ED%94%84%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98/</link>
+    <link>https://dongwooklee96.github.io/categories/%EC%95%A0%ED%94%84%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98.html</link>
     <description>Recent content in 애프리케이션 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Mon, 29 Mar 2021 22:19:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%95%A0%ED%94%84%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>메시지 큐를 이용한 비동기처리 및 에러 처리</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/29/%EB%A9%94%EC%8B%9C%EC%A7%80-%ED%81%90%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B9%84%EB%8F%99%EA%B8%B0%EC%B2%98%EB%A6%AC-%EB%B0%8F-%EC%97%90%EB%9F%AC-%EC%B2%98%EB%A6%AC/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/29/%EB%A9%94%EC%8B%9C%EC%A7%80-%ED%81%90%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B9%84%EB%8F%99%EA%B8%B0%EC%B2%98%EB%A6%AC-%EB%B0%8F-%EC%97%90%EB%9F%AC-%EC%B2%98%EB%A6%AC.html</link>
       <pubDate>Mon, 29 Mar 2021 22:19:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/29/%EB%A9%94%EC%8B%9C%EC%A7%80-%ED%81%90%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B9%84%EB%8F%99%EA%B8%B0%EC%B2%98%EB%A6%AC-%EB%B0%8F-%EC%97%90%EB%9F%AC-%EC%B2%98%EB%A6%AC/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/29/%EB%A9%94%EC%8B%9C%EC%A7%80-%ED%81%90%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B9%84%EB%8F%99%EA%B8%B0%EC%B2%98%EB%A6%AC-%EB%B0%8F-%EC%97%90%EB%9F%AC-%EC%B2%98%EB%A6%AC.html</guid>
       <description>&lt;h2 id=&#34;메시지-큐를-이용한-비동기-요청-처리&#34;&gt;메시지 큐를 이용한 비동기 요청 처리&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112848087-a9295900-90e2-11eb-82ce-b6dd8ec80708.png&#34; alt=&#34;engineering linecorp&#34;&gt;&lt;/p&gt;

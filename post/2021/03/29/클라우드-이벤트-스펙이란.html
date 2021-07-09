@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>클라우드 이벤트 스펙이란? | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">클라우드 이벤트 스펙이란?</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/29</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EC%8A%A4%ED%8E%99">클라우드 이벤트 스펙</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="클라우드-이벤트-스펙이란">클라우드 이벤트 스펙이란?</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112941452-927a1500-9169-11eb-9947-5291c6d27c86.png" alt="Screen Shot 2021-03-30 at 3 06 29 PM"></p>
+<ul>
+<li>
+<p>이벤트는 어디에서든지 발생하지만, 이벤트를 생산하는 생산자에 따라서 이벤트를 다르게 정의하는 경향이 있다.</p>
+</li>
+<li>
+<p>이벤트를 설명하는 표준이 없기 때문에, 개발자는 이벤트 사용방법을 계속해서 배워야 한다. 또한 <code>SDK</code>, 이벤트 라우터 또는 추적 시스템과 같은 환경에서 이벤트 데이터를 전달하는데 도움이 되는 도구 및 인프라의 잠재력을 제한한다.</p>
+</li>
+<li>
+<p>클라우드 이벤트는 서비스, 플랫폼 및 시스템간에 상호 운영성을 제공하기 위해서 이벤트 데이터를 공통 형시으로 설명하기 위한 스펙이다.</p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112941821-277d0e00-916a-11eb-83bd-4a426cf9ea86.png" alt="Screen Shot 2021-03-30 at 3 11 01 PM"></p>
+<ul>
+<li>
+<p>문서를 보면 프로토콜 별로 스펙과 문서를 정의한 것을 확인할 수 있다.</p>
+</li>
+<li>
+<p>최근에 카프카에 관심이 있으므로 카프카 메시지에 대한 문서를 살펴보도록 하겠다.</p>
+</li>
+</ul>
+<h3 id="카프카-메시지-맵핑">카프카 메시지 맵핑</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112943105-01f10400-916c-11eb-88a1-546ffe6c47a1.png" alt="Screen Shot 2021-03-30 at 3 24 17 PM"></p>
+<ul>
+<li>
+<p>카프카 <code>0.11.0.0</code> 이상에서는 이벤트 발신자가 콘텐츠 모드를 선택한다, 특정 콘텐츠 모드를 사용해서 이벤틀르 요청을 허용할 수 있는 프로토콜 사용 패턴은 응용 프로그램에서 정의 할 수 있지만, 여기에서는 정의되지 않는다.</p>
+</li>
+<li>
+<p>이벤트 수신자는 카프카 메시지의 <code>Content-type</code> 헤더를 검사하여 두 콘첸츠 모드를 구분할 수 있다.</p>
+</li>
+<li>
+<p>미디어 타입이 <code>application/cloudevents</code> 인 경우에는 이벤트 형식의 사용을 나타내고 수신자는 구조화된 모드를 사용합니다. 그렇지 않은 경우에는 디폴트로 바이너리 모드입니다.</p>
+</li>
+</ul>
+<p>따라서 다음과 같은 <code>JSON</code> 형태로 작성하면 된다.</p>
+<p><strong>예제</strong></p>
+<pre><code>------------------ Message -------------------
+
+Topic Name: mytopic
+
+------------------- key ----------------------
+
+Key: mykey
+
+------------------ headers -------------------
+
+content-type: application/cloudevents+json; charset=UTF-8
+
+------------------- value --------------------
+
+{
+    &quot;specversion&quot; : &quot;1.0&quot;,
+    &quot;type&quot; : &quot;com.example.someevent&quot;,
+    &quot;source&quot; : &quot;/mycontext/subcontext&quot;,
+    &quot;id&quot; : &quot;1234-1234-1234&quot;,
+    &quot;time&quot; : &quot;2018-04-05T03:56:24Z&quot;,
+    &quot;datacontenttype&quot; : &quot;application/xml&quot;,
+
+    ... further attributes omitted ...
+
+    &quot;data&quot; : {
+        ... application data encoded in XML ...
+    }
+}
+
+-----------------------------------------------
+</code></pre><h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://github.com/cloudevents/spec">cloudevents</a></li>
+<li><a href="https://github.com/cloudevents/spec/blob/v1.0.1/kafka-protocol-binding.md">cloudevents - kafka spec</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

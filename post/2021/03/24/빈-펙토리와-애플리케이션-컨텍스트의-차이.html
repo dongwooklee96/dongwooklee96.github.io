@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>빈 펙토리와 애플리케이션 컨텍스트의 차이 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">빈 펙토리와 애플리케이션 컨텍스트의 차이</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/24</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94">프로그래밍 - 자바</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="궁금증을-가지게-된-이유">궁금증을 가지게 된 이유</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112328879-10699680-8cfa-11eb-8c22-2db852326801.png" alt="Screen Shot 2021-03-24 at 11 38 22 PM"></p>
+<ul>
+<li>
+<p>스프링 문서를 보면서 공부하다가 위와 같은 문구를 보게 되었다. <code>ApplicationContext</code>가 <code>BeanFactory</code>의 서브 타입의 인터페이스라는 것이다.</p>
+</li>
+<li>
+<p>그렇다면 무슨 차이가 있을까라는 생각을 하게 되었다.</p>
+</li>
+</ul>
+<h3 id="bean-facotry">BEAN FACOTRY</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112329428-88d05780-8cfa-11eb-8c53-63c801dadfbb.png" alt="Screen Shot 2021-03-24 at 11 41 55 PM"></p>
+<p>다행스럽게도 위와 같은 문서가 스프링 공식문서에서 제공되고 있었다. 차이점은 아래와 같다.</p>
+<ul>
+<li><code>BeanFactory</code> API는 <code>Spring IoC</code> 기능을 위한 기초적인 기반을 제공한다.</li>
+<li>이것의 구체적인 계약은, 주로 스프링의 다른 부분과 관련된 써드 파티 프레임워크와의 통합에 사용된다.</li>
+<li><code>BeanFactory</code> 및 관련 인터페이스 (예: <code>BeanFactoryAware</code>, <code>Initializing Bean</code>, <code>DispisableBean</code>)는 다른 프레임워크 구성 요소의 중요한 통합지점이다.</li>
+<li>어노테이션이랑 리플렉션이 필요하지 않으므로, 컨테이너와 컴포넌트간에 매우 효율적인 상호작용을 할 수 있다.</li>
+<li>응용 프로그램 수준 빈은 동일한 콜백 인터페이스를 사용할 수 있지만, 일반적으로 어노테이션을 또는 설정을 통한 선언적 종속성 주입을 선호한다.</li>
+<li><code>BeanFactory</code> API 레벨과, <code>DefaultListableBeanFactory</code> 구현에서는 구성 형식이나 사용할 구성 요소 어노테이션에 대해서 가정을 하지 않는다.</li>
+<li>이러한 것은 확장 기능(예: <code>XmlBeanDefinitionReader</code>, <code>AutowiredAnnotationBeanPostProcessor</code>)을 통해서 제공되며, 공유 <code>BeanDefinition</code> 개체에서 핵심 메타데이터 표현으로 작성한다.</li>
+<li>이것이 바로 스프링 컨테이너를 유연하고 확장 가능하게 만드는 본질이다.</li>
+</ul>
+<blockquote>
+<p>솔직히 이 부분은 아직 잘 모르겠다&hellip; 그래도 정리를 해둔 기억이 있으니 코딩을 하면서 관련된 API를 사용할 때 다시 한번 확인해봐야겠다.</p>
+</blockquote>
+<h3 id="빈-펙토리와-애플리케이션-컨텍스트">빈 펙토리와 애플리케이션 컨텍스트</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112332863-70ae0780-8cfd-11eb-8ad5-23a995c1a92d.png" alt="Screen Shot 2021-03-25 at 12 02 28 AM"></p>
+<ul>
+<li>
+<p>이 섹션에서는 <code>BeanFactory</code>와 <code>ApplicationContext</code> 컨테이너 수준 간의 차이와 부트스트래핑에 대한 의미에 대해서 설명한다.</p>
+</li>
+<li>
+<p>커스텀 부트스트랩핑을 <code>GenericApplicationContext</code>, <code>AnnotationConfigApplicationContext</code>를 이용하여 구현할 것이 아니라면 일반적으로는 <code>ApplicationContext</code>를 사용해야한다.</p>
+</li>
+<li>
+<p>모든 공통 목적을 위해서 스프링의 핵심 컨테이너에 대한 기본 진입 지점이다.</p>
+</li>
+<li>
+<p><code>ApplicationContext</code>에는 <code>BeanFactory</code>의 모든 기능이 포함되므로, <code>BeanFactory</code>에 대한 완전한 제어가 필요한 시나리오를 제외하고 일반적으로 <code>BeanFactory</code>보다는 <code>ApplicationContext</code>를 사용하는 것을 권장한다.</p>
+</li>
+<li>
+<p><code>ApplicationContext</code>(일반 애플리케이션 컨텍스트 구현 등) 내에서 몇 가지 종류의 빈이 컨벤션에(특히, <code>post-processors</code>) 의해서 탐지되는 반면에 일반 <code>DefaultListableBeanFactory</code>는 특별한 빈들에게 대해서 관련이 없다.</p>
+</li>
+<li>
+<p>주석 처리 및 <code>AOP</code> 프록시와 같은 많은 확장 컨테이너 기능의 경우, <code>BeanPostProcessor</code> 확장 지점이 필수적이다.</p>
+</li>
+<li>
+<p>일반 <code>DefaultListableBeanFactory</code>만 사용하는 경우에는 기본적으로 이러한 사후 프로세스가 탐지 및 활성화 되지 않는다.</p>
+</li>
+<li>
+<p>빈 구성에 아무런 문제가 없기 때문에 이러한 상황은 혼란스러울 수 있지만 오히려 이러한 시나리오에서 컨테이너를 추가 설정을 통해서 완전히 부트스트랩 해야한다.</p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112334414-c0410300-8cfe-11eb-87ba-a5566175c744.png" alt="Screen Shot 2021-03-25 at 12 02 42 AM"></p>
+<ul>
+<li><code>BeanFactory</code>는 <code>Bean</code>을 인스턴스화 하거나 와이어링 하는 것 빼고는 <code>ApplicationContext</code>과 비교해서 많은 기능을 제공하지 않는 것을 확인할 수 있다.</li>
+</ul>
+<p>따라서 <code>BeanFactory</code>에서 사후 프로세서를 명시적으로 등록하려면, 다음의 예외 같이 프로그래밍 방식으로 <code>addBeanPostProcessor</code>를 호출해야한다.</p>
+<pre><code>DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+// populate the factory with bean definitions
+
+// now register any needed BeanPostProcessor instances
+factory.addBeanPostProcessor(new AutowiredAnnotationBeanPostProcessor());
+factory.addBeanPostProcessor(new MyBeanPostProcessor());
+
+// now start using the factory
+</code></pre><p>처음에 생각했던 것 과는 달리 기능을 제공하지 않을 뿐, 코드 상으로 설정을 해주면 사용할 수는 있다.</p>
+<ul>
+<li>
+<p>그래도 이렇게 명시적으로 등록을 해주어야 하기 때문에, 다양한 <code>ApplicationContext</code> 변형이 일반 <code>DefualtListableBeanFactory</code> 보다 선호 된다.</p>
+</li>
+<li>
+<p>특히 일반적인 엔터프라이즈 환경에서 확장 컨테이너 기능을 위해서 <code>BeanFactoryPostProcessor</code> 및 <code>BeanPostProcessor</code> 인스턴스에 의존하는 경우 더욱 그렇다.</p>
+</li>
+</ul>
+<p>일단 내가 생각하기에 가장 와닿는건 빈의 생명주기 관리를 할 수 없고, <code>BeanPostProcessor</code>를 자동으로 등록해주지 않는다는 것이다. 뭐 수동으로 등록해주면 되기는 하지만, 상당히 불편하다.</p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://docs.spring.io/spring-framework/docs/5.3.5-SNAPSHOT/reference/html/core.html#beans-introduction">SPRING CORE DOCS 5.3.5</a></li>
+<li><a href="http://wonwoo.ml/index.php/post/1571">ApplicationContext와 BeanFactory</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

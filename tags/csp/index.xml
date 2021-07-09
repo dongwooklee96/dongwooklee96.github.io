@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CSP on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/csp/</link>
+    <link>https://dongwooklee96.github.io/tags/csp.html</link>
     <description>Recent content in CSP on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Tue, 23 Mar 2021 22:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/csp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CSP(Content Security Policy) 란 무엇일까? (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft.html</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;

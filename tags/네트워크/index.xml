@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>네트워크 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/</link>
+    <link>https://dongwooklee96.github.io/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC.html</link>
     <description>Recent content in 네트워크 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Wed, 28 Apr 2021 00:12:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>리눅스 네트워크 도구 (테스트, 추적, 모니터링 명령어)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4.html</link>
       <pubDate>Wed, 28 Apr 2021 00:12:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4.html</guid>
       <description>&lt;h3 id=&#34;hping3&#34;&gt;hping3&lt;/h3&gt;
 &lt;hr&gt;
 &lt;pre&gt;&lt;code&gt;hping3 -S www.daum.net -p 80
@@ -112,10 +112,10 @@ hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
     
     <item>
       <title>MSS 그리고 MTU (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft.html</link>
       <pubDate>Tue, 27 Apr 2021 23:44:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/27/mss-%EA%B7%B8%EB%A6%AC%EA%B3%A0-mtu-draft.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116261520-b0f81e00-a7b2-11eb-96dd-03ae4f909358.png&#34; alt=&#34;images&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;mss-maximun-segment-size&#34;&gt;MSS (Maximun Segment Size)&lt;/h3&gt;
 &lt;hr&gt;
@@ -190,10 +190,10 @@ hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
     
     <item>
       <title>TCP 통신과정 추적해보기 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft.html</link>
       <pubDate>Tue, 20 Apr 2021 23:51:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EA%B3%BC%EC%A0%95-%EC%B6%94%EC%A0%81%ED%95%B4%EB%B3%B4%EA%B8%B0-draft.html</guid>
       <description>&lt;h3 id=&#34;추적-과정&#34;&gt;추적 과정&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;추적하기 전에 클라이언트와 서버 코드를 컴파일 한다.&lt;/p&gt;
@@ -329,10 +329,10 @@ gcc -pg -g -o server server.c
     
     <item>
       <title>TCP 통신에 대해서 알아보자...</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90....html</link>
       <pubDate>Tue, 20 Apr 2021 23:01:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.../</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/20/tcp-%ED%86%B5%EC%8B%A0%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90....html</guid>
       <description>&lt;h3 id=&#34;tcp-transmission-control-protocol&#34;&gt;TCP (Transmission Control Protocol)&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115409556-cf976b80-a22c-11eb-9c4c-c2f61110b0e2.png&#34; alt=&#34;tcp&#34;&gt;&lt;/p&gt;
@@ -437,10 +437,10 @@ gcc -pg -g -o server server.c
     
     <item>
       <title>DNS란? (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/13/dns%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/dns%EB%9E%80-draft.html</link>
       <pubDate>Tue, 13 Apr 2021 23:15:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/13/dns%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/dns%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;dnsdomain-name-system&#34;&gt;DNS(Domain Name System)&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;내가-활용중인-dns-ip-주소-확인하기&#34;&gt;내가 활용중인 DNS IP 주소 확인하기&lt;/h3&gt;
@@ -472,10 +472,10 @@ gcc -pg -g -o server server.c
     
     <item>
       <title>ARP란? (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/13/arp%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/arp%EB%9E%80-draft.html</link>
       <pubDate>Tue, 13 Apr 2021 23:01:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/13/arp%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/arp%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;arpaddress-resolution-protocol&#34;&gt;ARP(Address Resolution Protocol)&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -507,10 +507,10 @@ gcc -pg -g -o server server.c
     
     <item>
       <title>ICMP란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/13/icmp%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/icmp%EB%9E%80-draft.html</link>
       <pubDate>Tue, 13 Apr 2021 22:52:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/13/icmp%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/icmp%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;icmpinternet-control-message-protocol&#34;&gt;ICMP(Internet Control Message Protocol)&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -542,10 +542,10 @@ gcc -pg -g -o server server.c
     
     <item>
       <title>MAC 주소란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft.html</link>
       <pubDate>Tue, 13 Apr 2021 22:21:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/mac-%EC%A3%BC%EC%86%8C%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;mac-주소란&#34;&gt;MAC 주소란?&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;mac-주소-알아내는-법&#34;&gt;MAC 주소 알아내는 법&lt;/h3&gt;
@@ -561,10 +561,10 @@ gcc -pg -g -o server server.c
     
     <item>
       <title>라우팅이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Tue, 13 Apr 2021 22:20:48 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EB%9D%BC%EC%9A%B0%ED%8C%85%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;라우팅이란&#34;&gt;라우팅이란?&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -584,10 +584,10 @@ gcc -pg -g -o server server.c
     
     <item>
       <title>웹 클라이언트(브라우저) 부터 웹서버까지의 구조 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft.html</link>
       <pubDate>Tue, 13 Apr 2021 22:20:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EC%9B%B9-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%B8%8C%EB%9D%BC%EC%9A%B0%EC%A0%80-%EB%B6%80%ED%84%B0-%EC%9B%B9%EC%84%9C%EB%B2%84%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B5%AC%EC%A1%B0-draft.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114560424-a5333480-9ca7-11eb-9929-ae4566a72689.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;브라우저에서 주소를 입력하면 &lt;code&gt;HTTP&lt;/code&gt; 통신이 일어나게 되고, DNS 서버에서, 도메인 주소를 &lt;code&gt;IP&lt;/code&gt; 주소로 변환하는 요청을 하게 된다.&lt;/li&gt;

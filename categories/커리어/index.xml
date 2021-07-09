@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>커리어 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/categories/%EC%BB%A4%EB%A6%AC%EC%96%B4/</link>
+    <link>https://dongwooklee96.github.io/categories/%EC%BB%A4%EB%A6%AC%EC%96%B4.html</link>
     <description>Recent content in 커리어 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Sat, 27 Mar 2021 10:31:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%BB%A4%EB%A6%AC%EC%96%B4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>네이버 페이 배송 모듈 아키텍처 및 사용기술 분석</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/27/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%8E%98%EC%9D%B4-%EB%B0%B0%EC%86%A1-%EB%AA%A8%EB%93%88-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%B0%8F-%EC%82%AC%EC%9A%A9%EA%B8%B0%EC%88%A0-%EB%B6%84%EC%84%9D/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%8E%98%EC%9D%B4-%EB%B0%B0%EC%86%A1-%EB%AA%A8%EB%93%88-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%B0%8F-%EC%82%AC%EC%9A%A9%EA%B8%B0%EC%88%A0-%EB%B6%84%EC%84%9D.html</link>
       <pubDate>Sat, 27 Mar 2021 10:31:33 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%8E%98%EC%9D%B4-%EB%B0%B0%EC%86%A1-%EB%AA%A8%EB%93%88-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%B0%8F-%EC%82%AC%EC%9A%A9%EA%B8%B0%EC%88%A0-%EB%B6%84%EC%84%9D/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%8E%98%EC%9D%B4-%EB%B0%B0%EC%86%A1-%EB%AA%A8%EB%93%88-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%B0%8F-%EC%82%AC%EC%9A%A9%EA%B8%B0%EC%88%A0-%EB%B6%84%EC%84%9D.html</guid>
       <description>&lt;p&gt;많은 양의 트래픽을 감당하고 어떻게 고가용성의 시스템을 구축하는지 알아보기 위해서 네이버 기술 블로그 및 세미나를 보면서 사용하는 기술을 분석하고 어떤 고민을 하고 있는지 살펴보았다.&lt;/p&gt;
 &lt;h3 id=&#34;네이버-페이가-고민했던-문제점&#34;&gt;네이버 페이가 고민했던 문제점&lt;/h3&gt;
 &lt;hr&gt;
@@ -279,10 +279,10 @@
     
     <item>
       <title>네이버 신입 공채 체크 포인트 및 준비해야할 것들</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4.html</link>
       <pubDate>Sun, 07 Mar 2021 22:15:14 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110241534-b7c59a00-7f94-11eb-8b8c-3038b005cff4.png&#34; alt=&#34;Screen Shot 2021-03-07 at 10 29 29 PM&#34;&gt;&lt;/p&gt;
 &lt;p&gt;네이버에서 신입을 뽑을 때 고려하는 부분을 알 수 있을 것 같아서 읽어보았다. 물론 다른 기업들도 이러한 점을 고려해서 신입을 뽑을 것이다.&lt;/p&gt;
 &lt;ul&gt;
@@ -385,10 +385,10 @@
     
     <item>
       <title>우아한 테크 코드 지원 후기 및 회고</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%85%8C%ED%81%AC-%EC%BD%94%EB%93%9C-%EC%A7%80%EC%9B%90-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%ED%9A%8C%EA%B3%A0/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%85%8C%ED%81%AC-%EC%BD%94%EB%93%9C-%EC%A7%80%EC%9B%90-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%ED%9A%8C%EA%B3%A0.html</link>
       <pubDate>Wed, 03 Mar 2021 23:15:14 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%85%8C%ED%81%AC-%EC%BD%94%EB%93%9C-%EC%A7%80%EC%9B%90-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%ED%9A%8C%EA%B3%A0/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%85%8C%ED%81%AC-%EC%BD%94%EB%93%9C-%EC%A7%80%EC%9B%90-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%ED%9A%8C%EA%B3%A0.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109818546-707a9900-7c76-11eb-857b-2ee77f773bf0.png&#34; alt=&#34;Screen Shot 2021-03-03 at 11 15 58 PM&#34;&gt;&lt;/p&gt;
 &lt;p&gt;이전에 우아한 테크코스에 지원을 하여 코딩 테스트를 본 적이 있었다. 비록 탈락했지만 다음에 더 잘할 수 있도록 피드백을 주셨다.&lt;/p&gt;
 &lt;h3 id=&#34;코딩-테스트&#34;&gt;코딩 테스트&lt;/h3&gt;
@@ -421,10 +421,10 @@
     
     <item>
       <title>라인 개발자 입사기를 읽고 느낀점</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</link>
       <pubDate>Wed, 03 Mar 2021 21:49:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</guid>
       <description>&lt;h1 id=&#34;지원서-작성할-때-참고할-부분&#34;&gt;지원서 작성할 때, 참고할 부분&lt;/h1&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109811374-1a095c80-7c6e-11eb-9077-d4d5a18b0768.png&#34; alt=&#34;Screen Shot 2021-03-03 at 10 16 05 PM&#34;&gt;&lt;/p&gt;
@@ -537,10 +537,10 @@
     
     <item>
       <title>개발자 채용 프로세스</title>
-      <link>https://dongwooklee96.github.io/post/2021/02/27/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/02/27/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4.html</link>
       <pubDate>Sat, 27 Feb 2021 22:56:33 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%B1%84%EC%9A%A9-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4.html</guid>
       <description>&lt;h1 id=&#34;개발자-채용-프로세스&#34;&gt;개발자 채용 프로세스&lt;/h1&gt;
 &lt;hr&gt;
 &lt;p&gt;개발자 채용 프로세스는 다음과 같다.&lt;/p&gt;
@@ -620,10 +620,10 @@
     
     <item>
       <title>코딩 테스트 출제 경향 및 준비 방향</title>
-      <link>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5/</link>
+      <link>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5.html</link>
       <pubDate>Sat, 27 Feb 2021 22:28:35 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5.html</guid>
       <description>&lt;h1 id=&#34;최신-출제-경향과-준비-방향&#34;&gt;최신 출제 경향과 준비 방향&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;정확한 알고리즘을 사용하여 얼마나 빠르게 많은 문제를 풀었는지를 토대로 순위를 매긴다.&lt;/li&gt;
@@ -651,10 +651,10 @@
     
     <item>
       <title>이것이 코딩 테스트다</title>
-      <link>https://dongwooklee96.github.io/post/2021/02/27/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/02/27/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4.html</link>
       <pubDate>Sat, 27 Feb 2021 12:29:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4.html</guid>
       <description>&lt;h1 id=&#34;내가-코딩-테스트를-준비하는-이유&#34;&gt;내가 코딩 테스트를 준비하는 이유&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;당장 구직하지 않더라도, 이러한 준비를 미리 해두어야 좋은 기회를 잡을 수 있다.&lt;/li&gt;

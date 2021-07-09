@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>동시성 프로그래밍 및 자바 (3) - Callable과 Future | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">동시성 프로그래밍 및 자바 (3) - Callable과 Future</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/06</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EC%9E%90%EB%B0%94">프로그래밍 - 자바</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="callable과-future">Callable과 Future</h2>
+<hr>
+<ul>
+<li><code>Callable</code>과 <code>Runnable</code>의 차이점은 작업의 결과를 받을 수 있다는 사실이다.</li>
+<li><code>Future</code>는 비동기적인 작업의 현재 상태를 조회하거나 결과를 가져올 수 있다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/110198342-24f20600-7e95-11eb-827d-e423468801e7.png" alt="Screen Shot 2021-03-06 at 3 56 51 PM"></p>
+<p>다음은 <code>Future</code>에 대해 설명한 API 주석이다.</p>
+<ul>
+<li><code>Future</code>는 비동기식 계산의 결과를 나타냅니다.</li>
+<li>계산이 완료되었는지 확인하고, 완료되기를 기다리며, 결과를 확인할 수 있는 방법이 제공됩니다.</li>
+<li>결과는 계산이 완료된 경우에만 메서드 <code>get</code>을 사용하여 검색할 수 있으며, 작업이 완료될 때까지 블록킹 됩니다.</li>
+<li>또한 작업이 정상적으로 완료되었는지 또는 취소되었는지 확인할 수 있는 추가적인 방법이 제공된다.</li>
+<li>작업이 완료되면 이를 취소할 수 없다.</li>
+</ul>
+<h2 id="get---결과를-가져오기">get() - 결과를 가져오기</h2>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/110198530-8d8db280-7e96-11eb-9b45-45b9bae25d57.png" alt="Screen Shot 2021-03-06 at 3 56 51 PM"></p>
+<p><code>get()</code>은 오버로딩 된 두가지 메서드를 제공한다.</p>
+<ul>
+<li>계산이 완료될 때까지 기다린 다음에 결과를 검색한다.</li>
+<li>최대 지정된 시간까지 기다렸다가 사용 가능한 경우 결과를 검색합니다.</li>
+</ul>
+<pre><code>import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        Callable&lt;String&gt; hello = () -&gt; {
+            Thread.sleep(2000L);
+            return &quot;Hello&quot;;
+        };
+
+        Future&lt;String&gt; helloFuture = executorService.submit(hello);
+        System.out.println(&quot;Started!&quot;);
+
+        helloFuture.get(); // blocking call
+
+        System.out.println(&quot;End!!&quot;);
+        executorService.shutdown();
+    }
+}
+</code></pre><ul>
+<li>
+<p>다음과 같은 경우에는 터미널에 <code>Started!</code> 라는 글씨가 적히고 나서, 2초간 대기를 한 후에 <code>End!!</code> 라는 글씨가 찍히게 된다.</p>
+</li>
+<li>
+<p>타임아웃(최대로 기다릴 시간)을 설정할 수 있다.</p>
+</li>
+</ul>
+<h2 id="isdone-iscancelled---작업-상태-확인하기">isDone(), isCancelled() - 작업 상태 확인하기</h2>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/110198688-a64a9800-7e97-11eb-8f77-8bd8a28d5757.png" alt="Screen Shot 2021-03-06 at 3 56 51 PM"></p>
+<ul>
+<li><code>isDone</code>은 작업이 완료되었으면 참을 반환하고 아닌 경우에는 거짓을 반환한다.</li>
+<li><code>isCancelled</code>는 작업이 완료된 경우 참을 반환한다. 작업이 정상적으로 종료되거나, 예외 또는, 취소된 경우도 역시 참으로 반환된다.</li>
+</ul>
+<h2 id="cancel---작업-취소하기">cancel() - 작업 취소하기</h2>
+<p><img src="https://user-images.githubusercontent.com/14002238/110199234-d3e51080-7e9a-11eb-9fb7-1ff63519640f.png" alt="작업 취소"></p>
+<ul>
+<li>작업을 취소할 때 사용한다.</li>
+<li>작업이 이미 완료되었거나, 취소되었거나, 다른 이유로 취소할 수 없는 경우에는 실패한다.</li>
+<li>이 메서드가 실행된 후에 <code>isDone()</code>는 항상 참을 반환한다.</li>
+<li>일반적으로 작업이 이미 정상적으로 완료되었기 때문에, 작업을 취소할 수 없는 경우에는 거짓을 반환하고 그렇지 않으면 참을 반환한다.</li>
+<li>성공적으로 취소했으면, 참 아니면 거짓을 반환한다.</li>
+</ul>
+<h2 id="invokeall과-invokeany의-차이점">invokeAll()과 invokeAny()의 차이점</h2>
+<hr>
+<h4 id="invokeall">invokeAll</h4>
+<p><img src="https://user-images.githubusercontent.com/14002238/110199536-2d017400-7e9c-11eb-8b43-33862e419425.png" alt="invokeAll"></p>
+<ul>
+<li>태스크를 실행하고 모두 완료되거나 시간 초과가 만료될 때, 상태 및 결과를 저장하고 있는 <code>Future</code> 목록을 반환한다.</li>
+<li><code>Future.isDone</code>은 반환된 목록의 각 요소에 대해서 적용됩니다.</li>
+<li>반환시에 완료되지 않은 태스크는 취소됩니다.</li>
+<li>이 작업이 진행되는 동안 지정한 컬렉션이 수정되면 메서드의 결과가 정의되지 않습니다.</li>
+<li>동시에 실행한 작업중에 가장 오래걸리는 작업만큼 시간이 소요된다.</li>
+</ul>
+<pre><code>import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        Callable&lt;String&gt; hello = () -&gt; {
+            Thread.sleep(2000L);
+            return &quot;Hello&quot;;
+        };
+
+        Callable&lt;String&gt; java = () -&gt; {
+            Thread.sleep(4000L);
+            return &quot;Java&quot;;
+        };
+
+        Callable&lt;String&gt; dongwook = () -&gt; {
+            Thread.sleep(100L);
+            return &quot;Dong Wook&quot;;
+        };
+
+        List&lt;Future&lt;String&gt;&gt; futures = executorService.invokeAll(Arrays.asList(hello, java, dongwook));
+
+        for (Future&lt;String&gt; f : futures) {
+            System.out.println(f.get()); // Hello, Java, Dong Wook 순서대로 출력된다.
+        }
+        executorService.shutdown();
+    }
+}
+
+</code></pre><h4 id="invokeany">invokeAny</h4>
+<p><img src="https://user-images.githubusercontent.com/14002238/110199641-adc07000-7e9c-11eb-8c91-a79c559268e2.png" alt="invokeAny"></p>
+<ul>
+<li>성공적으로 완료된 태스크의 결과를 반환합니다.</li>
+<li>이 작업이 진행되는 동안 지정된 컬렉션이 수정되면 이 메서드의 결과가 정의되지 않는다.</li>
+<li>동시에 실행한 작업중에 제일 짧게 걸리는 작업만큼 시간이 걸린다.</li>
+<li>이 역시 또한 블록킹 콜이다.</li>
+</ul>
+<pre><code>public class Main {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        ExecutorService executorService = Executors.newFixedThreadPool(4);
+
+        Callable&lt;String&gt; hello = () -&gt; {
+            Thread.sleep(2000L);
+            return &quot;Hello&quot;;
+        };
+
+        Callable&lt;String&gt; java = () -&gt; {
+            Thread.sleep(4000L);
+            return &quot;Java&quot;;
+        };
+
+        Callable&lt;String&gt; dongwook = () -&gt; {
+            Thread.sleep(100L);
+            return &quot;Dong Wook&quot;;
+        };
+
+        String futures = executorService.invokeAny(Arrays.asList(hello, java, dongwook));
+
+        System.out.println(futures); // Dong Wook
+        executorService.shutdown();
+    }
+}
+</code></pre><h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=200069290">모던 자바 인 액션, 책, 한빛미디어</a></li>
+<li><a href="https://www.inflearn.com/course/the-java-java8/dashboard">더 자바, Java8, 프로그래밍 강의, 백기선</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>주간 회고 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">주간 회고</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/05/09</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%9A%8C%EA%B3%A0">회고</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%ED%9A%8C%EA%B3%A0">회고</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h1 id="til-양식">TIL 양식</h1>
+<h3 id="facts-사실-객관">Facts (사실, 객관)</h3>
+<ul>
+<li>
+<p>이력서를 한달마다 작성하면 좋다는 글을 보고 이력서를 작성해보았다.</p>
+</li>
+<li>
+<p>클린 아키텍처 파이썬이라는 책을 읽었다.</p>
+</li>
+<li>
+<p><a href="https://taetaetae.github.io/2019/01/10/spring-redirect-oom/">Spring MVC Redirect 처리중에 발생한 Out Of Memory 원인 분석하기</a> 라는 블로그 글을 읽었다.</p>
+</li>
+<li>
+<p>토이프로젝트를 진행할 때, 자가 진단할 수 있는 항목에 대한 영상을 보았다.</p>
+</li>
+<li>
+<p>오픈 소스 발표 영상을 보고, 다시 오픈소스 기여에 대한 열정이 타올랐다.</p>
+</li>
+</ul>
+<h3 id="feelings-느낌-주관">Feelings (느낌, 주관)</h3>
+<ul>
+<li>생각보다 이력서를 작성하기 쉽지 않았고, 미리 준비를 하는게 정말로 다행이라는 생각이 들었다.</li>
+<li>파이썬을 어떻게 해야지 제대로 사용할 수 있는지 감을 잡은 것 같다.</li>
+<li>성능 분석은 블로그에 나온 대로 정도는 해야지 제대로 한것이라는 생각이 들었다.</li>
+</ul>
+<h3 id="findings-배운-점">Findings (배운 점)</h3>
+<ul>
+<li>
+<p>플라스크에서, 레이어드 아키텍처로 프로젝트를 구성하는 방법에 대해서 배울 수 있었다.</p>
+</li>
+<li>
+<p>추상화를 할 때, 웹 프레임워크는 웹을 통해서 프로그램을 이용할 수 있게 해주는 것이며 분리가 잘 되어 있다면, CLI를 통해서 비즈니스 로직의 변경없이 프로그램을 사용할 수 있도록 설계해야한다는 것을 배웠다.</p>
+</li>
+<li>
+<p>데이터베이스 역시, 관계형 데이터베이스 뿐만 아니라, NoSQL도 빠르게 바꿔서 설계해야한다.</p>
+</li>
+<li>
+<p>코드의 문제점을 재현해보고 직접 눈으로 확인하면서 해결하는 모습이 인상 깊었다. nGrinder로 부하를 주고, Pinpoint로 모니터링을 하고 힙 덤프를 통해서 실제로 JVM에서 FULL GC가 몇 번 일어나는지 측정까지 하고 있었다.</p>
+</li>
+<li>
+<p>토이프로젝트를 진행할 때, 아래 항목에 유의해서 개발을 계속해야겠다.</p>
+</li>
+</ul>
+<pre><code>프로젝트를 자가 진단해볼 수 있는 주요 항목이다.
+실제 서비스를 공개적으로 배포하고 운영해보는 경험을 해보았다.
+유저의 피드백에 따라서, 성능 및 사용성을 개선해보고 신규 기능들을 추가해보았다.
+발견되는 버그와 개선사항을 정리하고 쌓인 이슈들을 체계적으로 관리 해 보았다.
+코드를 지속적으로 리펙토링하고 디자인 패턴을 적용해 보았다.
+위의 시도에서 더 좋은 설계와 더 빠른 개발 사이의 트레이드 오프를 고민해보았다.
+반복되는 수정이과 배포에 수반되는 작업을 자동화해보았다.
+언어나 프레임워크의 기능만으로 구현할 수 없는 것들을 직접 구현해보았다.
+내가 사용한 라이브러리나 프레임워크의 문제점이나 한계를 느끼고 개선해보았다.
+코드나 제품의 퀄리티를 유지하기 위한 분석 툴이나 테스틑 툴을 도입해보았다.
+타인과의 협업을 효율적으로 하기 위한 고민을 해보았다.
+</code></pre><h3 id="bad-개선할-점">Bad (개선할 점)</h3>
+<ul>
+<li>
+<p>학부때 배웠던 개념이라고 하더라도, 많이 잊어버린 기초 지식들이 많았고 이를 일하면서 틈틈히 채워나가야 하는 것을 알게 되었다.</p>
+</li>
+<li>
+<p>실무와 연결시켜서 지식을 배우니까 좀 더 기억에 오래 남을 수 있었던 것 같다.</p>
+</li>
+</ul>
+<h3 id="affimation-자기-선언">Affimation (자기 선언)</h3>
+<ul>
+<li>
+<p>전산 컴퓨터 기초 지식을 다시 복습해보면서, 내가 어떤 부분이 부족한지 꾸준히 파악하고 채워나갈 수 있도록 노력해야겠다.</p>
+</li>
+<li>
+<p>이번주에는 주로, 나를 되돌아보는 계기가 된 것 같다. 나의 부족한 점을 채우기 위해서 많은 노력을 해야겠다.</p>
+</li>
+</ul>
+<h3 id="engineer-skills핵심-역량">Engineer Skills(핵심 역량)</h3>
+<ul>
+<li>이력서를 작성하면서 나를 제대로 파악하고 어떻게 나를 표현할 수 있을지 고민을 해봐야 겠다.</li>
+</ul>
+<h3 id="project-perfomance-프로젝트-주요-성과">Project Perfomance (프로젝트 주요 성과)</h3>
+<ul>
+<li>이번주에는 딱히 프로젝트에서 주요한 성과를 이룬게 없는 느낌이다. 다음주에 노력하도록 해야겠다.</li>
+</ul>
+<h1 id="회고-작성법">회고 작성법</h1>
+<ol>
+<li>Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.</li>
+<li>Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.</li>
+<li>Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.</li>
+<li>Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.</li>
+<li>Engineer Skills (핵심 역량) 엔지니어를 평가하는 4가지 항목을 참고하여, 나의 핵심 역량을 작성한다.</li>
+</ol>
+<ul>
+<li>올바른 프로젝트 방향성을 가지고 개발을 하고 있는가?</li>
+<li>엔지니어링 관점에서 좋은 개발을 하고 있는가?</li>
+<li>프로젝트의 방향성을 제시할 수 있는가?</li>
+<li>같이 일하면서, 더 큰일을 할 수 있는가?</li>
+</ul>
+<ol start="6">
+<li>Project Perfomance (프로젝트 주요 성과) 내가 회사에서 한 주간 어떤 성과를 내었는지를 평가하는 항목이다.</li>
+</ol>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

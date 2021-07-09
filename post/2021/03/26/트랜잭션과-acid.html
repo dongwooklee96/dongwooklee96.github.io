@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>트랜잭션과 ACID | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">트랜잭션과 ACID</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/26</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>누군가 트랜잭션에 대해서 물어보았을 때, 분명히 알고 있다고 생각한 것인데도 제대로 답변하지 못했다. 이건 평소에 생각이 정리되지 않아서 그런 것 같다. 따라서 이참에 이에 대해서 정리를 해보도록 했다.</p>
+<h3 id="트랜잭션이란">트랜잭션이란</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112649044-6de21c80-8e8d-11eb-9e40-2f597a3555ac.png" alt="트랜잭션"></p>
+<p>위키 백과에서는 트랜잭션을 다음과 같이 정의하고 있다.</p>
+<ul>
+<li>
+<p>데이터베이스 트랜잭션은 데이터베이스에 대해서 DBMS 내에서 수행되고 다른 트랜잭션과 무관하게 일관되고 신뢰할 수 있는 방식으로 처리되는 작업 단위를 말한다.</p>
+</li>
+<li>
+<p>트랜잭션은 일반적으로 데이터베이스의 모든 변경 사항이 있다.</p>
+</li>
+<li>
+<p>데이터베이스 환경의 트랜잭션에는 두 가지의 주요 목적이 있다.</p>
+</li>
+<li>
+<p>실행 중지 (완전 및 부분적으로) 및 데이터베이스에 대한 많은 작업이 완료되지 않은 상태로 남아있는 경우에 장래로부터 정확하게 복구하고 데이터베이스를 일관성 있게 유지할 수 있는 신뢰할 수 있는 작업 단위를 제공한다.</p>
+</li>
+<li>
+<p>데이터베이스가 동시에 액세스 하는 프로그램 간에 분리를 제공한다. 이러한 분리를 제공하지 않으면 프로그램의 결과가 잘못될 수 있다.</p>
+</li>
+</ul>
+<h3 id="acid">ACID</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112650101-6707d980-8e8e-11eb-8d32-a92f3bce761b.png" alt="download"></p>
+<p>ACID 트랜잭션은 관계형 데이터베이스에서 여러 개의 SQL 연산을 하나의 단일 트랜잭션으로 처리하는 것을 말한다.</p>
+<p>여러 개의 테이블에 대해서 읽고 쓰고 하는 행동을 하나의 연산처럼 사용하는 것이다.</p>
+<p><strong>ACID 라는 단어는 분해할 수 없이 원자적(Atomicity)이고, 일관된(Consistency) 데이터 상태를 유지하고, 고립(Isolation)되어 다른 연산이 끼어들 수 없고, 데이터가 영원히(Durability) 반영된 상태로 있는 것을 의미한다.</strong></p>
+<ul>
+<li>
+<p>원자성(Atomicity) : 데이터베이스에서 가장 중요한 개념은 원자성일것이다, 여러개의 SQL 연산이 하나의 연산 처럼 동작해야한다. 어느 것 하나라도 실패했다면 모든 연산이 실행되지 않아야 한다.</p>
+</li>
+<li>
+<p>일관성(Consistency) : 같은 시점에 접속하는 클라이언트는 항상같은 데이터를 보고 있어야 한다는 것이다. 동일한 시간에 A와 B가 요청을 할 때, A가 읽은 데이터와 B가 읽은 데이터가 다르다면 아주 기본적인 일관성이 보장되지 않은 것이다.</p>
+</li>
+<li>
+<p>고립성(Isolation) : 트랜잭션이 수행되는 동안에, 다른 연산이 끼어들지 못한다는 것이다. 이에 대해서는 고립 수준이라는 것이 있는데 이는 나중에 자세히 알아보도록 한다.</p>
+</li>
+<li>
+<p>영속성(Durability) : 트랜잭션이 완료된 이후의 데이터는 업데이트 된 상태 그대로 영원히 반영되어 있다는 뜻이다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Database_transaction">WIKI - Database transaction</a></li>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=62639053">모바일 서버 프로그래밍 입문, 얼랭으로 만들며 배운다</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

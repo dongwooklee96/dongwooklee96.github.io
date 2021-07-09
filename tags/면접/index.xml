@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>면접 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%EB%A9%B4%EC%A0%91/</link>
+    <link>https://dongwooklee96.github.io/tags/%EB%A9%B4%EC%A0%91.html</link>
     <description>Recent content in 면접 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Wed, 03 Mar 2021 21:49:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%A9%B4%EC%A0%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>라인 개발자 입사기를 읽고 느낀점</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</link>
       <pubDate>Wed, 03 Mar 2021 21:49:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</guid>
       <description>&lt;h1 id=&#34;지원서-작성할-때-참고할-부분&#34;&gt;지원서 작성할 때, 참고할 부분&lt;/h1&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109811374-1a095c80-7c6e-11eb-9077-d4d5a18b0768.png&#34; alt=&#34;Screen Shot 2021-03-03 at 10 16 05 PM&#34;&gt;&lt;/p&gt;
@@ -125,10 +125,10 @@
     
     <item>
       <title>코딩 테스트 출제 경향 및 준비 방향</title>
-      <link>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5/</link>
+      <link>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5.html</link>
       <pubDate>Sat, 27 Feb 2021 22:28:35 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5.html</guid>
       <description>&lt;h1 id=&#34;최신-출제-경향과-준비-방향&#34;&gt;최신 출제 경향과 준비 방향&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;정확한 알고리즘을 사용하여 얼마나 빠르게 많은 문제를 풀었는지를 토대로 순위를 매긴다.&lt;/li&gt;

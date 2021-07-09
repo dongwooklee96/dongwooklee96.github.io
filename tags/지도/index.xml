@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>지도 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%EC%A7%80%EB%8F%84/</link>
+    <link>https://dongwooklee96.github.io/tags/%EC%A7%80%EB%8F%84.html</link>
     <description>Recent content in 지도 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Sun, 28 Mar 2021 10:45:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%A7%80%EB%8F%84/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>나만의 지도 시스템을 만드는데 유용한 도구 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft.html</link>
       <pubDate>Sun, 28 Mar 2021 10:45:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%82%98%EB%A7%8C%EC%9D%98-%EC%A7%80%EB%8F%84-%EC%8B%9C%EC%8A%A4%ED%85%9C%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EB%8F%84%EA%B5%AC-draft.html</guid>
       <description>&lt;h3 id=&#34;지도-시스템을-만드는데-추천하는-도구&#34;&gt;지도 시스템을 만드는데, 추천하는 도구&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;

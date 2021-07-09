@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>네트워크 메시지 암호화 및 방식 (중간자 공격, HMAC, 대칭, 비대칭 키) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">네트워크 메시지 암호화 및 방식 (중간자 공격, HMAC, 대칭, 비대칭 키)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/28</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%B3%B4%EC%95%88">보안</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="네트워크전송-레벨-암호화">네트워크(전송) 레벨 암호화</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/112745214-a7c43780-8fe1-11eb-8d75-3bd315668317.png" alt="download"></p>
+<ul>
+<li>
+<p>가장 기본적이고 필수적인 <code>REST API</code> 보안 방법은 네트워크 전송 프로토콜에서 <code>HTTPS</code> 보안 프로토콜을 사용하는 방법이다.</p>
+</li>
+<li>
+<p><code>HTTPS</code> 프로토콜을 사용한다 하더라도, 메세지 자체를 암호화해서 전송하기 때문에 해킹으로 말미암은 메시지 누출 위협을 해소할 수 있다.</p>
+</li>
+<li>
+<p>그러나 <code>HTTPS</code>를 사용하더라도 메시지를 낚아 채거나 변조하는 방법이 있는데 이러한 해킹 방법을 바로 중간자 공격 (<code>Man-In-The-Middle-Attack</code>)이라고 한다.</p>
+</li>
+<li>
+<p>정상적인 <code>HTTPS</code> 통신의 경우 다음과 같이 서버에서 제공하는 인증서를 이용하여 API와 서버 상호간에 암호화된 신뢰할 수 있는 새로운 네트워크 연결을 만든다.</p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112745283-1bfedb00-8fe2-11eb-8bf1-6c7de2d8fcee.jpg" alt="download"></p>
+<ul>
+<li>
+<p>중간자 공격의 경우에는 신뢰할 수 있는 연결을 만들려고 할 때 해커가 <code>API</code> 클라이언트와 서버 사이에 끼어들어 온다.</p>
+</li>
+<li>
+<p>신뢰할 수 있는 연결을 만들고자 서버가 인증서를 클라이언트에 내릴 때 해커가 이 인증서가 아닌 다른 인증서를 클라이언트에게 전달하고, 다른 인증서를 이용하여 <code>API</code> 클라이언트와 해커간에 HTTPS SSL 연결을 만든다.</p>
+</li>
+<li>
+<p>그리고 서버에게서 받은 인증서를 이용해서 서커와 <code>API</code> 서버 간의 HTTP SSL 연결을 맺는다. 이렇게 되면 해커는 중간에서 API 클라이언트와 서버 사이에 메시지를 모두 열어보고 변조도 가능해진다.</p>
+</li>
+<li>
+<p>이러한 중간자 공격을 방지하는 방법중에는 여러가지가 있지만, 가장 손쉬운 방법은 공인인증서를 사용하고 인증서를 확인하는 것이다.</p>
+</li>
+<li>
+<p>공인인증서는 <code>Verisign</code>과 같은 기관에서 인증서에 대한 공인 인증을 해준다. 즉, 이 인증서를 발급한 사람이 누구인가에 대한 신원 정보를 가지고 있다. 이를 공인 인증서라고 하는데, 공인 인증서는 인증 기관의 서명이 되어 있다. (공인 인증기관이 인증했다는 정보가 암호화 되서 들어간다.)</p>
+</li>
+<li>
+<p>해커가 공인인증서를 사용하려면 인증 기관에 가서 개인 정보를 등록해야하고, 자체 발급한 비공인 인증서를 사용하기 때문에 이를 이용해서 체크가 가능하다. 특히 인증서 안에는 인증서를 발급한 기관의 정보와 인증서에 대한 고유 일련번호가 들어가 있기 때문에 클라이언트에서 이 값을 확인해서 내가 발급하고 인증 받은 공인 인증서인지를 점검하도록 하면 된다.</p>
+</li>
+</ul>
+<h3 id="메시지-본문-암호화">메시지 본문 암호화</h3>
+<hr>
+<ul>
+<li>
+<p>암호화가 필요한 특정 필드만 애플리케이션 단에서 암호화하여 보내는 방법이 있다.</p>
+</li>
+<li>
+<p>메시지를 암호화하여 통신하려면, 클라이언트와 서버가 암호화 키를 가져야하는데, 암호화키는 크게 대칭 키와 비대칭 키 알고리즘 두 가지가 있다.</p>
+</li>
+<li>
+<p>비대칭 키 알고리즘은 암호화를 하는 키와 암호를 푸는 복호화 키가 다른 경우로, 암호화 하는 키를 공개 키(<code>Public Key</code>)라고 하고, 암호화를 푸는 키를 비밀 키(<code>Private Key</code>)라고 한다.</p>
+</li>
+<li>
+<p>이 공개 키는 암호화 할 수 있지만, 반대로 암호화된 메시지는 풀 수 없으므로 누출이 되어도 안전하다. (해커가 중간에서 공개 키를 낚아 챈다하더라도 이 키로는 암호화된 메시지를 복호화할 수 없다.)</p>
+</li>
+<li>
+<p>따라서 처음 클라이언트가 서버에 인증이 되었을 때 클라이언트에게 이 공개 키를 내리고, 이 후에 메시지를 이 공개 키를 통해서 암호화를 하게 되면 암호화된 메시지는 비밀키를 가진 서버만이 풀 수 있어서 안전하게 서버로 메시지를 보낼 수 있다.</p>
+</li>
+<li>
+<p>대표적인 비대칭 키 알고리즘으로는 <code>RSA</code> 등이 있으며 익숙한 <code>HTTPS</code>의 경우에도, 이 <code>RSA</code> 알고리즘을 사용한다. <code>RSA</code> 알고리즘을 사용하는 비대칭 키 암호화 로직과 라이브러리등은 공개된 것들이 많으므로 참고해서 사용하도록 한다.</p>
+</li>
+<li>
+<p>비대칭 키 알고리즘은 클라이언트에서 서버로 보내는 단방향 메시지에 대해서는 암호화하여 사용할 수 있지만, 반대로 서버에서 클라이언트로 내려오는 응답 메시지 등에는 적용하기 어렵다. 아니면 클라이언트가 서버에 등록될 때, 위와 반대 방법으로 클라이언트가 서버로 공개 키를 보내서 향후 서버에서 클라이언트로 통신에 그 공개 키를 사용하도록 해도 된다.</p>
+</li>
+<li>
+<p>이 경우에는 클라이언트와 서버 그리고 서버와 클라이언트 간의 키 쌍 두개를 관리해야 하기 때문에 복잡할 수 있는데, 이런 때에는 대칭 키 알고리즘을 고려해 볼 수 있다.</p>
+</li>
+<li>
+<p>대칭 키 알고리즘은 암호화와 복호화 키가 같은 알고리즘이다. 이 경우 <code>API</code> 클라이언트와 서버가 같은 키를 알고 있어야 한다. 키를 네트워크를 통해서 보내면 중간에 해커에 의해서 낚아 채일 염려가 있기 때문에, 양쪽에 안전하게 키를 전송하는 방법이 필요하다. 따라서 다음과 같은 방법을 사용한다.</p>
+</li>
+</ul>
+<pre><code>1. 서버에서 공개 키 KA1과 비공개 키 KA2 쌍을 생성한다.
+2. 클라이언트에게 공개 키 KA1을 네트워크를 통해서 내려 보낸다.
+3. 클라이언트는 새로운 비공개 대칭 키 KB를 생성하고 KA1을 이용하여 암호화하여 서버로 전송한다.
+4. 서버는 전송된 암호화 메세지를 `KA2`로 복호화하여 그 안에 있는 비 공개 키 KB를 꺼낸다.
+5. 향후 클라이언트와 서버는 상호 API 통신시 비공개 대칭 키 KB를 이용하여 암호화와 복호화를 진행한다.
+</code></pre><h3 id="메시지-무결성-보장">메시지 무결성 보장</h3>
+<hr>
+<ul>
+<li>
+<p>무결성이란 서버에서 <code>API</code> 호출을 받았을 때, 이 호출이 신뢰할 수 있는 호출인지 아닌지를 구별하는 방법을 말한다.</p>
+</li>
+<li>
+<p>즉, 해커가 중간에서 메시지를 가로채고 나서 내용을 변조하여 서버에 보냈을 때 내용이 변조되었는지를 판단하는 방법인데, 일반적으로 <code>HMAC</code>을 이용한 방식이 널리 사용된다.</p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/112745861-6c783780-8fe6-11eb-9f69-b693913434ed.png" alt="download"></p>
+<pre><code>1. 먼저 클라이언트는 호출하고자 하는 REST API의 메시지를 앞에서 정의한 키를 이용하여 HMAC 알고리즘을 이용하여 해시 값을 추출한다.
+
+2. API를 호출할 때, 메시지에 추출한 HMAC을 포함해서 호출한다.
+3. 서버는 호출된 메시지를 보고 HMAC을 제외한 나머지 메시지를 미리 정의된 키를 이용해서 HMAC 알고리즘으로 해시 값을 추출한다.
+4. 서버는 3버에서 생성된 HMAC 값과 API 호출시 같이 넘어온 HMAC 갑을 비교해서 값이 같으면 이 호출이 유효한 호출이라고 판단한다.
+</code></pre><ul>
+<li>
+<p>만약에 해커가 메시지를 중간에 가로채 변조했을 경우 서버에서 해시를 생성하면 변조된 메시지에 대한 해시가 생성되기 때문에, 클라이언트에서 변조 전에 보낸 해시 값과 달라진다.</p>
+</li>
+<li>
+<p>이를 통해서 메시지 변조의 여부를 판단할 수 있다.</p>
+</li>
+<li>
+<p>그러나 메시지를 변경하지 않고 해커가 같은 요청을 반복해서 보낸다면 메시지를 변조하지 않았다는 것으로, 서버는 이를 유효한 호출로 인식할 수 있는데 이를 재전송 공격(<code>Reply Attack</code>)이라고 한다. 따라서 이를 방지하기 위해서는 <code>timestamp</code>를 이용하는 방법이 있다.</p>
+</li>
+<li>
+<p>이 방법은 <code>HMAC</code>을 생성할 때, 메시지를 이용해서 해시 값을 생성하는 것이 아니라, 타임 스탬프를 포함해서 메시지를 생성하는 것이다.</p>
+</li>
+<li>
+<p>그리고 <code>API</code>를 호출할 때 <code>timestamp</code> 값을 같이 실어 보낸다.</p>
+</li>
+</ul>
+<pre><code>http://service.myapi.com/restapiservice?xxxxx&amp;hmac={hashvalue}&amp;timestamp={호출시간}
+</code></pre><ul>
+<li>이렇게 하면 서버는 메세지가 호출된 시간을 알 수 있고, 호출된 시간 +- 10분(또는 개발자가 정한 시간 폭)만큼의 호출만 정상적인 호출로 인식하고 시간이 지난 호출의 메시지는 비정상적인 호출로 무시하면 된다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=54438883">대용량 아키텍처와 성능 튜닝</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

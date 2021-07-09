@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>자바 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%EC%9E%90%EB%B0%94/</link>
+    <link>https://dongwooklee96.github.io/tags/%EC%9E%90%EB%B0%94.html</link>
     <description>Recent content in 자바 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Sat, 13 Mar 2021 11:40:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%9E%90%EB%B0%94/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>사내 세미나 과제 피드백 CH10 - Future, ComputableFuture</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/13/%EC%82%AC%EB%82%B4-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C-%ED%94%BC%EB%93%9C%EB%B0%B1-ch10-future-computablefuture/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/13/%EC%82%AC%EB%82%B4-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C-%ED%94%BC%EB%93%9C%EB%B0%B1-ch10-future-computablefuture.html</link>
       <pubDate>Sat, 13 Mar 2021 11:40:33 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/13/%EC%82%AC%EB%82%B4-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C-%ED%94%BC%EB%93%9C%EB%B0%B1-ch10-future-computablefuture/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/13/%EC%82%AC%EB%82%B4-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B3%BC%EC%A0%9C-%ED%94%BC%EB%93%9C%EB%B0%B1-ch10-future-computablefuture.html</guid>
       <description>&lt;p&gt;회사에서 자바 비동기 처리 및 &lt;code&gt;Future&lt;/code&gt;, &lt;code&gt;CompletableFuture&lt;/code&gt;에 대해서 세미나를 진행하였다.&lt;/p&gt;
 &lt;p&gt;과제를 진행하면서, 비동기 프로그래밍 및 자바에서 비동기 프로그래밍을 어떻게 사용하는지 생각해 볼 수 있었다.&lt;/p&gt;
 &lt;ul&gt;
@@ -90,10 +90,10 @@
     
     <item>
       <title>스프링 시큐리티 아키텍처 (미완성)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/11/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%AF%B8%EC%99%84%EC%84%B1/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/11/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%AF%B8%EC%99%84%EC%84%B1.html</link>
       <pubDate>Thu, 11 Mar 2021 07:20:33 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/11/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%AF%B8%EC%99%84%EC%84%B1/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/11/%EC%8A%A4%ED%94%84%EB%A7%81-%EC%8B%9C%ED%81%90%EB%A6%AC%ED%8B%B0-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%AF%B8%EC%99%84%EC%84%B1.html</guid>
       <description>&lt;h2 id=&#34;인증authentication과-인과authorization&#34;&gt;인증(Authentication)과 인과(Authorization)&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110706470-3f343700-823b-11eb-83e4-103013be399a.png&#34; alt=&#34;Screen Shot 2021-03-11 at 7 26 53 AM&#34;&gt;&lt;/p&gt;
@@ -194,10 +194,10 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
     
     <item>
       <title>Deprecated 된 MediaType.APPLICATION_JSON_UTF8</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/08/deprecated-%EB%90%9C-mediatype.application_json_utf8/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/08/deprecated-%EB%90%9C-mediatype.application_json_utf8.html</link>
       <pubDate>Mon, 08 Mar 2021 07:20:33 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/08/deprecated-%EB%90%9C-mediatype.application_json_utf8/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/08/deprecated-%EB%90%9C-mediatype.application_json_utf8.html</guid>
       <description>&lt;h2 id=&#34;mediatypeapplication_json_utf8&#34;&gt;MediaType.APPLICATION_JSON_UTF8&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110257472-75767a00-7fe1-11eb-82e2-0f1db1ca3886.png&#34; alt=&#34;Screen Shot 2021-03-08 at 7 39 39 AM&#34;&gt;&lt;/p&gt;
@@ -250,10 +250,10 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
     
     <item>
       <title>동시성 프로그래밍 및 자바 (2) - Executor Interfaces</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces.html</link>
       <pubDate>Mon, 01 Mar 2021 14:40:33 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-2-executor-interfaces.html</guid>
       <description>&lt;h1 id=&#34;executor-interfaces&#34;&gt;Executor Interfaces&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;Executor&lt;/code&gt;, 태스크를 관리하는 인터페이스 입니다.&lt;/li&gt;
@@ -344,10 +344,10 @@ public class Main {
     
     <item>
       <title>동시성 프로그래밍 및 자바 (1) - 프로세스와 쓰레드의 차이</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4.html</link>
       <pubDate>Mon, 01 Mar 2021 12:40:33 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/01/%EB%8F%99%EC%8B%9C%EC%84%B1-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%B0%8F-%EC%9E%90%EB%B0%94-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EC%99%80-%EC%93%B0%EB%A0%88%EB%93%9C%EC%9D%98-%EC%B0%A8%EC%9D%B4.html</guid>
       <description>&lt;h1 id=&#34;동시성이란-concurrency&#34;&gt;동시성이란? (Concurrency)&lt;/h1&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;동시성-프로그래밍이란&#34;&gt;동시성 프로그래밍이란?&lt;/h3&gt;

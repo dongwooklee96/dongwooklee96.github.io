@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>리액트에서 구글 번역기가 번역하면서, DOM 트리를 변경해 렌더링이 되지 않는 현상 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">리액트에서 구글 번역기가 번역하면서, DOM 트리를 변경해 렌더링이 되지 않는 현상</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/30</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%A6%AC%EC%95%A1%ED%8A%B8">리액트</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C">프론트엔드</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="문제-상황">문제 상황</h3>
+<p>개발을 진행하다가,  <code>PM</code>에서 데이터가 이상하다고, 확인해달라는 요청을 받았다. 확인을 해본 결과, 데이터베이스 및 서버에서 내려오는 데이터는 정상이였다. 하지만 화면에서 업데이트를 시키지 않고, 기존에 데이터가 그대로 남아있어 화면 업데이트가 안되는 상황이였다. 재현을 해봤을 때는 아무런 문제가 없어서 혹시나 하고 구글 번역기를 켜고 재현을 해보았을 때 버그가 발생하였다.</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/112934001-d82fe100-915b-11eb-917b-9405fadc17da.png" alt="Screen Shot 2021-03-30 at 1 28 22 PM"></p>
+<h3 id="원인">원인</h3>
+<p><img src="https://user-images.githubusercontent.com/14002238/112934219-407ec280-915c-11eb-8a90-c8be38c7c471.png" alt="Screen Shot 2021-03-30 at 1 31 30 PM"></p>
+<p>검색을 해보니, 비슷한 현상이 이미 보고가 되어있었고, 원인을 파악하기 위해서 살펴보았다.</p>
+<p>구글 번역기를 켰을 때 변경된 텍스트가 업데이트 되지 않는 이유는 다음과 같다.</p>
+<ul>
+<li>
+<p>웹 사이트에서 구글 번역기를 켰을 때 번역기가 텍스트를 <code>&lt;font&gt;</code> 태그로 대체한다. 하지만 리액트에서 변경된 것을 감지하지 못해서, 이미 <code>DOM</code> 트리에서 사라진 객체를 참조한다는 것이다.</p>
+</li>
+<li>
+<p>텍스트는 조건부로 렌더링이 되며, 부모 노드의 유일한 하위 노드가 아니다. 그런 후에 텍스트 노드가 제거되면 <code>React</code>는 <code>parent.removeChild(textNode)</code>를 호출하고 텍스트 노드가 더 이상 상위 노드의 하위 노드가 아니기 때문에 삭제한다.</p>
+<ul>
+<li>조건부로 렌더링 된 텍스트 노드가 부모의 유일한 자식일 때는 던지지 않는다.</li>
+</ul>
+</li>
+<li>
+<p>텍스트 노드가 앞의 노드가 조건 부로 렌더링되고, 그런 다음에 노드가 삽입 될 때 <code>parent.insertBefore(someNode, textNode)</code>를 호출하고 <code>textNode</code>가 더이상 상위 노드가 아니기 때문에 예외를 던진다.</p>
+</li>
+</ul>
+<h3 id="해결책">해결책</h3>
+<p><img src="https://user-images.githubusercontent.com/14002238/112934676-39a47f80-915d-11eb-81b9-2cf4771030db.png" alt="Screen Shot 2021-03-30 at 1 38 29 PM"></p>
+<ul>
+<li>해결책은, 텍스트를 <code>&lt;span&gt;</code> 태그로 감싸서 내용이 <code>&lt;font&gt;</code> 태그로 대체되더라도 리액트에서 참조하는 노드가 <code>DOM</code> 트리에서 사라지지 않게 하는 방법이다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://github.com/facebook/react/issues/11538">Make React resilient to DOM mutations from Google Translate</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

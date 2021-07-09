@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>파이썬에 AOP 적용하기라는 글을 읽고 느낀점 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">파이썬에 AOP 적용하기라는 글을 읽고 느낀점</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/06</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/aop">AOP</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="배경">배경</h2>
+<hr>
+<p>내가 현재 맡고 있는 솔루션에는 일일이 데이터베이스를 열어주고 쿼리를 실행하고 데이터베이스를 닫아주는 과정을 거치고 있었다. 매우 비효율적이고 중복된 코드가 많아져 이를 수정하고자 하였다. 따라서, 어떻게 수정할까 고민하는 과정에서 스프링에 있는 <code>AOP</code> 개념이 파이썬에도 있을 것이라고 확신하고 검색을 했다.  그러던 중에, 브랜디 개발 블로그에서 좋은 글을 발견하여 이를 읽고 느낀점을 적어보았다.</p>
+<h2 id="본문">본문</h2>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/110197088-69c56f00-7e8c-11eb-8350-146a7c2cbed8.png" alt="Screen Shot 2021-03-06 at 2 58 11 PM"></p>
+<ul>
+<li>다양한 관점에서 고려해보는 모습이 인상 깊었다.</li>
+<li>나도 물론 최선의 방법을 생각해보려고 고민을 해보지만, 이렇게까지 다양한 과점을 고려해보지는 않은 것 같다. 따라서 이와 같은 점을 배우도록 노력해야겠다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/110197130-cde83300-7e8c-11eb-98ca-f47d669044bd.png" alt="Screen Shot 2021-03-06 at 3 01 03 PM"></p>
+<ul>
+<li>
+<p>구현을 할 때, 요구사항을 명확히 정리해서 어떤 부분의 만족 시켜야하는지 조건을 상세하게 나열하였다.</p>
+</li>
+<li>
+<p>최근에 회사에서 요구사항을 명확히 이해하지 못해서 자꾸 실수를 하는 일이 있었는데, 이와 같이 요구사항을 명확히 글로 작성하면 실수할 일이 적어지고 내가 빠뜨린 부분이 없나 쉽게 확인할 수 있을 것이다.</p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/110197183-2d464300-7e8d-11eb-827d-03141a27e467.png" alt="Screen Shot 2021-03-06 at 3 03 50 PM"></p>
+<ul>
+<li>
+<p>코딩을 할 때, 시간의 제약 때문에 때로는 완벽하게 구현을 하지 못할 수 도 있다. 그래도 앞으로 개선할 방향 및 고민을 해야하는 부분을 기록해두면 나중에 여유가 생기거나 문제가 생겼을 때, 어떤 부분을 고민하고 해결해야하는지 쉽게 알 수 있을 것이다.</p>
+</li>
+<li>
+<p>글쓴이가 생각하는 불변의 원칙은 &lsquo;정확한 요구사항을 지키는 것&rsquo; 이다. 좋은 개발 방법론이나, 라이브러리가 있지만 정말로 우리 프로젝트에 필요한 기능인가를 항상 염두해야한다고 했다. 정말 맞는 것 같고, 프로젝트에 좋은 기능이라고 생각하면 무조건 도입을 해야한다고 생각하던 때가 있었다.</p>
+</li>
+<li>
+<p>하지만 정말로 우리 프로젝트에 필요한 기능인가를 고민하고 필요한 기능만 구현하는 안목이 필요하다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="http://labs.brandi.co.kr/2020/01/07/yangjh.html">파이썬 프로젝트에 AOP 도입하기</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

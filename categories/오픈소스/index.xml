@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>오픈소스 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/categories/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/</link>
+    <link>https://dongwooklee96.github.io/categories/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4.html</link>
     <description>Recent content in 오픈소스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Mon, 29 Mar 2021 22:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>멤티어 벤치마크로 아커스 성능 측정하기</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/29/%EB%A9%A4%ED%8B%B0%EC%96%B4-%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%EB%A1%9C-%EC%95%84%EC%BB%A4%EC%8A%A4-%EC%84%B1%EB%8A%A5-%EC%B8%A1%EC%A0%95%ED%95%98%EA%B8%B0/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/29/%EB%A9%A4%ED%8B%B0%EC%96%B4-%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%EB%A1%9C-%EC%95%84%EC%BB%A4%EC%8A%A4-%EC%84%B1%EB%8A%A5-%EC%B8%A1%EC%A0%95%ED%95%98%EA%B8%B0.html</link>
       <pubDate>Mon, 29 Mar 2021 22:04:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/29/%EB%A9%A4%ED%8B%B0%EC%96%B4-%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%EB%A1%9C-%EC%95%84%EC%BB%A4%EC%8A%A4-%EC%84%B1%EB%8A%A5-%EC%B8%A1%EC%A0%95%ED%95%98%EA%B8%B0/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/29/%EB%A9%A4%ED%8B%B0%EC%96%B4-%EB%B2%A4%EC%B9%98%EB%A7%88%ED%81%AC%EB%A1%9C-%EC%95%84%EC%BB%A4%EC%8A%A4-%EC%84%B1%EB%8A%A5-%EC%B8%A1%EC%A0%95%ED%95%98%EA%B8%B0.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112841192-2c46b100-90db-11eb-8c96-0eb41685ebb4.png&#34; alt=&#34;Screen Shot 2021-03-29 at 10 06 19 PM&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>DBMS를 분석하는 방법 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">DBMS를 분석하는 방법</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/03</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="kcd-2020">KCD 2020</h3>
+<hr>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/CgxiNF6xigY" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>막 오픈소스 컨트리뷰톤을 끝마치고, 오픈소스 개발에 재미를 붙였을 때, KDC 2020이라는 세미나가 열렸다. 오픈소스 데이터베이스 큐브리드에 기여하기라는 제목의 세션을 보았을 때, 오픈소스 DBMS를 개발한다는 부분이 신기했고, 궁금한 점이 있어서 메일을 보내게 되었는데, 친절하게도 아주 장문의 답장을 해주셨다.</p>
+<h3 id="메일">메일</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/109822109-ffd57b80-7c79-11eb-878d-337a28318428.png" alt="Screen Shot 2021-03-03 at 11 41 29 PM"></p>
+<p>내가 보낸 메일을 다시 보니까, 많이 부끄럽다;;</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/109821623-82117000-7c79-11eb-9da5-7f9b3f2d2864.png" alt="Screen Shot 2021-03-03 at 11 37 57 PM"></p>
+<p>매우 유용한 조언을 해주셨고, 실제로 많은 도움이 되었다. 이를 요약하자면 다음과 같다.</p>
+<ul>
+<li>
+<p>코드 레벨에서부터 접근하면 분석하기 쉽지 않다. 특히 DBMS는 여러가지 큰 개념이 모두 함께 유기적으로 동작하기 때문에 (<code>SQL</code>, <code>Query Rewrite/Optimization</code>, <code>Index</code>, <code>Transaction</code>, <code>Logging</code>)</p>
+</li>
+<li>
+<p>앞에서 말한 각 모듈들은 코드상으로는 <code>DBMS</code> 마다 모두 다르게 구현되어 있을 것이다. 따라서 추상적인 개념을 코드로 된 구현체로 최대한 맵핑해보려는 시도를 하는 것이 좋다.</p>
+</li>
+</ul>
+<blockquote>
+<p>예를 들어, &ldquo;SQL 파서 모듈은 SQL을 읽어서 파싱 트리라는 구조를 만든다&quot;와 같은 개념들은 DBMS 마다 같지만 코드상으로는 다르게 구현되어 있다.</p>
+</blockquote>
+<ul>
+<li>
+<p>SQL 파서 모듈과 같이, 각 모듈을 처음부터 코드를 읽어가면서 맨땅부터 이해하는 것은 쉽지 않다.</p>
+</li>
+<li>
+<p>시간이 충분하다면 한줄 한줄 분석하면서 파악할 수는 있겠지만 거의 불가능하다.</p>
+</li>
+<li>
+<p>따라서 그 모듈이 어떻게 돌아가는지에 대한 맥락을 먼저 잡아야한다.</p>
+</li>
+</ul>
+<blockquote>
+<p>이는 현업에서 일을 할 때 도 마찬가지라는 것을 명심해야겠다.</p>
+</blockquote>
+<h4 id="모듈을-분석하는-법">모듈을 분석하는 법</h4>
+<hr>
+<pre><code>1. 개략적인 모듈의 모양을 파악하기 위해서, 모듈의 인터페이스 또는 API나 시작점을 먼저 찾아본다.
+2. 모듈을 관통하는 주요 자료구조가 있다면 파악해둔다, (SQL 파서의 경우에는 `파싱트리`) 그 자료구조를 바탕으로 다른 엮여 있는 자료구조나 기능 구현을 파악해나간다.
+3. 분석하고 있는 모듈과 관련해서 다른 사람이 이전에 개발했던 기능, 기능/개선, 버그 수정사항에 대한 기록이 있으면 좋다. 
+  - 버그 트래킹 시스템이 있으면 먼저 찾아보고, 코드를 보다가 이해되지 않는 부분이 있으면 `git blame`기능으로 어떤 맥락으로 그 코드가 추가되었는지를 찾아보면 좋다.
+  - 찾아보았던 기능 개발/개선 기록을 검토하면서 코드 분석을 하다보면 가끔 이전 개발자가 예외 사항들을 놓치는 경우가 있는데 분석한 부분을 잘 이해했다면 기여할 수 있다.
+  - 개발자 메뉴얼이나 자료구조/모듈 간의 구조를 그려주는 문서들이 있으면 더 이해가 빠르다. (e.g. https://doxygen.postgresql.org/)
+4. 1 ~ 3번을 반복하면서 모듈들을 하나씩 이해해 가다 보면 모듈간에 어떻게 엮여 있는지 개략적으로 알아갈 수 있다. 확실히 코드를 분석하려면 어떤 새로운 기능을 개발하거나 큰 버그를 고친다면 더 자세히 이해할 수 있는 것 같다.
+</code></pre>
+<p>이를 알려주신 개발자 분이 위의 방법대로 한 단계씩 분석을 하면서 각 부분을 접근하고 계신다고 하셨다.
+그리고 분석하는 도중에 어떤 버그가 보여서 이건 버그라고 확신할 때 커미터에게 자신이 궁금한 점을 물어보면서 토론을 해보는 것도 좋다고 생각한다고 하셨다.</p>
+<h4 id="마무리">마무리</h4>
+<hr>
+<p>아쉽게도 현재는 오픈소스 활동을 재개하고 있지 않다. 사실 다시 오픈 소스 활동을 재개하고 싶지만, 현업에서 일을 하다보니 부족한 점이 너무 많아서 부족한 부분을 채우느라 다시 시작할 엄두를 못내고 있다.</p>
+<p>하지만 이번 글을 쓰면서 감사함을 느꼈고 이에 보답하기 위해서라도 오픈 소스 컨트리뷰션을 조만간 다시 재개할 수 있도록 노력을 해야겠다.</p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://doxygen.postgresql.org/">postgres doxygen</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

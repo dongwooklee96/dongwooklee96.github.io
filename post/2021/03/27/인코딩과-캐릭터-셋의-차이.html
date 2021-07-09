@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>인코딩과 캐릭터 셋의 차이 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">인코딩과 캐릭터 셋의 차이</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/27</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%9C%A0%ED%8B%B8">유틸</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>최근에 인코딩과 캐릭터 셋의 차이를 아는지에 대한 질문을 받았고, 제대로 답변하지 못한 기억이 난다. 따라서 이 두개의 차이점 및 추가적인 궁금증에 대해서 조사를 해보았다.</p>
+<p><img src="https://user-images.githubusercontent.com/14002238/112772028-8c9d0a80-9069-11eb-85a4-adb185619b6b.png" alt="Screen Shot 2021-03-29 at 8 33 54 AM"></p>
+<h3 id="유니코드와-utf-8-utf-16은-무엇이-다른가">유니코드와 <code>UTF-8</code>, <code>UTF-16</code>은 무엇이 다른가</h3>
+<ul>
+<li>
+<p>유니코드는 문자 집합으로, 문자 집합만 의미하며, 실제로 저장되는 방식(바이트로 맵핑)에 대해서는 아무런 설명을 하지 않는다.</p>
+</li>
+<li>
+<p>UTF-8, UTF-16 은 문자열 또는 바이트 배열에서 바이트로 문자를 맵핑하는 방법을 정의하는 인코딩이다.</p>
+</li>
+<li>
+<p>UTF-8, UTF-16, UTF-32는 기본적으로 일부 문자를 인코딩하는데, 사용되는 바이트의 양이 다르다.</p>
+</li>
+<li>
+<p>UTF-8은 ASCII에 정의된 문자에 대해서 1바이트를 사용하고, 다른 문자에 대해서는 2~4 사이의 바이트를 사용합니다. UTF-32는 각 문자에 대해서 4바이트를 지속적으로 사용하므로 문자열의 문자에 대한 반복은 사소한 것이지만 공통 문자열의 경우에는 더 많은 공간을 사용한다.</p>
+</li>
+</ul>
+<h3 id="캐릭터-셋과-인코딩의-차이점">캐릭터 셋과 인코딩의 차이점</h3>
+<ul>
+<li>캐릭터 셋은 단순히 특정 인코딩으로 나타낼 수 있는, 문자의 집합을 의미한다.</li>
+<li>예를 들면, &lsquo;☯&rsquo; 같은 문자는 유니코드 문자 집합과 다른 문자 집합에도 사용할 수 있다. 하지만 이 문자에 대한 인코딩을 서로 다를 수 있다.</li>
+</ul>
+<pre><code>Unicode character: ☯
+UTF-8 encoded: 0xE2 0x98 0xAF
+UTF-16 encoded: 0x26 0x2F
+</code></pre><h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://kore-nordmann.de/blog/php_charset_encoding_FAQ.html#what-is-the-difference-between-a-charset-and-an-encoding">what is the difference between a charset and an encoding</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

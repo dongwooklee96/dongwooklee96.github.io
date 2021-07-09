@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>객체지향 5원칙 (SOLID) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">객체지향 5원칙 (SOLID)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/13</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%94%94%EC%9E%90%EC%9D%B8-%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5">디자인 - 객체지향</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/solid-%EC%9B%90%EC%B9%99">SOLID 원칙</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <p>회사에서 객체지향 및 SOLID 원칙에 대해서 설명하는 세미나를 진행하였다.</p>
+<ul>
+<li><a href="https://github.com/dongwooklee96/java-chap02-assignment">사내 세미나 과제</a></li>
+</ul>
+<h2 id="객체지향-5원칙-solid-원칙">객체지향 5원칙 (SOLID) 원칙</h2>
+<hr>
+<h4 id="srp-single-responsiblity-principle---단일-책임-원칙">SRP (Single Responsiblity Principle) - 단일 책임 원칙</h4>
+<ul>
+<li>하나의 클래스는 하나의 책임만 가져야 한다.</li>
+<li>어떤 변화 (요구 사항등의 변화)에 의해서 클래스를 변경해야하는 이유는 오직 하나여야 한다.</li>
+<li>나머지 4원칙의 기초가 되는 원칙으로 SRP만 잘 지키면 다른 책임의 변경으로 인한 연쇄 작용을 방지할 수 있다.</li>
+</ul>
+<h4 id="ocp-open-closed-principle---개방-폐쇄-원칙">OCP (Open-Closed Principle) - 개방, 폐쇄 원칙</h4>
+<hr>
+<ul>
+<li>SW의 구성 요소 (모듈, 컴포넌트, 클래스, 메서드)는 확장에는 열려있고 변경에는 닫쳐있어야 한다.
+<ul>
+<li>변경을 위한 비용은 가능한 줄이고, 확장을 위한 비용은 극대화 한다.</li>
+</ul>
+</li>
+<li>OCP를 가능하게 하는 중요 매커니즘은 추상화와 다형성이다.</li>
+<li>새로운 기능이 추가되는 경우, 기존에 제공하던 클래스 (또는 메서드)를 수정하는 것이 아니라 새로운 클래스 (또는 메서드)를 추가해서 기능을 확장한다.</li>
+</ul>
+<h4 id="lsp-the-liskov-subsitution-principle---리스코프-치환-원칙">LSP (The Liskov Subsitution Principle) - 리스코프 치환 원칙</h4>
+<hr>
+<ul>
+<li>서브 클래스는 언제나 슈퍼 클래스를 대체할 수 있어야 한다.
+<ul>
+<li>슈퍼 클래스가 들어갈 자리에 서브 클래스를 넣어도, 원래대로 잘 작동해야 한다.</li>
+</ul>
+</li>
+<li>상속의 오용을 방지하게 하는 원칙</li>
+<li>슈퍼 클래스와 서브 클래스의 동작이 일관성 있게 동작해야함.</li>
+</ul>
+<h4 id="isp-interface-segregation-principle---인터페이스-분리-원칙">ISP (Interface Segregation Principle) - 인터페이스 분리 원칙</h4>
+<hr>
+<ul>
+<li>
+<p>한 클래스는 자신이 사용하지 않는 인터페이스의 메서드에 의존하지 않아야 한다.</p>
+<ul>
+<li>하나의 일반적인 인터페이스 보다는, 여러 개의 구체적인 인터페이스가 낫다.</li>
+</ul>
+</li>
+<li>
+<p>SRP가 클래스의 단일 책임을 강조한다면, ISP는 인터페이스의 단일 책임을 강조함.</p>
+</li>
+<li>
+<p><code>UserService</code>, <code>BoardService</code> (X)</p>
+</li>
+<li>
+<p><code>UserCreateService</code>, <code>BoardCreateService</code> (O)</p>
+</li>
+</ul>
+<h4 id="dip-dependency-inversion-principle---의존성-역전의-원칙">DIP (Dependency Inversion Principle) - 의존성 역전의 원칙</h4>
+<ul>
+<li>
+<p>변화하기 쉬운 것, 자주 변화하는 것 보다 변화하기 어려운 것, 거의 변화가 없는 것에 의존하라.</p>
+</li>
+<li>
+<p>고차원 모듈은 주로 변화하지 않음, 저 차원 모듈에 주로 자주 변화함</p>
+</li>
+<li>
+<p>구체적인 구현 클래스 보다 추상화된 인터페이스에 의존하라, 구체적이며 변동성이 크다면 절대로 이름을 언급하지 마라.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

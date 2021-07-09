@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>이것이 취업을 위한 코딩테스트다 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%B7%A8%EC%97%85%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/</link>
+    <link>https://dongwooklee96.github.io/tags/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%B7%A8%EC%97%85%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4.html</link>
     <description>Recent content in 이것이 취업을 위한 코딩테스트다 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Sun, 28 Feb 2021 12:29:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%9D%B4%EA%B2%83%EC%9D%B4-%EC%B7%A8%EC%97%85%EC%9D%84-%EC%9C%84%ED%95%9C-%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%8B%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>그리디 알고리즘</title>
-      <link>https://dongwooklee96.github.io/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</link>
+      <link>https://dongwooklee96.github.io/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.html</link>
       <pubDate>Sun, 28 Feb 2021 12:29:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/02/28/%EA%B7%B8%EB%A6%AC%EB%94%94-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.html</guid>
       <description>&lt;h1 id=&#34;그리디-알고리즘&#34;&gt;그리디 알고리즘&lt;/h1&gt;
 &lt;hr&gt;
 &lt;p&gt;현재 상황에서 좋아 보이는 것만을 선택하는 알고리즘&lt;/p&gt;
@@ -83,10 +83,10 @@ def assertMoney(money, count):
     
     <item>
       <title>코딩 테스트 출제 경향 및 준비 방향</title>
-      <link>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5/</link>
+      <link>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5.html</link>
       <pubDate>Sat, 27 Feb 2021 22:28:35 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%9C%EC%A0%9C-%EA%B2%BD%ED%96%A5-%EB%B0%8F-%EC%A4%80%EB%B9%84-%EB%B0%A9%ED%96%A5.html</guid>
       <description>&lt;h1 id=&#34;최신-출제-경향과-준비-방향&#34;&gt;최신 출제 경향과 준비 방향&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;정확한 알고리즘을 사용하여 얼마나 빠르게 많은 문제를 풀었는지를 토대로 순위를 매긴다.&lt;/li&gt;

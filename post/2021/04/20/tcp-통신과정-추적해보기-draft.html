@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>TCP 통신과정 추적해보기 (draft) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">TCP 통신과정 추적해보기 (draft)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/04/20</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="추적-과정">추적 과정</h3>
+<hr>
+<p>추적하기 전에 클라이언트와 서버 코드를 컴파일 한다.</p>
+<p><strong>client.c</strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+#define MAXLINE 1024
+
+int main(int argc, char **argv) {
+        struct sockaddr_in serveraddr;
+        int server_sockfd;
+        int client_len;
+        char buf[MAXLINE];
+
+        if((server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
+                perror(&quot;error : &quot;);
+                return 1;
+        }
+        serveraddr.sin_family = AF_INET;
+        serveraddr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);
+        serveraddr.sin_port = htons(4000);
+
+        client_len = sizeof(serveraddr);
+
+        if(connect(server_sockfd, (struct sockaddr*)&amp;serveraddr, client_len) == -1) {
+                perror(&quot;connect error : &quot;);
+                return 1;
+        }
+        memset(buf, 0x00, MAXLINE);
+        read(0, buf, MAXLINE);
+        if(write(server_sockfd, buf, MAXLINE) &lt;= 0) {
+                perror(&quot;write error : &quot;);
+                return 1;
+        }
+        memset(buf, 0x00, MAXLINE);
+        if(read(server_sockfd, buf, MAXLINE) &lt;= 0) {
+                perror(&quot;read error: &quot;);
+                return 1;
+        }
+        close(server_sockfd);
+        printf(&quot;server:%s\n&quot;, buf);
+        return 0;
+}
+</code></pre><p><strong>server.c</strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+
+#define BUFF_SIZE 1024
+
+int main(void){
+   int server_socket;
+   int client_socket;
+   int client_addr_size;
+   struct sockaddr_in server_addr;
+   struct sockaddr_in client_addr;
+   char buff_rcv[BUFF_SIZE+5];
+   char buff_snd[BUFF_SIZE+5];
+
+   server_socket = socket(PF_INET, SOCK_STREAM, 0);
+   if(-1 == server_socket){
+      printf( &quot;server socket 생성 실패n&quot;);
+      exit( 1);
+   }
+
+   memset(&amp;server_addr, 0, sizeof(server_addr));
+   server_addr.sin_family     = AF_INET;
+   server_addr.sin_port       = htons(4000);
+   server_addr.sin_addr.s_addr= htonl(INADDR_ANY);
+
+   if(-1 == bind(server_socket, (struct sockaddr*)&amp;server_addr, sizeof(server_addr))){
+      printf( &quot;bind() 실행 에러n&quot;);
+      exit(1);
+   }
+
+   while(1){
+      if(-1 == listen(server_socket, 5)){
+         printf( &quot;대기상태 모드 설정 실패n&quot;);
+         exit(1);
+      }
+
+      client_addr_size  = sizeof( client_addr);
+      client_socket     = accept( server_socket, (struct sockaddr*)&amp;client_addr, &amp;client_addr_size);
+
+      if (-1 == client_socket){
+         printf( &quot;클라이언트 연결 수락 실패n&quot;);
+         exit(1);
+      }
+
+      read (client_socket, buff_rcv, BUFF_SIZE);
+      printf(&quot;receive: %s\n&quot;, buff_rcv);
+
+      sprintf(buff_snd, &quot;%ld : %s&quot;, strlen(buff_rcv), buff_rcv);
+      write(client_socket, buff_snd, strlen(buff_snd)+1);          // +1: NULL까지 포함해서 전송
+      close(client_socket);
+   }
+}
+
+</code></pre><ul>
+<li>위의 소스 코드를 복사하여, 파일을 만든다.</li>
+</ul>
+<pre><code>gcc -pg -g -o client client.c
+gcc -pg -g -o server server.c
+</code></pre><ul>
+<li>그리고 위의 명령어를 통해서 컴파일을 해준다.</li>
+</ul>
+<h3 id="uftrace">UFTRACE</h3>
+<hr>
+<p><img src="https://user-images.githubusercontent.com/14002238/115418135-35d3bc80-a234-11eb-898d-50f3f8eb093e.png" alt="Screen Shot 2021-04-20 at 11 57 42 PM"></p>
+<ul>
+<li>
+<p>그리고 나서는 <a href="https://github.com/namhyung/uftrace">ufrace</a>를 이용하여 함수를 추적할 것이다.</p>
+</li>
+<li>
+<p>UFTACE는 C/C++로 작성된 프로그램의 실행을 추적하고 분석하는 도구이다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://github.com/namhyung/uftrace">uftrace</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

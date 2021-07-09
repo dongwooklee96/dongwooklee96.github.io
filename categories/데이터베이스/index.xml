@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>데이터베이스 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/</link>
+    <link>https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4.html</link>
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Thu, 24 Jun 2021 11:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>데드락이란? (DeadLock) (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft.html</link>
       <pubDate>Thu, 24 Jun 2021 11:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft.html</guid>
       <description>&lt;h2 id=&#34;배경&#34;&gt;배경&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/123192882-b8038a00-d4de-11eb-91a0-5e434f43c548.png&#34; alt=&#34;ScreenShot 2021-06-24 at 11 23 29 AM&#34;&gt;&lt;/p&gt;
@@ -80,10 +80,10 @@
     
     <item>
       <title>쿼리 캐시란? (MARIADB)</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb/</link>
+      <link>https://dongwooklee96.github.io/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb.html</link>
       <pubDate>Fri, 04 Jun 2021 15:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb.html</guid>
       <description>&lt;h3 id=&#34;쿼리-캐시&#34;&gt;쿼리 캐시&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -224,10 +224,10 @@ UUID_SHORT()
     
     <item>
       <title>오라클 성능 고도화 강의 (1)</title>
-      <link>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1/</link>
+      <link>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1.html</link>
       <pubDate>Sat, 08 May 2021 09:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1.html</guid>
       <description>&lt;h3 id=&#34;오라클-성능-고도화-강의&#34;&gt;오라클 성능 고도화 강의&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/117525284-6ec5ac80-affc-11eb-8e4f-f245c5ef8828.jpeg&#34; alt=&#34;IMG_5C71B9160877-1&#34;&gt;&lt;/p&gt;
@@ -304,10 +304,10 @@ UUID_SHORT()
     
     <item>
       <title>윈도우 함수에서 WHERE 절을 사용하지 못하는 이유(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft.html</link>
       <pubDate>Tue, 13 Apr 2021 15:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://learnsql.com/blog/window-functions-not-allowed-in-where/&#34;&gt;Why Window Functions Are Not Allowed in WHERE Clauses&lt;/a&gt;&lt;/li&gt;
@@ -317,10 +317,10 @@ UUID_SHORT()
     
     <item>
       <title>TWO-PHASE-LOCK(2PL)이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Wed, 07 Apr 2021 18:05:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;two-phase-lock&#34;&gt;TWO PHASE LOCK&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113949645-b4028d00-984a-11eb-98e5-e1d592569831.png&#34; alt=&#34;100518_0439_DBMSConcurr1&#34;&gt;&lt;/p&gt;
@@ -374,10 +374,10 @@ UUID_SHORT()
     
     <item>
       <title>ARIES란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft.html</link>
       <pubDate>Wed, 31 Mar 2021 22:56:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Algorithms_for_Recovery_and_Isolation_Exploiting_Semantics&#34;&gt;WIKI - ARIES&lt;/a&gt;&lt;/li&gt;
@@ -387,10 +387,10 @@ UUID_SHORT()
     
     <item>
       <title>데이터베이스에 대해서 배울 수 있는 좋은 강의 (CS186Berkeley)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley.html</link>
       <pubDate>Wed, 31 Mar 2021 20:40:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley.html</guid>
       <description>&lt;p&gt;우연히 유튜브에서 데이터베이스에 대해서 체계적이고 좋은 영상이 있는 것을 발견하였다.&lt;/p&gt;
 
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
@@ -423,10 +423,10 @@ UUID_SHORT()
     
     <item>
       <title>슬로우 쿼리란? (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft.html</link>
       <pubDate>Mon, 29 Mar 2021 20:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;슬로우-쿼리란&#34;&gt;슬로우 쿼리란&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -438,10 +438,10 @@ UUID_SHORT()
     
     <item>
       <title>리플리케이션이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Sun, 28 Mar 2021 17:43:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;gelera-리플리케이션&#34;&gt;Gelera 리플리케이션&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113364491-a05caf80-938e-11eb-8a11-e5933db7f28d.png&#34; alt=&#34;Screen Shot 2021-04-02 at 8 36 21 AM&#34;&gt;&lt;/p&gt;
@@ -490,20 +490,20 @@ UUID_SHORT()
     
     <item>
       <title>쿼리 오프 로딩이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Sun, 28 Mar 2021 17:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 </description>
     </item>
     
     <item>
       <title>데이터베이스 스토리지 티어링이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Sat, 27 Mar 2021 23:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;스토리지-티어링이란&#34;&gt;스토리지 티어링이란&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -512,10 +512,10 @@ UUID_SHORT()
     
     <item>
       <title>샤딩이란(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft.html</link>
       <pubDate>Sat, 27 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft.html</guid>
       <description>&lt;h3 id=&#34;샤딩&#34;&gt;샤딩&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -527,10 +527,10 @@ UUID_SHORT()
     
     <item>
       <title>클러스터링이란?(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft.html</link>
       <pubDate>Sat, 27 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft.html</guid>
       <description>&lt;h3 id=&#34;클러스터링&#34;&gt;클러스터링&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -553,10 +553,10 @@ UUID_SHORT()
     
     <item>
       <title>CONCURRENCY(동시성)와 PARALLELISM(병행성) (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft.html</link>
       <pubDate>Sat, 27 Mar 2021 01:09:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft.html</guid>
       <description>&lt;h3 id=&#34;concurrency동시성와-parallelism병행성&#34;&gt;CONCURRENCY(동시성)와 PARALLELISM(병행성)&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112660338-af2bf980-8e98-11eb-8aec-e165f24e7fde.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
@@ -599,10 +599,10 @@ UUID_SHORT()
     
     <item>
       <title>트랜잭션과 ACID</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid.html</link>
       <pubDate>Fri, 26 Mar 2021 23:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid.html</guid>
       <description>&lt;p&gt;누군가 트랜잭션에 대해서 물어보았을 때, 분명히 알고 있다고 생각한 것인데도 제대로 답변하지 못했다. 이건 평소에 생각이 정리되지 않아서 그런 것 같다. 따라서 이참에 이에 대해서 정리를 해보도록 했다.&lt;/p&gt;
 &lt;h3 id=&#34;트랜잭션이란&#34;&gt;트랜잭션이란&lt;/h3&gt;
 &lt;hr&gt;
@@ -655,10 +655,10 @@ UUID_SHORT()
     
     <item>
       <title>CAP 이론이란?</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80.html</guid>
       <description>&lt;h3 id=&#34;cap-정리&#34;&gt;CAP 정리&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112651209-86533680-8e8f-11eb-9579-2d9a2389ce27.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
@@ -704,20 +704,20 @@ UUID_SHORT()
     
     <item>
       <title>MVCC(다중 버전 동시성 제어)란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 </description>
     </item>
     
     <item>
       <title>TWO-PHASE COMMIT 이란?</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80.html</guid>
       <description>&lt;h3 id=&#34;two-phase-커밋이란&#34;&gt;TWO-PHASE 커밋이란?&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113822026-dd260d80-97b7-11eb-8ea8-b3c939d08cec.png&#34; alt=&#34;95&#34;&gt;&lt;/p&gt;
@@ -772,10 +772,10 @@ UUID_SHORT()
     
     <item>
       <title>합의(Consensus) 알고리즘이란(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -799,10 +799,10 @@ UUID_SHORT()
     
     <item>
       <title>SQLAlchemy 세션(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft.html</link>
       <pubDate>Fri, 19 Mar 2021 16:40:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://docs.sqlalchemy.org/en/13/orm/session_transaction.html#transactions-and-connection-management&#34;&gt;Transactions and Connection Management&lt;/a&gt;&lt;/li&gt;
@@ -812,10 +812,10 @@ UUID_SHORT()
     
     <item>
       <title>SQLAlchemy에서 트랜잭션 사용법</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95.html</link>
       <pubDate>Thu, 18 Mar 2021 13:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95.html</guid>
       <description>&lt;p&gt;회사에서 이슈 진행을 하다가, 트랜잭션를 이용하여 처리해야하는 부분을 발견하였다.
 따라서 &lt;code&gt;SQLAlchemy&lt;/code&gt;에서는 트랜잭션을 어떻게 사용하는지 정리해보도록 하겟다.&lt;/p&gt;
 &lt;h2 id=&#34;트랜잭션-관리하기&#34;&gt;트랜잭션 관리하기&lt;/h2&gt;
@@ -965,10 +965,10 @@ with sess.begin():
     
     <item>
       <title>mariadb 유니크 인덱스</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4.html</link>
       <pubDate>Tue, 09 Mar 2021 09:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4.html</guid>
       <description>&lt;h2 id=&#34;유니크-인덱스&#34;&gt;유니크 인덱스&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110399859-ed17d800-80b9-11eb-933e-d71a182abcb7.png&#34; alt=&#34;unique&#34;&gt;&lt;/p&gt;
@@ -987,10 +987,10 @@ with sess.begin():
     
     <item>
       <title>DBMS를 분석하는 방법</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Wed, 03 Mar 2021 23:32:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;h3 id=&#34;kcd-2020&#34;&gt;KCD 2020&lt;/h3&gt;
 &lt;hr&gt;
 
@@ -1055,10 +1055,10 @@ with sess.begin():
     
     <item>
       <title>데이터베이스 스키마를 관리하는 도구, Flyway</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway.html</link>
       <pubDate>Wed, 03 Mar 2021 20:09:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway.html</guid>
       <description>&lt;h1 id=&#34;데이터베이스-스키마-관리의-필요성&#34;&gt;데이터베이스 스키마 관리의 필요성&lt;/h1&gt;
 &lt;hr&gt;
 &lt;p&gt;최근에 회사에서 기존에 &lt;code&gt;AWS&lt;/code&gt;에서 서비스하던 서비스를 &lt;code&gt;ALI&lt;/code&gt; 클라우드에서 제공해야하는 일이 있었다. 따라서 데이터베이스 스키마와 마스터 데이터를 새로운 클라우드 환경으로 이전을 시켜줘야 했다.&lt;/p&gt;

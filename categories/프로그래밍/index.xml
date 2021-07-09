@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>프로그래밍 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/</link>
+    <link>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</link>
     <description>Recent content in 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Sat, 26 Jun 2021 23:27:23 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>C 포인터 이해와 활용 (2)</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-2/</link>
+      <link>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-2.html</link>
       <pubDate>Sat, 26 Jun 2021 23:27:23 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-2/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-2.html</guid>
       <description>&lt;h2 id=&#34;chap-02-동적-메모리-관리&#34;&gt;CHAP 02. 동적 메모리 관리&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -197,10 +197,10 @@ pi = malloc(sizeof(int));
     
     <item>
       <title>C 포인터 이해와 활용 (1)</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-1/</link>
+      <link>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-1.html</link>
       <pubDate>Sat, 26 Jun 2021 13:27:23 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-1/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/06/26/c-%ED%8F%AC%EC%9D%B8%ED%84%B0-%EC%9D%B4%ED%95%B4%EC%99%80-%ED%99%9C%EC%9A%A9-1.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/123501837-a78c1480-d682-11eb-892e-eb7378e1ef67.jpg&#34; alt=&#34;8994506799_1&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;포인터에 대해서 복습하고 모르던 내용을 다시 되집어 보기 위해서 다음 책을 읽고 정리한 내용이다.&lt;/li&gt;

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>보안 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/categories/%EB%B3%B4%EC%95%88/</link>
+    <link>https://dongwooklee96.github.io/categories/%EB%B3%B4%EC%95%88.html</link>
     <description>Recent content in 보안 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <lastBuildDate>Sun, 28 Mar 2021 16:17:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%B3%B4%EC%95%88/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>네트워크 메시지 암호화 및 방식 (중간자 공격, HMAC, 대칭, 비대칭 키)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4.html</link>
       <pubDate>Sun, 28 Mar 2021 16:17:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%EC%95%94%ED%98%B8%ED%99%94-%EB%B0%8F-%EB%B0%A9%EC%8B%9D-%EC%A4%91%EA%B0%84%EC%9E%90-%EA%B3%B5%EA%B2%A9-hmac-%EB%8C%80%EC%B9%AD-%EB%B9%84%EB%8C%80%EC%B9%AD-%ED%82%A4.html</guid>
       <description>&lt;h3 id=&#34;네트워크전송-레벨-암호화&#34;&gt;네트워크(전송) 레벨 암호화&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112745214-a7c43780-8fe1-11eb-8d75-3bd315668317.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
@@ -134,10 +134,10 @@
     
     <item>
       <title>REST API 보안 및 인가 방식</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D.html</link>
       <pubDate>Sun, 28 Mar 2021 15:17:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EA%B0%80-%EB%B0%A9%EC%8B%9D.html</guid>
       <description>&lt;h3 id=&#34;권한-인가&#34;&gt;권한 인가&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;인증이 끝나면 다음 단계는 권한에 대한 인증, 즉 인가(&lt;code&gt;Authoriation&lt;/code&gt;) 과정이 필요하다. 사용자가 인증을 받고 로그인을 했더라도, 해당 API를 호출할 수 있는 권한이 있는가를 확인 해야 한다.&lt;/p&gt;
@@ -252,10 +252,10 @@
     
     <item>
       <title>HTTP와 HTTPS의 차이점 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft.html</link>
       <pubDate>Sun, 28 Mar 2021 13:18:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/http%EC%99%80-https%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -266,10 +266,10 @@
     
     <item>
       <title>REST API 보안 및 인증 방식</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D.html</link>
       <pubDate>Sun, 28 Mar 2021 13:17:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/28/rest-api-%EB%B3%B4%EC%95%88-%EB%B0%8F-%EC%9D%B8%EC%A6%9D-%EB%B0%A9%EC%8B%9D.html</guid>
       <description>&lt;h3 id=&#34;rest-api-보안&#34;&gt;REST API 보안&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -549,10 +549,10 @@ HA2 = MD5(HTTP method:HTTP URL)
     
     <item>
       <title>CSP(Content Security Policy) 란 무엇일까? (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft.html</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/23/cspcontent-security-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -563,10 +563,10 @@ HA2 = MD5(HTTP method:HTTP URL)
     
     <item>
       <title>SOP(Same-origin policy) 란 무엇일까?</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C.html</link>
       <pubDate>Tue, 23 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/23/sopsame-origin-policy-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C.html</guid>
       <description>&lt;p&gt;브라우저 보안 정책에 &lt;code&gt;SOP(same-origin-policy)&lt;/code&gt; 있다는 것을 알게 되었고, 어떤건지 궁금해서 찾아보았다. 마침 MDN 문서에 잘 나와있어서 이를 참조할 수 있었다.&lt;/p&gt;
 &lt;h3 id=&#34;same-origin-policy동일-출처-정책&#34;&gt;Same-Origin-Policy(동일 출처 정책)&lt;/h3&gt;
 &lt;hr&gt;
@@ -713,10 +713,10 @@ HA2 = MD5(HTTP method:HTTP URL)
     
     <item>
       <title>CSRF 란 무엇일까?</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C.html</link>
       <pubDate>Wed, 10 Mar 2021 22:20:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C/</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/10/csrf-%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C.html</guid>
       <description>&lt;h3 id=&#34;csrf&#34;&gt;CSRF&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110636756-fc00a680-81ef-11eb-8940-ee638da62fc2.png&#34; alt=&#34;Screen Shot 2021-03-10 at 10 28 45 PM&#34;&gt;&lt;/p&gt;

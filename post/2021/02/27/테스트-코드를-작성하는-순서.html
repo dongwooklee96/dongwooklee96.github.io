@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>테스트 코드를 작성하는 순서 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">테스트 코드를 작성하는 순서</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/02/27</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%9C%A0%ED%8B%B8">유틸</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A3%BC%EB%8F%84-%EA%B0%9C%EB%B0%9C-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0">테스트 주도 개발 시작하기</a> <a href="../../../../tags/tdd">TDD</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="테스트-코드를-작성하는-순서">테스트 코드를 작성하는 순서</h3>
+<p>테스트 코드를 작성하는 것도 무작성 작성하는 것보다는 순서를 지켜가면서 작성하는 것이 훨씬 좋다.</p>
+<h4 id="테스트는-다음과-같은-순서를-따르면서-작성-해야한다">테스트는 다음과 같은 순서를 따르면서 작성 해야한다.</h4>
+<hr>
+<ol>
+<li>쉬운 경우에서, 어려운 경우로 진행</li>
+<li>예외적인 경우에서, 정상적인 경우로 진행</li>
+</ol>
+<blockquote>
+<p>한번에 완벽한 코드를 만들면 좋겠지만, 모두가 슈퍼 개발자인 것은 아니다. 보통의 개발자는 한 번에 많은 코드를 만들다 보면 나도 모르게 버그를 만들고
+나중에 버그를 잡기 위해 많은 시간을 허비하게 된다. 당연히 테스트 통과 시간도 길어진다.<br>
+그 뿐만 아니라, 코드 작성 시간이 길어지면 집중력도 떨어져서 흐름도 자주 끊기게 된다.<br>
+중간에 화장실도 다녀오고 커피도 마시게 된다. 자리에 돌아오면 이전까지 했던 흐름을 이어가 기 위한 시간도 필요하다.</p>
+</blockquote>
+<p>따라서 테스트를 코드를 작성할 때, 순서에 유의해서 작성 해야 한다 가장 구현하기 쉬운 경우부터 시작하고, 보통 수 분에서 십여 분 이내에 구현을 완료해서 테스트를 통과시킬 수 있을 만큼 쉬운 것을 선택한다. 그래야만 점진적으로 구현을 완성해갈 수 있다.</p>
+<ul>
+<li>한번에 구현하는 시간이 짧아지면 디버깅 할 때에 유리하다.</li>
+<li>작성한 코드가 많지 않고 작성 시간도 짧으면 머리속에 코드에 대한 내용이 생생하게 남아있기 때문에, 디버깅할 때 문제의 원인을 쉽게 찾을 수 있다.</li>
+</ul>
+<p>위의 문장을 읽고 나서 &ldquo;내가 지금 작성하고 있는 코드를 어떻게 하면 가장 빨리 실행할 수 있을까&rdquo; 라는 생각이 들었고
+가장 빠르게 실행 시킬 수 있는 방법은 테스트 코드를 작성하는 것이라는 결론을 내릴 수 있었다.</p>
+<h4 id="예외-상황을-먼저-테스트해야-하는-이유">예외 상황을 먼저 테스트해야 하는 이유</h4>
+<hr>
+<ul>
+<li>다양한 예외 상황은 복잡한 <code>if-else</code> 블록을 동반하기 때문에 예외 상황을 전혀 고려하지 않은 코드에 예외 상황을 반영하려면, 코드의 구조를 뒤집거나 코드 중간에 예외 상황을 처리하기 위해 조건문을 중복해서 추가하는 일이 벌어진다.</li>
+<li>TDD를 하는 동안 예외 상황을 찾고 테스트에 반영하면 예외 상황을 처리하지 않아 발생하는 버그도 줄여준다.</li>
+</ul>
+<h4 id="완급-조절">완급 조절</h4>
+<hr>
+<ul>
+<li>처음에 테스트 코드를 작성할 때, 어려운 것 중 하나는 한 번에 얼마만큼의 코드를 작성할 것인가이다.</li>
+<li>다음의 순서를 시키면서 TDD를 진행하는 것이 좋다.</li>
+<li>
+<blockquote>
+<ol>
+<li>정해진 값을 리턴</li>
+<li>값 비교를 이용해서 정해진 값을 리턴</li>
+<li>다양한 테스트를 추가하면서 구현을 일반화 시킨다.</li>
+</ol>
+</blockquote>
+</li>
+<li>뻔한 구현이라도 위 단계를 거쳐서 연습하는 것과 바로 구현하는 것과는 차이가 있다.</li>
+<li>테스트를 만들고 통과시키는 과정에서 구현이 막힐 때가 있다. 이럴 때 위 단계를 이용해서 TDD를 연습한 개발자는 조금씩 기능을 구현해 나갈 수 있는 반면에 그렇지 못한 개발자는 구현에 실패하게 된다.</li>
+</ul>
+<h4 id="지속적인-리팩토링">지속적인 리팩토링</h4>
+<hr>
+<ul>
+<li>
+<p>테스트를 통과한 후에는 리펙토링을 진행한다.</p>
+</li>
+<li>
+<p>코드 중복은 대표적인 리팩토링 대상이다.</p>
+</li>
+<li>
+<p>코드가 길어지면 메서드 추출과 같은 기법을 사용해서, 메서드 이름으로 코드의 의미를 표현할 수 있다.</p>
+</li>
+<li>
+<p>TDD를 진행하는 과정에서 지속적으로 리펙토링을 진행하면 코드 가독성이 높아진다. 코드 가독성이 높아지면 개발자는 빠르게 코드를 분석할 수 있어 변경할 코드를 빠르게 찾을 수 있다.</p>
+</li>
+<li>
+<p>코드 변경의 어려움을 줄여주어 향후 유지보수에 도움이 된다.</p>
+<pre><code>  테스트 대상 코드에서 상수를 변수로 바꾸거나 변수 이름을 추출하는 것과 같은 작은 
+  리펙토링은 발견하면 바로 실시하는데 반해서 메서드 추출과 같이 메서드의 구조에
+  영향을 주는 리펙토링은 큰 틀에서 구현 흐름이 눈에 들어오기 시작한 후에 진행한다.
+    
+  구현 초기에는 아직 구현의 전반적인 흐름을 모르기 때문에, 메서드 추출과 같은 
+  리펙토링을 진행하면 코드 구조를 잘못 잡을 가능성이 있기 때문이다. 코드 구조를 잘못 잡으면
+  테스트를 통과 시키는 과정에서 코드가 복잡해지거나 구현을 더는 진행하지 못하고 막힐 수 있다.
+  이런 상황이 오면 구현을 멈추고 메서드 추출 리팩토링을 되돌려야 한다. 
+  리팩토링을  취소해서 코드를 원상 복구한 뒤에 다음 테스트를 진행하고
+   코드의 의미나 구조가 더 명확해지면 그때 다시 리펙토링을 실시한다.
+</code></pre>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=233614629">테스트 주도 개발 시작하기, (최범균, 가메출판사)</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>테크니컬 라이팅 4대 원칙이라는 글을 읽고 느낀점 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">테크니컬 라이팅 4대 원칙이라는 글을 읽고 느낀점</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/04</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%9C%A0%ED%8B%B8">유틸</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EB%AC%B8%EC%84%9C%ED%99%94">문서화</a> <a href="../../../../tags/tdd">TDD</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="테스트-코드-및-메서드-주석에-대한-고민">테스트 코드 및 메서드 주석에 대한 고민</h3>
+<p>코드를 작성하면서 테스트 코드에 어떤 테스트라는 것을 어떻게 명확하게 표현할까, 그리고 모듈 및 클래스, 메서드 주석을 달면서 어떻게 작성해야 좋은 문서가 될까? 라는 고민을 하고 작성하였지만 여전히 어렵기만 했다. 그런던 중에서 카카오 기술 블로그에서 도움이 될 만한 글을 발견하였다.</p>
+<h4 id="테크닐컬-라이팅의-4대-원칙">테크닐컬 라이팅의 4대 원칙</h4>
+<p><img src="https://user-images.githubusercontent.com/14002238/109958056-21da0700-7d29-11eb-8f4f-779e11801b92.png" alt="img1 daumcdn"></p>
+<h4 id="명확성">명확성</h4>
+<ul>
+<li>테크니컬 라이팅의 첫 번째 원칙은 명확성이다.</li>
+</ul>
+<blockquote>
+<p>명확성이란 핵심어나 핵심 문장이 모호하게 사용되지 않고, 대상 독자가 기술 문서를 읽을 때, 내용의 모호함이나 혼란 없이 한번에 이해하도록 하는 글이다.</p>
+</blockquote>
+<ul>
+<li>
+<p>어떤 문서를 읽을 때, 독자 입장에서 이해가 가지 않아 특정 부분을 몇 번이고 다시 읽게 된다면, 이는 명확성이 떨어지는 글이다.</p>
+</li>
+<li>
+<p>명확성이 떨어지는 이유는 대부분의 경우 대상 독자를 제대로 파악하지 못해서 발생한다.</p>
+</li>
+<li>
+<p>&ldquo;개발자라면 모두 아는 내용인데 적어야할까?&rdquo; 라는 의문이 생기더라도 모두 적어야한다.</p>
+</li>
+<li>
+<p>&ldquo;개발자들이라면 다 안다&quot;라는 생각은 굉장히 주관적일 수 있기 때문이다.</p>
+</li>
+<li>
+<p>대학생들이나 외부의 초급 개발자들도 쉽게 따라 할 수 있을 정도의 상세한 문서여야 한다.</p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/109959088-6023f600-7d2a-11eb-9a7f-cfb1012115e6.png" alt="Screen Shot 2021-03-04 at 8 44 05 PM"></p>
+<h4 id="간결성">간결성</h4>
+<ul>
+<li>
+<p>간결성이란 특정 독자가 기술적인 내용을 신속하고 정확하게 이해할 수 있도록 미사여구나 감탄사 등을 사용하지 않고, 쉬운 단어와 간결한 문장을 사용하는 것이다.</p>
+</li>
+<li>
+<p>문장을 길고 복잡하게 복문으로 써야 더 있어보이고, 더 많은 정보를 담게 될 것이라는 생각은 금물이다.</p>
+</li>
+<li>
+<p>기술 문서에서는 &ldquo;~는 ~입니다.&rdquo; 라는 형식의 단문을 사용할 때 더욱 명확하고 가독성이 높은 글을 작성할 수 있다.</p>
+</li>
+<li>
+<p><img src="https://user-images.githubusercontent.com/14002238/109959559-040da180-7d2b-11eb-8d7a-a0ad03e6e701.png" alt="img1 daumcdn"></p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/109959668-2a334180-7d2b-11eb-924d-1945a49faf98.png" alt="Screen Shot 2021-03-04 at 8 49 40 PM"></p>
+<h4 id="정확성">정확성</h4>
+<ul>
+<li>
+<p>독자가 필요로 하는 정보를 기술적 오류 없이 정확하게 제공하는 것을 말한다.</p>
+</li>
+<li>
+<p>명확성과, 간결성이 떨어지지만 정확성이 확보된 기술문서라면, 독자들은 시간이 많이 걸린다고 해도 해당 문서를 이해할 수 있지만 반대의 경우에는 잘못된 정보를 전달하게 된다.</p>
+</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/109959933-7da58f80-7d2b-11eb-9144-7ca86c041707.png" alt="Screen Shot 2021-03-04 at 8 51 58 PM"></p>
+<h4 id="일관성">일관성</h4>
+<ul>
+<li>
+<p>문서에 용어, 표현, 그리고 어조 등을 일관성 있게 사용하는 것이다.</p>
+</li>
+<li>
+<p>특히 한번 언급된 단어를 다른 방식으로 언급하는 것은 독자에게 큰 혼란을 줄 수 있고, 결과적으로 문서의 신뢰도와 가독성이 저하된다.</p>
+</li>
+</ul>
+<h4 id="정리">정리</h4>
+<ul>
+<li>
+<p>&ldquo;짧게 써라&quot;라고 시작하는 문장은 테크니컬 라이팅 대 원칙중 &ldquo;간결성&quot;을 &ldquo;명료하게 써라&quot;는 &ldquo;명확성에 해당한다&rdquo;</p>
+</li>
+<li>
+<p>&ldquo;그림처럼 써라&quot;라는 문장은 독자가 어떤 시스템이나 기능의 아키텍처를 보다 쉽게 이해할 수 있도록 논리적으로 기술하거나 개발 시나리오나 개발 흐름 등의 시각 자료를 활용하는 것이다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://tech.kakaoenterprise.com/102">테크니컬 라이팅 4대 원칙</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
