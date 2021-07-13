@@ -76,6 +76,59 @@
     
     <item>
       <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/12/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Mon, 12 Jul 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/12/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mygumi.tistory.com/396?url=https://mygumi.tistory.com/396h&#34;&gt;Redux 를 걷어낸 이유&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.edgedb.com/&#34;&gt;EdgeDB&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리덕스와 SWR의 차이에 대해서 대략적으로 알 수 있었다. 이는 토이프로젝트에 어떤 기술을 도입할지 결정하는데 많은 도움이 될 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고, 상태 관리를 위해서라면 리덕스를 도입하는 것보다 &lt;code&gt;RECOIL&lt;/code&gt;이라는 상태 관리 라이브러리를 사용하는 것이 더 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;EDGEQL&lt;/code&gt; 이라는 매우 혁신적인 쿼리 언어를 발견하였다. 아직 실무에 적용하기는 힘들 것 같지만, 유심히 살펴보는게 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;요즘 매일 코딩 테스트 문제를 해결하는 시간대가 늦어지고 있는데, 이는 하기 싫은 다음이 약간이라도 섞여있어서 그런 것 같다. 이를 반성하고 예전처럼 다시 재미있게 코딩 테스트 문제를 풀 수 있으면 좋겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal-and-duedate-목표-및-마감기한&#34;&gt;Goal and DueDate (목표 및 마감기한)&lt;/h3&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;난 일에 책임감을 가지고, 막히는 일이 있더라도, 끝가지 해낼 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;항상 자신감을 가지고, 내가 목표한 바가 모두 잘될 것이라는 확신을 갖는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/07/09/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
       <pubDate>Fri, 09 Jul 2021 08:34:36 +0900</pubDate>
       
