@@ -6,7 +6,73 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 20 Jul 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 21 Jul 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/21/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Wed, 21 Jul 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/21/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://shipilev.net/jvm/anatomy-quarks/&#34;&gt;JVM Anatomy Quarks&lt;/a&gt; 라는 시리즈를 알게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;JVM&lt;/code&gt;을 공부하는데 많은 도움이 될 것 같다. 추가로 원 저자에게 허락을 맡으면, 번역글을 작성하는 것도 좋을 것이다. 글또에 이 번역글을 제출해도 재미있을 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;오전 일과가 끝나면 잠깐 쉬다가 운동을 시작한다. (12:30 ~ 13:00)까지, 그리고 점심을 먹는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;업무가 끝나고(17:00), 한시간 정도 쉬다가 (18:00) 부터 코딩 테스트 문제를 풀고 제출한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(19:00) 저녁 식사를 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(19:30) 복싱 도장으로 가서 복싱을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(10:00) 시스템 프로그래밍 공부를 한다. 이전에 공부하던 책 &amp;ldquo;리눅스 시스템 네트워크 프로그래밍은&amp;rdquo; 레퍼런스 형태로 사용하고 우선은 &amp;ldquo;모두를 위한 리눅스 프로그래밍&amp;rdquo; 이라는 책부터 공부를 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(12:00) 토이프로젝트에서 자바독을 명시한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;오늘 집중도 있게 일할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;많은 일도 하나씩 해결하다 보면, 끝나있을 것이다. 따라서 긍정적인 마인드로 공부를 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다시 공부를 시작할 마음이 생긴것 같고, 재미있을 것이다. 따라서 조급해하지 말고 즐기면서 공부를 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 문서를 처음부터 끝까지 읽으려고 하지말고, 머리에 들어오지 않는 내용이거나 지금 당장 필요하지 않은 내용이면 잠시 미루고 필요하거나 이해가 되려고 할 때 공부를 하는 것도 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도큐먼트를 필요한 부분만 읽는 것도 중요하지만, 너무 흘려 읽지 않고 필요한 부분은 집중해서 읽는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/07/20/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
