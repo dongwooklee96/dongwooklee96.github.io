@@ -6,7 +6,56 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 21 Jul 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Jul 2021 00:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>커맨드라인 인자</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/22/%EC%BB%A4%EB%A7%A8%EB%93%9C%EB%9D%BC%EC%9D%B8-%EC%9D%B8%EC%9E%90.html</link>
+      <pubDate>Thu, 22 Jul 2021 00:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/22/%EC%BB%A4%EB%A7%A8%EB%93%9C%EB%9D%BC%EC%9D%B8-%EC%9D%B8%EC%9E%90.html</guid>
+      <description>&lt;h3 id=&#34;커맨드-라인-인자&#34;&gt;커맨드 라인 인자&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+int main(int argc, char* argv[]) {
+  int i;
+  printf(&amp;quot;argc=[%d]\n&amp;quot;, argc);
+  for (i = 0; i &amp;lt; argc; i++) {
+    printf(&amp;quot;argv[%d]=%s\n&amp;quot;, i, argv[i]);
+  }
+  exit(0);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;argc&lt;/code&gt;, &lt;code&gt;argv&lt;/code&gt;는 실행 인자에 대한 정보를 담고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;argc&lt;/code&gt;는 실행 인자의 개수를 담고 있고, &lt;code&gt;argv&lt;/code&gt;는 실행 인자의 내용을 문자열 배열 형태로 담고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;argv[0]&lt;/code&gt;에는 실행할 때 입력한 명령어가 들어가는데, 예를 들어서 &lt;code&gt;./hello&lt;/code&gt; 라는 명령어를 실행하면 &lt;code&gt;argv[0]&lt;/code&gt;에 &lt;code&gt;./hello\0&lt;/code&gt;이라는 값이 들어간다. 따라서 &lt;code&gt;argc&lt;/code&gt;는 언제나 1 이상이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/126514030-9633c6d5-1a59-40ab-a450-ead604263969.png&#34; alt=&#34;Screen Shot 2021-07-22 at 12 16 25 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;프로그램을 실행할 때의 이름이 &lt;code&gt;argv[0]&lt;/code&gt;에 항상 들어있는 것과, 실행 인자를 늘리면 &lt;code&gt;argc&lt;/code&gt;도 증가하는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/126514473-f311278c-30db-4700-82d4-81f2caf18a28.png&#34; alt=&#34;Screen Shot 2021-07-22 at 12 18 59 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;추가적으로, 실행인자를 &amp;ldquo;&amp;ldquo;로 묶어서, 감싼 부분을 하나의 실행 인자로 묶어 주는 효과를 낼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 &lt;code&gt;*&lt;/code&gt;, &lt;code&gt;?&lt;/code&gt; 같은 와일드 카드(&lt;code&gt;glob&lt;/code&gt;) 패턴을 이용하여 파일 이름의 집합을 인자로 넘겨줄 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;glob&lt;/code&gt; 패턴을 문자 그대로 사용하고 싶은 경우에는 위와 같이 큰 따옴표로 주면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/07/21/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
