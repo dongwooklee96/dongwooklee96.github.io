@@ -6,7 +6,82 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 22 Jul 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 23 Jul 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Fri, 23 Jul 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://zuminternet.github.io/zum-front-investing-clone/&#34;&gt;INVESTING.COM 클론 코딩(feat. Vue JS SSR, CANVAS API)&lt;/a&gt; 라는 글을 읽었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://devkingdom.tistory.com/&#34;&gt;IT 알려주는 은행원&lt;/a&gt; 스프링에 대한 굉장히 좋은 글을 읽을 수 있었다. 토이프로젝트를 할 때 많은 도움이 될 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/126722627-0cb2a6d4-6195-4261-b01a-bd14eadb13a3.png&#34; alt=&#34;Screen Shot 2021-07-23 at 8 49 11 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;공개 개발자, 대회에 참여할 때 참고할 좋은 자료가 될 것 같다. 특히 기능적 요구사항과, 기술적인 요구사항을 간단하게 리스트업 하는게 좋았는데 토이 프로젝트도 당장 기능적인 요구사항을 리스트업하고 정리하는 시간을 가지는 것이 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어제 무리하지 않으려고, 비교적 일찍 잠자리에 들었는데 그나마 몸이 가벼워진 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어제 공개 개발자 대회 아이디어 도출 회의를 했었는데, 꽤 괜찮은 아이디어가 나온 것 같아서 기분이 좋았다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;스마트폰을 침실과 분리하니, 수면의 질이 올라간 느낌이다. 분리하려고 노력을 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내일이면 주말인데, 주말에도 일일 회고를 작성하고 오늘의 할일을 적어야겠다. 오늘의 할일을 적으니, 시간을 좀 더 활용하는 느낌이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어제 하루종일 컨디션이 별로라서, 시스템 프로그래밍 공부를 하지 못했다. 따라서 오늘은 꼭 하도록 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 오늘은 인프런에서 &lt;code&gt;JPA&lt;/code&gt; 강좌를 시청해야겠다는 생각을 했다. 이번 주말에, API 및 기능적 요구사항을 다시 한 번 정리하고 진도를 나가야겠다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;토이 프로젝트를 코드로 구현하는 것도 좋지만, 매일 기능 요구사항 및 어떻게 구현하면 좋을지 생각해보는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어제 컨디션이 좋지 못해서, 코드에 실수가 많이 발생했을 것 같다. 따라서, 오늘 다시 한 번 확인을 해봐야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오늘 점심(12:15 ~ 13:30)에는 간단한 운동 및 식사를 해야겠다.&lt;/li&gt;
+&lt;li&gt;업무가 끝난 후에, (17:00 ~ 17:30) 잠시 휴식한다.&lt;/li&gt;
+&lt;li&gt;코딩 테스트 문제를 풀고 이를 제출한다. (17:30 ~ 18:30)&lt;/li&gt;
+&lt;li&gt;간단하게 저녁 식사를 마친 뒤에, 복싱 도장에 가서 복싱을 할 예정이다. (19:30 ~ )&lt;/li&gt;
+&lt;li&gt;복싱을 마친 뒤에, 시스템 프로그래밍 공부를 간단히 할 예정이다. (22:00 ~ 23:00)&lt;/li&gt;
+&lt;li&gt;오늘 코드 포스 DIV.3 대회가 있어서 대회에 참여할 예정이다. (23:35 ~ )&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오늘 하루도 책임감 있게 일할 것이다.&lt;/li&gt;
+&lt;li&gt;항상 자신감 있고, 활기찬 생활을 할 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/07/22/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
