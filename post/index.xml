@@ -6,7 +6,251 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 23 Jul 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Jul 2021 01:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>스트림과 관련된 시스템 콜</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/24/%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EA%B4%80%EB%A0%A8%EB%90%9C-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</link>
+      <pubDate>Sat, 24 Jul 2021 01:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/24/%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EA%B4%80%EB%A0%A8%EB%90%9C-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</guid>
+      <description>&lt;h3 id=&#34;스트림과-관련된-시스템-콜&#34;&gt;스트림과 관련된 시스템 콜&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;스트림에서 바이트 열을 읽는 &lt;code&gt;read&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;스트림에서 바이트 열을 쓰는 &lt;code&gt;write&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;새로운 스트림을 생성하는 &lt;code&gt;open&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;사용 완료한 스트림을 닫는 &lt;code&gt;close&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일-디스크립터&#34;&gt;파일 디스크립터&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스에서 파일을 읽거나, 쓸 때 혹은 다른 프로세스와 데이터를 주고 받을 때 스트림을 사용한다고 했다. 그렇다면, 우리가 만든 프로그램에서 스트림을 사용하려면 어떻게 해야할까?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 위해서 &lt;strong&gt;파일 리스크립터(file desriptor)&lt;/strong&gt; 라는 것을 사용하는데, 커널이 스트림을 열 때 부여하는 번호이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;커널이 만들어준 스트림의 번호(파일 디스크립터)를 알아야 스트림을 본격적으로 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;표준-입력-표준-출력-표준-에러-출력&#34;&gt;표준 입력, 표준 출력, 표준 에러 출력&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;보통 셸을 통해서 프로세스가 생성되는 경우, 세 개의 스트림이 기본으로 생성되며, 이에 대한 파일 디스크립터 값이 미리 할당된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 새 개의 스트림이란 &lt;strong&gt;표준 입력(standard input)&lt;/strong&gt;, &lt;strong&gt;표준 출력(standard output)&lt;/strong&gt;, &lt;strong&gt;표준 에러 출력(standard error output)&lt;/strong&gt; 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이들 스트림은 각각 파일 디스크립터 0번, 1번, 2번에 할당된다. 이 값에 대한 매크로도 준비되어 있는데 각각 &lt;code&gt;STDIN_FILENO&lt;/code&gt;, &lt;code&gt;STDOUT_FILENO&lt;/code&gt;, &lt;code&gt;STDERR_FILENO&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;표준-입력과-표준-출력&#34;&gt;표준 입력과 표준 출력&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;표준 입력과 표준 출력을 잘 활용하면 리눅스 명령어를 조합하여 고도의 작업을 수행할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여러 명령어를 파이프로 연결하여 데이터를 처리하는 것이 가능한 것도 각 명령어가 표준 입력에서 데이터를 읽어들이고, 처리 결과를 표준 출력에 쓰게 되어 있기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 경우의 &amp;lsquo;표준&amp;rsquo;은 &amp;lsquo;디폴트&amp;rsquo;에 가까운 의미이다. 표준 입력은 프로그램의 디폴트 입력 소스이며, 표준 출력은 디폴트 출력지라는 의미이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여러개의 리눅스 명령어를 조합할 수 있는 것도 각 리눅스 명령어가 표준 입력에서 데이터를 읽고, 표준 출력에 쓰는 약속을 했기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;표준-에러-출력&#34;&gt;표준 에러 출력&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;표준 에러 출력은, 에러 메시지를 출력하기 위해서 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일반적으로 표준 출력은 파이프라인을 통해서 다른 프로그램의 표준 입력에 연결된다. 따라서 에러 메시지를 표준 출력으로 내보내면 사람이 에러 발생을 알기 어렵게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래서 여분의 스트림을 준비해서 일반 메시지는 파이프라인을 통해 표준 출력으로 내보내고, 에러 메시지는 표준 에러 출력으로 출력하도록 한 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;파일 디스크립터&lt;/th&gt;
+&lt;th&gt;매크로&lt;/th&gt;
+&lt;th&gt;의미&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;STDIN_FILENO&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;표준입력, 기본 입력 스트림&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;STDOUT_FILENO&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;표준 출력, 기본 출력 스트림&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;STDERR_FILENO&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;표준 에러 출력, 별도 메시지 출력용&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;스트림-읽기-및-쓰기&#34;&gt;스트림 읽기 및 쓰기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;스트림에서 데이터를 읽고 쓰기 위해서 &lt;code&gt;read()&lt;/code&gt;, &lt;code&gt;write()&lt;/code&gt; 라는 시스템 콜을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스트림에서 바이트 열을 읽기 위해서 사용하는 시스템 콜이 &lt;code&gt;read()&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;read2&#34;&gt;&lt;code&gt;read(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+
+ssize_t read(int fd, void *buf, size_t bufsize);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;read()&lt;/code&gt;는 파일 디스크립터 번호인 &lt;code&gt;fd&lt;/code&gt;에 해당하는 스트림에서 바이트 열을 읽는 시스템 콜이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bufsize&lt;/code&gt;로 바이트 수를 읽어서 &lt;code&gt;buf&lt;/code&gt;에 기록한다. &lt;code&gt;buf&lt;/code&gt;의 크기는 &lt;code&gt;bufsize&lt;/code&gt;로 할당하는 것이 일반적이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;read()&lt;/code&gt;는 읽기 작업이 완료되면 읽어들인 바이트 수를 반환한다. 그리고 파일의 끝에 도달한 경우에는 0을 반환하고, 중간에 에러가 발생한 경우에는 -1을 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bufsize&lt;/code&gt; 바이트 수 보다 적은 바이트를 읽는 경우도 많으므로 반환값을 체크하도록 코딩해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;주의사항&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;C언어 문자열에는 임의의 바이트 열을 저장할 수 있지만, 일반적으로 문자열의
+끝에는 &#39;\0&#39;을 넣는 것이 관례이다. API 중에도 문자열의 끝에 &#39;\0&#39;이 있다고
+전체하는 것과 그렇지 않은 것이 있어서 사용에 주의 해야한다. 
+예를 들어, 문자열의 끝에 &#39;\0&#39;이 있다고 전제하는 API에 &#39;\0&#39;로 끝나지 
+않는 문자열을 전달하면 문제가 될 수 있다.
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;read&lt;/code&gt;의 경우에는 읽어들인 데이터의 끝에 &lt;code&gt;\0&lt;/code&gt;가 있다고 전제하지 않는 &lt;code&gt;API&lt;/code&gt;이다. 따라서 &lt;code&gt;read(2)&lt;/code&gt;를 통해서 읽어 들인 문자열의 끝에 &lt;code&gt;\0&lt;/code&gt;이 있다고 생각하고 코드를 작성해서는 안된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어, &lt;code&gt;printf()&lt;/code&gt;의 경우에는 문자열의 끝에 &amp;lsquo;\0&amp;rsquo;이 들어가 있다고 전제하는 &lt;code&gt;API&lt;/code&gt; 이므로, &lt;code&gt;read(2)&lt;/code&gt;로 읽은 문자열을 그대로 &lt;code&gt;printf()&lt;/code&gt;로 전달하면 안된다. 이는 보안상의 취약점이 될 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;write2&#34;&gt;&lt;code&gt;write(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;스트림에 바이트 열을 쓸 때는 시스템 콜 &lt;code&gt;write()&lt;/code&gt;를 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+
+ssize_t write(int fd, const *buf, size_t bufsize);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;write()&lt;/code&gt;는 인자로 지정한 &lt;code&gt;bufsize&lt;/code&gt; 바이트만큼, &lt;code&gt;buf&lt;/code&gt;의 내용을 &lt;code&gt;fd&lt;/code&gt;로 지정한 파일 디스크립터의 스트림에 쓴다. 반환값의 데이터 타입인 &lt;code&gt;ssize_t&lt;/code&gt;는 부호 있는 정수를 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;정상적으로 쓴 바이트 수를 반환하고 에러가 발생한 경우에는 &lt;code&gt;-1&lt;/code&gt;를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;write()&lt;/code&gt;가 &lt;code&gt;bufsize&lt;/code&gt;로 지정한 바이트 수만큼 쓸 수 없는 상황은 비교적 드물지만, 발생한 여지는 충분히 있다. 정확한 처리가 필요한 경우에는 반환값을 체크하도록 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;스트림이란&#34;&gt;스트림이란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;스트림은 파일 디스크립터로 표현되고, &lt;code&gt;read()&lt;/code&gt;나 &lt;code&gt;write()&lt;/code&gt;를 통해서 읽고 쓸 수 있다. 예를 들면, 파일을 &lt;code&gt;open()&lt;/code&gt;하면 &lt;code&gt;read()&lt;/code&gt;나 &lt;code&gt;write()&lt;/code&gt;를 통해서 파일의 내용을 읽거나 쓸 수 있는데, 이것이 바로 스트림이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;같은 맥락에서 파이프라인이나, 소켓도 스트림으로 볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일-열기&#34;&gt;파일 열기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;프로세스가 만들어 질 때부터 사용할 수 있는 스트림으로는 표준 입력, 표준 출력, 표준 에러 출력이 있다. 이번에는 이 이외의 스트림을 만드는 방법에 대해서 알아보자.&lt;/p&gt;
+&lt;h4 id=&#34;open2&#34;&gt;&lt;code&gt;open(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;파일을 읽고 쓰는 스트림을 만들려면 시스템 콜 &lt;code&gt;open()&lt;/code&gt;을 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/stat.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+
+int open(const char *path, int flags);
+int open(const char *path, int flags, mode_t mode);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;open()&lt;/code&gt;은 첫 번째 인자 &lt;code&gt;path&lt;/code&gt;로 지정한 경로의 파일에 대한 스트림을 만들고, 그 스트림을 가리키는 파일 디스크립터를 반환한다. 이러한 과정을 흔히 파일을 연다라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;두 번째 인자인 &lt;code&gt;flags&lt;/code&gt;에서는 파일을 어떤 모드로 열 것인지 비트 연산자를 사용하여 지정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;파일을 열 때 사용할 수 있는 &lt;code&gt;flag(1)&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;flag&lt;/th&gt;
+&lt;th&gt;의미&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;O_RDONLY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;읽기 전용&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;O_WRONLY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;쓰기 전용&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;O_RDWR&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;읽고 쓰기&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;close2&#34;&gt;&lt;code&gt;close(2)&lt;/code&gt;&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;사용이 끝난 스트림은 &lt;code&gt;close()&lt;/code&gt;로 닫는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+
+int close(int fd);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;close&lt;/code&gt;는 파일 디스크립터 &lt;code&gt;fd&lt;/code&gt;에 연결된 스트림을 해제한다. 이러한 처리를 파일을 닫는다고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오류 없이 닫히면 &lt;code&gt;0&lt;/code&gt;, 에러가 발생하면 &lt;code&gt;-1&lt;/code&gt;를 반환한다. 일반적으로 &lt;code&gt;close()&lt;/code&gt;함수를 호출하는 코드는 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;if (close(fd) &amp;lt; 0) {
+  /* 에러 처리 */
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스가 종료되면 사용하던 모든 스트림을 커널이 파기 하기 때문에, &lt;code&gt;close()&lt;/code&gt;를 하지 않아도 시스템에 이상이 생기지 않을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 사용이 완료된 스트림은 반드시 종료시켜주는 것이 좋다. 프로세스가 동시에 사용할 수 있는 스트림의 개수에 제한이 있기도 하고, 스트림의 반대편에 프로세스가 &lt;code&gt;close()&lt;/code&gt; 할 대까지 기다리고 있을 수도 있다. 모든 리소스는 사용이 완료되었을 때 닫아주는 것이 바람직하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=173499011&#34;&gt;모두를 위한 리눅스 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/07/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>

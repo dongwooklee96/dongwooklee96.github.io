@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>스트림과 관련된 시스템 콜 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">스트림과 관련된 시스템 콜</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/07/24</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템 프로그래밍</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템 프로그래밍</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="스트림과-관련된-시스템-콜">스트림과 관련된 시스템 콜</h3>
+<hr>
+<ul>
+<li>스트림에서 바이트 열을 읽는 <code>read</code></li>
+<li>스트림에서 바이트 열을 쓰는 <code>write</code></li>
+<li>새로운 스트림을 생성하는 <code>open</code></li>
+<li>사용 완료한 스트림을 닫는 <code>close</code></li>
+</ul>
+<h3 id="파일-디스크립터">파일 디스크립터</h3>
+<hr>
+<ul>
+<li>
+<p>프로세스에서 파일을 읽거나, 쓸 때 혹은 다른 프로세스와 데이터를 주고 받을 때 스트림을 사용한다고 했다. 그렇다면, 우리가 만든 프로그램에서 스트림을 사용하려면 어떻게 해야할까?</p>
+</li>
+<li>
+<p>이를 위해서 <strong>파일 리스크립터(file desriptor)</strong> 라는 것을 사용하는데, 커널이 스트림을 열 때 부여하는 번호이다.</p>
+</li>
+<li>
+<p>커널이 만들어준 스트림의 번호(파일 디스크립터)를 알아야 스트림을 본격적으로 사용할 수 있다.</p>
+</li>
+</ul>
+<h3 id="표준-입력-표준-출력-표준-에러-출력">표준 입력, 표준 출력, 표준 에러 출력</h3>
+<hr>
+<ul>
+<li>
+<p>보통 셸을 통해서 프로세스가 생성되는 경우, 세 개의 스트림이 기본으로 생성되며, 이에 대한 파일 디스크립터 값이 미리 할당된다.</p>
+</li>
+<li>
+<p>이 새 개의 스트림이란 <strong>표준 입력(standard input)</strong>, <strong>표준 출력(standard output)</strong>, <strong>표준 에러 출력(standard error output)</strong> 이다.</p>
+</li>
+<li>
+<p>이들 스트림은 각각 파일 디스크립터 0번, 1번, 2번에 할당된다. 이 값에 대한 매크로도 준비되어 있는데 각각 <code>STDIN_FILENO</code>, <code>STDOUT_FILENO</code>, <code>STDERR_FILENO</code> 이다.</p>
+</li>
+</ul>
+<h3 id="표준-입력과-표준-출력">표준 입력과 표준 출력</h3>
+<hr>
+<ul>
+<li>
+<p>표준 입력과 표준 출력을 잘 활용하면 리눅스 명령어를 조합하여 고도의 작업을 수행할 수 있다.</p>
+</li>
+<li>
+<p>여러 명령어를 파이프로 연결하여 데이터를 처리하는 것이 가능한 것도 각 명령어가 표준 입력에서 데이터를 읽어들이고, 처리 결과를 표준 출력에 쓰게 되어 있기 때문이다.</p>
+</li>
+<li>
+<p>이 경우의 &lsquo;표준&rsquo;은 &lsquo;디폴트&rsquo;에 가까운 의미이다. 표준 입력은 프로그램의 디폴트 입력 소스이며, 표준 출력은 디폴트 출력지라는 의미이다.</p>
+</li>
+<li>
+<p>여러개의 리눅스 명령어를 조합할 수 있는 것도 각 리눅스 명령어가 표준 입력에서 데이터를 읽고, 표준 출력에 쓰는 약속을 했기 때문이다.</p>
+</li>
+</ul>
+<h3 id="표준-에러-출력">표준 에러 출력</h3>
+<hr>
+<ul>
+<li>
+<p>표준 에러 출력은, 에러 메시지를 출력하기 위해서 사용한다.</p>
+</li>
+<li>
+<p>일반적으로 표준 출력은 파이프라인을 통해서 다른 프로그램의 표준 입력에 연결된다. 따라서 에러 메시지를 표준 출력으로 내보내면 사람이 에러 발생을 알기 어렵게 된다.</p>
+</li>
+<li>
+<p>그래서 여분의 스트림을 준비해서 일반 메시지는 파이프라인을 통해 표준 출력으로 내보내고, 에러 메시지는 표준 에러 출력으로 출력하도록 한 것이다.</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>파일 디스크립터</th>
+<th>매크로</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>STDIN_FILENO</code></td>
+<td>표준입력, 기본 입력 스트림</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>STDOUT_FILENO</code></td>
+<td>표준 출력, 기본 출력 스트림</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>STDERR_FILENO</code></td>
+<td>표준 에러 출력, 별도 메시지 출력용</td>
+</tr>
+</tbody>
+</table>
+<h3 id="스트림-읽기-및-쓰기">스트림 읽기 및 쓰기</h3>
+<hr>
+<ul>
+<li>
+<p>스트림에서 데이터를 읽고 쓰기 위해서 <code>read()</code>, <code>write()</code> 라는 시스템 콜을 사용한다.</p>
+</li>
+<li>
+<p>스트림에서 바이트 열을 읽기 위해서 사용하는 시스템 콜이 <code>read()</code> 이다.</p>
+</li>
+</ul>
+<h4 id="read2"><code>read(2)</code></h4>
+<pre><code>#include &lt;unistd.h&gt;
+
+ssize_t read(int fd, void *buf, size_t bufsize);
+</code></pre><ul>
+<li>
+<p><code>read()</code>는 파일 디스크립터 번호인 <code>fd</code>에 해당하는 스트림에서 바이트 열을 읽는 시스템 콜이다.</p>
+</li>
+<li>
+<p><code>bufsize</code>로 바이트 수를 읽어서 <code>buf</code>에 기록한다. <code>buf</code>의 크기는 <code>bufsize</code>로 할당하는 것이 일반적이다.</p>
+</li>
+<li>
+<p><code>read()</code>는 읽기 작업이 완료되면 읽어들인 바이트 수를 반환한다. 그리고 파일의 끝에 도달한 경우에는 0을 반환하고, 중간에 에러가 발생한 경우에는 -1을 반환한다.</p>
+</li>
+<li>
+<p><code>bufsize</code> 바이트 수 보다 적은 바이트를 읽는 경우도 많으므로 반환값을 체크하도록 코딩해야한다.</p>
+</li>
+</ul>
+<p><strong>주의사항</strong></p>
+<pre><code>C언어 문자열에는 임의의 바이트 열을 저장할 수 있지만, 일반적으로 문자열의
+끝에는 '\0'을 넣는 것이 관례이다. API 중에도 문자열의 끝에 '\0'이 있다고
+전체하는 것과 그렇지 않은 것이 있어서 사용에 주의 해야한다. 
+예를 들어, 문자열의 끝에 '\0'이 있다고 전제하는 API에 '\0'로 끝나지 
+않는 문자열을 전달하면 문제가 될 수 있다.
+</code></pre><ul>
+<li>
+<p><code>read</code>의 경우에는 읽어들인 데이터의 끝에 <code>\0</code>가 있다고 전제하지 않는 <code>API</code>이다. 따라서 <code>read(2)</code>를 통해서 읽어 들인 문자열의 끝에 <code>\0</code>이 있다고 생각하고 코드를 작성해서는 안된다.</p>
+</li>
+<li>
+<p>예를 들어, <code>printf()</code>의 경우에는 문자열의 끝에 &lsquo;\0&rsquo;이 들어가 있다고 전제하는 <code>API</code> 이므로, <code>read(2)</code>로 읽은 문자열을 그대로 <code>printf()</code>로 전달하면 안된다. 이는 보안상의 취약점이 될 수 있다.</p>
+</li>
+</ul>
+<h4 id="write2"><code>write(2)</code></h4>
+<hr>
+<ul>
+<li>스트림에 바이트 열을 쓸 때는 시스템 콜 <code>write()</code>를 사용한다.</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+
+ssize_t write(int fd, const *buf, size_t bufsize);
+</code></pre><ul>
+<li>
+<p><code>write()</code>는 인자로 지정한 <code>bufsize</code> 바이트만큼, <code>buf</code>의 내용을 <code>fd</code>로 지정한 파일 디스크립터의 스트림에 쓴다. 반환값의 데이터 타입인 <code>ssize_t</code>는 부호 있는 정수를 의미한다.</p>
+</li>
+<li>
+<p>정상적으로 쓴 바이트 수를 반환하고 에러가 발생한 경우에는 <code>-1</code>를 반환한다.</p>
+</li>
+<li>
+<p><code>write()</code>가 <code>bufsize</code>로 지정한 바이트 수만큼 쓸 수 없는 상황은 비교적 드물지만, 발생한 여지는 충분히 있다. 정확한 처리가 필요한 경우에는 반환값을 체크하도록 하자.</p>
+</li>
+</ul>
+<h3 id="스트림이란">스트림이란?</h3>
+<hr>
+<ul>
+<li>
+<p>스트림은 파일 디스크립터로 표현되고, <code>read()</code>나 <code>write()</code>를 통해서 읽고 쓸 수 있다. 예를 들면, 파일을 <code>open()</code>하면 <code>read()</code>나 <code>write()</code>를 통해서 파일의 내용을 읽거나 쓸 수 있는데, 이것이 바로 스트림이다.</p>
+</li>
+<li>
+<p>같은 맥락에서 파이프라인이나, 소켓도 스트림으로 볼 수 있다.</p>
+</li>
+</ul>
+<h3 id="파일-열기">파일 열기</h3>
+<hr>
+<p>프로세스가 만들어 질 때부터 사용할 수 있는 스트림으로는 표준 입력, 표준 출력, 표준 에러 출력이 있다. 이번에는 이 이외의 스트림을 만드는 방법에 대해서 알아보자.</p>
+<h4 id="open2"><code>open(2)</code></h4>
+<ul>
+<li>파일을 읽고 쓰는 스트림을 만들려면 시스템 콜 <code>open()</code>을 사용한다.</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+
+int open(const char *path, int flags);
+int open(const char *path, int flags, mode_t mode);
+</code></pre><ul>
+<li>
+<p><code>open()</code>은 첫 번째 인자 <code>path</code>로 지정한 경로의 파일에 대한 스트림을 만들고, 그 스트림을 가리키는 파일 디스크립터를 반환한다. 이러한 과정을 흔히 파일을 연다라고 한다.</p>
+</li>
+<li>
+<p>두 번째 인자인 <code>flags</code>에서는 파일을 어떤 모드로 열 것인지 비트 연산자를 사용하여 지정한다.</p>
+</li>
+</ul>
+<p><strong>파일을 열 때 사용할 수 있는 <code>flag(1)</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>flag</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>O_RDONLY</code></td>
+<td>읽기 전용</td>
+</tr>
+<tr>
+<td><code>O_WRONLY</code></td>
+<td>쓰기 전용</td>
+</tr>
+<tr>
+<td><code>O_RDWR</code></td>
+<td>읽고 쓰기</td>
+</tr>
+</tbody>
+</table>
+<h3 id="close2"><code>close(2)</code></h3>
+<hr>
+<ul>
+<li>사용이 끝난 스트림은 <code>close()</code>로 닫는다.</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+
+int close(int fd);
+</code></pre><ul>
+<li>
+<p><code>close</code>는 파일 디스크립터 <code>fd</code>에 연결된 스트림을 해제한다. 이러한 처리를 파일을 닫는다고 한다.</p>
+</li>
+<li>
+<p>오류 없이 닫히면 <code>0</code>, 에러가 발생하면 <code>-1</code>를 반환한다. 일반적으로 <code>close()</code>함수를 호출하는 코드는 다음과 같다.</p>
+</li>
+</ul>
+<pre><code>if (close(fd) &lt; 0) {
+  /* 에러 처리 */
+}
+</code></pre><ul>
+<li>
+<p>프로세스가 종료되면 사용하던 모든 스트림을 커널이 파기 하기 때문에, <code>close()</code>를 하지 않아도 시스템에 이상이 생기지 않을 수 있다.</p>
+</li>
+<li>
+<p>그러나 사용이 완료된 스트림은 반드시 종료시켜주는 것이 좋다. 프로세스가 동시에 사용할 수 있는 스트림의 개수에 제한이 있기도 하고, 스트림의 반대편에 프로세스가 <code>close()</code> 할 대까지 기다리고 있을 수도 있다. 모든 리소스는 사용이 완료되었을 때 닫아주는 것이 바람직하다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=173499011">모두를 위한 리눅스 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
