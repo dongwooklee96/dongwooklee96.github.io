@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>CAT 명령어 만들기 및 기타 시스템 콜 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">CAT 명령어 만들기 및 기타 시스템 콜</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/07/24</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템 프로그래밍</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템 프로그래밍</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+
+static void do_cat(const char *path);
+static void die(const char *s);
+
+int main(int argc, char *argv[]) {
+  int i;
+  if (argc &lt; 2) {
+    fprintf(stderr, &quot;%s: file name not given\n&quot;, argv[0]);
+    exit(1);
+  }
+  for (i = 1; i &lt; argc; i++) {
+    do_cat(argv[i]);
+  }
+  exit(0);
+}
+
+#define BUFFER_SIZE 2048
+
+static void do_cat(const char *path)
+{
+  int fd;
+  unsigned char buf[BUFFER_SIZE];
+  int n;
+
+  fd = open(path, O_RDONLY);
+  if (fd &lt; 0) die(path);
+
+  for (;;) {
+    n = read(fd, buf, sizeof buf);
+    if (n &lt; 0) die(path);
+    if (n == 0) die(path);
+    if (write(STDOUT_FILENO, buf, n) &lt; 0) die(path);
+  }
+  if (close(fd) &lt; 0) die(path);
+}
+
+static void die(const char *s)
+{
+  perror(s);
+  exit(1);
+}
+</code></pre><h3 id="파일-오프셋">파일 오프셋</h3>
+<hr>
+<ul>
+<li>
+<p>파일 디스크립터에 대해서 <code>read()</code> 시스템 콜을 반복해서 호출하면 파일의 마지막에 도달하게 되는데 이것은 스트림이 마지막으로 읽은 파일의 위치를 기억하고 있기 때문이다.</p>
+</li>
+<li>
+<p>즉, 스트림은 파일의 특정 위치에 연결되어 있다. 이렇게 스트림이 연결되어 있는 위치를 <strong>파일 오프셋</strong>이라고 한다.</p>
+</li>
+<li>
+<p>파일 오프셋은 스트림의 속성으로 시스템 콜을 사용해서 조작할 수 있다. 파일 오프셋을 조작하는 대표적인 시스템 콜이 <code>lseek()</code> 이다.</p>
+</li>
+</ul>
+<h3 id="lseek2"><code>lseek(2)</code></h3>
+<hr>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+off_t lseek(int fd, off_t offset, int whence);
+</code></pre><ul>
+<li><code>lseek()</code>는 파일 디스크립터 내부의 파일 오프셋을 지정한 위치로 이동한다. 옮겨갈 위치를 지정하는 방식은 아래와 같고, 그것을 <code>whence</code>라는 인자에 저장한다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>제목</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SEEK_SET</td>
+<td>파일의 처음을 기준으로 오프셋 계산 및 이동</td>
+</tr>
+<tr>
+<td>SEEK_CUR</td>
+<td>현재 위치 기준으로 오프셋 계산 및 이동</td>
+</tr>
+<tr>
+<td>SEEK_END</td>
+<td>파일의 마지막을 기준으로 오프셋 계산 및 이동</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>스트림의 반대편에 있는 실체에 따라서 <code>lseek()</code>를 사용할 수 없는 경우도 있다. 예를 들어서 단말이나 프로세스에 연결된 스트림에 대해서는 <code>lseek()</code>를 실행하면 에러가 발생한다.</li>
+</ul>
+<h3 id="dup2-dup22">dup(2), dup2(2)</h3>
+<hr>
+<pre><code>#include &lt;unistd.h&gt;
+
+int dup(int oldfd);
+int dup2(int oldfd, int newfd);
+</code></pre><ul>
+<li><code>dup()</code>, <code>dup2()</code>는 인자로 지정한 파일 디스크립터 <code>oldfd</code>를 복제하는 시스템 콜이다.</li>
+</ul>
+<h3 id="ioctl2">ioctl(2)</h3>
+<hr>
+<pre><code>#include &lt;sys/ioctl.h&gt;
+
+int ioctl(int fd, unsigned long request, ...);
+</code></pre><ul>
+<li><code>ioctl()</code>은 스트림이 연결된 디바이스에 특화된 작업을 모두 포함하는 시스템 콜이다. 예를 들어서 아래와 같은 작업을 할 수 있다.</li>
+</ul>
+<pre><code>DVD 드라이브 여닫기, 음악 CD 재생
+프린터 구동이나 일시정지
+SCSI 디바이스 하드웨어 옵션 설정
+단말 통신 속도 설정
+</code></pre><p>자세한 내용은 메뉴얼에서 확인할 수 있다.</p>
+<pre><code>man ioctl_list
+</code></pre><h3 id="fcntl2">fcntl(2)</h3>
+<hr>
+<ul>
+<li><code>ioctl()</code>의 기능 중에서 파일 디스크립터 관련 작업을 분리하려고 만들어 진 것이 <code>fnctl</code>이다.</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+#include &lt;fcnt.h&gt;
+
+int fcntl(int fd, int cmd, ...);
+</code></pre><ul>
+<li>두번째 인자 <code>cmd</code>에 실제로 수행하는 작업을 지정하고 지정한 작업에 따라서, 세번째 이후의 인자가 결정된다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=173499011">모두를 위한 리눅스 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

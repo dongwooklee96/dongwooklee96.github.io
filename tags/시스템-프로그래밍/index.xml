@@ -6,7 +6,148 @@
     <description>Recent content in 시스템 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 24 Jul 2021 01:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 24 Jul 2021 05:05:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CAT 명령어 만들기 및 기타 시스템 콜</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/24/cat-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EA%B8%B0%ED%83%80-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</link>
+      <pubDate>Sat, 24 Jul 2021 05:05:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/24/cat-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EA%B8%B0%ED%83%80-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</guid>
+      <description>&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/stat.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+
+static void do_cat(const char *path);
+static void die(const char *s);
+
+int main(int argc, char *argv[]) {
+  int i;
+  if (argc &amp;lt; 2) {
+    fprintf(stderr, &amp;quot;%s: file name not given\n&amp;quot;, argv[0]);
+    exit(1);
+  }
+  for (i = 1; i &amp;lt; argc; i++) {
+    do_cat(argv[i]);
+  }
+  exit(0);
+}
+
+#define BUFFER_SIZE 2048
+
+static void do_cat(const char *path)
+{
+  int fd;
+  unsigned char buf[BUFFER_SIZE];
+  int n;
+
+  fd = open(path, O_RDONLY);
+  if (fd &amp;lt; 0) die(path);
+
+  for (;;) {
+    n = read(fd, buf, sizeof buf);
+    if (n &amp;lt; 0) die(path);
+    if (n == 0) die(path);
+    if (write(STDOUT_FILENO, buf, n) &amp;lt; 0) die(path);
+  }
+  if (close(fd) &amp;lt; 0) die(path);
+}
+
+static void die(const char *s)
+{
+  perror(s);
+  exit(1);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;파일-오프셋&#34;&gt;파일 오프셋&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파일 디스크립터에 대해서 &lt;code&gt;read()&lt;/code&gt; 시스템 콜을 반복해서 호출하면 파일의 마지막에 도달하게 되는데 이것은 스트림이 마지막으로 읽은 파일의 위치를 기억하고 있기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;즉, 스트림은 파일의 특정 위치에 연결되어 있다. 이렇게 스트림이 연결되어 있는 위치를 &lt;strong&gt;파일 오프셋&lt;/strong&gt;이라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파일 오프셋은 스트림의 속성으로 시스템 콜을 사용해서 조작할 수 있다. 파일 오프셋을 조작하는 대표적인 시스템 콜이 &lt;code&gt;lseek()&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;lseek2&#34;&gt;&lt;code&gt;lseek(2)&lt;/code&gt;&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+off_t lseek(int fd, off_t offset, int whence);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;lseek()&lt;/code&gt;는 파일 디스크립터 내부의 파일 오프셋을 지정한 위치로 이동한다. 옮겨갈 위치를 지정하는 방식은 아래와 같고, 그것을 &lt;code&gt;whence&lt;/code&gt;라는 인자에 저장한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;제목&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;SEEK_SET&lt;/td&gt;
+&lt;td&gt;파일의 처음을 기준으로 오프셋 계산 및 이동&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SEEK_CUR&lt;/td&gt;
+&lt;td&gt;현재 위치 기준으로 오프셋 계산 및 이동&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SEEK_END&lt;/td&gt;
+&lt;td&gt;파일의 마지막을 기준으로 오프셋 계산 및 이동&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;스트림의 반대편에 있는 실체에 따라서 &lt;code&gt;lseek()&lt;/code&gt;를 사용할 수 없는 경우도 있다. 예를 들어서 단말이나 프로세스에 연결된 스트림에 대해서는 &lt;code&gt;lseek()&lt;/code&gt;를 실행하면 에러가 발생한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dup2-dup22&#34;&gt;dup(2), dup2(2)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+
+int dup(int oldfd);
+int dup2(int oldfd, int newfd);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dup()&lt;/code&gt;, &lt;code&gt;dup2()&lt;/code&gt;는 인자로 지정한 파일 디스크립터 &lt;code&gt;oldfd&lt;/code&gt;를 복제하는 시스템 콜이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ioctl2&#34;&gt;ioctl(2)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/ioctl.h&amp;gt;
+
+int ioctl(int fd, unsigned long request, ...);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ioctl()&lt;/code&gt;은 스트림이 연결된 디바이스에 특화된 작업을 모두 포함하는 시스템 콜이다. 예를 들어서 아래와 같은 작업을 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;DVD 드라이브 여닫기, 음악 CD 재생
+프린터 구동이나 일시정지
+SCSI 디바이스 하드웨어 옵션 설정
+단말 통신 속도 설정
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;자세한 내용은 메뉴얼에서 확인할 수 있다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;man ioctl_list
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;fcntl2&#34;&gt;fcntl(2)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ioctl()&lt;/code&gt;의 기능 중에서 파일 디스크립터 관련 작업을 분리하려고 만들어 진 것이 &lt;code&gt;fnctl&lt;/code&gt;이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;fcnt.h&amp;gt;
+
+int fcntl(int fd, int cmd, ...);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;두번째 인자 &lt;code&gt;cmd&lt;/code&gt;에 실제로 수행하는 작업을 지정하고 지정한 작업에 따라서, 세번째 이후의 인자가 결정된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=173499011&#34;&gt;모두를 위한 리눅스 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>스트림과 관련된 시스템 콜</title>
       <link>https://dongwooklee96.github.io/post/2021/07/24/%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EA%B4%80%EB%A0%A8%EB%90%9C-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</link>
