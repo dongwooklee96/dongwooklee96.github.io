@@ -14,9 +14,23 @@
       
       <guid>https://dongwooklee96.github.io/post/2021/07/24/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
       <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;JPA&lt;/code&gt; 강의를 들었다.&lt;/li&gt;
+&lt;li&gt;시스템 프로그래밍 공부를 하였다.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;JPA&lt;/code&gt;를 사용하니 정말로 편하고 좋았지만, 내부 동작 원리를 제대로 이해하고 사용해야겠다는 생각을 했다.&lt;/li&gt;
+&lt;li&gt;아직은 파일 시스템에 대해서 긴가민가하는 상태이기는 하지만, 곧 좋아질 것이라고 믿는다.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;스트림과 관련된 라이브러리 함수를 배우게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오늘 역시도, 개발을 하다 보니 새벽에 잠들어버렸다. 다음날 늦게 일어났는데 이는 시간을 효율적으로 사용하지 못하는 것 이다.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -30,6 +44,9 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오늘 하루도 자신감 있게 하루를 보낼 것이다.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
