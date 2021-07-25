@@ -6,7 +6,153 @@
     <description>Recent content in 네트워크 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 28 Apr 2021 00:12:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 25 Jul 2021 18:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>소켓 프로그래밍이란?</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/25/%EC%86%8C%EC%BC%93-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B4%EB%9E%80.html</link>
+      <pubDate>Sun, 25 Jul 2021 18:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/25/%EC%86%8C%EC%BC%93-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B4%EB%9E%80.html</guid>
+      <description>&lt;h3 id=&#34;소켓-프로그래밍-입문&#34;&gt;소켓 프로그래밍 입문&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;우리 주변에서 발견할 수 있는 대부분의 프로그래밍은 누군가로부터 정보를 전달 받거나, 누군가에게 정보를 전달하는 작업의 연속이다. 이러한 입력과 출력 작업이 없는 프로그램은 거의 없기 때문에, 모든 프로그래머가 입출력 작업에 노출되어 있다고 볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;입출력의 대상은 화면, 키보드, 파일, 데이터베이스, 다른 프로그램등 정말로 다양하다. 이중에 컴퓨터 네트워크를 대상으로 하는 입출력 행위를 다루는 프로그래밍을 네트워크 프로그래밍 또는 소켓 프로그래밍이라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;소켓은 네트워크 대상 입출력을 위한 응용 프로그래밍 인터페이스 (API의) 이름이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;네트워크 프로그래밍의 정의&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;소켓 API를 이용하여 컴퓨터 네트워크를 사용하는 프로그램을 작성하는 것
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;프로세스 - 소켓 - 컴퓨터 네트워크 - 소켓 - 프로세스로 이어지는 연결 구조에서, 복잡한 컴퓨터 네트워크에서 데이터가 어떻게 전달되는가는 프로그래머의 1차 관심사가 아니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;소켓과-입출력&#34;&gt;소켓과 입출력&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;프로세스의 입장에서, 소켓에 관계된 작업은 다른 프로세스로부터 데이터를 받는 작업과 다른 프로세스에게 데이터를 주는 작업이라고 볼 수 있다.
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그래밍을 처음 배울 때 대부분의 책들이 &lt;code&gt;Hello World!&lt;/code&gt; 라는 문자열을 출력하는 프로그램을 작성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 프로그램은 출력 대상이 터미널 화면인 출력 프로그램이다. 입출력의 대상이 될 수 있는 대상은 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;표준 입출력, 파일, 장치, 터미널, 소켓&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;간단한-소켓-프로그래밍&#34;&gt;간단한 소켓 프로그래밍&lt;/h4&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/socket.h&amp;gt;
+
+int socket(int domain, int type, int protocol);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;domain&lt;/code&gt; : 소켓 통신을 위한 프로토콜 패밀리를 지정한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;type&lt;/code&gt;: 소켓의 종류를 지정한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;protocol&lt;/code&gt;: 소켓에서 사용할 포로토콜을 지정한다.&lt;/li&gt;
+&lt;li&gt;반환값은 성공시에는 파일의 디스크립터를 반환하고 실패시에는 -1을 반환한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+
+int main() {
+  int sd1, fd1, sd2, fd2;
+  sd1 = socket(PF_INET, SOCK_STREAM, 0);
+  fd1 = open(&amp;quot;test&amp;quot;, O_RDONLY);
+  sd2 = socket(PF_INET, SOCK_STREAM, 0);
+  fd2 = open(&amp;quot;test2&amp;quot;, O_RDONLY | O_CREAT);
+  printf(&amp;quot;sd1: %d, fd1: %d, sd2: %d, fd2: %d\n&amp;quot;, sd1, fd1, sd2, fd2);
+  close(sd1);
+  close(fd1);
+  close(sd2);
+  close(fd2);
+  return 0;
+}
+
+// result: sd1: 3, fd1: 4, sd2: 5, fd2: 6
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;결과를 통해서 소켓에도 파일과 같은 디스크립터가 할당된 다는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;통신-프로토콜&#34;&gt;통신 프로토콜&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;앞서 소개한 &lt;code&gt;socket&lt;/code&gt; 함수는 3개의 인자를 받아서 소켓을 생성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그 인자들 (도메인, 소켓타입, 프로토콜)을 이해하려면 컴퓨터 네트워크 통신 프로토콜에 대해서 알아야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대표적인 소켓 프로그램인 웹 서버를 기준으로 통신 프로토콜에 대해서 알아보도록 하자. 웹서버에 접속하는것은 아래의 세부작업으로 구성되어 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;1. 우리가 알고 있는 접속 주소를 네트워크 장비들이 이해할 수 있는 주소로 변환하는 작업
+2. 교환할 데이터를 패킷으로 만드는 작업
+3. 패킷이 이동하는 길의 이정표를 만드는 작업
+4. 패킷의 목적지와 이정표를 확인하여 올바른 경로로 패킷을 전달하는 작업
+5. 패킷이 목적지까지 제대로 도착했는지를 확인하는 작업
+6. 네트워크가 혼잡할 때, 네트워크로 전송하는 패킷의 흐름을 조절하는 작업
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이러한 작업을 수행하기 위해서 네트워크 장비들이 따라야하는 절차와 약속을 정의하고 있는 것이 바로 통신 프로토콜이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;인터넷-프로토콜&#34;&gt;인터넷 프로토콜&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;IP는 인터넷 계층 프로토콜로써 컴퓨터 네트워크의 핵심 프로토콜이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IP가 컴퓨터 네트워크의 핵심 프로토콜인 이유는 &lt;strong&gt;호스트와 라우터가 사용할 수 있는 통일된 규격의 주소, 즉 IP 주소를 제공하기 때문이다&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;택배를 보낸다고 하더라도, 주소가 있어야 정상적으로 목적으로 배송을 할 수 있을 것이다. 또한 통일된 규격인 주소이여야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 각각의 호스트들은 통신 기술과는 별개로 인식할 수 있는 주소가 있고 어려움 없이 데이터를 주고 받을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;전송-계층-프로토콜&#34;&gt;전송 계층 프로토콜&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크의 궁극적인 목적은 다른 호스트상에서 실행되고 있는 프로세스 간의 통신이다. 프로세스는 프로세스 아이디(&lt;code&gt;PID&lt;/code&gt;)로 식별이 가능하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다시 말해서, 프로세스를 특정하려면, &lt;code&gt;PID&lt;/code&gt; 가 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;원거리 호스트에서 실행중인 프로그램의 PID를 통신할 때마다 알아야 하는가?&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;앞에서 설명한 IP 주소 덕분에 호스트까지 데이터를 전달하는 것은 가능하지만, 호스트에 데이터가 도착하고 그 데이터가 어떤 프로세스에 전달되어야 하는지를 알려면 &lt;code&gt;PID&lt;/code&gt;로 판별을 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 다른 호스트에서 실행되고 있는 &lt;code&gt;PID&lt;/code&gt;를 알아내는 것은 쉽지 않으므로, 그 대신에 도착한 패킷에 있는 정보를 이용하여 해당 프로세스까지 전달해주는 수단이 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 일을 전송 계층 프로토콜인 &lt;code&gt;TCP&lt;/code&gt;, &lt;code&gt;UDP&lt;/code&gt;에 의해서 수행된다. &lt;strong&gt;전송 계층에서는 프로세스를 식별하기 위해서 포트라는 주소를 제공한다&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스 간에 통신할 포트 번호를 미리 약속한다면 &lt;code&gt;PID&lt;/code&gt;를 몰라도 통신하는 것이 가능하기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;전송 계층 프로토콜은 통신을 원하는 프로세스들과 직접적인 연관이 있는 것으로, 네트워크 중간에서 패킷을 포워딩하는 라우터에서는 작동하지 않는다. 통신의 시작점과 목적지에서만 역할을 하기 때문에 &lt;code&gt;END-TO-END&lt;/code&gt; 프로토콜이라고 불린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267&#34;&gt;네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>리눅스 네트워크 도구 (테스트, 추적, 모니터링 명령어)</title>
       <link>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4.html</link>
