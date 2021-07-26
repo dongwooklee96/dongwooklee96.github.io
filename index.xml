@@ -6,7 +6,51 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 27 Jul 2021 00:05:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Jul 2021 07:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Tue, 27 Jul 2021 07:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://d2.naver.com/helloworld/0881672&#34;&gt;nGrinder에 적용한 HttpCore 5와 HttpCore 5 살펴보기&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;글또에 작성할 기술 블로그를 어떻게 작성하면 좋을지에 대한 좋은 자료가 될 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;자꾸 글또에 투고할 글을 작성하는 것을 미루고 있는데, 토이 프로젝트에서 배포 자동화를 했던 경험을 적으면 좋을 것 같다는 생각을 했다. 아직 완전하지는 않은데, 배포 작동화를 하려면, AWS 코드 디플로이를 이용한 배포 자동화까지해야겠다는 생각을 했다. 오늘은 꼭 코드 디플로이를 이용한 배포자동화까지 할 예정이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;업무를 마치고 나서, 간단한 휴식후 코딩 테스트 문제를 푼다. (17:30 ~ 18:30)&lt;/li&gt;
+&lt;li&gt;시스템 프로그래밍 및 소켓 프로그래밍 공부를 한다. (19:30 ~ 21:00)&lt;/li&gt;
+&lt;li&gt;글또에 투고할 기술 글을 작성한다. (21:00 ~ 23:00)&lt;/li&gt;
+&lt;li&gt;취침 준비 및 간단한 독서후 취침을 한다. (23:00 ~ 24:00)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오늘 하루도, 열심히 시간을 모두 활용하면서 살아가자!&lt;/li&gt;
+&lt;li&gt;항상 자신감 있는 자세로 임하고, 어떤 문제든 시간만 있으면 해결 할 수 있다는 마음으로 임한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>HEAD 명령어 만들기</title>
       <link>https://dongwooklee96.github.io/post/2021/07/27/head-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
