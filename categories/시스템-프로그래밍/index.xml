@@ -6,7 +6,97 @@
     <description>Recent content in 시스템 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 24 Jul 2021 16:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Jul 2021 00:05:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HEAD 명령어 만들기</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/27/head-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
+      <pubDate>Tue, 27 Jul 2021 00:05:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/27/head-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;HEAD 명령어를 만들어보자. &lt;code&gt;head&lt;/code&gt; 명령어는 파일의 처음 몇 줄만을 출력해주는 명령어이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;아래는 &lt;code&gt;head&lt;/code&gt; 명령어를 실행하는 예이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;$ head -n 5 file.c
+
+cat file.c | head -n 5
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위처럼 파일의 이름을 실행인자로 전달하면, 그 파일의 처음 몇 줄만을 출력한다. 또한 인자로 파일 이름을 지정하지 않은 경우에는 표준 입력에서 읽어서 출력하는데, 이와 같은 동작이 리눅스에서는 일반적이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;headc&#34;&gt;&lt;code&gt;head.c&lt;/code&gt;&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;head&lt;/code&gt; 명령어는 비교적 간단한 프로그램이지만, 그렇다고 만만하지는 않다. 따라서 일부 기능만 포함된 버전을 만들고 조금씩 기능을 추가하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 단계적으로 기능을 추가해나가는 것이 일반적으로 프로그램을 만들 때 좋은 접근 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특히 초보자들은 처음부터 모든 기능을 다 구현하려다 보면 뒤죽박죽이 될 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 처음에는 아주 쉬운 기능을 확실히 돌아가게 만들고 나서, 조금씩 기능을 덧붙여 나가는 것이 확실한 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/stat.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+
+static void do_cat(const char *path);
+static void die(const char *s);
+
+int main(int argc, char *argv[]) {
+  int i;
+  if (argc &amp;lt; 2) {
+    fprintf(stdout, &amp;quot;%s: file name not given\n&amp;quot;, argv[0]);
+    exit(1);
+  }
+  for (i = 1; i &amp;lt; argc; i++) {
+    do_cat(argv[i]);
+  }
+  exit(0);
+}
+
+#define BUFFER_SIZE 2048
+
+static void do_cat(const char *path)
+{
+  int fd;
+  unsigned char buf[BUFFER_SIZE];
+  int n;
+
+  fd = open(path, O_RDONLY);
+  if (fd &amp;lt; 0) die(path);
+
+  for (;;) {
+    n = read(fd, buf, sizeof buf);
+    if (n &amp;lt; 0) die(path);
+    if (n == 0) die(path);
+    if (write(STDOUT_FILENO, buf, n) &amp;lt; 0) die(path);
+  }
+  if (close(fd) &amp;lt; 0) die(path);
+}
+
+static void die(const char *s)
+{
+  perror(s);
+  exit(1);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=173499011&#34;&gt;모두를 위한 리눅스 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>스트림과 관련 라이브러리 함수</title>
       <link>https://dongwooklee96.github.io/post/2021/07/24/%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EA%B4%80%EB%A0%A8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%ED%95%A8%EC%88%98.html</link>

@@ -17,8 +17,8 @@
 &lt;ul&gt;
 &lt;li&gt;다른 언어를 사용하다가, 파이썬으로 넘어온 프로그래머들은 자연스럽게 클래스에 게터(&lt;code&gt;getter&lt;/code&gt;)와 세터(&lt;code&gt;setter&lt;/code&gt;) 메서드를 명시적으로 구현하려고 한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OldResistor&lt;/span&gt;(object):
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;__init__&lt;/span&gt;(self, ohms):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OldResistor&lt;/span&gt;(object):
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, ohms):
     self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_ohms &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ohms
 
   &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;get_ohms&lt;/span&gt;(self):
@@ -29,18 +29,18 @@
 
 
 r0 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; OldResistor(&lt;span style=&#34;color:#ae81ff&#34;&gt;50e3&lt;/span&gt;)
-print(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Before: {r0.get_ohms()}&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# Before: 50000.0&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Before: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;r0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_ohms()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# Before: 50000.0&lt;/span&gt;
 
 r0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_ohms(&lt;span style=&#34;color:#ae81ff&#34;&gt;10e3&lt;/span&gt;)
-print(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Before: {r0.get_ohms()}&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;)&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# After: 10000.0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;r0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_ohms(r0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_ohms() &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5e3&lt;/span&gt;)
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Before: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;r0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_ohms()&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;)&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# After: 10000.0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;r0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;set_ohms(r0&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;get_ohms() &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;5e3&lt;/span&gt;)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;사용하는 법은 간단하지만, 파이썬 스럽지 않은 코딩 방법이다.&lt;/li&gt;
 &lt;li&gt;겟터와 셋터는 값을 증가시키고 그 값을 바로 반영하기 불편하다.&lt;/li&gt;
 &lt;li&gt;파이썬은 명시적인 게터와 세터를 구현할 일이 거의 없다. 대신 공개 속성부터 구현하기 시작해야 한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Register&lt;/span&gt;(object):
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;__init__&lt;/span&gt;(self, ohms):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Register&lt;/span&gt;(object):
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, ohms):
     self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ohms
     self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;voltage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
     self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
@@ -61,8 +61,8 @@ r1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 &lt;p&gt;제대로 동작하려면, 세터와 게터의 이름이 의도한 프로퍼티의 이름과 같아야한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;VoltageResistance&lt;/span&gt;(Register):
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;__init__&lt;/span&gt;(self, ohms):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;VoltageResistance&lt;/span&gt;(Register):
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, ohms):
     super()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__init__(ohms)
     self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_voltage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
 
@@ -76,14 +76,14 @@ r1&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
     self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_voltage &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms
 
 r2 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; VoltageResistance(&lt;span style=&#34;color:#ae81ff&#34;&gt;1e3&lt;/span&gt;)
-print(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Before: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{r2.current}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 0&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Before: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;r2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;current&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 0&lt;/span&gt;
 r2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;voltage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
-print(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;After: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{r2.current}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;)&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 0.01&lt;/span&gt;
+print(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;After: &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;r2&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;current&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;)&amp;#39;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 0.01&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;프로퍼티에 &lt;code&gt;setter&lt;/code&gt;를 설정하면, 클래스에 전달된 값들의 타입을 체크하고 값을 검증할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BoundedResistence&lt;/span&gt;(Register):
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;__init__&lt;/span&gt;(self, ohms):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BoundedResistence&lt;/span&gt;(Register):
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, ohms):
     super()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__init__(ohms)
 
     &lt;span style=&#34;color:#a6e22e&#34;&gt;@property&lt;/span&gt;
@@ -93,7 +93,7 @@ print(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;After: &lt;/span&gt;&l
     &lt;span style=&#34;color:#a6e22e&#34;&gt;@ohms&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;setter
     &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ohms&lt;/span&gt;(self, ohms):
       &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ohms &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
-      &lt;span style=&#34;color:#66d9ef&#34;&gt;raise&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ValueError&lt;/span&gt;(f&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{ohms}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; ohms must be &amp;gt; 0&amp;#34;&lt;/span&gt;)
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;raise&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ValueError&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;ohms&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; ohms must be &amp;gt; 0&amp;#34;&lt;/span&gt;)
 
 
 r3 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; BoundedResistence(&lt;span style=&#34;color:#ae81ff&#34;&gt;1e3&lt;/span&gt;)
@@ -103,8 +103,8 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 &lt;li&gt;다음은 모든 저항값이 0옴보다 큼을 보장하는 클래스를 정의한 것이다.&lt;/li&gt;
 &lt;li&gt;만약 &lt;code&gt;ohms&lt;/code&gt; 속성값이 0이거나, 0보다 작으면 예외가 발생하게 된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FixedResistence&lt;/span&gt;(Register):
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;__init__&lt;/span&gt;(self, ohms):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;FixedResistence&lt;/span&gt;(Register):
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __init__(self, ohms):
     super()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;__init__(ohms)
 
     &lt;span style=&#34;color:#a6e22e&#34;&gt;@property&lt;/span&gt;
@@ -157,7 +157,7 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 &lt;p&gt;파이썬에서는 위치 인수를 모두 키워드로 전달하는 것도 지원한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;reminder&lt;/span&gt;(number, divisor):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;reminder&lt;/span&gt;(number, divisor):
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; number &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; divisor
 
 reminder(&lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;)
@@ -172,7 +172,7 @@ reminder(divisor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span
 &lt;p&gt;키워드 인수는 함수를 정의할 때, 기본값을 설정할 수 있다. 이렇게 하면 반복적인 코드가 줄어들고, 코드가 깔끔해진다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;flow_rate&lt;/span&gt;(weight_diff, time_diff, period&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;flow_rate&lt;/span&gt;(weight_diff, time_diff, period&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (weight_diff &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; time_diff) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; period
 
 flow_per_second &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; flow_rate(weight_diff, time_diff)
@@ -206,12 +206,12 @@ flow_per_hour &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; flow_rate
 &lt;li&gt;이러한 경우에 사용하면 좋을 것 같다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;예제&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;(message, values):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;(message, values):
   &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; values:
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(message)
+  print(message)
   &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
     values_str &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(str(x) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; values)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; : &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (message, values_str))
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; : &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (message, values_str))
 
 log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;My number are&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
 log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/span&gt;, [])
@@ -229,12 +229,12 @@ log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/spa
 &lt;p&gt;함수 본문은 수정할 필요가 없고, 단지 호출하는 쪽만 수정하면 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;(message, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;values):
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;(message, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;values):
   &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; values:
-  &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(message)
+  print(message)
   &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
     values_str &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;join(str(x) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; values)
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; : &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (message, values_str))
+    print(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; : &lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (message, values_str))
 
 log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;My number are&amp;#39;&lt;/span&gt;, [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;])
 log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/span&gt;)
@@ -278,7 +278,7 @@ log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/spa
       
       <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%A0%84%EC%9A%A9-%EC%9D%B8%EC%88%98%EB%A1%9C-%EB%AA%85%EB%A3%8C%EC%84%B1%EC%9D%84-%EA%B0%95%EC%9A%94%ED%95%98%EC%9E%90.html</guid>
       <description>&lt;h2 id=&#34;batter-way-21-키워드-전용-인수로-명료성을-강요하자&#34;&gt;BATTER WAY 21. 키워드 전용 인수로 명료성을 강요하자.&lt;/h2&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;safe_division&lt;/span&gt;(number, divisor, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;,
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;safe_division&lt;/span&gt;(number, divisor, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;,
     ignore_overflow&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, ignore_zero_division&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;):
   &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; number &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; divisor
@@ -295,7 +295,7 @@ log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/spa
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;함수는 아래와 같은 방법으로 사용될 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; safe_division(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; safe_division(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;)
 print(result)
 
 result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; safe_division(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
@@ -304,7 +304,7 @@ print(result)
 &lt;li&gt;문제는 두 인수의 위치를 혼동하기 쉽기 때문에 찾기 어려운 버그가 발생할 수 있다.&lt;/li&gt;
 &lt;li&gt;따라서, 키워드 인수를 이용하여 매우 주의 깊고 항상 예외를 발생하도록 만들어 줄 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;ult &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; safe_division(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;, ignore_overflow&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;ult &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; safe_division(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;, ignore_overflow&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
 print(result)
 
 
@@ -324,7 +324,7 @@ print(result)
 &lt;p&gt;파이썬3 에서는 키워드 전용 인수로 함수를 정의해서 의도를 명확히 드러내도록 요구할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;safe_division&lt;/span&gt;(number, divisor, &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;,
     ignore_overflow&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;, ignore_zero_division&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;):
   &lt;span style=&#34;color:#66d9ef&#34;&gt;try&lt;/span&gt;:
@@ -342,11 +342,11 @@ print(result)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;키워드 인수가 아닌, 위치 인수를 사용하는 함수 호출은 더 이상 동작하지 않는다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; safe_division(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 에러 발생&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; safe_division(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 에러 발생&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;키워드 인수와 그 기본 값은 의도한 대로 동작한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;safe_devision(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, ignore_zero_division&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 정상 동작&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;safe_devision(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, ignore_zero_division&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;# 정상 동작&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;핵심-정리&#34;&gt;핵심 정리&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;키워드 인수는 함수 호출의 의도를 더 명확하게 해준다.&lt;/li&gt;
