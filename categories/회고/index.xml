@@ -6,7 +6,60 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 27 Jul 2021 07:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 28 Jul 2021 07:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/28/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Wed, 28 Jul 2021 07:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/28/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어제 밤늦게 도커 허브에 이미지를 자동으로 업로드하는 기능을 구현하였는데, 잘되어서 다행이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어제 자기전에 글또에 어떤 글을 투고하면 좋을까 고민을 하였는데 &lt;code&gt;API&lt;/code&gt;에 대한 글을 작성하면 좋을 것 같다는 생각을 했다. 특히 &lt;code&gt;HATEOAS&lt;/code&gt;에 대해서 어떻게 하면 이 기능을 잘 활용할지 그리고 사다드림의 &lt;code&gt;API&lt;/code&gt; 설계가 어떻게 이루어졌는지를 책과 함께 실제 &lt;code&gt;API&lt;/code&gt;를 설계하면 나의 이야기가 잘 녹아들 수 있을 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;점심 식사후에 취침을 하는데, 별로 졸리지도 않은데 오후 업무를 위해서 가끔 취침할 때가 있었다. 하지만, 정말로 피곤하지 않다면 자지 않는 편이 나은 것 같다. 일어나고 나서 한동안 찌뿌둥해서 업무 효율이 나오지 않기 때문이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;오늘 점심을 먹기 전에, 간단한 운동을 한 후(12:15 ~ 12:45)에, 씻고 식사를 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;업무를 마치고, 코딩 테스트 문제를 풀고 나서, 제출한다. (18:00 ~ 19:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사다드림 &lt;code&gt;API&lt;/code&gt; 설계를 시작한다. &lt;code&gt;API&lt;/code&gt; 설계를 하면서 배운점을 글로 기록한다. (19:00 ~ 21:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시스템 프로그래밍 공부 및 네트워크 프로그래밍 공부를 한다. (21:00 ~ 23:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;토이 프로젝트 (사다드림)의 AWS 배포 자동화를 구축한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;행복은 나중에 오지 않는다. 현재를 즐기고 충실하게 살아가면서 행복을 느끼는데 집중을 하자.&lt;/li&gt;
+&lt;li&gt;시간을 가치있게 사용하자. 모든 사람에게 공평하게 주어지는 것이 바로 시간이다. 이러한 시간을 낭비하도록 하지 말자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/07/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
