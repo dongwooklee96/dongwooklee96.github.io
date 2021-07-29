@@ -6,7 +6,109 @@
     <description>Recent content in 네트워크 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 25 Jul 2021 18:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Jul 2021 02:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>소켓 구조체 및 빅엔디안, 리틀엔디안</title>
+      <link>https://dongwooklee96.github.io/post/2021/07/30/%EC%86%8C%EC%BC%93-%EA%B5%AC%EC%A1%B0%EC%B2%B4-%EB%B0%8F-%EB%B9%85%EC%97%94%EB%94%94%EC%95%88-%EB%A6%AC%ED%8B%80%EC%97%94%EB%94%94%EC%95%88.html</link>
+      <pubDate>Fri, 30 Jul 2021 02:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/07/30/%EC%86%8C%EC%BC%93-%EA%B5%AC%EC%A1%B0%EC%B2%B4-%EB%B0%8F-%EB%B9%85%EC%97%94%EB%94%94%EC%95%88-%EB%A6%AC%ED%8B%80%EC%97%94%EB%94%94%EC%95%88.html</guid>
+      <description>&lt;h3 id=&#34;소켓-자료-구조&#34;&gt;소켓 자료 구조&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;컴퓨터 네트워크를 이용하여 통신을 하기 위해서는 다음과 같은 사항들이 결정되어야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;- 전송 계층 프로토콜
+- 네트워크 계층 프로토콜
+- Source 호스트의 IP 주소
+- Destination 호스트의 IP 주소
+- Source 프로세스의 포트번호
+- Destination 프로세스의 포트번호
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이중에서 프로토콜들은 &lt;code&gt;socket&lt;/code&gt; 함수의 인자로 결정할 수 있는 부분이다.&lt;/li&gt;
+&lt;li&gt;소켓에서는 주소를 다음과 같은 구조체를 이용하여 처리한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;struct sockaddr {
+  uint8_t sa_len; // 주소 길이
+  sa_familiy_t sa_family; // 주소 패밀리
+  char sa_data[14]; // 주소 값
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;네트워크 계층 프로토콜로 &lt;code&gt;IPv4&lt;/code&gt;를 사용한다면 아래 구조체를 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;struct sockaddr_in {
+  uint8_t sin_len; // 주소 길이
+  sa_familiy_t sin_family; // 주소 패밀리
+  in_port_t sin_port; // 포트번호
+
+  struct in_addr sin_addr; // IPv4 주소값
+  char sin_zero[8]; // 사용되지 않는 값 (sockaddr 과 길이를 맞추기 위함)
+}
+
+struct in_addr {
+  uint32_t s_addr; // IP 주소
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;주소를-소켓에-적용시키는-방법&#34;&gt;주소를 소켓에 적용시키는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+
+int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;소켓을 생성한 후 &lt;code&gt;bind()&lt;/code&gt; 함수를 호출하면 소켓에 &lt;code&gt;IP&lt;/code&gt; 주소와 포트번호 정보가 연결된다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bind()&lt;/code&gt; 함수는 두 번째 인자로 &lt;code&gt;sockaddr&lt;/code&gt; 구조체의 포인터를 사용하기 때문에 &lt;code&gt;sock_addr_in&lt;/code&gt; 구조체를 바로 사용할 수 없고 캐스팅을 해야한다.&lt;/li&gt;
+&lt;li&gt;프로토콜 주소의 확장성을 위해서 다양한 주소 체계를 처리할 수 있도록 제작된 형태이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;빅엔디안과-리틀-엔디안&#34;&gt;빅엔디안과 리틀 엔디안&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;컴퓨터에서 데이터를 바이트 단위로 다룬다. 데이터를 바이트 단위로 다루는 것은 대부분의 컴퓨터에서 공통적인 일이지만, 여러 바이트로 구성된 데이터를 메모리에 저장하는 방식은 컴퓨터 구조에 따라서 다를 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;만약 아래와 같은 연속된 바이트로 구성된 데이터가 있다고 가정하자.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;| 0x |  12 | 34 | 56 | 78 | 9a | bc | de | f0 |
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;빅엔디안(Big-Endian)&lt;/strong&gt; : 상위 바이트 값이 메모리의 작은 주소에 저장&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;리틀 엔디안(Little-Endian)&lt;/strong&gt; : 하위 바이트 값이 메모리의 작은 주소에 저장&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 차이 때문에 컴퓨터에서 사용하던 데이터를 네트워크로 그대로 전송하면 컴퓨터마다 해독이 가능할 수도 있고, 불가능할 수 도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크로 흘러가는 데이터는 빅엔디안 방식을 사용하기로 약속하고 이를 네트워크 바이트 순서라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;인텔 계열 컴퓨터는 리틀 엔디안으로 사용하기 때문에, 네트워크로 데이터를 전송하기 전에 빅엔디안으로 적절하게 변경해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;netinet/in.h&amp;gt;
+
+uint32_t htonl(uint32_t hostlong);
+uint16_t htons(uint16_t hostshort);
+uint32_t ntohl(uint32_t netlong);
+uint16_t ntohs(uint16_t netshort);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 함수들은, 두 바이트 오더 간에 변환을 해주는 함수이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;h&lt;/code&gt;가 뜻하는 것은 호스트이며 &lt;code&gt;n&lt;/code&gt;이 뜻하는 것은 네트워크이다. 데이터의 길이에 알맞게 사용을 하면 된다.&lt;/li&gt;
+&lt;li&gt;만약 이미 네트워크 바이트 오더를 사용하는 컴퓨터라면 &lt;code&gt;htons&lt;/code&gt;와 &lt;code&gt;htonl&lt;/code&gt; 함수를 사용해도 값이 변경되지는 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;struct sockaddr_in srv_addr;
+int port = 9001;
+
+srv_addr.sin_port = htons(port);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;앞의 함수를 사용하여 포트번호를 지정하는 예제이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267&#34;&gt;네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>소켓 프로그래밍이란?</title>
       <link>https://dongwooklee96.github.io/post/2021/07/25/%EC%86%8C%EC%BC%93-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%9D%B4%EB%9E%80.html</link>

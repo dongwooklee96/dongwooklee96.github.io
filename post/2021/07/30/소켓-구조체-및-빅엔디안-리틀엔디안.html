@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>소켓 구조체 및 빅엔디안, 리틀엔디안 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">소켓 구조체 및 빅엔디안, 리틀엔디안</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/07/30</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="소켓-자료-구조">소켓 자료 구조</h3>
+<hr>
+<ul>
+<li>컴퓨터 네트워크를 이용하여 통신을 하기 위해서는 다음과 같은 사항들이 결정되어야 한다.</li>
+</ul>
+<pre><code>- 전송 계층 프로토콜
+- 네트워크 계층 프로토콜
+- Source 호스트의 IP 주소
+- Destination 호스트의 IP 주소
+- Source 프로세스의 포트번호
+- Destination 프로세스의 포트번호
+</code></pre><ul>
+<li>이중에서 프로토콜들은 <code>socket</code> 함수의 인자로 결정할 수 있는 부분이다.</li>
+<li>소켓에서는 주소를 다음과 같은 구조체를 이용하여 처리한다.</li>
+</ul>
+<pre><code>struct sockaddr {
+  uint8_t sa_len; // 주소 길이
+  sa_familiy_t sa_family; // 주소 패밀리
+  char sa_data[14]; // 주소 값
+}
+</code></pre><ul>
+<li>네트워크 계층 프로토콜로 <code>IPv4</code>를 사용한다면 아래 구조체를 사용한다.</li>
+</ul>
+<pre><code>struct sockaddr_in {
+  uint8_t sin_len; // 주소 길이
+  sa_familiy_t sin_family; // 주소 패밀리
+  in_port_t sin_port; // 포트번호
+
+  struct in_addr sin_addr; // IPv4 주소값
+  char sin_zero[8]; // 사용되지 않는 값 (sockaddr 과 길이를 맞추기 위함)
+}
+
+struct in_addr {
+  uint32_t s_addr; // IP 주소
+}
+</code></pre><h3 id="주소를-소켓에-적용시키는-방법">주소를 소켓에 적용시키는 방법</h3>
+<hr>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+
+int bind(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+</code></pre><ul>
+<li>소켓을 생성한 후 <code>bind()</code> 함수를 호출하면 소켓에 <code>IP</code> 주소와 포트번호 정보가 연결된다.</li>
+<li><code>bind()</code> 함수는 두 번째 인자로 <code>sockaddr</code> 구조체의 포인터를 사용하기 때문에 <code>sock_addr_in</code> 구조체를 바로 사용할 수 없고 캐스팅을 해야한다.</li>
+<li>프로토콜 주소의 확장성을 위해서 다양한 주소 체계를 처리할 수 있도록 제작된 형태이다.</li>
+</ul>
+<h3 id="빅엔디안과-리틀-엔디안">빅엔디안과 리틀 엔디안</h3>
+<hr>
+<ul>
+<li>컴퓨터에서 데이터를 바이트 단위로 다룬다. 데이터를 바이트 단위로 다루는 것은 대부분의 컴퓨터에서 공통적인 일이지만, 여러 바이트로 구성된 데이터를 메모리에 저장하는 방식은 컴퓨터 구조에 따라서 다를 수 있다.</li>
+</ul>
+<p>만약 아래와 같은 연속된 바이트로 구성된 데이터가 있다고 가정하자.</p>
+<pre><code>| 0x |  12 | 34 | 56 | 78 | 9a | bc | de | f0 |
+</code></pre><ul>
+<li>
+<p><strong>빅엔디안(Big-Endian)</strong> : 상위 바이트 값이 메모리의 작은 주소에 저장</p>
+</li>
+<li>
+<p><strong>리틀 엔디안(Little-Endian)</strong> : 하위 바이트 값이 메모리의 작은 주소에 저장</p>
+</li>
+<li>
+<p>이러한 차이 때문에 컴퓨터에서 사용하던 데이터를 네트워크로 그대로 전송하면 컴퓨터마다 해독이 가능할 수도 있고, 불가능할 수 도 있다.</p>
+</li>
+<li>
+<p>네트워크로 흘러가는 데이터는 빅엔디안 방식을 사용하기로 약속하고 이를 네트워크 바이트 순서라고 한다.</p>
+</li>
+<li>
+<p>인텔 계열 컴퓨터는 리틀 엔디안으로 사용하기 때문에, 네트워크로 데이터를 전송하기 전에 빅엔디안으로 적절하게 변경해야한다.</p>
+</li>
+</ul>
+<pre><code>#include &lt;netinet/in.h&gt;
+
+uint32_t htonl(uint32_t hostlong);
+uint16_t htons(uint16_t hostshort);
+uint32_t ntohl(uint32_t netlong);
+uint16_t ntohs(uint16_t netshort);
+</code></pre><ul>
+<li>위의 함수들은, 두 바이트 오더 간에 변환을 해주는 함수이다.</li>
+<li><code>h</code>가 뜻하는 것은 호스트이며 <code>n</code>이 뜻하는 것은 네트워크이다. 데이터의 길이에 알맞게 사용을 하면 된다.</li>
+<li>만약 이미 네트워크 바이트 오더를 사용하는 컴퓨터라면 <code>htons</code>와 <code>htonl</code> 함수를 사용해도 값이 변경되지는 않는다.</li>
+</ul>
+<pre><code>struct sockaddr_in srv_addr;
+int port = 9001;
+
+srv_addr.sin_port = htons(port);
+</code></pre><ul>
+<li>앞의 함수를 사용하여 포트번호를 지정하는 예제이다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267">네트워크 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
