@@ -6,7 +6,260 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 01 Aug 2021 23:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 02 Aug 2021 00:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>간단한 소켓 프로그램</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/02/%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%86%8C%EC%BC%93-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8.html</link>
+      <pubDate>Mon, 02 Aug 2021 00:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/02/%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%86%8C%EC%BC%93-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8.html</guid>
+      <description>&lt;h3 id=&#34;간단한-소켓-프로그램&#34;&gt;간단한 소켓 프로그램&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;서버와 클라이언트를 연결해봄으로써, 간단한 소켓 프로그래밍을 해볼 것이다.&lt;/li&gt;
+&lt;li&gt;A와 B가 연결된 상태로 통신을 하려면 둘 중의 하나가 연결 요청을 해야한다. 그리고 나머지 한쪽은 상대방의 연결 요청을 처리할 준비를 해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+
+int listen(int sockfd, int backlog);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 함수는 연결 요청을 처리하기 위한 함수이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;listen()&lt;/code&gt; 함수는 해당 소켓을 듣기 상태로 만든다. &lt;code&gt;listen&lt;/code&gt; 함수가 호출되면 해당 소켓은 상대방의 연결 요청을 받을 준비를 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로그램의 흐름은 다음 라인으로 넘어가면 운영체제에게 해당 소켓을 통해 연결 요청이 들어올 경우, 연결 요청 정보를 저장해달라고 부탁한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;backlog&lt;/code&gt;는 저장하고 있을 연결 요청의 최대 수를 뜻한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+
+int accept(int sockfd, struct sockaddr *addr, socket_t addrlen);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;accept()&lt;/code&gt; 함수가 호출되는 순간, 커널은 &lt;code&gt;listen&lt;/code&gt; 함수에 의해 생성된 대기열에 연결 요청이 있었는지를 확인한다. 연결 요청이 없으면 &lt;code&gt;accept&lt;/code&gt; 함수는 연결 요청이 발생할 때까지 프로그램의 제어권을 가진 상태로 대기한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;연결 요청이 있으면 가장 먼저 연결 요청을 한 프로세스와 통신하기 위한 소켓의 파일 디스크립터를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여기서 주의해야할 것은 &lt;code&gt;listen&lt;/code&gt; 함수를 통해 듣기 모드에 돌입한 소켓은 &lt;strong&gt;연결 요청을 접수하는 역할을 하는 듣기 소켓이 되고 accept 함수의 결과 반환된 소켓은 실제 데이터 전송에 사용되는 연결 소켓이 된다는 것이다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+
+int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 함수를 통해서, &lt;code&gt;listen()&lt;/code&gt; 함수 호출로 대기하고 있는 프로세스에 연결 요청을 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/127778990-5303317c-394f-4399-ac92-2d892f045d22.gif&#34; alt=&#34;7099 epsi&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;데이터 전송을 위한 연결은 &lt;code&gt;connect()&lt;/code&gt; 함수의 인자로 전달된 소켓과 &lt;code&gt;accept()&lt;/code&gt; 함수 호출에 의해 듣기 소켓이 된 소켓은 연결 요청을 처리하는 일만을 담당한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;연결이 완료된 이후에는 일반 파일과 같이 입출력 함수 (&lt;code&gt;read&lt;/code&gt;, &lt;code&gt;write&lt;/code&gt;)를 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서버-프로그램&#34;&gt;서버 프로그램&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;간단한 예제를 통해서, 다룬 함수들의 실제 사용에 대해서 알아볼 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버 프로그램의 기능은 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;클라이언트쪽으로부터 &amp;ldquo;How old are you?&amp;rdquo; 라는 문자열을 전송받은 후에 이것을 전송한다.
+클라이언트쪽으로 &amp;ldquo;I am 20 years old&amp;rdquo; 라는 문자열을 전송한 후에 화면에 출력한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+
+#define PORT 9001
+
+int main() {
+  int srv_sd, client_sd;
+  struct sockaddr_in srv_addr, client_addr;
+  int client_addr_len, read_len;
+  char read_buff[BUFSIZ];
+  char write_buff[BUFSIZ] = &amp;quot;I am 20 years old.&amp;quot;;
+
+  srv_sd = socket(PF_INET, SOCK_STREAM, 0);
+
+  if (srv_sd == -1) {
+    printf(&amp;quot;socket creation error&amp;quot;);
+    return -1;
+  }
+  printf(&amp;quot;==== server program ====\n&amp;quot;);
+
+  memset(&amp;amp;srv_addr, 0, sizeof(srv_addr));
+  srv_addr.sin_family = AF_INET;
+  srv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  srv_addr.sin_port = htons(PORT);
+
+  if (bind(srv_sd, (struct sockaddr *) &amp;amp;srv_addr, sizeof(srv_addr)) == -1) {
+    printf(&amp;quot;bind error&amp;quot;);
+    return -1;
+  }
+
+  if (listen(srv_sd, 5) == -1) {
+    printf(&amp;quot;listen error&amp;quot;);
+    return -1;
+  }
+
+  client_addr_len = sizeof(client_addr);
+  client_sd = accept(srv_sd, (struct sockaddr*)&amp;amp;client_addr, &amp;amp;client_addr_len);
+
+  if (client_sd == -1) {
+    printf(&amp;quot;accept error&amp;quot;);
+    return -1;
+  }
+  write(client_sd, write_buff, sizeof(write_buff));
+  printf(&amp;quot;server: %s\n&amp;quot;, write_buff);
+
+  read_len = read(client_sd, read_buff, sizeof(read_buff));
+  if (read_len == -1) {
+    printf(&amp;quot;read error&amp;quot;);
+    return -1;
+  }
+
+  read_buff[read_len] = &#39;\0&#39;;
+  printf(&amp;quot;client: %s\n&amp;quot;, read_buff);
+
+  close(client_sd);
+  close(srv_sd);
+
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;클라이언트-프로그램&#34;&gt;클라이언트 프로그램&lt;/h3&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;같은 호스트 안에 위치한 서버 프로그램에 &lt;code&gt;TCP 9001번 포트로 연결을 시도한다.&lt;/code&gt;
+연결 후 서버 프로그램으로 &amp;lsquo;How old are you?&amp;rsquo; 라는 문자열을 전송한 후에 화면에 출력한다.
+서버로부터 &amp;lsquo;I am 20 years old.&amp;rsquo; 라는 문자열을 전송 받은 후에 화면에 출력한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+#define PORT 9001
+
+int main() {
+  int client_sd;
+  struct sockaddr_in client_addr;
+
+  int client_addr_len, read_len;
+  char write_buff[BUFSIZ] = &amp;quot;How old are you?&amp;quot;;
+  char read_buff[BUFSIZ];
+
+  client_sd = socket(PF_INET, SOCK_STREAM, 0);
+  if (client_sd == -1) {
+    printf(&amp;quot;socket creation error&amp;quot;);
+    return -1;
+  }
+  printf(&amp;quot;==== client program ====\n&amp;quot;);
+
+  memset(&amp;amp;client_addr, 0, sizeof(client_addr));
+  client_addr.sin_family = AF_INET;
+  client_addr.sin_addr.s_addr = inet_addr(&amp;quot;127.0.0.1&amp;quot;);
+  client_addr.sin_port = htons(PORT);
+
+  if (connect(client_sd, (struct sockaddr *) &amp;amp;client_addr, sizeof(client_addr)) == -1) {
+    printf(&amp;quot;connection error&amp;quot;);
+    close(client_sd);
+    return -1;
+  }
+
+  write(client_sd, write_buff, sizeof(write_buff));
+  printf(&amp;quot;client: %s\n&amp;quot;, write_buff);
+
+  read_len = read(client_sd, read_buff, sizeof(read_buff));
+  if (read_len == -1) {
+    printf(&amp;quot;read error&amp;quot;);
+    return -1;
+  }
+  read_buff[read_len] = &#39;\0&#39;;
+  printf(&amp;quot;server: %s\n&amp;quot;, read_buff);
+  close(client_sd);
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/127781662-add25fdb-1379-4a5f-a7e4-ea5214afd686.png&#34; alt=&#34;Screen Shot 2021-08-02 at 3 32 59 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서버를 실행한 직후 &lt;code&gt;netstat&lt;/code&gt; 명령을 통해서, &lt;code&gt;listen&lt;/code&gt; 상태에 있는 연결을 조회한 결과입니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버는 클라이언트의 연결 요청을 기다리는 &lt;code&gt;listen&lt;/code&gt; 상태에 머물러 있다는 것을 확인할 수 있습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;에러-처리&#34;&gt;에러 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;소켓 객체를 관리하는 것은 커널이고, 따라서 소켓 관련 함수들은 대부분 시스템 콜과 관련이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 함수들은 경우에 따라 실패할 수 있으므로, 실패의 종류에 따라서 필요한 루틴을 실행하는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스에서는 함수 호출 후에 발생한 에러를 저장하는 &lt;code&gt;errno&lt;/code&gt; 라는 전역 변수를 제공한다. &lt;code&gt;errno&lt;/code&gt;는 &lt;code&gt;errno.h&lt;/code&gt; 파일을 &lt;code&gt;include&lt;/code&gt; 해서 사용할 수 있다. 또한, 에러 종류에 대한 매크로도 &lt;code&gt;errno.h&lt;/code&gt;에 정의되어 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서, &lt;code&gt;socket&lt;/code&gt; 함수의 인자 중 프로토콜 패밀리가 잘못되면 &lt;code&gt;socket&lt;/code&gt; 함수는 &lt;code&gt;-1&lt;/code&gt;을 리턴하면 종료하고, 종료하면서 자신이 어떤 에러에 의해서 종료되었는지 &lt;code&gt;errno&lt;/code&gt; 변수에 저장하는데 그 값은 &lt;code&gt;EINVAL&lt;/code&gt;로 미리 정의되어 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 이 경우 다른 작업을 추가할고 싶으면 코드를 다음과 같이 구성하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;client_sd = socket(PF_INET, SOCK_STREAM, 0);
+
+if (client_sd == -1) {
+  if (errno == EINVAL) {
+    printf(&amp;quot;protocol family error&amp;quot;);
+    return -1;
+  }
+  printf(&amp;quot;socket creation error&amp;quot;);
+  return -1;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;화면에 에러 메시지에 대략적인 내용을 출력하는 함수를 만들고 실패가 발생하는 모든 함수에서 에러 처리 루틴을 삽입하는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+
+void perror(const char *msg);
+
+int foo(int domain, int type, int protocol) {
+  int res;
+  res = socket(domain, type, protocol);
+  if (res == -1) {
+    perror(&amp;quot;socket&amp;quot;);
+  }
+  return res;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267&#34;&gt;네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>IP 주소 변환</title>
       <link>https://dongwooklee96.github.io/post/2021/08/01/ip-%EC%A3%BC%EC%86%8C-%EB%B3%80%ED%99%98.html</link>

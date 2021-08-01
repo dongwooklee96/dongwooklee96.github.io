@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>간단한 소켓 프로그램 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">간단한 소켓 프로그램</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/08/02</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="간단한-소켓-프로그램">간단한 소켓 프로그램</h3>
+<hr>
+<ul>
+<li>서버와 클라이언트를 연결해봄으로써, 간단한 소켓 프로그래밍을 해볼 것이다.</li>
+<li>A와 B가 연결된 상태로 통신을 하려면 둘 중의 하나가 연결 요청을 해야한다. 그리고 나머지 한쪽은 상대방의 연결 요청을 처리할 준비를 해야한다.</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+
+int listen(int sockfd, int backlog);
+</code></pre><ul>
+<li>
+<p>위의 함수는 연결 요청을 처리하기 위한 함수이다.</p>
+</li>
+<li>
+<p><code>listen()</code> 함수는 해당 소켓을 듣기 상태로 만든다. <code>listen</code> 함수가 호출되면 해당 소켓은 상대방의 연결 요청을 받을 준비를 한다.</p>
+</li>
+<li>
+<p>프로그램의 흐름은 다음 라인으로 넘어가면 운영체제에게 해당 소켓을 통해 연결 요청이 들어올 경우, 연결 요청 정보를 저장해달라고 부탁한다.</p>
+</li>
+<li>
+<p><code>backlog</code>는 저장하고 있을 연결 요청의 최대 수를 뜻한다.</p>
+</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+
+int accept(int sockfd, struct sockaddr *addr, socket_t addrlen);
+</code></pre><ul>
+<li>
+<p><code>accept()</code> 함수가 호출되는 순간, 커널은 <code>listen</code> 함수에 의해 생성된 대기열에 연결 요청이 있었는지를 확인한다. 연결 요청이 없으면 <code>accept</code> 함수는 연결 요청이 발생할 때까지 프로그램의 제어권을 가진 상태로 대기한다.</p>
+</li>
+<li>
+<p>연결 요청이 있으면 가장 먼저 연결 요청을 한 프로세스와 통신하기 위한 소켓의 파일 디스크립터를 반환한다.</p>
+</li>
+<li>
+<p>여기서 주의해야할 것은 <code>listen</code> 함수를 통해 듣기 모드에 돌입한 소켓은 <strong>연결 요청을 접수하는 역할을 하는 듣기 소켓이 되고 accept 함수의 결과 반환된 소켓은 실제 데이터 전송에 사용되는 연결 소켓이 된다는 것이다.</strong></p>
+</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+
+int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+</code></pre><ul>
+<li>위의 함수를 통해서, <code>listen()</code> 함수 호출로 대기하고 있는 프로세스에 연결 요청을 할 수 있다.</li>
+</ul>
+<p><img src="https://user-images.githubusercontent.com/14002238/127778990-5303317c-394f-4399-ac92-2d892f045d22.gif" alt="7099 epsi"></p>
+<ul>
+<li>
+<p>데이터 전송을 위한 연결은 <code>connect()</code> 함수의 인자로 전달된 소켓과 <code>accept()</code> 함수 호출에 의해 듣기 소켓이 된 소켓은 연결 요청을 처리하는 일만을 담당한다.</p>
+</li>
+<li>
+<p>연결이 완료된 이후에는 일반 파일과 같이 입출력 함수 (<code>read</code>, <code>write</code>)를 사용할 수 있다.</p>
+</li>
+</ul>
+<h3 id="서버-프로그램">서버 프로그램</h3>
+<hr>
+<ul>
+<li>
+<p>간단한 예제를 통해서, 다룬 함수들의 실제 사용에 대해서 알아볼 것이다.</p>
+</li>
+<li>
+<p>서버 프로그램의 기능은 다음과 같다.</p>
+</li>
+</ul>
+<blockquote>
+<p>클라이언트쪽으로부터 &ldquo;How old are you?&rdquo; 라는 문자열을 전송받은 후에 이것을 전송한다.
+클라이언트쪽으로 &ldquo;I am 20 years old&rdquo; 라는 문자열을 전송한 후에 화면에 출력한다.</p>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;sys/socket.h&gt;
+
+#define PORT 9001
+
+int main() {
+  int srv_sd, client_sd;
+  struct sockaddr_in srv_addr, client_addr;
+  int client_addr_len, read_len;
+  char read_buff[BUFSIZ];
+  char write_buff[BUFSIZ] = &quot;I am 20 years old.&quot;;
+
+  srv_sd = socket(PF_INET, SOCK_STREAM, 0);
+
+  if (srv_sd == -1) {
+    printf(&quot;socket creation error&quot;);
+    return -1;
+  }
+  printf(&quot;==== server program ====\n&quot;);
+
+  memset(&amp;srv_addr, 0, sizeof(srv_addr));
+  srv_addr.sin_family = AF_INET;
+  srv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  srv_addr.sin_port = htons(PORT);
+
+  if (bind(srv_sd, (struct sockaddr *) &amp;srv_addr, sizeof(srv_addr)) == -1) {
+    printf(&quot;bind error&quot;);
+    return -1;
+  }
+
+  if (listen(srv_sd, 5) == -1) {
+    printf(&quot;listen error&quot;);
+    return -1;
+  }
+
+  client_addr_len = sizeof(client_addr);
+  client_sd = accept(srv_sd, (struct sockaddr*)&amp;client_addr, &amp;client_addr_len);
+
+  if (client_sd == -1) {
+    printf(&quot;accept error&quot;);
+    return -1;
+  }
+  write(client_sd, write_buff, sizeof(write_buff));
+  printf(&quot;server: %s\n&quot;, write_buff);
+
+  read_len = read(client_sd, read_buff, sizeof(read_buff));
+  if (read_len == -1) {
+    printf(&quot;read error&quot;);
+    return -1;
+  }
+
+  read_buff[read_len] = '\0';
+  printf(&quot;client: %s\n&quot;, read_buff);
+
+  close(client_sd);
+  close(srv_sd);
+
+  return 0;
+}
+</code></pre><h3 id="클라이언트-프로그램">클라이언트 프로그램</h3>
+<hr>
+<blockquote>
+<p>같은 호스트 안에 위치한 서버 프로그램에 <code>TCP 9001번 포트로 연결을 시도한다.</code>
+연결 후 서버 프로그램으로 &lsquo;How old are you?&rsquo; 라는 문자열을 전송한 후에 화면에 출력한다.
+서버로부터 &lsquo;I am 20 years old.&rsquo; 라는 문자열을 전송 받은 후에 화면에 출력한다.</p>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+#define PORT 9001
+
+int main() {
+  int client_sd;
+  struct sockaddr_in client_addr;
+
+  int client_addr_len, read_len;
+  char write_buff[BUFSIZ] = &quot;How old are you?&quot;;
+  char read_buff[BUFSIZ];
+
+  client_sd = socket(PF_INET, SOCK_STREAM, 0);
+  if (client_sd == -1) {
+    printf(&quot;socket creation error&quot;);
+    return -1;
+  }
+  printf(&quot;==== client program ====\n&quot;);
+
+  memset(&amp;client_addr, 0, sizeof(client_addr));
+  client_addr.sin_family = AF_INET;
+  client_addr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);
+  client_addr.sin_port = htons(PORT);
+
+  if (connect(client_sd, (struct sockaddr *) &amp;client_addr, sizeof(client_addr)) == -1) {
+    printf(&quot;connection error&quot;);
+    close(client_sd);
+    return -1;
+  }
+
+  write(client_sd, write_buff, sizeof(write_buff));
+  printf(&quot;client: %s\n&quot;, write_buff);
+
+  read_len = read(client_sd, read_buff, sizeof(read_buff));
+  if (read_len == -1) {
+    printf(&quot;read error&quot;);
+    return -1;
+  }
+  read_buff[read_len] = '\0';
+  printf(&quot;server: %s\n&quot;, read_buff);
+  close(client_sd);
+  return 0;
+}
+</code></pre><p><img src="https://user-images.githubusercontent.com/14002238/127781662-add25fdb-1379-4a5f-a7e4-ea5214afd686.png" alt="Screen Shot 2021-08-02 at 3 32 59 AM"></p>
+<ul>
+<li>
+<p>서버를 실행한 직후 <code>netstat</code> 명령을 통해서, <code>listen</code> 상태에 있는 연결을 조회한 결과입니다.</p>
+</li>
+<li>
+<p>서버는 클라이언트의 연결 요청을 기다리는 <code>listen</code> 상태에 머물러 있다는 것을 확인할 수 있습니다.</p>
+</li>
+</ul>
+<h3 id="에러-처리">에러 처리</h3>
+<hr>
+<ul>
+<li>
+<p>소켓 객체를 관리하는 것은 커널이고, 따라서 소켓 관련 함수들은 대부분 시스템 콜과 관련이 있다.</p>
+</li>
+<li>
+<p>이러한 함수들은 경우에 따라 실패할 수 있으므로, 실패의 종류에 따라서 필요한 루틴을 실행하는 것이 중요하다.</p>
+</li>
+<li>
+<p>리눅스에서는 함수 호출 후에 발생한 에러를 저장하는 <code>errno</code> 라는 전역 변수를 제공한다. <code>errno</code>는 <code>errno.h</code> 파일을 <code>include</code> 해서 사용할 수 있다. 또한, 에러 종류에 대한 매크로도 <code>errno.h</code>에 정의되어 있다.</p>
+</li>
+<li>
+<p>예를 들어서, <code>socket</code> 함수의 인자 중 프로토콜 패밀리가 잘못되면 <code>socket</code> 함수는 <code>-1</code>을 리턴하면 종료하고, 종료하면서 자신이 어떤 에러에 의해서 종료되었는지 <code>errno</code> 변수에 저장하는데 그 값은 <code>EINVAL</code>로 미리 정의되어 있다.</p>
+</li>
+<li>
+<p>따라서 이 경우 다른 작업을 추가할고 싶으면 코드를 다음과 같이 구성하면 된다.</p>
+</li>
+</ul>
+<pre><code>client_sd = socket(PF_INET, SOCK_STREAM, 0);
+
+if (client_sd == -1) {
+  if (errno == EINVAL) {
+    printf(&quot;protocol family error&quot;);
+    return -1;
+  }
+  printf(&quot;socket creation error&quot;);
+  return -1;
+}
+</code></pre><ul>
+<li>화면에 에러 메시지에 대략적인 내용을 출력하는 함수를 만들고 실패가 발생하는 모든 함수에서 에러 처리 루틴을 삽입하는 것이 좋다.</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+
+void perror(const char *msg);
+
+int foo(int domain, int type, int protocol) {
+  int res;
+  res = socket(domain, type, protocol);
+  if (res == -1) {
+    perror(&quot;socket&quot;);
+  }
+  return res;
+}
+</code></pre><h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267">네트워크 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
