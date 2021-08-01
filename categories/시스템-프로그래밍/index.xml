@@ -6,7 +6,216 @@
     <description>Recent content in 시스템 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 27 Jul 2021 00:05:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Aug 2021 21:46:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GREP 명령어 만들기 및 정규표현식</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/01/grep-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D.html</link>
+      <pubDate>Sun, 01 Aug 2021 21:46:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/01/grep-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D.html</guid>
+      <description>&lt;h3 id=&#34;grep-명령어-만들기-및-정규-표현식&#34;&gt;GREP 명령어 만들기 및 정규 표현식&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;libc&lt;/code&gt;에서 제공하는 정규 표현식 API는 다음과 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;regex.h&amp;gt;
+
+int recomp(regex_t *reg, const char *pattern, int flags);
+void regfree(regex_t *reg);
+int regexec(const regex_t *reg, const char *string, size_t nmatch, regmatch_t pmatch[], int flags);
+size_t regerror(int errcode, const regex_t *reg, char *msgbuf, size_t msgbuf_size);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;regcomp()&lt;/code&gt;는 두번째 인자로 넘어온 정규 표현식 문자열을 전용 데이터 형식 &lt;code&gt;regex_t&lt;/code&gt;로 변환한다. 변환한 결과는 첫번째 인자 &lt;code&gt;reg&lt;/code&gt;에 기록된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;첫번째 인자 &lt;code&gt;reg&lt;/code&gt;의 메모리 영역은 호출하기 전에 할당하여 그 포인터를 전달해야 하는데, 그 외에도 &lt;code&gt;regcomp()&lt;/code&gt;가 독자적으로 메모리를 확보하게 된다. 그것을 해제하는 &lt;code&gt;API&lt;/code&gt;가 바로 &lt;code&gt;regfree()&lt;/code&gt;이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;regcomp()&lt;/code&gt;와 &lt;code&gt;regfree()&lt;/code&gt;는 &lt;code&gt;open()&lt;/code&gt;, &lt;code&gt;close()&lt;/code&gt; 처럼 늘 쌍으로 사용되는 함수이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;regcomp()&lt;/code&gt;는 성공하면 0을 반환하고 실패하면, 에러 코드를 반환하는데, 이 에러 코드를 에러 메시지로 변환하는 함수가 &lt;code&gt;regerror()&lt;/code&gt;이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;grep-소스-코드&#34;&gt;grep 소스 코드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;regex.h&amp;gt;
+
+static void do_grep(regex_t *pat, FILE *f);
+
+int main(int argc, char *argv[]) {
+  regex_t pat;
+  int err;
+  int i;
+
+  if (argc &amp;lt; 2) {
+    fputs(&amp;quot;no pattern\n&amp;quot;, stderr);
+    exit(1);
+  }
+  err = regcomp(&amp;amp;pat, argv[1], REG_EXTENDED | REG_NOSUB | REG_NEWLINE);
+  if (err != 0) {
+    char buf[1024];
+    puts(buf);
+    exit(1);
+  }
+  if (argc == 2) {
+    do_grep(&amp;amp;pat, stdin);
+  } else {
+    for (i = 2; i &amp;lt; argc; i++) {
+      FILE *f;
+
+      f = fopen(argv[i], &amp;quot;r&amp;quot;);
+      if (!f) {
+        perror(argv[i]);
+        exit(1);
+      }
+      do_grep(&amp;amp;pat, f);
+      fclose(f);
+    }
+  }
+  regfree(&amp;amp;pat);
+  exit(0);
+}
+
+static void do_grep(regex_t *pat, FILE *src) {
+  char buf[4096];
+
+  while (fgets(buf, sizeof buf, src)) {
+    if (regexec(pat, buf, 0, NULL, 0) == 0) {
+      fputs(buf, stdout);
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;한글-문자열-처리와-국제화&#34;&gt;한글 문자열 처리와 국제화&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 &lt;code&gt;grep&lt;/code&gt; 명령어를 한글로 된 텍스트 파일에 적용할 수가 없다. 이유는 한글 문자열을 고려하지 않았기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C언어에서 문자는 사실 숫자이며, 문자열은 숫자의 배열이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;유니코드&#34;&gt;유니코드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;유니코드는 기존의 수많은 언어의 문자 코드를 대부분 포함해 문자 코드가 난립하는 상황을 해결하기 위해서 고안되었다. 그러나, 현실은 유니코드에 포함되지 않은 문자도 존재하며 특히 한자와 관련된 골치아픈 문제들이 남아있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래도 기존의 문자 코드를 여러개 사용하는 것보다는 훨씬 낫고, 달리 대체할 것이 없어 현재는 유니코드가 사실상 표준이 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;문자-코드의-구체적인-의미&#34;&gt;문자 코드의 구체적인 의미&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;lsquo;문자 코드&amp;rsquo; 라는 모호한 개념은 구체적으로 다음과 같이 두 가지로 분해할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;부호화 문자집합&lt;/li&gt;
+&lt;li&gt;인코딩&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;부호화-문자-집합&#34;&gt;부호화 문자 집합&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;문자집합 또는 문자 셋은 글자들의 집합이며, 집합 안의 문자들에 음수가 아닌 정수들을 배정한 것을 &lt;strong&gt;부호화된 문자 집합(coded character set)&lt;/strong&gt; 이라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;인코딩&#34;&gt;인코딩&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;부호화 문자 집합에 속하는 각 문자는 하나의 숫자와 대응된다. 그 번호를 실제 바이트 열로 적용할 때의 계산식이 인코딩이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;인코딩은 크게 두 가지 종류가 있는데 아래와 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;모든 문자에 대해서 같은 바이트 수를 사용하는 인코딩&lt;/li&gt;
+&lt;li&gt;문자의 종류에 따라 사용하는 바이트 수를 바꾸는 인코딩&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;전자를 &lt;strong&gt;와이드 문자&lt;/strong&gt;, 후자를 &lt;strong&gt;멀티 바이트 문자&lt;/strong&gt;라고 한다. 둘 다 실제로 사용되고 있는데, 문자열의 저장 및 전송은 멀티 파이트 문자를 사용하고, 프로세스 내에서 데이터를 처리할 때는 와이드 문자도 자주 사용된다. 와이드 문자가 처리하기 쉽기 때문이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;문자열-처리-방법&#34;&gt;문자열 처리 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;앞으로 유니코드가 우세할 것은 틀림이 없다. 그리고 특히 데이터 저장 및 전송에 사용되는 인코딩은 &lt;code&gt;UTF-8&lt;/code&gt;로 결정되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 지금까지 작성된 유니코등 이외의 데이터를 어떻게 처리할 것인가 하는 문제가 있는데 아래 방법중에 하나를 선택해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;프로그램에서 사용할 문자 코드를 미리 정한다 (혹은 사용자가 정하도록 한다)&lt;/li&gt;
+&lt;li&gt;문자 코드를 추출한다.&lt;/li&gt;
+&lt;li&gt;문자열을 주고 받을 때, 문자 코드의 이름도 넘기도록 한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;첫 번째 방법은 정해진 문자 코드를 사용하기로 사용자와 합의하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;두 번째 방법은 유니코드가 등장하기 전까지는 효과적일지 몰라도, 유니코드가 포함되면서 실패할 확률이 늘었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;세번재 방법은 문자 코드의 이름을 명시적으로 전달하는 것도 좋은 방법이지만, 이름을 잘못 전달하거나 모르는 경우가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;결로넉으로 완벽한 대처는 존재하기 힘들고, 가장 합리적인 방법은 사용할 문자 코드를 미리 정하고, 그 이외의 문자 코드는 이름을 넘겨줘서 처리할 수 있도록 대응하는 방법일 것이다.&lt;/p&gt;
+&lt;h3 id=&#34;국제화와-다중언어화&#34;&gt;국제화와 다중언어화&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;지금까지 설명한 것은 하나의 프로그램에서 여러 언어를 처리할 수 있도록 하기 위한 개념들이었고, 이를 다중 언어화라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이와 비슷한 개념으로 프로그램으 여러 요소를 지역의 관습에 맞추는 작업도 한다. 이것을 지역화(&lt;code&gt;localiszation&lt;/code&gt;)라고 한다. 예를 들어서, 메시지를 사용자가 원하는 언어로 표시하거나 날짜와 시간을 지역의 관습에 맞춰서 표시하는 경우이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 실행시에 해당 지역을 전환할 수 있게 하는 것을 국제화(&lt;code&gt;internationalization&lt;/code&gt;)라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C 언어에선 국제화의 기본 구조는 &lt;code&gt;로케일(locale)&lt;/code&gt; 이다. 국가, 언어, 문자의 조합이 로케일이며, 예를 들면 한글 &lt;code&gt;UTF-8&lt;/code&gt;의 경우 &lt;code&gt;ko_KR.UTF-8&lt;/code&gt; 로케일을 사용한다. &lt;code&gt;ko&lt;/code&gt;가 한글, &lt;code&gt;KR&lt;/code&gt;이 한국이라는 지역, &lt;code&gt;UTF-8&lt;/code&gt;이 유니코드를 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;다중언어-처리와-국제화를-위한-라이브러리&#34;&gt;다중언어 처리와 국제화를 위한 라이브러리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;국제화와 다중 언어 문자열 처리에 사용할 수 있는 라이브러리 몇 가지를 소개한다.&lt;/p&gt;
+&lt;h4 id=&#34;libc-로케일-매커니즘&#34;&gt;&lt;code&gt;libc&lt;/code&gt; 로케일 매커니즘&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;setlocale()&lt;/code&gt;이 로케일의 기본 API이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;libc-와이드-문자-관련-루틴wchar&#34;&gt;&lt;code&gt;libc&lt;/code&gt; 와이드 문자 관련 루틴(wchar)&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;libc&lt;/code&gt; 에서는 ANSI &lt;code&gt;C&lt;/code&gt;로 규정되어 있는, 와이드 문자용 &lt;code&gt;API&lt;/code&gt;가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;iconv&#34;&gt;&lt;code&gt;iconv&lt;/code&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;iconv&lt;/code&gt;문자 코드 간 상호 변환을 위해 사용하는 라이브러리이다. 예를 들면, &lt;code&gt;EUC-KR&lt;/code&gt;과 &lt;code&gt;UTF-8&lt;/code&gt;등의 변화를 수행할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;pcreperl-compatible-regular-expression&#34;&gt;&lt;code&gt;PCRE(Perl Compatible Regular Expression)&lt;/code&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PCRE(Perl Compatible Regular Expression)&lt;/code&gt;는 &lt;code&gt;UTF-8&lt;/code&gt;에 대응하는 정규 표현 라이브러리이다. 이장에서 소개한 &lt;code&gt;libc&lt;/code&gt; 정규 표현에 더하여 &lt;code&gt;Perl5&lt;/code&gt; 확장 정규 표현에도 대응한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=173499011&#34;&gt;모두를 위한 리눅스 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>HEAD 명령어 만들기</title>
       <link>https://dongwooklee96.github.io/post/2021/07/27/head-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
