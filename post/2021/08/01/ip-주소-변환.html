@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>IP 주소 변환 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">IP 주소 변환</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/08/01</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="주소-변환">주소 변환</h3>
+<hr>
+<ul>
+<li>
+<p>프로그램이 사용자에게 입력받는 주소는 <code>Dotted-Decimal</code> 형태의 문자열인 IP 주소 또는 호스트 이름일 것이다. 따라서 주소를 변환해주어야 한다.</p>
+</li>
+<li>
+<p>사용자가 입력한 IP 주소 문자열을 <code>uint32_t</code> 형태로 변환시켜주는 작업이 반드시 필요하다.</p>
+</li>
+<li>
+<p>경우에 따라서는 <code>IP</code> 주소를 다시 문자열 형태로 변환시키는 작업도 필요할 수 있다.</p>
+</li>
+</ul>
+<p>아래는 주소를 변환할 수 있는 API 이다.</p>
+<table>
+<thead>
+<tr>
+<th>함수</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int inet_addr(const char *cp)</code></td>
+<td>cp 문자열 IP 주소를 네트워크 바이트 순서 <code>in_addr_t</code>로 반환</td>
+</tr>
+<tr>
+<td><code>int inet_network(const char *cp)</code></td>
+<td>cp 문자열 IP 주소를 호스트 바이트 순서 <code>in_addr_t</code>로 반환</td>
+</tr>
+<tr>
+<td><code>int inet_aton(const char *cp, strcut in_addr *inp)</code></td>
+<td>cp 문자열 IP 네트워크 바이트 순서 <code>inp</code>로 변환</td>
+</tr>
+<tr>
+<td><code>char *inet_ntoa(struct in_addr in);</code></td>
+<td>네트워크 바이트 순서로 된 <code>in_addr</code>구조체 주소에서 IP 주소 문자열 반환</td>
+</tr>
+<tr>
+<td><code>int inet_pton(int af, const char *src, void *dst);</code></td>
+<td><code>af</code> 인자로 3계층 프로토콜 선택 가능, <code>src</code> 문자열 주소를 <code>dst</code>로 변환</td>
+</tr>
+<tr>
+<td><code>const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);</code></td>
+<td><code>af</code> 인자로 3계층 프로토콜을 선택 가능, <code>src</code> 주소 구조체를 문자열 주소로 변환</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ip-주소를-정수로-변환하여-출력하는-예제">IP 주소를 정수로 변환하여 출력하는 예제</h3>
+<hr>
+<pre><code>#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;stdio.h&gt;
+
+int main(int argc, char** argv) {
+  uint32_t ip_int;
+  char *ip_str = &quot;127.0.0.1&quot;;
+
+  ip_int = inet_network(ip_str);
+
+  printf(&quot;string: %s, decimal: %u, hex: %x\n&quot;,
+    ip_str, ip_int, ip_int);
+
+  ip_int = htonl(ip_int);
+  printf(&quot;after htonl - decimal: %u, hex: %x \n&quot;,
+    ip_int, ip_int);
+
+  return 0;
+}
+</code></pre><ul>
+<li>
+<p><code>inet_network</code> 함수를 이용하여 문자열로 된 <code>IP</code> 주소를 <code>uint32_t</code> 타입 변수에 호스트 바이트 순서로 저장한다.</p>
+</li>
+<li>
+<p><code>htonl</code> 함수를 이용하여 호스트 바이트 순서로 되어 있는 주소를 네트워크 바이트 순서로 변경한다.</p>
+</li>
+</ul>
+<h3 id="주소-변환-함수-예제">주소 변환 함수 예제</h3>
+<hr>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;arpa/inet.h&gt;
+
+int print_addr(struct sockaddr_in *);
+
+int main(char argc, char* argv[]) {
+
+  char *sample_ip = &quot;127.0.0.1&quot;;
+
+  int port = 9002;
+
+  struct sockaddr_in sock_addr1, sock_addr2, sock_addr3;
+
+  sock_addr1.sin_family = AF_INET;
+  sock_addr1.sin_addr.s_addr = inet_addr(sample_ip);
+  sock_addr1.sin_port = htons(port);
+
+  sock_addr2.sin_family = AF_INET;
+  inet_aton(sample_ip, &amp;(sock_addr2.sin_addr));
+  sock_addr2.sin_port = htons(port);
+
+  sock_addr2.sin_family = AF_INET;
+  inet_aton(sample_ip, &amp;(sock_addr2.sin_addr));
+  sock_addr2.sin_port = htons(port);
+
+  sock_addr3.sin_family = AF_INET;
+  inet_pton(AF_INET, sample_ip, &amp;(sock_addr3.sin_addr));
+  sock_addr3.sin_port = htons(port);
+
+  print_addr(&amp;sock_addr1);
+  print_addr(&amp;sock_addr2);
+  print_addr(&amp;sock_addr3);
+
+  printf(&quot;===== ntoa =====\n&quot;);
+  printf(&quot;IP: %s \n&quot;, inet_ntoa(sock_addr1.sin_addr));
+  printf(&quot;IP: %s \n&quot;, inet_ntoa(sock_addr2.sin_addr));
+  printf(&quot;IP: %s \n&quot;, inet_ntoa(sock_addr3.sin_addr));
+  return 0;
+}
+
+int print_addr(struct sockaddr_in *address) {
+  int port;
+  char txt[INET_ADDRSTRLEN];
+  port = ntohs(address-&gt;sin_port);
+  inet_ntop(AF_INET, &amp;(((struct sockaddr_in *) address) -&gt; sin_addr), txt, sizeof(struct sockaddr_in));
+  printf(&quot;ip: %s, port: %d \n&quot;, txt, address-&gt;sin_port);
+  return 0;
+}
+
+</code></pre><h3 id="호스트-이름과-ip-주소">호스트 이름과 IP 주소</h3>
+<hr>
+<ul>
+<li>
+<p>실제로 우리가 작성하는 프로그램은 <code>IP</code> 주소 문자열보다 호스트 이름을 인자로 받을 확률이 높다.</p>
+</li>
+<li>
+<p>호스트 이름 문자열을 <code>IP</code> 주소로 변환하는 과정은 단순 변환이 아니다. 네임 서버에 해당 내용을 조회하고 그 결과값을 알려주는 과정이 포함된다.</p>
+</li>
+</ul>
+<pre><code>#include &lt;netdb.h&gt;
+#include &lt;sys/socket.h&gt;
+struct hosten *gethostbyname(const char *name);
+</code></pre><ul>
+<li>호스트 이름을 네임서버에 조회하여 성공하면 네임 서버는 여러 가지 정보를 제공한다. 이 정보를 저장하기 위해서는 <code>hostent</code> 라는 구조체가 사용된다.</li>
+</ul>
+<pre><code>struct hostent {
+  char *h_name; // 호스트의 공식 이름
+  char **h_aliases; // 가명 리스트 (마지막 인자는 NULL)
+  int h_addrtype; // 호스트 주소 타입 (IPv4, IPv6)
+  int h_length; // 주소의 길이
+  char **h_addr_list; // 주소 리스트 (마지막 인자는 NULL)
+}
+#define h_addr h_addr_list[0]; // 주소 중 첫 번째 엔트리
+</code></pre><ul>
+<li>여러가지 정보 중에 우리가 관심 있는 것은 IP 주소이다. IP 주소는 <code>gethostbyname</code> 하뭇의 실행 결과 얻을 수 있는 <code>hostent</code> 구조체의 멤버 변수 중에서 주소 리스트인 <code>h_addr_list</code>를 통해서 얻어올 수 있다.</li>
+</ul>
+<h3 id="호스트-이름으로-ip-주소를-조회하는-예제">호스트 이름으로 <code>IP</code> 주소를 조회하는 예제</h3>
+<hr>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;string.h&gt;
+
+void err_proc(const char *);
+
+int main(int argc, char *argv[]) {
+  struct hostent *ent;
+  struct in_addr **res;
+  int i = 0;
+
+  if (argc != 2) {
+    fprintf(stderr, &quot;usage: %s &lt;hostname&gt; \n&quot;, argv[0]);
+    return -1;
+  }
+
+  ent = gethostbyname(argv[1]);
+  if (ent == NULL) err_proc(&quot;gethostbyname&quot;);
+
+  res = (struct in_addr **) ent-&gt;h_addr_list;
+  printf(&quot;hostname: %s \n&quot;, ent-&gt;h_name);
+  while(res[i] != NULL) {
+    printf(&quot;%s&quot;, inet_ntoa(*res[i]));
+    i++;
+  }
+  printf(&quot;\n&quot;);
+}
+
+void err_proc(const char *str) {
+  fprintf(stderr, &quot;%s: %s\n&quot;, str, strerror(errno));
+  exit(errno);
+}
+
+</code></pre><ul>
+<li>
+<p>예제 프로그램은 프로그램 실행시에 호스트 이름을 입력 인자로 받는다.</p>
+</li>
+<li>
+<p>프로그램 실행 시 입력받은 호스트 이름 문자열을 이용하여 <code>gethostbyname</code> 함수를 실행한다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267">네트워크 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

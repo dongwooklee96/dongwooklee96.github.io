@@ -6,7 +6,228 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 01 Aug 2021 21:46:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Aug 2021 23:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>IP 주소 변환</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/01/ip-%EC%A3%BC%EC%86%8C-%EB%B3%80%ED%99%98.html</link>
+      <pubDate>Sun, 01 Aug 2021 23:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/01/ip-%EC%A3%BC%EC%86%8C-%EB%B3%80%ED%99%98.html</guid>
+      <description>&lt;h3 id=&#34;주소-변환&#34;&gt;주소 변환&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그램이 사용자에게 입력받는 주소는 &lt;code&gt;Dotted-Decimal&lt;/code&gt; 형태의 문자열인 IP 주소 또는 호스트 이름일 것이다. 따라서 주소를 변환해주어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자가 입력한 IP 주소 문자열을 &lt;code&gt;uint32_t&lt;/code&gt; 형태로 변환시켜주는 작업이 반드시 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;경우에 따라서는 &lt;code&gt;IP&lt;/code&gt; 주소를 다시 문자열 형태로 변환시키는 작업도 필요할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;아래는 주소를 변환할 수 있는 API 이다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;함수&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;int inet_addr(const char *cp)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;cp 문자열 IP 주소를 네트워크 바이트 순서 &lt;code&gt;in_addr_t&lt;/code&gt;로 반환&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;int inet_network(const char *cp)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;cp 문자열 IP 주소를 호스트 바이트 순서 &lt;code&gt;in_addr_t&lt;/code&gt;로 반환&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;int inet_aton(const char *cp, strcut in_addr *inp)&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;cp 문자열 IP 네트워크 바이트 순서 &lt;code&gt;inp&lt;/code&gt;로 변환&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;char *inet_ntoa(struct in_addr in);&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;네트워크 바이트 순서로 된 &lt;code&gt;in_addr&lt;/code&gt;구조체 주소에서 IP 주소 문자열 반환&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;int inet_pton(int af, const char *src, void *dst);&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;af&lt;/code&gt; 인자로 3계층 프로토콜 선택 가능, &lt;code&gt;src&lt;/code&gt; 문자열 주소를 &lt;code&gt;dst&lt;/code&gt;로 변환&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;af&lt;/code&gt; 인자로 3계층 프로토콜을 선택 가능, &lt;code&gt;src&lt;/code&gt; 주소 구조체를 문자열 주소로 변환&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;ip-주소를-정수로-변환하여-출력하는-예제&#34;&gt;IP 주소를 정수로 변환하여 출력하는 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+
+int main(int argc, char** argv) {
+  uint32_t ip_int;
+  char *ip_str = &amp;quot;127.0.0.1&amp;quot;;
+
+  ip_int = inet_network(ip_str);
+
+  printf(&amp;quot;string: %s, decimal: %u, hex: %x\n&amp;quot;,
+    ip_str, ip_int, ip_int);
+
+  ip_int = htonl(ip_int);
+  printf(&amp;quot;after htonl - decimal: %u, hex: %x \n&amp;quot;,
+    ip_int, ip_int);
+
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;inet_network&lt;/code&gt; 함수를 이용하여 문자열로 된 &lt;code&gt;IP&lt;/code&gt; 주소를 &lt;code&gt;uint32_t&lt;/code&gt; 타입 변수에 호스트 바이트 순서로 저장한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;htonl&lt;/code&gt; 함수를 이용하여 호스트 바이트 순서로 되어 있는 주소를 네트워크 바이트 순서로 변경한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;주소-변환-함수-예제&#34;&gt;주소 변환 함수 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+
+int print_addr(struct sockaddr_in *);
+
+int main(char argc, char* argv[]) {
+
+  char *sample_ip = &amp;quot;127.0.0.1&amp;quot;;
+
+  int port = 9002;
+
+  struct sockaddr_in sock_addr1, sock_addr2, sock_addr3;
+
+  sock_addr1.sin_family = AF_INET;
+  sock_addr1.sin_addr.s_addr = inet_addr(sample_ip);
+  sock_addr1.sin_port = htons(port);
+
+  sock_addr2.sin_family = AF_INET;
+  inet_aton(sample_ip, &amp;amp;(sock_addr2.sin_addr));
+  sock_addr2.sin_port = htons(port);
+
+  sock_addr2.sin_family = AF_INET;
+  inet_aton(sample_ip, &amp;amp;(sock_addr2.sin_addr));
+  sock_addr2.sin_port = htons(port);
+
+  sock_addr3.sin_family = AF_INET;
+  inet_pton(AF_INET, sample_ip, &amp;amp;(sock_addr3.sin_addr));
+  sock_addr3.sin_port = htons(port);
+
+  print_addr(&amp;amp;sock_addr1);
+  print_addr(&amp;amp;sock_addr2);
+  print_addr(&amp;amp;sock_addr3);
+
+  printf(&amp;quot;===== ntoa =====\n&amp;quot;);
+  printf(&amp;quot;IP: %s \n&amp;quot;, inet_ntoa(sock_addr1.sin_addr));
+  printf(&amp;quot;IP: %s \n&amp;quot;, inet_ntoa(sock_addr2.sin_addr));
+  printf(&amp;quot;IP: %s \n&amp;quot;, inet_ntoa(sock_addr3.sin_addr));
+  return 0;
+}
+
+int print_addr(struct sockaddr_in *address) {
+  int port;
+  char txt[INET_ADDRSTRLEN];
+  port = ntohs(address-&amp;gt;sin_port);
+  inet_ntop(AF_INET, &amp;amp;(((struct sockaddr_in *) address) -&amp;gt; sin_addr), txt, sizeof(struct sockaddr_in));
+  printf(&amp;quot;ip: %s, port: %d \n&amp;quot;, txt, address-&amp;gt;sin_port);
+  return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;호스트-이름과-ip-주소&#34;&gt;호스트 이름과 IP 주소&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;실제로 우리가 작성하는 프로그램은 &lt;code&gt;IP&lt;/code&gt; 주소 문자열보다 호스트 이름을 인자로 받을 확률이 높다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;호스트 이름 문자열을 &lt;code&gt;IP&lt;/code&gt; 주소로 변환하는 과정은 단순 변환이 아니다. 네임 서버에 해당 내용을 조회하고 그 결과값을 알려주는 과정이 포함된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;netdb.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+struct hosten *gethostbyname(const char *name);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;호스트 이름을 네임서버에 조회하여 성공하면 네임 서버는 여러 가지 정보를 제공한다. 이 정보를 저장하기 위해서는 &lt;code&gt;hostent&lt;/code&gt; 라는 구조체가 사용된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;struct hostent {
+  char *h_name; // 호스트의 공식 이름
+  char **h_aliases; // 가명 리스트 (마지막 인자는 NULL)
+  int h_addrtype; // 호스트 주소 타입 (IPv4, IPv6)
+  int h_length; // 주소의 길이
+  char **h_addr_list; // 주소 리스트 (마지막 인자는 NULL)
+}
+#define h_addr h_addr_list[0]; // 주소 중 첫 번째 엔트리
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;여러가지 정보 중에 우리가 관심 있는 것은 IP 주소이다. IP 주소는 &lt;code&gt;gethostbyname&lt;/code&gt; 하뭇의 실행 결과 얻을 수 있는 &lt;code&gt;hostent&lt;/code&gt; 구조체의 멤버 변수 중에서 주소 리스트인 &lt;code&gt;h_addr_list&lt;/code&gt;를 통해서 얻어올 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;호스트-이름으로-ip-주소를-조회하는-예제&#34;&gt;호스트 이름으로 &lt;code&gt;IP&lt;/code&gt; 주소를 조회하는 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;netdb.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+void err_proc(const char *);
+
+int main(int argc, char *argv[]) {
+  struct hostent *ent;
+  struct in_addr **res;
+  int i = 0;
+
+  if (argc != 2) {
+    fprintf(stderr, &amp;quot;usage: %s &amp;lt;hostname&amp;gt; \n&amp;quot;, argv[0]);
+    return -1;
+  }
+
+  ent = gethostbyname(argv[1]);
+  if (ent == NULL) err_proc(&amp;quot;gethostbyname&amp;quot;);
+
+  res = (struct in_addr **) ent-&amp;gt;h_addr_list;
+  printf(&amp;quot;hostname: %s \n&amp;quot;, ent-&amp;gt;h_name);
+  while(res[i] != NULL) {
+    printf(&amp;quot;%s&amp;quot;, inet_ntoa(*res[i]));
+    i++;
+  }
+  printf(&amp;quot;\n&amp;quot;);
+}
+
+void err_proc(const char *str) {
+  fprintf(stderr, &amp;quot;%s: %s\n&amp;quot;, str, strerror(errno));
+  exit(errno);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;예제 프로그램은 프로그램 실행시에 호스트 이름을 입력 인자로 받는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로그램 실행 시 입력받은 호스트 이름 문자열을 이용하여 &lt;code&gt;gethostbyname&lt;/code&gt; 함수를 실행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267&#34;&gt;네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>GREP 명령어 만들기 및 정규표현식</title>
       <link>https://dongwooklee96.github.io/post/2021/08/01/grep-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D.html</link>
