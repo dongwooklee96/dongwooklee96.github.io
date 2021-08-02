@@ -6,7 +6,65 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 02 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Tue, 03 Aug 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/03/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://minieetea.com/2021/04/archives/6193&#34;&gt;잘 정리된 이력서보다 중요한 것&lt;/a&gt; 이전에 보았던 글인데 다시 보니 새로웠다. 최근에 구글 인공지능 교육 지원이나 오픈 소스 컨트리뷰톤을 지원하였는데, 지원서를 작성하는데도 많은 도움이 되는 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://medium.com/musinsa-tech/map-416b5f143943&#34;&gt;무신사가 검색 품질을 관리하는 방법&lt;/a&gt; 로그 수집 및 분석을 어떻게 하는지 알 수 있는 좋은 글이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://meetup.toast.com/posts/294&#34;&gt;모킹 통합관리와 cypress의 모킹 on/off 기능&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://josephg.com/blog/crdts-go-brrr/&#34;&gt;더 빠른 CRDT를 위해 최적화하기&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://channel.io/ko/blog/crdt_vs_ot&#34;&gt;https://channel.io/ko/blog/crdt_vs_ot&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프론트 개발을 하다 보면, 모킹 데이터를 사용할 때가 많은데, 모킹 데이터를 관리할 수 있는 좋은 방법을 제시한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;컨플루언스를 사용할 때, 실시간으로 데이터가 동기화되서 여러명이서 협력할 수 있는 것을 알 수 있었는데, 이러한 기술에 사용되는 알고리즘중에하나가, CRDT 또는 OT라는 것을 알게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오늘 업무시간에 마이그레이션 관련 작업을 마무리 할 것이다. (08:00 ~ 17:00)&lt;/li&gt;
+&lt;li&gt;업무가 끝나고 코딩 테스트 문제를 풀 것이다. (17:00 ~ 18:00)&lt;/li&gt;
+&lt;li&gt;코딩 테스트 문제를 제출하고 나서, 소켓 프로그래밍에 대해서 공부를 할 것이다. (20:00 ~ 22:00)&lt;/li&gt;
+&lt;li&gt;토이 프로젝트를 할 것이다. (22:00 ~ 24:00) API 설계 및 여행자등록 관련된 부분을 작업할 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;항상 건강하고 자신감 있게 살자.&lt;/li&gt;
+&lt;li&gt;내가 이루고 싶은 삶의 목표를 향해서 나아가자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/08/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
