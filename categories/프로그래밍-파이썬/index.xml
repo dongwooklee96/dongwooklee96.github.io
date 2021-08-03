@@ -6,7 +6,145 @@
     <description>Recent content in 프로그래밍 - 파이썬 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 06 Mar 2021 13:15:35 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Aug 2021 20:00:13 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬 리스트에서 중복된 요소를 제거하는 방법들 및 성능 비교 </title>
+      <link>https://dongwooklee96.github.io/post/2021/08/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EC%97%90%EC%84%9C-%EC%A4%91%EB%B3%B5%EB%90%9C-%EC%9A%94%EC%86%8C%EB%A5%BC-%EC%A0%9C%EA%B1%B0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EB%93%A4-%EB%B0%8F-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90.html</link>
+      <pubDate>Tue, 03 Aug 2021 20:00:13 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EC%97%90%EC%84%9C-%EC%A4%91%EB%B3%B5%EB%90%9C-%EC%9A%94%EC%86%8C%EB%A5%BC-%EC%A0%9C%EA%B1%B0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EB%93%A4-%EB%B0%8F-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90.html</guid>
+      <description>&lt;h3 id=&#34;리스트에서-중복된-요소를-제거하는-방법&#34;&gt;리스트에서 중복된 요소를 제거하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;리스트에서 중복된 요소를 제거하는 방법에는 크게 두 가지가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;1. 자료구조 SET을 이용하는 방법
+2. 딕셔너리를 이용하는 방법
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;첫-번째-방법---set-자료구조-이용&#34;&gt;첫 번째 방법 - SET() 자료구조 이용&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;파이썬에서는 중복된 요소를 허용하지 않는 &lt;a href=&#34;https://docs.python.org/3/tutorial/datastructures.html#sets&#34;&gt;SET&lt;/a&gt; 이라는 자료구조가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;] 
+
+sets &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; set(nums) &lt;span style=&#34;color:#75715e&#34;&gt;# 결과: {1, 2, 3, 4, 5, 7, 8,  9}&lt;/span&gt;
+
+list(sets) &lt;span style=&#34;color:#75715e&#34;&gt;# 결과: [1, 2, 3, 4, 5, 7, 8, 9]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;중복이 제거된 집합을 생성하고나서, 이를 다시 리스트로 변환하면 중복이 제거된 리스트가 반환된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ydzu7eos858oslr/Screen%20Shot%202021-08-03%20at%209.23.47%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;공식 문서를 살펴보면, &lt;code&gt;set()&lt;/code&gt;은 순서를 보장하지 않는 컬렉션이며, 중복을 허용하지 않는다고 되어있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;두-번째-방법---딕셔너리를-이용하는-방법&#34;&gt;두 번째 방법 - 딕셔너리를 이용하는 방법&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;두 번째 방법은 딕셔너리의 키가 고유하다는 특성을 이용하여 중복을 제거하는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+
+list(set(dict&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fromkeys(nums))) &lt;span style=&#34;color:#75715e&#34;&gt;# 결과: [1, 3, 5, 7, 9, 2, 4, 6]&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;SET&lt;/code&gt;을 이용한 방법과 차이점은 중복된 요소를 제거하더라도, 순서를 유지한다는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;딕셔너리 자료구조는 중복된 키 값이 입력되었을 때 값만 덮어쓰여지고 키 값은 유지하는 특성을 이용한 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8h17mdl4w4xx9tt/Screen%20Shot%202021-08-03%20at%209.46.47%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.python.org/3/library/stdtypes.html#dict.fromkeys&#34;&gt;&lt;code&gt;fromkeys()&lt;/code&gt;&lt;/a&gt; 는 반복 가능한 값을 인자로 받아, 키로 사용한다 그리고 그 키 값으로 새로운 딕셔너리 타입을 만드는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; nums1 &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;]
+&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; dict&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fromkeys(nums1)
+{&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;None&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;사용가능한 버전에는 키만 인자로 받는 버전과, 키와 값을 둘다 받는 버전이 있는데 인자로 키만 주어질 경우 키 값만 생성되고 키에 대한 값들은 모두 &lt;code&gt;None&lt;/code&gt;으로 설정된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/uje9m9lacxpkvi3/Screen%20Shot%202021-08-03%20at%209.40.13%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;딕셔너리에서 &lt;code&gt;list(d)&lt;/code&gt;를 수행하였을 때 딕셔너리에 존재하는 모든 키들이 삽입 순서대로 반환된다고 되어 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;따라서 리스트의 순서를 유지하고 싶으면, 딕셔너리를 이용하여 중복 요소를 제거하는 것이 좋다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;성능-비교&#34;&gt;성능 비교&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그렇다면 순서를 보장하지 않아도 되는 리스트에서 중복을 제거할 때 어떤 것이 더 좋을까?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 알아보기 위해서 성능을 비교해보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;pip install pytest-benchmark
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;우선 성능 비교를 위해서 &lt;code&gt;pytest-benchmark&lt;/code&gt; 모듈을 설치한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; time
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; random
+
+&lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; pytest
+
+nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;))
+
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mark&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;benchmark(
+    group&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;group-name&amp;#34;&lt;/span&gt;,
+    min_rounds&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;,
+    timer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time,
+    disable_gc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;,
+    warmup&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_use_dict&lt;/span&gt;(benchmark):
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@benchmark&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;func1&lt;/span&gt;():
+        list(dict&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fromkeys(nums))
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mark&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;benchmark(
+    group&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;group-name&amp;#34;&lt;/span&gt;,
+    min_rounds&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;,
+    timer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time,
+    disable_gc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;,
+    warmup&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;
+)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;test_use_set&lt;/span&gt;(benchmark):
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;@benchmark&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;func2&lt;/span&gt;():
+        list(set(nums))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;맨 위에서 랜덤으로 1 ~ 100 사이의 정수 리스트를 만들어 준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 코드는 &lt;code&gt;SET()&lt;/code&gt;과 딕셔너리를 이용하여, 리스트에서 중복된 요소를 제거하는 함수를 벤치마크 한 결과이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각각 10,000,000 번씩 돌린 결과의 수치들을 뽑아내었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/k8bl4heg0d9vab6/Screen%20Shot%202021-08-03%20at%2011.37.18%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;랜덤으로 생성된 리스트의 특성에 따라서 차이가 심할 수 있으므로 평균, 표준 편차, 중앙값이 의미가 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;딕셔너리를 이용하는 것보다 &lt;code&gt;SET&lt;/code&gt;을 사용하는 것이 중복된 원소를 훨씬 빠르게 제거할 수 있다는 것을 확인할 수 있다. 다만 리스트의 순서를 유지할 필요가 없는 경우에 사용할 수 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.pytest.org/en/6.2.x/contents.html&#34;&gt;pytest - doc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/7961363/removing-duplicates-in-lists/24554087&#34;&gt;stackoverflow&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>파이썬 itertools 모듈의 group by 함수</title>
       <link>https://dongwooklee96.github.io/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC-itertools-%EB%AA%A8%EB%93%88%EC%9D%98-group-by-%ED%95%A8%EC%88%98.html</link>

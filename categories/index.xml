@@ -6,7 +6,16 @@
     <description>Recent content in Categories on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 03 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Aug 2021 20:00:13 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>프로그래밍 - 파이썬</title>
+      <link>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</link>
+      <pubDate>Tue, 03 Aug 2021 20:00:13 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>회고</title>
       <link>https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0.html</link>
@@ -229,15 +238,6 @@
       <pubDate>Sat, 13 Mar 2021 13:40:33 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/categories/%EB%94%94%EC%9E%90%EC%9D%B8-%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>프로그래밍 - 파이썬</title>
-      <link>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</link>
-      <pubDate>Sat, 06 Mar 2021 13:15:35 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</guid>
       <description></description>
     </item>
     
