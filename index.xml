@@ -6,7 +6,282 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 09 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 09 Aug 2021 22:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UDP 소켓 프로그래밍</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/09/udp-%EC%86%8C%EC%BC%93-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</link>
+      <pubDate>Mon, 09 Aug 2021 22:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/09/udp-%EC%86%8C%EC%BC%93-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</guid>
+      <description>&lt;h3 id=&#34;udp-소켓-프로그래밍&#34;&gt;UDP 소켓 프로그래밍&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;UDP&lt;/code&gt;에서는 &lt;code&gt;TCP&lt;/code&gt;에서 제공하는 신뢰적인 정보 전달, 순차적인 정보 전달, 흐름 제어, 혼잡 제어와 같은 서비스를 제공하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대신 포트번호를 사용하여 데이터를 올바른 프로세스에게 전달해주는 서비스, 즉 전송 계층 프로토콜이 제공해주는 서비스 중 필 수 서비스만을 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;TCP&lt;/code&gt;는 위에서 나열한 서비스를 제공하기 위해서 &lt;code&gt;TCP&lt;/code&gt; 모듈 간의 정보를 공유해야하고 이를 위해 결국 네트워크 자원을 소모한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그에 비해서 &lt;code&gt;UDP&lt;/code&gt;는 카운터 파트들 사이에 정보를 공유할 필요가 없으니 그만큼 가볍다고 볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;udp&#34;&gt;UDP&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;UDP&lt;/code&gt;는 전송 계층 프로토콜의 핵심 기능인 호스트 안에서의 프로세스 식별을 통한 데이터 배달만을 수행하는 프로토콜이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 &lt;code&gt;TCP&lt;/code&gt; 처럼 안정적이고 순차적인 데이터 전달을 보장하지 않으며, 흐름제어와 혼잡 제어를 수행하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;헤더 구조가 단순하며, 주로 동영상 스트리밍, 인터넷 전화와 같은 실시간 응용에 많이 사용된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;TCP&lt;/code&gt;는 소켓을 생성하고 연결을 한 이후에 통신이 가능하다, 또한 전송되는 &lt;code&gt;TCP&lt;/code&gt; 세그먼트의 성공적인 전달 여부를 확인하기 위해서 수신자 &lt;code&gt;TCP&lt;/code&gt; 모듈은 &lt;code&gt;ACK&lt;/code&gt; 세그먼트를 추가적으로 전달한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;UDP&lt;/code&gt;의 경우 전송할 데이터가 생기면 바로 상대방 &lt;code&gt;UDP&lt;/code&gt; 모듈로 전송을 시도한다. 응용 계층으로부터 의뢰받은 데이터에 &lt;code&gt;UDP&lt;/code&gt; 포트 넘버가 적혀있는 &lt;code&gt;UDP&lt;/code&gt; 헤더만을 붙인 이후에 바로 네트워크 계층에 전송 서비스를 의뢰한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;udp-헤더&#34;&gt;UDP 헤더&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/twjz782l8j32syf/download.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SOURCE PORT, DESTINATION PORT:&lt;/strong&gt; 출발지 포트와, 목적지 포트인 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;UDP&lt;/strong&gt; 데이터 그램의 크기를 나타낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CHECK SUM&lt;/strong&gt; 데이터 무결성 검사를 위한 체크섬&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;udp-소켓&#34;&gt;UDP 소켓&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;UDP&lt;/strong&gt;는 연결지향적이지 않기 때문에, 송신자와 수신자 간의 연결과 연결 종료 절차가 없을 것이고 소켓에 수신자와 송신자 쌍에 대한 정보도 없을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 읽기 쓰기를 할 때는 상대방의 주소 정보를 항상 포함해야 될 것이다. 또한 주고 받는 데이터를 바이트 스트림으로 취급하는 &lt;strong&gt;TCP&lt;/strong&gt;와는 다르게 &lt;strong&gt;UDP&lt;/strong&gt;는 하나의 데이터그램 단위로 읽기/쓰기 작업을 진행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;UDP 소켓의 특징&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;연결 / 연결 종료 절차가 없음&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;소켓에 수신자, 송신자 쌍에 대한 정보를 저장하지 않음&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터그램 단위로 읽기/쓰기 진행&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;udp-서버-클라이언트-모델&#34;&gt;UDP 서버 클라이언트 모델&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;소켓-생성&#34;&gt;소켓 생성&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;전송 계층 프로토콜로 &lt;strong&gt;UDP&lt;/strong&gt;를 사용하려면, &lt;code&gt;socket&lt;/code&gt; 함수의 인자를 다음과 같이 설정해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+socket (AF_INET, SOCK_DGRAM, 0);
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;데이터-전송&#34;&gt;데이터 전송&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;소켓 전용 입출력 함수인 &lt;code&gt;sendto&lt;/code&gt;를 이용하여 &lt;strong&gt;UDP&lt;/strong&gt; 데이터그램을 전송하는 것이 가능하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+
+ssize_t sendto (
+    int sockfd,
+    const void *buf,
+    size_t len,
+    int flags,
+    const struct sockaddr *dest_addr,
+    socklen_t addrlen
+    )
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;파라미터에 대한 자세한 설명은 아래와 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;sockfd&lt;/strong&gt;: 소켓의 파일 디스크립터&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;buf&lt;/strong&gt;: 전송할 데이어가 저장되어 있는 곳의 첫 주소&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;len&lt;/strong&gt;: 전송할 데이터의 최대 길이&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;flags&lt;/strong&gt;: 부가적인 기능을 설정할 수 있는 플래그&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;dest_addr&lt;/strong&gt;: 목적지 주소&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;addrlen&lt;/strong&gt;: 목적지 주소 공간의 크기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sendto()&lt;/code&gt; 함수는 목적지의 주소를 인자로 받는다. 여기서 다음과 같은 의문이 생길 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;소켓의 출발지 주소는 어떻게 설정하는가?
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+
+void error_proc(const char*);
+
+int main(int argc, char *argv[]) {
+  int my_sock, read_len, n_sent;
+  char buff[BUFSIZ];
+  struct sockaddr_in dest_addr;
+  socklen_t addr_len;
+
+  my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+  if (my_sock == -1) error_proc(&amp;quot;socket&amp;quot;);
+  memset(&amp;amp;dest_addr, 0, sizeof(dest_addr));
+  dest_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  dest_addr.sin_family = AF_INET;
+  dest_addr.sin_port = htons(atoi(argv[2]));
+  addr_len = sizeof(dest_addr);
+
+  while(1) {
+    fgets(buff, BUFSIZ - 1, stdin);
+    read_len = strlen(buff);
+    n_sent = sendto(my_sock, buff, read_len, 0, (struct sockaddr *) &amp;amp;dest_addr,
+addr_len);
+    printf(&amp;quot;%d bytes were sent. \n&amp;quot;, n_sent);
+  }
+  return 0;
+}
+
+void error_proc(const char* str) {
+  fprintf(stderr, &amp;quot;%s: %s \n&amp;quot;, str, strerror(errno));
+  exit(1);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;다음 예제를 실행하고 패킷을 캡처해본면 다음과 같은 사실을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;출발지 주소를 설정하지 않고 &lt;code&gt;sendto&lt;/code&gt; 함수를 호출한 경우, 소켓에 자동으로 IP 주소와 포트번호가 할당된다.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;데이터-수신&#34;&gt;데이터 수신&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+
+ssize_t recvfrom (
+  int socketfd,
+  void *buf,
+  size_t len,
+  int flags,
+  struct sockaddr *src_addr,
+  socklen_t *addrlen
+)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;파라미터에 대한 자세한 설명은 아래와 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;sockfd&lt;/strong&gt;: 소켓의 파일 디스크립터&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;buf&lt;/strong&gt;: 수신할 데이어가 저장될 곳의 첫 주소&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;len&lt;/strong&gt;: 수신할 데이터의 최대 길이&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;flags&lt;/strong&gt;: 부가적인 기능을 설정할 수 있는 플래그&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;src_addr&lt;/strong&gt;: 출발지 주소를 저장할 구조체의 주소&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;addrlen&lt;/strong&gt;: 출발지 주소 공간의 크기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;앞에서 작성한 데이터 전송 프로그램과 통신이 가능한 데이터 수신 프로그램을 만들기 위해서는 수신 프로그램의 포트번호와 전송 프로그램의 목적지 포트가 일치해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 수신 측에서는 &lt;strong&gt;소켓에 주소를 설정해야한다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;주소의 설정을 위해서 &lt;code&gt;TCP&lt;/code&gt; 소켓과 마찬가지로 &lt;code&gt;bind&lt;/code&gt; 함수를 이용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bind&lt;/code&gt; 함수를 이용하여 소켓에 주소 정보를 설정한 후 &lt;code&gt;recvfrom&lt;/code&gt; 함수를 호출하는 형태로 프로그램을 진행해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;전송 프로그램이 sendto 함수의 인자로 전달하는 포트번호 = 수신 프로그램이 bind 함수의 인자로 전달하는 포트번호&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;따라서 수신 프로그램은 다음의 흐름으로 진행된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;소켓 생성(socket) -&amp;gt; 소켓에 주소 설정(bind) -&amp;gt; recvfrom 함수 호출(recvfrom)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;수신-프로그램-예제&#34;&gt;수신 프로그램 예제&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+void error_proc(const char*);
+
+int main(int argc, char **argv) {
+  int my_sock, read_len, n_recv, res;
+  char buff[BUFSIZ];
+
+  struct sockaddr_in src_addr, dest_addr;
+  socklen_t addr_len;
+
+  if (argc != 2) {
+    fprintf(stderr, &amp;quot;usage: %s port&amp;quot;, argv[0]);
+    return 0;
+  }
+
+  my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+  if (my_sock == -1) error_proc(&amp;quot;socket&amp;quot;);
+
+  memset(&amp;amp;src_addr, 0, sizeof(src_addr));
+  src_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  src_addr.sin_family = AF_INET;
+  src_addr.sin_port = htons(atoi(argv[1]));
+
+  res = bind(my_sock, (struct sockaddr *)&amp;amp;src_addr, sizeof(src_addr));
+
+  if (res == -1) error_proc(&amp;quot;bind&amp;quot;);
+
+  addr_len = sizeof(dest_addr);
+
+  while(1) {
+    n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0, (struct sockaddr *)&amp;amp;dest_addr, &amp;amp;addr_len);
+  if (n_recv == -1) error_proc(&amp;quot;recv_from&amp;quot;);
+  printf(&amp;quot;%d bytes were recv. \n&amp;quot;, n_recv);
+  }
+  return 0;
+}
+
+void error_proc(const char *str) {
+  fprintf(stderr, &amp;quot;%s: %s\n&amp;quot;, str, strerror(errno));
+  exit(1);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;전송-측-화면&#34;&gt;전송 측 화면&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/i5c8w5mne3it4ya/Screen%20Shot%202021-08-09%20at%2011.28.45%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;수신측-화면&#34;&gt;수신측 화면&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/5tviz2rngz6aj6u/Screen%20Shot%202021-08-09%20at%2011.26.43%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267&#34;&gt;네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/08/09/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>

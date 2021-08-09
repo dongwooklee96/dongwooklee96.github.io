@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>UDP 소켓 프로그래밍 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">UDP 소켓 프로그래밍</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/08/09</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="udp-소켓-프로그래밍">UDP 소켓 프로그래밍</h3>
+<hr>
+<ul>
+<li>
+<p><code>UDP</code>에서는 <code>TCP</code>에서 제공하는 신뢰적인 정보 전달, 순차적인 정보 전달, 흐름 제어, 혼잡 제어와 같은 서비스를 제공하지 않는다.</p>
+</li>
+<li>
+<p>대신 포트번호를 사용하여 데이터를 올바른 프로세스에게 전달해주는 서비스, 즉 전송 계층 프로토콜이 제공해주는 서비스 중 필 수 서비스만을 제공한다.</p>
+</li>
+<li>
+<p><code>TCP</code>는 위에서 나열한 서비스를 제공하기 위해서 <code>TCP</code> 모듈 간의 정보를 공유해야하고 이를 위해 결국 네트워크 자원을 소모한다.</p>
+</li>
+<li>
+<p>그에 비해서 <code>UDP</code>는 카운터 파트들 사이에 정보를 공유할 필요가 없으니 그만큼 가볍다고 볼 수 있다.</p>
+</li>
+</ul>
+<h3 id="udp">UDP</h3>
+<hr>
+<ul>
+<li>
+<p><code>UDP</code>는 전송 계층 프로토콜의 핵심 기능인 호스트 안에서의 프로세스 식별을 통한 데이터 배달만을 수행하는 프로토콜이다.</p>
+</li>
+<li>
+<p>따라서 <code>TCP</code> 처럼 안정적이고 순차적인 데이터 전달을 보장하지 않으며, 흐름제어와 혼잡 제어를 수행하지 않는다.</p>
+</li>
+<li>
+<p>헤더 구조가 단순하며, 주로 동영상 스트리밍, 인터넷 전화와 같은 실시간 응용에 많이 사용된다.</p>
+</li>
+<li>
+<p><code>TCP</code>는 소켓을 생성하고 연결을 한 이후에 통신이 가능하다, 또한 전송되는 <code>TCP</code> 세그먼트의 성공적인 전달 여부를 확인하기 위해서 수신자 <code>TCP</code> 모듈은 <code>ACK</code> 세그먼트를 추가적으로 전달한다.</p>
+</li>
+<li>
+<p><code>UDP</code>의 경우 전송할 데이터가 생기면 바로 상대방 <code>UDP</code> 모듈로 전송을 시도한다. 응용 계층으로부터 의뢰받은 데이터에 <code>UDP</code> 포트 넘버가 적혀있는 <code>UDP</code> 헤더만을 붙인 이후에 바로 네트워크 계층에 전송 서비스를 의뢰한다.</p>
+</li>
+</ul>
+<h3 id="udp-헤더">UDP 헤더</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/twjz782l8j32syf/download.png" alt=""></p>
+<ul>
+<li>
+<p><strong>SOURCE PORT, DESTINATION PORT:</strong> 출발지 포트와, 목적지 포트인 것을 확인할 수 있다.</p>
+</li>
+<li>
+<p><strong>UDP</strong> 데이터 그램의 크기를 나타낸다.</p>
+</li>
+<li>
+<p><strong>CHECK SUM</strong> 데이터 무결성 검사를 위한 체크섬</p>
+</li>
+</ul>
+<h3 id="udp-소켓">UDP 소켓</h3>
+<hr>
+<ul>
+<li>
+<p><strong>UDP</strong>는 연결지향적이지 않기 때문에, 송신자와 수신자 간의 연결과 연결 종료 절차가 없을 것이고 소켓에 수신자와 송신자 쌍에 대한 정보도 없을 것이다.</p>
+</li>
+<li>
+<p>따라서 읽기 쓰기를 할 때는 상대방의 주소 정보를 항상 포함해야 될 것이다. 또한 주고 받는 데이터를 바이트 스트림으로 취급하는 <strong>TCP</strong>와는 다르게 <strong>UDP</strong>는 하나의 데이터그램 단위로 읽기/쓰기 작업을 진행한다.</p>
+</li>
+</ul>
+<p><strong>UDP 소켓의 특징</strong></p>
+<ul>
+<li>
+<p>연결 / 연결 종료 절차가 없음</p>
+</li>
+<li>
+<p>소켓에 수신자, 송신자 쌍에 대한 정보를 저장하지 않음</p>
+</li>
+<li>
+<p>데이터그램 단위로 읽기/쓰기 진행</p>
+</li>
+</ul>
+<h3 id="udp-서버-클라이언트-모델">UDP 서버 클라이언트 모델</h3>
+<hr>
+<h4 id="소켓-생성">소켓 생성</h4>
+<ul>
+<li>전송 계층 프로토콜로 <strong>UDP</strong>를 사용하려면, <code>socket</code> 함수의 인자를 다음과 같이 설정해야한다.</li>
+</ul>
+<pre><code>socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+socket (AF_INET, SOCK_DGRAM, 0);
+</code></pre><h4 id="데이터-전송">데이터 전송</h4>
+<ul>
+<li>소켓 전용 입출력 함수인 <code>sendto</code>를 이용하여 <strong>UDP</strong> 데이터그램을 전송하는 것이 가능하다.</li>
+</ul>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+
+ssize_t sendto (
+    int sockfd,
+    const void *buf,
+    size_t len,
+    int flags,
+    const struct sockaddr *dest_addr,
+    socklen_t addrlen
+    )
+</code></pre><ul>
+<li>파라미터에 대한 자세한 설명은 아래와 같다.</li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>sockfd</strong>: 소켓의 파일 디스크립터</li>
+<li><strong>buf</strong>: 전송할 데이어가 저장되어 있는 곳의 첫 주소</li>
+<li><strong>len</strong>: 전송할 데이터의 최대 길이</li>
+<li><strong>flags</strong>: 부가적인 기능을 설정할 수 있는 플래그</li>
+<li><strong>dest_addr</strong>: 목적지 주소</li>
+<li><strong>addrlen</strong>: 목적지 주소 공간의 크기</li>
+</ul>
+</blockquote>
+<ul>
+<li><code>sendto()</code> 함수는 목적지의 주소를 인자로 받는다. 여기서 다음과 같은 의문이 생길 수 있다.</li>
+</ul>
+<pre><code>소켓의 출발지 주소는 어떻게 설정하는가?
+</code></pre><pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;arpa/inet.h&gt;
+
+void error_proc(const char*);
+
+int main(int argc, char *argv[]) {
+  int my_sock, read_len, n_sent;
+  char buff[BUFSIZ];
+  struct sockaddr_in dest_addr;
+  socklen_t addr_len;
+
+  my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+  if (my_sock == -1) error_proc(&quot;socket&quot;);
+  memset(&amp;dest_addr, 0, sizeof(dest_addr));
+  dest_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  dest_addr.sin_family = AF_INET;
+  dest_addr.sin_port = htons(atoi(argv[2]));
+  addr_len = sizeof(dest_addr);
+
+  while(1) {
+    fgets(buff, BUFSIZ - 1, stdin);
+    read_len = strlen(buff);
+    n_sent = sendto(my_sock, buff, read_len, 0, (struct sockaddr *) &amp;dest_addr,
+addr_len);
+    printf(&quot;%d bytes were sent. \n&quot;, n_sent);
+  }
+  return 0;
+}
+
+void error_proc(const char* str) {
+  fprintf(stderr, &quot;%s: %s \n&quot;, str, strerror(errno));
+  exit(1);
+}
+
+</code></pre><ul>
+<li>다음 예제를 실행하고 패킷을 캡처해본면 다음과 같은 사실을 확인할 수 있다.</li>
+</ul>
+<blockquote>
+<p>&ldquo;출발지 주소를 설정하지 않고 <code>sendto</code> 함수를 호출한 경우, 소켓에 자동으로 IP 주소와 포트번호가 할당된다.&rdquo;</p>
+</blockquote>
+<h3 id="데이터-수신">데이터 수신</h3>
+<hr>
+<pre><code>#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+
+ssize_t recvfrom (
+  int socketfd,
+  void *buf,
+  size_t len,
+  int flags,
+  struct sockaddr *src_addr,
+  socklen_t *addrlen
+)
+</code></pre><ul>
+<li>파라미터에 대한 자세한 설명은 아래와 같다.</li>
+</ul>
+<blockquote>
+<ul>
+<li><strong>sockfd</strong>: 소켓의 파일 디스크립터</li>
+<li><strong>buf</strong>: 수신할 데이어가 저장될 곳의 첫 주소</li>
+<li><strong>len</strong>: 수신할 데이터의 최대 길이</li>
+<li><strong>flags</strong>: 부가적인 기능을 설정할 수 있는 플래그</li>
+<li><strong>src_addr</strong>: 출발지 주소를 저장할 구조체의 주소</li>
+<li><strong>addrlen</strong>: 출발지 주소 공간의 크기</li>
+</ul>
+</blockquote>
+<ul>
+<li>
+<p>앞에서 작성한 데이터 전송 프로그램과 통신이 가능한 데이터 수신 프로그램을 만들기 위해서는 수신 프로그램의 포트번호와 전송 프로그램의 목적지 포트가 일치해야 한다.</p>
+</li>
+<li>
+<p>따라서 수신 측에서는 <strong>소켓에 주소를 설정해야한다.</strong></p>
+</li>
+<li>
+<p>주소의 설정을 위해서 <code>TCP</code> 소켓과 마찬가지로 <code>bind</code> 함수를 이용할 수 있다.</p>
+</li>
+<li>
+<p><code>bind</code> 함수를 이용하여 소켓에 주소 정보를 설정한 후 <code>recvfrom</code> 함수를 호출하는 형태로 프로그램을 진행해야 한다.</p>
+</li>
+</ul>
+<blockquote>
+<p>전송 프로그램이 sendto 함수의 인자로 전달하는 포트번호 = 수신 프로그램이 bind 함수의 인자로 전달하는 포트번호</p>
+</blockquote>
+<ul>
+<li>따라서 수신 프로그램은 다음의 흐름으로 진행된다.</li>
+</ul>
+<blockquote>
+<p>소켓 생성(socket) -&gt; 소켓에 주소 설정(bind) -&gt; recvfrom 함수 호출(recvfrom)</p>
+</blockquote>
+<h4 id="수신-프로그램-예제">수신 프로그램 예제</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdlib.h&gt;
+
+void error_proc(const char*);
+
+int main(int argc, char **argv) {
+  int my_sock, read_len, n_recv, res;
+  char buff[BUFSIZ];
+
+  struct sockaddr_in src_addr, dest_addr;
+  socklen_t addr_len;
+
+  if (argc != 2) {
+    fprintf(stderr, &quot;usage: %s port&quot;, argv[0]);
+    return 0;
+  }
+
+  my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+  if (my_sock == -1) error_proc(&quot;socket&quot;);
+
+  memset(&amp;src_addr, 0, sizeof(src_addr));
+  src_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  src_addr.sin_family = AF_INET;
+  src_addr.sin_port = htons(atoi(argv[1]));
+
+  res = bind(my_sock, (struct sockaddr *)&amp;src_addr, sizeof(src_addr));
+
+  if (res == -1) error_proc(&quot;bind&quot;);
+
+  addr_len = sizeof(dest_addr);
+
+  while(1) {
+    n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0, (struct sockaddr *)&amp;dest_addr, &amp;addr_len);
+  if (n_recv == -1) error_proc(&quot;recv_from&quot;);
+  printf(&quot;%d bytes were recv. \n&quot;, n_recv);
+  }
+  return 0;
+}
+
+void error_proc(const char *str) {
+  fprintf(stderr, &quot;%s: %s\n&quot;, str, strerror(errno));
+  exit(1);
+}
+
+</code></pre><h4 id="전송-측-화면">전송 측 화면</h4>
+<p><img src="https://dl.dropbox.com/s/i5c8w5mne3it4ya/Screen%20Shot%202021-08-09%20at%2011.28.45%20PM.png" alt=""></p>
+<h4 id="수신측-화면">수신측 화면</h4>
+<p><img src="https://dl.dropbox.com/s/5tviz2rngz6aj6u/Screen%20Shot%202021-08-09%20at%2011.26.43%20PM.png" alt=""></p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267">네트워크 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
