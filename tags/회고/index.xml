@@ -6,7 +6,66 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 10 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/11/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Wed, 11 Aug 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/11/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=JYd6EHl7i-g&amp;amp;t=171s&#34;&gt;게임프로그래머 실력향상법 자료조사 ver 2.0&lt;/a&gt; 라는 영상을 보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;토이프로젝트는 최소 일주일에 한번은 코드 푸시를 해야한다고 했다. 나도 이를 명심하고 꾸준하게 토이 프로젝트를 통해서 개발을 할 수 있도록 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;어제 리눅스 파운데이션 멘토링 신청서를 작성하면서, 링크드인 프로필을 수정하였다. 나를 어필할 수 있는 좋은 수단인 것 같아서 꾸준히 관리하고 이를 채워나갈 학습 및 해커톤에 많이 참가해야겠다는 생각이 들었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다이내믹 프로그래밍에 대해서 학습을 했는데, 기본적으로 재귀적으로 풀어나갈 수 있는 능력이 필요하다고 생각되었다. 재귀적으로 문제를 풀 수 있도록 많은 연습을 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스 멘토링 마감 기한이 얼마 남지 않아, 아마도 합격하기는 힘들 수도 있지만, 그래도 제출은 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;매일 일과가 끝난후에 간단히 운동을 하려고 했으나 하지 않았다. 차라리 점심시간에 운동을 간단하게 하는것이 좋을 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일과가 끝난 후에, 코딩 테스트 문제를 풀 것이다. (17:00 ~ 18:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 주도 설계 책을 학습 (19:00 ~ 21:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 주도 설계 스터디 참여  (21:00 ~ 24:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;나는 리눅스 커널과, DBMS 분야의 메인 컨트리뷰터가 될 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/08/10/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
