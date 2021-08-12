@@ -329,6 +329,50 @@ void error_proc(const char *str) {
 <p><img src="https://dl.dropbox.com/s/i5c8w5mne3it4ya/Screen%20Shot%202021-08-09%20at%2011.28.45%20PM.png" alt=""></p>
 <h4 id="수신측-화면">수신측 화면</h4>
 <p><img src="https://dl.dropbox.com/s/5tviz2rngz6aj6u/Screen%20Shot%202021-08-09%20at%2011.26.43%20PM.png" alt=""></p>
+<h3 id="다수의-클라이언트-처리">다수의 클라이언트 처리</h3>
+<hr>
+<ul>
+<li>
+<p><code>recvfrom</code> 함수의 특징에 대해서 좀 더 살펴보자면, <code>recvfrom</code>함수를 호출하면 프로그램은 데이터그램이 도착할 때 까지 대기 상태가 된다.</p>
+</li>
+<li>
+<p>데이터그램이 도착하면 <code>recvfrom</code> 함수는 다음 코드로 제어권을 넘기며 전달받은 데이터의 출발지 주소를 알려준다.</p>
+</li>
+<li>
+<p>즉 출발지 주소에 관계없이 자신에게 도착한 데이터그램을 가져온다는 특징이 있다.</p>
+</li>
+<li>
+<p>여기서 알 수 있는 것은 <code>sendto</code> 함수의 목적지도 한 곳으로 정해져 있는 것은 아니라는 점이다.</p>
+</li>
+<li>
+<p><code>sendto</code> 함수의 목적지는 호출 시마다 바뀔 수 있다.</p>
+</li>
+<li>
+<p>다시 정리하면 <code>sendto</code> 함수의 목적지와 <code>recvfrom</code> 함수의 출발지는 호출 시마다 바뀔 수 있다. 이 말은 하나의 소켓으로 여러 호스트 또는 여러 프로세스와 통신할 수 있다는 것을 뜻한다.</p>
+</li>
+</ul>
+<h3 id="connect-함수의-역할">connect 함수의 역할</h3>
+<hr>
+<ul>
+<li>
+<p>UDP 소켓은 <code>sendto</code> 함수나 <code>recvfrom</code> 함수를 호출했을 때만 커널과 연결되므로 함수 호출이 끝나면 소켓과 커널의 연결이 해제된다.</p>
+</li>
+<li>
+<p>커널과 소켓이 연결되고 다시 해제되는 과정에서도 무시하지 못할 만큼의 컴퓨팅 자원이 소모된다.</p>
+</li>
+<li>
+<p>connect 함수는 소켓의 목적지 주소를 설정하여 커널과 소켓을 연결시키는 역할을 한다.</p>
+</li>
+<li>
+<p>따라서 connect 함수를 사용하면 <code>read</code> 함수와 <code>write</code> 함수를 사용할 수 있다. (해당 소켓을 통해서 통신할 수 있는 목적지가 하나로 한정되기 때문에, <code>sendto</code>, <code>recvfrom</code>) 을 사용하지 않아도 된다.</p>
+</li>
+<li>
+<p>데이터 전송 시마다 커널과 소켓 사이의 연결과 연결 해제 과정이 없어서 효율이 좋아진다.</p>
+</li>
+<li>
+<p><code>ICMP</code> 메시지에 대한 통지를 받을 수 있다. (즉 UDP 다이어그램을 수신하는 상대방의 정상동작 여부를 파악할 수 있다.)</p>
+</li>
+</ul>
 <h3 id="참고-문헌">참고 문헌</h3>
 <hr>
 <ul>

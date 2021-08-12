@@ -6,7 +6,267 @@
     <description>Recent content in 네트워크 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 09 Aug 2021 22:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 13 Aug 2021 01:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>멀티 프로세스를 이용한 에코 및 채팅 서버</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/13/%EB%A9%80%ED%8B%B0-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%97%90%EC%BD%94-%EB%B0%8F-%EC%B1%84%ED%8C%85-%EC%84%9C%EB%B2%84.html</link>
+      <pubDate>Fri, 13 Aug 2021 01:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/13/%EB%A9%80%ED%8B%B0-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%97%90%EC%BD%94-%EB%B0%8F-%EC%B1%84%ED%8C%85-%EC%84%9C%EB%B2%84.html</guid>
+      <description>&lt;h3 id=&#34;멀티-프로세스-에코-서버&#34;&gt;멀티 프로세스 에코 서버&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;커널은 파일 디스크립터에 대한 정보를 파일 디스크립터 테이블에 관리한다. 파일 디스크립터 테이블은 프로세스당 하나씩 생성된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파일 디스크립터 테이블은 프로세스당 하나씩 생성된다. 또한 커널은 시스템 상에 열려 있는 모든 열린 파일에 대한 정보를 저장하고 있으며, 시스템당 하나만 존재한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파일 디스크립터 테이블은 열린 파일 테이블에 대한 링크를 가지고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스가 &lt;code&gt;fork()&lt;/code&gt;를 이용하여 자식 프로세스를 생성하면 커널은 자식 프로세스를 위한 파일 디스크립터 테이브을 생성하고, 이때 모든 값이 복사되기 때문에 두 파일 디스크립터 테이블은 같은 값을 가지게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;커널의 열린 파일 테이블 입장에서보면, 하나의 열린 파일 엔트리를 가리키는 파일 디스크립터 테이블의 엔트리가 두개 가 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 상황에서, 하나의 프로세스가 &lt;code&gt;close()&lt;/code&gt; 함수를 실행하면 열린 파일을 가리키고 있는 파일 디스크립터 테이블의 엔트리가 존재하는 한 &lt;code&gt;close&lt;/code&gt; 함수는 열린 파일 디스크립터 테이블의 해당 엔트리만 삭제한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+
+void error_proc();
+void error_print();
+
+int main(int argc, char* argv[]) {
+  int server_sd, client_sd;
+  struct sockaddr_in server_addr, client_addr;
+
+  int client_addr_len, read_len;
+  char read_buffer[BUFSIZ];
+  pid_t pid;
+
+  if (argc != 2) {
+    printf(&amp;quot;usage: %s [port] \n&amp;quot;, argv[0]);
+    exit(1);
+  }
+  printf(&amp;quot;server start...\n&amp;quot;);
+
+  server_sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+  if (server_sd == -1) error_proc();
+
+  memset(&amp;amp;server_addr, 0, sizeof(server_addr));
+  server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  server_addr.sin_family = AF_INET;
+  server_addr.sin_port = htons(atoi(argv[1]));
+
+  if (bind(server_sd, (struct sockaddr *)&amp;amp;server_addr, sizeof(server_addr)) == -1) error_proc();
+
+  if (listen(server_sd, 5) &amp;lt; 0) error_proc();
+
+  client_addr_len = sizeof(client_addr);
+
+  while(1) {
+    client_sd = accept(server_sd, (struct sockaddr *)&amp;amp;client_addr, &amp;amp;client_addr_len);
+    if (client_sd == -1) {
+      error_print();
+      continue;
+    }
+    printf(&amp;quot;client %s: %d is connected...\n&amp;quot;, inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
+    pid = fork();
+    if (pid == 0) { /* child process */
+      close(server_sd);
+      while (1) {
+        read_len = read(client_sd, read_buffer, sizeof(read_buffer) - 1);
+        if (read_len == 0) break;
+        read_buffer[read_len] = &#39;\0&#39;;
+        printf(&amp;quot;client (%d): %s\n&amp;quot;, ntohs(client_addr.sin_port), read_buffer);
+        write(client_sd, read_buffer, strlen(read_buffer));
+      }
+      printf(&amp;quot;client (%d) : is disconnected\n&amp;quot;, ntohs(client_addr.sin_port));
+      close(client_sd);
+      return 0;
+    } else if (pid == -1) error_proc(&amp;quot;fork&amp;quot;);
+    else {
+      close(client_sd);
+    }
+  }
+  close(server_sd);
+  return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;간단한-udp-멀티-프로세스-채팅-프로그램&#34;&gt;간단한 UDP 멀티 프로세스 채팅 프로그램&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;채팅 서버의 역할은 다음과 같다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;클라이언트의 접속 처리&lt;/li&gt;
+&lt;li&gt;클라이언트가 전송하는 문자열을 다른 클라이언트들에게 전송&lt;/li&gt;
+&lt;li&gt;클라이언트의 접속 종료 처리&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이 중에서, 클라이언트가 전송하는 문자열을 다른 클라이언트들에게 전송하는 기능은 여러 클라이언트들의 데이터를 하나의 소켓으로 처리할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;recvfrom&lt;/code&gt; 함수를 통해서 전달받은 문자열을 &lt;code&gt;sendto&lt;/code&gt; 함수로 전송한 클라이언트를 제외한 모든 클라이언트 들에게 전송하면 작업을 처리할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;채팅 서버&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+
+#define MAX_CLIENT 10
+
+void error_proc(const char*);
+
+int check_sock_list(struct sockaddr_in *entry, struct sockaddr_in *list, int count);
+
+int main(int argc, char* argv[]) {
+  int my_sock, read_len, n_recv, res;
+  char buff[BUFSIZ];
+  char name_buffer[50];
+  char *str_addr;
+  struct sockaddr_in src_addr, dest_addr;
+
+  socklen_t addr_len;
+  int n_client = 0, i = 0, port;
+  struct sockaddr_in sockets[MAX_CLIENT];
+
+  if (argc != 2) {
+    fprintf(stderr, &amp;quot;usage: %s port&amp;quot;, argv[0]);
+    return 0;
+  }
+
+  memset(&amp;amp;sockets, 0, sizeof(sockets[0])*MAX_CLIENT);
+  my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+  if (my_sock == -1) error_proc(&amp;quot;socket&amp;quot;);
+
+  memset(&amp;amp;src_addr, 0, sizeof(src_addr));
+  src_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  src_addr.sin_family = AF_INET;
+  src_addr.sin_port = htons(atoi(argv[1]));
+
+  res = bind(my_sock, (struct sockaddr*)&amp;amp;src_addr, sizeof(src_addr));
+  if (res == -1) error_proc(&amp;quot;bind&amp;quot;);
+  addr_len = sizeof(dest_addr);
+
+  while (1) {
+    n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0,
+        (struct sockaddr *) &amp;amp;dest_addr, &amp;amp;addr_len);
+    if (n_recv == -1) error_proc(&amp;quot;recvfrom&amp;quot;);
+    res = check_sock_list(&amp;amp;dest_addr, sockets, n_client);
+
+    if (res == n_client) {
+      if (res == MAX_CLIENT) continue;
+      else {
+        memcpy(&amp;amp;sockets[res],
+            &amp;amp;dest_addr, sizeof(dest_addr));
+        n_client++;
+      }
+    }
+    printf(&amp;quot;n_client: %d\n&amp;quot;, n_client);
+    str_addr = inet_ntoa(dest_addr.sin_addr);
+    sprintf(name_buffer, &amp;quot;%s: %d &amp;gt;&amp;gt; &amp;quot;, str_addr, ntohs(dest_addr.sin_port));
+
+    for (i = 0; i &amp;lt; n_client; i++) {
+      if (i == res) continue; // sender == receiver skip
+      sendto(my_sock, name_buffer, strlen(name_buffer), 0, (struct sockaddr *) &amp;amp;sockets[i], addr_len);
+      sendto(my_sock, buff, n_recv, 0, (struct sockaddr *) &amp;amp;sockets[i], addr_len);
+    }
+  }
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;채팅 클라이언트&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;signal.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+void error_proc(const char*);
+
+int main(int argc, char* argv[]) {
+  int my_sock, read_len, n_sent, n_recv;
+  char buff[BUFSIZ];
+  char str_addr;
+  struct sockaddr_in dest_addr;
+  socklen_t addr_len;
+  pid_t pid;
+
+  my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+  memset(&amp;amp;dest_addr, 0, sizeof(dest_addr));
+  dest_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  dest_addr.sin_family = AF_INET;
+  dest_addr.sin_port = htons(atoi(argv[2]));
+  addr_len = sizeof(dest_addr);
+
+  pid = fork();
+  if (pid == -1) error_proc(&amp;quot;fork&amp;quot;);
+  if (pid == 0) {
+    while (1) {
+      n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0, (struct sockaddr*) &amp;amp;dest_addr, &amp;amp;addr_len);
+      if (n_recv == -1) error_proc(&amp;quot;read&amp;quot;);
+      write(1, buff, n_recv);
+    }
+  } else {
+    while (1) {
+      fgets(buff, BUFSIZ - 1, stdin);
+      read_len = strlen(buff);
+      if (read_len == 0) error_proc(&amp;quot;fgets&amp;quot;);
+      n_sent = sendto(my_sock, buff, read_len, 0, (struct sockaddr*) &amp;amp;dest_addr, addr_len);
+      if (n_sent == -1) error_proc(&amp;quot;write&amp;quot;);
+      buff[read_len - 1] = &#39;\0&#39;;
+      if (!strcmp(buff, &amp;quot;END&amp;quot;)) break;
+    }
+    kill(pid, SIGTERM);
+  }
+  return 0;
+}
+
+void error_proc(const char* str) {
+  fprintf(stderr, &amp;quot;%s:%s \n&amp;quot;, str, strerror(errno));
+  exit(1);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;서버 화면&lt;/strong&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/fpxyeusfjxy8d2h/Screen%20Shot%202021-08-13%20at%202.47.58%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;클라이언트1&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/cguiw5wx46zoxjl/Screen%20Shot%202021-08-13%20at%202.47.48%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;클라이언트2&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8f8w1a3j8jrpuf3/Screen%20Shot%202021-08-13%20at%202.47.53%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;클라이언트 간의 통신이 이루어지는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267&#34;&gt;네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>UDP 소켓 프로그래밍</title>
       <link>https://dongwooklee96.github.io/post/2021/08/09/udp-%EC%86%8C%EC%BC%93-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</link>
@@ -274,6 +534,50 @@ void error_proc(const char *str) {
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/i5c8w5mne3it4ya/Screen%20Shot%202021-08-09%20at%2011.28.45%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;수신측-화면&#34;&gt;수신측 화면&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/5tviz2rngz6aj6u/Screen%20Shot%202021-08-09%20at%2011.26.43%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;다수의-클라이언트-처리&#34;&gt;다수의 클라이언트 처리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;recvfrom&lt;/code&gt; 함수의 특징에 대해서 좀 더 살펴보자면, &lt;code&gt;recvfrom&lt;/code&gt;함수를 호출하면 프로그램은 데이터그램이 도착할 때 까지 대기 상태가 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터그램이 도착하면 &lt;code&gt;recvfrom&lt;/code&gt; 함수는 다음 코드로 제어권을 넘기며 전달받은 데이터의 출발지 주소를 알려준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;즉 출발지 주소에 관계없이 자신에게 도착한 데이터그램을 가져온다는 특징이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여기서 알 수 있는 것은 &lt;code&gt;sendto&lt;/code&gt; 함수의 목적지도 한 곳으로 정해져 있는 것은 아니라는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;sendto&lt;/code&gt; 함수의 목적지는 호출 시마다 바뀔 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다시 정리하면 &lt;code&gt;sendto&lt;/code&gt; 함수의 목적지와 &lt;code&gt;recvfrom&lt;/code&gt; 함수의 출발지는 호출 시마다 바뀔 수 있다. 이 말은 하나의 소켓으로 여러 호스트 또는 여러 프로세스와 통신할 수 있다는 것을 뜻한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;connect-함수의-역할&#34;&gt;connect 함수의 역할&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;UDP 소켓은 &lt;code&gt;sendto&lt;/code&gt; 함수나 &lt;code&gt;recvfrom&lt;/code&gt; 함수를 호출했을 때만 커널과 연결되므로 함수 호출이 끝나면 소켓과 커널의 연결이 해제된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;커널과 소켓이 연결되고 다시 해제되는 과정에서도 무시하지 못할 만큼의 컴퓨팅 자원이 소모된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;connect 함수는 소켓의 목적지 주소를 설정하여 커널과 소켓을 연결시키는 역할을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 connect 함수를 사용하면 &lt;code&gt;read&lt;/code&gt; 함수와 &lt;code&gt;write&lt;/code&gt; 함수를 사용할 수 있다. (해당 소켓을 통해서 통신할 수 있는 목적지가 하나로 한정되기 때문에, &lt;code&gt;sendto&lt;/code&gt;, &lt;code&gt;recvfrom&lt;/code&gt;) 을 사용하지 않아도 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터 전송 시마다 커널과 소켓 사이의 연결과 연결 해제 과정이 없어서 효율이 좋아진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ICMP&lt;/code&gt; 메시지에 대한 통지를 받을 수 있다. (즉 UDP 다이어그램을 수신하는 상대방의 정상동작 여부를 파악할 수 있다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;

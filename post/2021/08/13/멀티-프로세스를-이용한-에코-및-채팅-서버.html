@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>멀티 프로세스를 이용한 에코 및 채팅 서버 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">멀티 프로세스를 이용한 에코 및 채팅 서버</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/08/13</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="멀티-프로세스-에코-서버">멀티 프로세스 에코 서버</h3>
+<hr>
+<ul>
+<li>
+<p>커널은 파일 디스크립터에 대한 정보를 파일 디스크립터 테이블에 관리한다. 파일 디스크립터 테이블은 프로세스당 하나씩 생성된다.</p>
+</li>
+<li>
+<p>파일 디스크립터 테이블은 프로세스당 하나씩 생성된다. 또한 커널은 시스템 상에 열려 있는 모든 열린 파일에 대한 정보를 저장하고 있으며, 시스템당 하나만 존재한다.</p>
+</li>
+<li>
+<p>파일 디스크립터 테이블은 열린 파일 테이블에 대한 링크를 가지고 있다.</p>
+</li>
+<li>
+<p>프로세스가 <code>fork()</code>를 이용하여 자식 프로세스를 생성하면 커널은 자식 프로세스를 위한 파일 디스크립터 테이브을 생성하고, 이때 모든 값이 복사되기 때문에 두 파일 디스크립터 테이블은 같은 값을 가지게 된다.</p>
+</li>
+<li>
+<p>커널의 열린 파일 테이블 입장에서보면, 하나의 열린 파일 엔트리를 가리키는 파일 디스크립터 테이블의 엔트리가 두개 가 된다.</p>
+</li>
+<li>
+<p>이 상황에서, 하나의 프로세스가 <code>close()</code> 함수를 실행하면 열린 파일을 가리키고 있는 파일 디스크립터 테이블의 엔트리가 존재하는 한 <code>close</code> 함수는 열린 파일 디스크립터 테이블의 해당 엔트리만 삭제한다.</p>
+</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+void error_proc();
+void error_print();
+
+int main(int argc, char* argv[]) {
+  int server_sd, client_sd;
+  struct sockaddr_in server_addr, client_addr;
+
+  int client_addr_len, read_len;
+  char read_buffer[BUFSIZ];
+  pid_t pid;
+
+  if (argc != 2) {
+    printf(&quot;usage: %s [port] \n&quot;, argv[0]);
+    exit(1);
+  }
+  printf(&quot;server start...\n&quot;);
+
+  server_sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+  if (server_sd == -1) error_proc();
+
+  memset(&amp;server_addr, 0, sizeof(server_addr));
+  server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  server_addr.sin_family = AF_INET;
+  server_addr.sin_port = htons(atoi(argv[1]));
+
+  if (bind(server_sd, (struct sockaddr *)&amp;server_addr, sizeof(server_addr)) == -1) error_proc();
+
+  if (listen(server_sd, 5) &lt; 0) error_proc();
+
+  client_addr_len = sizeof(client_addr);
+
+  while(1) {
+    client_sd = accept(server_sd, (struct sockaddr *)&amp;client_addr, &amp;client_addr_len);
+    if (client_sd == -1) {
+      error_print();
+      continue;
+    }
+    printf(&quot;client %s: %d is connected...\n&quot;, inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
+    pid = fork();
+    if (pid == 0) { /* child process */
+      close(server_sd);
+      while (1) {
+        read_len = read(client_sd, read_buffer, sizeof(read_buffer) - 1);
+        if (read_len == 0) break;
+        read_buffer[read_len] = '\0';
+        printf(&quot;client (%d): %s\n&quot;, ntohs(client_addr.sin_port), read_buffer);
+        write(client_sd, read_buffer, strlen(read_buffer));
+      }
+      printf(&quot;client (%d) : is disconnected\n&quot;, ntohs(client_addr.sin_port));
+      close(client_sd);
+      return 0;
+    } else if (pid == -1) error_proc(&quot;fork&quot;);
+    else {
+      close(client_sd);
+    }
+  }
+  close(server_sd);
+  return 0;
+}
+
+</code></pre><h3 id="간단한-udp-멀티-프로세스-채팅-프로그램">간단한 UDP 멀티 프로세스 채팅 프로그램</h3>
+<hr>
+<p>채팅 서버의 역할은 다음과 같다.</p>
+<ol>
+<li>클라이언트의 접속 처리</li>
+<li>클라이언트가 전송하는 문자열을 다른 클라이언트들에게 전송</li>
+<li>클라이언트의 접속 종료 처리</li>
+</ol>
+<ul>
+<li>
+<p>이 중에서, 클라이언트가 전송하는 문자열을 다른 클라이언트들에게 전송하는 기능은 여러 클라이언트들의 데이터를 하나의 소켓으로 처리할 수 있다.</p>
+</li>
+<li>
+<p><code>recvfrom</code> 함수를 통해서 전달받은 문자열을 <code>sendto</code> 함수로 전송한 클라이언트를 제외한 모든 클라이언트 들에게 전송하면 작업을 처리할 수 있다.</p>
+</li>
+</ul>
+<p><strong>채팅 서버</strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;arpa/inet.h&gt;
+
+#define MAX_CLIENT 10
+
+void error_proc(const char*);
+
+int check_sock_list(struct sockaddr_in *entry, struct sockaddr_in *list, int count);
+
+int main(int argc, char* argv[]) {
+  int my_sock, read_len, n_recv, res;
+  char buff[BUFSIZ];
+  char name_buffer[50];
+  char *str_addr;
+  struct sockaddr_in src_addr, dest_addr;
+
+  socklen_t addr_len;
+  int n_client = 0, i = 0, port;
+  struct sockaddr_in sockets[MAX_CLIENT];
+
+  if (argc != 2) {
+    fprintf(stderr, &quot;usage: %s port&quot;, argv[0]);
+    return 0;
+  }
+
+  memset(&amp;sockets, 0, sizeof(sockets[0])*MAX_CLIENT);
+  my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+  if (my_sock == -1) error_proc(&quot;socket&quot;);
+
+  memset(&amp;src_addr, 0, sizeof(src_addr));
+  src_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  src_addr.sin_family = AF_INET;
+  src_addr.sin_port = htons(atoi(argv[1]));
+
+  res = bind(my_sock, (struct sockaddr*)&amp;src_addr, sizeof(src_addr));
+  if (res == -1) error_proc(&quot;bind&quot;);
+  addr_len = sizeof(dest_addr);
+
+  while (1) {
+    n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0,
+        (struct sockaddr *) &amp;dest_addr, &amp;addr_len);
+    if (n_recv == -1) error_proc(&quot;recvfrom&quot;);
+    res = check_sock_list(&amp;dest_addr, sockets, n_client);
+
+    if (res == n_client) {
+      if (res == MAX_CLIENT) continue;
+      else {
+        memcpy(&amp;sockets[res],
+            &amp;dest_addr, sizeof(dest_addr));
+        n_client++;
+      }
+    }
+    printf(&quot;n_client: %d\n&quot;, n_client);
+    str_addr = inet_ntoa(dest_addr.sin_addr);
+    sprintf(name_buffer, &quot;%s: %d &gt;&gt; &quot;, str_addr, ntohs(dest_addr.sin_port));
+
+    for (i = 0; i &lt; n_client; i++) {
+      if (i == res) continue; // sender == receiver skip
+      sendto(my_sock, name_buffer, strlen(name_buffer), 0, (struct sockaddr *) &amp;sockets[i], addr_len);
+      sendto(my_sock, buff, n_recv, 0, (struct sockaddr *) &amp;sockets[i], addr_len);
+    }
+  }
+  return 0;
+}
+</code></pre><p><strong>채팅 클라이언트</strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;signal.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;unistd.h&gt;
+
+void error_proc(const char*);
+
+int main(int argc, char* argv[]) {
+  int my_sock, read_len, n_sent, n_recv;
+  char buff[BUFSIZ];
+  char str_addr;
+  struct sockaddr_in dest_addr;
+  socklen_t addr_len;
+  pid_t pid;
+
+  my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+
+  memset(&amp;dest_addr, 0, sizeof(dest_addr));
+  dest_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  dest_addr.sin_family = AF_INET;
+  dest_addr.sin_port = htons(atoi(argv[2]));
+  addr_len = sizeof(dest_addr);
+
+  pid = fork();
+  if (pid == -1) error_proc(&quot;fork&quot;);
+  if (pid == 0) {
+    while (1) {
+      n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0, (struct sockaddr*) &amp;dest_addr, &amp;addr_len);
+      if (n_recv == -1) error_proc(&quot;read&quot;);
+      write(1, buff, n_recv);
+    }
+  } else {
+    while (1) {
+      fgets(buff, BUFSIZ - 1, stdin);
+      read_len = strlen(buff);
+      if (read_len == 0) error_proc(&quot;fgets&quot;);
+      n_sent = sendto(my_sock, buff, read_len, 0, (struct sockaddr*) &amp;dest_addr, addr_len);
+      if (n_sent == -1) error_proc(&quot;write&quot;);
+      buff[read_len - 1] = '\0';
+      if (!strcmp(buff, &quot;END&quot;)) break;
+    }
+    kill(pid, SIGTERM);
+  }
+  return 0;
+}
+
+void error_proc(const char* str) {
+  fprintf(stderr, &quot;%s:%s \n&quot;, str, strerror(errno));
+  exit(1);
+}
+</code></pre><p><strong>서버 화면</strong>
+<img src="https://dl.dropbox.com/s/fpxyeusfjxy8d2h/Screen%20Shot%202021-08-13%20at%202.47.58%20AM.png" alt=""></p>
+<p><strong>클라이언트1</strong></p>
+<p><img src="https://dl.dropbox.com/s/cguiw5wx46zoxjl/Screen%20Shot%202021-08-13%20at%202.47.48%20AM.png" alt=""></p>
+<p><strong>클라이언트2</strong></p>
+<p><img src="https://dl.dropbox.com/s/8f8w1a3j8jrpuf3/Screen%20Shot%202021-08-13%20at%202.47.53%20AM.png" alt=""></p>
+<ul>
+<li>클라이언트 간의 통신이 이루어지는 것을 확인할 수 있다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267">네트워크 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
