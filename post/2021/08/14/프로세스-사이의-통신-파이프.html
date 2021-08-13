@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>프로세스 사이의 통신 - 파이프 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">프로세스 사이의 통신 - 파이프</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/08/14</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="파이프">파이프</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/zmenrdqn0icmmou/download.jpg" alt=""></p>
+<ul>
+<li>
+<p>파이프는 프로세스가 파이프 객체 생성을 요청하면 커널은 프로세스가 사용할 수 있는 메모리 공간 (버퍼)를 할당하고 그 버퍼에 접근할 수 있는 두 개의 파일 디스크립터를 프로세스에게 알려준다.</p>
+</li>
+<li>
+<p>파이프 버퍼에 저장되는 데이터는 바이트 흐름으로 취급된다. 두 개의 파일 디스크립터 중 하나는 읽기 작업 전용 나머지 하나는 쓰기 작업 전용으로 사용할 수 있다. 파이프 버퍼에 저장되는 데이터는 바이트 흐름으로 취급된다.</p>
+</li>
+<li>
+<p>두 개의 파일 디스크립터 중 하나는 읽기 작업 전용 나머지 하나는 쓰기 작업 전용으로 사용할 수 있다. 두 디스크립터 사이에서의 읽기 / 쓰기 작업의 혼용은 허용되지 않는다.</p>
+</li>
+</ul>
+<pre><code>#include &lt;unistd.h&gt;
+
+int pipe(int pipefd[2]);
+</code></pre><ul>
+<li>
+<p>인자: <strong>pipefd[2]</strong>: 파이프 버퍼에 접근하기 위한 두 개의 파일 디스크립터</p>
+</li>
+<li>
+<p>파이프를 생성하기 위해서는 <code>pipe</code> 함수를 이용할 수 있다.</p>
+</li>
+<li>
+<p>두 개의 디스크립터 중 <code>pipefd[0]</code>은 읽기 영역의 끝을 가리키며 <code>pipefd[1]</code>은 읽기 영역의 끝을 가리킨다.</p>
+</li>
+<li>
+<p>파이프 또한 입출력 중 한 가지 방법이다. 따라서 저수준 입출력 함수를 이용하여 읽기/쓰기 작업을 할 수 있다.</p>
+</li>
+<li>
+<p>파이프를 단일 프로세스에서 사용할 때에는 커널에서 제공받은 저장공간일 뿐 활용도가 업다. 파이프를 프로세스 사이의 통신을 위해 사용하려면 <code>fork()</code> 함수와 함께 사용해야 한다.</p>
+</li>
+<li>
+<p>부모 프로세스에서 파이프를 생성하고 <code>fork()</code>를 통해서 자식 프로세스를 생성하면 파이프에 접근할 수 있는 파일 디스크립터들이 복사된다. 따라서 부모 프로세스와 자식 프로세스 사이의 데이터 교환이 가능해지며 또한, 자식 프로세스들끼리도 파이프를 이용하여 통신하는 것이 가능하다.</p>
+</li>
+<li>
+<p>파이프는 프로세스 간 통신을 할 때 해당 파이프에 대해서 쓰기 작업을 수행하는 프로세스와 읽기 작업을 하는 프로세스를 정해서 한 방향으로 통신하는 것이 일반적이다.</p>
+</li>
+<li>
+<p>물론 두 프로세스 또는 그 이상의 프로세스가 <code>write()</code> 함수를 이용하여 파이프에 데이터를 쓰는 것이 가능하지만, 그러나 파이프는 데이터를 연속된 바이트의 흐름으로 처리하기 때문에, 프로세스 별로 쓴 데이터를 구별해주지 않고 파이프 버퍼에 쌓일 뿐이다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/rl7x72prngofxov/images.png" alt=""></p>
+<ul>
+<li>
+<p>위의 그림처럼 <code>fork()</code> 함수 이후에 사용하지 않는 프로세스 A의 <code>pipefd[0]</code>과 프로세스 B의 <code>pipefd[1]</code>을 <code>close()</code> 함수를 통해서 닫아주는 것이 좋다.</p>
+</li>
+<li>
+<p>이유는 파이프 통신의 종료와 연관되어 있는데, 파이프 <code>write()</code>에 해당하는 파일 디스크립터로 <code>close()</code> 함수를 호출하면 <code>read()</code> 함수는 버퍼에 있는 모든 데이터를 읽고 <code>EOF</code>를 만난다.</p>
+</li>
+<li>
+<p>따라서 <code>read()</code> 함수를 호출한 프로세스는 상대방 프로세스가 파이프 연결을 끊었다는 사실을 <code>read()</code> 함수의 반환값으로 인지할 수 있다.</p>
+</li>
+<li>
+<p>시스템 단위로 운영되는 &lsquo;열린 파일 테이블&rsquo;의 엔트리는 하나의 파일 디스크립터라도 해당 엔트리를 가리키고 있다면 없어지지 않는다. 만약 프로세스 A의 <code>pipefd[0]</code>이 열려 있더라면, 프로세스 B가 <code>pipefd[0]</code>을 닫아도 &lsquo;열린 파일 테이블의&rsquo; 해당 엔트리를 사라지지 않으므로 프로세스 A는 프로세스 B가 파이프를 닫았다는 사실을 알 방법이 없다.</p>
+</li>
+</ul>
+<h4 id="예제">예제</h4>
+<ul>
+<li>부모 프로세스는 사용자에게 문자열을 입력받는다.</li>
+<li>부모 프로세스는 자식 프로세스에게 파이프를 통해서 사용자가 입력한 문자열을 전송한다.</li>
+<li>자식 프로세슨느 부모 프로세스가 전달한 문자열을 파일에 쓴다.</li>
+</ul>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/wait.h&gt;
+
+void error_proc(const char *);
+
+int main(int argc, char *argv[]) {
+  int pipe_fd[2];
+  int res;
+  char buff[BUFSIZ];
+  pid_t pid;
+  int read_len, n_write;
+  int open_fd, status;
+
+  if (argc != 2) {
+    fprintf(stderr, &quot;usage: %s [file] \n&quot;, argv[0]);
+  }
+
+  res = pipe(pipe_fd);
+  if (res == -1) error_proc(&quot;pipe&quot;);
+
+  pid = fork();
+  
+  if (pid == -1) error_proc(&quot;fork&quot;);
+  if (pid == 0) { // child
+    close(pipe_fd[1]);
+    open_fd = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC);
+    while (1) {
+      read_len = read(pipe_fd[0], buff, BUFSIZ - 1);
+      if (read_len == -1) error_proc(&quot;read&quot;);
+      if (read_len == 0) break;
+      write(open_fd, buff, read_len);
+    }
+    printf(&quot;parent process closed the pipe. \n&quot;);
+    close(open_fd);
+    close(pipe_fd[0]);
+    return 0;
+  } else { // parent
+    close(pipe_fd[0]);
+    while (1) {
+      fgets(buff, BUFSIZ - 1, stdin);
+      read_len = strlen(buff);
+      if (read_len == 4 &amp;&amp; !strncmp(buff, &quot;END&quot;, 3))
+        break;
+      n_write = write(pipe_fd[1], buff, read_len);
+      if (n_write == -1) error_proc(&quot;write&quot;);
+      printf(&quot;%d bytes are written \n&quot;, n_write);
+    }
+    close(pipe_fd[1]);
+    wait(&amp;status);
+    return 0;
+  }
+}
+
+void error_proc(const char *str) {
+  fprintf(stderr, &quot;%s: %s\n&quot;, str, strerror(errno));
+  exit(1);
+}
+
+</code></pre><h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267">네트워크 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
