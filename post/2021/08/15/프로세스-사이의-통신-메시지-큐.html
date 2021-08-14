@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>프로세스 사이의 통신 - 메시지 큐 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">프로세스 사이의 통신 - 메시지 큐</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/08/15</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="메시지-큐">메시지 큐</h3>
+<hr>
+<ul>
+<li>
+<p>운영체제는 <code>IPC</code>를 위해서 메시지 큐라는 객체를 제공한다. 메시지 큐는 말 그대로 큐라는 자료 구조로 구성되어 있다.</p>
+</li>
+<li>
+<p>메시지 큐는 운영체제가 관리하는 별도의 객체로서 따라서 프로세스 A에서 프로세스 B에게 메시지를 전달하고자 프로세스 A에서 메시지 큐에 데이터를 복사하는 과정, 프로세스 B가 메시지 큐에서 데이터를 읽어오는 과정을 거쳐서 통신이 가능하다.</p>
+</li>
+<li>
+<p>공유 메모리를 설명했을 때와 유사한 순서로 메시지 큐의 생성, 메시지 큐의 타입 설정, 데이터 읽기, 데이터 쓰기의 과정에 관여하는 함수에 대해서 알아볼 것이다.</p>
+</li>
+<li>
+<p>메시지 큐를 사용하기 위해서는 <code>mq_open()</code> 함수를 통해서 기존에 존재하는 메시지 큐에 접근할 수 있는 디스크립터를 얻어오거나 새로운 메시지 큐를 생성한 후에 생성된 메시지 큐에 접근할 수 있는 디스크립터를 얻어야한다.</p>
+</li>
+</ul>
+<pre><code>// oflag에 O_CREAT가 명시된 경우
+mqd_t mq_open(const char *name, int oflag, mode_t mode, struct mq_attr *attr);
+
+// oflag에 O_CREAT가 명시되지 않은 경우
+mqd_t mq_open(const char *name, int oflag);
+</code></pre><ul>
+<li>
+<p>name: 메시지 큐 객체를 지칭하기 위한 이름</p>
+</li>
+<li>
+<p>oflag: 생성되는 메시지 큐의 특성 정의(공유 메모리의 oflag와 유사함)</p>
+</li>
+<li>
+<p>mode: 생성되는 메시지 큐 객체의 퍼미션</p>
+</li>
+<li>
+<p>attr: 생성되는 메시지 큐 객체의 속성</p>
+</li>
+<li>
+<p><code>oflag</code>, <code>mode</code>는 공유 메모리와 세마포어 함수의 <code>open</code> 함수에서 사용되는 인자와 비슷한 성격을 가진다.</p>
+</li>
+</ul>
+<pre><code>struct mq_attr {
+  long mq_flags; // 메시지 큐의 블록, 논블록 설정 여부
+  long mq_maxmsg; // 메시지 큐에 저장될 수 있는 메시지의 최대 수
+  long mq_msgsize; // 메시지의 최대 사이즈 (바이트)
+  long mq_curmsgs; // 메시지 큐에 들어있는 메시지의 수
+}
+</code></pre><ul>
+<li><code>mq_attr</code> 구조체는 생성되는 메시지 큐의 속성을 지정하기 위해서 사용되며 다음과 같이 정의된다.</li>
+</ul>
+<pre><code>int mq_getattr(mqd_t mqd, struct mq_attr *attr);
+</code></pre><ul>
+<li>
+<p>mqd: 속성값을 얻어오려고 하는 메시지 큐를 지칭하는 디스크립터</p>
+</li>
+<li>
+<p>attr: 속성값을 저장하기 위한 <code>mq_attr</code> 구조체</p>
+</li>
+<li>
+<p>메시지 큐의 속성 정보는 <code>mq_getattr</code> 함수를 사용하여 조회할 수 있다.</p>
+</li>
+</ul>
+<pre><code>int mq_send(mqd_t mqd, const char *ptr, size_t len, unsigned int prio);
+</code></pre><ul>
+<li>
+<p><strong>mqd</strong>: 접근할 메시지 큐를 지정하기 위한 디스크립터</p>
+</li>
+<li>
+<p><strong>ptr</strong>: 전송할 데이터의 시작 지점을 가리키는 포인터</p>
+</li>
+<li>
+<p><strong>len</strong>: 전송할 데이터의 길이를 나타내는 매개변수</p>
+</li>
+<li>
+<p><strong>prio</strong>: 메시지의 우선순위를 나타내는 매개변수</p>
+</li>
+<li>
+<p>메시지 큐에 보내야 하는 데이터를 삽입하는 함수는 <code>mq_send</code> 이다.</p>
+</li>
+</ul>
+<pre><code>ssize_t mq_receive(mqd_t mqd, char *ptr, size_t len, unsigned int *prio);
+</code></pre><ul>
+<li>
+<p><strong>mqd</strong>: 접근할 메시지 큐를 지정하기 위한 디스크립터</p>
+</li>
+<li>
+<p><strong>ptr</strong>: 전송받는 데이터의 시작 시점을 가리키는 포인터</p>
+</li>
+<li>
+<p><strong>len</strong>: 전송받는 데이터의 길이를 나타내는 매개변수</p>
+</li>
+<li>
+<p><strong>prio</strong>: 메시지의 우선순위를 나타내는 매개변수</p>
+</li>
+<li>
+<p>반면 메시지 큐에서 데이터를 읽어오는 함수는 <code>mq_receive</code> 함수이다.</p>
+</li>
+</ul>
+<h4 id="예제">예제</h4>
+<ul>
+<li>부모와 자식 프로세스 사이에서 간단한 문자열을 전송하는 프로그램을 작성해보자.</li>
+</ul>
+<blockquote>
+<ul>
+<li>프로그램은 자식 프로세스를 하나 생성한다.</li>
+<li>자식 프로세스는 사용자에게 문자열을 입력 받은 후에 메시지 큐를 이용하여 부모 프로세스에게 전송한다.</li>
+<li>부모 프로세스는 화면에 전송받은 문자열을 출력한다.</li>
+</ul>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;mqueue.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+
+#define MQ_NAME &quot;/test_mq&quot;
+
+int main(int argc, char **argv)
+{
+  mqd_t mqfd;
+  int pid;
+  unsigned int priority = 10;
+  char send_buff[50];
+  void *read_buff;
+  int read_len;
+
+  struct mq_attr attr;
+  attr.mq_flags = 0;
+  attr.mq_maxmsg = 10;
+  attr.mq_msgsize = 10;
+
+  mqfd = mq_open(MQ_NAME, O_CREAT|O_RDWR, 644, &amp;attr);
+  if (mqfd == (mqd_t)-1)
+  {
+    perror(&quot;mq_open failure from main&quot;);
+    printf(&quot;Errno = %d\n&quot;,errno);
+    exit(0);
+  }
+
+  pid = fork();
+  if (pid == 0) {
+    printf(&quot;child: &quot;);
+    scanf(&quot;%s&quot;, send_buff);
+    if (mq_send(mqfd, send_buff, strlen(send_buff), priority) == -1) {
+      fprintf(stderr, &quot;MQ SEND ERROR\n&quot;);
+      exit(1);
+    }
+  } else if (pid &lt; 0) {
+    fprintf(stderr, &quot;FORK FAILURE\n&quot;);
+    exit(1);
+  } else {
+    if (mq_getattr(mqfd, &amp;attr) == -1) {
+      fprintf(stderr, &quot;MQ_GET_ATTR ERROR \n&quot;);
+      exit(1);
+    }
+    read_buff = malloc(attr.mq_msgsize);
+    read_len = mq_receive(mqfd, read_buff, attr.mq_msgsize, &amp;priority);
+    printf(&quot;parent receives: %s\n&quot;, (char*)read_buff);
+  }
+  return 0;
+}
+
+</code></pre><p><img src="https://dl.dropbox.com/s/yjytov82iozfi4s/Screen%20Shot%202021-08-15%20at%208.51.54%20AM.png" alt=""></p>
+<ul>
+<li>
+<p>정상적으로 자식 프로세스에서 보낸 문자열이 부모 프로세스로 전달된 것을 확인할 수 있다.</p>
+</li>
+<li>
+<p>한가지 주의할 점은 <code>struct mq_attr</code> 구조체의 값을 설정할 때 현재 시스템에서 허용 가능한 값이 정해져있으므로 시스템에서 정한 값을 넘지 않도록 주의해야한다.</p>
+</li>
+<li>
+<p>시스템 설정값은 <code>/proc/sys/fs/mqueue/</code> 위치에 있다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/8xbgyr5un86s3q6/Screen%20Shot%202021-08-15%20at%208.56.06%20AM.png" alt=""></p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267">네트워크 프로그래밍</a></li>
+<li><a href="https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&amp;blogId=kdr0923&amp;logNo=50073835187">네이버 블로그 - 메시지큐 사용하기</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
