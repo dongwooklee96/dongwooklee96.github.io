@@ -6,7 +6,593 @@
     <description>Recent content in 네트워크 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 15 Aug 2021 02:52:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 17 Aug 2021 00:52:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>입출력과 소켓</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/17/%EC%9E%85%EC%B6%9C%EB%A0%A5%EA%B3%BC-%EC%86%8C%EC%BC%93.html</link>
+      <pubDate>Tue, 17 Aug 2021 00:52:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/17/%EC%9E%85%EC%B6%9C%EB%A0%A5%EA%B3%BC-%EC%86%8C%EC%BC%93.html</guid>
+      <description>&lt;h3 id=&#34;입출력-전반&#34;&gt;입출력 전반&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;입력과 출력은 정보 전달을 위한 핵심 과정이다. 프로세스 간의 정보 전달을 궁극적인 목적으로 하는 소켓 프로그래밍에서도 입출력은 핵심 절차이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;입출력 시스템의 동작 원리에 대해서 이해한다면 제작하는 프로그램의 완성도를 높일 수 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일-디스크립터-파일-테이블-파일&#34;&gt;파일 디스크립터, 파일 테이블, 파일&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/poobyg7pu5oi4oh/%EC%BA%A1%EC%B2%98.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파일 디스크립터는 프로세스가 파일에 접근할 때, 파일을 식별하기 위한 이름표이다. 소켓 또한 생성되면 파일 디스크립터 (소켓 디스크립터)가 부여된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;운영체제는 프로세스가 접근할 수 있는 자원인 파일을 다루기 위해서 프로세스별로 파일 디스크립터 테이블을 관리한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서 프로세스 A가 &lt;code&gt;open()&lt;/code&gt; 함수를 이용하여 파일을 열었다면 프로세스 A의 파일 디스크립터 테이블에 파일에 접근하기 위한 정보가 기록된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 운영체제는 시스템 전체에 열려 있는 모든 파일 정보(장치 및 소켓 포함)가 저장된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;디스크립터 테이블에는 다음과 같은 두 가지 정보가 저장된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;파일 디스크립터의 속성 정보를 저장하고 있는 &lt;code&gt;flags&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;운영체제가 관리하는 파일 레코드를 가리키는 포인터&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파일 테이블에는 다음과 같은 세 가지 정보가 저장된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;file offset&lt;/code&gt;: 열려 있는 파일 중 현재 읽기 또는 쓰기가 실행될 위치를 저장&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;status flag&lt;/code&gt;: &lt;code&gt;open&lt;/code&gt; 시스템 콜에서 지정하는 파일의 정보들을 저장&lt;/li&gt;
+&lt;li&gt;실제 파일 위치를 가리키는 포인터&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일-디스크립터-테이블과-열린-파일-테이블의-엔트리entry&#34;&gt;파일 디스크립터 테이블과 열린 파일 테이블의 엔트리(Entry)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;open()&lt;/code&gt; 함수 또는 &lt;code&gt;socket()&lt;/code&gt; 함수를 이용하면 프로세스 단위로 파일 디스크립터를 관리하기 위해서 사용되는 파일 디스크립터 테이블에 하나의 엔트리가 생성된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 엔트리에는 열린 파일 테이블의 엔트리를 참조하기 위한 포인터가 포함되어 있다. 또한, 앞의 함수들은 시스템 전체의 열린 파일을 관리하기 위해 사용되는 열린 파일 테이블의 엔트리도 생성하는 역할을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/0j0pqm37n5mfs88/image.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해당 엔트리는 실제 파일이나 소켓이 가리키는 포인터를 가지고 있다. 같은 파일을 서로 다른 두 프로세스가 열 경우에 열린 파일 테이블의 엔트리는 두개가 되지만, 두 엔트리에서 가리키는 실제 저장소는 하나가 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/lco2nqt6kso2igb/img.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;프로세스가 &lt;code&gt;fork()&lt;/code&gt; 함수에 의해서 복제되면 같은 파일 테이블 엔트리를 가리키는 파일 디스크립터 테이블 엔트리가 생성된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ksan0lstok65vni/%EA%B7%B8%EB%A6%BC-3.9-dup%EB%A1%9C-%ED%8C%8C%EC%9D%BC-%EB%94%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%84%B0%EB%A5%BC-%EB%B3%B5%EC%A0%9C%ED%95%A0-%EB%95%8C-%EC%97%B4%EB%A0%A4%EC%A7%84-%ED%8C%8C%EC%9D%BC%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B5%AC%EC%A1%B0.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;dup()&lt;/code&gt; 계열 함수를 호출하면 파일 디스크립터를 복사할 수 있다. &lt;code&gt;dup&lt;/code&gt; 함수에 의해서 생성된 파일 디스크립터는 원본 파일 디스크립터와 동일한 열린 파일 테이블 엔트리를 참조한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int dup(int oldfd);
+결과값 : 복사된 파일 디스크립터(새로 부여된 디스크립터)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;같은 프로세스 내에서 파일 디스크립터를 복제하는 함수이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int dup2(int oldfd, int newfd);
+
+결과값 : 복사된 파일 디스크립터 (새로 부여된 디스크립터)
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;파일-오프셋이란&#34;&gt;파일 오프셋이란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파일 오프셋은 읽기/쓰기의 기준이 되는 포인터 값이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오프셋은 읽기/쓰기의 기준이 파일의 시작지점으로부터 몇 바이트 떨어져있는지를 나타낸다. 예를 들어서, &lt;code&gt;read()&lt;/code&gt; 함수를 호출하여 5바이트를 읽는다면 오프셋 값을 기준으로 파일에서 5바이트의 데이터가 읽혀진다. 또한 이 경우에 오프셋 값은 5만큼 증가한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물론 소켓에서는 오프셋 값은 의미가 없지만, 파일 입출력을 다룰 때는 오프셋 값에 주의해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여기서 주목할만한 포인트는 오프셋 값은 파일 디스크립터 테이블이 아니라, 열린 파일 테이블에 있다는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 &lt;code&gt;dup()&lt;/code&gt;로 복제한 파일 디스크립터는 오프셋 값을 원본 디스크립터와 공유한다. 반면에 개별적인 &lt;code&gt;open()&lt;/code&gt; 함수를 통해서 열린 파일 테이블에 독립적인 엔트리를 생성한 두 파일디스크립터들은 오프셋을 공유하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+
+#include &amp;lt;unistd.h&amp;gt;
+
+off_t lseek(int fd, off_t offset, int whence);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;인자&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;fd: 오프셋 값을 조회하거나 변경하고자하는 파일을 가리키는 디스크립터&lt;/li&gt;
+&lt;li&gt;offset: 변경할 오프셋의 크기&lt;/li&gt;
+&lt;li&gt;whence: 오프셋 변경의 기준이 되는 지점 (세 가지 매크로를 제공한다.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;결과값&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;변경된 매크로 값 반환, 실패시 -1&lt;/li&gt;
+&lt;li&gt;whence 값으로 사용가능한 매크로&lt;/li&gt;
+&lt;li&gt;SEEK_SET: 파일의 시작 지점&lt;/li&gt;
+&lt;li&gt;SEEK_CUR: 현재 오프셋 값&lt;/li&gt;
+&lt;li&gt;SEEK_END: 파일의 마지막 지점 + 1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;예제&#34;&gt;예제&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  int fd1, fd2, fd3;
+  char buff[BUFSIZ];
+  int read_len, n_write;
+  if (argc != 2) {
+    printf(&amp;quot;usage: %s filename \n&amp;quot;, argv[0]);
+    return -1;
+  }
+
+  fd1 = open(argv[1], O_RDWR | O_CREAT | O_TRUNC);
+  fd2 = open(argv[1], O_RDONLY);
+  fd3 = dup(fd1);
+
+  fgets(buff, BUFSIZ - 1, stdin);
+
+  read_len = strlen(buff);
+  n_write = write(fd1, &amp;quot;abc&amp;quot;, 3);
+  n_write += write(fd1, buff, read_len + 1);
+  if (n_write == -1) printf(&amp;quot;error&amp;quot;);
+
+  printf(&amp;quot;offset (fd1): %d\n&amp;quot;, (int) lseek(fd1, 0, SEEK_CUR));
+  printf(&amp;quot;offset (fd2): %d\n&amp;quot;, (int) lseek(fd2, 0, SEEK_CUR));
+  printf(&amp;quot;offset (fd3): %d\n&amp;quot;, (int) lseek(fd3, 0, SEEK_CUR));
+
+  read(fd2, buff, 4);
+  write(1, buff, 4);
+
+  printf(&amp;quot;-----\n&amp;quot;);
+
+  printf(&amp;quot;offset (fd1): %d\n&amp;quot;, (int) lseek(fd1, 0, SEEK_CUR));
+  printf(&amp;quot;offset (fd2): %d\n&amp;quot;, (int) lseek(fd2, 0, SEEK_CUR));
+  printf(&amp;quot;offset (fd3): %d\n&amp;quot;, (int) lseek(fd3, 0, SEEK_CUR));
+
+  close(fd1);
+  fgets(buff, BUFSIZ - 1, stdin);
+  read_len = strlen(buff);
+  n_write += write(fd3, buff, read_len);
+
+  lseek(fd2, 0, SEEK_SET);
+  memset(buff, 0, BUFSIZ);
+  read_len = read(fd2, buff, n_write);
+  write(1, buff, n_write);
+  close(fd2);
+  close(fd3);
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8kcx9hgxucbiljj/Screen%20Shot%202021-08-17%20at%201.36.08%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파일 디스크립터 fd1, fd2, fd3를 생성하는데, fd1, fd2는 각각 &lt;code&gt;open()&lt;/code&gt; 함수로 열고 fd3는 fd1을 &lt;code&gt;dup()&lt;/code&gt; 함수를 통해서 복제한 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로그램을 실행하면서 인자로 &lt;code&gt;test.txt&lt;/code&gt; 를 넘겼다. 따라서 실행 파일과 같은 폴더에 &lt;code&gt;test.txt&lt;/code&gt; 파일이 생성된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그 다음으로는 사용자에게 문자열을 입력 받는 부분인데, 여기서는 &lt;code&gt;this i a test file&lt;/code&gt; 이라는 문자열이 입력된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;문자열 입력 후 파일 디스크립터 &lt;code&gt;fd1&lt;/code&gt;을 이용하여 파일에 쓰기 작업을 수행한다. 이때 사용자에게 입력 받은 문자열에 앞서 &amp;ldquo;abc&amp;rdquo; 라는 문자열을 저장한다. 따라서 문자열 24개와 엔터를 포함한 25개가 오프셋 값으로 저장된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;fd2는 fd1과 같은 파일을 가리키고 있지만 서로 다른 열린 파일 테이블을 가리키고 있으므로 오프셋의 값이 0이라는 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그 후에 fd2를 이용하여 파일의 4글자 값을 읽었을 때 오프셋 값이 증가한 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;소켓-전용-입출력-함수&#34;&gt;소켓 전용 입출력 함수&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;지금까지 TCP 소켓에서는 읽기 쓰기는 저수준 입출력 함수인 &lt;code&gt;read&lt;/code&gt; 함수와 &lt;code&gt;write&lt;/code&gt; 함수를 이용했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;read()&lt;/code&gt;, &lt;code&gt;write()&lt;/code&gt; 함수는 리눅스의 추상화된 파일 (파일, 소켓, 디바이스 장치)에서 공통적으로 사용할 수 있는 저수준 입출력 함수이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 함수와는 별개로 소켓 전용 입출력 함수에 대해서 알아보도록 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;ssize_t send(int socket, const void *buffer, size_t length, int flags);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;인자&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;socket&lt;/strong&gt;: 데이터 전달을 위해서 사용하고자 하는 소켓 디스크립터&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;buffer&lt;/strong&gt;: 전달하려고 하는 데이터를 저장하고 있는 공간의 주소&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;length&lt;/strong&gt;: 전달하려고 하는 데이터의 길이&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;flag&lt;/strong&gt;: 데이터 전송 시 사용할 수 있는 옵션들&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;send()&lt;/code&gt; 함수는 &lt;code&gt;write()&lt;/code&gt; 함수보다 하나의 인자를 더 가지고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;소켓 입출력에서 필요한 옵션들을 지정하는데 사용할 수 있는 &lt;code&gt;flags&lt;/code&gt; 라는 인자이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;flags&lt;/code&gt;는 파일을 &lt;code&gt;open&lt;/code&gt; 할 때 사용하는 &lt;code&gt;flags&lt;/code&gt; 처럼 여러 설정 값의 비트 연산으로 구성된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;flags&lt;/code&gt; 인자에 대해서는 읽기 기능을 수행하는 소켓 전용 함수인 &lt;code&gt;recv&lt;/code&gt;를 다룬 후에 자세히 알아보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;ssize_t recv(int socket, void *buffer, size_t length, int flags);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;인자&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;socket&lt;/strong&gt;: 데이터 읽기 작업을 위해 사용하고자하는 소켓 디스크립터&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;buffer&lt;/strong&gt;: 읽어온 데이터를 저장하려고 하는 공간의 주소&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;length&lt;/strong&gt;: 읽으려고 하는 데이터의 최대 길이&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;flag&lt;/strong&gt;: 데이터 읽기 작업을 위해 사용할 수 있는 옵션들&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;flags&#34;&gt;flags&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;두 함수에서 공통으로 사용하는 &lt;code&gt;flags&lt;/code&gt; 인자에 대해서 알아보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MSG_OOB: Out of Band 데이터 전송을 위한 옵션이다. TCP의 Urgent 기능에 관한 것으로 MSG_OOB가 설정되면 Urgent 데이터로 취급하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MSG_DONTWAIT: 입출력 함수의 동작이 블록 되지 않게 된다. 즉 논 블록으로 동작하게 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다음은 &lt;code&gt;send()&lt;/code&gt; 함수에서 사용할 수 있는 &lt;code&gt;flags&lt;/code&gt;이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MSG_DONTROUTE: 메시지가 라이터를 통해 다른 네트워크로 전달되는 것을 막는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MSG_PEEK: 수신 버퍼에 데이터가 들어있는지를 알아보기 위해서 사용한다. &lt;code&gt;MSG_PEEK&lt;/code&gt; 옵션이 활성화 되어 있는 상태에서 &lt;code&gt;recv&lt;/code&gt; 함수로 읽어진 데이터는 수신 버퍼에서 지워지지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;urgent-데이터&#34;&gt;Urgent 데이터&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;TCP 기능중에서는 전송하는 데이터 중에 긴급한 메시지가 있음을 알리는 기능이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&amp;ldquo;전송하는 데이터 중에서 긴급한 메시지가 있으니, 이 부분을 확인하시오.&amp;rdquo;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 긴급한 데이터의 전송은 주목적이 아니라 특수한 목적이기 때문에 &lt;code&gt;In Band&lt;/code&gt;의 반대말인 &lt;strong&gt;Out of Band(OOB)&lt;/strong&gt; 전송으로 불린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예제를 통해서 알아보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;예제-1&#34;&gt;예제&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Urgent 데이터 전송을 위한 서버 / 클라이언트 프로그램&lt;/li&gt;
+&lt;li&gt;클라이언트 프로그램은 서버 프로그램으로 다음과 같은 데이터 순서대로 전송한다.
+&lt;ul&gt;
+&lt;li&gt;Normal_MSG1&lt;/li&gt;
+&lt;li&gt;Normal_MSG2&lt;/li&gt;
+&lt;li&gt;Urgent_MSG&lt;/li&gt;
+&lt;li&gt;Normal MSG4&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;3번째 데이터는 Urgent Flag를 셋팅하여 전송한다.&lt;/li&gt;
+&lt;li&gt;서버 프로그램은 클라이언트 프로그램이 전송하는 데이터를 화면에 출력한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;클라이언트 프로그램&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  int connect_sd;
+  struct sockaddr_in client_addr;
+  int client_addr_len, read_len;
+  char write_buffer[BUFSIZ];
+
+  if (argc != 3) {
+    printf(&amp;quot;usage: %s &amp;lt;IP Address&amp;gt; &amp;lt;Port Number&amp;gt;\n&amp;quot;, argv[0]);
+    return -1;
+  }
+
+  connect_sd = socket(PF_INET, SOCK_STREAM, 0);
+
+  printf(&amp;quot;=== client program ===\n&amp;quot;);
+
+  memset(&amp;amp;client_addr, 0, sizeof(client_addr));
+  client_addr.sin_family = AF_INET;
+  client_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  client_addr.sin_port = htons(atoi(argv[2]));
+
+  connect(connect_sd, (struct sockaddr *) &amp;amp;client_addr, sizeof(client_addr));
+
+  send(connect_sd, &amp;quot;normal_msg1&amp;quot;, strlen(&amp;quot;normal_msg1&amp;quot;), 0);
+  send(connect_sd, &amp;quot;normal_msg2&amp;quot;, strlen(&amp;quot;normal_msg2&amp;quot;), 0);
+  send(connect_sd, &amp;quot;urgent_msg&amp;quot;, strlen(&amp;quot;urgent msg&amp;quot;), MSG_OOB);
+  send(connect_sd, &amp;quot;normal_msg3&amp;quot;, strlen(&amp;quot;normal_msg3&amp;quot;), 0);
+  close(connect_sd);
+
+  return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;서버 프로그램&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;signal.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+int listen_sd, connect_sd;
+
+void urgent_handler(int sig);
+
+int main(int argc, char *argv[]) {
+  struct sockaddr_in server_addr, client_addr;
+  int client_addr_len, read_len, str_len, state;
+  char read_buffer[BUFSIZ];
+  pid_t pid;
+  struct sigaction act;
+
+  if (argc != 2) {
+    printf(&amp;quot;usage: %s [port number]\n&amp;quot;, argv[0]);
+    return -1;
+  }
+
+  act.sa_handler = urgent_handler;
+  sigemptyset(&amp;amp;act.sa_mask);
+  act.sa_flags = 0;
+
+  printf(&amp;quot;server start...\n&amp;quot;);
+  listen_sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+  memset(&amp;amp;server_addr, 0, sizeof(server_addr));
+  server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  server_addr.sin_family = AF_INET;
+  server_addr.sin_port = htons(atoi(argv[1]));
+
+  bind(listen_sd, (struct sockaddr *) &amp;amp;server_addr, sizeof(server_addr));
+  listen(listen_sd, 5);
+
+  client_addr_len = sizeof(client_addr);
+  connect_sd = accept(listen_sd, (struct sockaddr *) &amp;amp;client_addr, &amp;amp;client_addr_len);
+  fprintf(stderr, &amp;quot;a client is connected...\n&amp;quot;);
+
+  fcntl(connect_sd, F_SETOWN, getpid());
+  state = sigaction(SIGURG, &amp;amp;act, 0);
+
+  while (1) {
+    read_len = recv(connect_sd, read_buffer, sizeof(read_buffer), 0);
+    read_buffer[read_len] = &#39;\0&#39;;
+    printf(&amp;quot;client: %s\n&amp;quot;, read_buffer);
+    if (read_len == 0) {
+      close(connect_sd);
+      break;
+    }
+  }
+  fprintf(stderr, &amp;quot;the client is disconnected.\n&amp;quot;);
+  close(listen_sd);
+  return 0;
+}
+
+void urgent_handler(int sig) {
+  int read_len;
+  char read_buffer[BUFSIZ];
+
+  read_len = recv(connect_sd, read_buffer, sizeof(read_buffer), MSG_OOB);
+  read_buffer[read_len] = &#39;\0&#39;;
+  printf(&amp;quot;client(urgent): %s\n&amp;quot;, read_buffer);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;OOB&lt;/code&gt; 전송에 대해서 정리하자면 긴급 데이터 처리를 위해서 &lt;code&gt;OOB&lt;/code&gt; 전송을 하더라도 데이터가 빨리 전송되는 것은 아니며 데이터 중에 한 바이트만 긴급 데이터로 취급된다는 것을 알 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;이 세그먼트에 긴급한 데이터가 있다.&amp;rdquo; 정도의 정보만 수신자 측에 전달할 수 있는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;표준-입출력-함수&#34;&gt;표준 입출력 함수&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;시스템 콜은 사용자 모드와 커널 모드를 전환하기 때문에 자원을 많이 소모한다. 사용자 A와 사용자 B가 각각 100 바이트의 데이터를 &lt;code&gt;WRITE&lt;/code&gt; 함수를 사용하여 파일을 작성한다고 생각을 해보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;사용자 A는 100 바이트를 작성하는 &lt;code&gt;write()&lt;/code&gt; 함수를 한 번 호출하여 100 바이트를 작성한다.&lt;/li&gt;
+&lt;li&gt;사용자 B는 10 바이트를 작성하는 &lt;code&gt;write()&lt;/code&gt; 함수를 10번 호출하여 100 바이트를 작성한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파일을 입력할 때마다 &lt;code&gt;write()&lt;/code&gt; 함수를 호출하는 대신에 누군가가 입력할 데이터를 모아서 데이터가 충분히 많아졌을 때 &lt;code&gt;write()&lt;/code&gt; 함수를 호출하면 시스템 콜을 호출하는 횟수를 줄일 수 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;표준 입출력 함수는 자체적으로 버퍼를 가지고 있기 때문에 시스템 콜 실행 횟수를 줄이는 기능을 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스트림&#34;&gt;스트림&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;표준 입출력 함수들은 시스템 콜의 실행 횟수를 줄이는 기능 이외에 문자열 처리를 쉽게 해준다는 장점이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;소켓 프로그래밍을 할 때도 표준 입출력 함수들을 활용하면 복잡한 문자열 작업을 편하게 할 수 있는 경우가 많다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스트림은 표준 입출력에서의 파일 시스템을 추상화한 개념이다. &lt;code&gt;fopen()&lt;/code&gt;, &lt;code&gt;fclose()&lt;/code&gt; 같은 표준 입출력 함수는 파일에 접근하기 위해서 FILE 구조체의 포인터를 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;초기 제작 의도와는 다르게 스트림을 FILE 구조체의 포인터 자체로 간주하는 사람들도 많다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;표준 입출력 함수를 이용하는 프로그램들은 아래 소스와 같은 흐름을 따른다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;FILE *fp;
+
+fp = fopen(&amp;quot;filename.txt&amp;quot;, &amp;quot;r&amp;quot;);
+...
+fprintffp, &amp;quot;....&amp;quot;);
+....
+fclose(fp);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위에서 처럼 &lt;code&gt;fscanf()&lt;/code&gt;, &lt;code&gt;fprintf()&lt;/code&gt;, &lt;code&gt;fgets()&lt;/code&gt;, &lt;code&gt;fputs()&lt;/code&gt; 등등의 표준 입출력 함수를 사용하려면, 파일을 가리키는 FILE형 포인터 즉, 스트림을 생성해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;FILE *fdopen(int fd, const char *mode);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;파일 디스크립터로부터 스트림을 생성하는 방법은 &lt;code&gt;fdopen()&lt;/code&gt; 함수를 이용하는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int fileno(FILE *stream)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;반대로 스트림에서 파일 디스크립터를 추출하는 것도 가능하다. 이때는 &lt;code&gt;fileno&lt;/code&gt; 함수를 이용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;표준-입출력-버퍼-관리&#34;&gt;표준 입출력 버퍼 관리&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파일 스트림에 &lt;code&gt;fprintf()&lt;/code&gt;나 &lt;code&gt;fputs()&lt;/code&gt; 같은 함수를 이용하여 쓰기 작업을 하면 &lt;code&gt;write()&lt;/code&gt; 관련 시스템 콜이 실행되어 파일 쓰기 작업이 수행된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 표준 입출력 함수의 사용이 시스템 콜로 바로 이어지는 것은 아니다. 표준 결과물은 표준 입출력 버퍼에 저장되어 있다가 상황에 맞게 한 번의 시스템 콜로 처리된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 버퍼링은 시스템 콜의 횟수를 줄일 수 있다는 장점을 제공하는 동시에 버퍼링되어 있는 시간만큼 해당 작업이 지연된다는 단점을 가져올 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 경우에 따라 버퍼에 있는 내용을 강제로 배출하는 기능이 필요한다. 이러한 기능은 &lt;code&gt;fflush()&lt;/code&gt; 함수가 수행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int fflush(FILE *stream);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;또한 표준 입출력에서 사용되는 버퍼의 크기를 설정하는 것이 가능하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;void setbuff(FILE *stream, char *buf);
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;예제---표준-입출력-함수를-이용한-소켓-프로그래밍&#34;&gt;예제 - 표준 입출력 함수를 이용한 소켓 프로그래밍&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;클라이언트&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nclude &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;arpa/inet.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  int connect_sd;
+  struct sockaddr_in client_addr;
+  int client_addr_len, read_len;
+  char write_buffer[BUFSIZ];
+  FILE *wfp;
+
+  if (argc != 3) {
+    printf(&amp;quot;usage: %s &amp;lt;IP Address&amp;gt; &amp;lt;Port Number&amp;gt;\n&amp;quot;, argv[0]);
+    return -1;
+  }
+
+  connect_sd = socket(PF_INET, SOCK_STREAM, 0);
+  printf(&amp;quot;=== client program ===\n&amp;quot;);
+
+  memset(&amp;amp;client_addr, 0, sizeof(client_addr));
+  client_addr.sin_family = AF_INET;
+  client_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  client_addr.sin_port = htons(atoi(argv[2]));
+
+  connect(connect_sd, (struct sockaddr *)&amp;amp;client_addr, sizeof(client_addr));
+  wfp = fdopen(connect_sd, &amp;quot;w&amp;quot;);
+  while (1) {
+    printf(&amp;quot;send msg: &amp;quot;);
+    fgets(write_buffer, BUFSIZ, stdin);
+    fputs(write_buffer, wfp);
+    fflush(wfp);
+    if (!strcmp(write_buffer, &amp;quot;END\n&amp;quot;)) break;
+  }
+  fclose(wfp);
+  return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;서버&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  int listen_sd, connect_sd;
+  struct sockaddr_in server_addr, client_addr;
+  int client_addr_len, read_len, str_len, state;
+
+  char read_buffer[BUFSIZ];
+  FILE *rfp;
+
+  if (argc != 2) {
+    printf(&amp;quot;usage %s [port number]\n&amp;quot;, argv[0]);
+    return -1;
+  }
+
+  printf(&amp;quot;server start...\n&amp;quot;);
+  listen_sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+
+  memset(&amp;amp;server_addr, 0, sizeof(server_addr));
+
+  server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  server_addr.sin_family = AF_INET;
+  server_addr.sin_port = htons(atoi(argv[1]));
+
+  bind(listen_sd, (struct sockaddr *)&amp;amp;server_addr, sizeof(server_addr));
+  listen(listen_sd, 5);
+
+  client_addr_len = sizeof(client_addr);
+
+  connect_sd = accept(listen_sd, (struct sockaddr*)&amp;amp;client_addr, &amp;amp;client_addr_len);
+  fprintf(stderr, &amp;quot;a client is connected...\n&amp;quot;);
+
+  rfp = fdopen(connect_sd, &amp;quot;r&amp;quot;);
+
+  while (!feof(rfp)) {
+    fgets(read_buffer, BUFSIZ, rfp);
+    printf(&amp;quot;%s&amp;quot;, read_buffer);
+  }
+  fprintf(stderr, &amp;quot;the client is disconnected. \n&amp;quot;);
+  fclose(rfp);
+  return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/q3lp1q6nxe1d91s/Screen%20Shot%202021-08-17%20at%203.43.38%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/r63x0947s1x2kp0/Screen%20Shot%202021-08-17%20at%203.44.34%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267&#34;&gt;네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>프로세스 사이의 통신 - 메시지 큐</title>
       <link>https://dongwooklee96.github.io/post/2021/08/15/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EC%82%AC%EC%9D%B4%EC%9D%98-%ED%86%B5%EC%8B%A0-%EB%A9%94%EC%8B%9C%EC%A7%80-%ED%81%90.html</link>
