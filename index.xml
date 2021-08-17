@@ -6,7 +6,386 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 17 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Aug 2021 01:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>멀티 쓰레드</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/18/%EB%A9%80%ED%8B%B0-%EC%93%B0%EB%A0%88%EB%93%9C.html</link>
+      <pubDate>Wed, 18 Aug 2021 01:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/18/%EB%A9%80%ED%8B%B0-%EC%93%B0%EB%A0%88%EB%93%9C.html</guid>
+      <description>&lt;h3 id=&#34;스레드&#34;&gt;스레드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;스레드는 독립적으로 수행되는 작업의 단위이다. 일반적인 프로세스 기반 프로그램은 &lt;code&gt;main()&lt;/code&gt; 함수의 순차적인 흐름에 따라 코드에 맞는 작업을 수행하고 종료하는 식의 프로그램이었다. 스레드는 다수의 독립된 작업흐름을 가진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실행중인 프로세스는 CPU, 메모리 등 시스템 자원을 할당 받아 작업을 수행한다.일반적인 환경이라면 CPU의 수 보다 더 많은 프로세스가 실행되고 있기 때문에 각각의 프로세스는 운영체제의 작업 스케줄러에 의해서 시스템 자원의 사용 순서를 기다린 후에 자원을 할당 받아서 실행된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/f79l71ce6tq2fob/download.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그런데 작업 스케줄러는 실제로 프로세스 단위가 아니라 스레드 단위로 스케줄링을 한다. 따라서 스레드는 독립적인 작업의 흐름을 가질 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 그림처럼 스케줄러는 스레드 단위로 작업 순서를 결정한다. 또한 같은 프로세스에 속한 스레드들은 전역 변수와 같은 프로세스의 자원을 공유할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;스레드의-생성&#34;&gt;스레드의 생성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;기본적으로 프로그램은 하나의 스레드로 구성되어 있다. 여기에 추가의 작업 흐름을 만들기 위해서는 &lt;code&gt;pthread_create()&lt;/code&gt; 함수를 호출하면 된다.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;pthread.h&amp;gt;
+
+int pthread_create(pthread_t *thread, const pthread_attr_r *attr, void *(start_routine)(void *), void *arg);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;인자&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;thread: 스레드를 지칭하기 위한 스레드 ID&lt;/li&gt;
+&lt;li&gt;attr: 스레드 생성시 필요한 속성값을 저장하고 있는 구조체, 일반적으로 NULL로 설정한다.&lt;/li&gt;
+&lt;li&gt;start_routine: 스레드의 시작과 함께 호출되는 함수의 포인터&lt;/li&gt;
+&lt;li&gt;arg: start_routinue 함수에 전해지는 매개변수, 매개변수가 없을 경우에는 NULL로 셋팅한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;결과값&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;성공시 0, 실패 시 정의된 에러 번호&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;pthread_create()&lt;/code&gt; 함수가 스레드 생성에 실패하면 그 원인에 해당하는 에러 코드를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;EAGAIN: 스레드를 생성하기 위한 가용성의 부족&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;EINVAL: 잘못된 attr 셋팅&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;EPERM: 접근권한 에러&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;데이터-힙-스택-그리고-스레드&#34;&gt;데이터, 힙, 스택 그리고 스레드&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스는 운영체제로부터 가상 메모리 영역을 할당받고 코드부터 시작하여 실행을 위해 사용되는 변수들까지 그 메모리 영역에 저장한다. 이 중에서 실제로 변수를 저장하기 위한 영역에는 다음과 같은 이름이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터 영역: 전역 변수와 정적 변수까지 지정되는 영역이며 프로그램의 시작과 동시에 할당된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스택 영역: 지역 변수가 지정되는 영역이다. 함수가 호출되면 함수에서 사용하는 지역 변수들은 이 영역에서 할당된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;힙 영역: 실행 시에 지정되는 영역이다. 프로그래머에 의한 동적 할당 함수가 호출되면 이 영역에 있는 메모리 공간이 사용된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;fork()&lt;/code&gt; 함수를 이용하여 프로세스를 복제하면 새로 생성된 자식 프로세스는 부모 프로세스의 데이터, 스택, 힙 영역이 모두 복사되어 새로운 프로세스로 동작한다. 반면 스레드가 생성된 경우에는 스택 영역만 추가로 생성된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스레드-예제&#34;&gt;스레드 예제&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;pthread.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+void *init_thread(void *perm) {
+  int i;
+  for (i = 1; i &amp;lt; 10; i++) {
+    printf(&amp;quot;counter: %d\n&amp;quot;, i);
+    sleep(1);
+  }
+  printf(&amp;quot;thread is now terminated. \n&amp;quot;);
+}
+
+int main(int argc, char *argv[]) {
+  pthread_t thread_id;
+
+  if (pthread_create(&amp;amp;thread_id, NULL, init_thread, NULL) != 0) {
+    fprintf(stderr, &amp;quot;pthread creation error\n&amp;quot;);
+    exit(0);
+  }
+
+  sleep(5);
+  printf(&amp;quot;main function is terminated.\n&amp;quot;);
+  return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/nil12xld856vtus/Screen%20Shot%202021-08-18%20at%201.34.53%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;실행 결과 생성된 스레드가 카운터를 1에서부터 5까지 증가시키면서 화면에 출력한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스레드가 종료되는 시점은 메인 함수가 종료되는 시점과 같다는 것을 확인할 수 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스레드는 실행할 것이 더 남이있다고 하더라도 메인 함수가 종료되면 함께 종료된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 스레드의 정상적인 종료를 기다리는 로직이 메인 함수에게 요구 된다면 어떻게 할 수 있을까?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스레드가 종료되는 시점을 예측하여 메인 함수를 대기 시키는 방법이 있을 수 있으나, 이는 코드가 복잡해질 수록 힘들다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 &lt;code&gt;pthread_join()&lt;/code&gt; 이라는 함수를 제공한다. &lt;code&gt;pthread_join()&lt;/code&gt; 함수는 지정된 스레드가 종료할 때까지 &lt;code&gt;pthread_join()&lt;/code&gt;을 호출한 스레드를 대기 상태로 만든다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메인 함수에서 &lt;code&gt;pthread_join()&lt;/code&gt;을 호출하면 지정한 스레드의 종료 시점까지 메인 함수를 대기 상태로 만들 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int pthread_join(pthread_t thread, void **retval);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;인자&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;thread: 종료를 기다리는 스레드의 ID&lt;/li&gt;
+&lt;li&gt;retval: 스레드가 종료하면서 반환하는 값에 접근하기 위한 2차원 포인터&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;결과값&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;성공시 0, 실패시 에러코드를 반환한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;pthread_join()&lt;/code&gt; 함수는 실패 시 다음과 같은 에러코드를 반환한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;EDEADLK: 두 스레드가 서로 &lt;code&gt;pthread_join()&lt;/code&gt;을 호출하는 교착상태의 발생&lt;/li&gt;
+&lt;li&gt;ESRCH: 해당 ID를 갖는 스레드가 존재하지 않을 경우&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/sdgv5o3x4gdwjhx/slide_4.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;예제&#34;&gt;예제&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;pthread.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+void *init_thread(void *perm) {
+  int i;
+  for (i = 0; i &amp;lt; 10; i++) {
+    printf(&amp;quot;counter: %d\n&amp;quot;, i);
+    sleep(1);
+  }
+  printf(&amp;quot;thread is now terminated. \n&amp;quot;);
+}
+
+int main(int argc, char *argv[]) {
+  pthread_t thread_id;
+  int res;
+
+  if (pthread_create(&amp;amp;thread_id, NULL, init_thread, NULL) != 0) {
+    fprintf(stderr, &amp;quot;pthread creation error\n&amp;quot;);
+    exit(0);
+  }
+
+  if (pthread_join(thread_id, (void **)&amp;amp;res) != 0) {
+    fprintf(stderr, &amp;quot;pthread join error\n&amp;quot;);
+    exit(0);
+  }
+  printf(&amp;quot;main function is terminated\n&amp;quot;);
+  return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/vt5fr1n58vhwetp/Screen%20Shot%202021-08-18%20at%201.49.44%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실행결과 스레드가 종료되기 전까지는 메인 함수가 종료되지 않는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스레드-사이의-통신&#34;&gt;스레드 사이의 통신&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;같은 프로세스 안에서 존재하는 스레드 사이의 정보 교환 방법에 대해서 알아볼 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;결론부터 말하자면 스레드 사이의 정보 교환을 위해서 프로세스의 전역 변수가 사용된다. &lt;code&gt;fork()&lt;/code&gt; 함수로 복제하여 생성한 프로세스와는 달리 스레드는 한 프로세스 내에서 독립적인 동작의 흐름을 만드는 것이기 때문에 프로세스의 자원을 공유할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다만, 스레드 사이의 데이터 동기화가 중요하다. 동기화 문제는 프로세스에서는 새마포어를 사용해서 해결하였는데 스레드도 세마포어를 이용하여 문제를 해결해볼 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;예제-1&#34;&gt;예제&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;pthread.h&amp;gt;
+#include &amp;lt;semaphore.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;fcntl.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+#define SEM_NAME &amp;quot;/test&amp;quot;
+
+void *thread_a_main(void *arg);
+void *thread_b_main(void *arg);
+
+static sem_t *sem;
+static int counter = 0;
+
+int main(int argc, char *argv[]) {
+  pthread_t thread_id_1, thread_id_2;
+  int res;
+
+  sem = sem_open(SEM_NAME, O_RDWR | O_CREAT, 0777, 1);
+  if (sem == SEM_FAILED) {
+    fprintf(stderr, &amp;quot;sem open error \n&amp;quot;);
+    exit(1);
+  }
+
+  if (pthread_create(&amp;amp;thread_id_1, NULL, thread_a_main, NULL) != 0) {
+    fprintf(stderr, &amp;quot;pthread 1 creation error\n&amp;quot;);
+    exit(0);
+  }
+
+  if (pthread_create(&amp;amp;thread_id_2, NULL, thread_b_main, NULL) != 0) {
+    fprintf(stderr, &amp;quot;pthread 2 creation error\n&amp;quot;);
+    exit(0);
+  }
+
+  if (pthread_join(thread_id_1, (void **) &amp;amp;res) != 0) {
+    fprintf(stderr, &amp;quot;pthread 1 join error\n&amp;quot;);
+    exit(0);
+  }
+
+  if (pthread_join(thread_id_2, (void **) &amp;amp;res) != 0) {
+    fprintf(stderr, &amp;quot;pthread 2 join error\n&amp;quot;);
+    exit(0);
+  }
+
+  sem_unlink(SEM_NAME);
+  return 0;
+}
+
+
+void *thread_a_main(void *arg) {
+  int i;
+  for (i = 0; i &amp;lt; 60000; i++) {
+    sem_wait(sem);
+    counter += 2;
+    printf(&amp;quot;thread a increases the counter by 2: counter - %d\n&amp;quot;, counter);
+    sem_post(sem);
+  }
+  return NULL;
+}
+
+void *thread_b_main(void *arg) {
+  int i;
+  for (i = 0; i &amp;lt; 60000; i++) {
+    sem_wait(sem);
+    counter += 3;
+    printf(&amp;quot;thread b increases the counter by 3: counter - %d \n&amp;quot;, counter);
+    sem_post(sem);
+  }
+  return NULL;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/621yp4ga0p58a1l/2021-08-18%2002.10.10.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실행 결과 A, B 스레드가 각각 카운터 변수에 접근해서 값을 증가시키는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;뮤텍스를-이용한-데이터-동기화&#34;&gt;뮤텍스를 이용한 데이터 동기화&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 예제와 같은 동기화 문제를 &lt;code&gt;pthread.h&lt;/code&gt;에 있는 뮤텍스를 활용하여 해결할 수 도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;뮤텍스도 세마포어와 유사한 기능을 수행한다. 세마포어와 마찬가지로 생성, 크리티컬 섹션 진입, 크리티컬 섹션 탈출, 소멸을 담당하는 함수를 알아보면서 뮤텍스 예제를 만들어 볼 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *mutexattr);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;인자&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mutex: 생성한 뮤텍스 객체에 접근하기 위한 포인터&lt;/li&gt;
+&lt;li&gt;mutexattr: 뮤텍스 객체의 속성을 정하기 위한 인자, NULL을 사용하면 기본값으로 설정&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;결과값&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;성공시 0, 실패시 에러코드를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;pthread_mutex_init()&lt;/code&gt; 함수는 뮤텍스 객체를 생성하는 역할을 한다. 생성한 뮤텍스 객체에 접근하는 것을 가능하게 하기 위해서 &lt;code&gt;mutex&lt;/code&gt; 라는 &lt;code&gt;pthread_mutex_t&lt;/code&gt; 타입의 포인터를 인자로 받는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;세마포어와 마찬가지로 뮤텍스 자체가 크리티컬 섹션을 보호하는 것은 아니다. 스레드의 상태 정보를 공유할 수 있는 게시판으로 뮤텍스를 이해하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;동기화를 하고자 하는 변수에 대한 읽기 작업/쓰기 작업을 하기 전에 항상 게시판을 확인하여 현재 사용중인 스레드가 있는지 확인하는 과정이 뮤텍스이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int pthread_mutex_lock(pthread_mutex_t *mutex);
+int pthread_mutex_unlock(pthread_mutex_t *mutex);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;동기화하기 위한 자원에 접근하기 전에 호출하는 함수는 &lt;code&gt;pthread_mutex_lock()&lt;/code&gt; 함수이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반면 자원에 대한 사용을 멈추고 다른 프로세스가 사용할 수 있는 기회를 주는 함수는 &lt;code&gt;pthread_mutex_unlock()&lt;/code&gt;이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int pthread_mutex_destory(pthread_mutex_t *mutex);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;인자&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;mutex: 사용할 뮤텍스 객체를 가리키는 포인터&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;마지막으로 생성한 뮤텍스를 소멸시킬 때 사용하는 &lt;code&gt;pthread_mutex_destory()&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;예제-2&#34;&gt;예제&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;뮤텍스를 이용하여 스레드 간에 동기화를 시켜보겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;pthread.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+void *thread_a_main(void *arg);
+void *thread_b_main(void *arg);
+
+static int counter = 0;
+static pthread_mutex_t mutex;
+
+int main(int argc, char *argv[]) {
+  pthread_t thread_id_1, thread_id_2;
+  int res;
+  pthread_mutex_init(&amp;amp;mutex, NULL);
+
+  pthread_create(&amp;amp;thread_id_1, NULL, thread_a_main, NULL);
+  pthread_create(&amp;amp;thread_id_2, NULL, thread_b_main, NULL);
+
+  pthread_join(thread_id_1, (void**) &amp;amp;res);
+  pthread_join(thread_id_2, (void**) &amp;amp;res);
+
+  pthread_mutex_destroy(&amp;amp;mutex);
+  return 0;
+}
+
+void *thread_a_main(void *arg) {
+  int i;
+  for (i = 0; i &amp;lt; 10000; i++) {
+    pthread_mutex_lock(&amp;amp;mutex);
+    counter += 2;
+    printf(&amp;quot;thread a increases the counter by 2: counter - %d\n&amp;quot;, counter);
+    pthread_mutex_unlock(&amp;amp;mutex);
+  }
+  return NULL;
+}
+
+void *thread_b_main(void *arg) {
+  int i;
+  for (i = 0; i &amp;lt; 10000; i++) {
+    pthread_mutex_lock(&amp;amp;mutex);
+    counter += 3;
+    printf(&amp;quot;thread b increases the counter by 3: counter - %d\n&amp;quot;, counter);
+    pthread_mutex_unlock(&amp;amp;mutex);
+  }
+  return NULL;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/41pxocbi6r6wz7a/2021-08-18%2002.34.13.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267&#34;&gt;네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/08/17/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
