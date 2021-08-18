@@ -6,7 +6,83 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 18 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/19/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Thu, 19 Aug 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/19/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://engineering.linecorp.com/ko/blog/testing-optimization/&#34;&gt;LINE에서 테스트를 최적화하는 방법&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오늘 팀 회식을 하는 날이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;테스트 역시, 개발을 할 때와 마찬가지로 설계를 해야 효과적인 테스트를 할 수 있다고 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어디론가로 떠가고 싶다는 생각을 하였다. 모든 것을 내려놓고 잠시 여행을 다녀오면 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어제 테스트 데이터가 정상적으로 설정되지 않는 이슈가 있었는데 오늘 모두 정상적으로 생성되었으면 좋겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;테스트를 설계하는 기법에도 여러가지 방법이 있다는 것을 알게 되었다. (EP-BVA, 페어와이즈, 상태 전의)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;EP-BVA: EP는 동등 분할 기법으로 프로그램의 입력 값과 출력 값이 특정 그룹으로 되어있고, 분류된 그룹의 값들을 시스템에서 동일하게 취급한다는 특성을 이용한 테스트 기법. BVA는 경계값 분석 기법으로 동등 분할의 확장 형태이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페어 와이즈 : 가능한 모든 입력값의 조합을 테스트하는 대신에 짝들의 조합으로 테스트 하는 방법&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상태 전의 : 어떤 이벤트가 발생하였을 때 모든 입력값의 조합을 테스트 하는 대신에 짝들의 조합으로 테스트 하는 방법&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어제 페이징과 필터를 구현하면서, 많은 것을 알게 되었다. 하지만, 특정 칼럼필드에 정렬을 각각 오름차순할 떄 API를 어떻게 설계해야하는지 조사를 해봐야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어제 역시도, 업무가 끝나고 찌뿌둥한 느낌과 무기력한 느낌을 지우지 못해서 늦잠을 자게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;17:00 ~ (회사 업무가 끝나고 코딩 테스트 문제를 해결 할 것이다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;18:30 ~ (회식을 위해서 배달 음식을 시켜야겠다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;19:30 ~ (회식이 얼추 끝나면, 멀티 플렉싱기법에 대해서 공부를 할 것이다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;생각을 비우고, 일상에서 명상을 자주 하자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/08/18/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
