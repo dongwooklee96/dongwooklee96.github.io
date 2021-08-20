@@ -6,7 +6,262 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 20 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 21 Aug 2021 01:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>멀티 플렉싱</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/21/%EB%A9%80%ED%8B%B0-%ED%94%8C%EB%A0%89%EC%8B%B1.html</link>
+      <pubDate>Sat, 21 Aug 2021 01:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/21/%EB%A9%80%ED%8B%B0-%ED%94%8C%EB%A0%89%EC%8B%B1.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서버 프로그램은 일반적으로 동시에 여러 클라이언트에게 서비스를 제공해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 작업은 멀티 프로세스와 멀티 스레드를 이용하여 처리가 가능하고 독립된 흐름을 만들어서 클라이언트의 요청을 각가 처리한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 하나의 흐름으로 모든 클라이언트의 요청을 처리하는 방법도 있다. 이 방법을 사용하면 하나의 프로세스가 여러 클라이언트에게 순차적으로 서비스를 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 서비스 모델은 통신에서 하나의 미디엄에 여러 목적지에 해당하는 정보를 실어 보내는 멀티 플렉싱과 유사해 보이기 때문에 멀티 플렉싱이라는 용어로 불리기도 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;멀티-플렉싱&#34;&gt;멀티 플렉싱&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/auyfwxv83mqzei8/download13.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;TCP 연결이 형성된 이후의 입출력은 결국에 파일 디스크립터를 이용한 &lt;code&gt;write()/read(), send()/recv()&lt;/code&gt; 함수와 같은 입출력 함수를 통해서 이루어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;멀티 프로세스 프로그래밍과 멀티 스레드 프로그래밍은 클라이언트와의 입출력을 처리하기 위한 파일 디스크립터를 독립된 실행의 흐름으로 관리했었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상담 서비스에 비유를 하자면, 고객에게 전화가 올 때마다 한명의 상담원을 할당하여 고객에게 서비스를 제공하는 상황과 비슷하다고 생각할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각각의 상담원들은 고객의 요청이 들어올 때마다 그에 상응하는 서비스를 제공한다. 상담원들은 고객의 요청이 없더라도 계속 대기한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 한 명의 상담원이 여러 명의 고객에게 서비스를 제공해야하는 상황이 되면 어떻게 처리할 수 있을까? 고객의 요청이 자동 응답기에 의해서 저장되고 상담원이 자동 응답기를 조회하면서 처리해야하는 일이 발견 될 때마다 일을 한다면 한명의 상담원으로 여러 명의 고객에게 서비스를 할 수 있을 것 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;통신에서 하나의 통신 채널을 이용하여 여러 쌍의 송수신자 사이의 통신을 가능하게 하는 것을 멀티플렉싱이라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;select--함수&#34;&gt;SELECT () 함수&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이미 연결된 소켓에 읽을 데이터가 있는지 없는지를 확인하는 작업이 필요한데 이러한 작업을 위해서 &lt;code&gt;select()&lt;/code&gt; 함수를 소개한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;select()&lt;/code&gt; 함수는 데이터의 유무를 확인할 소켓을 지정하는 역할을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;즉 &lt;code&gt;select()&lt;/code&gt; 함수는 관찰하고자 하는 파일 디스크립터를 등록하는 함수라고 볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;인자&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;nfds&lt;/code&gt;: 파일 디스크립터 중에 가장 높은 값&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;readfds&lt;/code&gt;, &lt;code&gt;writefds&lt;/code&gt;, &lt;code&gt;exeptfds&lt;/code&gt;: 파일 디스크립터의 집합으로 (읽기/쓰기/예외)에 관심을 두고 모니터링할 파일 디스크립터를 지정할 때 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;timeout&lt;/code&gt;: &lt;code&gt;select()&lt;/code&gt; 함수의 호출은 지정한 관찰 결과가 발생할 때까지 프로그램을 블로킹 상태로 만든다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;timeout&lt;/code&gt;은 계속해서 블록킹 상태로 대기하는 것을 방지하기 위해서 블로킹 상태로 유지되는 시간의 상한을 정하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;select()&lt;/code&gt; 함수는 여러 개의 파일 디스크립터를 &lt;code&gt;timeout&lt;/code&gt; 시간만큼 모니터링 한다. 모니터링 하던 중에 읽기/쓰기/예외와 같은 입출력 동작이 블로킹 되지 않고 수행할 수 있는 상황이 발생하면 양수값을 반환하면서 함수를 종료한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특정 조건이 발생할 때까지 파일 디스크립터들을 모니터링을 하면서 호출한 프로세스를 대기 상태로 만든다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/c60ove3zertoj84/img1.daumcdn.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;관찰할 파일 디스크립터는 &lt;code&gt;fd_set&lt;/code&gt; 이라는 변수형으로 묶을 수 있다. &lt;code&gt;fd_set&lt;/code&gt;은 관찰 대상이 되는 파일 디스크립터를 비트 단위로 저장한 자료형이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;fd_set&lt;/code&gt;의 값을 설정하려면 비트 단위 연산을 해야하기 때문에 매크로의 도움 없이 값을 설정하고 읽는 작업은 복잡한 작업이 된다. 따라서 아래와 같은 매크로가 정의되어 있으며 이 매크로들을 사용하여 &lt;code&gt;fd_set&lt;/code&gt; 자료형의 값을 제어할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;매크로&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;FD_ZERO(fd_set *fdset)&lt;/td&gt;
+&lt;td&gt;fdset 변수의 모든 비트를 0으로 설정&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FD_SET(int fd, fd_set *fdset)&lt;/td&gt;
+&lt;td&gt;fdset 변수 중 fd에 해당하는 비트를 1로 설정&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FD_CLR(int fd, fd_set *fdset)&lt;/td&gt;
+&lt;td&gt;fdset 변수 중 fd에 해당하는 비트를 0으로 설정&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FD_ISSET(int fd, fd_set *fdset)&lt;/td&gt;
+&lt;td&gt;fdset 변수 중 fd에 해당하는 비트가 1이면 양수를 반환한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;select&lt;/code&gt; 함수는 파일 디스크립터 셋을 모니터링 하는 중에 해당 입출력 이벤트가 발생하면 해당 &lt;code&gt;fd_set&lt;/code&gt; 변수에서 이벤트가 발생하지 않은 파일 디스크립터 비트를 0으로 셋팅 한 후에 양의 정수를 반환하면서 종료한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 종료 이후에 &lt;code&gt;fd_set()&lt;/code&gt; 매크로를 사용하여 어떤 파일 디스크립터가 준비된 것인지를 알아낼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 &lt;code&gt;select()&lt;/code&gt; 함수의 관찰 시간은 &lt;code&gt;timeval&lt;/code&gt; 이라는 구조체를 이용하여 &lt;code&gt;select()&lt;/code&gt; 함수에 전달된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;struct timeval {
+  long tv_sec; // 초
+  long tv_usec; // 마이크로 초
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;만약 &lt;code&gt;timeval&lt;/code&gt; 변수를 사용하여 정해진 시간 동안 모니터링하고 있는 파일 디스크립터 셋에 변화가 발생하지 않으면 &lt;code&gt;select()&lt;/code&gt; 함수는 0을 반환한다. 또한, &lt;code&gt;timeval()&lt;/code&gt; 변수 자리에 &lt;code&gt;NULL&lt;/code&gt; 인자를 사용하면 시간을 무한대로 설정할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;select-함수의-활용&#34;&gt;SELECT() 함수의 활용&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;멀티 프로세스 / 스레드를 활용한 일반적인 서버 프로그램의 호출은 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;socket()&lt;/code&gt; 호출&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;bind()&lt;/code&gt; 호출&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;listen()&lt;/code&gt; 호출&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;accept()&lt;/code&gt; 호출 후에 프로세스 또는 스레드를 생성하여 각자의 입출력을 처리&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;select()&lt;/code&gt; 함수를 이용하여 만들 서버 프로그램은 단일 프로세스 프로그램이기 때문에, &lt;code&gt;accept()&lt;/code&gt; 호출 이후 생성되는 연결 소켓의 파일 디스크립터를 받는 일과 연결 소켓을 이용하여 입출력을 처리하는 루틴이 있어야 한다. 따라서 아래와 같은 흐름을 가진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;socket 호출 (듣기 소켓 생성)&lt;/li&gt;
+&lt;li&gt;bind 호출&lt;/li&gt;
+&lt;li&gt;listen 호출&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;관찰 대상이 되는 디스크립터 셋 형성&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;루프 시작&lt;/li&gt;
+&lt;li&gt;듣기 소켓을 관찰하여 읽을 데이터가 있을 경우 accept를 호출한다.&lt;/li&gt;
+&lt;li&gt;accept 호출로 전송 소켓 디스킙터를 관찰 대상에 등록한다.&lt;/li&gt;
+&lt;li&gt;전송 소켓을 관찰하여 읽을 데이터가 있을 경우 입출력을 한다.&lt;/li&gt;
+&lt;li&gt;루프 끝&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;예제&#34;&gt;예제&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;에코 서버 프로그램을 작성하면서 &lt;code&gt;SELECT()&lt;/code&gt;의 사용 방법을 알아 볼 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버 프로그램은 클라이언트의 요청을 받아들여 TCP 연결을 형성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버 프로그램은 연결 이후 클라이언트가 전송하는 문자열을 다시 클라이언트로 재전송 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버 프로그램은 멀티 플렉싱을 사용하여 다수의 클라이언트를 처리한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/socket.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;netinet/in.h&amp;gt;
+#include &amp;lt;string.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;sys/time.h&amp;gt;
+#include &amp;lt;errno.h&amp;gt;
+
+void error_proc(const char*);
+
+int main(int argc, char *argv[]) {
+  int listen_sd, connect_sd;
+  struct sockaddr_in server_addr, client_addr;
+  int client_addr_len, read_len, str_len;
+  char read_buffer[BUFSIZ];
+  int max_fd = 0;
+  fd_set default_fds, read_fds;
+  int res, i;
+
+  if (argc != 2) {
+    printf(&amp;quot;usage: %s [port number]\n&amp;quot;, argv[0]);
+    return -1;
+  }
+
+  printf(&amp;quot;server start...\n&amp;quot;);
+  listen_sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
+  if (listen_sd == -1) error_proc(&amp;quot;socket&amp;quot;);
+  memset(&amp;amp;server_addr, 0, sizeof(server_addr));
+
+                                                                                        31,0-1        10%
+        } else { // 듣기 소켓 외의 다른 소켓이 읽기 준비 상태가 되면 IO를 수정
+          read_len = read(i, read_buffer, sizeof(read_buffer) -1);
+          if (read_len == 0) {
+            fprintf(stderr, &amp;quot;a client is disconnected... \n&amp;quot;);
+            FD_CLR(i, &amp;amp;default_fds);
+            close(i);
+            continue;
+          }
+          read_buffer[read_len] = &#39;\0&#39;;
+          printf(&amp;quot;client (%d): %s\n&amp;quot;, i - 3, read_buffer);
+          write(i, read_buffer, strlen(read_buffer));
+        }
+      }
+    }
+  }
+  close(listen_sd);
+  return 0;
+}
+
+void error_proc(const char *str) {
+  fprintf(stderr, &amp;quot;error: %s\n&amp;quot;, str);
+  exit(1);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;select()&lt;/code&gt; 함수는 소켓 프로래밍에만 특화되어 있는 함수가 아니라 파일 디스크립터를 관리하는 방법을 제공하는 함수로 볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여러 개의 파일 디스크립터 상태 변화를 모니터링하여 적절하게 입출력 작업을 할 때 유용하게 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267&#34;&gt;네트워크 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/08/20/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
