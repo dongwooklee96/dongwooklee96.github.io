@@ -6,7 +6,71 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 19 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 20 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/20/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Fri, 20 Aug 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/20/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://tech.kakaoenterprise.com/113&#34;&gt;Release Note 톺아보기&lt;/a&gt; 라는 글을 읽어보게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;내가 개발하고 있는 솔루션에도 이관 날짜에 맞춰서 릴리즈 노트를 작성하는 것도 좋을 것 같다는 생각을 하였다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;릴리즈 노트 정보를 공유해야하는 이유는 크게 아래와 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;업데이트 정보르 한데 모아서, 내가 작업하지 않은 업데이트 사항을 빠르게 파악가능하다.&lt;/li&gt;
+&lt;li&gt;릴리즈 노트를 보면 누구나 제품의 발자취를 한눈에 파악가능하다.&lt;/li&gt;
+&lt;li&gt;우리 회사의 제품 혹은 서비스가 지속적으로 개선되고 최신의 상태를 유지하고 있음을 알린다.&lt;/li&gt;
+&lt;li&gt;사용자의 신고와 의견을 반영하고 있다는 인상을 주어서 사용자의 적극적인 피드백을 유도한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;또한 릴리즈 노트에, 태그를 넣어서 한눈에 원하는 항목을 쉽게 찾을 수 있도록 하는 것도 좋을 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;NEW: 새로운 서비스(문서)가 출시된 경우
+FEATURE: 새로운 기능이 추가된 경우
+CHANGED: 기존 기능이 수정 또는 변경된 경우
+FIXED: 기존의 오류 및 버그가 수정된 경우
+DEPRECATED: 제공되고 있는 기능이 중단된 경우
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어제 퇴근후에 바로 잠에 들지 않아서 생활 패턴을 원래 대로 유지시키는데 도움이 된 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어제 코딩 테스트 문제를 풀어서 제출하려고 하였으나 몸이 피곤하여 하기 부담스러웠다. 오늘은 제출할 수 있도록 해야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;업무가 끝난후에 코딩 테스트 문제를 풀어서 제출해야겠다. (17:00 ~ 18:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오늘은 내일 있을 공개소프트웨어 개발 분량을 해결하기 위해서 코딩 테스트 문제를 풀고나서 바로 웹 개발을 해야겟다. (19:00 ~ 21:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오늘도 열심히 공부를 해야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/08/19/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
