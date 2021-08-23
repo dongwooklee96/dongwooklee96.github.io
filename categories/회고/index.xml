@@ -6,7 +6,143 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 23 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 24 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/24/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Tue, 24 Aug 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/24/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스 파일 시스템에 관한 좋을 글을 읽을 수 있었다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.naver.com/n_cloudplatform/222384170516&#34;&gt;POSIX 알아보기 #1 : Linux(리눅스 파일 시스템의 종류와 특징)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.naver.com/n_cloudplatform/222481521174&#34;&gt;POSIX 알아보기 #2 : 가상 파일 시스템 VFS(Virtual Filesystem)의 의의와 동작 방식&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://slack.engineering/how-we-design-our-apis-at-slack/&#34;&gt;How We Design Our APIs at Slack&lt;/a&gt; 라는 글을 읽었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스 파일 시스템에 대해서 공부할 때 많은 도움이 될 것 같다. 그리고 실제 글을 보면서 리눅스 커널을 직접 살펴보면 더 재미있을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;API를 설계하면서 내가 과연 좋은 API를 만들고 있는지 궁금할 때가 있는데 위와 같은 글을 읽으면서 내가 잘 하고 있거나 아니면 개선할 점을 찾을 수 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;슬랙이 API를 디자인하는 원칙&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;한가지 동작만 아주 잘 할것&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;한번에 너무 많은 문제를 해결하려고 시도하고 싶을 지도 모르지만 많은 동작을 지원하면 복잡해지고 이해하기 어려워진다.&lt;/li&gt;
+&lt;li&gt;단순한 API는 이해하기 쉬울 뿐만 아니라 확장하기 쉽고 성능이 뛰어나고 안전하다. 그리고 API에 새로운 기능을 추가하는 쉽지만 제거하기는 쉽지 않다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;빠르고 쉽게 사용할 수 있게 만들 것&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;개발자가 API를 쉽게 이해하고 빠르게 시작할 수 있도록 하는 것이 중요하다.&lt;/li&gt;
+&lt;li&gt;초기 API 문서를 디자인할 때 중요한 것이 무엇인지 항상 생각하면서 문서를 작성하자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;직관적인 일관성을 위해서 노력하기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;사용하고 있는 용어를 업계 표준이나 다른 API 들에서 통일성있게 제공해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;의미있는 에러 리턴하기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;API 설계의 또 다른 원칙은 의미있는 오류를 반환하여 개발자가 문제를 더 쉽게 해결할 수 있도록 하는 것이다.&lt;/li&gt;
+&lt;li&gt;오류 코드를 반환하는 것 외에도 API 응답의 필드에서 긴 형식의 오류 메세지를 추가하는 것이 유용하다. 문제 해결 방법이나 추가 정보 링크를 포함하여 사람이 읽을 수 있는 오류 설명이 포함될 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;확장성과 성능을 고려한 설계&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;매우 많은 양의 데이터를 반환하는 API는 페이징 처리를 해야한다. 그렇지 않으면 백엔드가 과부하에 걸린다.&lt;/li&gt;
+&lt;li&gt;다른 컬렉션안에 큰 컬렉션을 중첩하지 마라. 이 경우에 페이징 처리를 매우 복잡해진다.&lt;/li&gt;
+&lt;li&gt;API 속도 제한 : 클라이언트 코드의 오류로 인해서 서버에 지속적인 요청으로 서버가 과부화 될 수 있다. 애플리케이션의 안전성과 가용성을 높이면서 인프라를 보호하려면 적절한 속도 제한을 걸어야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;호환성을 깨는 변경을 피하기&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;설계-프로세스&#34;&gt;설계 프로세스&lt;/h3&gt;
+&lt;h4 id=&#34;1-api-스펙-작성&#34;&gt;1. API 스펙 작성&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;팀이 해결하고자 하는 문제를 파악하고 API 사용 사례를 정의하면서 사양을 작성하는 것 부터 시작한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여기서 메서드 이름, 목적, 예제 요청, 응답 및 가능한 오류와 같은 정보가 포함될 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/zkv70hxw94aa12c/Screen%20Shot%202021-08-24%20at%208.37.22%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위와 같이 작성한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-내부-api-리뷰&#34;&gt;2. 내부 API 리뷰&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;내부 개발자들과 사용성, 보안 및 성능 고려 사항에 대해서 자세히 설명한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-초기-파트너-피드백&#34;&gt;3. 초기 파트너 피드백&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;API를 사용하는 파트너사에게 공유한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-베타-테스팅&#34;&gt;4. 베타 테스팅&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;새로운 API를 널리 사용할 수 있도록 선별된 파트너사에게 미리 액세스를 제공한다. 이러한 공개로 인해서 피드백이 주어지고 문제를 조기에 해결 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;요즘 일찍 자고 알람을 맞추지 않은 상태로 일어나고 있다. 그리고 아침 산책 및 운동을 하는데 몸이 훨씬 가벼워지고 기분이 좋아진다. 앞으로도 이러한 루틴을 유지할 수 있도록 해야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어제 기타 학원에서 피곤한채로 수업하여 집중도에 문제가 있었는데 수업전에 연습을 충분히 해야겠고, 그리고 피곤하지 않을 수 있도록 에너지를 충전해서 가야겠다. 그리고 평소에 체력을 키워야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;업무가 끝난 후에 코딩 테스트 공부를 한다. (17:00 ~ 18:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 &lt;code&gt;POSTGRES&lt;/code&gt;에 어떻게 기여할 수 있을 지 조사 및 구현을 한다. (18:00 ~ 19:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스 파일 시스템에 대해서 공부를 한다. (20:00 ~ 21:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;운동 및 취침을 한다. (22:00 ~ )&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오늘 하루도 힘차고 활기차게 보내자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/08/23/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>정렬 알고리즘 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">정렬 알고리즘</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/08/23</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">알고리즘</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="정렬-알고리즘">정렬 알고리즘</h3>
+<hr>
+<ul>
+<li>
+<p>정렬은 알고리즘 학습에 있어서 가장 기본적으로 알아두어야 하는 개념중에 하나이다.</p>
+</li>
+<li>
+<p>정렬을 하면서 다양한 문제를 쉽게 해결할 수 있다.</p>
+<ul>
+<li>찾기 : 정렬된 리스트는 특정 아이템을 쉽게 찾을 수 있도록 한다.</li>
+<li>선택: 찾기와 마찬가지로 정렬된 리스트에서 다양한 아이템에 접근하여 얻어올 수 있다. 예를 들어서 리스트에서 3번째 큰 수를 가져온다던가 중간값을 찾거나 하는 일들이 쉽게 처리 될 수 있다.</li>
+<li>중복 검출 : 정렬되어 있다면 중복 아이템 찾기도 쉽게 처리할 수 있다.</li>
+<li>분포 : 리스트에서 가장 많이 있거나 적게 있는 아이템들을 쉽게 골라낼 수 있다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="거품-정렬-bubble-sort">거품 정렬 (Bubble Sort)</h3>
+<hr>
+<ul>
+<li>
+<p>거품 정렬은 정렬 중에서 가장 직관적인 정렬 방식이다. 거품 정렬은 알고리즘 동작이 각 순회의 가장 큰 요소가 맨 뒤로 이동하는 방식이기 때문에 지어진 이름이다.</p>
+</li>
+<li>
+<p>예를 들어서 배열에 요소가 다음과 같이 있다고 가정을 하자. [8, 2, 6, 4, 5] 그렇다면 가장 처음에 있는 요소를 뒤의 요소와 비교하여 뒤의 요소보다 크다면 서로 값을 바꾼다.</p>
+</li>
+<li>
+<p>교환된 요소는 뒤의 숫자보다 크므로 계속 비교되어 끝까지 이동하게 된다.</p>
+</li>
+<li>
+<p>한 번의 순회가 끝나면 다음 순회를 이어서 진행한다. 거품 정렬에서 1번의 순회는 가장 큰 수를 맨 뒤로 보내기 때문에 마지막 요소와 비교할 필요가 없다.</p>
+</li>
+</ul>
+<pre><code>def bubble_sort(arr):
+    n = len(arr)
+
+    for i in range(n):
+        done_sort = True
+
+        for j in range(n - i - 1):
+            if arr[j] &gt; arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+                done_sort = False
+        if done_sort:
+            break
+    return arr
+
+
+if __name__ == &quot;__main__&quot;:
+    input_arr = [8, 2, 6, 4, 5]
+    print(f'{bubble_sort(input_arr)}')
+</code></pre><h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=267996120">쓰면서 익히는 알고리즘과 자료구조</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
