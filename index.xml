@@ -6,7 +6,117 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 25 Aug 2021 12:29:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Thu, 26 Aug 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://johngrib.github.io/wiki/java-javadoc/&#34;&gt;Javadoc 작성하기&lt;/a&gt; 라는 글을 읽었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.hwahae.co.kr/all/tech/tech-tech/6662/&#34;&gt;Python 3.6부터는 Dict가 순서를 기억한다.&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;메서드 주석을 이용하였을 때, 훨씬 파악하기 쉬웠다고 한다. 나도 프로그램을 작성할 때 메서드 주석을 작성하려고 노력해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메서드 주석을 작성하는데 목표는 메서드의 대략적인 역할을 3초안에 파악하는 것이라고 하였다. 3초안에 어떤 역할을 하는 메서드인지 명확하게 드러낼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;자바독을 읽는 사람의 입장에서 생각을 해보면서 각 코드의 역할이나 책임 경계에 대해서 생각해보는 시간을 가질 수 있다고 하였다. 따라서 메서드 주석을 작성하는 것 만으로도 좋은 설계에 대한 고민을 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;특정 메서드나 클래스의 책임을 3초 안에 파악할 수 있도록 짧고 간결하게 적는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메서드가 무엇을 입력 받아서 무엇을 리턴하는지를 중점적으로 설명한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메서드가 어떤 경우에 예외를 던지는지 케이스 별로 설명한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;구현에 대해서는 설명하지 않는 편이 좋다. (구현이 바뀌면 주석도 바뀌어야 하기 때문에&amp;hellip;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어떠한 경우에 예외를 발생시키는지 알려주는 것이 참 좋은 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;참, 거짓을 리턴하는 메서드의 경우에 아래와 같이 작성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;- main description은 다음과 같이 마침표가 있는 문장형으로 작성한다.
+  *서버가 대기중이라면 true, 대기중이 아니라면 false를 리턴합니다.
+  * 비어 있는 문자열이면 true를 리턴합니다.
+  * 적합한 문자열인 경우에만 true를 리턴합니다.
+- @return은 명사형으로 짧게 작성한다.
+  * 서버가 대기중이라면 true, 대기중이 아니라면 false
+  * 비어 있는 문자열이면 true
+  * 적합한 문자열인 경우에만 true
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;어떤 경우에 예외를 발생시키는지 꼭 메서드 주석에 입력하도록 하자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;어제 한강에서 킥보드를 탔더니 스트레스도 날리고 좋은 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;평소에 업무를 마치고 한강으로 달리기나 자전거를 타는 것도 좋을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;부주의한 코딩으로, 버그가 발생한다. 어떤 코드 부분을 삭제할 때 왜 이 코드가 있었고, 어떤 역할을 하는지 명확하게 파악하기 위해서 노력하자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;업무가 끝나고 코딩 테스트 문제를 푼다 (17:00 ~ 18:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;미용실에서 머리를 자르자. 머리 스타일을 바꿔봐야겠다. (18:00 ~ 19:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스 커널 개발에 관한 책을 읽는다. (19:00 ~ 20:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;카테고리를 조회할 수 있는 API를 작성한다. (20:00 ~ 21:00)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=rnykgyOczpM&amp;amp;list=WL&amp;amp;index=10&#34;&gt;&amp;lsquo;억&amp;rsquo;만장자가 &amp;lsquo;백&amp;rsquo;만장자에게 가르치는 것 (일반인들은 모름)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스스로 어떤 것을 해야할지 파악하고 처리할 수 있는 사람이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나도 내가 구축한 사업 생태계를 만든다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 선언) 내가 했던 일을 통해 배운 점과 아쉬운 점을 어떻게 유지
+하고 개선할지를 적는다.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+    </item>
+    
     <item>
       <title>동전 거스름돈 문제</title>
       <link>https://dongwooklee96.github.io/post/2021/08/25/%EB%8F%99%EC%A0%84-%EA%B1%B0%EC%8A%A4%EB%A6%84%EB%8F%88-%EB%AC%B8%EC%A0%9C.html</link>
