@@ -6,7 +6,136 @@
     <description>Recent content in 알고리즘 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 25 Aug 2021 12:29:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 26 Aug 2021 20:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>큰 수의 법칙</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/26/%ED%81%B0-%EC%88%98%EC%9D%98-%EB%B2%95%EC%B9%99.html</link>
+      <pubDate>Thu, 26 Aug 2021 20:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/26/%ED%81%B0-%EC%88%98%EC%9D%98-%EB%B2%95%EC%B9%99.html</guid>
+      <description>&lt;h3 id=&#34;문제---큰-수의-법칙&#34;&gt;문제 - 큰 수의 법칙&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;다양한 수로 이루어진 배열이 있을 때 주어진 수들을 M번 더하여 가장 큰 수를 만드는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;단 배열의 특정한 인덱스에 해당하는 수가 연속해서 K번을 초과해서 더해질 수가 없는 것 이 특징이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어 순서대로 2, 4, 5, 4, 6 으로 이루어진 배열이 있을 때 M이 8이고 K가 3이라고 가정하자. 이 경우에 특정한 인덱스의 수가 연속해서 세 번까지만 더해질 수 있으므로 큰 수의 법칙에 따른 결과는 6 + 6 + 6 + 5 + 6 + 6 + 6 + 5인 46이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;제한-사항&#34;&gt;제한 사항&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;특정 수가 K 번을 초과해서 더해질 수 없다.&lt;/li&gt;
+&lt;li&gt;첫째 줄에 N(2 &amp;lt;= N &amp;lt; 1000), M (1 &amp;lt;= M &amp;lt;= 10,000), K (1 &amp;lt;= K &amp;lt;= 10000)의 자연수가 주어진다.&lt;/li&gt;
+&lt;li&gt;둘째 줄에 N개의 자연수가 주어진다. 각 자연수는 공백으로 구분한다. 각각의 자연수는 1 이상 ~ 10,000 이하의 수로 주어진다.&lt;/li&gt;
+&lt;li&gt;입력으로 주어지는 K는 항상 M보다 작거나 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;아이디어&#34;&gt;아이디어&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;반복문&#34;&gt;반복문&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;정렬을 하여 가장 큰 수와 그 다음으로 큰 수를 순서대로 구한다.&lt;/li&gt;
+&lt;li&gt;크게 M번 만큼 순회를 한다.&lt;/li&gt;
+&lt;li&gt;K번 만큼 개수를 세어서 만약 K번 만큼 수행하였을 때 그 다음 큰수로 변경하여 한번 더하는 것을 M번이 끝날 때까지 반복한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;시간 복잡도 : O(N)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;나누기&#34;&gt;나누기&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;정렬을 하여 가장 큰 수와 그 다음으로 큰 수를 구한다.&lt;/li&gt;
+&lt;li&gt;크게 M 번만큼 반복을 한다.&lt;/li&gt;
+&lt;li&gt;증가하는 요소를 K로 나눈 나머지가 0으로 나누어 떨어지면 그 다움으로 큰 수로 더한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;반복되는-수열-파악&#34;&gt;반복되는 수열 파악&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;가장 큰 수와 두 번째로 큰 수가 더해질 때는 특정한 수열 형태로 일정하게 반복해서 더해진다.&lt;/li&gt;
+&lt;li&gt;M을 (K + 1)로 나눈 몫 만큼 반복이 되어지며 K를 곱하면 나누어 떨어질 때 가장 큰수를 곱하는 경우이다., 여기에 일정하게 나누어 떨어지지 않는 경우도 있으므로  M을 (K + 1)로 나눈 나머지를 더해주면 된다.&lt;/li&gt;
+&lt;li&gt;총 수행할 개수 M에서 가장 큰 수를 더하는 횟수를 빼면 두번째로 큰 숫자를 더하는 숫자가 나온다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; List
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(n: int, m: int, k: int, lists: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+    lists&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort(reverse&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+    first, second &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; lists[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], lists[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    tot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(m):
+        cnt &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; cnt &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; k:
+            tot &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; second
+            cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            tot &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; first
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; tot
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution1&lt;/span&gt;(n: int, m: int, k: int, arrays: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+    arrays&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort(reverse&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+    first, second &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arrays[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;], arrays[&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    tot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, m &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (k &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;) &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            tot &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; second
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;:
+            tot &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; first
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; tot
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution2&lt;/span&gt;(n: int, m: int, k: int, arrays: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+    arrays&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+    first &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arrays[n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    second &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arrays[n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+
+    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;:
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(k):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+            result &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; first
+            m &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;
+        result &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; second
+        m &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; result
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution3&lt;/span&gt;(n: int, m: int, k: int, arrays: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+    arrays&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;sort()
+    first &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arrays[n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+    second &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; arrays[n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;]
+
+    count &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; int(m &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; (k &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; k
+    count &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; (k &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+
+    result &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+    result &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (count) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; first
+    result &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; (m &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; count) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; second
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    n, m, k &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+    lists &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split()))
+    print(solution1(n, m, k, lists))
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118&#34;&gt;이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>동전 거스름돈 문제</title>
       <link>https://dongwooklee96.github.io/post/2021/08/25/%EB%8F%99%EC%A0%84-%EA%B1%B0%EC%8A%A4%EB%A6%84%EB%8F%88-%EB%AC%B8%EC%A0%9C.html</link>
