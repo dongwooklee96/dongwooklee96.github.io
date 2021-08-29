@@ -6,7 +6,56 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 29 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Aug 2021 21:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VIM 설정 파일</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/29/vim-%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC.html</link>
+      <pubDate>Sun, 29 Aug 2021 21:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/29/vim-%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC.html</guid>
+      <description>&lt;pre&gt;&lt;code&gt;set bg=dark
+set autoindent
+set cindent
+set tabstop=8
+set shiftwidth=8
+
+set nu
+
+&amp;quot; 불필요한 공백이나 들여쓰기에 빨간색으로 보여준다.
+if has(&amp;quot;autocmd&amp;quot;)
+  highlight ExtraWhitespace ctermbg=red guibg=red
+  match ExtraWhitespace /\s\+$\|\t/
+  autocmd BufWinEnter * match ExtraWhitespace /\s\+$\|\t/
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@&amp;lt;!$\|\t/
+  autocmd InsertLeave * match ExtraWhitespace /\s\+$\|\t/
+  autocmd BufWinLeave * call clearmatches()
+endif
+
+&amp;quot; 파일을 열었을 때 이전의 위치를 기억하고 다시 그 위치에서 열어주는 기능
+if has(&amp;quot;autocmd&amp;quot;)
+  au bufreadpost * if line(&amp;quot;&#39;\&amp;quot;&amp;quot;) &amp;gt; 0 &amp;amp;&amp;amp; line(&amp;quot;&#39;\&amp;quot;&amp;quot;) &amp;lt;= line(&amp;quot;$&amp;quot;)
+    \| exe &amp;quot;normal g &#39;\&amp;quot;&amp;quot; |
+endif
+
+&amp;quot; CTRL + 이동키로 파일간 이동 가능하게 하는 핫키
+
+nmap &amp;lt;C-H&amp;gt; &amp;lt;C-W&amp;gt;h
+nmap &amp;lt;C-J&amp;gt; &amp;lt;C-W&amp;gt;j
+nmap &amp;lt;C-K&amp;gt; &amp;lt;C-W&amp;gt;k
+nmap &amp;lt;C-L&amp;gt; &amp;lt;C-W&amp;gt;l
+
+&amp;quot; CTAGS / CSCOPE
+set tags=/home/reallinux/git/linux/tags
+set csprg=/usr/local/bin/cscope
+cs add /home/reallinux/git/linux/cscope.out
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=61315607&#34;&gt;리눅스 커널 패치와 커밋&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/08/29/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
