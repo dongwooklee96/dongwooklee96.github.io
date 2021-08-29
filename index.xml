@@ -6,7 +6,39 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 29 Aug 2021 21:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Aug 2021 22:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>부팅할 때 리눅스 커널 버전 선택하는 옵션</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/29/%EB%B6%80%ED%8C%85%ED%95%A0-%EB%95%8C-%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%BB%A4%EB%84%90-%EB%B2%84%EC%A0%84-%EC%84%A0%ED%83%9D%ED%95%98%EB%8A%94-%EC%98%B5%EC%85%98.html</link>
+      <pubDate>Sun, 29 Aug 2021 22:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/29/%EB%B6%80%ED%8C%85%ED%95%A0-%EB%95%8C-%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%BB%A4%EB%84%90-%EB%B2%84%EC%A0%84-%EC%84%A0%ED%83%9D%ED%95%98%EB%8A%94-%EC%98%B5%EC%85%98.html</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/6yl64fjc9wr7kon/Screen%20Shot%202021-08-29%20at%2010.17.19%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;vim /etc/default/grub&lt;/code&gt; 명령어를 통해서 설정 파일을 연다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;GRUB_DEFAULT=0
+GRUB_TIMEOUT_STYLE=hiddden
+GRUB_TIMEOUT=0
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;기존 위와 같이 설정되어 있는 부분을 아래와 같이 바꾼다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;GRUB_DEFAULT=3
+GRUB_TIMEOUT_STYLE=menu
+GRUB_TIMEOUT=3
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;부팅할 떄 커널의 버전을 설정할 수 있는 옵션이다. 설치된 커널로 부팅할지, 아니면 기존에 설치되어 있는 커널로 부팅할지를 결정할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;설치된 커널이 잘못된 경우, 수월하게 복구할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
+    </item>
+    
     <item>
       <title>VIM 설정 파일</title>
       <link>https://dongwooklee96.github.io/post/2021/08/29/vim-%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC.html</link>
