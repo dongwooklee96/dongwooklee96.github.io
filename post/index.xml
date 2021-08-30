@@ -6,7 +6,82 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 29 Aug 2021 22:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 30 Aug 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>일일 회고</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/30/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Mon, 30 Aug 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/30/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://medium.com/musinsa-tech/%EB%AC%B4%EC%8B%A0%EC%82%AC-%EC%84%9C%EB%B9%84%EC%8A%A4%EC%97%90-%EC%A0%81%ED%95%A9%ED%95%9C-nosql-%EB%8F%84%EC%9E%85-%EC%97%AC%EC%A0%95-2%ED%8E%B8-3f2f390ed718&#34;&gt;무신사 서비스에 적합한 NoSQL 도입 여정&lt;/a&gt; 라는 글을 읽었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;오늘 회사 업무가 어느정도 마무리 될 것 같다는 생각이 든다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다음에 어떤 작업을 하게 될지 고민을 미리 해보고 작업할 것 들이 있으면 미리 작업하는 것이 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터베이스를 어떻게 테스트 할지 고민을 해봐야 할 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;주말에 해야할 일과 휴식을 적절하게 취한 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일요일에 쉬는 것도 좋지만, 운동을 하는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;복싱을 쉬지 말고 동네 복싱장을 등록하는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;17:00 ~ 18:00 (코딩 테스트 문제를 푼다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;18:00 ~ 19:00 (저녁 식사 후에 잠시 휴식을 한다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;20:00 ~ 21:00 (기타 수업에 참석한다.) 오는 길에 복싱장에 들려서 장비를 챙겨서 집에 와야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;22:00 ~ 리눅스 파일 시스템에 대해서 추가적으로 공부 및 정리를 하면 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-확언&#34;&gt;Affimation (자기 확언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;오늘도 좋은 하루를 보낼 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나는 리눅스 커널 및 시스템 프로그래밍에 대해서 공부를 할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 확언)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;정확한 언어 (나만의 방식으로 그 언어를 이미지화 시키는 것이다.)&lt;/li&gt;
+&lt;li&gt;명확한 시각화&lt;/li&gt;
+&lt;li&gt;상응하는 감정 (자신만의 감정을 상상한다.)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>부팅할 때 리눅스 커널 버전 선택하는 옵션</title>
       <link>https://dongwooklee96.github.io/post/2021/08/29/%EB%B6%80%ED%8C%85%ED%95%A0-%EB%95%8C-%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%BB%A4%EB%84%90-%EB%B2%84%EC%A0%84-%EC%84%A0%ED%83%9D%ED%95%98%EB%8A%94-%EC%98%B5%EC%85%98.html</link>
