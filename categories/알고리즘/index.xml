@@ -80,6 +80,102 @@ def solution2(n: int, k: int) -&amp;gt; int:
         result += 1
     return result
 
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    n, k = map(int, input().split())
+    print(solution(n, k))
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;더-나은-방법&#34;&gt;더 나은 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;조금 더 효율적으로 풀 수 있는 방법이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;입력이 적을 때는 일일이 하나씩 빼도 문제가 없지만, 큰 숫자를 빼야하는 경우에는 N이 K의 배수가 되도록 효율적으로 한번에 빼는 것 이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118&#34;&gt;이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>알고리즘 문제 - 1이 될때까지</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/27/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-1%EC%9D%B4-%EB%90%A0%EB%95%8C%EA%B9%8C%EC%A7%80.html</link>
+      <pubDate>Fri, 27 Aug 2021 17:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/27/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-1%EC%9D%B4-%EB%90%A0%EB%95%8C%EA%B9%8C%EC%A7%80.html</guid>
+      <description>&lt;h3 id=&#34;문제---1이-될때까지&#34;&gt;문제 - 1이 될때까지&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;어떠한 수 N이 1이 될떄가지 다음의 두 과정 중에 하나를 반복적으로 선택하여 수행하려고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;N에서 1을 뺀다.&lt;/li&gt;
+&lt;li&gt;N을 K로 나눈다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;두 번째 연산은 N이 K로 나누어질때만 선택할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서 N이 17, K가 4라면 1번의 과정을 1번하면 16이 되고 이후 2번의 과정을 2번하면 N은 1이 된다. 결과적으로 이 경우 전체 과정을 실행한 횟수는 3이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;N과 K가 주어질 때, N이 1이 될떄까지 1번 혹은 2번의 과정을 수행해야하는 최소 횟수를 구하는 프로그램을 작성하라.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;제한-사항&#34;&gt;제한 사항&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;아이디어&#34;&gt;아이디어&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;그리디&#34;&gt;그리디&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;K로 나눌 수 있는지 보고, 나눌 수 없으면 1을 뺀다.&lt;/li&gt;
+&lt;li&gt;N이 1이 될때까지 위의 과정을 반복한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;재귀&#34;&gt;재귀&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;K로 나눈 경우와, 1을 뺀 경우를 선택한다.&lt;/li&gt;
+&lt;li&gt;그리고 결과적으로 더 작은 값을 선택한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;def solution(n: int, k: int) -&amp;gt; int:
+    &amp;quot;&amp;quot;&amp;quot;
+    :param n: 특정한 수
+    :param k: 나눌 수
+    :return: 수행한 최소 횟수
+    &amp;quot;&amp;quot;&amp;quot;
+    tot = 0
+    while not n == 1:
+        if n % k == 0:
+            n //= k
+        else:
+            n -= 1
+        tot += 1
+    return tot
+
+
+def solution2(n: int, k: int) -&amp;gt; int:
+    result = 0
+
+    while n &amp;gt;= k:
+        while n % k != 0:
+            n -= 1
+            result += 1
+        n //= k
+        result += 1
+
+    while n &amp;gt; 1:
+        n -= 1
+        result += 1
+    return result
+
 def solution3(n: int, k: int) -&amp;gt; int:
     cnt = 0
 
