@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>알고리즘 문제 - 1이 될때까지 | 개발자 이동욱</title>
+    <title>[알고리즘 문제 풀이] 상하좌우 | 개발자 이동욱</title>
     <link rel="stylesheet" href="../../../../css/style.css" />
     <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
@@ -53,9 +53,9 @@
     <br/>
 
 <div class="article-meta">
-<h1><span class="title">알고리즘 문제 - 1이 될때까지</span></h1>
+<h1><span class="title">[알고리즘 문제 풀이] 상하좌우</span></h1>
 <h2 class="author">이동욱</h2>
-<h2 class="date">2021/08/27</h2>
+<h2 class="date">2021/08/31</h2>
 <p class="terms">
   
   
@@ -70,103 +70,125 @@
 
 <div class="content-wrapper">
   <main>
-    <h3 id="문제---1이-될때까지">문제 - 1이 될때까지</h3>
+    <h3 id="문제---상하좌우">문제 - 상하좌우</h3>
 <hr>
 <ul>
-<li>어떠한 수 N이 1이 될떄가지 다음의 두 과정 중에 하나를 반복적으로 선택하여 수행하려고 한다.</li>
+<li>
+<p>여행가 A는 N X N 크기의 정사각형 공간위에 서 있다.</p>
+</li>
+<li>
+<p>이 공간은 1 X 1 크기의 정사각형으로 나누어져있다. 가장 왼쪽 좌표는 (1, 1)이며, 가장 오른쪽 좌표는 (N, N)에 해당한다.</p>
+</li>
+<li>
+<p>여행가 A는 상, 하, 좌, 우 방향으로 이동할 수 있으며 시작 좌표는 항상 (1, 1)이다.</p>
+</li>
+<li>
+<p>우리 앞에는 여행가 A가 이동할 계획이 적힌 계획서가 놓여 있다.</p>
+</li>
+<li>
+<p>계획서에는 하나의 줄에 띄어쓰기를 기준으로 하여 L, R, U, D 중 하나의 문자가 반복적으로 적혀있고 각 문자의 의미는 아래와 같다.</p>
+</li>
 </ul>
-<ol>
-<li>N에서 1을 뺀다.</li>
-<li>N을 K로 나눈다.</li>
-</ol>
+<blockquote>
+<ul>
+<li>L: 왼쪽으로 한 칸 이동</li>
+<li>R: 오른쪽으로 한 칸 이동</li>
+<li>U: 위로 한 칸 이동</li>
+<li>D: 아래로 한 칸 이동</li>
+</ul>
+</blockquote>
 <ul>
 <li>
-<p>두 번째 연산은 N이 K로 나누어질때만 선택할 수 있다.</p>
+<p>이때 여행가 A가 N X N 크기의 정사각형 공간을 벗어나는 움직임은 무시된다.</p>
 </li>
 <li>
-<p>예를 들어서 N이 17, K가 4라면 1번의 과정을 1번하면 16이 되고 이후 2번의 과정을 2번하면 N은 1이 된다. 결과적으로 이 경우 전체 과정을 실행한 횟수는 3이 된다.</p>
-</li>
-<li>
-<p>N과 K가 주어질 때, N이 1이 될떄까지 1번 혹은 2번의 과정을 수행해야하는 최소 횟수를 구하는 프로그램을 작성하라.</p>
+<p>계획서가 주어졌을 때 여행가 A가 최종적으로 도착할 지점의 좌표를 출력하는 프로그램을 작성하라.</p>
 </li>
 </ul>
 <h3 id="제한-사항">제한 사항</h3>
 <hr>
+<h4 id="입력">입력</h4>
+<ul>
+<li>첫 째 줄에 공간을 나타내는 N이 주어진다. (1 ~ 100)</li>
+<li>둘 째 줄에 여행가 A가 이동할 계획서가 주어진다. (1 ~ 100)</li>
+</ul>
+<h4 id="출력">출력</h4>
+<ul>
+<li>
+<p>첫 째 줄에 여행가 A가 최종적으로 도착할 지점의 좌표 (X, Y)를 공백으로 구분하여 출력한다.</p>
+</li>
+<li>
+<p>정사각형 공간을 벗어나는 움직임은 무시된다.</p>
+</li>
+</ul>
 <h3 id="아이디어">아이디어</h3>
 <hr>
-<h4 id="그리디">그리디</h4>
 <ul>
-<li>K로 나눌 수 있는지 보고, 나눌 수 없으면 1을 뺀다.</li>
-<li>N이 1이 될때까지 위의 과정을 반복한다.</li>
+<li>계획서를 읽고 현재 좌표에 더해본다. (L, R, U, D)</li>
+<li>정사각형 공간을 벗어났는지 판단한다.
+<ul>
+<li>IF (1 &lt;= X &lt;= N, 1 &lt;= Y &lt;= N)</li>
 </ul>
-<h4 id="재귀">재귀</h4>
-<ul>
-<li>K로 나눈 경우와, 1을 뺀 경우를 선택한다.</li>
-<li>그리고 결과적으로 더 작은 값을 선택한다.</li>
+</li>
+<li>이상이 없다면 좌표를 갱신하고 다음 계획서를 끝날때까지 읽는다.</li>
 </ul>
 <h3 id="코드">코드</h3>
 <hr>
-<pre><code>def solution(n: int, k: int) -&gt; int:
-    &quot;&quot;&quot;
-    :param n: 특정한 수
-    :param k: 나눌 수
-    :return: 수행한 최소 횟수
-    &quot;&quot;&quot;
-    tot = 0
-    while not n == 1:
-        if n % k == 0:
-            n //= k
-        else:
-            n -= 1
-        tot += 1
-    return tot
+<pre><code>from typing import List
+from typing import Tuple
 
 
-def solution2(n: int, k: int) -&gt; int:
-    result = 0
+def solution(n: int, maps: List[str]) -&gt; Tuple[int, int]:
+    current_x = 1
+    current_y = 1
 
-    while n &gt;= k:
-        while n % k != 0:
-            n -= 1
-            result += 1
-        n //= k
-        result += 1
+    for map in maps:
+        if map == 'L':
+            if 1 &lt;= current_x - 1 &lt;= n:
+                current_x -= 1
+        elif map == 'R':
+            if 1 &lt;= current_x + 1 &lt;= n:
+                current_x += 1
+        elif map == 'U':
+            if 1 &lt;= current_y - 1 &lt;= n:
+                current_y -= 1
+        elif map == 'D':
+            if 1 &lt;= current_y + 1 &lt;= n:
+                current_y += 1
 
-    while n &gt; 1:
-        n -= 1
-        result += 1
-    return result
-
-def solution3(n: int, k: int) -&gt; int:
-    cnt = 0
-
-    while not n &lt;= 1:
-        if n % k == 0:
-            n //= k
-            cnt += 1
-        else:
-            target = (n // k) * k
-            cnt += n - target
-            n = target
-
-    return cnt
+    return current_y, current_x
 
 
-if __name__ == &quot;__main__&quot;:
-    n, k = map(int, input().split())
-    print(solution(n, k))
+def solution2(n: int, plans: List[str]) -&gt; Tuple[int, int]:
+    x, y = 1, 1
+    dx = [0, 0, -1, 1]
+    dy = [-1, 1, 0, 0]
+    move_types = ['L', 'R', 'U', 'D']
 
-</code></pre><h3 id="더-나은-방법">더 나은 방법</h3>
+    for plan in plans:
+        for i in range(len(move_types)):
+            if plan == move_types[i]:
+                nx = x + dx[i]
+                ny = y + dy[i]
+            if nx &lt; 1 or ny &lt; 1 or nx &gt; n or ny &gt; n:
+                continue
+            x, y = nx, ny
+    return x, y
+
+
+if __name__ == '__main__':
+    n = int(input())
+    maps = list(input().split())
+    print(solution(n, maps))
+
+</code></pre><h3 id="개선할-점">개선할 점</h3>
 <hr>
 <ul>
 <li>
-<p>조금 더 효율적으로 풀 수 있는 방법이 있다.</p>
+<p>좌표 문제를 풀 때 배열에 미리 상, 하, 좌, 우 값을 입력해두는 것이 좀 더 깔끔한것 같다.</p>
 </li>
 <li>
-<p>입력이 적을 때는 일일이 하나씩 빼도 문제가 없지만, 큰 숫자를 빼야하는 경우에는 N이 K의 배수가 되도록 효율적으로 한번에 빼는 것 이 좋다.</p>
-</li>
-<li>
-<p>앞으로 하나씩 빼는 패턴이 보이면 한번에 뺄 수 없는지 고민을 해봐야겠다.</p>
+<p>맵을 읽을 때 리스트에 가능한 수를 넣어두고 반복문으로 일치하는지 확인하는 패턴도 유용하게 사용할 수 있을 것 같다.</p>
 </li>
 </ul>
 <h3 id="참고-문헌">참고 문헌</h3>
