@@ -6,7 +6,274 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 31 Aug 2021 08:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Aug 2021 16:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[시스템 프로그래밍] 디렉터리와 관련된 API 및 프로그램 작성</title>
+      <link>https://dongwooklee96.github.io/post/2021/08/31/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC%EC%99%80-%EA%B4%80%EB%A0%A8%EB%90%9C-api-%EB%B0%8F-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%9E%91%EC%84%B1.html</link>
+      <pubDate>Tue, 31 Aug 2021 16:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/08/31/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC%EC%99%80-%EA%B4%80%EB%A0%A8%EB%90%9C-api-%EB%B0%8F-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%9E%91%EC%84%B1.html</guid>
+      <description>&lt;h3 id=&#34;디렉터리-내용-읽어-들이기&#34;&gt;디렉터리 내용 읽어 들이기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;먼저 디렉터리 엔트리를 리스트 하는 API를 설명할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;디렉터리도 일반적인 파일과 비슷하다. 즉 &lt;code&gt;open()&lt;/code&gt; 하고 &lt;code&gt;read()&lt;/code&gt; 한 후에 &lt;code&gt;close()&lt;/code&gt; 하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;디렉터리를 읽으면 디렉터리에 담긴 파일들의 정보를 읽을 수 있다. 파일 한 개당 하나의 구조체에 대응되어, 디렉터리를 읽으면 구조체의 배열을 얻을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;디렉터리는 바이트 배열임과 동시에 구조체의 배열인 것이다. 이 구조체를 디렉터리 엔트리라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스의 디렉터리 API는 디렉터리 엔트리 배열 단위로 조작하는 API를 제공하여 개발자가 편리하게 사용할 수 있다. 이 API는 일반적인 파일을 취급하는 API와 비슷하게 &lt;code&gt;opendir(), readdir(), closedir()&lt;/code&gt; 라는 함수를 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;openddir3&#34;&gt;&lt;code&gt;openddir(3)&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;dirent.h&amp;gt;
+
+DIR *opendir(const char *path);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;opendir()&lt;/code&gt;은 경로로 지정한 디렉터리를 얻기 위해서 &lt;code&gt;open()&lt;/code&gt; 하고 DIR 타입에 대한 포인터를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DIR 타입은 디렉터리를 읽어들이기 위한 스트림을 관리하는 구조체로, 파일을 읽을 때 사용한 FILE 타입에 대응하는 개념이라고 생각하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;readdir3&#34;&gt;&lt;code&gt;readdir(3)&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;dirent.h&amp;gt;
+
+struct dirent *readdir(DIR *d);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;readdir()&lt;/code&gt;은 디렉터리 스트림 d로부터 엔트리를 하나씩 읽어 들여 &lt;code&gt;struct dirent(DIRectory Entry)&lt;/code&gt; 타입으로 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;더 읽을 엔트리가 없거나 읽어 들이는데 실패하면 NULL을 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;struct dirent&lt;/code&gt;의 내용은 운영체제에 따라서 다른데, 리눅스에는 적어도 엔트리의 이름에 해당하는 &lt;code&gt;char *d_name&lt;/code&gt; 이 있다. &lt;code&gt;d_name&lt;/code&gt;은 &amp;lsquo;\0&amp;rsquo;을 마지막에 담고 있는 문자열이라서 &lt;code&gt;printf(), fputs()&lt;/code&gt;에서 그대로 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;readdir()&lt;/code&gt;가 반환한 포인터는 다시 호출했을 때 덮어 쓰이므로 주의해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;closedir3&#34;&gt;&lt;code&gt;closedir(3)&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;dirent.h&amp;gt;
+
+int closedir(DIR *d);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;closedir()&lt;/code&gt;은 디렉터리 스트림 d를 닫는 함수이다. 성공하면 0을, 실패하면 -1을 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 외에도 파일을 다룰 때 사용한 &lt;code&gt;fseek()&lt;/code&gt;와 &lt;code&gt;ftell()&lt;/code&gt;에 대응하는 &lt;code&gt;seekdir()&lt;/code&gt;와 &lt;code&gt;telldir()&lt;/code&gt;도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ls-명령어-만들어보기&#34;&gt;ls 명령어 만들어보기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;dirent.h&amp;gt;
+
+static void do_ls(char *path);
+
+int main(int argc, char *argv[]) {
+  int i;
+
+  if (argc &amp;lt; 2) {
+    fprintf(stderr, &amp;quot;%s: no argument\n&amp;quot;, argv[0]);
+    exit(1);
+  }
+
+  for (i = 1; i &amp;lt; argc; i++) {
+    do_ls(argv[i]);
+  }
+  exit(0);
+}
+
+static void do_ls(char *path) {
+  DIR *d;
+  struct dirent *ent;
+
+  d = opendir(path);
+
+  if (!d) {
+    perror(path);
+    exit(1);
+  }
+  while (ent = readdir(d)) {
+    printf(&amp;quot;%s\n&amp;quot;, ent-&amp;gt;d_name); // 더 읽어 들일 엔트리가 없을 때까지 (즉, NULL이 반환될 때까지) 이름을 출력한다.
+  }
+  closedir(d);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/0lqtqhtpi797aln/Screen%20Shot%202021-08-31%20at%207.02.41%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실행 결과는 위와 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;디렉터리-트리의-순회&#34;&gt;디렉터리 트리의 순회&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;지금까지는 디렉터리 밑에 있는 파일에 접근하는 방법을 설명하였지만, 디렉터리 안에는 또 다른 디렉터리가 있을 수도 있는데, 그 안까지 접근하고 싶은 경우에는, 즉 재귀적으로 접근하고 싶을 경우도 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;즉 재귀적으로 접근하고 싶은 경우가 있을 텐데. 이러한 조작을 &amp;lsquo;디렉터리 순회&amp;rsquo;라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;기본적으로 순회할 때도 &lt;code&gt;openddir()&lt;/code&gt;, &lt;code&gt;readdir()&lt;/code&gt;, &lt;code&gt;closedir()&lt;/code&gt; 의 세 가지를 사용해서 꾸준히 디렉터리를 타고 들어가면 된다. 단 이때 주의해야할 것은 &amp;lsquo;.&amp;rsquo;, &amp;lsquo;..&amp;lsquo;의 존재이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;void
+traverse(path) {
+  DIR *d = openddir(path);
+  struct dirent *ent;
+
+  while (ent = readdir(d)) {
+    if /* ent가 디렉터리이면 */ {
+      traverse(path/ent);
+    }
+    /* 처리 */
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 코드의 문제는 &amp;lsquo;.&amp;lsquo;를 배제하지 않으므로 무한 재귀에 빠지게 된다. 또한 &amp;lsquo;..&amp;rsquo; 를 배제하지 않았으므로 결국 루트 디렉터릮자ㅣ 거슬러 올라와 파일 시스템 전체를 순회하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 문제를 해결하려면 명시적으로 &amp;lsquo;.&amp;rsquo;, &amp;lsquo;..&amp;lsquo;를 제외해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;두 번재 문제로는 심볼릭 링크를 고려하지 않았다. 예를 들면 처리 중인 디렉터리 안에 루트 디렉터리를 가리키는 심볼릭 링크가 있다면 루트 디렉터리로 처리가 이동하고, 그 안에서 또 루트 디렉터리를 가리키는 심볼릭 링크가 있으면 무한 루프에 들어가게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 문제를 피하기 위해서는 뒤에서 서술하는 &lt;code&gt;lstate()&lt;/code&gt;를 사용해서 심볼릭 링크를 명시적으로 제외할 필요가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇듯이 디렉터리 순회 코드는 꽤 주의해서 작성해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;디렉터리-만들기&#34;&gt;디렉터리 만들기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;mkdir2&#34;&gt;&lt;code&gt;mkdir(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/stat.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+
+int mkdir(const char *path, mode_t mode);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mkdir()&lt;/code&gt;은 &lt;code&gt;path&lt;/code&gt;로 지정한 디렉터리를 만든다. 성공하면 0을 반환하고, 실패하면 -1을 반환하고 errno를 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;두 번째 인자인 &lt;code&gt;mode&lt;/code&gt;에는 권한을 지정한다. 단 여기서 지정된 값이 그대로 권한이 되는 것은 아니고, 먼저 &lt;code&gt;umask&lt;/code&gt;라는 값과 비트 연산이 이루어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mkdir()&lt;/code&gt;은 다른 시스템 콜에 비해서 꽤 빈번하게 실패하는데, 많이 발생하는 실패 원인은 아래와 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;ENOENT
+상위 디렉터리가 없다.&lt;/li&gt;
+&lt;li&gt;ENOTDIR
+path로 지정한 상위 디렉터리가 디렉터리가 아니다.&lt;/li&gt;
+&lt;li&gt;EEXIST
+path로 지정한 경로에 이미 파일이나 디렉터리가 존재한다.&lt;/li&gt;
+&lt;li&gt;EPERM
+상위 디렉터리에 대한 변경 권한이 없다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;umask&#34;&gt;umask&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mkdir()&lt;/code&gt;이나 &lt;code&gt;open()&lt;/code&gt;을 사용할 때 만들어질 파일의 권한을 지정할 수 있지만, 두 경우 모두 지정한 값이 그대로 사용되는 것은 아니다. &lt;code&gt;umask()&lt;/code&gt;를 사용해서 변경된 값이 사용된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;umask&lt;/code&gt;는 프로세스 속성 중 하나로, 가장 일반적인 값은 8진수 022다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/qvlrqg02onl9v34/umask.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;open()이나 mkdir()에서 실제로 사용하는 권한은 C 언어로 표현하면 &amp;lsquo;mode &amp;amp; ~umask&amp;rsquo;로 계산된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/stat.h&amp;gt;
+
+mode_t umask(mode_t mask);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;umask()&lt;/code&gt;는 프로세스의 &lt;code&gt;umask()&lt;/code&gt; 값을 &lt;code&gt;mask&lt;/code&gt;로 변경하고, 직전까지의 &lt;code&gt;umask()&lt;/code&gt; 값을 반환한다. &lt;code&gt;umask()&lt;/code&gt;는 절대로 실패하지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mkdir-명령어-작성하기&#34;&gt;mkdir 명령어 작성하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/stat.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  int i;
+
+  if (argc &amp;lt; 2) {
+    fprintf(stderr, &amp;quot;%s: no arguments\n&amp;quot;, argv[0]);
+    exit(1);
+  }
+
+  for (i = 1; i &amp;lt; argc; i++) {
+    if (mkdir(argv[i], 0777) &amp;lt; 0) {
+      perror(argv[i]);
+      exit(1);
+    }
+  }
+  exit(0);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/5xe4zj3wrn5z3t5/Screen%20Shot%202021-08-31%20at%207.26.23%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;디렉터리-삭제하기&#34;&gt;디렉터리 삭제하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;rmdir2&#34;&gt;&lt;code&gt;rmdir(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+
+int rmdir(const char *path);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;rmdir()&lt;/code&gt;은 path로 지정한 디렉터리를 삭제한다. 디렉터리는 반드시 비어있어야 한다. 성공하면 0을 반환하고 실패하면 -1을 반환하고나서 errno를 설정한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;reallinux@ubuntu:~/git/system$ clear
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  int i;
+  if (argc &amp;lt; 2) {
+    fprintf(stderr, &amp;quot;%s: no arguments\n&amp;quot;, argv[0]);
+    exit(1);
+  }
+
+  for (i = 1; i &amp;lt; argc; i++) {
+    if (rmdir(argv[i]) &amp;lt; 0) {
+      perror(argv[i]);
+      exit(1);
+    }
+  }
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ldi7fgq7pca2qbs/Screen%20Shot%202021-08-31%20at%207.54.59%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=173499011&#34;&gt;모두를 위한 리눅스 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[알고리즘 문제 풀이] 상하좌우</title>
       <link>https://dongwooklee96.github.io/post/2021/08/31/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-%EC%83%81%ED%95%98%EC%A2%8C%EC%9A%B0.html</link>
