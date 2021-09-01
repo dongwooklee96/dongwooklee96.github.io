@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>[알고리즘 문제 풀이] 왕실의 나이트 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">[알고리즘 문제 풀이] 왕실의 나이트</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/09/01</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">알고리즘</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="문제---왕실의-나이트">문제 - 왕실의 나이트</h3>
+<hr>
+<ul>
+<li>
+<p>8 X 8 좌표 평면이 있다. 왕실 정원의 특정한 한 칸에 나이트가 서 있다.</p>
+</li>
+<li>
+<p>나이트는 말을 타고 있기 때문에 이동을 할 때는 L자 형태로만 이동할 수 있으며 정원 밖으로는 나갈 수 없다.</p>
+</li>
+<li>
+<p>나이트는 특정한 위치에서 다음과 같은 2가지 경우로 이동할 수 있다.</p>
+</li>
+</ul>
+<blockquote>
+<ol>
+<li>수평으로 두 칸 이동한 뒤에 수직으로 한 칸 이동하기.</li>
+<li>수직으로 두 칸 이동한 뒤에 수평으로 한 칸 이동하기.</li>
+</ol>
+</blockquote>
+<ul>
+<li>8 X 8 좌표 평면상에 나이트의 위치가 주어졌을 때 나이트가 이동할 수 있는 경우의 수를 출력하는 프로그램을 작성하라.</li>
+</ul>
+<h3 id="제한-사항">제한 사항</h3>
+<hr>
+<ul>
+<li>왕실의 정원에서 행을 표시할 때는 1 ~ 8로 표시하고, 열 위치를 표현할 때는 a ~ h로 표현한다.</li>
+</ul>
+<h3 id="아이디어">아이디어</h3>
+<hr>
+<ul>
+<li>
+<p>이동할 수 있는 좌표를 X, Y로 나누어서 리스트에 담는다. 총 8개가 나온다.</p>
+</li>
+<li>
+<p>각각 좌표를 순회하면서 범위에 넘지 않으면 개수를 더한다.</p>
+</li>
+<li>
+<p>개수를 출력한다.</p>
+</li>
+</ul>
+<h3 id="코드">코드</h3>
+<hr>
+<pre><code>solution(x: int, y: int) -&gt; int:
+    count = 0
+    xx = [-2, -1, 1, 2, 2, 1, -1, -2]
+    yy = [1, 2, 2, 1, -1, -2, -2, -1]
+
+    for i in range(len(xx)):
+        if 1 &lt;= (x + xx[i]) &lt;= 8 and 1 &lt;= y + yy[i] &lt;= 8:
+            count += 1
+    return count
+
+
+def solution2():
+    input_data = input()
+    x = int(input_data[1])
+    y = int(ord(input_data[0])) - int(ord('a')) + 1
+
+    steps = [
+        (-2, -1), (-1, -2), (1, -2), (2, -1),
+        (2, 1), (1, 2), (-1, 2), (-2, 1)
+    ]
+    result = 0
+    for step in steps:
+        next_row = x + step[0]
+        next_col = y + step[1]
+
+        if 1 &lt;= next_row &lt;= 8 and 1 &lt;= next_col &lt;= 8:
+            result += 1
+    print(result)
+
+
+if __name__ == '__main__':
+    split = list(input())
+    hash_table = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8}
+
+    print(solution(hash_table[split[0]], int(split[1]))
+</code></pre><h3 id="개선할-점">개선할 점</h3>
+<hr>
+<ul>
+<li>
+<p>튜플로 좌표를 해결하니 조금 더 가독성이 좋아지는 것 같다.</p>
+</li>
+<li>
+<p>붙어 있는 문자열을 각각 분리하는 방법이 여러 가지가 있는 것 같다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118">이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

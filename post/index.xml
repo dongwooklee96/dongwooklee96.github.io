@@ -6,7 +6,108 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 01 Sep 2021 08:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Sep 2021 09:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[알고리즘 문제 풀이] 왕실의 나이트</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/01/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-%EC%99%95%EC%8B%A4%EC%9D%98-%EB%82%98%EC%9D%B4%ED%8A%B8.html</link>
+      <pubDate>Wed, 01 Sep 2021 09:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/01/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-%EC%99%95%EC%8B%A4%EC%9D%98-%EB%82%98%EC%9D%B4%ED%8A%B8.html</guid>
+      <description>&lt;h3 id=&#34;문제---왕실의-나이트&#34;&gt;문제 - 왕실의 나이트&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;8 X 8 좌표 평면이 있다. 왕실 정원의 특정한 한 칸에 나이트가 서 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나이트는 말을 타고 있기 때문에 이동을 할 때는 L자 형태로만 이동할 수 있으며 정원 밖으로는 나갈 수 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나이트는 특정한 위치에서 다음과 같은 2가지 경우로 이동할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;수평으로 두 칸 이동한 뒤에 수직으로 한 칸 이동하기.&lt;/li&gt;
+&lt;li&gt;수직으로 두 칸 이동한 뒤에 수평으로 한 칸 이동하기.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;8 X 8 좌표 평면상에 나이트의 위치가 주어졌을 때 나이트가 이동할 수 있는 경우의 수를 출력하는 프로그램을 작성하라.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;제한-사항&#34;&gt;제한 사항&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;왕실의 정원에서 행을 표시할 때는 1 ~ 8로 표시하고, 열 위치를 표현할 때는 a ~ h로 표현한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;아이디어&#34;&gt;아이디어&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이동할 수 있는 좌표를 X, Y로 나누어서 리스트에 담는다. 총 8개가 나온다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각각 좌표를 순회하면서 범위에 넘지 않으면 개수를 더한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;개수를 출력한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;solution(x: int, y: int) -&amp;gt; int:
+    count = 0
+    xx = [-2, -1, 1, 2, 2, 1, -1, -2]
+    yy = [1, 2, 2, 1, -1, -2, -2, -1]
+
+    for i in range(len(xx)):
+        if 1 &amp;lt;= (x + xx[i]) &amp;lt;= 8 and 1 &amp;lt;= y + yy[i] &amp;lt;= 8:
+            count += 1
+    return count
+
+
+def solution2():
+    input_data = input()
+    x = int(input_data[1])
+    y = int(ord(input_data[0])) - int(ord(&#39;a&#39;)) + 1
+
+    steps = [
+        (-2, -1), (-1, -2), (1, -2), (2, -1),
+        (2, 1), (1, 2), (-1, 2), (-2, 1)
+    ]
+    result = 0
+    for step in steps:
+        next_row = x + step[0]
+        next_col = y + step[1]
+
+        if 1 &amp;lt;= next_row &amp;lt;= 8 and 1 &amp;lt;= next_col &amp;lt;= 8:
+            result += 1
+    print(result)
+
+
+if __name__ == &#39;__main__&#39;:
+    split = list(input())
+    hash_table = {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3, &#39;d&#39;: 4, &#39;e&#39;: 5, &#39;f&#39;: 6, &#39;g&#39;: 7, &#39;h&#39;: 8}
+
+    print(solution(hash_table[split[0]], int(split[1]))
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;개선할-점&#34;&gt;개선할 점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;튜플로 좌표를 해결하니 조금 더 가독성이 좋아지는 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;붙어 있는 문자열을 각각 분리하는 방법이 여러 가지가 있는 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118&#34;&gt;이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[알고리즘 문제 풀이] 시각</title>
       <link>https://dongwooklee96.github.io/post/2021/09/01/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-%EC%8B%9C%EA%B0%81.html</link>
