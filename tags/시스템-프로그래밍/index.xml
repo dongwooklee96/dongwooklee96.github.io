@@ -6,7 +6,198 @@
     <description>Recent content in 시스템 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 31 Aug 2021 16:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 03 Sep 2021 22:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[시스템 프로그래밍] 하드 링크 및 심볼릭 링크</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/03/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%95%98%EB%93%9C-%EB%A7%81%ED%81%AC-%EB%B0%8F-%EC%8B%AC%EB%B3%BC%EB%A6%AD-%EB%A7%81%ED%81%AC.html</link>
+      <pubDate>Fri, 03 Sep 2021 22:00:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/03/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%95%98%EB%93%9C-%EB%A7%81%ED%81%AC-%EB%B0%8F-%EC%8B%AC%EB%B3%BC%EB%A6%AD-%EB%A7%81%ED%81%AC.html</guid>
+      <description>&lt;h3 id=&#34;하드-링크&#34;&gt;하드 링크&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스에는 하나의 파일에 두 개 이상의 이름을 지정할 수 있다. 이를 위해서 링크라는 개념이 존재하는데 이를 하드 링크라고 부르기도 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;링크란 파일에 새로운 이름을 붙이는 것이다. 예를 들면 다음과 같이 A 라는 파일을 만들었다고 가정을 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;echo &#39;this is a file.&#39; &amp;gt; a
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이때 파일의 이름과 실체의 관계는 이름이 실체를 포인터처럼 가리키고 있는 모습이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여기서 파일 A의 실체에 새로운 이름 B를 붙여보자. 이때 사용하는 명령어가 바로 &lt;code&gt;ln&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/l8sfgjl3kss323z/hardlink.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ln a b
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이 작업은 파일 A를 가리키는 하드 링크 B를 만드는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이후에 A의 내용을 변경하면 B의 내용도 동일하게 변경된다. 왜냐하면 A와 B는 같은 것을 가리키고 있기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파일에 부여된 이름의 개수는 &lt;code&gt;ls -l&lt;/code&gt;를 사용하여 확인할 수 있다. 이름이 하나만 있는 파일을 &lt;code&gt;ls&lt;/code&gt; 명령어로 표시하면 다음과 같이 출력 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;rm -f a b
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/k7n1p5qp75n0bua/Screen%20Shot%202021-09-01%20at%2010.10.03%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;왼쪽에서 두 번째 란이 이름의 개수를 의미한다. 이것을 링크 카운터라고 한다. 현재 링크 카운터가 두 개인 것을 확인할 수 있고 양쪽 다 모두 2개인 것을 확인할 수 있는데 링크 카운터는 실체에 기록되기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;한편, 이름을 삭제하려면 &lt;code&gt;rm&lt;/code&gt; 명령어를 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;rm&lt;/code&gt; 이 파일을 제거하는 명령어라고 인식하기 쉽지만, 사실은 &lt;code&gt;rm&lt;/code&gt;이 삭제하는 것은 파일이 아닌 파일의 이름이다. 실체를 가리키는 이름이 모두 없어진 시점에서, 즉 링크 카운트가 0이 되었을 때 비로소 실체가 삭제된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/zyhnkt6e7sp99cp/Screen%20Shot%202021-09-01%20at%2010.13.40%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;rm&lt;/code&gt;에 의해서 링크 카운터가 다시 1로 되돌아 간 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;link2&#34;&gt;&lt;code&gt;link(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;하드 링크를 작성하는 시스템 콜이 &lt;code&gt;link(2)&lt;/code&gt; 이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+
+int link(const char *src, const char *dest);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;link()&lt;/code&gt;는 &lt;code&gt;src&lt;/code&gt;로 지정한 파일에 새로운 이름 &lt;code&gt;dest&lt;/code&gt;를 추가한다. 두 번째 인자가 새로 만들 이름이라는 점에 유의하기 바란다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;성공하면 0을 반환하고 실패하면 -1을 반환하면서 &lt;code&gt;errno&lt;/code&gt;를 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;한편, &lt;code&gt;link()&lt;/code&gt;에는 다음과 같은 중요한 제약이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;src&lt;/code&gt;와 &lt;code&gt;dest&lt;/code&gt;에는 동일한 파일 시스템에 있어야 한다. 양쪽 모두가 하나의 파일 시스템에 존재해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;src&lt;/code&gt;와 &lt;code&gt;dest&lt;/code&gt;에 디렉터리는 사용할 수 없다. 즉, 디렉터리에 하드 링크를 붙일 수 없다. 이 제한은 나중에 언급할 심볼릭 링크를 사용하여 해결할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;ln-명령어-작성하기&#34;&gt;ln 명령어 작성하기&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  if (argc != 3) {
+    fprintf(stderr, &amp;quot;%s: wrong arguments\n&amp;quot;, argv[0]);
+    exit(1);
+  }
+
+  if (link(argv[1], argv[2]) &amp;lt; 0) {
+    perror(argv[1]);
+    exit(1);
+  }
+  exit(0);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/moh0m14brkjpxhi/Screen%20Shot%202021-09-01%20at%2010.31.32%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ls -l&lt;/code&gt; 출력하는 항목 중 왼쪽에서 두 번재 열에 주목을 하면 &lt;code&gt;ln.c&lt;/code&gt;의 링크 카운터가 2로 증가한 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;심볼릭-링크&#34;&gt;심볼릭 링크&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;심볼릭 링크는 하드 링크처럼 파일의 실체에 새로운 이름을 붙이는 매커니즘이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 그 구조는 하드 링크와 상당히 다르다. 하드 링크는 이름과 실체를 연결하는 구조이지만, 심볼링 링크는 이름에 이름을 연결하는 구조이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 실제로 심볼릭 링크에 엑세스가 있을 때 비로소 이름의 실체를 찾는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 심볼링 링크에는 다음과 같은 특징이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;심볼릭 링크에는 대응하는 실체가 존재하지 않아도 된다.
+심볼릭 링크는 실제로 액세스 할 때가 아니면 이름의 실체의 맵핑을 하지 않기 때문에 실체가 없어도 만들 수 있다.&lt;/li&gt;
+&lt;li&gt;파일 시스템의 경계를 뛰어넘어서 별명을 붙일 수 있다.
+하드 링크는 하나의 파일 시스템 내에서만 만들 수 있다는 제약이 있었다. 그러나 심볼릭 링크는 파일 시스템의 경계와 관계없이 만들 수 있다.&lt;/li&gt;
+&lt;li&gt;디렉터리에도 별명을 붙일 수 있다.
+디렉터리에 대해서는 하드 링크는 만들 수 없지만 심볼릭 링크는 만들 수 있따.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;현재는 하드 링크를 거의 사용하지 않고 파일에 별명을 붙이고 싶을 때는 심볼릭 링크를 사용하는 것 이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;symlink2&#34;&gt;&lt;code&gt;symlink(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;심볼릭 링크를 만드는 시스템 콜은 &lt;code&gt;symlink(2)&lt;/code&gt;이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+
+int symlink(const char *src, const char *dest);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;symlink()&lt;/code&gt;는 지정한 경로에 대한 새로운 심볼릭 링크를 만든다. 성공하면 0을 반환하고 실패하면 -1을 반환하면서 &lt;code&gt;errno&lt;/code&gt;를 설정한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;readlink2&#34;&gt;&lt;code&gt;readlink(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;심볼릭 링크가 가리키는 이름을 얻기 위해 &lt;code&gt;readlink(2)&lt;/code&gt;를 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+
+int readlink(const char *path, char *buf, size_t bufsize);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;readlink()&lt;/code&gt;는 심볼릭 링크 &lt;code&gt;path&lt;/code&gt;가 가리키는 이름을 &lt;code&gt;buf&lt;/code&gt;에 담아준다. 이때 최대 &lt;code&gt;bufsize&lt;/code&gt; 바이트를 담아주며 &lt;code&gt;bufsize&lt;/code&gt;는 보통의 크기로 지정한다. 또한 &lt;code&gt;readlink()&lt;/code&gt;는 문자열의 마지막에 &lt;code&gt;\0&lt;/code&gt;을 기록하지 않기 때문에 주의해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;호출에 성공하면 &lt;code&gt;buf&lt;/code&gt;에 포함된 바이트 수를 반환한다. 실패하면 -1을 반환하면서 &lt;code&gt;errno&lt;/code&gt;를 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;symlink-명령어-만들기&#34;&gt;&lt;code&gt;symlink&lt;/code&gt; 명령어 만들기&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;보통 리눅스에서 심볼릭 링크를 만들 때 &lt;code&gt;ln -s&lt;/code&gt;를 사용하는데, 여기서는 전용 명령어처럼 만들어 보기로 하겠다. 이름은 &lt;code&gt;symlink&lt;/code&gt; 이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  if (argc != 3) {
+    fprintf(stderr, &amp;quot;%s: wrong number of arguments\n&amp;quot;, argv[0]);
+    exit(1);
+  }
+
+  if (symlink(argv[1], argv[2]) &amp;lt; 0) {
+    perror(argv[1]);
+    exit(1);
+  }
+  exit(0);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;심볼링 링크가 제대로 이루어진 것을 확인할 수 있고, 파일 목록을 조회하였을 때 화살표로 어떤 파일을 가리키는지 알려준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/9i0mcnb79hen52p/Screen%20Shot%202021-09-03%20at%2010.36.19%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=173499011&#34;&gt;모두를 위한 리눅스 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[시스템 프로그래밍] 디렉터리와 관련된 API 및 프로그램 작성</title>
       <link>https://dongwooklee96.github.io/post/2021/08/31/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC%EC%99%80-%EA%B4%80%EB%A0%A8%EB%90%9C-api-%EB%B0%8F-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%9E%91%EC%84%B1.html</link>
