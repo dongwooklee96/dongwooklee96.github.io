@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>[파이썬] ASYNCIO 사용법 및 예제 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">[파이썬] ASYNCIO 사용법 및 예제</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/09/05</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <ul>
+<li>
+<p>Asyncio는 파이썬의 병행 프로그래밍 도구로 스레드나 멀티 프로세싱 대비 가벼운 편이다.</p>
+</li>
+<li>
+<p>구조에 대해서 간단히 설명하지면, 이벤트 루프를 통해서 태스크를 실행하는 방식이다.</p>
+</li>
+<li>
+<p>다른 방식들과 가장 큰 차이점은 각 태스크에서 이벤트 루프로 제어권을 다시 넘겨줄 시점을 지정한다는 것이다.</p>
+</li>
+</ul>
+<h3 id="asyncio-기능">ASYNCIO 기능</h3>
+<blockquote>
+<ul>
+<li>asyncio 이벤트 루프 사용하기</li>
+<li>async/await 함수 호출하기</li>
+<li>루프에서 실행할 태스크 작성하기</li>
+<li>여러 개의 태스크가 완료되길 기다리기</li>
+<li>모든 병행 태스크 종료 후 루프 종료하기</li>
+</ul>
+</blockquote>
+<ul>
+<li>전체 <code>asyncio</code> API 중 일부는 위와 같이 요약할 수 있다.</li>
+</ul>
+<pre><code>import asyncio
+import time
+
+
+async def main():
+    print(f'{time.ctime()} Hello!')
+    await asyncio.sleep(1.0)
+    print(f'{time.ctime()} GoodBye!')
+
+
+asyncio.run(main())
+
+</code></pre><ul>
+<li>위는 간단한 파이썬의 Asyncio를 사용한 예제이다.</li>
+<li>실행결과는 아래와 같다.</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/c3ma0wq6h2cbwe7/2021-09-05%2019.28.41.gif" alt=""></p>
+<ul>
+<li>눈치채지 어려울 수 도 있지만, <code>Hello!</code> 라는 문자열이 출력되고 나서 1초 후에 <code>GoodBye!</code> 라는 문자열이 출려된다.</li>
+</ul>
+<pre><code>import asyncio
+import time
+
+
+async def main():
+    print(f'{time.ctime()} Hello!')
+    await asyncio.sleep(1.0)
+    print(f'{time.ctime()} GoodBye!')
+
+loop = asyncio.get_event_loop() # 코루틴을 실행하기 위한 루프 인스턴스를 얻는 방법이다.
+task = loop.create_task(main()) # create_task()를 호출해서 루프에 코루틴을 스케줄링 한다.
+loop.run_until_complete(task) # 호출을 통해 현재 스레드를 블로킹 할 수 있다. 루프가 실행되는 동안 다른 작업들도 같이 실행된다. 
+                              # asyncio.run() 도 내부에서 run_until_complete()를 호출하여 메인 스레드를 블로킹한다.
+pending = asyncio.all_tasks(loop=loop)
+for task in pending:
+    task.cancel()
+group = asyncio.gather(*pending, return_exceptions=True) # 루프 중지 증으로 블로킹 상태가 풀린 후에 아직 실행중인 태스크를 취합하고  
+                                                         # 모든 태스크에게 취소 요청을 한 후에 loop.run_until_complete()를 호출하여 태스크들이 모두 종료 상태가 될 때까지 기다린다.
+                                                         # asyncio.run()의 내부에서 위의 절차를 모두 포함한다.
+loop.run_until_complete(group)
+loop.close() # 보통 최종 동작이다. 모든 루프의 대기열을 비우고 익스큐터를 종료시킨다. asyncio.run() 내부에서는 호출될 때마다 신규 이벤트 루프를 생성하고 반환하기 전에 루프를 닫는다.
+</code></pre><h3 id="asyncio의-계층">Asyncio의 계층</h3>
+<ul>
+<li>계층 9: 네트워크: 스트림</li>
+<li>계층 8: 네트워크: TCP &amp; UDP</li>
+<li>계층 7: 네트워크: 트랜스포트</li>
+<li>계층 6: 도구</li>
+<li>계층 5: 별개의 스레드와 프로세스</li>
+<li>계층 4: Task</li>
+<li>계층 3: Future</li>
+<li>계층 2: 이벤트 루프</li>
+<li>계층 1: 코루틴</li>
+</ul>
+<h3 id="코루틴">코루틴</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/3gk2z30sqecf5mf/Screen%20Shot%202021-09-06%20at%2012.42.33%20AM.png" alt=""></p>
+<pre><code>async def f():
+  return 123
+
+&gt;&gt;&gt; type(f)
+&gt;&gt;&gt; import inspect
+&gt;&gt;&gt; inspect.iscoroutinefunction(f)
+</code></pre><ul>
+<li>
+<p>위의 함수는 가장 간단한 형태의 코루틴 선언이다. 일반적인 함수와 유사해보이지만, <code>async def</code> 키워드로 시작한다는 점이 다르다.</p>
+</li>
+<li>
+<p>함수 <code>f()</code>의 정확한 타입은 &lsquo;코루틴&rsquo;이 아니라 코루틴 함수이다. 파이썬에서 제네레이터 함수의 형태와 동일하다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/o0jbsojpc2s4bc6/Screen%20Shot%202021-09-06%20at%2012.45.45%20AM.png" alt=""></p>
+<ul>
+<li>
+<p>함수 <code>g</code>가 제네레이터로 불리는 경우가 있는데 위에서 보듯이 <code>g</code> 자체는 함수일 뿐이다.</p>
+</li>
+<li>
+<p>제네레이터는 호출하여 값으로 반환받아야 하며, 코루틴 함수도 이와 동일하다. <code>async def</code> 함수를 호출하여 코루틴 객체를 반환받아야 한다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/72hcv3hmf3cq3bx/Screen%20Shot%202021-09-06%20at%2012.48.28%20AM.png" alt=""></p>
+<ul>
+<li>
+<p>그렇다면 코루틴은 무엇인가? <strong>코루틴</strong>은 완료되지 않은 채 일시 정지 했던 함수를 재개 할 수 있는 기능을 가진 객체이다. 이는 제네레이터와 매우 흡사하다.</p>
+</li>
+<li>
+<p>파이썬 3.5에서 <code>async def</code>와 <code>await</code>를 키워드를 이용하여 네이티브 코루티을 도입하기 전, 파이썬에 3.4에서는 제네레이터와 데코레이터를 통해서 <code>asyncio</code> 라이브러리를 사용할 수 있었다.</p>
+</li>
+<li>
+<p>파이썬에서 코루틴 객체들이 어떻게 사용되는지 좀 더 확인을 해보겠다. 가장 중요한 것은 파이썬의 코루틴 사이에서 실행을 &lsquo;전환&rsquo; 하는 방식이다.</p>
+</li>
+<li>
+<p>코루틴이 반환할 때 실제로는 <code>StopIteration</code> 예외가 발생한다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/tln5w86tzhlnttp/Screen%20Shot%202021-09-06%20at%2012.52.36%20AM.png" alt=""></p>
+<ul>
+<li>
+<p>코루틴에 <code>None</code>을 전달하여 초기화를 한다. 이벤트 루프는 내부적으로 동일한 방식을 통해서 코루틴에 대해 초기화를 진행하므로 직접 실행할 필요는 없다.</p>
+</li>
+<li>
+<p>생성한 모든 코루틴을 <code>loop.create_task(coro)</code> 혹은 <code>await coro</code>를 통해서 실행하면 <code>loop</code> 가 알아서 <code>.send(None)</code>를 내부적으로 실행할 것이다.</p>
+</li>
+</ul>
+<h4 id="await-키워드">await 키워드</h4>
+<ul>
+<li>
+<p>새로운 키워드 <code>await</code>는 항상 매개변수를 하나 필요로 한다. 허용되는 형은 <code>awaitable</code>로 불리며 다음 중 하나여야 한다.</p>
+</li>
+<li>
+<p>코루틴 (즉, async def 함수의 반환값)</p>
+</li>
+<li>
+<p><code>__await__()</code> 라는 특별 매서드를 구현한 모든 객체, 이 메서드는 반드시 이터레이터를 반환해야한다.</p>
+</li>
+</ul>
+<pre><code>import asyncio
+
+
+async def f():
+    await asyncio.sleep(0)
+    return 123
+
+
+async def main():
+    result = await f()
+    return result
+
+</code></pre><ul>
+<li>
+<p>함수 <code>f()</code>를 호출하면 코루틴을 반환하고 이는 <code>f()</code>에 대해서 <code>await()</code> 할 수 있다는 뜻이다.</p>
+</li>
+<li>
+<p><code>f()</code>가 완료되면 <code>result</code>의 변수 값은 123이 될 것이다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li>
+<p><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=269805857">파이썬 비동기 라이브러리 Asyncio</a></p>
+</li>
+<li>
+<p><a href="https://www.pythonsheets.com/notes/python-asyncio.html">Asyncio Cheat Sheet</a></p>
+</li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
