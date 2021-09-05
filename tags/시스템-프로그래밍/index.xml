@@ -6,7 +6,229 @@
     <description>Recent content in 시스템 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 03 Sep 2021 22:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 05 Sep 2021 12:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[시스템 프로그래밍] 파일 메타 정보 확인 및 수정하기</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/05/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%BC-%EB%A9%94%ED%83%80-%EC%A0%95%EB%B3%B4-%ED%99%95%EC%9D%B8-%EB%B0%8F-%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B0.html</link>
+      <pubDate>Sun, 05 Sep 2021 12:00:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/05/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%BC-%EB%A9%94%ED%83%80-%EC%A0%95%EB%B3%B4-%ED%99%95%EC%9D%B8-%EB%B0%8F-%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B0.html</guid>
+      <description>&lt;h3 id=&#34;메타-정보-획득하기&#34;&gt;메타 정보 획득하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파일 시스템에는 데이터 외에도 다음과 같은 정보가 추가적으로 저장되어 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;파일의 종류&lt;/li&gt;
+&lt;li&gt;크기&lt;/li&gt;
+&lt;li&gt;권한&lt;/li&gt;
+&lt;li&gt;소유자&lt;/li&gt;
+&lt;li&gt;그룹&lt;/li&gt;
+&lt;li&gt;작성시간&lt;/li&gt;
+&lt;li&gt;변경 시간&lt;/li&gt;
+&lt;li&gt;액세스 시간&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;stat2&#34;&gt;stat(2)&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/stat.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+
+int stat(const char *path, struct stat *buf);
+int lstat(const char *path, struct stat *buf);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;stat()&lt;/code&gt;은 &lt;code&gt;path&lt;/code&gt;로 지정한 엔트리 정보를 취득해서 &lt;code&gt;buf&lt;/code&gt;에 써넣는다. 성공하면 0을 반환하고, 실패하면 -1을 반환하면서 &lt;code&gt;errno&lt;/code&gt;를 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;lstat()&lt;/code&gt;은 &lt;code&gt;stat()&lt;/code&gt;와 거의 같지만, &lt;code&gt;path&lt;/code&gt;가 심볼릭 링크인 경우 해당 링크를 따라가지 않고 심볼릭 링크 자신의 정보를 반환한다는 점이 다르다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한, 파일 디스크립터에서 동일한 정보를 얻을 수 있는 &lt;code&gt;fstat()&lt;/code&gt;도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/alvpqekrtk3jq87/Screen%20Shot%202021-09-05%20at%2012.54.42%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;fstat()&lt;/code&gt;에 관해서는 &lt;code&gt;man&lt;/code&gt; 페이지를 참고하면 자세히 나와 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스 &lt;code&gt;struct stat&lt;/code&gt; 구조체와 의미는 아래와 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/0gsljbxhc3sedt2/Screen%20Shot%202021-09-05%20at%2012.58.14%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;stat-명령어-만들기&#34;&gt;&lt;code&gt;stat&lt;/code&gt; 명령어 만들기&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;시스템 콜 &lt;code&gt;stat()&lt;/code&gt;을 사용하여 &lt;code&gt;stat&lt;/code&gt; 명령어를 만들어 볼 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;sys/stat.h&amp;gt;
+#include &amp;lt;time.h&amp;gt;
+
+static char *filetype(mode_t mode);
+
+int main(int argc, char *argv[]) {
+  struct stat st;
+
+  if (argc != 2) {
+    fprintf(stderr, &amp;quot;wrong argument\n&amp;quot;);
+    exit(1);
+  }
+
+  if (lstat(argv[1], &amp;amp;st) &amp;lt; 0) {
+    perror(argv[1]);
+    exit(1);
+  }
+
+  printf(&amp;quot;type\t%o (%s)\n&amp;quot;, (st.st_mode &amp;amp; S_IFMT), filetype(st.st_mode));
+  printf(&amp;quot;mode\t%o\n&amp;quot;, st.st_mode &amp;amp; ~S_IFMT);
+  printf(&amp;quot;dev\t%llu\n&amp;quot;, (unsigned long long)st.st_dev);
+  printf(&amp;quot;ino\t%lu\n&amp;quot;, (unsigned long)st.st_ino);
+  printf(&amp;quot;rdev\t%lu\n&amp;quot;, (unsigned long)st.st_rdev);
+  printf(&amp;quot;nlink\t%lu\n&amp;quot;, (unsigned long)st.st_nlink);
+  printf(&amp;quot;uid\t%d\n&amp;quot;, st.st_uid);
+  printf(&amp;quot;gid\t%d\n&amp;quot;, st.st_gid);
+  printf(&amp;quot;size\t%ld\n&amp;quot;, st.st_size);
+  printf(&amp;quot;blksize\t%ld\n&amp;quot;, (unsigned long)st.st_blksize);
+  printf(&amp;quot;blocks\t%lu\n&amp;quot;, (unsigned long)st.st_blocks);
+  printf(&amp;quot;atime\t%s&amp;quot;, ctime(&amp;amp;st.st_atime));
+  printf(&amp;quot;mtime\t%s&amp;quot;, ctime(&amp;amp;st.st_mtime));
+  printf(&amp;quot;ctime\t%s&amp;quot;, ctime(&amp;amp;st.st_ctime));
+
+  exit(0);
+}
+
+static char *filetype(mode_t mode) {
+  if (S_ISREG(mode)) return &amp;quot;file&amp;quot;;
+  if (S_ISDIR(mode)) return &amp;quot;directory&amp;quot;;
+  if (S_ISCHR(mode)) return &amp;quot;chardev&amp;quot;;
+  if (S_ISBLK(mode)) return &amp;quot;blockdev&amp;quot;;
+  if (S_ISFIFO(mode)) return &amp;quot;fifo&amp;quot;;
+  if (S_ISLNK(mode)) return &amp;quot;symlink&amp;quot;;
+  if (S_ISSOCK(mode)) return &amp;quot;socket&amp;quot;;
+  return &amp;quot;unknown&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8a8mzrp95wvqhdr/Screen%20Shot%202021-09-05%20at%202.37.04%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실행 결과는 위와 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;메타-정보-변경하기&#34;&gt;메타 정보 변경하기&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;메타 정보를 획득하는 시스템 콜은 &lt;code&gt;stat(2)&lt;/code&gt; 한 개지만, 변경하는 시스템 콜은 여러개가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;변경 대상&lt;/th&gt;
+&lt;th&gt;사용하는 시스템 콜&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;권한&lt;/td&gt;
+&lt;td&gt;chmod(2)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;오너와 그룹&lt;/td&gt;
+&lt;td&gt;chown (2)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;최종 액세스 시간과 최종 갱신 시각&lt;/td&gt;
+&lt;td&gt;utime(2)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;chmod2&#34;&gt;&lt;code&gt;chmod(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/stat.h&amp;gt;
+
+int chmod(const char *path, mode_t mode);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;chmod&lt;/code&gt;는 경로로 지정한 파일의 모드를 변경한다. 성공하면 0을 반환하고 실패하면 -1을 반환하면서 &lt;code&gt;errno&lt;/code&gt;에 에러 번호를 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;mode&lt;/code&gt;는 표에 있는 상수를 &lt;code&gt;OR&lt;/code&gt;로 묶어서 지정하거나 &lt;code&gt;0775&lt;/code&gt; 같은 숫자를 사용한다. C언어에서 숫자에 0을 앞에 두면 8진수가 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서, 권한 644의 경우, &amp;lsquo;0644&amp;rsquo; 또는 &amp;lsquo;S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH`로 지정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;chown2&#34;&gt;&lt;code&gt;chown(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+
+int chown(const char *path, uid_t owner, gid_t group);
+int lchown(const char *path, uid_t owner, gid_t group);
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;chown()&lt;/code&gt;은 파일 &lt;code&gt;path&lt;/code&gt;의 소유 사용자를 &lt;code&gt;owner&lt;/code&gt;로, 소유 그룹을 &lt;code&gt;group&lt;/code&gt;로 변경한다. 그중 하나만을 변경하려는 경우에는 변경하지 않는 쪽에 -1을 지정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;lchown()&lt;/code&gt;의 동작은 &lt;code&gt;chown()&lt;/code&gt;과 거의 같지만, &lt;code&gt;path&lt;/code&gt;가 심볼릭 링크인 경우에는 그 심볼릭 링크 자체의 정보를 변경하는 점이 다르다. 그리고 &lt;code&gt;chown()&lt;/code&gt; 은 심볼릭 링크가 가리키는 파일의 정보를 변경한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;둘 다 성공하면 0을 반환하며, 실패하면 -1을 반환하고 &lt;code&gt;errno&lt;/code&gt;를 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어느 시스템 콜이든지 소유 사용자를 변경하려면 슈퍼 사용자 권한이 필요하다. 그리고 소유 그룹을 변경하는 경우에는 해당 파일의 소유 사용자여야 하며, 그리고 자신이 포함된 그룹으로만 변경할 수 있다. 물론, 슈퍼 사용자라면 임의의 그룹으로 변경할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;lchown()&lt;/code&gt;이 있다면 &lt;code&gt;lchmod()&lt;/code&gt;도 있을 것 같지만, 리눅스에서는 심볼릭 링크 자체에 권한이 없어 &lt;code&gt;lchmod()&lt;/code&gt;란 존재하지 않는다. 그러나 BSD 계열의 유닉스에는 존재한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;utime2&#34;&gt;&lt;code&gt;utime(2)&lt;/code&gt;&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;utime.h&amp;gt;
+
+int utime(const char *path, struct utimbuf *buf);
+
+struct utimbuf {
+  time_t actime; /* 최종 액세스 시간 */
+  time_t modetime; /* 최종 갱신 시간 */
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;utime()&lt;/code&gt;은 경로로 지정한 파일의 최종 액세스 시간과 최종 갱신 시간을 변경한다. 만약 &lt;code&gt;buf&lt;/code&gt;가 NULL이 아니면 &lt;code&gt;buf&lt;/code&gt;의 내용에 따라서 &lt;code&gt;actime&lt;/code&gt;과 &lt;code&gt;modtime&lt;/code&gt;이 설정된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;buf&lt;/code&gt;가 NULL 이라면 양쪽 모두 현재 시간으로 변경된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;chmod-명령어-작성하기&#34;&gt;chmod 명령어 작성하기&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sys/stat.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+  int mode;
+  int i;
+
+  if (argc &amp;lt; 2) {
+    fprintf(stderr, &amp;quot;no mode given\n&amp;quot;);
+    exit(1);
+  }
+
+  mode = strtol(argv[1], NULL, 0);
+  for (i = 2; i &amp;lt; argc; i++) {
+    if (chmod(argv[i], mode) &amp;lt; 0) {
+      perror(argv[i]);
+    }
+  }
+  exit(0);
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;strtol()&lt;/code&gt;은 &lt;code&gt;atoi()&lt;/code&gt; 와 같이 정수가 표현된 문자열을 정수 타입의 값으로 변환하는 함수이다. 그러나 &lt;code&gt;atoi()&lt;/code&gt;와 다르게 세번째 인자로 진수를 설정할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=173499011&#34;&gt;모두를 위한 리눅스 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[시스템 프로그래밍] 하드 링크 및 심볼릭 링크</title>
       <link>https://dongwooklee96.github.io/post/2021/09/03/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%95%98%EB%93%9C-%EB%A7%81%ED%81%AC-%EB%B0%8F-%EC%8B%AC%EB%B3%BC%EB%A6%AD-%EB%A7%81%ED%81%AC.html</link>
