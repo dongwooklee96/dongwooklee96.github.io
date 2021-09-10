@@ -6,7 +6,92 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 10 Sep 2021 16:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Sep 2021 22:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[세미나 발표] 슬기로운 오픈 소스 생활 | 라인 개발 실록</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/10/%EC%84%B8%EB%AF%B8%EB%82%98-%EB%B0%9C%ED%91%9C-%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EC%83%9D%ED%99%9C-%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A1%9D.html</link>
+      <pubDate>Fri, 10 Sep 2021 22:04:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/10/%EC%84%B8%EB%AF%B8%EB%82%98-%EB%B0%9C%ED%91%9C-%EC%8A%AC%EA%B8%B0%EB%A1%9C%EC%9A%B4-%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4-%EC%83%9D%ED%99%9C-%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C-%EC%8B%A4%EB%A1%9D.html</guid>
+      <description>&lt;h3 id=&#34;오픈-소스를-통해서-얻을-수-있는-것&#34;&gt;오픈 소스를 통해서 얻을 수 있는 것&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;기술적-혜택&#34;&gt;기술적 혜택&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;협업을 잘하기 위한 스킬&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;질문 잘하기&lt;/li&gt;
+&lt;li&gt;기대치를 정하기&lt;/li&gt;
+&lt;li&gt;호감가는 의사소통&lt;/li&gt;
+&lt;li&gt;효율적인 의사소통 수단을 사용&lt;/li&gt;
+&lt;li&gt;최신 기술 및 모범 사례를 배울 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;경력상-혜택&#34;&gt;경력상 혜택&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;이력서와 포트폴리오를 별개로 관리하자.&lt;/li&gt;
+&lt;li&gt;토론, 소개, 정보 공유가 중요하다.&lt;/li&gt;
+&lt;li&gt;일상에서 만나는 사람보다 더 다양한 - 문화적 배경, 기술, 경험 사람을 만날 수 있다.&lt;/li&gt;
+&lt;li&gt;많은 개발자들이 네트워킹을 어려워하지만, 커뮤니티 사람들의 말을 잘 듣고 정중하게 참여하는 것 부터 시작을 해보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;오픈-소스-기여를-준비하기&#34;&gt;오픈 소스 기여를 준비하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;기여를-준비하기&#34;&gt;기여를 준비하기&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;기여하고 싶다는 것을 깨닫는다.&lt;/li&gt;
+&lt;li&gt;프로젝트를 찾는다.&lt;/li&gt;
+&lt;li&gt;할 일을 찾는다.&lt;/li&gt;
+&lt;li&gt;환경을 구성한다.&lt;/li&gt;
+&lt;li&gt;기여 작업을 한다.&lt;/li&gt;
+&lt;li&gt;기여를 제출한다.&lt;/li&gt;
+&lt;li&gt;피드백을 받고 코드 개선을 반복한다.&lt;/li&gt;
+&lt;li&gt;기여가 받아들여진다.&lt;/li&gt;
+&lt;li&gt;다시 처음으로 돌아간다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;시작하기-전에-확인해야할-파일들&#34;&gt;시작하기 전에 확인해야할 파일들&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;README&lt;/code&gt;,&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LICENSE&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CONTRIBUTING&lt;/code&gt; 이 규칙을 따르면 더 쉽게 기여가 더 쉽게 받아들여진다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CODE OF CONDUCT&lt;/code&gt; 커뮤니티에서 환영하는 행동, 환영받지 못하는 행동, 멤버가 신고할 수 있는 곳, 신고하는 방법 등을 제시하는 문서&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;STYLE GUIDE&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;효과적으로-의사소통하기&#34;&gt;효과적으로 의사소통하기&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;이슈 트래킹을 잘 찾아보면 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;기여할-오픈-소스-프로젝트를-찾기&#34;&gt;기여할 오픈 소스 프로젝트를 찾기&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;자신이 이미 사용하고 있는 소프트웨어 중에 오픈 소스인 것을 찾아보고 기여를 해보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;플러그인 같은 경우도 간단히 접근하기 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;열린 이슈 중에서 내가 하고자 하는 일이 이슈 목록에 있는지 확인하자. 닫힌 이슈도 지나치지 말고, 내가 기여하고 싶은 부분이 이미 닫힌 이슈에 있더라도, 어떤 이유로 그 아이디어를 추친하지 않기로 했는지를 확인하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이미 닫힌 이슈를 살펴보는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;우선 사용자가 되어서 이 프로젝트는 어떤 프로젝트인지 그리고 제작자가 어떤 의도로 기능을 만들었는지 생각을 해보기&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=2lL2eRQch2o&#34;&gt;슬기로운 오픈소스 생활 | 라인개발실록&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[알고리즘 문제 풀이] 음료수 얼려 먹기</title>
       <link>https://dongwooklee96.github.io/post/2021/09/10/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-%EC%9D%8C%EB%A3%8C%EC%88%98-%EC%96%BC%EB%A0%A4-%EB%A8%B9%EA%B8%B0.html</link>
