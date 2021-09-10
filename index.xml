@@ -6,7 +6,96 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 10 Sep 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Sep 2021 16:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[알고리즘 문제 풀이] 음료수 얼려 먹기</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/10/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-%EC%9D%8C%EB%A3%8C%EC%88%98-%EC%96%BC%EB%A0%A4-%EB%A8%B9%EA%B8%B0.html</link>
+      <pubDate>Fri, 10 Sep 2021 16:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/10/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-%EC%9D%8C%EB%A3%8C%EC%88%98-%EC%96%BC%EB%A0%A4-%EB%A8%B9%EA%B8%B0.html</guid>
+      <description>&lt;h3 id=&#34;문제---음료수-얼려먹기&#34;&gt;문제 - 음료수 얼려먹기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;N x M 크기의 얼음 틀이 있다. 구멍이 뚫려 있는 부분은 0, 칸막이가 존재하는 부분은 1로 표시된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;구멍이 뚫려 있는 부분끼리 상, 하, 좌, 우로 붙어 있는 경우 서로 연결되어있는 것으로 간주한다. 이때 얼음 틀의 모양이 주어졌을 떄 생성되는 총 아이스크림의 개수를 구하라.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;제한-사항&#34;&gt;제한 사항&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;입력 조건 :
+&lt;ul&gt;
+&lt;li&gt;첫 번째 줄에 얼음 틀의 세로 길이 N과 가로 길이 M이 주어진다. (1 &amp;lt;= N, M &amp;lt;= 1,000)&lt;/li&gt;
+&lt;li&gt;두 번째 줄부터 N + 1 번째 줄까지 얼음 틀의 형태가 주어진다.&lt;/li&gt;
+&lt;li&gt;이때 구멍이 뚫려있는 부분은 0, 그렇지 않은 부분은 1이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;출력 : 한번에 만들 수 있는 아이스크림의 개수를 출력한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;아이디어&#34;&gt;아이디어&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;모든 얼음 틀을 왼쪽 상단부터 반복문으로 검사한다. 만약 탐색하지 않은 공간이 있다면 그곳부터, DFS, BFS를 이용하여 탐색을 시작한다. 모두 탐색하고 나서 방문한 곳을 기록하고 아이스크림의 개수를 하나 증가시킨다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;더 이상 방문하지 않은 곳이 없으면 아이스크림의 개수를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; List
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(maps: List[List[int]], n: int, m: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;dfs&lt;/span&gt;(x, y):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; m:
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; maps[x][y] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+            maps[x][y] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+            dfs(x &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, y)
+            dfs(x, y &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+            dfs(x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, y)
+            dfs(x, y &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n):
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(m):
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; dfs(x, y):
+                cnt &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; cnt
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    n, m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+
+    maps &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n):
+        maps&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(list(map(int, input())))
+
+    print(solution(maps, n, m))
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;배운점&#34;&gt;배운점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;DFS 문제를 어떻게 풀어야할 지 대략적으로 감을 잡은 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118&#34;&gt;이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/09/10/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
