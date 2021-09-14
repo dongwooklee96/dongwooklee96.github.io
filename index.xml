@@ -6,7 +6,88 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 13 Sep 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Sep 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[일일 회고]</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Wed, 15 Sep 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://spoqa.github.io/2021/09/13/domain-driven-development-transition-story.html&#34;&gt;도메인 주도 개발 전환 이야기&lt;/a&gt; 라는 글을 읽었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://tech.kakaoenterprise.com/115&#34;&gt;신입 개발자 공채, 최종 합격까지의 여정을 알려줄게!&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://devocean.sk.com/blog/techBoardDetail.do?ID=163363&#34;&gt;Python 3.9 에서 추가된 것들&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;예제가 플라스크로 작성되어 있어서 많은 도움이 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코딩 테스트는 한달정도 프로그래머스에서 중간 난이도의 문제를 3, 4개씩 풀었다고 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고, 문제를 풀 때는 히든 케이스가 어떤 것이 있을지 고민하면서 풀었다고 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일단 기본적으로 서비스 레이어와 리포지터리 레이어를 분리하는 작업이 필요한 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현재 맡고 있는 프로젝트에서 어떻게 개선할지 고민을 하면 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;기존 구조보다 유지보수성과 가독성을 위해서라면 지금부터 이러한 작업을 조금씩이라도 해야할 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어느정도 문제를 풀고 나서는 난이도와 문제 수를 늘려서 풀어봐야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;나의 부족함을 깨닫게 되었다. 그리고 코딩 테스트 문제도 열심히 풀어봐야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;직접 오픈 소스 프로젝트에 기여하면서 나의 실력을 키워야겠다. 책만 보다보니, 돌아서면 까먹게 되는 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;(17:00 ~ 18:00) 코딩 테스트 문제를 풀 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(18:00 ~ 19:00) 아커스 코드 및 내가 진행하고 있는 이슈를 살펴보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-확언&#34;&gt;Affimation (자기 확언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오픈 소스를 통해서 많이 배우고 실력을 향상 시키자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 확언)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;정확한 언어 (나만의 방식으로 그 언어를 이미지화 시키는 것이다.)&lt;/li&gt;
+&lt;li&gt;명확한 시각화&lt;/li&gt;
+&lt;li&gt;상응하는 감정 (자신만의 감정을 상상한다.)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/09/13/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
