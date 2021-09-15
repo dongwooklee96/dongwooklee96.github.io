@@ -6,7 +6,88 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 15 Sep 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Sep 2021 23:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[알고리즘 문제 풀이] 미로 찾기</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/15/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-%EB%AF%B8%EB%A1%9C-%EC%B0%BE%EA%B8%B0.html</link>
+      <pubDate>Wed, 15 Sep 2021 23:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/15/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C-%ED%92%80%EC%9D%B4-%EB%AF%B8%EB%A1%9C-%EC%B0%BE%EA%B8%B0.html</guid>
+      <description>&lt;h3 id=&#34;문제---미로-탈출&#34;&gt;문제 - 미로 탈출&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;N x M 크기의 직사각형 형태의 미로에 갇혀 있다. 미로에는 여러 마리의 괴물이 있어서 이를 피해서 탈출해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;동빈이의 위치는 (1, 1)이고 미로의 출구는 (N, M)의 위치에 존재하며 한 번에 한 칸씩 움직일 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;괴물이 있는 부분은 0, 없는 부분은 1로 표시된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;탈출하기 위해서 움직여야 하는 최소 개수를 구하라.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;제한-사항&#34;&gt;제한 사항&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;N, M은 (4 &amp;lt;= N, M &amp;lt;= 200) 이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; collections &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; deque
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(n, m, graph):
+    dx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;]
+    dy &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;bfs&lt;/span&gt;(x, y):
+        queue &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; deque()
+        queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((x, y))
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; queue:
+            x, y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;popleft()
+
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;):
+                nx &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; x &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; dx[i]
+                ny &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; dy[i]
+
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; nx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; ny &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; nx &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;or&lt;/span&gt; ny &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; m:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; graph[nx][ny] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;continue&lt;/span&gt;
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; graph[nx][ny] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;:
+                    graph[nx][ny] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; graph[x][y] &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;
+                    queue&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append((nx, ny))
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; graph[n &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;][m &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;]
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; bfs(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;)
+
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; __name__ &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;:
+    n, m &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; map(int, input()&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;split())
+
+    graph &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; []
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n):
+        graph&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;append(list(map(int, input())))
+
+    print(solution(n, m, graph))
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;배운점&#34;&gt;배운점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;내 힘으로 풀 수 있을 때까지 풀어봐야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118&#34;&gt;이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/09/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
