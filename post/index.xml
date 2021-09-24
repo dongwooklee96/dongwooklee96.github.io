@@ -6,7 +6,145 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 24 Sep 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Sep 2021 13:29:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬 - 재사용 가능한 TRY, CATCH 동작을 원한다면 contextlib과 with 문을 사용하라</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%9E%AC%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-try-catch-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%9B%90%ED%95%9C%EB%8B%A4%EB%A9%B4-contextlib%EA%B3%BC-with-%EB%AC%B8%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EB%9D%BC.html</link>
+      <pubDate>Fri, 24 Sep 2021 13:29:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%9E%AC%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-try-catch-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%9B%90%ED%95%9C%EB%8B%A4%EB%A9%B4-contextlib%EA%B3%BC-with-%EB%AC%B8%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EB%9D%BC.html</guid>
+      <description>&lt;h2 id=&#34;batter-way-18-재사용-가능한-tryfinally-동작을-원한다면-contextlib과-with-문을-사용하라&#34;&gt;BATTER WAY 18. 재사용 가능한 try/finally 동작을 원한다면 contextlib과 with 문을 사용하라&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬의 &lt;code&gt;with&lt;/code&gt; 문은 코드가 특별한 컨텍스트 안에서 실행되는 경우를 표현한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어, 상호 배제 락(뮤텍스)를 &lt;code&gt;with&lt;/code&gt; 문 안에서 사용하면 락을 소유 했을 때만, 코드 블록이 실행된다는 것을 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;from threading import Lock
+
+Lock = Lock()
+with lock:
+  # 어떤 불변 조건을 유지하면서 작업을 수행한다.
+  ...
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Lock&lt;/code&gt; 클래스가 &lt;code&gt;with&lt;/code&gt; 문을 적절히 활성화해주므로 위의 예제는 아래의 코드와 동등하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;lock.acquire()
+try:
+  # 어떤 불변 조건을 유지하면서 작업을 수행한다.
+  ...
+finally:
+  lock.release()
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같은 경우엔느  &lt;code&gt;with&lt;/code&gt; 문을 사용하는 것이 훨씬 더 낫다. 이유는 try/finally 구조를 반복적으로 사용할 필요가 없고, &lt;code&gt;acquire&lt;/code&gt;에 대응하는 &lt;code&gt;release&lt;/code&gt; 를 실수로 빠뜨리는 경우를 방지할 수 있기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;contextlib&lt;/code&gt; 내장 모듈을 사용하면 만든 객체나 함수를 &lt;code&gt;with&lt;/code&gt; 문에서 쉽게 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;contextlib&lt;/code&gt; 모듈은 &lt;code&gt;with&lt;/code&gt; 문에 쓸 수 있는 함수를 간단히 만들 수 있는 &lt;code&gt;contextmanager&lt;/code&gt; 데코레이터를 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 데코레이터를 사용하는 방법이 &lt;code&gt;__enter__&lt;/code&gt;, &lt;code&gt;__exit__&lt;/code&gt; 특별 메서드를 사용해서 새롭게 클래스를 정의하는 방법보다 훨씬 쉽다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;사용-예제&#34;&gt;사용 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;예를 들어서, 어떤 코드 영역에서 디버깅 관련 로그를 더 많이 남기고 싶다고 가정을 할 때, 아래 코드는 디버깅 로그를 남기는 함수이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;def my_function():
+   logging.debug(&#39;debug data&#39;)
+   logging.error(&#39;error log&#39;)
+   logging.debug(&#39;additional debug data&#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/hpaxrrh45y2556w/Screen%20Shot%202021-09-24%20at%202.40.57%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그램의 기본 로그 수준은 &lt;code&gt;WARNING&lt;/code&gt; 이므로, 이 함수를 실행하면 오류 메시지만 화면에 출력된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 컨텍스트 매니저를 정의하여 이 함수의 로그 수준을 일시적으로 높혀보겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 헬퍼 함수는 &lt;code&gt;with&lt;/code&gt; 블록을 실행하기 직전에 로그 수준을 높이고, 블록을 실행한 후에 로그 수준을 이전 수준으로 복구 시키는 코드이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;@contextmanager
+def debug_logging(level):
+    logger = logging.getLogger()
+    old_level = logger.getEffectiveLevel()
+    logger.setLevel(level)
+    try:
+        yield
+    finally:
+        logger.setLevel(old_level)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;yield&lt;/code&gt; 식은 &lt;code&gt;with&lt;/code&gt; 블록의 내용이 실행되는 부분을 지정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;with&lt;/code&gt; 블록 안에서 발생한 예외는 어떤 것이든 &lt;code&gt;yield&lt;/code&gt; 식에 의해서ㄷ 다시 발생되기 때문에 이 예외를 헬퍼 함수 안에서 잡아 낼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8as3xj5zv05jxwq/Screen%20Shot%202021-09-24%20at%202.52.31%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;with debug_logging(logging.DEBUG):
+    my_function()
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 사진과 같이 모든 로그가 출력된 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;with와-대상-변수-함께-사용하기&#34;&gt;with와 대상 변수 함께 사용하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;with&lt;/code&gt; 문에 전달된 컨텍스트 매니저가 객체를 반환할 수 도 있다. 이렇게 반환된 객체는 &lt;code&gt;with&lt;/code&gt; 복합문의 일부로 지정된 지역 변수에 대입된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 통해서 &lt;code&gt;with&lt;/code&gt; 블록 안에서 실행되는 코드가 직접 컨텍스트 객체와 상화 작용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서 파일을 작성하고 이 파일이 제대로 닫혔는지 확인하고 싶다고 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;with&lt;/code&gt; 문에 &lt;code&gt;open&lt;/code&gt;을 전달하면 이렇게 할 수 있다. &lt;code&gt;open&lt;/code&gt;은 &lt;code&gt;with&lt;/code&gt; 문에서 &lt;code&gt;as&lt;/code&gt;를 통해 대상으로 지정된 변수에게 파일 핸들을 제공하고, &lt;code&gt;with&lt;/code&gt; 블록에서 나갈 때 이 핸들을 닫는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;with open(&#39;my_output.txt&#39;, &#39;w&#39;) as handle:
+  handle.write(&#39;data&#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 접근 방법은 파일 핸들을 매번 수동으로 열고 닫는 것보다 파이썬 다운 방식이며, 이 방식을 사용하면 코드 실행이 &lt;code&gt;with&lt;/code&gt; 문을 벗어날 때 결국에는 파일이 닫힌다고 확신할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 코드에서 문제가 될 수 있는 부분을 강조함으로써 파일 핸들이 열린 채로 실행되는 코드의 양을 줄이도록 한다. 일반적으로 파일 핸들이 열려 있는 부분을 줄이면 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정리&#34;&gt;정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;with&lt;/code&gt; 문을 사용하면 try/finally 블록을 통해서 사용해야하는 로직을 재활용하면서, 가독성을 높힐 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;contextlib&lt;/code&gt; 내장 모듈이 제공하는 &lt;code&gt;contextmanager&lt;/code&gt; 데코레이터를 사용하면 여러분이 만든 함수를 &lt;code&gt;with&lt;/code&gt; 문에 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;컨텍스트 매니저가 &lt;code&gt;yield&lt;/code&gt; 하는 값은 &lt;code&gt;with&lt;/code&gt; 문의 &lt;code&gt;as&lt;/code&gt; 부분에 전달된다. 이를 특별한 컨텍스트 내부에서 실행되는 코드 안에서 직접 그 컨텍스트에 접근할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728&#34;&gt;파이썬 코딩의 기술&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/09/24/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>

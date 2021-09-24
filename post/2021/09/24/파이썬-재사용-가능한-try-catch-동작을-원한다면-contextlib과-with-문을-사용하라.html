@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>파이썬 - 재사용 가능한 TRY, CATCH 동작을 원한다면 contextlib과 with 문을 사용하라 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">파이썬 - 재사용 가능한 TRY, CATCH 동작을 원한다면 contextlib과 with 문을 사용하라</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/09/24</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="batter-way-18-재사용-가능한-tryfinally-동작을-원한다면-contextlib과-with-문을-사용하라">BATTER WAY 18. 재사용 가능한 try/finally 동작을 원한다면 contextlib과 with 문을 사용하라</h2>
+<hr>
+<ul>
+<li>
+<p>파이썬의 <code>with</code> 문은 코드가 특별한 컨텍스트 안에서 실행되는 경우를 표현한다.</p>
+</li>
+<li>
+<p>예를 들어, 상호 배제 락(뮤텍스)를 <code>with</code> 문 안에서 사용하면 락을 소유 했을 때만, 코드 블록이 실행된다는 것을 의미한다.</p>
+</li>
+</ul>
+<pre><code>from threading import Lock
+
+Lock = Lock()
+with lock:
+  # 어떤 불변 조건을 유지하면서 작업을 수행한다.
+  ...
+
+</code></pre><ul>
+<li><code>Lock</code> 클래스가 <code>with</code> 문을 적절히 활성화해주므로 위의 예제는 아래의 코드와 동등하다.</li>
+</ul>
+<pre><code>lock.acquire()
+try:
+  # 어떤 불변 조건을 유지하면서 작업을 수행한다.
+  ...
+finally:
+  lock.release()
+
+</code></pre><ul>
+<li>
+<p>위와 같은 경우엔느  <code>with</code> 문을 사용하는 것이 훨씬 더 낫다. 이유는 try/finally 구조를 반복적으로 사용할 필요가 없고, <code>acquire</code>에 대응하는 <code>release</code> 를 실수로 빠뜨리는 경우를 방지할 수 있기 때문이다.</p>
+</li>
+<li>
+<p><code>contextlib</code> 내장 모듈을 사용하면 만든 객체나 함수를 <code>with</code> 문에서 쉽게 사용할 수 있다.</p>
+</li>
+<li>
+<p><code>contextlib</code> 모듈은 <code>with</code> 문에 쓸 수 있는 함수를 간단히 만들 수 있는 <code>contextmanager</code> 데코레이터를 제공한다.</p>
+</li>
+<li>
+<p>이 데코레이터를 사용하는 방법이 <code>__enter__</code>, <code>__exit__</code> 특별 메서드를 사용해서 새롭게 클래스를 정의하는 방법보다 훨씬 쉽다.</p>
+</li>
+</ul>
+<h3 id="사용-예제">사용 예제</h3>
+<hr>
+<ul>
+<li>예를 들어서, 어떤 코드 영역에서 디버깅 관련 로그를 더 많이 남기고 싶다고 가정을 할 때, 아래 코드는 디버깅 로그를 남기는 함수이다.</li>
+</ul>
+<pre><code>def my_function():
+   logging.debug('debug data')
+   logging.error('error log')
+   logging.debug('additional debug data')
+</code></pre><p><img src="https://dl.dropbox.com/s/hpaxrrh45y2556w/Screen%20Shot%202021-09-24%20at%202.40.57%20PM.png" alt=""></p>
+<ul>
+<li>
+<p>프로그램의 기본 로그 수준은 <code>WARNING</code> 이므로, 이 함수를 실행하면 오류 메시지만 화면에 출력된다.</p>
+</li>
+<li>
+<p>따라서 컨텍스트 매니저를 정의하여 이 함수의 로그 수준을 일시적으로 높혀보겠다.</p>
+</li>
+<li>
+<p>이 헬퍼 함수는 <code>with</code> 블록을 실행하기 직전에 로그 수준을 높이고, 블록을 실행한 후에 로그 수준을 이전 수준으로 복구 시키는 코드이다.</p>
+</li>
+</ul>
+<pre><code>@contextmanager
+def debug_logging(level):
+    logger = logging.getLogger()
+    old_level = logger.getEffectiveLevel()
+    logger.setLevel(level)
+    try:
+        yield
+    finally:
+        logger.setLevel(old_level)
+
+</code></pre><ul>
+<li>
+<p><code>yield</code> 식은 <code>with</code> 블록의 내용이 실행되는 부분을 지정한다.</p>
+</li>
+<li>
+<p><code>with</code> 블록 안에서 발생한 예외는 어떤 것이든 <code>yield</code> 식에 의해서ㄷ 다시 발생되기 때문에 이 예외를 헬퍼 함수 안에서 잡아 낼 수 있다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/8as3xj5zv05jxwq/Screen%20Shot%202021-09-24%20at%202.52.31%20PM.png" alt=""></p>
+<pre><code>with debug_logging(logging.DEBUG):
+    my_function()
+</code></pre><ul>
+<li>위의 사진과 같이 모든 로그가 출력된 것을 확인할 수 있다.</li>
+</ul>
+<h3 id="with와-대상-변수-함께-사용하기">with와 대상 변수 함께 사용하기</h3>
+<hr>
+<ul>
+<li>
+<p><code>with</code> 문에 전달된 컨텍스트 매니저가 객체를 반환할 수 도 있다. 이렇게 반환된 객체는 <code>with</code> 복합문의 일부로 지정된 지역 변수에 대입된다.</p>
+</li>
+<li>
+<p>이를 통해서 <code>with</code> 블록 안에서 실행되는 코드가 직접 컨텍스트 객체와 상화 작용할 수 있다.</p>
+</li>
+<li>
+<p>예를 들어서 파일을 작성하고 이 파일이 제대로 닫혔는지 확인하고 싶다고 하자.</p>
+</li>
+<li>
+<p><code>with</code> 문에 <code>open</code>을 전달하면 이렇게 할 수 있다. <code>open</code>은 <code>with</code> 문에서 <code>as</code>를 통해 대상으로 지정된 변수에게 파일 핸들을 제공하고, <code>with</code> 블록에서 나갈 때 이 핸들을 닫는다.</p>
+</li>
+</ul>
+<pre><code>with open('my_output.txt', 'w') as handle:
+  handle.write('data')
+</code></pre><ul>
+<li>
+<p>이러한 접근 방법은 파일 핸들을 매번 수동으로 열고 닫는 것보다 파이썬 다운 방식이며, 이 방식을 사용하면 코드 실행이 <code>with</code> 문을 벗어날 때 결국에는 파일이 닫힌다고 확신할 수 있다.</p>
+</li>
+<li>
+<p>그리고 코드에서 문제가 될 수 있는 부분을 강조함으로써 파일 핸들이 열린 채로 실행되는 코드의 양을 줄이도록 한다. 일반적으로 파일 핸들이 열려 있는 부분을 줄이면 좋다.</p>
+</li>
+</ul>
+<h3 id="정리">정리</h3>
+<hr>
+<ul>
+<li>
+<p><code>with</code> 문을 사용하면 try/finally 블록을 통해서 사용해야하는 로직을 재활용하면서, 가독성을 높힐 수 있다.</p>
+</li>
+<li>
+<p><code>contextlib</code> 내장 모듈이 제공하는 <code>contextmanager</code> 데코레이터를 사용하면 여러분이 만든 함수를 <code>with</code> 문에 사용할 수 있다.</p>
+</li>
+<li>
+<p>컨텍스트 매니저가 <code>yield</code> 하는 값은 <code>with</code> 문의 <code>as</code> 부분에 전달된다. 이를 특별한 컨텍스트 내부에서 실행되는 코드 안에서 직접 그 컨텍스트에 접근할 수 있다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728">파이썬 코딩의 기술</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
