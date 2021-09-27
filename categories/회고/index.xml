@@ -6,7 +6,71 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 27 Sep 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 Sep 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[일일 회고]</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/28/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Tue, 28 Sep 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/28/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://news.hada.io/topic?id=5088&#34;&gt;러스트로 라즈베리 파이용 임베디드 OS 만들어보기&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://news.hada.io/topic?id=5084&#34;&gt;nginx 플레이그라운드&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;러스트로 임베디드를 만들어보는 연습을 하여, 운영체제에 대한 원리 및 러스트라는 언어에 대해서 배울 수 있으면 좋을 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/48zwe2i9coi0uwz/Screen%20Shot%202021-09-28%20at%208.28.49%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;엔지닉스 설정을 바꿔서 테스트해볼 수 있는 &lt;a href=&#34;https://nginx-playground.wizardzines.com/&#34;&gt;사이트&lt;/a&gt;이다. 많은 설정이 존재하는 엔지닉스의 설정을 변경하기 어려울 때가 있었는데, 어떤 기능을 테스트할 때 사용하면 좋을 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;시간을 게임을 하는것과 같이 낭비하지 않는 것 같다. 물론 공부를 하는 것은 아니지만 시간을 낭비하는 것이 아니라면 크게 신경쓰지 않아도 되는 부분인 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그래밍 공부를 너무 안하지는 말고, 관심 있는 분야부터 천천히 호기심에 의해서 공부를 하는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오픈 소스 개발을 하다가 막히는 부분이 있었는데 이 부분에 대해서 질문을 하면서 해결하는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;(17:00 ~ 18:00) 복싱 도장에 가서 운동을 할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(19:00 ~ 20:00) 기타 연습을 할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-확언&#34;&gt;Affimation (자기 확언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;내 목소리에 귀를 기울이고 자신감을 가지자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 확언)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;정확한 언어 (나만의 방식으로 그 언어를 이미지화 시키는 것이다.)&lt;/li&gt;
+&lt;li&gt;명확한 시각화&lt;/li&gt;
+&lt;li&gt;상응하는 감정 (자신만의 감정을 상상한다.)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/09/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
