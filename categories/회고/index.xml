@@ -6,7 +6,52 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 29 Sep 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 30 Sep 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[일일 회고]</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/30/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Thu, 30 Sep 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/09/30/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://teamdable.github.io/techblog/New-CSS-features&#34;&gt;알뜰신 CSS&lt;/a&gt; 이라는 글을 읽었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;나도 언젠가는 퍼블리싱을 배워서 멋진 디자인의 웹사이트를 만들고 싶은 마음이 있는데, 이를 익혀두면 좋을 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;[17:00 ~ 18:00] 바로 복싱도장에 가서 운동을 마친다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;[20:00 ~ 21:00] &lt;a href=&#34;https://github.com/naver/arcus-memcached/issues/480&#34;&gt;sorted set 기능 검토 및 개발&lt;/a&gt; 관련해서 코드 리딩 및 솔루션 빌드 및 질문하기&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-확언&#34;&gt;Affimation (자기 확언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;나는 오늘 할일을 정하면 반드시 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 확언)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;정확한 언어 (나만의 방식으로 그 언어를 이미지화 시키는 것이다.)&lt;/li&gt;
+&lt;li&gt;명확한 시각화&lt;/li&gt;
+&lt;li&gt;상응하는 감정 (자신만의 감정을 상상한다.)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/09/29/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
