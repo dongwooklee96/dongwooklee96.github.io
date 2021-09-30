@@ -15,13 +15,21 @@
       <guid>https://dongwooklee96.github.io/post/2021/09/30/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
       <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://teamdable.github.io/techblog/New-CSS-features&#34;&gt;알뜰신 CSS&lt;/a&gt; 이라는 글을 읽었다.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://teamdable.github.io/techblog/New-CSS-features&#34;&gt;알뜰신 CSS&lt;/a&gt; 이라는 글을 읽었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://engineering.linecorp.com/ko/blog/mysql-workbench-visual-explain-index/&#34;&gt;MySQL Workbench의 VISUAL EXPLAIN으로 인덱스 동작 확인하기&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;나도 언젠가는 퍼블리싱을 배워서 멋진 디자인의 웹사이트를 만들고 싶은 마음이 있는데, 이를 익혀두면 좋을 것 같다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;인덱스에 대해서 시각적으로 이해할 수 있는 좋은 기회였다.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
 &lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
 &lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
