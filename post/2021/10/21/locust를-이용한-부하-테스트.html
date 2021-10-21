@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>LOCUST를 이용한 부하 테스트 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">LOCUST를 이용한 부하 테스트</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/10/21</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B8%B0%ED%83%80">기타</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="locust를-선택한-이유">LOCUST를 선택한 이유</h3>
+<hr>
+<ul>
+<li>
+<p>최근에 부하테스트를 진행할 일이 있었다. 여러가지 부하 테스팅 툴이 있었지만, 나는 <a href="https://locust.io/">LOCUST</a>를 선택 했다.</p>
+</li>
+<li>
+<p>LOCUST를 선택한 이유는 설치가 간단해보이고, 파이썬으로 스크립트를 작성해 코드로 관리할 수 있다는 점도 마음에 들었다.</p>
+</li>
+<li>
+<p>그리고 또한 웹 기반 UI를 제공하여 결과를 확인하거나, 조작하기도 편리하였다.</p>
+</li>
+</ul>
+<h3 id="설치-방법">설치 방법</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/0b5wmn704oz4h7w/Screen%20Shot%202021-10-21%20at%2010.28.26%20AM.png" alt=""></p>
+<ul>
+<li>설치 방법은 그냥 터미널에서 다음 명령어를 입력하며 된다.</li>
+</ul>
+<pre><code>pip3 install locust
+</code></pre><h3 id="테스트-방법">테스트 방법</h3>
+<hr>
+<ul>
+<li>원하는 폴더에 가서, <code>locustfile.py</code> 를 만들고 나서, 아래 코드를 작성한다.</li>
+</ul>
+<pre><code>from locust import HttpUser, task
+
+class HelloWorldUser(HttpUser):
+  @task
+   def hello_world(self):
+     self.client.get(&quot;/hello&quot;)
+     self.client.get(&quot;/world&quot;)
+</code></pre><ul>
+<li>
+<p>가장 간단한 예제 코드이며, 해당 코드를 실행하면 <code>HTTP</code> 요청을 서버에 전송한다.</p>
+</li>
+<li>
+<p><code>LOCUST</code>를 실행하는 <code>locustfile.py</code>를 작성한 디렉터리에서 터미널에 아래 명령어를 입력하는 것이다.</p>
+</li>
+</ul>
+<pre><code>locust --host=&quot;server address&quot;
+</code></pre><ul>
+<li>실행 하면, 사용자 수와 사용자가 증가하는 기간을 설정할 수 있고, 초당 응답 시간 및 전체적인 지표를 확인할 수 있다.</li>
+</ul>
+<pre><code>
+from random import randint
+from locust import HttpUser, task
+
+
+class UserBehavior(HttpUser):
+
+    def on_start(self):
+        self.login()
+
+    def on_stop(self):
+        self.logout()
+
+    def login(self):
+        response = self.client.post(&quot;/api/v1/auth/login&quot;, json={&quot;user-id&quot;: &quot;id&quot;,
+                                                                &quot;user-pwd&quot;: &quot;pass&quot;})
+        access_token = response.json()['data']['access_token']
+        self.client.headers.update({'Authorization': 'Bearer ' + access_token})
+
+        # # user info
+        self.user_company_key = response.json()['data']['user_info']['company_key']
+
+    def logout(self):
+        self.client.delete(&quot;/api/v1/auth/logout_access_token&quot;)
+
+    # 조회
+    @task
+    def view_dashboard(self):
+        &quot;&quot;&quot;
+        HOME - DASH BOARD
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/dashboard/summary-info?role=ADMIN&amp;company_key=26')
+        response = self.client.get('/api/v1/notice/dashboard-notices?company_key=26')
+        response = self.client.get('/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=0')
+        response = self.client.get('/api/v1/dashboard/compliance-list?offset=0&amp;count=12&amp;group_list=&amp;company_key=26')
+
+    @task
+    def view_home_notice(self):
+        &quot;&quot;&quot;
+        HOME - NOTICE
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get(
+            '/api/v1/notice/notices?offset=0&amp;count=20&amp;company_key=26&amp;show_deleted=0&amp;is_cm=1&amp;is_admin=1&amp;is_service_admin=0')
+
+    @task
+    def view_training_my_training_to_do_list(self):
+        &quot;&quot;&quot;
+        TRAINING - MY TRAINING - TO DO LIST
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get(
+            '/api/v1/contents/my-lecture/to-do-list?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;my_status=NOT+OPEN,+IN+PROGRESS,+OVERDUE&amp;status_list=ACTIVE,+EXPIRED&amp;after_active_date=1&amp;exclude_previous=1&amp;validity=1&amp;company_key=26')
+
+    @task
+    def view_training_my_training_optional_list(self):
+        &quot;&quot;&quot;
+        TRAINING - MY TRAINING - OPTIONAL
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get(
+            '/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;status=ACTIVE&amp;training_type=OPTIONAL&amp;category_list=&amp;attended=0&amp;validity=1&amp;my_lecture=0&amp;sorting_mode=due_date_desc&amp;exclude_previous=1&amp;type=LECTURE&amp;company_key=26')
+
+    @task
+    def view_training_my_training_all_lectures(self):
+        &quot;&quot;&quot;
+        TRAINING - MY TRAINING - ALL
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get(
+            '/api/v1/contents/my-lecture/to-do-list?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=238,239,267,268,240,242,489,366,367,368,488,343,369,370,472,473,371,312,382,467,476,483,490,482,495,491,493,496,497&amp;validity=1&amp;company_key=26')
+
+    @task
+    def view_all_training_list(self):
+        &quot;&quot;&quot;
+        TRAINING - ALL TRAINING
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE')
+        response = self.client.get('/api/v1/job-title/all-job-titles?company_key=26')
+        response = self.client.get('/api/v1/contents/categories-from-dic?exclude_previous=1&amp;company_key=26')
+        response = self.client.get(
+            '/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;exclude_previous=1&amp;company_key=26')
+
+    @task
+    def view_user_management_group(self):
+        &quot;&quot;&quot;
+        USER_MANAGEMENT - GROUP
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=0')
+
+    @task
+    def view_user_management_job_title(self):
+        &quot;&quot;&quot;
+        USER_MANAGEMENT - JOB TITLE
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/job-title/job-titles?show_deleted=0&amp;offset=0&amp;count=20&amp;company_key=26')
+
+    @task
+    def view_user_management_user(self):
+        &quot;&quot;&quot;
+        USER_MANAGEMENT - USER
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE')
+        response = self.client.get('/api/v1/job-title/all-job-titles?company_key=26')
+        response = self.client.get('/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=0')
+
+        response = self.client.get(
+            '/api/v1/user/users?status=ACTIVE,INACTIVE&amp;offset=0&amp;count=20&amp;roles=&amp;group_list=&amp;show_deleted=0&amp;company_key=26')
+
+    @task
+    def view_contents_management_category(self):
+        &quot;&quot;&quot;
+        CONTENTS MANAGEMENT - CATEGORY
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/contents/categories?show_deleted=0&amp;exclude_previous=0&amp;company_key=26')
+
+    @task
+    def view_contents_management_lecture(self):
+        &quot;&quot;&quot;
+        CONTENTS MANAGEMENT - LECTURE
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/job-title/all-job-titles?company_key=26')
+        response = self.client.get('/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE')
+
+        response = self.client.get(
+            '/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;exclude_previous=1&amp;type=LECTURE&amp;company_key=26')
+
+    @task
+    def view_contents_management_quiz(self):
+        &quot;&quot;&quot;
+        CONTENTS MANAGEMENT - QUIZ
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get(
+            '/api/v1/contents/quizzes?show_deleted=0&amp;offset=0&amp;count=20&amp;status=ACTIVE,+INACTIVE&amp;company_key=26')
+
+    @task
+    def view_contents_management_course(self):
+        &quot;&quot;&quot;
+        CONTENTS MANAGEMENT - COURSE
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/job-title/all-job-titles?company_key=26')
+        response = self.client.get('/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE')
+        response = self.client.get('/api/v1/contents/categories-from-dic?exclude_previous=1&amp;company_key=26')
+        response = self.client.get(
+            '/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;exclude_previous=1&amp;type=COURSE&amp;company_key=26')
+
+    @task
+    def view_learning_progress_training(self):
+        &quot;&quot;&quot;
+        LEARNING PROGRESS - TRAINING
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/contents/categories-from-dic?company_key=26')
+        response = self.client.get('/api/v1/progress/lectures?offset=0&amp;count=20&amp;category_list=&amp;company_key=26')
+
+    @task
+    def view_learning_progress_user(self):
+        &quot;&quot;&quot;
+        LEARNING PROGRESS - USER
+        &quot;&quot;&quot;
+        # get list
+        response = self.client.get('/api/v1/user/all_user_list_by_requester?company_key=26&amp;user_status_list=ACTIVE')
+        response = self.client.get('/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=1')
+        response = self.client.get('/api/v1/contents/categories-from-dic?company_key=26')
+        response = self.client.get(
+            '/api/v1/progress/users?offset=0&amp;count=20&amp;show_deleted=0&amp;category_list=&amp;show_inactive_user=false&amp;company_key=26')
+
+    @task
+    def view_system_management(self):
+        &quot;&quot;&quot;
+        SYSTEM MANAGEMENT
+        &quot;&quot;&quot;
+        response = self.client.get('/api/v1/sys/system?company_key=26')
+
+    # 생성
+    @task
+    def add_category(self):
+        &quot;&quot;&quot;
+        CONTENTS MANAGEMENT - CATEGORY - ADD
+        &quot;&quot;&quot;
+        num1 = randint(0, 5000)
+        num2 = randint(0, 5000)
+        response = self.client.post('/api/v1/contents/categories', json={
+            &quot;parent_category_name&quot;: &quot;NEW COMPANY 1&quot;,
+            &quot;parent_category_key&quot;: 0,
+            &quot;category_name&quot;: &quot;test_category_&quot; + str(num1) + &quot;_&quot; + str(num2),
+            &quot;note&quot;: None,
+            &quot;training_type&quot;: &quot;MANDATORY&quot;,
+            &quot;due_days&quot;: None,
+            &quot;alarm&quot;: 0,
+            &quot;alarm_days&quot;: 0,
+            &quot;deleted&quot;: 0,
+            &quot;status&quot;: &quot;ACTIVE&quot;,
+            &quot;trainee_list&quot;: [],
+            &quot;mandatory_trainee_list&quot;: [],
+            &quot;optional_trainee_list&quot;: [],
+            &quot;category_key&quot;: -1,
+            &quot;inactive_date&quot;: None,
+            &quot;will_inactive&quot;: 0,
+            &quot;name&quot;: &quot;test_category_1&quot;,
+            &quot;company_key&quot;: 26
+        })
+
+    @task
+    def add_lecture(self):
+        &quot;&quot;&quot;
+        CONTENTS MANAGEMENT - LECTURE - ADD
+        &quot;&quot;&quot;
+        num1 = randint(0, 5000)
+        num2 = randint(0, 5000)
+        response = self.client.post('/api/v1/contents/lectures', json={
+            &quot;category_key&quot;: 497,
+            &quot;name&quot;: &quot;lecture_&quot; + str(num1) + &quot;_&quot; + str(num2),
+            &quot;practitioner_type&quot;: None,
+            &quot;training_year&quot;: None,
+            &quot;note&quot;: None,
+            &quot;training_type&quot;: &quot;MANDATORY&quot;,
+            &quot;lecture_length&quot;: 0,
+            &quot;active_date&quot;: &quot;2021-10-20&quot;,
+            &quot;inactive_date&quot;: &quot;9999-12-31&quot;,
+            &quot;due_date&quot;: None,
+            &quot;due_days&quot;: 1,
+            &quot;alarm&quot;: 0,
+            &quot;alarm_days&quot;: 0,
+            &quot;certificate&quot;: 0,
+            &quot;complete_date_mode&quot;: &quot;AUTO_ASSIGN&quot;,
+            &quot;trainee_list&quot;: [
+                {&quot;trainee_key&quot;: 1013, &quot;value&quot;: &quot;dwlee&quot;, &quot;trainee_type&quot;: &quot;USER&quot;, &quot;training_type&quot;: &quot;MANDATORY&quot;}],
+            &quot;mandatory_trainee_list&quot;: [
+                {&quot;trainee_key&quot;: 1013, &quot;value&quot;: &quot;dwlee&quot;, &quot;trainee_type&quot;: &quot;USER&quot;, &quot;training_type&quot;: &quot;MANDATORY&quot;}],
+            &quot;optional_trainee_list&quot;: [], &quot;include_contents&quot;: 0, &quot;contents_type&quot;: None, &quot;contents_name&quot;: None,
+            &quot;contents_url&quot;: None,
+            &quot;contents_link&quot;: &quot;&quot;, &quot;completion_period&quot;: 0, &quot;visibility&quot;: False, &quot;add_on_file_name&quot;: None,
+            &quot;add_on_file_url&quot;: None,
+            &quot;include_quiz&quot;: 0, &quot;quiz_type&quot;: None, &quot;quiz_key&quot;: None, &quot;number_of_quiz&quot;: 0, &quot;passing_score&quot;: 0,
+            &quot;start_date&quot;: None,
+            &quot;end_date&quot;: None, &quot;has_quiz_time_limit&quot;: 0, &quot;quiz_time_limit&quot;: 0, &quot;company_key&quot;: 26
+        })
+
+</code></pre><ul>
+<li>
+<p>위는 내가 작성한 스크립트이다. 특이한 점으로는 부하 테스트를 실행하고 끝낼 때 <code>on_start()</code> 메서드와, <code>on_stop()</code> 메서드를 이용하여 로그인과 로그아웃을 하는 것이다.</p>
+</li>
+<li>
+<p>그리고 로그인 할 때 반환되는 <code>JWT</code> 토큰정보를 <code>self.client.headers.update</code>를 이용하여 저장하는 것을 확인할 수 있다.</p>
+</li>
+<li>
+<p>이렇게 하면, API 호출을 하기 위해서 토큰이 필요하더라도 문제 없이 호출할 수 있다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://docs.locust.io/en/stable/">locust- doc</a></li>
+<li><a href="https://loadforge.com/directory/getting_auth_token">locust - Getting Auth Token</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
