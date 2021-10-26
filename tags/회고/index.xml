@@ -6,7 +6,75 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 25 Oct 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 26 Oct 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[일일 회고]</title>
+      <link>https://dongwooklee96.github.io/post/2021/10/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Tue, 26 Oct 2021 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/10/26/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://news.hada.io/topic?id=5253&#34;&gt;질문에 대한 유용한 답변을 얻는 방법&lt;/a&gt; 이라는 글을 읽게 되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;나도 평소에 내가 질문하고 싶은 것이 있을 때 제대로 질문하지 못해서 올바른 답변을 받지 못한 적이 있었다. 따라서, 나는 이러한 경우에 그냥 넘어갔었는데 질문을 잘하여서, 원하는 답변을 얻어내자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;모호하거나 불명확한 질문을 하면, 내가 이미 아는것을 설명하거나 아니면 전혀 문제와 상관없는 것을 설명할 때가 있다. 이럴 때는 과감하게 중단 시키고 내가 원하는 답변이 나오도록 다시 물어볼 필요가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예 / 아니오로 답할 수 있는 질문을 하자. 이 질문의 의도는 내 이해도를 확인시키는 질문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이해하고 있는 것을 말하기 -&amp;gt; 나의 목표를 설명하고, 내가 현재 이해하고 있는 것을 얘기한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상관없는 주제를 말한다고 생각한다면, 더 구체적인 질문을 하여서, 인터럽트를 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내 질문의 답이 아닌 답변을 억셉트 하지 말고, 더 물어보는 것이 중요하고 더 자세한 질문을 통해서 내가 알고 싶은 방향으로 유도하는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;유용한 답변을 주는 방법은 말하는 중간에 &amp;ldquo;내가 말한것이 이해되었는지 계속 체크하기&amp;rdquo;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;(17:00 ~ 18:30) 복싱 도장에 가서 운동을 할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(19:00 ~ 20:00) 저녁 식사 및 휴식을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(21:00 ~ 21:30) 시스템 프로그래밍 공부 및 C 언어 공부를 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-확언&#34;&gt;Affimation (자기 확언)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어떤 일을 진행할 때, 상대방과 충분히 이야기를 한 후에 진행을 하자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 확언)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;정확한 언어 (나만의 방식으로 그 언어를 이미지화 시키는 것이다.)&lt;/li&gt;
+&lt;li&gt;명확한 시각화&lt;/li&gt;
+&lt;li&gt;상응하는 감정 (자신만의 감정을 상상한다.)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/10/25/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
