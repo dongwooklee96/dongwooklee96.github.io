@@ -6,7 +6,45 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 02 Nov 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 04 Nov 2021 14:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>SQL 다대다 관계 및 유용한 기능</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/04/sql-%EB%8B%A4%EB%8C%80%EB%8B%A4-%EA%B4%80%EA%B3%84-%EB%B0%8F-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EA%B8%B0%EB%8A%A5.html</link>
+      <pubDate>Thu, 04 Nov 2021 14:20:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/04/sql-%EB%8B%A4%EB%8C%80%EB%8B%A4-%EA%B4%80%EA%B3%84-%EB%B0%8F-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EA%B8%B0%EB%8A%A5.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 &lt;code&gt;SQLALCHEMY&lt;/code&gt;를 이용하여, 테이블 간의 다대다 관계를 맺어줄 일이 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그런던 중에 객체의 관계를 어떻게 맺어주면 되는지에 대한 것과 연산을 어떻게 해야하는지에 대한 유용한 블로그 글을 읽게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나중에 정리하면 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_orm_many_to_many_relationships.htm&#34;&gt;TutorialsPoint - Many to Many Relationships&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://programmer.help/blogs/sqlalchemy-many-to-many-relationship.html&#34;&gt;Programmer Help&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://ljs93kr.tistory.com/60?category=714932&#34;&gt;건강한 프로그래머 - Python 으로 ORM 완벽사용 (2)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://weicomes.tistory.com/261?category=670729&#34;&gt;SQLAlchemy 시작하기 - Part 1&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://weicomes.tistory.com/262?category=670729&#34;&gt;SQLAlchemy 시작하기 - Part 2&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/11/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
