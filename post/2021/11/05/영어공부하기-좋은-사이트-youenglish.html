@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>알고리즘 문제 - 1이 될때까지 | 개발자 이동욱</title>
+    <title>영어공부하기 좋은 사이트 YouEnglish | 개발자 이동욱</title>
     <link rel="stylesheet" href="../../../../css/style.css" />
     <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
@@ -53,13 +53,13 @@
     <br/>
 
 <div class="article-meta">
-<h1><span class="title">알고리즘 문제 - 1이 될때까지</span></h1>
+<h1><span class="title">영어공부하기 좋은 사이트 YouEnglish</span></h1>
 <h2 class="author">이동욱</h2>
-<h2 class="date">2021/08/27</h2>
+<h2 class="date">2021/11/05</h2>
 <p class="terms">
   
   
-  Categories: <a href="../../../../categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">알고리즘</a> 
+  Categories: <a href="../../../../categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">프로그래밍</a> 
   
   
   
@@ -70,92 +70,18 @@
 
 <div class="content-wrapper">
   <main>
-    <h3 id="문제---1이-될때까지">문제 - 1이 될때까지</h3>
-<hr>
-<ul>
-<li>어떠한 수 N이 1이 될떄가지 다음의 두 과정 중에 하나를 반복적으로 선택하여 수행하려고 한다.</li>
-</ul>
-<ol>
-<li>N에서 1을 뺀다.</li>
-<li>N을 K로 나눈다.</li>
-</ol>
-<ul>
+    <ul>
 <li>
-<p>두 번째 연산은 N이 K로 나누어질때만 선택할 수 있다.</p>
+<p>영어공부하기 굉장히 좋은 사이트를 찾았다. <a href="https://youglish.com/">YouEnglish</a> 라는 사이트인데, 영어 단어를 입력하면 해당 영어 단어를 말하는 유튜브 영상이 매칭된다.</p>
 </li>
 <li>
-<p>예를 들어서 N이 17, K가 4라면 1번의 과정을 1번하면 16이 되고 이후 2번의 과정을 2번하면 N은 1이 된다. 결과적으로 이 경우 전체 과정을 실행한 횟수는 3이 된다.</p>
-</li>
-<li>
-<p>N과 K가 주어질 때, N이 1이 될떄까지 1번 혹은 2번의 과정을 수행해야하는 최소 횟수를 구하는 프로그램을 작성하라.</p>
-</li>
-</ul>
-<h3 id="제한-사항">제한 사항</h3>
-<hr>
-<h3 id="아이디어">아이디어</h3>
-<hr>
-<h4 id="그리디">그리디</h4>
-<ul>
-<li>K로 나눌 수 있는지 보고, 나눌 수 없으면 1을 뺀다.</li>
-<li>N이 1이 될때까지 위의 과정을 반복한다.</li>
-</ul>
-<h4 id="재귀">재귀</h4>
-<ul>
-<li>K로 나눈 경우와, 1을 뺀 경우를 선택한다.</li>
-<li>그리고 결과적으로 더 작은 값을 선택한다.</li>
-</ul>
-<h3 id="코드">코드</h3>
-<hr>
-<pre><code>def solution(n: int, k: int) -&gt; int:
-    &quot;&quot;&quot;
-    :param n: 특정한 수
-    :param k: 나눌 수
-    :return: 수행한 최소 횟수
-    &quot;&quot;&quot;
-    tot = 0
-    while not n == 1:
-        if n % k == 0:
-            n //= k
-        else:
-            n -= 1
-        tot += 1
-    return tot
-
-
-def solution2(n: int, k: int) -&gt; int:
-    result = 0
-
-    while n &gt;= k:
-        while n % k != 0:
-            n -= 1
-            result += 1
-        n //= k
-        result += 1
-
-    while n &gt; 1:
-        n -= 1
-        result += 1
-    return result
-
-
-if __name__ == &quot;__main__&quot;:
-    n, k = map(int, input().split())
-    print(solution(n, k))
-
-</code></pre><h3 id="더-나은-방법">더 나은 방법</h3>
-<hr>
-<ul>
-<li>
-<p>조금 더 효율적으로 풀 수 있는 방법이 있다.</p>
-</li>
-<li>
-<p>입력이 적을 때는 일일이 하나씩 빼도 문제가 없지만, 큰 숫자를 빼야하는 경우에는 N이 K의 배수가 되도록 효율적으로 한번에 빼는 것 이 좋다.</p>
+<p>영어공부할 때 예문이 부족한 경우가 많은데 발음과 함께 예문을 볼 수 있는 것이 정말로 많은 도움이 될 것 같다.</p>
 </li>
 </ul>
 <h3 id="참고-문헌">참고 문헌</h3>
 <hr>
 <ul>
-<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118">이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어</a></li>
+<li><a href="https://youglish.com/">YouEnglish</a></li>
 </ul>
 
     <a href="../../../../"> >> Home</a>
