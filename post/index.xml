@@ -6,7 +6,76 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 06 Nov 2021 17:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Nov 2021 21:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데이터 정규화란? (머신러닝)</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/06/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%95%EA%B7%9C%ED%99%94%EB%9E%80-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D.html</link>
+      <pubDate>Sat, 06 Nov 2021 21:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/06/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%95%EA%B7%9C%ED%99%94%EB%9E%80-%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D.html</guid>
+      <description>&lt;h3 id=&#34;데이터-정규화란&#34;&gt;데이터 정규화란&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;머신러닝에 사용되는 데이터는 그 값이 너무 크거나 작지 않고 적당한 범위 (-1에서 ~ 1사이)에 있어야 모델의 정확도가 높아진다고 알려져있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 기법은 알고리즘에 따라서 다른데, 선형회귀, 로지스틱 회귀, 서포트 벡터 머신 등의 알고리즘에서는 효과가 좋지만, 결정 트리 알고리즘에서는 효과가 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래서 학습 전에 미리 값이 적당한 범위를 유지하도록 모델에 입력할 데이터를 변환하기도 한다. 이러한 작업을 데이터 정규화라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;정규화에서 많이 쓰이는 기법은 정규화와 표준화이다. 각 기법의 의미와 변환 방법은 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정규화-normalization&#34;&gt;정규화 (normalization)&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/x7pgzm3m1l5l00m/alidf232.png.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;입력 변수 X를 최소값은 0, 최댓값은 1이 되게 1차 함수를 통해서 변환한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;표준화-standardization&#34;&gt;표준화 (standardization)&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/pfsj77li7joubem/hasdhsf.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;입력 변수 X를 평균이 0, 분산이 1인 정규 분포가 되도록 1차 함수를 통해서 변환한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;중요한-점&#34;&gt;중요한 점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;두 가지 기법중에 정규화는 이상값의 영향을 쉽게 받는다. 따라서, 데이터에 이상값이 포함되었을 가능성이 높다면, 표준화를 적용하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반대로. 이미지 데이터처럼 최솟값과 최대값을 미리 알 수 있는 경우에는 정규화를 사용하는 경우가 많다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;그-외의-데이터-전처리-방법&#34;&gt;그 외의 데이터 전처리 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그 외 데이터 전처리에서 자주 쓰이는 기법으로 &amp;lsquo;이산화(discretization)&amp;lsquo;이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이산화는 &amp;lsquo;연령&amp;rsquo;과 같은 숫자 값 데이터를 &amp;lsquo;10대&amp;rsquo;, &amp;lsquo;20대&amp;rsquo;와 같이 레이블로 분류하는 기법을 말한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그 이외에도 다양한 데이터 전처리 기법이 있다. 예를 들면 기업의 연간 매출처럼 기업의 규모에 따라서 값이 크게 달라지는 숫자 값은 그 로그값을 취해서 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또 변환의 주기성이 알려진 숫자 함수라면 삼각함수가 유용하게 쓰이기도 한다. 경우에 따라서는 여러 개의 입력 데이터를 조합해 만든 새로운 입력 데이터를 이용하여 정확도가 뛰어난 모델을 만들기도 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 고도의 데이터 전처리를 &amp;lsquo;특징값 엔지니어링&amp;rsquo;이라고 하며 데이터 사이언티스트의 담당 업무 중에서도 가장 난도가 높은 업무로 취급이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=273487776&#34;&gt;돈 되는 파이썬 인공지능 프로그래밍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>머신러닝의 종류와 딥러닝이란</title>
       <link>https://dongwooklee96.github.io/post/2021/11/06/%EB%A8%B8%EC%8B%A0%EB%9F%AC%EB%8B%9D%EC%9D%98-%EC%A2%85%EB%A5%98%EC%99%80-%EB%94%A5%EB%9F%AC%EB%8B%9D%EC%9D%B4%EB%9E%80.html</link>
