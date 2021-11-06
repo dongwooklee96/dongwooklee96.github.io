@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>분류 인공지능 알고리즘의 종류와 특징 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">분류 인공지능 알고리즘의 종류와 특징</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/11/06</h2>
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="대표적인-분류-알고리즘-특징">대표적인 분류 알고리즘 특징</h3>
+<hr>
+<ul>
+<li>크게 구현 방식에 따라서 손실 함수 타입과 결정 트리 방식으로 나누어 진다.</li>
+</ul>
+<h4 id="손실-함수-타입-종류">손실 함수 타입 종류</h4>
+<ul>
+<li><strong>로지스틱 회귀</strong></li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/5d4jlmnv599yo42/skdfh334.png" alt=""></p>
+<ul>
+<li>
+<p>시그모이그 함수의 출력을 확률로 취급한다. 결정 경계는 직선 형태이다. 따라서 산점도를 확인하였을 때 선형 분리 가능한 데이터가 아니라면 분류할 수 없다.</p>
+</li>
+<li>
+<p>위의 그림에서 첫 번째 그림같은 경우라면 분류할 수 있지만 그 이외에는 분류할 수 없다.</p>
+</li>
+<li>
+<p><strong>서포트 벡터 머신 (커널)</strong></p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/a8elgeunc3x62fl/234klkljsdf.png" alt=""></p>
+<ul>
+<li>
+<p>커널 트릭을 적용하여 직선 이외의 결정 경계를 가질 수 있다. 로지스틱 회귀가 결정 경계를 직선으로만 정하려고 하여 제대로 분류를 하지 못하는 문제를 해결 할 수 있다.</p>
+</li>
+<li>
+<p>기본 아이디어는 2차원의 점으로 된 데이터를 직선으로 분류할 수 없다면, 3차원으로 다시 배치하여 면으로 분류를 할 수 있다는 아이디어이다.</p>
+</li>
+<li>
+<p>구체적으로 차원을 확장하는 방법은 가우시안 커널, 다항 커널, 시그모이드 커널 등 여러 알고리즘이 있다.</p>
+</li>
+<li>
+<p><strong>신경망</strong></p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/qry2hinlw1lncnc/dfkjdf33434.png" alt=""></p>
+<ul>
+<li>
+<p>중간층을 추가하는 방법으로 직선 이외의 결정 경계를 가질 수 있다.</p>
+</li>
+<li>
+<p>신경망은 말 그래도 뇌의 신경 세포가 이루는 네트워크를 모방해 만든 알고리즘이다. 원으로 표시된 것이 하나하나의 뇌세포에 해당하며, 세포 간의 결합을 통해서 학습이 진행된다.</p>
+</li>
+<li>
+<p>층을 늘리는 만큼 더욱 복잡한 모델을 만들 수 있다. 신경망 모델을 구현하려면 일반적으로 텐서플로나 케라스 같은 딥러닝 전용 라이브러리를 사용한다.</p>
+</li>
+</ul>
+<h4 id="결정-트리-타입-종류">결정 트리 타입 종류</h4>
+<ul>
+<li><strong>결정 트리</strong></li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/1etrh3k47p49lx9/dkfjdkfjd3434.png" alt=""></p>
+<ul>
+<li>
+<p>특징 필드의 값을 기준으로 그룹을 나누는 과정을 반복함</p>
+</li>
+<li>
+<p>각 처리 과정이 있고, 아래로 내려갈 수록 분류가 되어지는 방식이다.</p>
+</li>
+<li>
+<p>맨 위의 박스를 보면 <code>petal_width</code>가 1.75보다 작은지를 기준으로 분류하고 아래도 이와 같은 방식을 반복한다.</p>
+</li>
+<li>
+<p>이 과정이 결정트리의 기본 처리 방식이다. 만약 사람에게 분류할 규칙을 정하라고 한다면, 이와 같이 정할 것이다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/w69olhigsnoxtfb/234lkjsf.png" alt=""></p>
+<ul>
+<li>
+<p>학습을 시킨 것을 살펴보면, 서포트벡터 머신과 마찬가지로 원형의 결정 경계를 구할 수 있다.</p>
+</li>
+<li>
+<p>서포트 벡터 머신의 경계선이 완만한 곡선이었것에 비해서, 결정 트리의 경계선은 직사각형을 조합해서 만든 형태를 보인다.</p>
+</li>
+<li>
+<p>이상값이 있어도 억지로 짜맞추는 규칙을 만들어내므로 경계선이 부자연스러워진다.</p>
+</li>
+<li>
+<p>과적합이 발생할 수 있어서 주의 및 파라미터 튜닝을 해야한다.</p>
+</li>
+<li>
+<p><strong>랜덤 포레스트</strong></p>
+<ul>
+<li>
+<p>학습 데이터의 일부분으로 여러 개의 결정 트리를 만든 다음에, 결정 트리 간의 다수 결로 결정한다.</p>
+</li>
+<li>
+<p>결정 트리는 어떤 성질의 데이터에도 유연하게 대응할 수 있는 것이 특징이지만, 과적합을 일으키기 쉽다. 이러한 단점을 극복하기 위해서 나온 것이 랜덤 포레스트이다.</p>
+</li>
+<li>
+<p>랜덤 포레스트의 바탕이되는 아이디어는 약분류기라는 간단한 분류기를 여러 개 만들고 그 분류 결과로 다수결로 최종 판단을 내리자는 것이다.</p>
+</li>
+<li>
+<p>첫 단계는 원본의 학습 데이터에서 표본 데이터를 N개의 세트로 만든다. 표본을 추출할 때 데이터 중복을 허용하여 (부트스트래핑) 하여 약 분류기를 만든다.</p>
+</li>
+<li>
+<p>이렇게 학습한 분류기는 정확도가 떨어지지만 약분류기의 결과를 모두 모아서 다수결로 최종 결과를 결정하면 전체적으로는 정확도가 높은 분류 결과가 나온다고 알려져있다.</p>
+</li>
+<li>
+<p>이것이 바로 랜덤 포레스트 방식이며, 단순 결정 트리와 비교하면 과적합을 잘 일으키지 않는 모델이 된다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/l6jt5f7vacjyzjq/dfkjdf3434.png" alt=""></p>
+<ul>
+<li>학습 결과를 보면, 결정 트리 방식보다 경계선이 자연스러워진 것을 확인할 수 있다.</li>
+</ul>
+</li>
+<li>
+<p><strong>XGBoost</strong></p>
+<ul>
+<li>
+<p>오분류되었던 데이터로 분류 모델을 만들어서 정확도를 향상시키는 기법이다.</p>
+</li>
+<li>
+<p>간단히 설명하면, 분류의 여러 개의 결정 트리를 사용하는 기법인 &lsquo;앙상블&rsquo;과 &lsquo;배깅&rsquo;, &lsquo;부스팅&rsquo;을 결합한 알고리즘이다.</p>
+</li>
+<li>
+<p>배깅은 서로 무관한 약분류기를 병렬로 만들어 그 분류 결과를 다수결로 최종 결과를 결정하는 기법이다.</p>
+</li>
+<li>
+<p>조금 전에 설명한 랜덤 포레스트가 바로 배깅이 적용된 결정 트리라고 할 수 있다.</p>
+</li>
+<li>
+<p>부스팅 역시 여러 개의 분류기를 사용한다는 점은 배깅과 같지만 배깅이 여러 개의 분류기를 서로 무관하게 학습시키는 반해서, 부스팅은 바로 전 분류기의 결과를 기초로 다음 분류기를 학습한다.</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="손실-함수-타입에-대한-설명">손실 함수 타입에 대한 설명</h3>
+<hr>
+<ul>
+<li>
+<p>모델의 구조가 수학적 함수로 결정되어 있고, 학습은 함수의 파라미터를 최적화하는 과정에 해당 한다.</p>
+</li>
+<li>
+<p>파라미터를 최적화하는 구체적인 방법은 모델의 정확도가 높아질 수록 함수 값이 작아지는 (모두 정답을 맞히면 0이되는) 함수인 &lsquo;손실 함수&rsquo;를 정의하고 수학적 방법을 통해 이 함수의 함수 값이 최소가 되는 파라미터를 구한다.</p>
+</li>
+</ul>
+<h3 id="결정-트리-타입에-대한-설명">결정 트리 타입에 대한 설명</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/3j47p2jbu2w9k4p/dklifljsdf3434.png" alt=""></p>
+<ul>
+<li>
+<p>특정 필드에 대한 역치(threshold)를 설정하고 필드 값이 이 역치보다 큰가 작은가를 기준으로 그룹을 나누는 방식이다.</p>
+</li>
+<li>
+<p>어떤 필드의 값이 어떤 역치 값에 따라 어떻게 그룹이 나뉘는가에 대한 규칙을 결정하는 것이 학습 과정이 된다.</p>
+</li>
+<li>
+<p>손실 함수 타입은 입력값이 극단적으로 커기저나 작아지는 경우 알고리즘이 제대로 동작하지 않는다. 그러므로 앞서 설명한 데이터 정규화를 미리 거치는 편이 좋다.</p>
+</li>
+<li>
+<p>이와 다르게 결정 트리 타입은 단순히 값의 대소 비교만으로 분류가 이루어지기 때문에 정규화처럼 값의 배율을 조정하는 방법은 영향을 미치지 못한다.</p>
+</li>
+</ul>
+<h3 id="기타-타입">기타 타입</h3>
+<hr>
+<ul>
+<li>
+<p>나이브 베이즈(Naive Nayes), K-최근접 이웃 (K-Nearest Neighbor) 처럼 결정 트리 타입도, 손실 함수 타입도 아닌 분류 알고리즘이 있다.</p>
+</li>
+<li>
+<p>하지만 표 형태를 가지는 &lsquo;구조화 데이터&rsquo;를 대상으로 한다면, 위에서 설명한 알고리즘으로 대부분 처리할 수 있다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=273487776">돈 되는 파이썬 인공지능 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
