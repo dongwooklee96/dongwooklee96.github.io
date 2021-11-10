@@ -6,7 +6,119 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 09 Nov 2021 21:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Nov 2021 21:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬으로 살펴보는 아키텍처 패턴 - 4장</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/10/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-4%EC%9E%A5.html</link>
+      <pubDate>Wed, 10 Nov 2021 21:06:33 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/10/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-4%EC%9E%A5.html</guid>
+      <description>&lt;h3 id=&#34;서비스-계층-소개&#34;&gt;서비스 계층 소개&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;플라스크 앱이 하는 일을 살펴보면, 오케스트레이션이라고 부르는 요소가 상당 부분을 차지한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오케이스트레이션은 저장소에서 여러 가지를 가져오고, 데이터베이스 상태에 따라서 입력을 검증하여 오류를 처리하고, 성공적인 경우에는 데이터베이스에 커밋하는 작업을 포함한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;import model
+from model import OrderLine
+from repository import AbstractRepository
+
+
+class InvalidSku(Exception):
+    pass
+
+
+def is_valid_sku(sku, batches):
+    return sku in {b.sku for b in batches}
+
+def allocate(line: OrderLine, repo: AbstractRepository, session) -&amp;gt; str:
+    batches = repo.list()
+    if not is_valid_sku(line.sku, batches):
+        raise InvalidSku(f&#39;Invalid sku {line.sku}&#39;)
+    batchref = model.allocate(line, batches)
+    session.commit()
+    return batchref
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;서비스 계층에서는 다음과 같이, 예외처리를 하거나 커밋을 데이터베이스 커밋을 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;@flask.route.gubbins
+def allocate_endpoint():
+    session = get_session()
+    repo = repository.SqlAlchemyRepository(session)
+    line = model.OrderLine(
+        request.json[&#39;orderid&#39;],
+        request.json[&#39;sku&#39;],
+        request.json[&#39;qty&#39;],
+    )
+    try:
+        batchref = services.allocate(line, repo, session)
+    except (model.OutOfStock, services.InvalidSku) as e:
+        return jsonify({&#39;message&#39;: str(e)}), 400
+    return jsonify({&#39;batchref&#39;: batchref}), 201
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;엔드 포인트에서 좀 더 간단해진 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;엔드포인트에서는 요청전 상태를 관리하고 파라미터로부터 정보를 파싱하여 상태코드를 응답하고 JSON을 처리하는 역할을 하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 오케이스트레이션 로직은 유지 케이스 / 서비스 계층에 들어가고, 도메인 로직은 도메인에 그대로 남는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;도메인-서비스와-서비스-계층의-차이&#34;&gt;도메인 서비스와 서비스 계층의 차이&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;서비스-계층&#34;&gt;서비스 계층&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서비스는 외부 세계에서 오는 요청을 처리해서 연산을 오케스트레이션한다. 즉 서비스 계층은 데이터베이스에서 데이터를 얻거나, 도메인 모델을 업데이트 하거나, 변경된 내용을 영속화 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 시스템에서 어떤 연산이 일어날 때마다 해야하는 지루한 작업이며 비즈니스 로직과 분리하면 프로그램을 깔끔하게 유지하는데 도움이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;도메인-서비스&#34;&gt;도메인 서비스&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 서비스는 도메인 모델에 속하지만 근본적으로 상태가 있는 엔티티나 값 객체에 속하지 않는 로직을 부르는 이름이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를들어서 쇼핑 카트 애플리케이션을 만든다면 도메인 서비스로 세금 관련 규칙을 구현한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;세금을 계산하는 작업은 쇼핑 카트를 업데이트하는 작업과는 별개이다. 모델에서 중요한 부분이지만, 세금만을 위한 영속적인 엔티티를 사용하는 것은 바람직하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정리&#34;&gt;정리&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서비스 계층을 추가하면 다음과 같은 장점이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;플라크스 API 엔드포인트가 아주 얇아지고 작성하기 쉬워진다. 플라스크 API 엔드 포인트는 오직 JSON 파싱이나 정상 경로나 비정상 경로에 따른 올바른 HTTP 코드 반환등의 &amp;lsquo;웹 기능&amp;rsquo;만 수행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인에 대한 명확한 API를 정의하였다. 이런 API는 자신이 API인지 CLI인지 심지어 테스트인지에 관계없이 어댑터가 도메인 모델 클래스를 몰라도 사용할 수 있는 유스케이스나 진입점 집합이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서비스 계층을 사용하면 테스트를 &amp;lsquo;높은 기어비&amp;rsquo;로 작성할 수 있고 도메인 모델을 적합한 형태로 마음껏 리팩터링할 수 있다. 서비스 계층을 활용하면 같은 유스케이스를 제공할 수 있는 한 이미 존재하는 수 많은 테스트를 재작성하지 않고도 새로운 설계를 테스트할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;작성한 테스트의 피라미드 구조도 좋아보인다. 테스트 상당 부분은 빠른 단위 테스트이며 E2E나 통합 테스트는 최소화 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;amp;start=slayer&#34;&gt;파이썬으로 살펴보는 아키텍처 패턴&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>파이썬으로 살펴보는 아키텍처 패턴 - 2장</title>
       <link>https://dongwooklee96.github.io/post/2021/11/09/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-2%EC%9E%A5.html</link>
