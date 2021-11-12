@@ -6,7 +6,32 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 08 Sep 2021 14:10:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 12 Nov 2021 10:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>POSTGRES 익스텐션 설치 방법</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/12/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95.html</link>
+      <pubDate>Fri, 12 Nov 2021 10:20:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/12/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 &lt;code&gt;POSTGRES&lt;/code&gt;에서 익스텐션을 설치할 일이 있어서 설치하는 방법을 찾아보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 설치할 익스텐션은 &lt;code&gt;tablefunc&lt;/code&gt;, &lt;code&gt;dict_xsyn&lt;/code&gt;, &lt;code&gt;fuzzystrmatch&lt;/code&gt;, &lt;code&gt;pg_tgram&lt;/code&gt;, &lt;code&gt;cube&lt;/code&gt;와 같은 것들이 있었는데&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;아래와 같이 &lt;code&gt;CREATE EXTENSION&lt;/code&gt;을 쓰고 그 뒤에 원하는 익스텐션을 적으면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;CREATE EXTENSION cube;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/51279446/how-to-install-the-cube-function-for-postgresql&#34;&gt;How to install the cube function for Postgresql&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>Write-Scale Out MariaDB Xpand (10 node cluster) 세미나를 듣고 기록한 내용</title>
       <link>https://dongwooklee96.github.io/post/2021/09/08/write-scale-out-mariadb-xpand-10-node-cluster-%EC%84%B8%EB%AF%B8%EB%82%98%EB%A5%BC-%EB%93%A3%EA%B3%A0-%EA%B8%B0%EB%A1%9D%ED%95%9C-%EB%82%B4%EC%9A%A9.html</link>
