@@ -137,20 +137,6 @@ def solution2(n: int, k: int) -&gt; int:
         result += 1
     return result
 
-def solution3(n: int, k: int) -&gt; int:
-    cnt = 0
-
-    while not n &lt;= 1:
-        if n % k == 0:
-            n //= k
-            cnt += 1
-        else:
-            target = (n // k) * k
-            cnt += n - target
-            n = target
-
-    return cnt
-
 
 if __name__ == &quot;__main__&quot;:
     n, k = map(int, input().split())
@@ -164,9 +150,6 @@ if __name__ == &quot;__main__&quot;:
 </li>
 <li>
 <p>입력이 적을 때는 일일이 하나씩 빼도 문제가 없지만, 큰 숫자를 빼야하는 경우에는 N이 K의 배수가 되도록 효율적으로 한번에 빼는 것 이 좋다.</p>
-</li>
-<li>
-<p>앞으로 하나씩 빼는 패턴이 보이면 한번에 뺄 수 없는지 고민을 해봐야겠다.</p>
 </li>
 </ul>
 <h3 id="참고-문헌">참고 문헌</h3>

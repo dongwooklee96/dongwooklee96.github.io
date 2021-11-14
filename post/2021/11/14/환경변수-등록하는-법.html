@@ -7,17 +7,17 @@
     </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
-    <link rel="manifest" href="../images/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>표준시간 | 개발자 이동욱</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/fonts.css" />
+    <title>환경변수 등록하는 법 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
     <header>
 
@@ -31,12 +31,12 @@
       
       
       <li class="pull-left ">
-        <a href="../categories/">categories</a>
+        <a href="../../../../categories/">categories</a>
       </li>
       
       
-      <li class="pull-left current">
-        <a href="../tags/">tags</a>
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
       </li>
       
 
@@ -52,35 +52,41 @@
   <body>
     <br/>
 
+<div class="article-meta">
+<h1><span class="title">환경변수 등록하는 법</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/11/14</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%9C%A0%ED%8B%B8">유틸</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%ED%91%9C%EC%A4%80%EC%8B%9C%EA%B0%84">표준시간</a> 
+  
+  
+</p>
+</div>
+
 
 <div class="content-wrapper">
+  <main>
+    <pre><code>echo 'export PATH=&quot;$PATH:`pwd`/flutter/bin&quot;' &gt;&gt; ~/.zshrc
+</code></pre><ul>
+<li>다음 명령어를 입력하면 위의 명령어가 쉘 환경 설정 파일에 들어가게 된다.</li>
+</ul>
 
-  <h1>표준시간</h1>
-  
-
-  
-
-  <ul>
-     
-     
-     
-     <li>
-       <span class="date">2021/11/14</span>
-       <a href="../post/2021/11/14/%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html">환경변수 등록하는 법</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/05/09</span>
-       <a href="../post/2021/05/09/%EC%9D%B4%EB%A0%A5%EC%84%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%A0-%EB%95%8C%EC%9D%98-%ED%8C%81.html">이력서를 작성할 때의 팁</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/04/27</span>
-       <a href="../post/2021/04/27/%EB%8D%B0%EC%9D%B4%ED%8A%B8-%ED%83%80%EC%9E%84-%EB%B0%8F-%ED%91%9C%EC%A4%80-%EA%B7%9C%EA%B2%A9%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-draft.html">데이트 타임 및 표준 규격에 대해서 (draft)</a>
-     </li>
-     
-   </ul>
+    <a href="../../../../"> >> Home</a>
+  </main>
 </div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
   <footer>
       
 <script>

@@ -6,7 +6,20 @@
     <description>Recent content in 표준시간 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 09 May 2021 18:37:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%91%9C%EC%A4%80%EC%8B%9C%EA%B0%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 14 Nov 2021 12:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%91%9C%EC%A4%80%EC%8B%9C%EA%B0%84/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>환경변수 등록하는 법</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/14/%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</link>
+      <pubDate>Sun, 14 Nov 2021 12:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/14/%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
+      <description>&lt;pre&gt;&lt;code&gt;echo &#39;export PATH=&amp;quot;$PATH:`pwd`/flutter/bin&amp;quot;&#39; &amp;gt;&amp;gt; ~/.zshrc
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;다음 명령어를 입력하면 위의 명령어가 쉘 환경 설정 파일에 들어가게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>이력서를 작성할 때의 팁</title>
       <link>https://dongwooklee96.github.io/post/2021/05/09/%EC%9D%B4%EB%A0%A5%EC%84%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%A0-%EB%95%8C%EC%9D%98-%ED%8C%81.html</link>
