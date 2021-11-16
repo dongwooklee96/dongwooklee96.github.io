@@ -6,7 +6,55 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 15 Nov 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 16 Nov 2021 09:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬으로 살펴보는 아키텍처 패턴 - 5장</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/16/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-5%EC%9E%A5.html</link>
+      <pubDate>Tue, 16 Nov 2021 09:06:33 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/16/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-5%EC%9E%A5.html</guid>
+      <description>&lt;h3 id=&#34;어떤-종류의-테스트를-작성할지-결정하는-방법&#34;&gt;어떤 종류의 테스트를 작성할지 결정하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;새로운 기능을 추가하거나 버그를 수정할 떄 도메인 모델을 크게 변경할 필요가 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 모델을 변경해야하는 경우 더 낮은 결합과 더 높은 커버리지를 제공하므로 서비스에 대한 테스트를 작성하는게 더 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;새로운 프로젝트를 시작하거나 아주 어려운 특정 문제를 다뤄야 한다면 도메인 모델에 대한 테스트를 다시 작성해서 더 나은 피드백을 얻고 의도를 더 명확히 설명하는 테스트를 작성하는 것이 낫다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;마무리&#34;&gt;마무리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;특성상 엔드투엔드 테스트를 하나씩 마든다는 목표를 세워야 한다.
+-&amp;gt; 어떤 특성이 잘 작동하는지 보고 움직이는 모든 부품이 서로 잘 연결되어 움직이는지 살펴보는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;테스트 대부분은 서비스 계층을 사용해서 만드는 것을 권한다.
+-&amp;gt; 이런 테스트는 커버리지, 실행 시간, 효율 사이를 잘 절충할 수 있게 해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 모델을 사용하는 핵심 테스트를 적게 작성하고 유지하는 것을 권한다.
+-&amp;gt; 도메인 테스트는 좀 더 커버리지가 작고, 더 깨지기 쉽다. 하지만 이런 테스트가 제공하는 피드백이 가장 크다.
+-&amp;gt; 이러한 테스트를 서비스 계층 테스트로 대신할 수 있으면 삭제하는 것이 낫다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오류 처리도 특성으로 취급하자!
+-&amp;gt; 각 기능의 정상 경로만 테스트하고 모든 비정상 경로를 테스트하는 엔드투엔드 테스트도  유지하면 된다는 의미이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;amp;start=slayer&#34;&gt;파이썬으로 살펴보는 아키텍처 패턴&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/11/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>

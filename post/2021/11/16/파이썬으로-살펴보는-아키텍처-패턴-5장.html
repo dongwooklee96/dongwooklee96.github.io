@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>파이썬으로 살펴보는 아키텍처 패턴 - 5장 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">파이썬으로 살펴보는 아키텍처 패턴 - 5장</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/11/16</h2>
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="어떤-종류의-테스트를-작성할지-결정하는-방법">어떤 종류의 테스트를 작성할지 결정하는 방법</h3>
+<hr>
+<ul>
+<li>
+<p>새로운 기능을 추가하거나 버그를 수정할 떄 도메인 모델을 크게 변경할 필요가 없다.</p>
+</li>
+<li>
+<p>도메인 모델을 변경해야하는 경우 더 낮은 결합과 더 높은 커버리지를 제공하므로 서비스에 대한 테스트를 작성하는게 더 좋다.</p>
+</li>
+<li>
+<p>새로운 프로젝트를 시작하거나 아주 어려운 특정 문제를 다뤄야 한다면 도메인 모델에 대한 테스트를 다시 작성해서 더 나은 피드백을 얻고 의도를 더 명확히 설명하는 테스트를 작성하는 것이 낫다.</p>
+</li>
+</ul>
+<h3 id="마무리">마무리</h3>
+<hr>
+<ul>
+<li>
+<p>특성상 엔드투엔드 테스트를 하나씩 마든다는 목표를 세워야 한다.
+-&gt; 어떤 특성이 잘 작동하는지 보고 움직이는 모든 부품이 서로 잘 연결되어 움직이는지 살펴보는 것이다.</p>
+</li>
+<li>
+<p>테스트 대부분은 서비스 계층을 사용해서 만드는 것을 권한다.
+-&gt; 이런 테스트는 커버리지, 실행 시간, 효율 사이를 잘 절충할 수 있게 해준다.</p>
+</li>
+<li>
+<p>도메인 모델을 사용하는 핵심 테스트를 적게 작성하고 유지하는 것을 권한다.
+-&gt; 도메인 테스트는 좀 더 커버리지가 작고, 더 깨지기 쉽다. 하지만 이런 테스트가 제공하는 피드백이 가장 크다.
+-&gt; 이러한 테스트를 서비스 계층 테스트로 대신할 수 있으면 삭제하는 것이 낫다.</p>
+</li>
+<li>
+<p>오류 처리도 특성으로 취급하자!
+-&gt; 각 기능의 정상 경로만 테스트하고 모든 비정상 경로를 테스트하는 엔드투엔드 테스트도  유지하면 된다는 의미이다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;start=slayer">파이썬으로 살펴보는 아키텍처 패턴</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
