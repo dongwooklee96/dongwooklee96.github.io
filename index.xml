@@ -6,7 +6,60 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 18 Nov 2021 18:44:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Nov 2021 09:19:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>코드 카타를 하자</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/19/%EC%BD%94%EB%93%9C-%EC%B9%B4%ED%83%80%EB%A5%BC-%ED%95%98%EC%9E%90.html</link>
+      <pubDate>Fri, 19 Nov 2021 09:19:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/19/%EC%BD%94%EB%93%9C-%EC%B9%B4%ED%83%80%EB%A5%BC-%ED%95%98%EC%9E%90.html</guid>
+      <description>&lt;h3 id=&#34;코드-카타란-무엇인가&#34;&gt;코드 카타란 무엇인가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 &lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=258021255&#34;&gt;자바 개발자를 위한 97가지 제안&lt;/a&gt; 이라는 책을 읽게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;거기서 코드 카타를 통해서 학습을 하라는 글귀를 보게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드 카타란 쉽게 말하면, 짧은 예제 코드이다. 예를 들어서 어떤 문제를 어떻게 해결할지 쉽게 떠오르지 않을 때 구글링을 하여서, 블로그나 스택오버플로우에 나와있는 코드를 보고 도움을 받은 적이 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 예제들이 바로 코드 카타라고 하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;코드-카타를-만드는-절차&#34;&gt;코드 카타를 만드는 절차&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;- 1. 학습 하려는 주제를 선정한다.
+
+- 2. 원하는 지식을 설명할 수 있으며 성공하는 단위 테스트를 작성한다.
+
+- 3. 최종 솔루션에 만족할 때까지 반복해서 코드를 리펙토링 한다. 리펙토링 과정에서 단위 테스트가 실패하지 않는지 확인한다.
+- 4. 테스트가 실패하도록 실습한 솔루션을 삭제한다.
+
+- 5. 실패하는 테스트와 관련된 코드 그리고 빌드 결과물을 블로그에 올린다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;마무리&#34;&gt;마무리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;어떤 문제를 좋은 방법을 통해서 해결했다고 생각한다면 간단한 코드 카타를 만들어서, 이를 포스팅하는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;뭔가 유용한 것을 배우고 나서 이를 기록으로 남기는 것은 중요하고, 나중에 유용하게 사용할 수 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 카타를 만드는 것은 해당 언어와 프레임워크의 커뮤니티를 개선시켜주는 작업이며 다른 사람들을 도울 수 있는 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=258021255&#34;&gt;자바 개발자를 위한 97가지 제안&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[Novermber] 13th 영어 스피킹 수업 복습</title>
       <link>https://dongwooklee96.github.io/post/2021/11/18/novermber-13th-%EC%98%81%EC%96%B4-%EC%8A%A4%ED%94%BC%ED%82%B9-%EC%88%98%EC%97%85-%EB%B3%B5%EC%8A%B5.html</link>
