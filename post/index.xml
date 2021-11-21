@@ -6,7 +6,20 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 21 Nov 2021 20:19:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 22 Nov 2021 08:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>POSTGRES 소스코드로부터 빌드하는 방법</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/22/postgres-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EB%B9%8C%EB%93%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
+      <pubDate>Mon, 22 Nov 2021 08:00:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/22/postgres-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EB%B9%8C%EB%93%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
+      <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/51279446/how-to-install-the-cube-function-for-postgresql&#34;&gt;PostgreSQL: сборка из исходников и настройка под Linux&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>앞으로의 커리어 패쓰에 대한 정리</title>
       <link>https://dongwooklee96.github.io/post/2021/11/21/%EC%95%9E%EC%9C%BC%EB%A1%9C%EC%9D%98-%EC%BB%A4%EB%A6%AC%EC%96%B4-%ED%8C%A8%EC%93%B0%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%95%EB%A6%AC.html</link>
