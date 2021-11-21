@@ -6,7 +6,85 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 19 Nov 2021 09:19:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 Nov 2021 20:19:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>앞으로의 커리어 패쓰에 대한 정리</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/21/%EC%95%9E%EC%9C%BC%EB%A1%9C%EC%9D%98-%EC%BB%A4%EB%A6%AC%EC%96%B4-%ED%8C%A8%EC%93%B0%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%95%EB%A6%AC.html</link>
+      <pubDate>Sun, 21 Nov 2021 20:19:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/21/%EC%95%9E%EC%9C%BC%EB%A1%9C%EC%9D%98-%EC%BB%A4%EB%A6%AC%EC%96%B4-%ED%8C%A8%EC%93%B0%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%95%EB%A6%AC.html</guid>
+      <description>&lt;h3 id=&#34;이번년도에-대한-평가&#34;&gt;이번년도에 대한 평가&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이번년도를 만족스럽게 보냈는지 누군가 물어본다면, 그냥 보통이라고 대답을 할 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이번 년도에 좋았던 것은 내가 잘 몰랐던 것을 실제로 사용해보면서 알게 된 경우가 많았다. 그전에는 알고 있다고 생각을 했지만, 제대로 알지 못했던 그런 것들 말이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 업무에 조금은 익숙해진 것 같아서, 다행이라고 생각이 드는 한편, 조금은 정체 된 것 같다는 생각이 들기도 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이번 년도에 별로 만족스럽지 못한 것은 하반기에 많은 시간이 있었음에도 불구하고 시간을 효율적으로 사용하지 못했기 때문이다. 그 이유는 명확하지 않은 목표 때문이라고 생각을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DBMS 코어 개발을 경험해보고 싶은 마음에 시스템 프로그래밍에 대해서 공부를 했었는데, 실제 현재 하는 일과 관련 되어 있지도 않고, 그저 학습만 했기 때문에 실력이 많이 늘지 않았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 현재 업무와 관련되어 있지 않다고 핑계를 대면서, 내가 제대로 공부를 하려면 실제 그 분야에서 일을 해야하고 그렇지 않다면 나는 절대로 하지 못할 것이라고 생각하기도 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;내가 정말로 관심이 있다면 누가 시키거나, 억지로 하지 않아도 내가 알아서 했을 것 아닌가.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;솔직히 말하면, 내가 정말로 이 분야에 관심이 있는지 나조차도 제대로 모르겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;앞으로의-방향&#34;&gt;앞으로의 방향&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 DBMS 기업에서 일하려는 생각은 일단 접어두었다. 그 대신에 백엔드 개발자로서의 역량을 더 키워보기로 마음을 먹었다. 백엔드 개발자로서의 역량이 아직은 성숙되지 못했다고 생각이 들고, 무엇보다 내가 정말로 DBMS 코어 개발자가 되어야만 하는가에 대한 생각 정리가 되지 않았기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만, 완전히 포기한다는 것은 아니다. 우선은 방법을 조금 바꾸기로 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;평일에는 도메인 주도 개발이나, 쿼리 튜닝같은 백엔드 엔지니어의 실력을 키울 수 있는 공부를 한다면, 주말에는 내가 평일에 공부했던 DBMS의 동작이 실제로 어떻게 구현되어 있는지 살펴보는 일을 하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 공부하면서, 내가 진짜로 DBMS 개발에 관심이 있는지 아니면 그냥 단순히 시스템 개발은 어떻게 이루어지는지 그리고 내가 할 수 있는지에 대한 호기심에 의해서 그런건지를 알 수 있을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 이번년도에는 우선 도메인주도 개발이나 클린 아키텍처 같은 공부를 하기 보다는 데이터베이스 이론이나, 쿼리 튜닝에 대해서 공부를 할 것이다. 그렇기 위해서는 목표가 있으면 좋은데 2022년 1회 SQLP 자격증 취득을 목표로 공부를 진행할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 취득을 하고 나면, 그 후에 이벤트 기반 아키텍처나 도메인 주도 설계 그리고 자바에 대해서 좀 더 깊게 공부를 하면 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 또한 영어 회화를 평소에 꾸준하게 하여, 외국인이랑 일상 대화를 주고 받는데 어려움이 없도록 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정리&#34;&gt;정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;평일에는 백엔드 엔지니어로서 역량을 키울 수 있는 도메인 주도 개발 및 대용량 트레픽을 처리할 수 있는 인프라에 대해서 학습을 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;주말에는 DBMS 인터널한 내용에 대해서 공부를 하자. 이건 일을 위해서 학습한다기 보다는 내가 관심 있어서 하는 일이고, 배운 내용을 정리해서, 포스팅을 올리자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 절대로 조바심을 가지고 공부를 하지 말고 즐기려고 최대한 노력해보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 코드를 분석할 때는 너무 큰 목표가 아닌 작은 목표및 내가 분석한 내용을 정리하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>코드 카타를 하자</title>
       <link>https://dongwooklee96.github.io/post/2021/11/19/%EC%BD%94%EB%93%9C-%EC%B9%B4%ED%83%80%EB%A5%BC-%ED%95%98%EC%9E%90.html</link>
