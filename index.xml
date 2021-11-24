@@ -6,7 +6,159 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 22 Nov 2021 08:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Nov 2021 09:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬으로 살펴보는 아키텍처 패턴 - 6장</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-6%EC%9E%A5.html</link>
+      <pubDate>Wed, 24 Nov 2021 09:06:33 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-6%EC%9E%A5.html</guid>
+      <description>&lt;h3 id=&#34;작업-단위-패턴&#34;&gt;작업 단위 패턴&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;작업 단위 패턴은 저장소와 서비스 계층 패턴을 하나로 묶어주는 패턴이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;저장소 패턴이 영속적 저장소 개념에 대한 추상화라면 작업 단위 패턴은 원자적 연산이라는 개념에 의한 추상화이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;UoW (Unit of Work)&lt;/code&gt; 패턴을 사용하면, 서비스 계층과 데이터 계층을 완전히 분리할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;작업-단위-패턴의-장점&#34;&gt;작업 단위 패턴의 장점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;작업 단위 패턴은 영속적 저장소에 대한 단일 진입점으로 작용한다. &lt;code&gt;UoW&lt;/code&gt;는 어떤 객체가 메모리에 적재 되었고, 어떤 객체가 최종 상태인지를 기억한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;작업에 사용할 데이터베이스의 안정적인 스냅샷을 제공하고, 연산을 진행하는 과정에서 변경하지 않은 객체에 대한 스냅샷도 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;변경 내용을 한번에 영속화할 방법을 제공한다. 어딘가 잘못되더라도 일관성이 없는 상태로 끝나지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;영속성을 처리하기 위한 간단한 API와 저장소를 쉽게 얻을 수 있는 장소를 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;class FakeUnitOfWork(unit_of_work.AbstractUnitOfWork):
+    def __init__(self):
+        self.batches = FakeRepository([])
+        self.commited = False
+
+    def commit(self):
+        self.commited = True
+
+    def rollback(self):
+        pass
+
+
+def test_add_batch():
+    uow = FakeUnitOfWork()
+    services.add_batch(&amp;quot;b1&amp;quot;, &amp;quot;CRUNCHY-ARMCHAIR&amp;quot;, 100, None, uow)
+    assert uow.batches.get(&amp;quot;b1&amp;quot;) is not None
+    assert uow.commited
+
+
+def test_allocate_returns_allocation():
+    uow = FakeUnitOfWork()
+    services.add_batch(&amp;quot;batch1&amp;quot;, &amp;quot;CRUNCHY-ARMCHAIR&amp;quot;, 100, None, uow)
+    result = services.allocate(&amp;quot;o1&amp;quot;, &amp;quot;COMPLICATED-LAMP&amp;quot;, 10, uow)
+    assert result == &amp;quot;batch1&amp;quot;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;세션을 사용하는 것 보다, &lt;code&gt;UoW&lt;/code&gt;를 모킹하기가 더 편하다 이들은 영속성 계층을 변경하여 실제 데이터베이스를 사용하지 않고도 메모리상에서 테스트를 진행할 수 있게 해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가짜 객체 두개를 사용해서 얻을 수 있는 최송 설계에 차이가 있는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실행이 빠른 테스트를 작성하는데 관심이 있다면, 가짜 객체 두 개를 사용하여 얻을 수 있는 최종 설계에 차이가 있는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Session&lt;/code&gt;을 사용하여 데이터베이스에 대한 질의를 사용자가 원하는 대로 만들기를 쉽지만, 이렇게 구현하면 데이터베이스에 접근하는 코드가 코드 베이스 여기저기 흩어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 상황을 피하기 위해서 영속적 계층에 대한 접근을 제한하여 각 컴포넌트가 자신에게 필요한 것만 갖고 불필요한 나머지는 갖지 않도록 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;def test_rolls_back_uncommited_work_by_default(session_factory):
+    uow = unit_of_work.SqlAlchemyUnitOfWork(session_factory)
+    with uow:
+        insert_batch(uow.session, &#39;batch1&#39;, &#39;MEDIUM-PLINTH&#39;, 100, None)
+
+    new_session = session_factory()
+    rows = list(new_session.execute(&#39;SELECT * FROM &amp;quot;batches&amp;quot;&#39;))
+    assert rows == []
+
+def test_rolls_back_on_error(session_factory):
+    class MyException(Exception):
+        pass
+
+    uow = unit_of_work.SqlAlchemyUnitOfWork(session_factory)
+    with pytest.raises(MyException):
+        with uow:
+            insert_batch(uow.session, &#39;batch1&#39;, &#39;LARGE-FORK&#39;, 100, None)
+            raise MyException()
+        new_session = session_factory()
+        rows = list(new_session.execute(&amp;quot;SELECT * FROM &#39;batches&#39;&amp;quot;))
+        assert rows == []
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;UoW&lt;/code&gt; 패턴을 이용하여 서비스 코드를 테스트 한 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;명시적-커밋과-암시적-커밋&#34;&gt;명시적 커밋과 암시적 커밋&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Uow&lt;/code&gt; 패턴을 이용하면, 디폴트로 결과를 커밋하고 예외가 발생한 경우만 롤백을 하는 코드를 작성할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;class AbstractUnitOfWork(abc.ABC):
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exn_type, exn_value, traceback):
+        if exn_type is None:
+            self.commit()
+        else:
+            self.rollback()
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;암시적인 커밋은 이렇게 구현할 수 있지만, 언제 상태를 플러시 해야할지를 선택해야 한다면 명시적인 커밋을 요구하는 쪽이 더 나을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드를 몇 줄 더 작성해야하기는 하지만, 명시적 커밋을 요구하면 시스템의 상태를 바꾸는 경로가 단 하나만 존재하므로 코드를 추론하는 것이 더 쉬워진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;마지막으로 롤백하는 것이 더 이해하기 쉬워서 롤백하는 쪽을 선호하기도 한다. 이럴 롤백은 마지막 커밋 지점으로 상태를 되돌리기 때문에, 사용자가 직접 커밋하지 않으면 중간의 변화가 모두 사라진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정리&#34;&gt;정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;작업-단위-패턴은-데이터-무결성-중심의-추상화이다&#34;&gt;작업 단위 패턴은 데이터 무결성 중심의 추상화이다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;작업 단위 패턴을 사용하면, 연산의 끝에 플러시 연산을 한 번만 수행해 도메인 모델의 일관성을 강화하고 성능을 향상 시킬 때 도움이 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;작업-단위-패턴은-저장소와-서비스-계층-패턴과-밀접하게-연관되어-작동한다&#34;&gt;작업 단위 패턴은 저장소와 서비스 계층 패턴과 밀접하게 연관되어 작동한다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;작업 단위 패턴은 원자적 업데이트를 표현해 데이터 접근에 대한 추상화를 완성시켜준다. 서비스 계층의 유스 케이스들은 각각 블록 단위로 성공하거나 실패하는 별도의 작업 단위로 실행된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;콘텍스트-관리자를-사용하는-멋진-유스케이스이다&#34;&gt;콘텍스트 관리자를 사용하는 멋진 유스케이스이다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;콘텍스트 관리자는 파이썬에서 영역을 정의하는 전형적인 방법이다. 콘텍스트 관리자를 사용해 요청 처리가 커밋을 호출하지 않고 끝나면 자동으로 작업을 롤백할 수 있다. 이런식으로 구현하면 시스템은 기본적으로 안전한 상태가 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;sqlalchemy는-이미-작업-단위-패턴을-제공한다&#34;&gt;SQLAlchemy는 이미 작업 단위 패턴을 제공한다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;SQLAlchemy 세션 객체를 더 간단하게 추상화하여 ORM과 코드 사이의 인터페이스를 더 좁힌다. 이렇게 하면 코드의 각 부분의 결합을 느슨하게 유지할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;amp;start=slayer&#34;&gt;파이썬으로 살펴보는 아키텍처 패턴&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>POSTGRES 소스코드로부터 빌드하는 방법</title>
       <link>https://dongwooklee96.github.io/post/2021/11/22/postgres-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EB%B9%8C%EB%93%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
