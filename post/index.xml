@@ -6,7 +6,52 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 24 Nov 2021 10:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Nov 2021 21:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>플라스크에서 AOP 처리하기</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/24/%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC%EC%97%90%EC%84%9C-aop-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.html</link>
+      <pubDate>Wed, 24 Nov 2021 21:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/24/%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC%EC%97%90%EC%84%9C-aop-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.html</guid>
+      <description>&lt;h3 id=&#34;플라스크에서-aop-처리하기&#34;&gt;플라스크에서 AOP 처리하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;exception.py&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;class InvalidAPIUsage(Exception):
+    status_code = 400
+
+    def __init__(self, message, status_code=None, payload=None):
+        super().__init__()
+        self.message = message
+        if status_code:
+            self.status_code = status_code
+        self.payload = payload
+
+    def to_dict(self):
+        rv = dict(self.payload or ())
+        rv[&#39;message&#39;] = self.message
+        return rv
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;다음과 같은 예외를 만들어 준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;app.py&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@app.errorhandler(InvalidAPIUsage)
+def invalid_api_usage(e):
+    return jsonify(error=str(e.to_dict()))
+
+@app.route(&amp;quot;/&amp;quot;)
+def index():
+    raise InvalidAPIUsage(&amp;quot;No user id provided!&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;다음과 같이 &lt;code&gt;errorhandler&lt;/code&gt;에 생성한 예외를 등록한 후에, 예외를 호출하면 처리하는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://flask.palletsprojects.com/en/1.1.x/errorhandling/&#34;&gt;flask - docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>파이썬으로 살펴보는 아키텍처 패턴 - 7장 (애그리게이트와 일관성 경계)</title>
       <link>https://dongwooklee96.github.io/post/2021/11/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-7%EC%9E%A5-%EC%95%A0%EA%B7%B8%EB%A6%AC%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%99%80-%EC%9D%BC%EA%B4%80%EC%84%B1-%EA%B2%BD%EA%B3%84.html</link>
