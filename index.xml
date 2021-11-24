@@ -6,7 +6,169 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 24 Nov 2021 09:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 24 Nov 2021 10:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬으로 살펴보는 아키텍처 패턴 - 7장 (애그리게이트와 일관성 경계)</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-7%EC%9E%A5-%EC%95%A0%EA%B7%B8%EB%A6%AC%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%99%80-%EC%9D%BC%EA%B4%80%EC%84%B1-%EA%B2%BD%EA%B3%84.html</link>
+      <pubDate>Wed, 24 Nov 2021 10:06:33 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-7%EC%9E%A5-%EC%95%A0%EA%B7%B8%EB%A6%AC%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%99%80-%EC%9D%BC%EA%B4%80%EC%84%B1-%EA%B2%BD%EA%B3%84.html</guid>
+      <description>&lt;h3 id=&#34;애그리게이트와-일관성-경계&#34;&gt;애그리게이트와 일관성 경계&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;불변 조건과 제약에 대해서 살펴보고, 모데인 모델 객체가 개념적으로나 영속적 저장소 안에서나 내부적인 일관성을 유지하는 방법을 살펴볼 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일관성 경계를 설명하고, 일관성 겅계가 어떻게 유지보수 편의를 해치지 않으면서, 고성능 소프트웨어를 만들 수 있게 도와주는지 확인 할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;모든-것을-스프레드-시트에서-처리하지-않는-이유&#34;&gt;모든 것을 스프레드 시트에서 처리하지 않는 이유&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;실제로 엄청난 수의 비즈니스가 단지 이메일로 스프레드 시트를 주고 받는 식으로 이루어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 로직을 적용하기 힘들고, 일관성을 유지하기 어려워서 규모를 확장하기 어렵다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특정 필드를 볼 수 있도록 허용된 사람은 누구인가? 누가 그런 필드를 변경할 수 있는가?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같은 질문들은 시스템의 제약이다. 도메인 로직의 일부는 이런 제약을 강제로 지키도록 하여, 시스템이 만족하는 불변 조건을 유지하려는 목적으로 작성된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;불변 조건은 어떤 연산을 끝낼 때마다 항상 참이여야 하는 요소를 의미한다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;불변-조건-제약-일관성&#34;&gt;불변 조건, 제약, 일관성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;제약과 불변조건이라는 두 단어는 약간 서로 대치가 가능해 보인다. 제약은 모델이 취할 수 있는 상태의 수를 제한하지만, 불변 조건은 항상 참이여야 하는 조건이라고 정의할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;호텔 예약 시스템을 작성한다면 중복 예약을 허용하지 않는 제약이 있을 수 있다. 이러한 제약은 한 객실에 예약 한 개만 있을 수 있다는 불변 조건을 지원한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물론 경우에 따라서, 규칙을 일시적으로 완화해야 할 수 도 있다. 예를 들어서 VIP가 예약한다면 VIP의 숙박 기관과 위치에 맞춰서 주변의 방 예약을 섞어야 할 수도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메모리상에서 예약을 섞는 동안 한 곳에 예약이 두 개 이상 발생할 수 있지만, 작업이 끝나면 도메인 모델은 모든 불변 조건을 만족하는 일관성 있는 최종 상태로 끝난다는 사실을 보장해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 고객이 만족하는 방법을 찾지 못한 채 연산이 완료되면 안되고, 오류를 발생시켜야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시스템 상태를 업데이트 할 때마다 코드는 이러한 불변 조건을 어기지 않는지 확인해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;동시성이라는 아이디어를 도입하면 상황이 더 복잡해진다. 갑자기 재고를 여러 주문 라인에 동시에 할당할 수 있게 된다. 심지어 배치를 변경하는 동시에 주문 라인을 할당할 수도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;보통 데이터베이스 테이블에 락을 적용해서 이러한 문제를 해결한다. 락을 사용하면 같은 테이블이나 같은 행에 대해서 두 연산이 동시에 일어나는 경우를 방지할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 이렇게 락을 사용하면, 교착 상태가 되거나 성능에 문제가 발생할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;애그리게이트란&#34;&gt;애그리게이트란?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;애그리게이트 패턴은 다른 도메인 객체들을 포함하여, 이 객체 컬렉션 전체를 한꺼번에 다룰 수 있게 해주는 도메인 패턴이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;애그리게이트에 있는 객체를 변경하는 유일한 방법은 애그리게이트와 그 안의 객체 전체를 불러와서 애그리게이트 자체에 대해서 메서드를 호출하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모델이 더 복잡해지고 엔티티와 값 객체가 늘어나면서 각각에 대한 참조가 서로 얽히고 설킨 그래프가 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서, 누가 어떤 객체를 변경할 수 있는지 추적하기가 어려워진다. 특히 모델 안에 컬렉션이 있으면 어떤 엔티티를 선정해서 그 엔티티와 관련된 모든 객체를 변경할 수 있는 단일 진입점으로 삼으면 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이렇게 하면 시스템이 개념적으로 더 간단해지고 어떤 객체가 다른 객체의 일관성을 책임지게 하면 시스템에 대해서 추론하기가 더 쉬워진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;애그리게이트를-선택하기&#34;&gt;애그리게이트를 선택하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;시스템에 대해서 어떤 애그리게이트를 선택할지는 매우 중요하다. 애그리게이트는 모든 연산이 일관성 있는 상태에서 끝난다는 점을 보장하는 경계가 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 사실은 소프트웨어에 대해서 추론하고 이상한 경합을 방지할 수 있게 도와준다. 서로 일관성이 있어야 하는 소수의 객체 주변에 경계를 설정하고자 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;성능을 위해서는 경계가 더 작을 수록 좋다. 이렇나 경계에 좋은 이름을 부여할 필요가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;하나의-애그리게이트--한-저장소&#34;&gt;하나의 애그리게이트 = 한 저장소&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;애그리게이트가 될 엔티티를 정의하고 나면, 외부 세계에서 접근할 수 있는 유일한 엔티티가 되어야 한다는 규칙을 적용해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;즉, 허용되는 모든 저장소는 애그리게이트만 반환해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NOTE: 저장소가 애그리게이트만 반환해야 한다는 규칙은 애그리게이트가 도메인 모델에 접근할 수 있는 유일한 통로여야 한다는 관계를 강제로 지키게 하는 핵심 규칙이다. 이 규칙을 어기지 않도록 주의해야 한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;def add_batch(
+    ref: str, sku: str, qty: int, eta: Optional[date],
+    uow: unit_of_work.AbstractUnitOfWork,
+):
+    with uow:
+        product = uow.product.get(sku=sku)
+        if not product:
+            product = model.Product(sku=sku, batches=[])
+            uow.products.append(model.Batch(ref, sku, qty, eta))
+        product.batches.append(model.Batch(ref, sku, qty, eta))
+        uow.batches.add(model.Batch(ref, sku, qty, eta))
+        uow.commit()
+
+
+def allocate(
+    orderid: str, sku: str, qty: int,
+    uow: unit_of_work.AbstractUnitOfWork,
+) -&amp;gt; str:
+    line = OrderLine(orderid, sku, qty)
+    with uow:
+        batches = uow.batches.list()
+        if not is_valid_sku(line.sku, batches):
+            raise InvalidSku(f&amp;quot;Invalid sku {line.sku}&amp;quot;)
+        batchref = model.allocate(line, batches)
+        uow.commit()
+    return batchref
+
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;정리&#34;&gt;정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;애그리게이트와-일관성-경계-1&#34;&gt;애그리게이트와 일관성 경계&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;애그리게이트는 도메인 모델에 대한 진입점이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;-&amp;gt; 도메인에 속한 것을 바꿀 수 있는 방식을 제한하면 시스템을 더 쉽게 추론할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;애그리게이트는 일관성 경계 문제를 책임진다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;-&amp;gt; 애그리게이트의 역할은 관련된 여러 객체로 이루어진 그룹에 적용할 불변 조건에 대한 비즈니스 규칙을 관리하는 것이다.&lt;/p&gt;
+&lt;p&gt;-&amp;gt; 자신이 담당하는 객체 사이와 객체의 비즈니스 규칙 사이의 일관성을 검사하고, 어떤 변경이 일관성을 해친다면 이를 거부하는 것도 애그리게이트의 역할이다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;애그리게이트의 동시성 문제는 공존한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;-&amp;gt; 동시성 검사 구현 방법을 고민하다 보면 결국에는 트랜잭션과 락에 도달하게 된다. 애그리게이트를 제대로 선택하는 것은 여러 분의 도메인을 개념적으로 잘 조직화하는 것 뿐 아니라 성능에 대한 문제이기도 하다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;amp;start=slayer&#34;&gt;파이썬으로 살펴보는 아키텍처 패턴&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>파이썬으로 살펴보는 아키텍처 패턴 - 6장</title>
       <link>https://dongwooklee96.github.io/post/2021/11/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-6%EC%9E%A5.html</link>
