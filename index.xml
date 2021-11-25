@@ -6,7 +6,79 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 24 Nov 2021 21:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Nov 2021 18:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데이터베이스를 공부할 때 TRACING을 하는 법을 먼저 배우자</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/25/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-tracing%EC%9D%84-%ED%95%98%EB%8A%94-%EB%B2%95%EC%9D%84-%EB%A8%BC%EC%A0%80-%EB%B0%B0%EC%9A%B0%EC%9E%90.html</link>
+      <pubDate>Thu, 25 Nov 2021 18:00:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/25/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-tracing%EC%9D%84-%ED%95%98%EB%8A%94-%EB%B2%95%EC%9D%84-%EB%A8%BC%EC%A0%80-%EB%B0%B0%EC%9A%B0%EC%9E%90.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;오라클 성능 고도화라는 강의를 들을 때, &lt;code&gt;AUTO TRACE&lt;/code&gt; 도구로 실제 실행한 쿼리에서 읽은 네트워크 시간 및 IO에 대한 통계를 측정할 수 있는 도구가 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 시스템 정보를 나타내는 내부적으로 생성된 테이블이 많이 있다. 이런 것을 통해서도 데이터베이스에 대해서 많은 정보를 알 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서, 소스 코드를 먼저 보는 것보다는 문서와 데이터베이스에 어떤 기능이 있는지 그리고 어떻게 확인할 수 있는지를 먼저 보는 것이 우선이 되어야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.postgresql.org/docs/14/catalogs-overview.html&#34;&gt;System Catalogs - PostgresSQL&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://mariadb.com/kb/en/information-schema-innodb-tables/&#34;&gt;Information Schema InnoDB Tables - MariaDB&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>앞으로 POSTGRES에 컨트리뷰션을 할 방향에 대해서...</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/25/%EC%95%9E%EC%9C%BC%EB%A1%9C-postgres%EC%97%90-%EC%BB%A8%ED%8A%B8%EB%A6%AC%EB%B7%B0%EC%85%98%EC%9D%84-%ED%95%A0-%EB%B0%A9%ED%96%A5%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C....html</link>
+      <pubDate>Thu, 25 Nov 2021 00:50:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/25/%EC%95%9E%EC%9C%BC%EB%A1%9C-postgres%EC%97%90-%EC%BB%A8%ED%8A%B8%EB%A6%AC%EB%B7%B0%EC%85%98%EC%9D%84-%ED%95%A0-%EB%B0%A9%ED%96%A5%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C....html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 다시 컨트리뷰션을 하기 위해서, POSTGRES 소스 코드 및 메일링 리스트 그리고 COMMITFEST를 살펴보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;처음 커밋을 한 후로 오랜 시간이 지났지만, 여전히 메인 소스코드를 파악하고 막연히 소스 코드를 보는 것도 힘들기도 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 범위를 줄여야겠다는 생각을 했다. 우선 &lt;code&gt;pg_dump&lt;/code&gt; 와 같은 클라이언트 도구를 하나 정해서 파악을 하고, 그 뒤에 조금 더 큰 기능을 보는 것이 좋을 것이라고 생각을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 소스 코드 분석도 중요하지만, 우선은 테스트 코드에 집중을 하여, &lt;code&gt;perl&lt;/code&gt; 스크립트를 공부해야겠다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.timescale.com/blog/how-and-why-to-become-a-postgresql-contributor/&#34;&gt;How (and why) to become a PostgreSQL contributor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.citusdata.com/blog/2019/01/15/contributing-to-postgres/&#34;&gt;Contributing to Postgres&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://wiki.postgresql.org/wiki/So,_you_want_to_be_a_developer%3F&#34;&gt;So, you want to be a developer?&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://commitfest.postgresql.org/&#34;&gt;PostgreSQL - COMMITFEST&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://planet.postgresql.org/&#34;&gt;PostgresSQL - PLANET&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>플라스크에서 AOP 처리하기</title>
       <link>https://dongwooklee96.github.io/post/2021/11/24/%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC%EC%97%90%EC%84%9C-aop-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.html</link>

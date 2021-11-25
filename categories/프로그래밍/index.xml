@@ -6,7 +6,49 @@
     <description>Recent content in 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 21 Nov 2021 20:19:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 25 Nov 2021 00:50:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>앞으로 POSTGRES에 컨트리뷰션을 할 방향에 대해서...</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/25/%EC%95%9E%EC%9C%BC%EB%A1%9C-postgres%EC%97%90-%EC%BB%A8%ED%8A%B8%EB%A6%AC%EB%B7%B0%EC%85%98%EC%9D%84-%ED%95%A0-%EB%B0%A9%ED%96%A5%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C....html</link>
+      <pubDate>Thu, 25 Nov 2021 00:50:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/25/%EC%95%9E%EC%9C%BC%EB%A1%9C-postgres%EC%97%90-%EC%BB%A8%ED%8A%B8%EB%A6%AC%EB%B7%B0%EC%85%98%EC%9D%84-%ED%95%A0-%EB%B0%A9%ED%96%A5%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C....html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 다시 컨트리뷰션을 하기 위해서, POSTGRES 소스 코드 및 메일링 리스트 그리고 COMMITFEST를 살펴보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;처음 커밋을 한 후로 오랜 시간이 지났지만, 여전히 메인 소스코드를 파악하고 막연히 소스 코드를 보는 것도 힘들기도 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 범위를 줄여야겠다는 생각을 했다. 우선 &lt;code&gt;pg_dump&lt;/code&gt; 와 같은 클라이언트 도구를 하나 정해서 파악을 하고, 그 뒤에 조금 더 큰 기능을 보는 것이 좋을 것이라고 생각을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 소스 코드 분석도 중요하지만, 우선은 테스트 코드에 집중을 하여, &lt;code&gt;perl&lt;/code&gt; 스크립트를 공부해야겠다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.timescale.com/blog/how-and-why-to-become-a-postgresql-contributor/&#34;&gt;How (and why) to become a PostgreSQL contributor&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.citusdata.com/blog/2019/01/15/contributing-to-postgres/&#34;&gt;Contributing to Postgres&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://wiki.postgresql.org/wiki/So,_you_want_to_be_a_developer%3F&#34;&gt;So, you want to be a developer?&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://commitfest.postgresql.org/&#34;&gt;PostgreSQL - COMMITFEST&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://planet.postgresql.org/&#34;&gt;PostgresSQL - PLANET&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>앞으로의 커리어 패쓰에 대한 정리</title>
       <link>https://dongwooklee96.github.io/post/2021/11/21/%EC%95%9E%EC%9C%BC%EB%A1%9C%EC%9D%98-%EC%BB%A4%EB%A6%AC%EC%96%B4-%ED%8C%A8%EC%93%B0%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A0%95%EB%A6%AC.html</link>
