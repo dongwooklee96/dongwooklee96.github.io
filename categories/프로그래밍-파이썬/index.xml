@@ -6,7 +6,42 @@
     <description>Recent content in 프로그래밍 - 파이썬 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 03 Aug 2021 20:00:13 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 02 Nov 2021 09:39:13 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GUNICORN</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/02/gunicorn.html</link>
+      <pubDate>Tue, 02 Nov 2021 09:39:13 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/02/gunicorn.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 서버에서 타임아웃 에러가 발생하여서, 관련 옵션들을 살펴보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gunicorn&lt;/code&gt;에 대해서 몰랐던 것들을 많이 알게 되었다. 그리고 기존의 설정들이 비효율적이게 잡혀있다는 것도 알게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.hwahae.co.kr/all/tech/tech-tech/5567/&#34;&gt;gunicorn 설정의 A to Z&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/benoitc/gunicorn/blob/master/examples/example_config.py&#34;&gt;example_config.py&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://leekchan.com/gevent-tutorial-ko/?fbclid=IwAR3Ns4jc5XIDtrFwiPXzfDncQmhXuN8C1z1Q75luV931qwkY3gIHyLJFnDU&#34;&gt;Python 개발자를 위한 gevent&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/save-the-day-with-gevent/&#34;&gt;gevent와 함께 하루를 저장하세요&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/flask-gevent-tutorial/&#34;&gt;gevent와 함께 Flask를 사용하는 방법(uWSGI 및 Gunicorn 에디션)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>파이썬 리스트에서 중복된 요소를 제거하는 방법들 및 성능 비교 </title>
       <link>https://dongwooklee96.github.io/post/2021/08/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EC%97%90%EC%84%9C-%EC%A4%91%EB%B3%B5%EB%90%9C-%EC%9A%94%EC%86%8C%EB%A5%BC-%EC%A0%9C%EA%B1%B0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EB%93%A4-%EB%B0%8F-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90.html</link>
@@ -374,41 +409,6 @@ person2 = WhatPerson.static_person()   # return 아빠
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>GUNICORN</title>
-      <link>https://dongwooklee96.github.io/post/1/01/01/gunicorn.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/post/1/01/01/gunicorn.html</guid>
-      <description>&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;최근에 서버에서 타임아웃 에러가 발생하여서, 관련 옵션들을 살펴보았다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;gunicorn&lt;/code&gt;에 대해서 몰랐던 것들을 많이 알게 되었다. 그리고 기존의 설정들이 비효율적이게 잡혀있다는 것도 알게 되었다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;http://blog.hwahae.co.kr/all/tech/tech-tech/5567/&#34;&gt;gunicorn 설정의 A to Z&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/benoitc/gunicorn/blob/master/examples/example_config.py&#34;&gt;example_config.py&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;http://leekchan.com/gevent-tutorial-ko/?fbclid=IwAR3Ns4jc5XIDtrFwiPXzfDncQmhXuN8C1z1Q75luV931qwkY3gIHyLJFnDU&#34;&gt;Python 개발자를 위한 gevent&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/save-the-day-with-gevent/&#34;&gt;gevent와 함께 하루를 저장하세요&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/flask-gevent-tutorial/&#34;&gt;gevent와 함께 Flask를 사용하는 방법(uWSGI 및 Gunicorn 에디션)&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

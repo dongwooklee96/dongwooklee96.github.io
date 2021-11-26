@@ -2343,6 +2343,41 @@ class SqlAlchemyRepository(AbstractRepository):
     </item>
     
     <item>
+      <title>GUNICORN</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/02/gunicorn.html</link>
+      <pubDate>Tue, 02 Nov 2021 09:39:13 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/02/gunicorn.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 서버에서 타임아웃 에러가 발생하여서, 관련 옵션들을 살펴보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gunicorn&lt;/code&gt;에 대해서 몰랐던 것들을 많이 알게 되었다. 그리고 기존의 설정들이 비효율적이게 잡혀있다는 것도 알게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.hwahae.co.kr/all/tech/tech-tech/5567/&#34;&gt;gunicorn 설정의 A to Z&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/benoitc/gunicorn/blob/master/examples/example_config.py&#34;&gt;example_config.py&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://leekchan.com/gevent-tutorial-ko/?fbclid=IwAR3Ns4jc5XIDtrFwiPXzfDncQmhXuN8C1z1Q75luV931qwkY3gIHyLJFnDU&#34;&gt;Python 개발자를 위한 gevent&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/save-the-day-with-gevent/&#34;&gt;gevent와 함께 하루를 저장하세요&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/flask-gevent-tutorial/&#34;&gt;gevent와 함께 Flask를 사용하는 방법(uWSGI 및 Gunicorn 에디션)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/11/02/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
       <pubDate>Tue, 02 Nov 2021 08:00:36 +0900</pubDate>
@@ -30980,41 +31015,6 @@ end_time &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; time&lt;span s
 &lt;li&gt;Findings: 코드도 중요하지만, 솔루션에 대한 이해가 없으면 내가 지금 하고 있는 것이 맞는지 틀리는지 판단하기 어렵다. 그리고 평소에 시간이 날 때마다 솔루션에 대한 공부를 해야겠다.&lt;/li&gt;
 &lt;li&gt;Affirmation : 앞으로 솔루션을 많이 사용해보면서 존재하는 기능들을 따로 정리를 해두고, 활자로써의 지식이 아니라, 경험적인 지식으로 이를 발전시켜서 생산성을 증가시켜야겠다는 생각을 했다.&lt;/li&gt;
 &lt;/ol&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>GUNICORN</title>
-      <link>https://dongwooklee96.github.io/post/1/01/01/gunicorn.html</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/post/1/01/01/gunicorn.html</guid>
-      <description>&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;최근에 서버에서 타임아웃 에러가 발생하여서, 관련 옵션들을 살펴보았다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;code&gt;gunicorn&lt;/code&gt;에 대해서 몰랐던 것들을 많이 알게 되었다. 그리고 기존의 설정들이 비효율적이게 잡혀있다는 것도 알게 되었다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;http://blog.hwahae.co.kr/all/tech/tech-tech/5567/&#34;&gt;gunicorn 설정의 A to Z&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/benoitc/gunicorn/blob/master/examples/example_config.py&#34;&gt;example_config.py&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;http://leekchan.com/gevent-tutorial-ko/?fbclid=IwAR3Ns4jc5XIDtrFwiPXzfDncQmhXuN8C1z1Q75luV931qwkY3gIHyLJFnDU&#34;&gt;Python 개발자를 위한 gevent&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/save-the-day-with-gevent/&#34;&gt;gevent와 함께 하루를 저장하세요&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/flask-gevent-tutorial/&#34;&gt;gevent와 함께 Flask를 사용하는 방법(uWSGI 및 Gunicorn 에디션)&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

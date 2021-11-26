@@ -7,17 +7,17 @@
     </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
-    <link rel="manifest" href="../images/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>프로그래밍 - 파이썬 | 개발자 이동욱</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/fonts.css" />
+    <title>GUNICORN | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
     <header>
 
@@ -30,13 +30,13 @@
       </li>
       
       
-      <li class="pull-left current">
-        <a href="../categories/">categories</a>
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
       </li>
       
       
       <li class="pull-left ">
-        <a href="../tags/">tags</a>
+        <a href="../../../../tags/">tags</a>
       </li>
       
 
@@ -52,45 +52,63 @@
   <body>
     <br/>
 
+<div class="article-meta">
+<h1><span class="title">GUNICORN</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/11/02</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%B4%EC%8D%AC">프로그래밍 - 파이썬</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> 
+  
+  
+</p>
+</div>
+
 
 <div class="content-wrapper">
+  <main>
+    <ul>
+<li>
+<p>최근에 서버에서 타임아웃 에러가 발생하여서, 관련 옵션들을 살펴보았다.</p>
+</li>
+<li>
+<p><code>gunicorn</code>에 대해서 몰랐던 것들을 많이 알게 되었다. 그리고 기존의 설정들이 비효율적이게 잡혀있다는 것도 알게 되었다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li>
+<p><a href="http://blog.hwahae.co.kr/all/tech/tech-tech/5567/">gunicorn 설정의 A to Z</a></p>
+</li>
+<li>
+<p><a href="https://github.com/benoitc/gunicorn/blob/master/examples/example_config.py">example_config.py</a></p>
+</li>
+<li>
+<p><a href="http://leekchan.com/gevent-tutorial-ko/?fbclid=IwAR3Ns4jc5XIDtrFwiPXzfDncQmhXuN8C1z1Q75luV931qwkY3gIHyLJFnDU">Python 개발자를 위한 gevent</a></p>
+</li>
+<li>
+<p><a href="https://iximiuz.com/en/posts/save-the-day-with-gevent/">gevent와 함께 하루를 저장하세요</a></p>
+</li>
+<li>
+<p><a href="https://iximiuz.com/en/posts/flask-gevent-tutorial/">gevent와 함께 Flask를 사용하는 방법(uWSGI 및 Gunicorn 에디션)</a></p>
+</li>
+</ul>
 
-  <h1>프로그래밍 - 파이썬</h1>
-  
-
-  
-
-  <ul>
-     
-     
-     
-     <li>
-       <span class="date">2021/11/02</span>
-       <a href="../post/2021/11/02/gunicorn.html">GUNICORN</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/08/03</span>
-       <a href="../post/2021/08/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EC%97%90%EC%84%9C-%EC%A4%91%EB%B3%B5%EB%90%9C-%EC%9A%94%EC%86%8C%EB%A5%BC-%EC%A0%9C%EA%B1%B0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EB%93%A4-%EB%B0%8F-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90.html">파이썬 리스트에서 중복된 요소를 제거하는 방법들 및 성능 비교</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/03/06</span>
-       <a href="../post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC-itertools-%EB%AA%A8%EB%93%88%EC%9D%98-group-by-%ED%95%A8%EC%88%98.html">파이썬 itertools 모듈의 group by 함수</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/03/03</span>
-       <a href="../post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4.html">파이썬 @classmethod와 @staticmethod 차이</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/03/02</span>
-       <a href="../post/2021/03/02/wsgi.html">WSGI</a>
-     </li>
-     
-   </ul>
+    <a href="../../../../"> >> Home</a>
+  </main>
 </div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
   <footer>
       
 <script>
