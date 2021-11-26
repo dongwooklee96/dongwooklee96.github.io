@@ -6,7 +6,70 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 26 Nov 2021 18:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 26 Nov 2021 19:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LEARING PERL - 2 (데이터 타입)</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/26/learing-perl-2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85.html</link>
+      <pubDate>Fri, 26 Nov 2021 19:20:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/26/learing-perl-2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85.html</guid>
+      <description>&lt;h3 id=&#34;자료형&#34;&gt;자료형&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;펄의 데이터 타입은 상당히 간단하다, 스칼라 타입으로 불리는 데이터는 단지 하나의 값을 나타낸다고 생각을 하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서 숫자와 문자열 같은 데이터들이 바로 스칼라 타입이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다른 프로그래밍 언어에서는 숫자와 문자열 타입은 엄연히 다른 타입으로 취급하는 경우가 많은데 펄에서는 비슷하게 처리된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 처음에는 이상하게 느껴질 수도 있지만, 데이터를 다루기에는 더 편할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;스칼라-값과-스칼라-변수&#34;&gt;스칼라 값과 스칼라 변수&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;숫자와 문자열 같은 스칼라 값이 있고 이 값을 저장할 수 있는 스칼라 변수가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;당연하게도 스칼라 값은 변경할 수 없지만, 변수에 어떤 스칼라가 들어갈지는 변경할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;펄은 숫자를 처리할 때 모든 숫자를 내부적으로 실수로 처리한다. 이는 정확도와 숫자 크기에 제한이 있다는 뜻이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 파이썬과 같이 지수 연산을 다음과 같이 할 수 있다. 어쩌면 파이썬이 펄을 보고 참고한 것일 수도 있을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;2**3 # 8
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;펄에서 가장 짧은 문자열의 길이는 아무것도 없는 것이고, 가장 긴 문자열의 길이는 메모리가 허락하는 한 제한이 없다. 이는 펄이 추구하는 원칙중에 &amp;ldquo;제약 없음&amp;quot;에 기인한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;펄 문자열에는 어떠한 값이라도 들어갈 수 있는데, 예를들어, 그래픽 이미지 값을 변경할 수도 있고, 컴파일된 프로그램을 문자열로 읽어들일 수도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 펄은 유니코드 문자에 대해서, 완벽한 지원을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 펄 컴파일러가 자동적으로 유니코드로 해석하지는 않고, 아래 &lt;code&gt;pragma&lt;/code&gt;를 입력해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;use utf8;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;pragma&lt;/code&gt;는 펄 컴파일러가 어떻게 동작해야하는지 알려주는 역할을 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Learning-Perl-Randal-L-Schwartz/dp/1449303587&#34;&gt;Learning Perl, 7th Edition&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>LEARING PERL을 읽고 느낀점 1</title>
       <link>https://dongwooklee96.github.io/post/2021/11/26/learing-perl%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90-1.html</link>
