@@ -6,7 +6,127 @@
     <description>Recent content in 기타 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 21 Oct 2021 10:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%83%80/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Nov 2021 17:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%83%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>간단한 AUTOTOOLS 예제</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/28/%EA%B0%84%EB%8B%A8%ED%95%9C-autotools-%EC%98%88%EC%A0%9C.html</link>
+      <pubDate>Sun, 28 Nov 2021 17:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/28/%EA%B0%84%EB%8B%A8%ED%95%9C-autotools-%EC%98%88%EC%A0%9C.html</guid>
+      <description>&lt;h3 id=&#34;autotools-란&#34;&gt;AUTOTOOLS 란&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;여러 파일로 나누어진 C 언어 프로젝트를 빌드하려면 일일히 컴파일 하고 나서, 목적파일을 링크해줘야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서, 손이 많이 가게 된다. &lt;code&gt;AUTOTOOLS&lt;/code&gt;는 이러한 작업을 자동으로 해주는 도구이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;소스-코드-작성&#34;&gt;소스 코드 작성&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/bdsw203xr62vs5a/Screen%20Shot%202021-11-28%20at%205.52.36%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;우선 다음과 같은 명령어로 프로젝트를 생성할 디렉터리를 하나 만들어준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;mkdir multimodule
+cd multimodule
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;multimodule&lt;/code&gt; 이라는 이름으로 만들어주었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 나서, &lt;code&gt;src&lt;/code&gt;와 &lt;code&gt;test&lt;/code&gt; 디렉터를 만들어주고, 나서 간단한 코드를 작성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;두 개의 숫자를 입력받고 나서, 최대 값을 반환하는 간단한 예제이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;아래 소스코드는 multimodule/src 디렉터리 안에 작성하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;util.c&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int max(int a, int b) {
+    if (a &amp;gt; b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;util.h&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;int max(int a, int b);
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;main.c&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+#include &amp;quot;util.h&amp;quot;
+
+int main(int argc, char* argv[]) {
+    int a, b, max_num;
+
+    printf(&amp;quot;please input two numbers: &amp;quot;);
+    scanf(&amp;quot;%d %d&amp;quot;, &amp;amp;a, &amp;amp;b);
+    max_num = max(a, b);
+    printf(&amp;quot;max number is %d\n&amp;quot;, max_num);
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;make-파일-작성&#34;&gt;MAKE 파일 작성&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;프로젝트 루트 폴더로 올라가서, &lt;code&gt;Makefile.am&lt;/code&gt; 파일을 작성해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Makefile.am&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;AUTOMAKE_OPTIONS = subdir-objects
+bin_PROGRAMS = multimodule
+
+multimodule_SOURCES = \
+        src/main.c \
+        src/util.c
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 나서, 터미널에서 &lt;code&gt;autoscan&lt;/code&gt; 명령어를 입력한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그려면 &lt;code&gt;configure.scan&lt;/code&gt; 이라는 파일이 자동으로 생성되고, 템플릿에 원하는 내용을 채워 넣는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;AC_PREREQ([2.69])
+AC_INIT([multimodule], [0.0.1], [])
+AC_CONFIG_SRCDIR([src/main.c])
+AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+
+# Checks for programs.
+AC_PROG_CC
+
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 나서, 이 파일 이름을  &lt;code&gt;configure.ac&lt;/code&gt;로 변경한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그런 후에 터미널에 아래 명령어를 입력한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;autoreconf -v -i
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/mfayufu7l04trjz/Screen%20Shot%202021-11-28%20at%206.10.16%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해당 명령어가 정상적으로 실행되었으면, &lt;code&gt;configure&lt;/code&gt; 실행파일이 생성되고 이를 실행하고 나서, &lt;code&gt;Makefile.am&lt;/code&gt; 파일이 생성되었다면 마지막으로 &lt;code&gt;make&lt;/code&gt; 명령어를 입력하면 프로그램이 빌드되고 실행 파일이 생성되게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/dcq897lnsrc1l46/2021-11-28%2018.13.58.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=dc1kEJvS248&#34;&gt;Creating a simple Autotools based project&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>LOCUST를 이용한 부하 테스트</title>
       <link>https://dongwooklee96.github.io/post/2021/10/21/locust%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%B6%80%ED%95%98-%ED%85%8C%EC%8A%A4%ED%8A%B8.html</link>

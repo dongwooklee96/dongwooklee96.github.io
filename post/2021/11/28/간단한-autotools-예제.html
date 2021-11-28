@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>간단한 AUTOTOOLS 예제 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">간단한 AUTOTOOLS 예제</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/11/28</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B8%B0%ED%83%80">기타</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="autotools-란">AUTOTOOLS 란</h3>
+<hr>
+<ul>
+<li>
+<p>여러 파일로 나누어진 C 언어 프로젝트를 빌드하려면 일일히 컴파일 하고 나서, 목적파일을 링크해줘야한다.</p>
+</li>
+<li>
+<p>따라서, 손이 많이 가게 된다. <code>AUTOTOOLS</code>는 이러한 작업을 자동으로 해주는 도구이다.</p>
+</li>
+</ul>
+<h4 id="소스-코드-작성">소스 코드 작성</h4>
+<p><img src="https://dl.dropbox.com/s/bdsw203xr62vs5a/Screen%20Shot%202021-11-28%20at%205.52.36%20PM.png" alt=""></p>
+<ul>
+<li>우선 다음과 같은 명령어로 프로젝트를 생성할 디렉터리를 하나 만들어준다.</li>
+</ul>
+<pre><code>mkdir multimodule
+cd multimodule
+</code></pre><ul>
+<li>
+<p><code>multimodule</code> 이라는 이름으로 만들어주었다.</p>
+</li>
+<li>
+<p>그리고 나서, <code>src</code>와 <code>test</code> 디렉터를 만들어주고, 나서 간단한 코드를 작성한다.</p>
+</li>
+<li>
+<p>두 개의 숫자를 입력받고 나서, 최대 값을 반환하는 간단한 예제이다.</p>
+</li>
+<li>
+<p>아래 소스코드는 multimodule/src 디렉터리 안에 작성하면 된다.</p>
+</li>
+</ul>
+<p><strong>util.c</strong></p>
+<pre><code>int max(int a, int b) {
+    if (a &gt; b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+</code></pre><p><strong>util.h</strong></p>
+<pre><code>int max(int a, int b);
+</code></pre><p><strong>main.c</strong></p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &quot;util.h&quot;
+
+int main(int argc, char* argv[]) {
+    int a, b, max_num;
+
+    printf(&quot;please input two numbers: &quot;);
+    scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
+    max_num = max(a, b);
+    printf(&quot;max number is %d\n&quot;, max_num);
+    return 0;
+}
+</code></pre><h4 id="make-파일-작성">MAKE 파일 작성</h4>
+<ul>
+<li>프로젝트 루트 폴더로 올라가서, <code>Makefile.am</code> 파일을 작성해준다.</li>
+</ul>
+<p><strong>Makefile.am</strong></p>
+<pre><code>AUTOMAKE_OPTIONS = subdir-objects
+bin_PROGRAMS = multimodule
+
+multimodule_SOURCES = \
+        src/main.c \
+        src/util.c
+</code></pre><ul>
+<li>
+<p>그리고 나서, 터미널에서 <code>autoscan</code> 명령어를 입력한다.</p>
+</li>
+<li>
+<p>그려면 <code>configure.scan</code> 이라는 파일이 자동으로 생성되고, 템플릿에 원하는 내용을 채워 넣는다.</p>
+</li>
+</ul>
+<pre><code>AC_PREREQ([2.69])
+AC_INIT([multimodule], [0.0.1], [])
+AC_CONFIG_SRCDIR([src/main.c])
+AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE([-Wall -Werror foreign])
+
+# Checks for programs.
+AC_PROG_CC
+
+# Checks for libraries.
+
+# Checks for header files.
+
+# Checks for typedefs, structures, and compiler characteristics.
+
+# Checks for library functions.
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
+</code></pre><ul>
+<li>
+<p>그리고 나서, 이 파일 이름을  <code>configure.ac</code>로 변경한다.</p>
+</li>
+<li>
+<p>그런 후에 터미널에 아래 명령어를 입력한다.</p>
+</li>
+</ul>
+<pre><code>autoreconf -v -i
+</code></pre><p><img src="https://dl.dropbox.com/s/mfayufu7l04trjz/Screen%20Shot%202021-11-28%20at%206.10.16%20PM.png" alt=""></p>
+<ul>
+<li>해당 명령어가 정상적으로 실행되었으면, <code>configure</code> 실행파일이 생성되고 이를 실행하고 나서, <code>Makefile.am</code> 파일이 생성되었다면 마지막으로 <code>make</code> 명령어를 입력하면 프로그램이 빌드되고 실행 파일이 생성되게 된다.</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/dcq897lnsrc1l46/2021-11-28%2018.13.58.gif" alt=""></p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=dc1kEJvS248">Creating a simple Autotools based project</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
