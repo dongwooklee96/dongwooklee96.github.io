@@ -6,7 +6,57 @@
     <description>Recent content in 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Nov 2021 15:00:23 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Nov 2021 15:30:23 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>(C언어) goto 문</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/28/c%EC%96%B8%EC%96%B4-goto-%EB%AC%B8.html</link>
+      <pubDate>Sun, 28 Nov 2021 15:30:23 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/28/c%EC%96%B8%EC%96%B4-goto-%EB%AC%B8.html</guid>
+      <description>&lt;h3 id=&#34;goto-제어문&#34;&gt;GOTO 제어문&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;goto&lt;/code&gt; 문은 지정한 곳으로 무조건 점프를 시키는 제어문이다. &lt;code&gt;goto&lt;/code&gt; 라는 말이 의미하듯이 조건 없이 무조건 제어를 옮겨버리기 때문에, 가장 사용하기 쉬운 제어문이기도 하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;goto&lt;/code&gt;로 제어를 옮길 지점은 레이블이라는 것으로 표식을 한다. 단 블록의 끝만 제외하고 프로그램의 어느 곳에나 레이블을 배치해놓고 &lt;code&gt;goto&lt;/code&gt; 레이블 명; 이라는 명령을 내리면 즉시 레이블 위치로 이동한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;레이블 보다 앞에서 뒤로 이동할 수 있지만 함수 내에서만 이동할 수 있으며 다른 함수로는 점프할 수 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;예제&#34;&gt;예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+
+int main(int argc, char *argv[]) {
+
+    int i, sum;
+
+    i = 1;
+    sum = 0;
+
+here:
+    sum = sum + i;
+    if (i &amp;lt; 100) {
+        i = i + 1;
+        goto here;
+    }
+    printf(&amp;quot;1 ~ 100 total = %d\n&amp;quot;, sum);
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;다음은 1부터 100까지 더하는 예제이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://beej.us/guide/bgc/html/split/index.html&#34;&gt;Beej&amp;rsquo;s Guide to C Programming&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>(C언어) typedef 키워드</title>
       <link>https://dongwooklee96.github.io/post/2021/11/28/c%EC%96%B8%EC%96%B4-typedef-%ED%82%A4%EC%9B%8C%EB%93%9C.html</link>
