@@ -6,7 +6,55 @@
     <description>Recent content in 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 25 Nov 2021 00:50:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Nov 2021 15:00:23 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>(C언어) typedef 키워드</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/28/c%EC%96%B8%EC%96%B4-typedef-%ED%82%A4%EC%9B%8C%EB%93%9C.html</link>
+      <pubDate>Sun, 28 Nov 2021 15:00:23 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/28/c%EC%96%B8%EC%96%B4-typedef-%ED%82%A4%EC%9B%8C%EB%93%9C.html</guid>
+      <description>&lt;h3 id=&#34;사용자-정의-형-타입&#34;&gt;사용자 정의 형 타입&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;C언어에서는 기존의 타입들로부터 사용자가 새로운 타입을 정의하는 방법을 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자 정의형 타입을 만드는 방법은 다음과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;typedef 타입정의 타입이름;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;사용-예제&#34;&gt;사용 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+
+typedef enum {true, false} bool;
+
+int main(int argc, char *argv[]) {
+
+    bool is_true = true;
+    printf(&amp;quot;result: %d\n&amp;quot;, is_true);
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;다음은 &lt;code&gt;bool&lt;/code&gt; 타입을 선언하여 사용하는 예제이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C언어에서는 &lt;code&gt;bool&lt;/code&gt; 타입이 존재하지 않지만, &lt;code&gt;typedef&lt;/code&gt;를 통해서 만들어서 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자 정의형은 가독성을 높히는 효과가 있어서 주로 구조체와 같이 큰 타입에 대해서 별도의 타입을 정의하여 사용하는 경우가 많다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://beej.us/guide/bgc/html/split/index.html&#34;&gt;Beej&amp;rsquo;s Guide to C Programming&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>앞으로 POSTGRES에 컨트리뷰션을 할 방향에 대해서...</title>
       <link>https://dongwooklee96.github.io/post/2021/11/25/%EC%95%9E%EC%9C%BC%EB%A1%9C-postgres%EC%97%90-%EC%BB%A8%ED%8A%B8%EB%A6%AC%EB%B7%B0%EC%85%98%EC%9D%84-%ED%95%A0-%EB%B0%A9%ED%96%A5%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C....html</link>
