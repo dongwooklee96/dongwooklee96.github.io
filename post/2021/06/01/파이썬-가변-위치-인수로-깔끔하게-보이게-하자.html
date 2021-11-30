@@ -76,12 +76,12 @@
 <li>이러한 경우에 사용하면 좋을 것 같다.</li>
 </ul>
 <p><strong>예제</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(message, values):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(message, values):
   <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> values:
-  print(message)
+  <span style="color:#66d9ef">print</span>(message)
   <span style="color:#66d9ef">else</span>:
     values_str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;, &#39;</span><span style="color:#f92672">.</span>join(str(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> values)
-    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (message, values_str))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (message, values_str))
 
 log(<span style="color:#e6db74">&#39;My number are&#39;</span>, [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>])
 log(<span style="color:#e6db74">&#39;Hi there&#39;</span>, [])
@@ -99,12 +99,12 @@ log(<span style="color:#e6db74">&#39;Hi there&#39;</span>, [])
 <p>함수 본문은 수정할 필요가 없고, 단지 호출하는 쪽만 수정하면 된다.</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(message, <span style="color:#f92672">*</span>values):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(message, <span style="color:#f92672">*</span>values):
   <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> values:
-  print(message)
+  <span style="color:#66d9ef">print</span>(message)
   <span style="color:#66d9ef">else</span>:
     values_str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;, &#39;</span><span style="color:#f92672">.</span>join(str(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> values)
-    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (message, values_str))
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (message, values_str))
 
 log(<span style="color:#e6db74">&#39;My number are&#39;</span>, [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>])
 log(<span style="color:#e6db74">&#39;Hi there&#39;</span>)

@@ -6,7 +6,102 @@
     <description>Recent content in 펄 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 26 Nov 2021 19:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%8E%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Nov 2021 19:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%8E%84/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LEARING PERL - 3 (문자열)</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/30/learing-perl-3-%EB%AC%B8%EC%9E%90%EC%97%B4.html</link>
+      <pubDate>Tue, 30 Nov 2021 19:20:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/11/30/learing-perl-3-%EB%AC%B8%EC%9E%90%EC%97%B4.html</guid>
+      <description>&lt;h3 id=&#34;홑따옴표-문자열&#34;&gt;홑따옴표 문자열&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;홑따옴표 문자열은 다음과 같이 표시할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&#39;fred&#39; # four characters: f, r, e, d
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;그리고 특수 홑따음표나 백슬레시를 표현하고 싶다면 앞에 &amp;lsquo;&#39; 백슬레시를 붙여주면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&#39;Don\&#39;t let an apostrophe end this string prematurely!&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;주의할 점은 백슬레시는 오직 &lt;code&gt;&#39;&lt;/code&gt; 홑따옴표를 나타내거나, 백슬레시를 나타낼 때만 사용할 수 있다는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&#39;hello\nthere&#39; # hellonthere
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;쌍따옴표-문자열&#34;&gt;쌍따옴표 문자열&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;쌍따옴표는 기본적으롤 홑따옴표 문자열과 큰 차이는 없지만, 백슬레시를 이용하여 활용할 수 있는 표현이 훨씬 더 많다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;barney&amp;quot; # &#39;barney&#39;와 같다.
+&amp;quot;hello world\n&amp;quot; # &#39;hello world&#39; 다음에 개행이 추가된다.
+&amp;quot;the last character of this string is a quote mark: \&amp;quot;&amp;quot;
+&amp;quot;coke\tsprite&amp;quot; # coke, 다음에 탭문자 그리고 sprite
+&amp;quot;\x{2668}&amp;quot; # 유니코드로 &#39;♨&#39; 문자가 표현된다.
+&amp;quot;\N{SNOWMAN}&amp;quot; # 유니코드로 &#39;☃&#39; 문자가 표현된다.
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;그리고 쌍따옴표 문자열은 변수의 값을 표현할 수 있는 장치가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;문자열-연산자&#34;&gt;문자열 연산자&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;펄에는 스트링을 반복해서 더할 수 있는 문법이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;fref&amp;quot; x 3 # &amp;quot;fredfredfred&amp;quot; 로 나타내진다.
+&amp;quot;barney&amp;quot; x (4 + 1) # &amp;quot;barneybarneybarneybarneybarney&amp;quot; 로 나타내진다.
+5 x 4.8 # 5555 로 나타내진다.
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;마지막 예제는 조금은 특이한데, &lt;code&gt;x&lt;/code&gt; 연산자는 왼쪽에 오는 값을 문자열로 치환해서 생각을 한다. 따라서 &amp;ldquo;5&amp;quot;가 되고 그것을 오른쪽에 있는 4와 곱해서 &amp;ldquo;5555&amp;quot;가 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;뒤의 숫자 4.8은 내림처리되어서 4로 표현된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 반복할 숫자가 0이라면 빈 문자열을 나타낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;펄은-자동으로-숫자와-문자-타입을-변경한다&#34;&gt;펄은 자동으로 숫자와 문자 타입을 변경한다&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;펄은 연산자에 따라서, 앞에 오는 타입을 변환시키는데 앞에 오는 타입이 문자열을 요구하면 문자열로 생각하고 숫자를 요구하면 숫자로 판단하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 숫자 타입을 원하는 연산자에 문자열을 적게 되면 자동으로 숫자로 타입으로 변경된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 &amp;ldquo;12&amp;rdquo; * &amp;ldquo;3&amp;rdquo; 같은 숫자 타입을 원하는 연산자에 문자열을 적게 된다면 문자열은 자동으로 숫자로 변환되고 36이라는 결과가 반환된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 문자열로 변환될 수 없는 숫자와 문자가 섞여 있는 타입이라면 문자열에서 앞쪽의 숫자만 뽑아서 계산을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 절대로 숫자로 변환할 수 없다면 숫자 0으로 변경되어서 계산된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;quot;12abcde34&amp;quot; * &amp;quot; 3&amp;quot; # 36 
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;경고-표시&#34;&gt;경고 표시&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;펄 스크립트를 작성할 때, 아래 코드를 적으면 프로그램에서 어떻게 동작할지 잘 모르겠는 부분을 워닝으로 표시해줄 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
+use warnings;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;또는&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl -w
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;그 경고는 모듈을 추가하였을 때 내가 작성하지 않은 부분에 대해서도 경로를 표시해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;$ perl -w my_program
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;그리고 &lt;code&gt;use diagnostics;&lt;/code&gt; pragma를 사용하면 더 상세한 내용을 알 수 있다. 이것은 프로그램을 최적화하는데 많은 도움이 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Learning-Perl-Randal-L-Schwartz/dp/1449303587&#34;&gt;Learning Perl, 7th Edition&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>LEARING PERL - 2 (데이터 타입)</title>
       <link>https://dongwooklee96.github.io/post/2021/11/26/learing-perl-2-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%83%80%EC%9E%85.html</link>

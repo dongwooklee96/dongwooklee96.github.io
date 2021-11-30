@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>LEARING PERL - 3 (문자열) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">LEARING PERL - 3 (문자열)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/11/30</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%8E%84">펄</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="홑따옴표-문자열">홑따옴표 문자열</h3>
+<hr>
+<ul>
+<li>홑따옴표 문자열은 다음과 같이 표시할 수 있다.</li>
+</ul>
+<pre><code>'fred' # four characters: f, r, e, d
+</code></pre><ul>
+<li>그리고 특수 홑따음표나 백슬레시를 표현하고 싶다면 앞에 &lsquo;' 백슬레시를 붙여주면 된다.</li>
+</ul>
+<pre><code>'Don\'t let an apostrophe end this string prematurely!'
+</code></pre><ul>
+<li>주의할 점은 백슬레시는 오직 <code>'</code> 홑따옴표를 나타내거나, 백슬레시를 나타낼 때만 사용할 수 있다는 것이다.</li>
+</ul>
+<pre><code>'hello\nthere' # hellonthere
+</code></pre><h3 id="쌍따옴표-문자열">쌍따옴표 문자열</h3>
+<hr>
+<ul>
+<li>쌍따옴표는 기본적으롤 홑따옴표 문자열과 큰 차이는 없지만, 백슬레시를 이용하여 활용할 수 있는 표현이 훨씬 더 많다.</li>
+</ul>
+<pre><code>&quot;barney&quot; # 'barney'와 같다.
+&quot;hello world\n&quot; # 'hello world' 다음에 개행이 추가된다.
+&quot;the last character of this string is a quote mark: \&quot;&quot;
+&quot;coke\tsprite&quot; # coke, 다음에 탭문자 그리고 sprite
+&quot;\x{2668}&quot; # 유니코드로 '♨' 문자가 표현된다.
+&quot;\N{SNOWMAN}&quot; # 유니코드로 '☃' 문자가 표현된다.
+</code></pre><ul>
+<li>그리고 쌍따옴표 문자열은 변수의 값을 표현할 수 있는 장치가 있다.</li>
+</ul>
+<h3 id="문자열-연산자">문자열 연산자</h3>
+<hr>
+<ul>
+<li>펄에는 스트링을 반복해서 더할 수 있는 문법이 있다.</li>
+</ul>
+<pre><code>&quot;fref&quot; x 3 # &quot;fredfredfred&quot; 로 나타내진다.
+&quot;barney&quot; x (4 + 1) # &quot;barneybarneybarneybarneybarney&quot; 로 나타내진다.
+5 x 4.8 # 5555 로 나타내진다.
+</code></pre><ul>
+<li>
+<p>마지막 예제는 조금은 특이한데, <code>x</code> 연산자는 왼쪽에 오는 값을 문자열로 치환해서 생각을 한다. 따라서 &ldquo;5&quot;가 되고 그것을 오른쪽에 있는 4와 곱해서 &ldquo;5555&quot;가 된다.</p>
+</li>
+<li>
+<p>뒤의 숫자 4.8은 내림처리되어서 4로 표현된다.</p>
+</li>
+<li>
+<p>만약 반복할 숫자가 0이라면 빈 문자열을 나타낸다.</p>
+</li>
+</ul>
+<h3 id="펄은-자동으로-숫자와-문자-타입을-변경한다">펄은 자동으로 숫자와 문자 타입을 변경한다</h3>
+<ul>
+<li>
+<p>펄은 연산자에 따라서, 앞에 오는 타입을 변환시키는데 앞에 오는 타입이 문자열을 요구하면 문자열로 생각하고 숫자를 요구하면 숫자로 판단하게 된다.</p>
+</li>
+<li>
+<p>만약 숫자 타입을 원하는 연산자에 문자열을 적게 되면 자동으로 숫자로 타입으로 변경된다.</p>
+</li>
+<li>
+<p>만약 &ldquo;12&rdquo; * &ldquo;3&rdquo; 같은 숫자 타입을 원하는 연산자에 문자열을 적게 된다면 문자열은 자동으로 숫자로 변환되고 36이라는 결과가 반환된다.</p>
+</li>
+<li>
+<p>만약 문자열로 변환될 수 없는 숫자와 문자가 섞여 있는 타입이라면 문자열에서 앞쪽의 숫자만 뽑아서 계산을 한다.</p>
+</li>
+<li>
+<p>그리고 절대로 숫자로 변환할 수 없다면 숫자 0으로 변경되어서 계산된다.</p>
+</li>
+</ul>
+<pre><code>&quot;12abcde34&quot; * &quot; 3&quot; # 36 
+</code></pre><h3 id="경고-표시">경고 표시</h3>
+<hr>
+<ul>
+<li>펄 스크립트를 작성할 때, 아래 코드를 적으면 프로그램에서 어떻게 동작할지 잘 모르겠는 부분을 워닝으로 표시해줄 수 있다.</li>
+</ul>
+<pre><code>#!/usr/bin/perl
+use warnings;
+</code></pre><p>또는</p>
+<pre><code>#!/usr/bin/perl -w
+</code></pre><ul>
+<li>그 경고는 모듈을 추가하였을 때 내가 작성하지 않은 부분에 대해서도 경로를 표시해준다.</li>
+</ul>
+<pre><code>$ perl -w my_program
+</code></pre><ul>
+<li>그리고 <code>use diagnostics;</code> pragma를 사용하면 더 상세한 내용을 알 수 있다. 이것은 프로그램을 최적화하는데 많은 도움이 된다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.amazon.com/Learning-Perl-Randal-L-Schwartz/dp/1449303587">Learning Perl, 7th Edition</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
