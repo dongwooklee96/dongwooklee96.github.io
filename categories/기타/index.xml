@@ -6,7 +6,47 @@
     <description>Recent content in 기타 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 28 Nov 2021 17:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%83%80/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Dec 2021 20:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%83%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>컨퍼런스 영상을 간단히 요약하는 영상을 만들어보자</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/02/%EC%BB%A8%ED%8D%BC%EB%9F%B0%EC%8A%A4-%EC%98%81%EC%83%81%EC%9D%84-%EA%B0%84%EB%8B%A8%ED%9E%88-%EC%9A%94%EC%95%BD%ED%95%98%EB%8A%94-%EC%98%81%EC%83%81%EC%9D%84-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EC%9E%90.html</link>
+      <pubDate>Thu, 02 Dec 2021 20:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/02/%EC%BB%A8%ED%8D%BC%EB%9F%B0%EC%8A%A4-%EC%98%81%EC%83%81%EC%9D%84-%EA%B0%84%EB%8B%A8%ED%9E%88-%EC%9A%94%EC%95%BD%ED%95%98%EB%8A%94-%EC%98%81%EC%83%81%EC%9D%84-%EB%A7%8C%EB%93%A4%EC%96%B4%EB%B3%B4%EC%9E%90.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;전에 해외 컨퍼런스 영상을 한글로 번역하여 많은 사람들이 개발에 관한 더 좋은 정보를 얻을 수 있었으면 하는 생각을 했었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;조금 번역을 하다가, 나중에 해야겠다고 마음만 먹고 지금까지 귀찮아서 안하고 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 최근에 카프카로 유명한 최원영님이 올린 글을 보고 나서, 다시 영상을 제작해보고 싶은 마음이 생겼다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이전에는 풀 영상을 모두 번역하려고 시도 하였는데 먹었는데, 별로 좋은 방법이 아닌 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사실 사람들이 원하는 내용은 컨퍼런스를 간략히 요약 내용이기 때문이다. 관심 있는 내용 조차도 컨퍼런스의 풀 영상을 보기는 부담스럽다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;많은 자기 개발 영상들이 책을 요약해서 이를 영상으로 제작하거나 아니면 한 시간짜리 강의를 간략하게 요약해서 게시를 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 전체 영상을 보고 나서, 어떤 내용인지를 요약하여 이를 올리는 것이 더 좋은 방법이 될 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 처음부터 해외 영상을 올리면 조금은 힘들 수도 있다. 우선 한국 컨퍼런스 영상을 먼저 요약하는 과정을 거치고 나서, 추후에 편집 실력이 늘으면 그때 해외 영상을 번역하고 편집하여 올리는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;많은 자기 개발 유튜버들을 참고해서 편집을 하는 것도 괜찮을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
+    </item>
+    
     <item>
       <title>간단한 AUTOTOOLS 예제</title>
       <link>https://dongwooklee96.github.io/post/2021/11/28/%EA%B0%84%EB%8B%A8%ED%95%9C-autotools-%EC%98%88%EC%A0%9C.html</link>

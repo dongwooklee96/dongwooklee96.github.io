@@ -74,8 +74,8 @@
 <ul>
 <li>다른 언어를 사용하다가, 파이썬으로 넘어온 프로그래머들은 자연스럽게 클래스에 게터(<code>getter</code>)와 세터(<code>setter</code>) 메서드를 명시적으로 구현하려고 한다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OldResistor</span>(object):
-  <span style="color:#66d9ef">def</span> __init__(self, ohms):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OldResistor</span>(object):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
     self<span style="color:#f92672">.</span>_ohms <span style="color:#f92672">=</span> ohms
 
   <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_ohms</span>(self):
@@ -86,18 +86,18 @@
 
 
 r0 <span style="color:#f92672">=</span> OldResistor(<span style="color:#ae81ff">50e3</span>)
-print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Before: </span><span style="color:#e6db74">{</span>r0<span style="color:#f92672">.</span>get_ohms()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># Before: 50000.0</span>
+print(f<span style="color:#e6db74">&#39;Before: {r0.get_ohms()}&#39;</span>) <span style="color:#75715e"># Before: 50000.0</span>
 
 r0<span style="color:#f92672">.</span>set_ohms(<span style="color:#ae81ff">10e3</span>)
-print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Before: </span><span style="color:#e6db74">{</span>r0<span style="color:#f92672">.</span>get_ohms()<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)<span style="color:#e6db74">&#39;)&#39;</span>) <span style="color:#75715e"># After: 10000.0</span>
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">r0<span style="color:#f92672">.</span>set_ohms(r0<span style="color:#f92672">.</span>get_ohms() <span style="color:#f92672">+</span> <span style="color:#ae81ff">5e3</span>)
+print(f<span style="color:#e6db74">&#39;Before: {r0.get_ohms()}&#39;</span>)<span style="color:#e6db74">&#39;)&#39;</span>) <span style="color:#75715e"># After: 10000.0</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">r0<span style="color:#f92672">.</span>set_ohms(r0<span style="color:#f92672">.</span>get_ohms() <span style="color:#f92672">+</span> <span style="color:#ae81ff">5e3</span>)
 </code></pre></div><ul>
 <li>사용하는 법은 간단하지만, 파이썬 스럽지 않은 코딩 방법이다.</li>
 <li>겟터와 셋터는 값을 증가시키고 그 값을 바로 반영하기 불편하다.</li>
 <li>파이썬은 명시적인 게터와 세터를 구현할 일이 거의 없다. 대신 공개 속성부터 구현하기 시작해야 한다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Register</span>(object):
-  <span style="color:#66d9ef">def</span> __init__(self, ohms):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Register</span>(object):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
     self<span style="color:#f92672">.</span>ohms <span style="color:#f92672">=</span> ohms
     self<span style="color:#f92672">.</span>voltage <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
     self<span style="color:#f92672">.</span>current <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
@@ -118,8 +118,8 @@ r1<span style="color:#f92672">.</span>ohms <span style="color:#f92672">+=</span>
 <p>제대로 동작하려면, 세터와 게터의 이름이 의도한 프로퍼티의 이름과 같아야한다.</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VoltageResistance</span>(Register):
-  <span style="color:#66d9ef">def</span> __init__(self, ohms):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">VoltageResistance</span>(Register):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
     super()<span style="color:#f92672">.</span>__init__(ohms)
     self<span style="color:#f92672">.</span>_voltage <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
 
@@ -133,14 +133,14 @@ r1<span style="color:#f92672">.</span>ohms <span style="color:#f92672">+=</span>
     self<span style="color:#f92672">.</span>current <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>_voltage <span style="color:#f92672">/</span> self<span style="color:#f92672">.</span>ohms
 
 r2 <span style="color:#f92672">=</span> VoltageResistance(<span style="color:#ae81ff">1e3</span>)
-print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;Before: </span><span style="color:#e6db74">{</span>r2<span style="color:#f92672">.</span>current<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># 0</span>
+print(f<span style="color:#e6db74">&#39;Before: </span><span style="color:#e6db74">{r2.current}</span><span style="color:#e6db74">&#39;</span>) <span style="color:#75715e"># 0</span>
 r2<span style="color:#f92672">.</span>voltage <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>
-print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;After: </span><span style="color:#e6db74">{</span>r2<span style="color:#f92672">.</span>current<span style="color:#e6db74">}</span><span style="color:#e6db74">&#39;</span>)<span style="color:#e6db74">&#39;)&#39;</span>) <span style="color:#75715e"># 0.01</span>
+print(f<span style="color:#e6db74">&#39;After: </span><span style="color:#e6db74">{r2.current}</span><span style="color:#e6db74">&#39;</span>)<span style="color:#e6db74">&#39;)&#39;</span>) <span style="color:#75715e"># 0.01</span>
 </code></pre></div><ul>
 <li>프로퍼티에 <code>setter</code>를 설정하면, 클래스에 전달된 값들의 타입을 체크하고 값을 검증할 수 있다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BoundedResistence</span>(Register):
-  <span style="color:#66d9ef">def</span> __init__(self, ohms):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BoundedResistence</span>(Register):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
     super()<span style="color:#f92672">.</span>__init__(ohms)
 
     <span style="color:#a6e22e">@property</span>
@@ -150,7 +150,7 @@ print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;After
     <span style="color:#a6e22e">@ohms</span><span style="color:#f92672">.</span>setter
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">ohms</span>(self, ohms):
       <span style="color:#66d9ef">if</span> ohms <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>:
-      <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>ohms<span style="color:#e6db74">}</span><span style="color:#e6db74"> ohms must be &gt; 0&#34;</span>)
+      <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(f<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{ohms}</span><span style="color:#e6db74"> ohms must be &gt; 0&#34;</span>)
 
 
 r3 <span style="color:#f92672">=</span> BoundedResistence(<span style="color:#ae81ff">1e3</span>)
@@ -160,8 +160,8 @@ r3<span style="color:#f92672">.</span>ohms <span style="color:#f92672">=</span> 
 <li>다음은 모든 저항값이 0옴보다 큼을 보장하는 클래스를 정의한 것이다.</li>
 <li>만약 <code>ohms</code> 속성값이 0이거나, 0보다 작으면 예외가 발생하게 된다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FixedResistence</span>(Register):
-  <span style="color:#66d9ef">def</span> __init__(self, ohms):
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FixedResistence</span>(Register):
+  <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__init__</span>(self, ohms):
     super()<span style="color:#f92672">.</span>__init__(ohms)
 
     <span style="color:#a6e22e">@property</span>
