@@ -6,7 +6,16 @@
     <description>Recent content in Categories on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 08 Dec 2021 10:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Dec 2021 19:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>펄</title>
+      <link>https://dongwooklee96.github.io/categories/%ED%8E%84.html</link>
+      <pubDate>Wed, 08 Dec 2021 19:20:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/categories/%ED%8E%84.html</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>책</title>
       <link>https://dongwooklee96.github.io/categories/%EC%B1%85.html</link>
@@ -49,15 +58,6 @@
       <pubDate>Thu, 02 Dec 2021 20:00:39 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%83%80.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>펄</title>
-      <link>https://dongwooklee96.github.io/categories/%ED%8E%84.html</link>
-      <pubDate>Tue, 30 Nov 2021 19:20:40 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%ED%8E%84.html</guid>
       <description></description>
     </item>
     

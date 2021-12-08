@@ -6,7 +6,252 @@
     <description>Recent content in 펄 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 30 Nov 2021 19:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%8E%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Dec 2021 19:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%8E%84/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LEARING PERL - 4번째 학습</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/08/learing-perl-4%EB%B2%88%EC%A7%B8-%ED%95%99%EC%8A%B5.html</link>
+      <pubDate>Wed, 08 Dec 2021 19:20:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/08/learing-perl-4%EB%B2%88%EC%A7%B8-%ED%95%99%EC%8A%B5.html</guid>
+      <description>&lt;h3 id=&#34;for-반복문&#34;&gt;FOR 반복문&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
+
+foreach $rock (qw/ bedrock slate lava /) {
+    print &amp;quot;one rock is $rock.\n&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;펄에서는 반복문을 위와 같이 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특이한 점은 &lt;code&gt;$rock&lt;/code&gt;에 들어가는 값이 복사본이 아니라, 리스트의 원본이 들어간다는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약에 &lt;code&gt;$rocks&lt;/code&gt;를 변경하면 원본 리스트가 변경된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
+
+@rocks = qw/ bedrock slate lava /;
+
+foreach $rock (@rocks) {
+    $rock = &amp;quot;\t$rock&amp;quot;;
+    $rock .= &amp;quot;\n&amp;quot;;
+}
+print &amp;quot;The rocks are:\n&amp;quot;, @rocks;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 이렇게 작성한다면, 원본 배열과 다른 결과가 나올 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또 한가지 특이한 점은, 어떤 값이 들어있는 변수를 반복문의 컨트롤 변수 (리스트의 값이 들어가는 변수)로 사용한다면 반복문에서는 리스트의 값이 하나씩 대입되고 반복문이 끝나면 반복문이 시작하기 전의 값으로 복원되어 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
+
+$rock = &#39;shale&#39;;
+
+@rocks = qw&amp;quot; bedrock slate lava &amp;quot;;
+
+foreach $rock (@rocks) {
+  print &amp;quot;$rock\n&amp;quot;;
+}
+
+print &amp;quot;rock is still $rock\n&amp;quot;; # &#39;rocks is still shale&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;따라서, 반복문에서 사용하는 컨트롤 변수를 위에서 사용하고 있는지 걱정할 필요가 없다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;_-변수&#34;&gt;$_ 변수&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;foreach&lt;/code&gt; 문에서, 컨트롤 변수를 생략했다면, 자동으로 &lt;code&gt;$_&lt;/code&gt;라는 공간에 들어가게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
+
+foreach (1..10) {
+  print &amp;quot;I can count to $_ !\n&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;그리고 &lt;code&gt;$_&lt;/code&gt; 변수에 값을 대입하고 나서, &lt;code&gt;print&lt;/code&gt;를 하게 되면 이전에 대입한 값이 들어가게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
+
+foreach (1..10) {
+  print &amp;quot;I can count to $_ !\n&amp;quot;;
+}
+
+$_ = &amp;quot;Yabba dabba doo\n&amp;quot;;
+print; # &#39;Yadda badda doo&#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;reverse-연산자&#34;&gt;reverse 연산자&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
+
+@fred = 6..10;
+print &amp;quot;@fred\n&amp;quot;;
+@barney = reverse(@fred);
+print &amp;quot;@fred\n&amp;quot;;
+@wilma = reverse 6..10;
+print &amp;quot;@wilma\n&amp;quot;;
+@fred = reverse @fred;
+print &amp;quot;@fred\n&amp;quot;;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;reverse&lt;/code&gt; 연산자는 리스트의 값을 거꾸로 변환해서 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;주의할 점은 그저 거꾸로 뒤집은 값을 반환할 뿐이지, 원본 값을 변경하지는 않는다는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sort-연산자&#34;&gt;sort 연산자&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
+
+@rocks = qw/ bedrock slate rubble granite /;
+print &amp;quot;@rocks\n&amp;quot;; # bedrock slate rubble granite
+
+@sorted = sort(@rocks);
+print &amp;quot;@sorted\n&amp;quot;; # bedrock granite rubble slate
+@back = reverse sort @rocks;
+print &amp;quot;@back\n&amp;quot;; # slate rubble granite bedrock
+@rocks = sort @rocks;
+print &amp;quot;@rocks\n&amp;quot;; # bedrock granite rubble slate
+@numbers = sort 97..102; # 100 101 102 97 98 99
+print &amp;quot;@numbers\n&amp;quot;;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이를 실행해보면 마지막 결과가 예상과 다르게 나오는데 그 이유는 문자열로 취급하기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 &lt;code&gt;reverse&lt;/code&gt; 연산자와 마찬가지로, 정렬한 리스트를 반환하기 때문에 원본은 변경되지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;each-연산자&#34;&gt;each 연산자&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
+
+@rocks = qw/ bedrock slate rubble granite /;
+while (($index, $value) = each @rocks) {
+  print &amp;quot;$index: $value\n&amp;quot;;
+}
+
+# 결과
+0: bedrock
+1: slate
+2: rubble
+3: granite
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;each&lt;/code&gt; 연산자는 인덱스와 리스트의 값을 동시에 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 파이썬을 알고 있다면, &lt;code&gt;enumerate&lt;/code&gt; 를 사용한 것과 같은 결과를 얻을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;스칼라-값과-리스트-값은-문맥에-따라서-달라진다&#34;&gt;스칼라 값과 리스트 값은 문맥에 따라서 달라진다&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;펄은 특이하게 문맥에 따라서 값이 다르게 처리 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이것은 마치 자연어와 같은데, 자연어도 문맥에 따라서 같은 단어임에도 불구하고 다르게 사용될 수 있다. 펄도 그렇다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;@people = qw (fred barney betty);
+@sorted = sort @people; # list context: barney, betty, fred
+$number = 42 + @people; # 42 + 3 = 45
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 리스트를 생산하는 연산의 경우 리스트에서만 사용될 것으로 예상이 되며, 스칼라 값에 사용할 경우에는 예상하기 힘든 값이 나올 수도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리스트를 만드는 연산을 스칼라 문맥에서 사용할 경우에는 문서를 참조하는 것이 낫다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;/usr/bin/perl
+
+@backwards = reverse qw/ yadda dabba doo/;
+print &amp;quot;@backwards\n&amp;quot;;
+$backwards = reverse qw/ yabba dabba doo /;
+print &amp;quot;$backwards\n&amp;quot;;
+
+== result ==
+doo dabba yadda
+oodabbadabbay
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;일반적인 경우 아래와 같이 생각하면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;$fred = something; # 스칼라
+@pebbles = something; # 리스트
+($wilma, $betty) = something; # 리스트
+($dino) = something # 리스트
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;마지막의 경우 스칼라라고 생각 할 수도 있지만, 리스트인 것을 주의해서 봐야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;괄호가 리스트라는 것을 명확하게 나타내고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리스트에 스칼라를 대입해도 리스트이고, 리스트 값을 대입해도 리스트이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리스트 값에 스칼라 변수를 대입하면 자동으로 리스트 값으로 변환된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;@fred = 6 * 7 # list (42)
+@barney = &amp;quot;hello&amp;quot; . &#39; &#39; . &amp;quot;world&amp;quot;;
+
+@wilma = undef # list (undef)
+@betty = (  ); # empty array
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;또한, &lt;code&gt;undef&lt;/code&gt; 값은 스칼라 갑이며 빈 리스트를 만들고 싶다면, 빈 괄호를 사용하여 만드는 것이 더 올바른 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 강제로 스칼라 값을 취하고 싶다면 &lt;code&gt;scalar&lt;/code&gt; 라는 함수를 사용하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;!/usr/bin/perl
+
+@rocks = qw( talc quartz jade obsidian );
+
+print &amp;quot;How many rocks do you have?\n&amp;quot;;
+print &amp;quot;I have &amp;quot;, @rocks, &amp;quot; rocks!\n&amp;quot;;
+print &amp;quot;I hvae &amp;quot;, scalar @rocks, &amp;quot; rocks!\n&amp;quot;;
+
+=== result ===
+How many rocks do you have?
+I have talcquartzjadeobsidian rocks!
+I hvae 4 rocks!
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;stdin&#34;&gt;&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;대표적으로 스칼라 값과 리스트 값에 따라서 동작이 달라지는 연산이 바로 &lt;code&gt;&amp;lt;STDIN&amp;gt;&lt;/code&gt;이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스칼라 값으로 &lt;code&gt;&amp;lt;STDIN&amp;gt;&lt;/code&gt; 을 입력받으면 한 단어만 입력받게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리스트 값에 &lt;code&gt;&amp;lt;STDIN&amp;gt;&lt;/code&gt; 으로 사용자 입력값을 받으면, 더 이상 남아있는 값이 없을 때까지 입력을 받는다. 모두 입력 받았다는 것을 나타내려면 CTRL + D를 누르면 모두 입력 했다는 것을 나타낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;보통 개행 문자 (\n)를 &lt;code&gt;chomp()&lt;/code&gt;를 사용하여 제거한 값을 받는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;@lines = &amp;lt;STDIN&amp;gt;;
+chomp(@lines);
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Learning-Perl-Randal-L-Schwartz/dp/1449303587&#34;&gt;Learning Perl, 7th Edition&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>LEARING PERL - 3 (문자열)</title>
       <link>https://dongwooklee96.github.io/post/2021/11/30/learing-perl-3-%EB%AC%B8%EC%9E%90%EC%97%B4.html</link>
