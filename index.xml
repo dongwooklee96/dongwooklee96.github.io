@@ -6,7 +6,125 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 09 Dec 2021 11:23:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Dec 2021 15:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PostgresSQL 번역으로 기여하는 방법</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/09/postgressql-%EB%B2%88%EC%97%AD%EC%9C%BC%EB%A1%9C-%EA%B8%B0%EC%97%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
+      <pubDate>Thu, 09 Dec 2021 15:04:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/09/postgressql-%EB%B2%88%EC%97%AD%EC%9C%BC%EB%A1%9C-%EA%B8%B0%EC%97%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
+      <description>&lt;h3 id=&#34;postgressql에-번역으로-기여하기&#34;&gt;PostgresSQL에 번역으로 기여하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/4pyc184bly5p3qi/Screen%20Shot%202021-12-09%20at%203.38.16%20PM%20copy.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.postgresql.org/developer/coding/&#34;&gt;PostgresSQL - Develoer&lt;/a&gt; 페이지에서 정보를 확인하다가, 번역이라는 섹션을 보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;번역이라면, 충분히 기여할 수 있고 또한 개발처럼 부담이 많이 되는 것도 아니라서 개발 프로세스 및 메일링 리스트로 대화를 하는데 많은 도움이 될 것 같다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 기능을 파악하는데 많은 도움이 될 것이다. 문서화, 번역, 테스트 코드는 처음 관심 있는 오픈 소스에 기여하기 위한 좋은 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 주변 개발자들이나, 오픈 소스에 기여하고 싶은 분들께 처음 시도를 해보면 좋을 것 같은 마음에 정리를 해보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;한국어-번역-상황&#34;&gt;한국어 번역 상황&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/oiq1fpw8cu0vdrr/Screen%20Shot%202021-12-09%20at%203.47.30%20PM%20copy.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;해당 사이트 (&lt;a href=&#34;https://babel.postgresql.org/&#34;&gt;https://babel.postgresql.org/&lt;/a&gt;)에 들어가보면 14 버전을 기준으로 번역이 완료된 부분과 아직 완료되지 않은 부분을 테이블 형태로 보여준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;많이 번역된 모듈도 있지만, 거의 번역되지 않은 모듈도 존재하였다. &lt;code&gt;PostgresSQL&lt;/code&gt;은 꾸준하게 개발되므로, 계속 번역할 곳이 생길 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/6f21gls1j1vpbjw/Screen%20Shot%202021-12-09%20at%203.53.49%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;또한 해당 사이트에 접속하면 번역된 파일이 언제 머지되었는지, 시황을 확인할 수 있다. 커밋된 메시지를 확인해보니까 서두에 번역된 언어 로케일을 적고 나서, 그 뒤에 메시지를 적는 것 같았다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/sezodbt8nxsky4m/Screen%20Shot%202021-12-09%20at%204.02.53%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;또한 한국어로 작성된 패치 파일도 확인하였다. 커밋 메시지 중에 번역팀 정보가 있어 만약 번역을 한다면 이 팀에게 연락을 해보는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;번역 진행 사항은 메일링 리스트로 관리되어지고 있다. 따라서, 번역을 진행하기 전에 진행하고 싶다는 의사를 &lt;a href=&#34;https://www.postgresql.org/list/pgsql-translators/&#34;&gt;pgsql - translators&lt;/a&gt; 로 보내보는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;번역을-진행하는-법&#34;&gt;번역을 진행하는 법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/xl2nm4hk09nl6gx/Screen%20Shot%202021-12-09%20at%205.49.45%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://wiki.postgresql.org/wiki/NLS&#34;&gt;https://wiki.postgresql.org/wiki/NLS&lt;/a&gt; 에서 번역을 하는 방법에 대해서 알려주고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;번역은 &lt;code&gt;GNU&lt;/code&gt;에서 만든 도구인 &lt;a href=&#34;https://www.gnu.org/software/gettext/manual/gettext.html&#34;&gt;GNU Gettext - 메뉴얼&lt;/a&gt; 을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;번역-프로세스&#34;&gt;번역 프로세스&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://babel.postgresql.org/&#34;&gt;번역 현황판&lt;/a&gt;에 가서, PO 파일을 다운로드 받아라 그리고 나서, 그 파일에다가 번역을 하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;새로운 번역을 시작하려면 표 맨 왼쪽에 있는 모듈 (카탈로그) 이름 중에 번역하고 싶은 것을 클릭하여서 &lt;code&gt;.POT&lt;/code&gt; 파일을 다운로드 한다. 헤더 부분의 모든 필드를 채우고 나면, 퍼지 플래그를 지워준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/kkkspu2zehyalcv/Screen%20Shot%202021-12-09%20at%206.22.25%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;VIM&lt;/code&gt; 플러그인에서 오류나는 부분을 자동으로 알려준다. 따라서 이러한 부분을 모두 채우면 다음과 같고, 아까 검증하는 명령어를 터미널에 입력하면 아래와 같이 번역된 숫자와 번역되지 않은 숫자를 알려준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/2f62jigczemeem3/Screen%20Shot%202021-12-09%20at%206.30.09%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/3z6triu9si3jqr4/Screen%20Shot%202021-12-09%20at%206.30.23%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;편집을 마치고 나서 파일에 오류가 있는지를 확인한다. 오류를 확인하는 방법은 다음과 같다. 터미널에 &lt;code&gt;msgfmt -o /dev/null -v -c yourfile.po&lt;/code&gt; 명령어를 실행한다. 또는 &lt;code&gt;PostgresSQL&lt;/code&gt; 소스코드에 파일을 복사한 후에, &lt;code&gt;gmake maintainer-check-po&lt;/code&gt; 명령어를 입력한다. 만약 이러한 확인 작업을 하지 않으면 사용자가 프로그램을 사용하는 도중에 버그가 발생할 수 있으므로 꼭 확인을 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;확인까지 문제 없이 모두 마쳤다면, 결과물을 &lt;a href=&#34;https://redmine.postgresql.org/projects/pgtranslation&#34;&gt;패치 - 트래커&lt;/a&gt;에 첨부하여 작업을 했다는 것을 알린다. 파일을 첨부할 때 패치파일을 보내는 것이 아니라, 그냥 번역한 파일 그대로 보내면 된다. 오히려 간편하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;파일은 이름을 변경하지 말고, 다운로드 받은 당시의 파일 이름 그대로 사용하면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;마지막으로 메인테이너가 소스코드에 병합 시켜주면, 번역한 파일이 반영된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;유용한-도구&#34;&gt;유용한 도구&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;텍스트 편집기를 사용해도 되지만, 전용 편집기를 사용하면 더욱 편리하게 작성할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://poedit.net/&#34;&gt;poedit&lt;/a&gt; 이라고 하는 편집기다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;이전에-기여한-사람에게-연락하기&#34;&gt;이전에 기여한 사람에게 연락하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;해당 파일을 작업하기 전에 파일에 나와있는 마지막으로 수정한 팀이나 번역가에게 연락을 해야한다. 왜냐하면 중복해서 작업을 하는 불상사를 피하기 위해서이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://babel.postgresql.org/&#34;&gt;postgres - babel&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://git.postgresql.org/gitweb/?p=pgtranslation/messages.git;a=summary&#34;&gt;pgtranslation - gitlog&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://wiki.postgresql.org/wiki/NLS&#34;&gt;postgres - Wiki (NLS)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>버클리 대학의 데이터베이스 강의를 수강신청하였다</title>
       <link>https://dongwooklee96.github.io/post/2021/12/09/%EB%B2%84%ED%81%B4%EB%A6%AC-%EB%8C%80%ED%95%99%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B0%95%EC%9D%98%EB%A5%BC-%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD%ED%95%98%EC%98%80%EB%8B%A4.html</link>
@@ -581,6 +699,49 @@ from mysql.innodb_index_stats
 &lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>스프링에서 @RequestMapping의 params 속성을 플라스크에서도 사용할 수 있을까?</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/02/%EC%8A%A4%ED%94%84%EB%A7%81%EC%97%90%EC%84%9C-requestmapping%EC%9D%98-params-%EC%86%8D%EC%84%B1%EC%9D%84-%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC%EC%97%90%EC%84%9C%EB%8F%84-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C.html</link>
+      <pubDate>Thu, 02 Dec 2021 15:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/02/%EC%8A%A4%ED%94%84%EB%A7%81%EC%97%90%EC%84%9C-requestmapping%EC%9D%98-params-%EC%86%8D%EC%84%B1%EC%9D%84-%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC%EC%97%90%EC%84%9C%EB%8F%84-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C.html</guid>
+      <description>&lt;h3 id=&#34;스프링에서는-url-분기를-params를-통해서-가능하다&#34;&gt;스프링에서는 URL 분기를 params를 통해서 가능하다.&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;스프링에서는 아래와 같은 방법으로 URL을 컨트롤러에 맵핑 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;// /user?actions=migration 일 경우 호출됨
+@RequestMapping(value=&amp;quot;/user&amp;quot;, params=&amp;quot;actions=migration&amp;quot;)
+
+// not equal도 가능
+@RequestMapping(value=&amp;quot;/user&amp;quot;, params=&amp;quot;actions!=migration&amp;quot;)
+
+// 값에 상관없이 파라미터에 actions 이 있을 경우 호출됨
+@RequestMapping(value=&amp;quot;/user&amp;quot;, parmas=&amp;quot;actions&amp;quot;)
+
+// 파라미터에 actions 이 없어야 호출됨
+@RequestMapping(value=&amp;quot;/user&amp;quot;, params=&amp;quot;!actions&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이 경우 앞의 동작을 RESTFUL 하기 만들고, 뒤에 명확한 동작을 넣을 수 있어서, URI 설계하기가 훨씬 수월하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 플라스크에서도 이 기능을 지원하는지에 대해서 찾아보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://joont92.github.io/spring/@RequestMapping/&#34;&gt;@RequestMapping&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://dzone.com/articles/using-the-spring-requestmapping-annotation&#34;&gt;Using the Spring @RequestMapping Annotation&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
