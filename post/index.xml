@@ -6,7 +6,32 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 08 Dec 2021 19:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Dec 2021 10:19:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DBMS 랭킹 사이트</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/09/dbms-%EB%9E%AD%ED%82%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</link>
+      <pubDate>Thu, 09 Dec 2021 10:19:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/09/dbms-%EB%9E%AD%ED%82%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/hjfkvkme0fxlt4v/Screen%20Shot%202021-12-09%20at%2010.18.58%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;데이터베이스 랭킹을 매겨주는 사이트를 발견하였다. &lt;a href=&#34;https://db-engines.com/en/&#34;&gt;db-engines&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;점수에 따른 랭킹을 보여주고, 트랜드 또한 보여준다. 그리고 DBMS 종류마다 분류할 수 있어서 나중에 특정 DBMS를 선택할 때 도움이 될 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;한국에서 만든 큐브리드나, 알티베이스도 랭크되어있어서 신기했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://db-engines.com/en/&#34;&gt;db-engines&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>LEARING PERL - 4번째 학습</title>
       <link>https://dongwooklee96.github.io/post/2021/12/08/learing-perl-4%EB%B2%88%EC%A7%B8-%ED%95%99%EC%8A%B5.html</link>
