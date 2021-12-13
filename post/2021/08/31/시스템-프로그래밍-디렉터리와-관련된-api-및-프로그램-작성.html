@@ -120,7 +120,7 @@ struct dirent *readdir(DIR *d);
 <p>더 읽을 엔트리가 없거나 읽어 들이는데 실패하면 NULL을 반환한다.</p>
 </li>
 <li>
-<p><code>struct dirent</code>의 내용은 운영체제에 따라서 다른데, 리눅스에는 적어도 엔트리의 이름에 해당하는 <code>char *d_name</code> 이 있다. <code>d_name</code>은 &lsquo;\0&rsquo;을 마지막에 담고 있는 문자열이라서 <code>printf(), fputs()</code>에서 그대로 사용할 수 있다.</p>
+<p><code>struct dirent</code>의 내용은 운영체제에 따라서 다른데, 리눅스에는 적어도 엔트리의 이름에 해당하는 <code>char *d_name</code> 이 있다. <code>d_name</code>은 &lsquo;\0'을 마지막에 담고 있는 문자열이라서 <code>printf(), fputs()</code>에서 그대로 사용할 수 있다.</p>
 </li>
 <li>
 <p><code>readdir()</code>가 반환한 포인터는 다시 호출했을 때 덮어 쓰이므로 주의해야 한다.</p>
@@ -189,10 +189,10 @@ static void do_ls(char *path) {
 <p>지금까지는 디렉터리 밑에 있는 파일에 접근하는 방법을 설명하였지만, 디렉터리 안에는 또 다른 디렉터리가 있을 수도 있는데, 그 안까지 접근하고 싶은 경우에는, 즉 재귀적으로 접근하고 싶을 경우도 있을 것이다.</p>
 </li>
 <li>
-<p>즉 재귀적으로 접근하고 싶은 경우가 있을 텐데. 이러한 조작을 &lsquo;디렉터리 순회&rsquo;라고 한다.</p>
+<p>즉 재귀적으로 접근하고 싶은 경우가 있을 텐데. 이러한 조작을 &lsquo;디렉터리 순회'라고 한다.</p>
 </li>
 <li>
-<p>기본적으로 순회할 때도 <code>openddir()</code>, <code>readdir()</code>, <code>closedir()</code> 의 세 가지를 사용해서 꾸준히 디렉터리를 타고 들어가면 된다. 단 이때 주의해야할 것은 &lsquo;.&rsquo;, &lsquo;..&lsquo;의 존재이다.</p>
+<p>기본적으로 순회할 때도 <code>openddir()</code>, <code>readdir()</code>, <code>closedir()</code> 의 세 가지를 사용해서 꾸준히 디렉터리를 타고 들어가면 된다. 단 이때 주의해야할 것은 &lsquo;.', &lsquo;..&lsquo;의 존재이다.</p>
 </li>
 </ul>
 <pre><code>void
@@ -212,7 +212,7 @@ traverse(path) {
 <p>위의 코드의 문제는 &lsquo;.&lsquo;를 배제하지 않으므로 무한 재귀에 빠지게 된다. 또한 &lsquo;..&rsquo; 를 배제하지 않았으므로 결국 루트 디렉터릮자ㅣ 거슬러 올라와 파일 시스템 전체를 순회하게 된다.</p>
 </li>
 <li>
-<p>이 문제를 해결하려면 명시적으로 &lsquo;.&rsquo;, &lsquo;..&lsquo;를 제외해야 한다.</p>
+<p>이 문제를 해결하려면 명시적으로 &lsquo;.', &lsquo;..&lsquo;를 제외해야 한다.</p>
 </li>
 <li>
 <p>두 번재 문제로는 심볼릭 링크를 고려하지 않았다. 예를 들면 처리 중인 디렉터리 안에 루트 디렉터리를 가리키는 심볼릭 링크가 있다면 루트 디렉터리로 처리가 이동하고, 그 안에서 또 루트 디렉터리를 가리키는 심볼릭 링크가 있으면 무한 루프에 들어가게 된다.</p>
@@ -265,7 +265,7 @@ path로 지정한 경로에 이미 파일이나 디렉터리가 존재한다.</l
 </ul>
 <p><img src="https://dl.dropbox.com/s/qvlrqg02onl9v34/umask.png" alt=""></p>
 <ul>
-<li>open()이나 mkdir()에서 실제로 사용하는 권한은 C 언어로 표현하면 &lsquo;mode &amp; ~umask&rsquo;로 계산된다.</li>
+<li>open()이나 mkdir()에서 실제로 사용하는 권한은 C 언어로 표현하면 &lsquo;mode &amp; ~umask'로 계산된다.</li>
 </ul>
 <pre><code>#include &lt;sys/types.h&gt;
 #include &lt;sys/stat.h&gt;
