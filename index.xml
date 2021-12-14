@@ -6,7 +6,117 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 14 Dec 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Dec 2021 21:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LEARING PERL - 5번째 학습 (서브 루틴)</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/14/learing-perl-5%EB%B2%88%EC%A7%B8-%ED%95%99%EC%8A%B5-%EC%84%9C%EB%B8%8C-%EB%A3%A8%ED%8B%B4.html</link>
+      <pubDate>Tue, 14 Dec 2021 21:20:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/14/learing-perl-5%EB%B2%88%EC%A7%B8-%ED%95%99%EC%8A%B5-%EC%84%9C%EB%B8%8C-%EB%A3%A8%ED%8B%B4.html</guid>
+      <description>&lt;h3 id=&#34;서브-루틴&#34;&gt;서브 루틴&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서브 루틴의 이름은, 펄의 또 다른 식별자이다. 그리고 때때로 앞에 &lt;code&gt;&amp;amp;&lt;/code&gt; 기호가 붙지만, 어떨때는 생략해도 되고 어떨때는 생략하면 안된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;펄에서 서브루틴 이름은 별도의 네임 스페이스에 존재하기 때문에 같은 이름의 스칼라 변수가 같은 프로그램 내에 존재할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;뭐 일반적으로 그럴 일은 별로 없겠지만 말이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서브-루틴을-선언하는-방법&#34;&gt;서브 루틴을 선언하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sub&lt;/code&gt; 라는 키워드를 사용하고 &lt;code&gt;{  }&lt;/code&gt; 사이에 함수의 내용을 넣으면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sub marine {
+  $n += 1;
+  print &amp;quot;hello, sailor number $n\n&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;만약 중복되는 이름의 서브루틴이 있을 경우 뒤에오는 서브 루틴이 앞의 것을 대체한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 펄의 서브루틴에서는 전역변수에 접근이 가능하다. 이 점은 많은 버그가 일어날 것 같다. 심지어 책에서는 이러한 점이 펄 사용자로 하여금 성난 군중을 만들어서 펄 개발팀을 도망가게 만들었다고 표현했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;곧 서브루틴안에서만 사용가능한 변수를 배우게 될 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서브-루틴을-호출하는-방법&#34;&gt;서브 루틴을 호출하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;서브 루틴을 호출하는 방법은 &lt;code&gt;&amp;amp;&lt;/code&gt;를 이용해서 호출할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;amp;marine;
+&amp;amp;marine;
+&amp;amp;marine;
+&amp;amp;marnie;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이는 위에서 선언한 서브루틴인 &lt;code&gt;marine&lt;/code&gt; 서브루틴을 호출한 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서브루틴의-반환값&#34;&gt;서브루틴의 반환값&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서브루틴을 호출할 때는 그 자체로 표현식으로 처리된다. 반환된 값을 사용하던지 안하던지는 상관이 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 서브 루틴값은 반환 값을 지닌다. 하지만 그 모두가 의미있는 값을 반환하는 것은 아니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반환 값을 가지는 서브루틴이나 가지지 않는 서브루틴 사이의 차이점은 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;펄에서는 따로, &lt;code&gt;return&lt;/code&gt; 와 같은 키워드를 사용하지 않는다. 마지막에 위치한 값이 자동으로 반환값이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sub sum_of_fred_and_barney {
+  print &amp;quot;hey, you called me sum_of_fred_and_barney subroutine!&amp;quot;;
+  $fred + $barney;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 예제에서는 자동으로 &lt;code&gt;$fred+ $barney&lt;/code&gt;가 리턴값이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 서브루틴의 마지막에 값이 아닌 &lt;code&gt;print&lt;/code&gt;가 오면 그냥 정상적으로 출력되었다는 뜻으로 &lt;code&gt;1&lt;/code&gt; 값이 반환된다. 이러한 동작이 원한것이 아니라면 주의를 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sub sum_of_fred_and_barney {
+  print &amp;quot;hey, you called me sum_of_fred_and_barney subroutine!&amp;quot;;
+  $fred + $barney;
+  print &amp;quot;hey, I&#39;m returning a value now\n&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그렇다면, 위의 예제에서와 같이 중간의 계산 값은 어떻게 되는가? 펄은 이러한 값들은 사용하지 않고 그냥 버려버린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 펄에서 경고를 표시해주도록 설정했다면, 이러한 연산이 있다고 알려줄 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 마지막 예제는 큰 값을 리턴하는 서브 루틴이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sub larger_of_fred_or_barney {
+  if ($fred &amp;gt; $barney) {
+    $fred;
+  } else {
+    $barney;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Learning-Perl-Randal-L-Schwartz/dp/1449303587&#34;&gt;Learning Perl, 7th Edition&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/12/14/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
@@ -2281,13 +2391,13 @@ def allocate_endpoint():
 &lt;p&gt;서비스 계층을 추가하면 다음과 같은 장점이 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;플라크스 API 엔드포인트가 아주 얇아지고 작성하기 쉬워진다. 플라스크 API 엔드 포인트는 오직 JSON 파싱이나 정상 경로나 비정상 경로에 따른 올바른 HTTP 코드 반환등의 &amp;lsquo;웹 기능&#39;만 수행한다.&lt;/p&gt;
+&lt;p&gt;플라크스 API 엔드포인트가 아주 얇아지고 작성하기 쉬워진다. 플라스크 API 엔드 포인트는 오직 JSON 파싱이나 정상 경로나 비정상 경로에 따른 올바른 HTTP 코드 반환등의 &amp;lsquo;웹 기능&amp;rsquo;만 수행한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;도메인에 대한 명확한 API를 정의하였다. 이런 API는 자신이 API인지 CLI인지 심지어 테스트인지에 관계없이 어댑터가 도메인 모델 클래스를 몰라도 사용할 수 있는 유스케이스나 진입점 집합이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;서비스 계층을 사용하면 테스트를 &amp;lsquo;높은 기어비&#39;로 작성할 수 있고 도메인 모델을 적합한 형태로 마음껏 리팩터링할 수 있다. 서비스 계층을 활용하면 같은 유스케이스를 제공할 수 있는 한 이미 존재하는 수 많은 테스트를 재작성하지 않고도 새로운 설계를 테스트할 수 있다.&lt;/p&gt;
+&lt;p&gt;서비스 계층을 사용하면 테스트를 &amp;lsquo;높은 기어비&amp;rsquo;로 작성할 수 있고 도메인 모델을 적합한 형태로 마음껏 리팩터링할 수 있다. 서비스 계층을 활용하면 같은 유스케이스를 제공할 수 있는 한 이미 존재하는 수 많은 테스트를 재작성하지 않고도 새로운 설계를 테스트할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;작성한 테스트의 피라미드 구조도 좋아보인다. 테스트 상당 부분은 빠른 단위 테스트이며 E2E나 통합 테스트는 최소화 된다.&lt;/p&gt;
@@ -2966,7 +3076,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;그 외 데이터 전처리에서 자주 쓰이는 기법으로 &amp;lsquo;이산화(discretization)&amp;lsquo;이 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이산화는 &amp;lsquo;연령&#39;과 같은 숫자 값 데이터를 &amp;lsquo;10대&amp;rsquo;, &amp;lsquo;20대&#39;와 같이 레이블로 분류하는 기법을 말한다.&lt;/p&gt;
+&lt;p&gt;이산화는 &amp;lsquo;연령&amp;rsquo;과 같은 숫자 값 데이터를 &amp;lsquo;10대&amp;rsquo;, &amp;lsquo;20대&amp;rsquo;와 같이 레이블로 분류하는 기법을 말한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;그 이외에도 다양한 데이터 전처리 기법이 있다. 예를 들면 기업의 연간 매출처럼 기업의 규모에 따라서 값이 크게 달라지는 숫자 값은 그 로그값을 취해서 사용한다.&lt;/p&gt;
@@ -2975,7 +3085,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;또 변환의 주기성이 알려진 숫자 함수라면 삼각함수가 유용하게 쓰이기도 한다. 경우에 따라서는 여러 개의 입력 데이터를 조합해 만든 새로운 입력 데이터를 이용하여 정확도가 뛰어난 모델을 만들기도 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이러한 고도의 데이터 전처리를 &amp;lsquo;특징값 엔지니어링&#39;이라고 하며 데이터 사이언티스트의 담당 업무 중에서도 가장 난도가 높은 업무로 취급이 된다.&lt;/p&gt;
+&lt;p&gt;이러한 고도의 데이터 전처리를 &amp;lsquo;특징값 엔지니어링&amp;rsquo;이라고 하며 데이터 사이언티스트의 담당 업무 중에서도 가장 난도가 높은 업무로 취급이 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -3107,7 +3217,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;오분류되었던 데이터로 분류 모델을 만들어서 정확도를 향상시키는 기법이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;간단히 설명하면, 분류의 여러 개의 결정 트리를 사용하는 기법인 &amp;lsquo;앙상블&#39;과 &amp;lsquo;배깅&amp;rsquo;, &amp;lsquo;부스팅&#39;을 결합한 알고리즘이다.&lt;/p&gt;
+&lt;p&gt;간단히 설명하면, 분류의 여러 개의 결정 트리를 사용하는 기법인 &amp;lsquo;앙상블&amp;rsquo;과 &amp;lsquo;배깅&amp;rsquo;, &amp;lsquo;부스팅&amp;rsquo;을 결합한 알고리즘이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;배깅은 서로 무관한 약분류기를 병렬로 만들어 그 분류 결과를 다수결로 최종 결과를 결정하는 기법이다.&lt;/p&gt;
@@ -3128,7 +3238,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;모델의 구조가 수학적 함수로 결정되어 있고, 학습은 함수의 파라미터를 최적화하는 과정에 해당 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;파라미터를 최적화하는 구체적인 방법은 모델의 정확도가 높아질 수록 함수 값이 작아지는 (모두 정답을 맞히면 0이되는) 함수인 &amp;lsquo;손실 함수&#39;를 정의하고 수학적 방법을 통해 이 함수의 함수 값이 최소가 되는 파라미터를 구한다.&lt;/p&gt;
+&lt;p&gt;파라미터를 최적화하는 구체적인 방법은 모델의 정확도가 높아질 수록 함수 값이 작아지는 (모두 정답을 맞히면 0이되는) 함수인 &amp;lsquo;손실 함수&amp;rsquo;를 정의하고 수학적 방법을 통해 이 함수의 함수 값이 최소가 되는 파라미터를 구한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;결정-트리-타입에-대한-설명&#34;&gt;결정 트리 타입에 대한 설명&lt;/h3&gt;
@@ -3155,7 +3265,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;나이브 베이즈(Naive Nayes), K-최근접 이웃 (K-Nearest Neighbor) 처럼 결정 트리 타입도, 손실 함수 타입도 아닌 분류 알고리즘이 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;하지만 표 형태를 가지는 &amp;lsquo;구조화 데이터&#39;를 대상으로 한다면, 위에서 설명한 알고리즘으로 대부분 처리할 수 있다.&lt;/p&gt;
+&lt;p&gt;하지만 표 형태를 가지는 &amp;lsquo;구조화 데이터&amp;rsquo;를 대상으로 한다면, 위에서 설명한 알고리즘으로 대부분 처리할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -3198,14 +3308,14 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;머신러닝은 모델을 구축하고 입력을 모델에 넣으면 출력으로 원하는 결과가 나온다. 마치 블랙박스처럼 특정한 입력을 넣고 모델을 통해서 원하는 결과를 반환하는 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;머신러닝의 또 다른 특징은 &amp;lsquo;학습&#39;이라는 수단을 통해서 모델을 만든다는 점이다. 학습의 엄밀한 정의는 &amp;lsquo;학습 데이터를 사용해서 바람직한 행동을 하는 모델을 만드는 일이다.&amp;rsquo;&lt;/p&gt;
+&lt;p&gt;머신러닝의 또 다른 특징은 &amp;lsquo;학습&amp;rsquo;이라는 수단을 통해서 모델을 만든다는 점이다. 학습의 엄밀한 정의는 &amp;lsquo;학습 데이터를 사용해서 바람직한 행동을 하는 모델을 만드는 일이다.&amp;rsquo;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;머신러닝의-세-가지-학습-방식&#34;&gt;머신러닝의 세 가지 학습 방식&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;학습 방식을 보면 크게 &amp;lsquo;지도 학습&amp;rsquo;, &amp;lsquo;비지도 학습&amp;rsquo;, 그리고 &amp;lsquo;강화 학습&#39;의 세 가지가 있다.&lt;/p&gt;
+&lt;p&gt;학습 방식을 보면 크게 &amp;lsquo;지도 학습&amp;rsquo;, &amp;lsquo;비지도 학습&amp;rsquo;, 그리고 &amp;lsquo;강화 학습&amp;rsquo;의 세 가지가 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;우선 지도 학습에는 분류, 회귀, 시계열 분석이 있고 보통 정답을 알고 있는 경우 사용한다.&lt;/p&gt;
@@ -3220,16 +3330,16 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;h4 id=&#34;지도-학습&#34;&gt;지도 학습&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;지도 학습은 앞에서 말했듯이 일반적으로 정답 데이터를 가진 상태에서 모델을 최적화 하는 &amp;lsquo;학습 단계&#39;와 정답을 모르는 상태에서 이미 학습된 모델의 출력을 예측 결과로 삼는 &amp;lsquo;예측 단계&#39;가 있다.&lt;/p&gt;
+&lt;p&gt;지도 학습은 앞에서 말했듯이 일반적으로 정답 데이터를 가진 상태에서 모델을 최적화 하는 &amp;lsquo;학습 단계&amp;rsquo;와 정답을 모르는 상태에서 이미 학습된 모델의 출력을 예측 결과로 삼는 &amp;lsquo;예측 단계&amp;rsquo;가 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이 중 &amp;lsquo;예측 단계&#39;에서는 학습 단계에서는 없었던 처음 보는 입력 데이터가 등장하고 처음보는 데이터에 대해서 적절한 예측 결과를 출력하는 것이 모델의 목적이다.&lt;/p&gt;
+&lt;p&gt;이 중 &amp;lsquo;예측 단계&amp;rsquo;에서는 학습 단계에서는 없었던 처음 보는 입력 데이터가 등장하고 처음보는 데이터에 대해서 적절한 예측 결과를 출력하는 것이 모델의 목적이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;지도 학습의 가장 큰 특징은 정답 데이터가 있다는 것이다. AI라고 한다면 웬지 스스로 정답을 도출할 것 같지만, 지도 학습은 학습 단계에서 정답 데이터를 반드시 함께 제공해야 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;정답을 사람이 직접 만들어야하는 경우에는 &amp;lsquo;정답 데이터를 만드는 작업&#39;에 큰 수고가 들지만 그 만큼 중요성도 높은 작업이다.&lt;/p&gt;
+&lt;p&gt;정답을 사람이 직접 만들어야하는 경우에는 &amp;lsquo;정답 데이터를 만드는 작업&amp;rsquo;에 큰 수고가 들지만 그 만큼 중요성도 높은 작업이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;이 점은 실제 업무에 지도 학습을 적용하려고 할 떄 가장 중요하게 고려해야할 사항이다.&lt;/p&gt;
@@ -3259,30 +3369,30 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;h4 id=&#34;강화-학습&#34;&gt;강화 학습&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;강화 학습은 지금까지 설명한 &amp;lsquo;지도 학습&amp;rsquo;, &amp;lsquo;비지도 학습&#39;과는 많은 점에서 차이가 있다.&lt;/p&gt;
+&lt;p&gt;강화 학습은 지금까지 설명한 &amp;lsquo;지도 학습&amp;rsquo;, &amp;lsquo;비지도 학습&amp;rsquo;과는 많은 점에서 차이가 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;에이전트(모델)와 환경의 상호작용을 전제로 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;모델은 관측을 통해서, &amp;lsquo;조작&#39;의 결과로 환경이 어떻게 변화했는지 알 수 있다.&lt;/p&gt;
+&lt;p&gt;모델은 관측을 통해서, &amp;lsquo;조작&amp;rsquo;의 결과로 환경이 어떻게 변화했는지 알 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&amp;lsquo;관측&#39;과는 별개로 비정기적으로 보상이 주어지는데, 이 보상이 정답에 해당한다. 그러나 정답은 &amp;lsquo;조작&#39;으로부터 어느 정도 시간이 흐른 후에 알 수 있다.&lt;/p&gt;
+&lt;p&gt;&amp;lsquo;관측&amp;rsquo;과는 별개로 비정기적으로 보상이 주어지는데, 이 보상이 정답에 해당한다. 그러나 정답은 &amp;lsquo;조작&amp;rsquo;으로부터 어느 정도 시간이 흐른 후에 알 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;강화 학습은 딥러닝 알고리즘과 함께 &amp;lsquo;게임을 플레이하는 프로그램&amp;rsquo;, &amp;lsquo;로봇 제어&amp;rsquo;, &amp;lsquo;바둑 AI&#39;등 다양한 분야에서 이용된다.&lt;/p&gt;
+&lt;p&gt;강화 학습은 딥러닝 알고리즘과 함께 &amp;lsquo;게임을 플레이하는 프로그램&amp;rsquo;, &amp;lsquo;로봇 제어&amp;rsquo;, &amp;lsquo;바둑 AI&amp;rsquo;등 다양한 분야에서 이용된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;지도-학습에-속하는-처리-패턴&#34;&gt;지도 학습에 속하는 처리 패턴&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
-&lt;li&gt;지도 학습은 머신 러닝에서 가장 널리 쓰이는 학습 패턴이다. 예측 하려는 값이나 입력 값의 종류에 따라서 &amp;lsquo;분류&amp;rsquo;, &amp;lsquo;회귀&amp;rsquo;, &amp;lsquo;시계열 분석&#39;의 세가지 처리 패턴이 있다.&lt;/li&gt;
+&lt;li&gt;지도 학습은 머신 러닝에서 가장 널리 쓰이는 학습 패턴이다. 예측 하려는 값이나 입력 값의 종류에 따라서 &amp;lsquo;분류&amp;rsquo;, &amp;lsquo;회귀&amp;rsquo;, &amp;lsquo;시계열 분석&amp;rsquo;의 세가지 처리 패턴이 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;분류&#34;&gt;분류&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;지도 학습에서 가장 널리 쓰이는 패턴인 분류는 &amp;lsquo;어떤 그룹에 속하는지&#39;가 예측 대상이라는 점이다.&lt;/p&gt;
+&lt;p&gt;지도 학습에서 가장 널리 쓰이는 패턴인 분류는 &amp;lsquo;어떤 그룹에 속하는지&amp;rsquo;가 예측 대상이라는 점이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;어떤 모델이 존재하고 이 모델은 고객의 정보를 입력 받고 이 고객이 계약을 성공할 것인지 아니면, 실패할 것인지를 예측 한다고 했을 때 정보가 입력된 고객은 AI의 판단에 의해서 &amp;lsquo;계약 성공&amp;rsquo;, 또는 &amp;lsquo;계약 실패&amp;rsquo; 두 그룹중에 하나로 분류된다.&lt;/p&gt;
@@ -3291,7 +3401,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;AI가 사람대신에 판단을 수행해주기 때문에 실무에서 가장 많이 쓰이는 패턴이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;위의 예제는 &amp;lsquo;계약 성공&amp;rsquo; 및 &amp;lsquo;계약 실패&#39;로 그룹이 두 가지 뿐이지만, 분류 그룹이 세 개 이상인 경우도 있으며 이런 경우를 &amp;lsquo;다중 분류&amp;rsquo; 라고 한다.&lt;/p&gt;
+&lt;p&gt;위의 예제는 &amp;lsquo;계약 성공&amp;rsquo; 및 &amp;lsquo;계약 실패&amp;rsquo;로 그룹이 두 가지 뿐이지만, 분류 그룹이 세 개 이상인 경우도 있으며 이런 경우를 &amp;lsquo;다중 분류&amp;rsquo; 라고 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;다중 분류는 딥러닝이 발전하면서 이미지나 텍스트를 대상으로 많이 사용된다. 일반적으로 머신러닝에서 사용하는 분류는 이진 분류이다.&lt;/p&gt;
@@ -3303,7 +3413,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;회귀의 입력 부분은 분류와 같다. 예를 들어서, 날씨에 따라서 자전거 이용수를 예측한다고 했을 떄 입력 값으로는 계절, 년, 요일, 날짜, 습도, 풍속과 같은 데이터가 들어갈 것이고 출력으로는 자전거 이용 숫자가 나올 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이렇게 수치를 예측하는 모델이 바로 &amp;lsquo;회귀&#39;이다. 자전거 이용 수를 예측한다면 담당자의 수를 결정하거나 자전거가 부족할 경우 예비 자전거를 준비하는 등의 조치를 취할 수 있다.&lt;/p&gt;
+&lt;p&gt;이렇게 수치를 예측하는 모델이 바로 &amp;lsquo;회귀&amp;rsquo;이다. 자전거 이용 수를 예측한다면 담당자의 수를 결정하거나 자전거가 부족할 경우 예비 자전거를 준비하는 등의 조치를 취할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;이 사례와 마찬가지로, 케이크 가계의 &amp;lsquo;케이크 판매수&amp;rsquo;, &amp;lsquo;테마 파크의 입장객 수&amp;rsquo; 처럼 &lt;strong&gt;수치를 정확하게 예측하여 업무적인 효과를 볼 수 있는 다양한 유스케이스&lt;/strong&gt;가 있다.&lt;/p&gt;
@@ -3315,12 +3425,12 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;/ul&gt;
 &lt;h3 id=&#34;비지도-학습에-속하는-처리-패턴&#34;&gt;비지도 학습에 속하는 처리 패턴&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;비지도 학습에 속하는 &amp;lsquo;연관 분석&amp;rsquo;, &amp;lsquo;클러스터링&amp;rsquo;, &amp;lsquo;차원 축소&#39;의 세 가지 처리 패턴에 대해서 설명할 것이다.&lt;/li&gt;
+&lt;li&gt;비지도 학습에 속하는 &amp;lsquo;연관 분석&amp;rsquo;, &amp;lsquo;클러스터링&amp;rsquo;, &amp;lsquo;차원 축소&amp;rsquo;의 세 가지 처리 패턴에 대해서 설명할 것이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;연관-분석&#34;&gt;연관 분석&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;연관 분석은 &amp;lsquo;장바구니 분석&#39;이라고도 한다. 고객이 여러 가지 상품을 동시에 구입 가능한 상황에서 상품의 어떤 조합이 연관 관계가 큰지 수학적으로 분석하는 기법이다.&lt;/p&gt;
+&lt;p&gt;연관 분석은 &amp;lsquo;장바구니 분석&amp;rsquo;이라고도 한다. 고객이 여러 가지 상품을 동시에 구입 가능한 상황에서 상품의 어떤 조합이 연관 관계가 큰지 수학적으로 분석하는 기법이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;연관 분석은 그 결과에 따라서 어떤 대책을 실행해야 분석을 수행한 의미가 있다. 대책으로는 고객의 편의를 위해서 연관되가 높은 상품을 가까히 배치하기&lt;/p&gt;
@@ -3372,7 +3482,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;최근에 AI가 유행하면서, 딥러닝이라는 용어를 자주 접했을텐데 차이를 알아보자.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이번 장에서 처리한 처리 패턴은 머신 러닝을 블랙박스로 보았을 때 외부로 드러나는 동작을 기준으로 설명한 것이다. 이들 처리 패턴에도 &amp;lsquo;알고리즘&#39;이라고 하는 실제 구현 방법이 있다.&lt;/p&gt;
+&lt;p&gt;이번 장에서 처리한 처리 패턴은 머신 러닝을 블랙박스로 보았을 때 외부로 드러나는 동작을 기준으로 설명한 것이다. 이들 처리 패턴에도 &amp;lsquo;알고리즘&amp;rsquo;이라고 하는 실제 구현 방법이 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;딥러닝은 주로 분류 처리 패턴에서 사용되는 알고리즘의 한 종류라고 보면 된다.&lt;/p&gt;
@@ -3387,19 +3497,19 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;이 노드끼리 연결되는 방식을 자유롭게 바꿀 수 있어서 새로운 종류의 모델이 계속 제안되며 독자적으로 발전할 수 있었다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;신경망 중에서도 층수가 4층 이상(중간층이 두 층 이상)인 것을 딥러닝이라고 한다. 딥러닝 모델의 노드와 노드를 잇는 화살표마다 &amp;lsquo;가중치&#39;라는 파라미터가 부여된다.&lt;/p&gt;
+&lt;p&gt;신경망 중에서도 층수가 4층 이상(중간층이 두 층 이상)인 것을 딥러닝이라고 한다. 딥러닝 모델의 노드와 노드를 잇는 화살표마다 &amp;lsquo;가중치&amp;rsquo;라는 파라미터가 부여된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;그리고 층수와 노드의 수를 늘려가면서 엄청나게 많은 수의 파라미터를 가질 수 있다. 이로 인해서, 모델의 표현력이 높아지며 기존 머신러닝 알고리즘으로 해결하기 어려웠던 이미지, 동영상, 텍스트, 음성 (비구조적 데이터)를 다룰 수 있게 되었다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;머신러닝 용어중에 &amp;lsquo;구조적 데이터&#39;와 &amp;lsquo;비구조적 데이터&#39;가 있다. 구조적 데이터는 &amp;lsquo;나이&amp;rsquo;, &amp;lsquo;직업&#39;처럼 일반적인 데이터베이스의 필드 형태로 다룰 수 있는 데이터를 말한다.&lt;/p&gt;
+&lt;p&gt;머신러닝 용어중에 &amp;lsquo;구조적 데이터&amp;rsquo;와 &amp;lsquo;비구조적 데이터&amp;rsquo;가 있다. 구조적 데이터는 &amp;lsquo;나이&amp;rsquo;, &amp;lsquo;직업&amp;rsquo;처럼 일반적인 데이터베이스의 필드 형태로 다룰 수 있는 데이터를 말한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;하지만 이미지, 동영상, 텍스트, 음성등은 일반적인 데이터베이스의 필드로는 다룰 수 없기 때문에 비구조적 데이터라고 한다. 딥러닝은 이 비구조적 데이터를 다루기에 적합하다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;비구조적 데이터를 대상으로 하는 처리 패턴은 세 개 이상의 그룹으로 분류하는 다중 분류이다. 딥러닝은 이런 &amp;lsquo;다중 분류&#39;와 유스케이스에서 특히 위력을 발휘한다.&lt;/p&gt;
+&lt;p&gt;비구조적 데이터를 대상으로 하는 처리 패턴은 세 개 이상의 그룹으로 분류하는 다중 분류이다. 딥러닝은 이런 &amp;lsquo;다중 분류&amp;rsquo;와 유스케이스에서 특히 위력을 발휘한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -6592,7 +6702,7 @@ graph[2].append((0, 5))
 &lt;p&gt;인접 리스트 방식에서는 모든 노드에 연결된 노드에 대한 정볼르 차례대로 연결하여 저장한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;인접 리스트는 &amp;lsquo;연결 리스트&#39;라는 자료구조를 이용하여 구현하는데 파이썬은 기본 리스트로 구현한다.&lt;/p&gt;
+&lt;p&gt;인접 리스트는 &amp;lsquo;연결 리스트&amp;rsquo;라는 자료구조를 이용하여 구현하는데 파이썬은 기본 리스트로 구현한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;dfs-1&#34;&gt;DFS&lt;/h3&gt;
@@ -6877,7 +6987,7 @@ loop.close() # 보통 최종 동작이다. 모든 루프의 대기열을 비우�
 &lt;p&gt;위의 함수는 가장 간단한 형태의 코루틴 선언이다. 일반적인 함수와 유사해보이지만, &lt;code&gt;async def&lt;/code&gt; 키워드로 시작한다는 점이 다르다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;함수 &lt;code&gt;f()&lt;/code&gt;의 정확한 타입은 &amp;lsquo;코루틴&#39;이 아니라 코루틴 함수이다. 파이썬에서 제네레이터 함수의 형태와 동일하다.&lt;/p&gt;
+&lt;p&gt;함수 &lt;code&gt;f()&lt;/code&gt;의 정확한 타입은 &amp;lsquo;코루틴&amp;rsquo;이 아니라 코루틴 함수이다. 파이썬에서 제네레이터 함수의 형태와 동일하다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/o0jbsojpc2s4bc6/Screen%20Shot%202021-09-06%20at%2012.45.45%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -6989,7 +7099,7 @@ async def main():
 &lt;p&gt;프로그래밍 모델 관점에서 보면, 스레딩의 여러 CPU와 공유 메모리 (스레드 간 효율적인 통신의 수단)을 사용하는 방식이 계산 위주의 작업을 가장 잘 수행할 수 있어서 계산 위주의 작업이 많은 분야에 적합하지만 다른 문제점을 발생시킬 수도 있어서 필요악이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;반면에 네트워크 프로그래밍은 &amp;lsquo;어떤 일들이 일어나기를 기다림&#39;이라는 많은 작업들로 구성되어있다. 따라서 여러 CPU에 작업을 효율적으로 분배하기 위한 운영체제와의 연계작업이 필요없다.&lt;/p&gt;
+&lt;p&gt;반면에 네트워크 프로그래밍은 &amp;lsquo;어떤 일들이 일어나기를 기다림&amp;rsquo;이라는 많은 작업들로 구성되어있다. 따라서 여러 CPU에 작업을 효율적으로 분배하기 위한 운영체제와의 연계작업이 필요없다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;또한 공유 메모리 접근 시 발생할 수 있는 경합 조건과 같은 리스크를 불러오는 선점형 멀티 태스킹도 필요없다.&lt;/p&gt;
@@ -7878,7 +7988,7 @@ struct dirent *readdir(DIR *d);
 &lt;p&gt;더 읽을 엔트리가 없거나 읽어 들이는데 실패하면 NULL을 반환한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;code&gt;struct dirent&lt;/code&gt;의 내용은 운영체제에 따라서 다른데, 리눅스에는 적어도 엔트리의 이름에 해당하는 &lt;code&gt;char *d_name&lt;/code&gt; 이 있다. &lt;code&gt;d_name&lt;/code&gt;은 &amp;lsquo;\0&#39;을 마지막에 담고 있는 문자열이라서 &lt;code&gt;printf(), fputs()&lt;/code&gt;에서 그대로 사용할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;struct dirent&lt;/code&gt;의 내용은 운영체제에 따라서 다른데, 리눅스에는 적어도 엔트리의 이름에 해당하는 &lt;code&gt;char *d_name&lt;/code&gt; 이 있다. &lt;code&gt;d_name&lt;/code&gt;은 &amp;lsquo;\0&amp;rsquo;을 마지막에 담고 있는 문자열이라서 &lt;code&gt;printf(), fputs()&lt;/code&gt;에서 그대로 사용할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;readdir()&lt;/code&gt;가 반환한 포인터는 다시 호출했을 때 덮어 쓰이므로 주의해야 한다.&lt;/p&gt;
@@ -7947,10 +8057,10 @@ static void do_ls(char *path) {
 &lt;p&gt;지금까지는 디렉터리 밑에 있는 파일에 접근하는 방법을 설명하였지만, 디렉터리 안에는 또 다른 디렉터리가 있을 수도 있는데, 그 안까지 접근하고 싶은 경우에는, 즉 재귀적으로 접근하고 싶을 경우도 있을 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;즉 재귀적으로 접근하고 싶은 경우가 있을 텐데. 이러한 조작을 &amp;lsquo;디렉터리 순회&#39;라고 한다.&lt;/p&gt;
+&lt;p&gt;즉 재귀적으로 접근하고 싶은 경우가 있을 텐데. 이러한 조작을 &amp;lsquo;디렉터리 순회&amp;rsquo;라고 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;기본적으로 순회할 때도 &lt;code&gt;openddir()&lt;/code&gt;, &lt;code&gt;readdir()&lt;/code&gt;, &lt;code&gt;closedir()&lt;/code&gt; 의 세 가지를 사용해서 꾸준히 디렉터리를 타고 들어가면 된다. 단 이때 주의해야할 것은 &amp;lsquo;.&#39;, &amp;lsquo;..&amp;lsquo;의 존재이다.&lt;/p&gt;
+&lt;p&gt;기본적으로 순회할 때도 &lt;code&gt;openddir()&lt;/code&gt;, &lt;code&gt;readdir()&lt;/code&gt;, &lt;code&gt;closedir()&lt;/code&gt; 의 세 가지를 사용해서 꾸준히 디렉터리를 타고 들어가면 된다. 단 이때 주의해야할 것은 &amp;lsquo;.&amp;rsquo;, &amp;lsquo;..&amp;lsquo;의 존재이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;void
@@ -7970,7 +8080,7 @@ traverse(path) {
 &lt;p&gt;위의 코드의 문제는 &amp;lsquo;.&amp;lsquo;를 배제하지 않으므로 무한 재귀에 빠지게 된다. 또한 &amp;lsquo;..&amp;rsquo; 를 배제하지 않았으므로 결국 루트 디렉터릮자ㅣ 거슬러 올라와 파일 시스템 전체를 순회하게 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이 문제를 해결하려면 명시적으로 &amp;lsquo;.&#39;, &amp;lsquo;..&amp;lsquo;를 제외해야 한다.&lt;/p&gt;
+&lt;p&gt;이 문제를 해결하려면 명시적으로 &amp;lsquo;.&amp;rsquo;, &amp;lsquo;..&amp;lsquo;를 제외해야 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;두 번재 문제로는 심볼릭 링크를 고려하지 않았다. 예를 들면 처리 중인 디렉터리 안에 루트 디렉터리를 가리키는 심볼릭 링크가 있다면 루트 디렉터리로 처리가 이동하고, 그 안에서 또 루트 디렉터리를 가리키는 심볼릭 링크가 있으면 무한 루프에 들어가게 된다.&lt;/p&gt;
@@ -8023,7 +8133,7 @@ path로 지정한 경로에 이미 파일이나 디렉터리가 존재한다.&lt
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/qvlrqg02onl9v34/umask.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;open()이나 mkdir()에서 실제로 사용하는 권한은 C 언어로 표현하면 &amp;lsquo;mode &amp;amp; ~umask&#39;로 계산된다.&lt;/li&gt;
+&lt;li&gt;open()이나 mkdir()에서 실제로 사용하는 권한은 C 언어로 표현하면 &amp;lsquo;mode &amp;amp; ~umask&amp;rsquo;로 계산된다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;sys/stat.h&amp;gt;
@@ -9020,7 +9130,7 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 &lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=rnykgyOczpM&amp;amp;list=WL&amp;amp;index=10&#34;&gt;&amp;lsquo;억&#39;만장자가 &amp;lsquo;백&#39;만장자에게 가르치는 것 (일반인들은 모름)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=rnykgyOczpM&amp;amp;list=WL&amp;amp;index=10&#34;&gt;&amp;lsquo;억&amp;rsquo;만장자가 &amp;lsquo;백&amp;rsquo;만장자에게 가르치는 것 (일반인들은 모름)&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;스스로 어떤 것을 해야할지 파악하고 처리할 수 있는 사람이 된다.&lt;/p&gt;
@@ -11810,7 +11920,7 @@ int pipe(int pipefd[2]);
 &lt;p&gt;따라서 &lt;code&gt;read()&lt;/code&gt; 함수를 호출한 프로세스는 상대방 프로세스가 파이프 연결을 끊었다는 사실을 &lt;code&gt;read()&lt;/code&gt; 함수의 반환값으로 인지할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;시스템 단위로 운영되는 &amp;lsquo;열린 파일 테이블&#39;의 엔트리는 하나의 파일 디스크립터라도 해당 엔트리를 가리키고 있다면 없어지지 않는다. 만약 프로세스 A의 &lt;code&gt;pipefd[0]&lt;/code&gt;이 열려 있더라면, 프로세스 B가 &lt;code&gt;pipefd[0]&lt;/code&gt;을 닫아도 &amp;lsquo;열린 파일 테이블의&amp;rsquo; 해당 엔트리를 사라지지 않으므로 프로세스 A는 프로세스 B가 파이프를 닫았다는 사실을 알 방법이 없다.&lt;/p&gt;
+&lt;p&gt;시스템 단위로 운영되는 &amp;lsquo;열린 파일 테이블&amp;rsquo;의 엔트리는 하나의 파일 디스크립터라도 해당 엔트리를 가리키고 있다면 없어지지 않는다. 만약 프로세스 A의 &lt;code&gt;pipefd[0]&lt;/code&gt;이 열려 있더라면, 프로세스 B가 &lt;code&gt;pipefd[0]&lt;/code&gt;을 닫아도 &amp;lsquo;열린 파일 테이블의&amp;rsquo; 해당 엔트리를 사라지지 않으므로 프로세스 A는 프로세스 B가 파이프를 닫았다는 사실을 알 방법이 없다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;예제&#34;&gt;예제&lt;/h4&gt;
@@ -15107,7 +15217,7 @@ int fclose(FILE *stream);
 &lt;p&gt;파일은 바이트의 연속이다. 그런데 그 바이트의 연속을 문자의 연속으로 본다면 파일은 곧 줄의 연속이라고 볼 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;리눅스 시스템에서는 &amp;lsquo;줄&#39;은 &lt;code&gt;&#39;\n&#39;&lt;/code&gt;를 기준으로 줄이 나뉜다.&lt;/p&gt;
+&lt;p&gt;리눅스 시스템에서는 &amp;lsquo;줄&amp;rsquo;은 &lt;code&gt;&#39;\n&#39;&lt;/code&gt;를 기준으로 줄이 나뉜다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;또한 파일의 마지막이나 스트림으로부터의 입력이 끝나는 지점에 &lt;code&gt;&#39;\n&#39;&lt;/code&gt;이 없어도 하나의 줄로 간주한다.&lt;/p&gt;
@@ -15362,7 +15472,7 @@ int fcntl(int fd, int cmd, ...);
 &lt;p&gt;여러 명령어를 파이프로 연결하여 데이터를 처리하는 것이 가능한 것도 각 명령어가 표준 입력에서 데이터를 읽어들이고, 처리 결과를 표준 출력에 쓰게 되어 있기 때문이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이 경우의 &amp;lsquo;표준&#39;은 &amp;lsquo;디폴트&#39;에 가까운 의미이다. 표준 입력은 프로그램의 디폴트 입력 소스이며, 표준 출력은 디폴트 출력지라는 의미이다.&lt;/p&gt;
+&lt;p&gt;이 경우의 &amp;lsquo;표준&amp;rsquo;은 &amp;lsquo;디폴트&amp;rsquo;에 가까운 의미이다. 표준 입력은 프로그램의 디폴트 입력 소스이며, 표준 출력은 디폴트 출력지라는 의미이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;여러개의 리눅스 명령어를 조합할 수 있는 것도 각 리눅스 명령어가 표준 입력에서 데이터를 읽고, 표준 출력에 쓰는 약속을 했기 때문이다.&lt;/p&gt;
@@ -15446,7 +15556,7 @@ ssize_t read(int fd, void *buf, size_t bufsize);
 &lt;p&gt;&lt;code&gt;read&lt;/code&gt;의 경우에는 읽어들인 데이터의 끝에 &lt;code&gt;\0&lt;/code&gt;가 있다고 전제하지 않는 &lt;code&gt;API&lt;/code&gt;이다. 따라서 &lt;code&gt;read(2)&lt;/code&gt;를 통해서 읽어 들인 문자열의 끝에 &lt;code&gt;\0&lt;/code&gt;이 있다고 생각하고 코드를 작성해서는 안된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;예를 들어, &lt;code&gt;printf()&lt;/code&gt;의 경우에는 문자열의 끝에 &amp;lsquo;\0&#39;이 들어가 있다고 전제하는 &lt;code&gt;API&lt;/code&gt; 이므로, &lt;code&gt;read(2)&lt;/code&gt;로 읽은 문자열을 그대로 &lt;code&gt;printf()&lt;/code&gt;로 전달하면 안된다. 이는 보안상의 취약점이 될 수 있다.&lt;/p&gt;
+&lt;p&gt;예를 들어, &lt;code&gt;printf()&lt;/code&gt;의 경우에는 문자열의 끝에 &amp;lsquo;\0&amp;rsquo;이 들어가 있다고 전제하는 &lt;code&gt;API&lt;/code&gt; 이므로, &lt;code&gt;read(2)&lt;/code&gt;로 읽은 문자열을 그대로 &lt;code&gt;printf()&lt;/code&gt;로 전달하면 안된다. 이는 보안상의 취약점이 될 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;write2&#34;&gt;&lt;code&gt;write(2)&lt;/code&gt;&lt;/h4&gt;
@@ -16277,7 +16387,7 @@ $글또캘린더
 &lt;p&gt;다양한 언어의 정규 표현 실행을 위한 함수는 서로 다르지만, 정규 표현 자체는 개발 언어에서 동일하게 적용된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;반복자-repeaters---&#34;&gt;반복자 (Repeaters): `*, +,&lt;/h3&gt;
+&lt;h3 id=&#34;반복자-repeaters---&#34;&gt;반복자 (Repeaters): &lt;code&gt;*, +, {}&lt;/code&gt;&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -16316,7 +16426,7 @@ $글또캘린더
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&amp;lsquo;color&amp;rsquo;, &amp;lsquo;colour&#39;과 같이 동일한 의미를 가지는 단어가 다른 스펠링으로 쓰이는 경우가 있다.&lt;/p&gt;
+&lt;p&gt;&amp;lsquo;color&amp;rsquo;, &amp;lsquo;colour&amp;rsquo;과 같이 동일한 의미를 가지는 단어가 다른 스펠링으로 쓰이는 경우가 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;이런 경우 &lt;code&gt;?&lt;/code&gt; 키워드를 통해서 &amp;lsquo;u&amp;rsquo; 문자를 0 혹은 1개가 있을 수 있다는 것을 나타낼 수 있다.&lt;/p&gt;
@@ -16337,8 +16447,8 @@ $글또캘린더
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;문자-클래스-charactert-classes-&#34;&gt;문자 클래스 (Charactert classes): &lt;code&gt;[]&lt;/code&gt;&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
-&lt;li&gt;[cnf]이면 &amp;lsquo;c&amp;rsquo;, &amp;lsquo;d&#39;혹은 f가 될 수 있다,&lt;/li&gt;
-&lt;li&gt;[^cdf] 이면 &amp;lsquo;c&amp;rsquo;, &amp;lsquo;d&amp;rsquo;, f를 제외한 나머지 문자열&lt;/li&gt;
+&lt;li&gt;[cnf]이면 &amp;lsquo;c&amp;rsquo;, &amp;rsquo;d&amp;rsquo;혹은 f가 될 수 있다,&lt;/li&gt;
+&lt;li&gt;[^cdf] 이면 &amp;lsquo;c&amp;rsquo;, &amp;rsquo;d&amp;rsquo;, f를 제외한 나머지 문자열&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;그룹-문자-grouping-character-&#34;&gt;그룹 문자 (Grouping character): &lt;code&gt;()&lt;/code&gt;&lt;/h3&gt;
 &lt;hr&gt;
@@ -18434,7 +18544,7 @@ const int * const * pcpci;
 &lt;p&gt;말만 하는 것이 아닌 적극적으로 행동하는 사람이 되어야 겠다. 하지만 행동을 하기 전에는 내가 무었때문에 이것을 하려는지 명확한 목표가 있어야 할 것 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;업무를 요청하는 &amp;lsquo;근본적인 이유&#39;를 파악할 수 있도록 노력해야겠다. 그리고 고객이 요청하는 일이 정말로, 해결책이 아니라 우리가 고객이 원하는 목적을 찾을 수 있도록 해야겠다.&lt;/p&gt;
+&lt;p&gt;업무를 요청하는 &amp;lsquo;근본적인 이유&amp;rsquo;를 파악할 수 있도록 노력해야겠다. 그리고 고객이 요청하는 일이 정말로, 해결책이 아니라 우리가 고객이 원하는 목적을 찾을 수 있도록 해야겠다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
@@ -19113,10 +19223,10 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;모델은 &amp;lsquo;요소와 요소 사이의 관계&#39;를 나타낸 것이다.&lt;/p&gt;
+&lt;p&gt;모델은 &amp;lsquo;요소와 요소 사이의 관계&amp;rsquo;를 나타낸 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;사람들은 흔히 &amp;lsquo;이해하려면 분해해보라&#39;고 한다. 복잡한 사물을 있는 그대로 이해하는 것이 힘들기 때문이다.&lt;/p&gt;
+&lt;p&gt;사람들은 흔히 &amp;lsquo;이해하려면 분해해보라&amp;rsquo;고 한다. 복잡한 사물을 있는 그대로 이해하는 것이 힘들기 때문이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;모델을 작성할 때 중요한 점은 &lt;strong&gt;목적과 관점을 명확하게 하는 것이다.&lt;/strong&gt;&lt;/p&gt;
@@ -19135,7 +19245,7 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 &lt;p&gt;복잡한 사물은 여러 개의 요소로 구성되어 있다. &lt;strong&gt;모델링에서 가장 바람직한 방법은 각 요소를 모두 찾아내서 열거하는 작업 부터 시작해보는 것이다.&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;발상을 위한 사고법에서는 &amp;lsquo;발산&#39;과 &amp;lsquo;수렴&#39;의 사고과정을 반복한다.&lt;/p&gt;
+&lt;p&gt;발상을 위한 사고법에서는 &amp;lsquo;발산&amp;rsquo;과 &amp;lsquo;수렴&amp;rsquo;의 사고과정을 반복한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;모델의 상세한 내용을 작성하는 경우, 깊이 있게 숙고 하고, 다시 폭넓게 생각하면서 이번 작업의 목적에 부합하지 않는 요소들을 제거하여 대담하게 수렴시켜 나가는 과정을 수행한다.&lt;/p&gt;
@@ -19150,7 +19260,7 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 &lt;p&gt;그러나 정말로 무엇이든지 생각나는 모든 것을 끄집어내서 표현하면 다 좋다는 의미는 아니다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;복잡한 사물을 구성하는 &amp;lsquo;중요한 요소들&#39;을 모두 열거해 보는 것&lt;/strong&gt;이 이 단계에서 해야할 작업이다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;복잡한 사물을 구성하는 &amp;lsquo;중요한 요소들&amp;rsquo;을 모두 열거해 보는 것&lt;/strong&gt;이 이 단계에서 해야할 작업이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;요소는-명사로-작성한다&#34;&gt;요소는 명사로 작성한다&lt;/h4&gt;
@@ -19159,7 +19269,7 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 &lt;p&gt;모델이라는 것은 사물을 단순하게 표현한 것이므로 때에 따라서는 모호함이 표함되어 있어서 그 의미를 전달하기 어려운 경우도 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&amp;lsquo;요소를 명사로 한다&#39;라는 점을 주의해서 모델링하면 자신의 의도와 모델의 표현을 서로 일치하게 만들 수 있다.&lt;/p&gt;
+&lt;p&gt;&amp;lsquo;요소를 명사로 한다&amp;rsquo;라는 점을 주의해서 모델링하면 자신의 의도와 모델의 표현을 서로 일치하게 만들 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;관계를-명확하게-한다&#34;&gt;관계를 명확하게 한다&lt;/h4&gt;
@@ -19234,7 +19344,7 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 &lt;p&gt;문장으로 성립되는지를 확인한다. &lt;strong&gt;요소와 요소 사이의 관계가 정말로 성립하는지 논리적으로 생각해봄으로써 관계의 적절성을 확인할 수 있다.&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&amp;lsquo;나무에서 떨어진다&#39;와 같은 동사구를 명사화하여 요소로 추출하는 것이 때로는 더 좋은 모델을 만드는데 중요하다.&lt;/p&gt;
+&lt;p&gt;&amp;lsquo;나무에서 떨어진다&amp;rsquo;와 같은 동사구를 명사화하여 요소로 추출하는 것이 때로는 더 좋은 모델을 만드는데 중요하다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -19265,7 +19375,7 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 3. 새롭고 혁신적인 발상을 하고 싶다.
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;위와 같은 능력을 가지고 싶다면 방법은 하나이다. &amp;lsquo;단순하게 생각하기&#39;를 하면 된다.&lt;/p&gt;
+&lt;p&gt;위와 같은 능력을 가지고 싶다면 방법은 하나이다. &amp;lsquo;단순하게 생각하기&amp;rsquo;를 하면 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&amp;lsquo;단순하게 생각하기&amp;rsquo; 이것이 무엇인지 알기 힘들다면, 답은 프로그래머들의 사고 방식에서 찾아 볼 수 있고 이를 활용하면 위의 세가지 문제를 해결할 수 있다.&lt;/p&gt;
@@ -19290,7 +19400,7 @@ r3&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#
 &lt;h3 id=&#34;모델이란-무엇인가&#34;&gt;모델이란 무엇인가?&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
-&lt;li&gt;모델이란 &amp;lsquo;사물을 단순하게 표현한 것&#39;이라고 할 수 있다.&lt;/li&gt;
+&lt;li&gt;모델이란 &amp;lsquo;사물을 단순하게 표현한 것&amp;rsquo;이라고 할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/120913795-beb79200-c6d4-11eb-842f-68abd4ce850c.JPG&#34; alt=&#34;IMG_5740&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -25967,7 +26077,7 @@ UTF-16 encoded: 0x26 0x2F
 &lt;ul&gt;
 &lt;li&gt;REST는 크게 리소스, 메서드, 메시지의 3가지 요소로 구성된다.&lt;/li&gt;
 &lt;li&gt;예를 들어서, &amp;ldquo;이름이 Terry인 사용자를 생성했을 때&amp;rdquo; 사용자는 생성되는 리소스, 생성한다라는 행위는 메서드 그리고, 이름이 &lt;code&gt;Terry&lt;/code&gt;는 메시지가 된다.&lt;/li&gt;
-&lt;li&gt;이를 REST로 표현해보면 다음과 같은 형태가 된다, &amp;lsquo;생성한다&#39;라는 의미가 있는 메서드는 &lt;code&gt;HTTP&lt;/code&gt; &lt;code&gt;POST&lt;/code&gt;가 되고, 생성하고자 하는 대상이 되는 사용자라는 리소스는 &lt;code&gt;http://myweb/users&lt;/code&gt;라는 형태의 URI로 표현되며, 생성하고자 하는 사용자의 구체적인 내용은 &lt;code&gt;JSON&lt;/code&gt; 문서를 이용하여 표현된다.&lt;/li&gt;
+&lt;li&gt;이를 REST로 표현해보면 다음과 같은 형태가 된다, &amp;lsquo;생성한다&amp;rsquo;라는 의미가 있는 메서드는 &lt;code&gt;HTTP&lt;/code&gt; &lt;code&gt;POST&lt;/code&gt;가 되고, 생성하고자 하는 대상이 되는 사용자라는 리소스는 &lt;code&gt;http://myweb/users&lt;/code&gt;라는 형태의 URI로 표현되며, 생성하고자 하는 사용자의 구체적인 내용은 &lt;code&gt;JSON&lt;/code&gt; 문서를 이용하여 표현된다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;HTTP POST, http://myweb/users/
 {
@@ -26513,7 +26623,7 @@ HTTP GET, /users/{userid}/likes/devices
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112713152-1b4d4280-8f17-11eb-8529-5f69c0d9b17b.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;마이크로 서비스 아키텍처를 이해하려면 먼저 모놀리틱 아키텍처 스타일에 대해서 이해해야한다.&lt;/li&gt;
-&lt;li&gt;모놀리틱 아키텍처 스타일은 기존의 전통적인 웹 시스템 개발 스타일로, 하나의 애플리케이션 내에 모든 로직이 들어가있는 &amp;lsquo;통짜 구조&#39;이다.&lt;/li&gt;
+&lt;li&gt;모놀리틱 아키텍처 스타일은 기존의 전통적인 웹 시스템 개발 스타일로, 하나의 애플리케이션 내에 모든 로직이 들어가있는 &amp;lsquo;통짜 구조&amp;rsquo;이다.&lt;/li&gt;
 &lt;li&gt;각 컴포넌트는 상호 호출을 함수를 이용한 참조에 의한 호출 구조를 취한다.&lt;/li&gt;
 &lt;li&gt;전체 애플리케이션을 하나로 처리하기 때문에 개발 도구에서 하나의 애플리케이션만 개발하면 되고, 배포 역시 간편하며 테스트도 하나의 애플리케이션만 수행하면 되므로 간편하다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -29486,7 +29596,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 &lt;li&gt;지원서에 개인 &lt;code&gt;GITHUB URL&lt;/code&gt;을 작성한 지원자의 경우, 꼭 들어가서 본다.&lt;/li&gt;
 &lt;li&gt;소스코드를 통해서 지원자의 개발 역량을 파악할 수 있을 뿐더라, &lt;code&gt;GITHUB&lt;/code&gt;를 운영하고 공유할 정도라면 어느 정도 수준이 있는 개발자일 것이라는 기대를 하기 때문이다.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;GITHUB&lt;/code&gt;는 생각보다 많은 정보를 준다. 소스 코드를 지속적으로 업로드 하고, 관리하고 공유하는 것이 중요하다.&lt;/li&gt;
-&lt;li&gt;지원서에서는 &amp;lsquo;결과&#39;보다는 &amp;lsquo;무엇을 했는지&amp;rsquo; 강조하는 것이 좋다.&lt;/li&gt;
+&lt;li&gt;지원서에서는 &amp;lsquo;결과&amp;rsquo;보다는 &amp;lsquo;무엇을 했는지&amp;rsquo; 강조하는 것이 좋다.&lt;/li&gt;
 &lt;li&gt;학과 공부에서 배운 것 뿐만 아니라 새로 알게 된 경험에 관한 이야기도 좋다.&lt;/li&gt;
 &lt;li&gt;협업에 대해서 이야기 하고 싶다면 갈등, 조정, 협의, 합의 등에 이르게 된 과정을 설명하는게 좋다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -30536,7 +30646,7 @@ for key, group in groupby(things, lambda x: x[0]):
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;나 자신을 잘 아는 것이 중요하다.&lt;/li&gt;
-&lt;li&gt;&amp;lsquo;나&#39;를 알아야 어필할 수 있는 포인트도 보이고, 나에게 잘 맞는 직무도 찾을 수 있다.&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;나&amp;rsquo;를 알아야 어필할 수 있는 포인트도 보이고, 나에게 잘 맞는 직무도 찾을 수 있다.&lt;/li&gt;
 &lt;li&gt;내가 지금까지 활동했던 것을 정리해보는 것을 추천한다.&lt;/li&gt;
 &lt;li&gt;어떤 경험을 했고, 어떤 일이 일어났고, 어떤 것을 배우고 얻었는지를 중점으로 작성해보는 것이다.&lt;/li&gt;
 &lt;li&gt;그리고 나서 지원할 직무와 연결지어서 어떤 경험들을 추려낼지 고민하면서 서류를 작성하면 조금 더 쉬워질 것이다.&lt;/li&gt;
@@ -30588,7 +30698,7 @@ for key, group in groupby(things, lambda x: x[0]):
 &lt;p&gt;자신이 제출한 자기소개서, 이력서, 포트폴리오를 2 ~ 3번 정독하고 면접관들이 어떤 부분에서 궁금할지를 예측하여 자문자답하면서 내용을 정리&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;면접은 &amp;lsquo;어떻게&#39;보다 &amp;lsquo;왜&#39;라는 질문을 받았을 때 제대로 답변할 수 있도록 준비를 하면 좋을 것이다.&lt;/p&gt;
+&lt;p&gt;면접은 &amp;lsquo;어떻게&amp;rsquo;보다 &amp;lsquo;왜&amp;rsquo;라는 질문을 받았을 때 제대로 답변할 수 있도록 준비를 하면 좋을 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;대답을 못한다고 감점은 없다, 따라서 모르면 모른다고 답변을 하고 모든 것을 후회없이 보여줄 수 있도록 준비를 하자.&lt;/p&gt;
@@ -30600,7 +30710,7 @@ for key, group in groupby(things, lambda x: x[0]):
 &lt;li&gt;코딩 테스트 준비를 꾸준히 하자.&lt;/li&gt;
 &lt;li&gt;컴퓨터 공학 관련 지식들을 꾸준히 리마인드 하고, 블로그에 잘 정리를 하자.&lt;/li&gt;
 &lt;li&gt;포트폴리오는 왜 이러한 기술을 사용했고, 문제점, 및 문제를 해결한 과정이 잘 녹아들어 있어야 한다.&lt;/li&gt;
-&lt;li&gt;면접은 &amp;lsquo;어떻게&#39;보다는 &amp;lsquo;왜&#39;라는 질문에 답을 할 수 있어야 한다.&lt;/li&gt;
+&lt;li&gt;면접은 &amp;lsquo;어떻게&amp;rsquo;보다는 &amp;lsquo;왜&amp;rsquo;라는 질문에 답을 할 수 있어야 한다.&lt;/li&gt;
 &lt;li&gt;면접 질문 기반이 자기소개서 및 포트폴리오에서 나오므로 자기소개서 및 포트폴리오를 처음부터 잘 작성하자.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -31334,7 +31444,7 @@ print(queue)
 &lt;p&gt;현재 상황에서 좋아 보이는 것만을 선택하는 알고리즘&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;어떤 문제가 있을 때 단순 무식하게 탐욕적으로 푸는 알고리즘이다.&lt;/li&gt;
-&lt;li&gt;여기서 탐욕적이라는 말은 &amp;lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&#39;을 의미한다.&lt;/li&gt;
+&lt;li&gt;여기서 탐욕적이라는 말은 &amp;lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&amp;rsquo;을 의미한다.&lt;/li&gt;
 &lt;li&gt;&amp;lsquo;사전에 외우고 있지 않아도 풀 수 있을 가능성이 높은 유형&amp;rsquo; 이라는 특징이 있다.&lt;/li&gt;
 &lt;li&gt;그리디 알고리즘 유형의 문제는 매우 다양하기 때문에, 암기한다고 해서 항상 잘 풀수 있는 것은 아니다.&lt;/li&gt;
 &lt;li&gt;많은 유형을 접해보고 문제를 풀어보며 훈련을 해야한다.&lt;/li&gt;
@@ -31467,7 +31577,7 @@ def assertMoney(money, count):
 &lt;li&gt;코딩 테스트를 치른 내용을 토대로 면접을 진행하며 알고리즘 역량이 제대로 갖추었는지를 평가한다.&lt;/li&gt;
 &lt;li&gt;알고리즘의 원리를 완전히 자기것으로 만들 수 있어야한다.&lt;/li&gt;
 &lt;li&gt;자료구조와 알고리즘에 대한 이해가 바탕이 되어야한다.&lt;/li&gt;
-&lt;li&gt;단순히 알고리즘의 시간 복잡도를 평가하는 것만으로는 부족하고, 실제로 서로 다른 알고리즘을 비교하여 &amp;lsquo;특정한 상황&#39;에서 무엇이 더 좋을지를 설명할 수 있어야한다.&lt;/li&gt;
+&lt;li&gt;단순히 알고리즘의 시간 복잡도를 평가하는 것만으로는 부족하고, 실제로 서로 다른 알고리즘을 비교하여 &amp;lsquo;특정한 상황&amp;rsquo;에서 무엇이 더 좋을지를 설명할 수 있어야한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;포트폴리오-질의-응답-형식&#34;&gt;포트폴리오 질의 응답 형식&lt;/h3&gt;
 &lt;ul&gt;
@@ -31491,14 +31601,14 @@ def assertMoney(money, count):
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;알고리즘 문제를 잘 풀었다고 해서, 기술 면접을 쉽게 통과할 수 있다고 생각을 하면 안된다.&lt;/li&gt;
-&lt;li&gt;기업에서 원하는 직원은 문제를 풀어 &amp;lsquo;정답 판정&#39;을 받는 지원자가 아니라, 어떤 방법으로 문제에 접근하여 어떠한 알고리즘을 사용했는지를 논리 정연하게 설명할 수 있는 지원자를 원한다.&lt;/li&gt;
+&lt;li&gt;기업에서 원하는 직원은 문제를 풀어 &amp;lsquo;정답 판정&amp;rsquo;을 받는 지원자가 아니라, 어떤 방법으로 문제에 접근하여 어떠한 알고리즘을 사용했는지를 논리 정연하게 설명할 수 있는 지원자를 원한다.&lt;/li&gt;
 &lt;li&gt;회사에서 같이 일할 사람을 뽑는 과정이므로 논리적으로 말로 정리하는 능력도 매우 중요하다.&lt;/li&gt;
 &lt;li&gt;이러한 능력은 하루 아침에 생기는 것이 아니므로, 평소에 기술 블로그나 깃허브 저장소를 운영하며 능력을 키워갈 수 있다. 또한 글로도 논리적인 풀이 능력을 확인할 수 있으므로 채용시에 장점이 될 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;기술-면접의-어려움&#34;&gt;기술 면접의 어려움&lt;/h1&gt;
 &lt;hr&gt;
 &lt;ul&gt;
-&lt;li&gt;면접관마다 중요하게 생각하는 개발자의 자질이 다들 수 있어서, 기술 면접을 &amp;lsquo;완벽&#39;하게 대비하는 일은 불가능하다.&lt;/li&gt;
+&lt;li&gt;면접관마다 중요하게 생각하는 개발자의 자질이 다들 수 있어서, 기술 면접을 &amp;lsquo;완벽&amp;rsquo;하게 대비하는 일은 불가능하다.&lt;/li&gt;
 &lt;li&gt;어떤 면접관은 (개발자) 수학과 알고리즘의 원리를 중요하게 생각해서 업무에서 필요한 알고리즘 원리에 초점을 맞추어 질문을 할 수 있는 반면에, 다른 면접관은 프레임워크나 라이브러리를 다룬 경험을 중요하게 생각하여 관련 경험을 주로 물어볼 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;인성-면접-질문-리스트&#34;&gt;인성 면접 질문 리스트&lt;/h1&gt;
@@ -31516,7 +31626,7 @@ def assertMoney(money, count):
 &lt;p&gt;회사에 대해 궁금한 점이 있다면 말해주세요.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;면접은 단순히 회사에 채용되는 과정이 아니라, 여러분 또한 회사를 선택하는 입장이라는 점을 기억하자. 따라서 회사에 대하여 궁금한 점이 있다면 질문할 수 있도록 사전에 회사에 대해 알아보고 면접에 임하자.&lt;/p&gt;
-&lt;p&gt;1차원적으로 궁금한 것을 물어보는 것보다는 자신의 개발자로서의 성향 중에서 &amp;lsquo;긍정적인 성향&#39;을 드러낼 만한 질문을 하는 것이 좋다.&lt;/p&gt;
+&lt;p&gt;1차원적으로 궁금한 것을 물어보는 것보다는 자신의 개발자로서의 성향 중에서 &amp;lsquo;긍정적인 성향&amp;rsquo;을 드러낼 만한 질문을 하는 것이 좋다.&lt;/p&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 </description>
     </item>

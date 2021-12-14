@@ -6,7 +6,117 @@
     <description>Recent content in 펄 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 08 Dec 2021 19:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%8E%84/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Dec 2021 21:20:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%8E%84/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LEARING PERL - 5번째 학습 (서브 루틴)</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/14/learing-perl-5%EB%B2%88%EC%A7%B8-%ED%95%99%EC%8A%B5-%EC%84%9C%EB%B8%8C-%EB%A3%A8%ED%8B%B4.html</link>
+      <pubDate>Tue, 14 Dec 2021 21:20:40 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/14/learing-perl-5%EB%B2%88%EC%A7%B8-%ED%95%99%EC%8A%B5-%EC%84%9C%EB%B8%8C-%EB%A3%A8%ED%8B%B4.html</guid>
+      <description>&lt;h3 id=&#34;서브-루틴&#34;&gt;서브 루틴&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서브 루틴의 이름은, 펄의 또 다른 식별자이다. 그리고 때때로 앞에 &lt;code&gt;&amp;amp;&lt;/code&gt; 기호가 붙지만, 어떨때는 생략해도 되고 어떨때는 생략하면 안된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;펄에서 서브루틴 이름은 별도의 네임 스페이스에 존재하기 때문에 같은 이름의 스칼라 변수가 같은 프로그램 내에 존재할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;뭐 일반적으로 그럴 일은 별로 없겠지만 말이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서브-루틴을-선언하는-방법&#34;&gt;서브 루틴을 선언하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;sub&lt;/code&gt; 라는 키워드를 사용하고 &lt;code&gt;{  }&lt;/code&gt; 사이에 함수의 내용을 넣으면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sub marine {
+  $n += 1;
+  print &amp;quot;hello, sailor number $n\n&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;만약 중복되는 이름의 서브루틴이 있을 경우 뒤에오는 서브 루틴이 앞의 것을 대체한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 펄의 서브루틴에서는 전역변수에 접근이 가능하다. 이 점은 많은 버그가 일어날 것 같다. 심지어 책에서는 이러한 점이 펄 사용자로 하여금 성난 군중을 만들어서 펄 개발팀을 도망가게 만들었다고 표현했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;곧 서브루틴안에서만 사용가능한 변수를 배우게 될 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서브-루틴을-호출하는-방법&#34;&gt;서브 루틴을 호출하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;서브 루틴을 호출하는 방법은 &lt;code&gt;&amp;amp;&lt;/code&gt;를 이용해서 호출할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;&amp;amp;marine;
+&amp;amp;marine;
+&amp;amp;marine;
+&amp;amp;marnie;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이는 위에서 선언한 서브루틴인 &lt;code&gt;marine&lt;/code&gt; 서브루틴을 호출한 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서브루틴의-반환값&#34;&gt;서브루틴의 반환값&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서브루틴을 호출할 때는 그 자체로 표현식으로 처리된다. 반환된 값을 사용하던지 안하던지는 상관이 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 서브 루틴값은 반환 값을 지닌다. 하지만 그 모두가 의미있는 값을 반환하는 것은 아니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반환 값을 가지는 서브루틴이나 가지지 않는 서브루틴 사이의 차이점은 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;펄에서는 따로, &lt;code&gt;return&lt;/code&gt; 와 같은 키워드를 사용하지 않는다. 마지막에 위치한 값이 자동으로 반환값이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sub sum_of_fred_and_barney {
+  print &amp;quot;hey, you called me sum_of_fred_and_barney subroutine!&amp;quot;;
+  $fred + $barney;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 예제에서는 자동으로 &lt;code&gt;$fred+ $barney&lt;/code&gt;가 리턴값이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 서브루틴의 마지막에 값이 아닌 &lt;code&gt;print&lt;/code&gt;가 오면 그냥 정상적으로 출력되었다는 뜻으로 &lt;code&gt;1&lt;/code&gt; 값이 반환된다. 이러한 동작이 원한것이 아니라면 주의를 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sub sum_of_fred_and_barney {
+  print &amp;quot;hey, you called me sum_of_fred_and_barney subroutine!&amp;quot;;
+  $fred + $barney;
+  print &amp;quot;hey, I&#39;m returning a value now\n&amp;quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그렇다면, 위의 예제에서와 같이 중간의 계산 값은 어떻게 되는가? 펄은 이러한 값들은 사용하지 않고 그냥 버려버린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 펄에서 경고를 표시해주도록 설정했다면, 이러한 연산이 있다고 알려줄 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 마지막 예제는 큰 값을 리턴하는 서브 루틴이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;sub larger_of_fred_or_barney {
+  if ($fred &amp;gt; $barney) {
+    $fred;
+  } else {
+    $barney;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Learning-Perl-Randal-L-Schwartz/dp/1449303587&#34;&gt;Learning Perl, 7th Edition&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>LEARING PERL - 4번째 학습</title>
       <link>https://dongwooklee96.github.io/post/2021/12/08/learing-perl-4%EB%B2%88%EC%A7%B8-%ED%95%99%EC%8A%B5.html</link>

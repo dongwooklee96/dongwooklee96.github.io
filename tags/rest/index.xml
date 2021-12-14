@@ -31,7 +31,7 @@
 &lt;ul&gt;
 &lt;li&gt;REST는 크게 리소스, 메서드, 메시지의 3가지 요소로 구성된다.&lt;/li&gt;
 &lt;li&gt;예를 들어서, &amp;ldquo;이름이 Terry인 사용자를 생성했을 때&amp;rdquo; 사용자는 생성되는 리소스, 생성한다라는 행위는 메서드 그리고, 이름이 &lt;code&gt;Terry&lt;/code&gt;는 메시지가 된다.&lt;/li&gt;
-&lt;li&gt;이를 REST로 표현해보면 다음과 같은 형태가 된다, &amp;lsquo;생성한다&#39;라는 의미가 있는 메서드는 &lt;code&gt;HTTP&lt;/code&gt; &lt;code&gt;POST&lt;/code&gt;가 되고, 생성하고자 하는 대상이 되는 사용자라는 리소스는 &lt;code&gt;http://myweb/users&lt;/code&gt;라는 형태의 URI로 표현되며, 생성하고자 하는 사용자의 구체적인 내용은 &lt;code&gt;JSON&lt;/code&gt; 문서를 이용하여 표현된다.&lt;/li&gt;
+&lt;li&gt;이를 REST로 표현해보면 다음과 같은 형태가 된다, &amp;lsquo;생성한다&amp;rsquo;라는 의미가 있는 메서드는 &lt;code&gt;HTTP&lt;/code&gt; &lt;code&gt;POST&lt;/code&gt;가 되고, 생성하고자 하는 대상이 되는 사용자라는 리소스는 &lt;code&gt;http://myweb/users&lt;/code&gt;라는 형태의 URI로 표현되며, 생성하고자 하는 사용자의 구체적인 내용은 &lt;code&gt;JSON&lt;/code&gt; 문서를 이용하여 표현된다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre&gt;&lt;code&gt;HTTP POST, http://myweb/users/
 {
