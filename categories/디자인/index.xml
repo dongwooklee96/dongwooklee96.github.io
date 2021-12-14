@@ -99,13 +99,13 @@ def allocate_endpoint():
 &lt;p&gt;서비스 계층을 추가하면 다음과 같은 장점이 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;플라크스 API 엔드포인트가 아주 얇아지고 작성하기 쉬워진다. 플라스크 API 엔드 포인트는 오직 JSON 파싱이나 정상 경로나 비정상 경로에 따른 올바른 HTTP 코드 반환등의 &amp;lsquo;웹 기능&#39;만 수행한다.&lt;/p&gt;
+&lt;p&gt;플라크스 API 엔드포인트가 아주 얇아지고 작성하기 쉬워진다. 플라스크 API 엔드 포인트는 오직 JSON 파싱이나 정상 경로나 비정상 경로에 따른 올바른 HTTP 코드 반환등의 &amp;lsquo;웹 기능&amp;rsquo;만 수행한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;도메인에 대한 명확한 API를 정의하였다. 이런 API는 자신이 API인지 CLI인지 심지어 테스트인지에 관계없이 어댑터가 도메인 모델 클래스를 몰라도 사용할 수 있는 유스케이스나 진입점 집합이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;서비스 계층을 사용하면 테스트를 &amp;lsquo;높은 기어비&#39;로 작성할 수 있고 도메인 모델을 적합한 형태로 마음껏 리팩터링할 수 있다. 서비스 계층을 활용하면 같은 유스케이스를 제공할 수 있는 한 이미 존재하는 수 많은 테스트를 재작성하지 않고도 새로운 설계를 테스트할 수 있다.&lt;/p&gt;
+&lt;p&gt;서비스 계층을 사용하면 테스트를 &amp;lsquo;높은 기어비&amp;rsquo;로 작성할 수 있고 도메인 모델을 적합한 형태로 마음껏 리팩터링할 수 있다. 서비스 계층을 활용하면 같은 유스케이스를 제공할 수 있는 한 이미 존재하는 수 많은 테스트를 재작성하지 않고도 새로운 설계를 테스트할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;작성한 테스트의 피라미드 구조도 좋아보인다. 테스트 상당 부분은 빠른 단위 테스트이며 E2E나 통합 테스트는 최소화 된다.&lt;/p&gt;
@@ -261,7 +261,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;파이썬에서는 아래와 같이 표현할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@dataclass&lt;/span&gt;(fronzen&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@dataclass&lt;/span&gt;(fronzen&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
 &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Money&lt;/span&gt;:
     currency: str
     value: str
@@ -281,14 +281,14 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;사람은 이름과 다르게 영속적인 정체성이 있다. 따라서 엔티티에는 정체성 동등성이라는 특징이 있다. 이는 엔티티의 값을 바꾸더라도, 바뀐 엔티티는 이전과 같은 엔티티로 인식된다는 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Batch&lt;/span&gt;:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Batch&lt;/span&gt;:
     &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;__eq__&lt;/span&gt;(self, other):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __eq__(self, other):
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; isinstance(other, Batch):
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; other&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reference &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reference
 
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;__hash__&lt;/span&gt;(self):
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __hash__(self):
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; hash(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reference)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -436,7 +436,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112713152-1b4d4280-8f17-11eb-8529-5f69c0d9b17b.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;마이크로 서비스 아키텍처를 이해하려면 먼저 모놀리틱 아키텍처 스타일에 대해서 이해해야한다.&lt;/li&gt;
-&lt;li&gt;모놀리틱 아키텍처 스타일은 기존의 전통적인 웹 시스템 개발 스타일로, 하나의 애플리케이션 내에 모든 로직이 들어가있는 &amp;lsquo;통짜 구조&#39;이다.&lt;/li&gt;
+&lt;li&gt;모놀리틱 아키텍처 스타일은 기존의 전통적인 웹 시스템 개발 스타일로, 하나의 애플리케이션 내에 모든 로직이 들어가있는 &amp;lsquo;통짜 구조&amp;rsquo;이다.&lt;/li&gt;
 &lt;li&gt;각 컴포넌트는 상호 호출을 함수를 이용한 참조에 의한 호출 구조를 취한다.&lt;/li&gt;
 &lt;li&gt;전체 애플리케이션을 하나로 처리하기 때문에 개발 도구에서 하나의 애플리케이션만 개발하면 되고, 배포 역시 간편하며 테스트도 하나의 애플리케이션만 수행하면 되므로 간편하다.&lt;/li&gt;
 &lt;/ul&gt;

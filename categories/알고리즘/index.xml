@@ -36,7 +36,7 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
 &lt;hr&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; collections &lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; deque
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; collections &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; deque
 
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(n, m, graph):
@@ -128,7 +128,7 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
 &lt;hr&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; List
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; List
 
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(maps: List[List[int]], n: int, m: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
@@ -234,7 +234,7 @@ graph[2].append((0, 5))
 &lt;p&gt;인접 리스트 방식에서는 모든 노드에 연결된 노드에 대한 정볼르 차례대로 연결하여 저장한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;인접 리스트는 &amp;lsquo;연결 리스트&#39;라는 자료구조를 이용하여 구현하는데 파이썬은 기본 리스트로 구현한다.&lt;/p&gt;
+&lt;p&gt;인접 리스트는 &amp;lsquo;연결 리스트&amp;rsquo;라는 자료구조를 이용하여 구현하는데 파이썬은 기본 리스트로 구현한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;dfs-1&#34;&gt;DFS&lt;/h3&gt;
@@ -488,7 +488,7 @@ if __name__ == &#39;__main__&#39;:
 &lt;/ul&gt;
 &lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
 &lt;hr&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(n: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(n: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
     ret &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; h &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(n &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;):
         &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; m &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;60&lt;/span&gt;):
@@ -910,7 +910,7 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 &lt;/ol&gt;
 &lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
 &lt;hr&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; List
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; List
 
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;, matrix: List[List[int]]):
@@ -1013,7 +1013,7 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 &lt;/ol&gt;
 &lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
 &lt;hr&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#66d9ef&#34;&gt;import&lt;/span&gt; List
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; typing &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; List
 
 
 &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(n: int, m: int, k: int, lists: List[int]) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
@@ -1121,7 +1121,7 @@ if __name__ == &amp;quot;__main__&amp;quot;:
 &lt;/ul&gt;
 &lt;h3 id=&#34;코드&#34;&gt;코드&lt;/h3&gt;
 &lt;hr&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(exchange: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;solution&lt;/span&gt;(exchange: int) &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; int:
   cnt &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;
   coins &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#ae81ff&#34;&gt;500&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;50&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;]
 
@@ -1534,7 +1534,7 @@ print(queue)
 &lt;p&gt;현재 상황에서 좋아 보이는 것만을 선택하는 알고리즘&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;어떤 문제가 있을 때 단순 무식하게 탐욕적으로 푸는 알고리즘이다.&lt;/li&gt;
-&lt;li&gt;여기서 탐욕적이라는 말은 &amp;lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&#39;을 의미한다.&lt;/li&gt;
+&lt;li&gt;여기서 탐욕적이라는 말은 &amp;lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&amp;rsquo;을 의미한다.&lt;/li&gt;
 &lt;li&gt;&amp;lsquo;사전에 외우고 있지 않아도 풀 수 있을 가능성이 높은 유형&amp;rsquo; 이라는 특징이 있다.&lt;/li&gt;
 &lt;li&gt;그리디 알고리즘 유형의 문제는 매우 다양하기 때문에, 암기한다고 해서 항상 잘 풀수 있는 것은 아니다.&lt;/li&gt;
 &lt;li&gt;많은 유형을 접해보고 문제를 풀어보며 훈련을 해야한다.&lt;/li&gt;
