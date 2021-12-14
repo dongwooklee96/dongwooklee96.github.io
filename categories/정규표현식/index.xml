@@ -26,7 +26,7 @@
 &lt;p&gt;다양한 언어의 정규 표현 실행을 위한 함수는 서로 다르지만, 정규 표현 자체는 개발 언어에서 동일하게 적용된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;반복자-repeaters---&#34;&gt;반복자 (Repeaters): &lt;code&gt;*, +, {}&lt;/code&gt;&lt;/h3&gt;
+&lt;h3 id=&#34;반복자-repeaters---&#34;&gt;반복자 (Repeaters): `*, +,&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -65,7 +65,7 @@
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&amp;lsquo;color&amp;rsquo;, &amp;lsquo;colour&amp;rsquo;과 같이 동일한 의미를 가지는 단어가 다른 스펠링으로 쓰이는 경우가 있다.&lt;/p&gt;
+&lt;p&gt;&amp;lsquo;color&amp;rsquo;, &amp;lsquo;colour&#39;과 같이 동일한 의미를 가지는 단어가 다른 스펠링으로 쓰이는 경우가 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;이런 경우 &lt;code&gt;?&lt;/code&gt; 키워드를 통해서 &amp;lsquo;u&amp;rsquo; 문자를 0 혹은 1개가 있을 수 있다는 것을 나타낼 수 있다.&lt;/p&gt;
@@ -86,8 +86,8 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;문자-클래스-charactert-classes-&#34;&gt;문자 클래스 (Charactert classes): &lt;code&gt;[]&lt;/code&gt;&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
-&lt;li&gt;[cnf]이면 &amp;lsquo;c&amp;rsquo;, &amp;rsquo;d&amp;rsquo;혹은 f가 될 수 있다,&lt;/li&gt;
-&lt;li&gt;[^cdf] 이면 &amp;lsquo;c&amp;rsquo;, &amp;rsquo;d&amp;rsquo;, f를 제외한 나머지 문자열&lt;/li&gt;
+&lt;li&gt;[cnf]이면 &amp;lsquo;c&amp;rsquo;, &amp;lsquo;d&#39;혹은 f가 될 수 있다,&lt;/li&gt;
+&lt;li&gt;[^cdf] 이면 &amp;lsquo;c&amp;rsquo;, &amp;lsquo;d&amp;rsquo;, f를 제외한 나머지 문자열&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;그룹-문자-grouping-character-&#34;&gt;그룹 문자 (Grouping character): &lt;code&gt;()&lt;/code&gt;&lt;/h3&gt;
 &lt;hr&gt;
