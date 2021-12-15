@@ -6,7 +6,36 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 15 Dec 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Dec 2021 17:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>공식 문서를 한글로 편하게 읽을 수 있는 사이트</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/15/%EA%B3%B5%EC%8B%9D-%EB%AC%B8%EC%84%9C%EB%A5%BC-%ED%95%9C%EA%B8%80%EB%A1%9C-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%9D%BD%EC%9D%84-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</link>
+      <pubDate>Wed, 15 Dec 2021 17:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/15/%EA%B3%B5%EC%8B%9D-%EB%AC%B8%EC%84%9C%EB%A5%BC-%ED%95%9C%EA%B8%80%EB%A1%9C-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%9D%BD%EC%9D%84-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/mjiu1rmvgig795c/Screen%20Shot%202021-12-15%20at%206.04.37%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;공식 문서를 한글로 편하게 번역한 사이트를 발견하였다. 번역이 이상하거나 원문이 보고 싶을 때 번역된 부분을 마우스로 올려놓고 있으면 자동으로 원문이 나온다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 번역이 이상하거나, 마음에 들지 않을 때 쉽게 제안할 수 있다는 것도 마음에 든다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;PostgreSQL&lt;/code&gt;의 경우에는 누락된 부분이 없이 깔끔하게 번역된 것 같지만, &lt;code&gt;MariaDB&lt;/code&gt;의 경우에는 테이블에 번역되지 않은체 영어 원문 그대로 보여지는 경우도 있고 심지어는 아에 글씨가 나타나지 않는 부분도 있는 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;직접 번역 작업을 하면서, &lt;code&gt;PostgresSQL&lt;/code&gt;에 대해서 알아보려고 했지만, 그렇게 까지는 하지 않아도 될 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://runebook.dev/&#34;&gt;runebook.dev&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/12/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
