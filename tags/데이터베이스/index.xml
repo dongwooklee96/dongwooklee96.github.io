@@ -6,7 +6,98 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 09 Dec 2021 11:23:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 15 Dec 2021 10:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데이터베이스 파일 구조 방식</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/15/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0-%EB%B0%A9%EC%8B%9D.html</link>
+      <pubDate>Wed, 15 Dec 2021 10:20:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/15/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0-%EB%B0%A9%EC%8B%9D.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;파일은 페이지의 집합으로 구성이 되는데 페이지를 구성하는 많은 방식이 있다. 그 중에서 정렬되지 않은 힙 파일 구조에 대해서 자세히 살펴볼 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;파일-페이지-레코드&#34;&gt;파일, 페이지, 레코드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/qffed9qft6488cv/table.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;우리가 흔하게 볼 수 있는 데이터베이스에서 데이터가 어떻게 저장되는지 확인하는 방식은 위의 그림과 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같은 테이블은 파일의 형태로 저장이 된다. 파일은 블록과 페이지로 이루어져있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 페이지는 레코드의 집합으로 이루어진 형태이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/h503k6ytqkl6bzx/Screen%20Shot%202021-12-15%20at%2010.56.45%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 해당 블록과 페이지는 메모리상에서 다음과 같이 나타내진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페이지는 메인 메모리에서 레코드 형태로 나타내지고, 위의 그림과 같이 저장이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 쿼리를 통해서 조회문으로 레코드를 얻어오는 방식은 특정 레코드 아이디를 참조해서 얻어오는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;레코드 아이디는 (페이지 아이디, 페이지의 위치) 같은 것을 가리키는 포인터라고 생각하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;데이터베이스-파일-구조&#34;&gt;데이터베이스 파일 구조&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;정렬되지-않은-힙-파일-구조&#34;&gt;정렬되지 않은 힙 파일 구조&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;레코드가 임의의 페이지에 저장된 상태, 순서가 따로 존재하지 않는다.&lt;/li&gt;
+&lt;li&gt;가장 단순한 구조로서 일반적으로 레코드들이 삽입된 순서대로 파일에 저장된다.&lt;/li&gt;
+&lt;li&gt;자료구조에서 나오는 힙과는 다르다. 데이터베이스에서 힙 파일 구조는 레코드들이 정렬되지 않은 상태라고 보면 된다.&lt;/li&gt;
+&lt;li&gt;페이지가 할당/해제 될 때마다 파일의 크기가 커졌다가 줄어든다.&lt;/li&gt;
+&lt;li&gt;레코드 수준의 연산을 지원한다. 페이지들과, 사용되지 않는 빈 공간, 그리고 페이지에 있는 레코드들을 추적해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/3m1y7f2ukor100s/Screen%20Shot%202021-12-15%20at%2011.27.19%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 그림은 힙 파일 구조를 링크드 리스트 형태로 구현한 것이다. 맨 앞에 헤더 페이지가 있는데 헤더 페이지 아이디와 힙 파일의 이름은 데이터베이스 카탈로그에 저장이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 페이지는 두 개의 포인터를 가지고 있다. 하나는 데이터를 가리키고 있는 포인터이고 다른 하나는 빈 공간을 가리키고 있는 포인터이다. 이 구조의 문제점은 페이지를 추가하려고 할 때, 모든 페이지를 조회해서 빈 공간을 찾아야 한다는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/pm8ertkql63vyx1/Screen%20Shot%202021-12-15%20at%2011.42.43%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 페이지 딕셔너리 방식을 사용 한다. 페이지 딕셔너리 방식은 많은 수의 헤더 페이지를 가진다. 첫 번째 헤더 페이지가 데이터베이스 카탈로그에 저장되며 다른 헤더를 가리키고 있다. 따라서 이러한 헤더들을 디렉터리라고 부른다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각 헤더 페이지들은 실제 데이터가 저장되어 있는 페이지를 가리키는 공간을 가지고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 방식을 사용하면 사용하지 않는 빈 공간을 쉽게 찾을 수 있어 새로운 데이터를 삽입하는데 전체 페이지를 검색하지 않아도 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;클러스터된-힙-파일&#34;&gt;클러스터된 힙 파일&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;레코드와 페이지가 그룹화된 형태&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;정렬된-파일&#34;&gt;정렬된 파일&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;페이지와 레코드가 정렬된 형태&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;인덱스-파일&#34;&gt;인덱스 파일&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;B+트리, 선형 해시 구조, &amp;hellip;&lt;/li&gt;
+&lt;li&gt;레코드를 포함하거나, 다른 파일의 레코드를 가리킬 수 도 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=XXGmqV1gIug&amp;amp;list=PLzzVuDSjP25SJBxWLPfYLwGlOPHmKL775&amp;amp;index=7&#34;&gt;Lec 4 5 Part 1 Files&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://wkdtjsgur100.github.io/db-summary/&#34;&gt;여러 File Organization의 비용을 비교해보자&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>버클리 대학의 데이터베이스 강의를 수강신청하였다</title>
       <link>https://dongwooklee96.github.io/post/2021/12/09/%EB%B2%84%ED%81%B4%EB%A6%AC-%EB%8C%80%ED%95%99%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B0%95%EC%9D%98%EB%A5%BC-%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD%ED%95%98%EC%98%80%EB%8B%A4.html</link>
@@ -417,18 +508,18 @@ from mysql.innodb_index_stats
 &lt;p&gt;설정이 되어있는지 확인하고 싶다면, 아래와 같은 쿼리 문을 입력한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HAVE_QUERY_CACHE&amp;#39;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HAVE_QUERY_CACHE&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;조회 결과 &lt;code&gt;YES&lt;/code&gt;로 나온다면, 쿼리 캐시 기능을 사용할 수 있다는 뜻이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;QUERY_CACHE_TYPE&amp;#39;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;QUERY_CACHE_TYPE&amp;#39;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;그 다음에는 현재 시스템에서 쿼리 캐시 기능을 사용하고 있는지를 조회해 볼 것이다. 위의 쿼리 결과가 &lt;code&gt;ON&lt;/code&gt;으로 나온다면 이미 쿼리 캐시 기능을 적용하고 있다는 뜻이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;쿼리-캐시가-되지-않는-경우&#34;&gt;쿼리 캐시가 되지 않는 경우&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;아래와 같은 함수를 사용하면, 기본적으로 쿼리가 캐싱되지 않는다.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;BENCHMARK()
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;BENCHMARK()
 CONNECTION_ID()
 CONVERT_TZ()
 CURDATE()
@@ -456,7 +547,7 @@ UUID_SHORT()
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;또한 쿼리에 아래와 같은 구문이 있을 경우 쿼리가 캐싱되지 않는다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; SQL_NO_CACHE ...
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; SQL_NO_CACHE ...
 &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; OUTFILE ...
 &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; DUMPFILE ...
 &lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;FOR&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;UPDATE&lt;/span&gt;
