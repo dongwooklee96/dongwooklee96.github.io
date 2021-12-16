@@ -6,13 +6,13 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 16 Dec 2021 10:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Dec 2021 15:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>데이터베이스 페이지 구조</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B5%AC%EC%A1%B0.html</link>
-      <pubDate>Thu, 16 Dec 2021 10:20:24 +0900</pubDate>
+      <title>데이터베이스 페이지 및 레코드 구조</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%8F-%EB%A0%88%EC%BD%94%EB%93%9C-%EA%B5%AC%EC%A1%B0.html</link>
+      <pubDate>Thu, 16 Dec 2021 15:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B5%AC%EC%A1%B0.html</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%8F-%EB%A0%88%EC%BD%94%EB%93%9C-%EA%B5%AC%EC%A1%B0.html</guid>
       <description>&lt;h3 id=&#34;페이지-구조&#34;&gt;페이지 구조&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/xqzsbjzfgo3bbht/Screen%20Shot%202021-12-16%20at%2011.36.21%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -84,10 +84,43 @@
 &lt;p&gt;그렇다면 메모리 단편화에 대해서 생각을 해봐야할 것이다. 메모리 단편화를 위해서 빈 메모리 공간을 정리해줄 필요가 있는데 두가지 방식이 있다. 레코드가 업데이트 될 때마다 정리를 해주는 방식과 실제 단편화 때문에 데이터를 넣기 힘들 때 정리를 하는 방식이 있다. 보통 후자를 사용한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;레코드-구조&#34;&gt;레코드 구조&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;관계형 모델에서, 테이블에 대한 정보 및 테이블이 가지고 있는 컬럼 및 자료형은 시스템 카탈로그에 저장된다. 그 이유는 레코드에서 타입을 구분하기 위한 노력을 하지 않아도 되므로 저장공간을 더 많이 확보할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 레코드는 저장하는 데이터에 대한 어떠한 정보도 가지고 있지 않으며 테이블 정보는 시스템 카탈로그에 저장된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 레코드에서 필드 타입은 구분되지 않는다. 또한 자바와 같이 직렬화를 하지 않으며 데이터베이스에 저장된 바이트 형태 그대로 메모리에서 보여지게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 각 필드를 어떻게 구분할지에 대한 문제가 생기게 된다. 간단하게 생각하면 CSV 파일 처럼, 구분자를 넣어줄 수도 있지만 이는 파싱을 해야하며 또한 낭비되는 메모리가 발생한다. 각 필드마다 &lt;code&gt;,&lt;/code&gt; 구분자를 넣어줘야하기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/wtrimgfa4k9hqy3/Screen%20Shot%202021-12-16%20at%203.57.29%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;결론은 레코드에 해더를 생성하고 그 헤더에서 각 필드의 마지막 위치를 가리키는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가변 길이 필드는 뒤로 늘어나야 하므로, 고정 길이 필드가 앞으로 오게 되고 뒤에 이어서 가변 길이 필드가 저장된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=z26fEmCYdIQ&amp;amp;list=PLzzVuDSjP25SJBxWLPfYLwGlOPHmKL775&amp;amp;index=8&#34;&gt;Lec 4 5 Part 2 Pages for Fixed Length&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=z26fEmCYdIQ&amp;amp;list=PLzzVuDSjP25SJBxWLPfYLwGlOPHmKL775&amp;amp;index=8&#34;&gt;Lec 4 5 Part 2 Pages for Fixed Length&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=gcQgJMRr60Y&amp;amp;list=PLzzVuDSjP25SJBxWLPfYLwGlOPHmKL775&amp;amp;index=10&#34;&gt;Lec 4 5 Part 4 Record Layout&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=ZOOM4wxUpjU&amp;amp;list=PLzzVuDSjP25SJBxWLPfYLwGlOPHmKL775&amp;amp;index=11&#34;&gt;Lec 4 5 Part 5 Summary&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
