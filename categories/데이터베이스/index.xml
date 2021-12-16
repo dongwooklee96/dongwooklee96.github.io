@@ -6,7 +6,92 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 15 Dec 2021 10:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Dec 2021 10:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데이터베이스 페이지 구조</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B5%AC%EC%A1%B0.html</link>
+      <pubDate>Thu, 16 Dec 2021 10:20:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EA%B5%AC%EC%A1%B0.html</guid>
+      <description>&lt;h3 id=&#34;페이지-구조&#34;&gt;페이지 구조&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/xqzsbjzfgo3bbht/Screen%20Shot%202021-12-16%20at%2011.36.21%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;페이지에는 페이지 헤더가 있는데 페이지에 대한 메타 정보를 담고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;레코드의 숫자, 남은 공간, 다음 또는 이전 페이지에 대한 포인터, 비트맵 그리고 슬롯 테이블을 가지고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페이지에 레이아웃은 두 가지 관점이 있는데 첫번째로 페이지 안에 저장될 레코드의 형태가 고정 길이를 가지는 경우와 가변 길이를 가지는 경우가 있다. 두 번째는 페이지가 패킹 되거나 언패킹 되는 경우가 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페이지에서 레코드는 레코드 아이디를 통해서 찾을 수 있으며 레코드 아이디는 다음과 같은 형태로 저장이 된다. (페이지 번호, 페이지에서 찾으려는 레코드 아이디) 이와 같은 형태로 저장이 되므로 어떤 페이지에 레코드가 어디에 위치해있는지를 찾을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;고정-길이-레코드-패킹-된-경우-페이지-레이아웃&#34;&gt;고정 길이 레코드, 패킹 된 경우 페이지 레이아웃&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/nw0vysqb4e7hyji/Screen%20Shot%202021-12-16%20at%2011.46.03%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이런 구조인 경우 레코드를 추가할 때 빈 공간을 찾기 쉽다. 우선 페이지 헤더로 가서, 레코드의 숫자를 확인한 다음에 마지막 레코드로 가서 레코드를 추가하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 삭제의 경우에는 삭제하고 나서, 삭제된 레코드 공간을 땡겨야 한다. 맨 끝에 레코드를 삭제하는 경우에는 아무것도 하지 않아도 되지만, 중간 레코드를 삭제 했다면 삭제된 레코드의 공간을 뒤의 레코드부터 땡겨서 앞으로 채워야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 레코드 아이디 또한 변경되게 된다. 따라서 페이지안의 레코드가 변경 되는 경우 연산이 많아 진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;고정-길이-레코드-언패킹&#34;&gt;고정 길이 레코드, 언패킹&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/l3byuyym493t1o2/Screen%20Shot%202021-12-16%20at%2011.54.48%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이 구조의 경우 페이지 해더에 비트맵 정보가 포함된다. 이 비트맵 정보를 참조해서 레코드가 비어있는지 아니면 비어있지 않은지 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터를 추가할 경우에는 페이지 헤더에서 비어있는 레코드를 확인할 수 있는 비트맵을 참고하여 가장 먼저 비어있는 페이지를 데이터를 추가하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;삭제하는 경우에는 그냥 간단하게 비트맵에 해당 레코드 위치의 비트를 삭제되었다고 바꾸면 된다. 언패킹 구조의 경우에 추가 및 삭제가 비트 연산을 통해서 이루어지므로, 매우 빠르다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;가변-길이-레코드&#34;&gt;가변 길이 레코드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/pkcfetc1mbebkat/Screen%20Shot%202021-12-16%20at%201.46.14%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;가변 길이 레코드의 경우, 페이지 맨 아래 부분에 슬롯 디렉터리를 가진다. 이를 푸터라고 부른다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;맨 마지막 슬롯은 비어있는 레코드의 위치를 나타낸다. 따라서 항상 맨 마지막 레코드의 끝을 가리키고 있다고 생각하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 각 슬롯은 레코드의 위치와 길이를 가지고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/cgfkgeetrkfw3qm/Screen%20Shot%202021-12-16%20at%201.48.56%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;페이지에서 레코드를 삭제하는 방법은 더 간단하다. 슬롯에서 해당 레코드를 가리키고 있는 슬롯을 지우면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;페이지에서 새로운 레코드를 더하는 것은 빈 슬롯을 찾아서 거기에 새로 추가될 레코드의 주소를 가리키면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그렇다면 메모리 단편화에 대해서 생각을 해봐야할 것이다. 메모리 단편화를 위해서 빈 메모리 공간을 정리해줄 필요가 있는데 두가지 방식이 있다. 레코드가 업데이트 될 때마다 정리를 해주는 방식과 실제 단편화 때문에 데이터를 넣기 힘들 때 정리를 하는 방식이 있다. 보통 후자를 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=z26fEmCYdIQ&amp;amp;list=PLzzVuDSjP25SJBxWLPfYLwGlOPHmKL775&amp;amp;index=8&#34;&gt;Lec 4 5 Part 2 Pages for Fixed Length&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>데이터베이스 파일 구조 방식</title>
       <link>https://dongwooklee96.github.io/post/2021/12/15/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0-%EB%B0%A9%EC%8B%9D.html</link>

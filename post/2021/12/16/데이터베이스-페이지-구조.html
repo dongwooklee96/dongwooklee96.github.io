@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
+     crossorigin="anonymous">
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>데이터베이스 페이지 구조 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">데이터베이스 페이지 구조</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/12/16</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="페이지-구조">페이지 구조</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/xqzsbjzfgo3bbht/Screen%20Shot%202021-12-16%20at%2011.36.21%20AM.png" alt=""></p>
+<ul>
+<li>
+<p>페이지에는 페이지 헤더가 있는데 페이지에 대한 메타 정보를 담고 있다.</p>
+</li>
+<li>
+<p>레코드의 숫자, 남은 공간, 다음 또는 이전 페이지에 대한 포인터, 비트맵 그리고 슬롯 테이블을 가지고 있다.</p>
+</li>
+<li>
+<p>페이지에 레이아웃은 두 가지 관점이 있는데 첫번째로 페이지 안에 저장될 레코드의 형태가 고정 길이를 가지는 경우와 가변 길이를 가지는 경우가 있다. 두 번째는 페이지가 패킹 되거나 언패킹 되는 경우가 있다.</p>
+</li>
+<li>
+<p>페이지에서 레코드는 레코드 아이디를 통해서 찾을 수 있으며 레코드 아이디는 다음과 같은 형태로 저장이 된다. (페이지 번호, 페이지에서 찾으려는 레코드 아이디) 이와 같은 형태로 저장이 되므로 어떤 페이지에 레코드가 어디에 위치해있는지를 찾을 수 있다.</p>
+</li>
+</ul>
+<h3 id="고정-길이-레코드-패킹-된-경우-페이지-레이아웃">고정 길이 레코드, 패킹 된 경우 페이지 레이아웃</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/nw0vysqb4e7hyji/Screen%20Shot%202021-12-16%20at%2011.46.03%20AM.png" alt=""></p>
+<ul>
+<li>
+<p>이런 구조인 경우 레코드를 추가할 때 빈 공간을 찾기 쉽다. 우선 페이지 헤더로 가서, 레코드의 숫자를 확인한 다음에 마지막 레코드로 가서 레코드를 추가하면 된다.</p>
+</li>
+<li>
+<p>하지만 삭제의 경우에는 삭제하고 나서, 삭제된 레코드 공간을 땡겨야 한다. 맨 끝에 레코드를 삭제하는 경우에는 아무것도 하지 않아도 되지만, 중간 레코드를 삭제 했다면 삭제된 레코드의 공간을 뒤의 레코드부터 땡겨서 앞으로 채워야 한다.</p>
+</li>
+<li>
+<p>그리고 레코드 아이디 또한 변경되게 된다. 따라서 페이지안의 레코드가 변경 되는 경우 연산이 많아 진다.</p>
+</li>
+</ul>
+<h3 id="고정-길이-레코드-언패킹">고정 길이 레코드, 언패킹</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/l3byuyym493t1o2/Screen%20Shot%202021-12-16%20at%2011.54.48%20AM.png" alt=""></p>
+<ul>
+<li>
+<p>이 구조의 경우 페이지 해더에 비트맵 정보가 포함된다. 이 비트맵 정보를 참조해서 레코드가 비어있는지 아니면 비어있지 않은지 확인할 수 있다.</p>
+</li>
+<li>
+<p>데이터를 추가할 경우에는 페이지 헤더에서 비어있는 레코드를 확인할 수 있는 비트맵을 참고하여 가장 먼저 비어있는 페이지를 데이터를 추가하면 된다.</p>
+</li>
+<li>
+<p>삭제하는 경우에는 그냥 간단하게 비트맵에 해당 레코드 위치의 비트를 삭제되었다고 바꾸면 된다. 언패킹 구조의 경우에 추가 및 삭제가 비트 연산을 통해서 이루어지므로, 매우 빠르다.</p>
+</li>
+</ul>
+<h3 id="가변-길이-레코드">가변 길이 레코드</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/pkcfetc1mbebkat/Screen%20Shot%202021-12-16%20at%201.46.14%20PM.png" alt=""></p>
+<ul>
+<li>
+<p>가변 길이 레코드의 경우, 페이지 맨 아래 부분에 슬롯 디렉터리를 가진다. 이를 푸터라고 부른다.</p>
+</li>
+<li>
+<p>맨 마지막 슬롯은 비어있는 레코드의 위치를 나타낸다. 따라서 항상 맨 마지막 레코드의 끝을 가리키고 있다고 생각하면 된다.</p>
+</li>
+<li>
+<p>그리고 각 슬롯은 레코드의 위치와 길이를 가지고 있다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/cgfkgeetrkfw3qm/Screen%20Shot%202021-12-16%20at%201.48.56%20PM.png" alt=""></p>
+<ul>
+<li>
+<p>페이지에서 레코드를 삭제하는 방법은 더 간단하다. 슬롯에서 해당 레코드를 가리키고 있는 슬롯을 지우면 된다.</p>
+</li>
+<li>
+<p>페이지에서 새로운 레코드를 더하는 것은 빈 슬롯을 찾아서 거기에 새로 추가될 레코드의 주소를 가리키면 된다.</p>
+</li>
+<li>
+<p>그렇다면 메모리 단편화에 대해서 생각을 해봐야할 것이다. 메모리 단편화를 위해서 빈 메모리 공간을 정리해줄 필요가 있는데 두가지 방식이 있다. 레코드가 업데이트 될 때마다 정리를 해주는 방식과 실제 단편화 때문에 데이터를 넣기 힘들 때 정리를 하는 방식이 있다. 보통 후자를 사용한다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=z26fEmCYdIQ&amp;list=PLzzVuDSjP25SJBxWLPfYLwGlOPHmKL775&amp;index=8">Lec 4 5 Part 2 Pages for Fixed Length</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
