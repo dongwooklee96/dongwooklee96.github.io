@@ -6,7 +6,72 @@
     <description>Recent content in 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 15 Dec 2021 17:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 19 Dec 2021 18:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>이상한 리뷰의 앨리스 영상 구성 방식 분석</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/19/%EC%9D%B4%EC%83%81%ED%95%9C-%EB%A6%AC%EB%B7%B0%EC%9D%98-%EC%95%A8%EB%A6%AC%EC%8A%A4-%EC%98%81%EC%83%81-%EA%B5%AC%EC%84%B1-%EB%B0%A9%EC%8B%9D-%EB%B6%84%EC%84%9D.html</link>
+      <pubDate>Sun, 19 Dec 2021 18:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/19/%EC%9D%B4%EC%83%81%ED%95%9C-%EB%A6%AC%EB%B7%B0%EC%9D%98-%EC%95%A8%EB%A6%AC%EC%8A%A4-%EC%98%81%EC%83%81-%EA%B5%AC%EC%84%B1-%EB%B0%A9%EC%8B%9D-%EB%B6%84%EC%84%9D.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;컨퍼런스의 내용을 10분 내외의 동영상으로 요약해서 영상을 만들자는 생각을 한 적이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오래동안 미뤄두다가 이제야 구체적인 방향을 잡기 시작했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이전에 자기 계발 채널중에서 &lt;code&gt;이상한 리뷰의 앨리스&lt;/code&gt; 채널을 보았는데 이 방식을 참고하여 요약한 내용을 전달하면 영상에서 전달하려는 메시지를 잘 전달할 수 있을 것 같았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 해당 채널에서 어떻게 메시지를 전달하는지 분석을 해보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;분석한-내용&#34;&gt;분석한 내용&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/bjuztxtz99x619h/Screen%20Shot%202021-12-19%20at%206.32.58%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;처음에는 의미를 알 수 없는 영상으로 시작한다. 그리고 처음에 보여주는 영상은 시청자들의 호기심을 자극하는 용도인 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8rj58jx4wkntcwm/Screen%20Shot%202021-12-19%20at%206.33.46%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;그리고 나서, 주제와 연관된 이야기를 하면서, 마지막으로 해당 이야기를 할 연사에 대해서 소개를 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/s85mo9o3b2h2nep/Screen%20Shot%202021-12-19%20at%206.35.22%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;그 다음에 강연의 핵심 내용을 편집해서 보여준다. 그리고 나서, 강연의 내용을 알기 쉽게 풀어서 이야기를 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/s7eostb814cw0r4/Screen%20Shot%202021-12-19%20at%206.36.08%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이어서, 강연과 해설을 반복해서 하고 싶은 이야기를 풀어나간다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;느낀점&#34;&gt;느낀점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;영상을 어떻게 편집할지에 대한 고민도 필요하겠지만 그보다 컨텐츠를 어떻게 구성할 것인가?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 어떻게 요약을 할지에 대한 고민이 선행되어야 할 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;영상을 편집하기에 앞서서 내가 요약한 내용을 어떻게 풀어갈지, 그리고 정리를 어떻게 해야할지에 대해서 평소에 많은 생각을 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/channel/UCzmyfZl7lxV-lLZxpSJWsWQ&#34;&gt;이상한 리뷰의 앨리스&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=PRORRPyqf2Y&#34;&gt;이상한 리뷰의 앨리스 - 부자들은 무의식적으로 이것을 할 수 있습니다
+&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>공식 문서를 한글로 편하게 읽을 수 있는 사이트</title>
       <link>https://dongwooklee96.github.io/post/2021/12/15/%EA%B3%B5%EC%8B%9D-%EB%AC%B8%EC%84%9C%EB%A5%BC-%ED%95%9C%EA%B8%80%EB%A1%9C-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%9D%BD%EC%9D%84-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</link>
