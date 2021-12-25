@@ -6,13 +6,166 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 22 Dec 2021 11:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Dec 2021 16:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>인덱스 (INDEX) 정리</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC.html</link>
+      <title>인덱스 (INDEX) 정리 2</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/25/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-2.html</link>
+      <pubDate>Sat, 25 Dec 2021 16:20:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/25/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-2.html</guid>
+      <description>&lt;h3 id=&#34;인덱스가-지원하는-연산&#34;&gt;인덱스가 지원하는 연산&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;동등 조회 (=)&lt;/li&gt;
+&lt;li&gt;범위 조회 (&amp;lt;, &amp;gt;, &amp;lt;=, &amp;gt;=, BETWEEEN)&lt;/li&gt;
+&lt;li&gt;B+TREE 인덱스는 위의 두개의 연산을 모두 지원하지만, 해시 인덱스는 오직 동등 연산만 지원을 한다.&lt;/li&gt;
+&lt;li&gt;그 밖에 다양한 데이터 종류를 처리하기 위한 많은 종류의 인덱스가 종류한다.  (R-TREE, KD-TREE, GiST)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;인덱스-키와-정렬&#34;&gt;인덱스 키와 정렬&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;B+TREE와 같은 정렬된 인덱스는 키를 기준으로 사전 순서대로 정렬된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;복합 인덱스의 경우에는 만약 (k1, k2)로 이루어진 경우에는 (k1, k2) 이후에 오는 컬럼에 대해서 동등 연산이나, 범위 연산을 하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이후에 몇까지 예제를 보여줄 텐데, 초록색으로 표시된 부분은 인덱스가 범위 접근을 할 수 있다는 뜻이고 빨간색으로 표시된 부분은 인덱스가 범위로 접근하지 못한다는 뜻이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;먼저 &amp;lt;AGE, SALARY&amp;gt;에 대해서 복합 인덱스가 있다고 가정을 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ar7d3zjy07jdp04/Screen%20Shot%202021-12-25%20at%204.35.27%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;만약 &lt;code&gt;AGE=31 &amp;amp; SALARY=400&lt;/code&gt; 인 조건에 대해서 인덱스로 빠르게 조회가 가능한지 묻는다면 가능하다. 먼저 31을 빠르게 찾고 나서, SALARY로 정렬되어 있기 때문에 빠르게 찾을 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/582hu7tklodcd4z/Screen%20Shot%202021-12-25%20at%204.38.08%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;만약 &lt;code&gt;AGE=55 % SALARY &amp;gt; 200&lt;/code&gt; 인 경우에 대해서 인덱스로 빠르게 조회가 가능한지 묻는다면 이 역시도 가능하다. 위와 같은 이유로 SALARY 역시 정렬되어 있기 때문이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/fjn2tcz8y8ujpdj/Screen%20Shot%202021-12-25%20at%204.39.49%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;만약 &lt;code&gt;AGE &amp;gt; 31 &amp;amp; SALARY = 400&lt;/code&gt;을 찾는다면 인덱스로 빠르게 조회할 수 없다. 왜냐하면, AGE가 같지 않은 상태에서 SALARY는 더 이상 정렬 상태임을 보장할 수 없기 때문이다. 따라서 AGE에 따라서 인덱스 범위 연산을 하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이와 같은 이유로 &lt;code&gt;SALARY = 300&lt;/code&gt; 또한 인덱스를 효율적으로 사용하지 못한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;데이터-엔트리-저장소&#34;&gt;데이터 엔트리 저장소&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;세가지의 구현 방법이 있다. 첫 번째는 값으로 저장하는 것이고 두번째는 값을 가리키는 참조를 생성하는 것이다. 마지막은 리스트 형태로 참조하는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;1-값으로-저장되는-형태&#34;&gt;1. 값으로 저장되는 형태&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/zoif1zn93le8kp0/Screen%20Shot%202021-12-25%20at%204.56.12%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;포인터가 필요없는 형태이다. 리프 노드에 실제 레코드가 저장되어 있으며 키와 값을 분리할 필요가 없다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-참조로-가리키는-형태&#34;&gt;2. 참조로 가리키는 형태&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/osx3ygt89cz2o1n/Screen%20Shot%202021-12-25%20at%204.58.32%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같은 형태로는 우선 키 값으로 데이터를 찾아가면 해당 데이터에 페이지 아이디랑 슬롯 아이디가 적혀 있는 형태이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서, (2, JOE)을 찾는다면 인덱스로 키값이 2인 곳을 찾아가면 데이터에는 [1, 1]이 들어있다. 이가 뜻하는 것은 페이지 1, 슬롯 1을 찾아가라는 뜻이다. 아래 그림에 나와있듯이 해당 위치에 가면 값을 찾을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-하나의-키로-여러-레코드를-참조하는-형태&#34;&gt;3. 하나의 키로 여러 레코드를 참조하는 형태&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/21dxclvpotdymhd/Screen%20Shot%202021-12-25%20at%205.06.01%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;하나의 키가 많은 레코드를 매칭할 수 있는 구조이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 형태는 키에 따른 중복 데이터가 많은 경우에 유용하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2번과-3번의-차이점&#34;&gt;2번과 3번의 차이점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/vd0pejzgjpwn6lz/Screen%20Shot%202021-12-25%20at%205.10.48%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;인덱스를 통해서 데이터를 참조하는 형태는 하나의 테이블의 여러가지 인덱스를구현하는데 중요하다. 그렇지 않으면 인덱스를 생성할 때마다 튜플을 복제해서 만들어야 할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한, 데이터를 참조하는 구조가 아니라면, 테이블의 데이터를 업데이트 할 때마다 엄청난 부하가 생길 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;왼쪽의 경우에는 인덱스가 가리키고 있는 레코드와 일대일로 매칭이 되지만, 오른쪽의 경우에는 인덱스가 여러 개의 레코드를 가리키고 있는 형태이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;클러스트-인덱스와-클러스트-되지-않은-인덱스&#34;&gt;클러스트 인덱스와 클러스트 되지 않은 인덱스&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/rlxqjk5xfl45emj/Screen%20Shot%202021-12-25%20at%205.29.25%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위에서 보았던 2, 3번 형태의 참조하는 형태의 인덱스는 클러스트 되거나 클러스터링 되지 않은 인덱스 형태로 만들 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클러스트된 인덱스를 만들려면 먼저 힙 파일을 정렬해야한다, 클러스터링 된 인덱스는 접근하려는 힙 파일이 순차적으로 되어있지만, 클러스터링 되지 않은 인덱스는 힙파일 순서가 정렬되어 있지 않아서, 이곳 저곳 가리키고 있는 모습을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클러스트 되지 않은 인덱스를 통해서 접근하는 경우에는 더 많은 페이지에 접근해야하므로, 더 많은 I/O가 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;클러스트된-인덱스에-데이터가-삽입-되는-경우&#34;&gt;클러스트된 인덱스에 데이터가 삽입 되는 경우&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/z8lfdwl20h65r1j/Screen%20Shot%202021-12-25%20at%205.36.39%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;삽입하려는 곳에 공간이 빈다면, 바로 삽입하면 되지만, 그렇지 않은 경우에는 새로운 블록을 생성하게 되고 그곳을 가리키게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 많은 데이터가 삽입되면 힙 파일 정렬 구조는 깨지게 되며 다시 힙 파일을 정렬해줘야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클러스터링 된 인덱스는 더 적은 I/O 를 통해서 더 빠른 조회가 가능하다. 또한 범위를 조회할 때 더 빠른 특징을 가지고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 이를 유지하는데 많은 비용이 든다는 단점이 있다. 왜냐하면 업데이트 될 떄마다 구조가 깨지기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 많은 업데이트 연산 후에 백 그라운드 연산으로, 정렬을 다시 해주거나, 힙 파일은 새롭게 더해지는 레코드를 위해서 오직 2/3 만 채우는 식으로 최적화를 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;인덱스-키로-길이가-변하는-키를-사용하였을-때&#34;&gt;인덱스 키로 길이가 변하는 키를 사용하였을 때&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ldnry21ait4uuxo/Screen%20Shot%202021-12-25%20at%207.05.20%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이전에는 길이가 변하지 않는 정수형을 키로 사용하는 예제를 다루었지만, 이번에는 문자열 같은 가변 데이터를 키로 사용하였을 떄 어떨지를 다루어보겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;prefix로-키를-압축시키는-방법&#34;&gt;PREFIX로 키를 압축시키는 방법&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/o41zr22233altju/Screen%20Shot%202021-12-25%20at%207.17.14%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;루트나 중간 노드의 키들의 &lt;code&gt;PREFIX&lt;/code&gt;를 뽑아서 저장하는 방식이다. 하지만 이 방식은 키에 따라서 균일하게 파티셔닝이 안된다는 단점이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 리프 노드 부터 압축하는 방식을 사용하기로 한다. 이 방식에서는 분할 할 때 최소의 &lt;code&gt;PREFIX&lt;/code&gt;를 결정하고 나서 위로 복사하여 올린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;prefix--suffix로-키를-압축하는-방법&#34;&gt;PREFIX &amp;amp; SUFFIX로 키를 압축하는 방법&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/gydyu8bys6eorjw/Screen%20Shot%202021-12-25%20at%207.25.47%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;많은 키들이 &lt;code&gt;PREFIX&lt;/code&gt;로 하였을 떄 많은 공통된 부분이 있다. 따라서 공통된 &lt;code&gt;PREFIX&lt;/code&gt;를 헤더로 보내고 남은 &lt;code&gt;SUFFIX&lt;/code&gt;만 저장하는 방식이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=hSEWD2XIcL4&amp;amp;list=PLzzVuDSjP25QCp7S4_8b-rX9vytv6OqsZ&#34;&gt;LECTURE 6 - INDICES &amp;amp; B+TREE REFINEMENTS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>인덱스 (INDEX) 정리 1</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-1.html</link>
       <pubDate>Wed, 22 Dec 2021 11:20:24 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC.html</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-1.html</guid>
       <description>&lt;h3 id=&#34;데이터에-접근하는-두-가지-방법&#34;&gt;데이터에 접근하는 두 가지 방법&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/kochddz88kb868o/Screen%20Shot%202021-12-22%20at%209.59.14%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
