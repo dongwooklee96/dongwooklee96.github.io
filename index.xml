@@ -6,7 +6,327 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 27 Dec 2021 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Dec 2021 10:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬으로 살펴보는 아키텍처 패턴 - 8장 (이벤트와 메시지 버스)</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/29/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-8%EC%9E%A5-%EC%9D%B4%EB%B2%A4%ED%8A%B8%EC%99%80-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B2%84%EC%8A%A4.html</link>
+      <pubDate>Wed, 29 Dec 2021 10:06:33 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/29/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-8%EC%9E%A5-%EC%9D%B4%EB%B2%A4%ED%8A%B8%EC%99%80-%EB%A9%94%EC%8B%9C%EC%A7%80-%EB%B2%84%EC%8A%A4.html</guid>
+      <description>&lt;h3 id=&#34;가장-먼저-웹-컨트롤러가-지저분해지는-일을-막기&#34;&gt;가장 먼저 웹 컨트롤러가 지저분해지는 일을 막기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;@app.route(&amp;quot;/allocate&amp;quot;, methods=[&#39;POST&#39;])
+def allocate_endpoint():
+    line = model.OrderLine(
+        request.json[&#39;orderid&#39;],
+        request.json[&#39;sku&#39;],
+        request.json[&#39;qty&#39;],
+    )
+    try:
+        uow = unit_of_work.SqlAlchemyUnitOfWork()
+        batchref = services.allocate(line, uow)
+    except (model.OutOfStock, services.InvalidSku) as e:
+        send_mail(
+            &#39;out of stock&#39;,
+            &#39;stock_admin@made.com&#39;,
+            f&#39;{line.orderid} - {line.sku}&#39;
+        )
+        return jsonify({&#39;message&#39;: str(e)}), 400
+    return jsonify({&#39;batchref&#39;: batchref}), 201
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;해당 코드는 재고가 없을 때 이메일을 전송하는 코드이다, 이처럼 컨트롤러 여기저기에 기능을 끼워 넣으면 전체가 빠르게 더러워진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이메일을 보내는 일은 HTTP 계층이 처리해야할 일이 아니며, 이렇게 새롭게 추가된 기능에 대한 단위 테스트를 진행할 수 있어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;모델이-지저분-해지는-일을-막기&#34;&gt;모델이 지저분 해지는 일을 막기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;def allocate(line: OrderLine, batches: List[Batch]) -&amp;gt; str:
+    try:
+
+        batch = next(
+            b for b in sorted(batches) if b.can_allocate(line)
+        )
+        batch.allocate(line)
+        return batch.reference
+    except StopIteration:
+        email.send_mail(&#39;stock@made.com&#39;, f&#39;Out of stock for {line.sku}&#39;)
+        raise OutOfStock(f&#39;Out of stock for sku {line.sku}&#39;)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;컨트롤러가 복잡해지는 것을 막기 위해서, 모델에서 이메일을 전송하는 코드를 넣었는데 이 역시도 좋지 않은 구조이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메일을 전송하는 코드는 인프라 영역이며, 인프라 영역에 의존하는 것은 좋지 않다. 이런 이메일 송신은 시스템의 멋지고 깔끔한 흐름을 더럽힌다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 모델은 &amp;lsquo;실제 할당 할 수 있는 것보다 더 많은 상품을 할당할 수는 없다&amp;rsquo;라는 규칙에 집중 해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 모델의 역할은 재고가 부족한지 알아내는 것일 뿐, 통지를 보내는 것은 다룬 곳에서 한다. 이러한 기능은 끌 수도 있고 켤 수도 있어야 하며, 모데인 모델의 규칙을 변경하지 않아도 이메일 대신에 SMS 로도 통지를 할 수 있어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;서비스-계층이-지저분-해지는-것을-막기&#34;&gt;서비스 계층이 지저분 해지는 것을 막기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;def allocate(orderid: str, sku: str, qty: int, uow: unit_of_work.AbstractUnitOfWork) -&amp;gt; str:
+    line = OrderLine(orderid, sku, qty)
+    with uow:
+        product = uow.products.get(sku=line.sku)
+        if product is None:
+            raise InvalidSku(f&#39;Invalid sku {line.sku}&#39;)
+        try:
+            batchref = product.allocate(line)
+            uow.commit()
+            return batchref
+        except model.OutOfStock:
+            email.send_mail(&#39;stock@made.com&#39;, f&#39;Out of stock for {line.sku}&#39;)
+            raise
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;lsquo;재고를 할당 하려고 시도하고 할당에 실패하면 이메일을 보내야 한다&amp;rsquo;는 요구사항은 워크 플로우 오케스트레이션에 속한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 동작은 어던 목표를 달성하기 위해서 시스템을 따라야하는 단계이다. 오케스트레이션을 처리하기 위해서 서비스 계층을 작성했지만, 서비스 게층에서 이메일 기능을 추가하는 것이 적합하지 않아보인다. 예외를 잡아서 발생시키는 코드는 왠지 모르게 마음이 불편하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 실제로 단일 책임 원칙 (SRP)에 위배된다. 여기서 처리하는 유스 케이스는 할당이다. 서비스 계층에서 하는 일은 할당이지, 이메일을 보내는 일도 하고 있지 않다. SRP를 위배하는지 쉽게 확인할 수 있는 방법은 ~를 한 다음에 그리고를 붙여서 함수가 하는 일을 설명하고 있다면 SRP를 위배하고 있을 가능성이 높다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 문제를 해결하기 위해서는 오케스트레이션을 여러 단계로 구분해서 각각의 관심사가 서로 얽히는 일이 없도록 해야 한다. 도메인 모델의 일은 품절을 알아내는 것이며 통지를 보내는 일은 다른 존재에게 부여해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 기능을 켜거나 끌 수 있고, 이메일 대신에 SMS로 통지 방식을 바꾸더라도 모델의 규칙을 바꿀 필요는 없다. 그리고 세부 구현으로 서비스 계층을 분리한다. 의존성 역전 원칙을 통지에도 적용해서 작업 단위 패턴을 통해서 데이터베이스에 대한 의존성을 피했던 것 처럼 서비스 계층이 통지에 직접 의존하지 않고 추상화에 의존하도록 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;메시지-버스&#34;&gt;메시지 버스&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;소개하려는 모델은 도메인 이벤트와 메시지 버스이다. 이는 여러 가지 방법으로 구현이 가능하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;첫째로, 모델은 이메일을 신경쓰지 않고 이벤트 기록을 담당한다. 이벤트는 발생한 일에 대한 사실을 뜻한다. 이벤트에 응답하고 새로운 연산을 실행하기 위해서 메시지 버스를 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트는 값 객체 (VO)에 속한다. 이벤트는 순수 데이터 구조이므로 아무런 동작이 없다. 이벤트를 항상 도메인 언어로 이름을 붙여야 한다. 항상 이벤트를 도메인 모델의 일부분으로 간주한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;class Event:
+    pass
+
+
+@dataclass
+class OutOfStock(Event):
+    sku: str
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 모델은 발생한 사실을 기록하기 위해서 이벤트를 발생시킨다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;외부에서 볼 때 이벤트 발생이 어떻게 보이는지 다음 예제를 통해서 알 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;def test_records_out_of_stock_event_if_cannot_allocate():
+    batch = Batch(&#39;batch1&#39;, &#39;SMALL-FORK&#39;, 10, eta=today)
+    product = Product(sku=&amp;quot;SMALL-FORK&amp;quot;, batches=[batch])
+    product.allocate(OrderLine(&#39;order1&#39;, &#39;SMALL-FORK&#39;, 10))
+
+    allocation = product.allocate(OrderLine(&#39;order2&#39;, &#39;SMALL-FORK&#39;, 1))
+
+    assert product.events[-1] == events.OutofStock(sku=&amp;quot;SMALL-FORK&amp;quot;)
+    assert allocation is None
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;애그리게이트는 &lt;code&gt;events&lt;/code&gt;라는 새로운 속성을 외부로 노출하고 애트리뷰트에 발생한 일에 대한 사실은 &lt;code&gt;event&lt;/code&gt; 객체 형태로 남긴 리스트에 남아있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;class Product:
+
+    def __init__(self, sku: str, batches: List[Batch], version_number: int = 0):
+        self.sku = sku
+        self.batches = batches
+        self.version_number = version_number
+        self.events = []
+
+    def allocate(self, line: OrderLine) -&amp;gt; str:
+        try:
+            ...
+        except StopIteration:
+            self.events.append(events.OutOfStock(line.sku))
+            return None
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트는 애그리게이트 속성으로 존재하며, 이메일을 보내는 코드는 직접 호출하는 대신에 이메일이 필요한 품절 이벤트가 발생한 시점에 이벤트를 기록하고, 이때 도메인의 언어로만 이벤트를 기록하도록 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;품절인 경우에는 더 이상 예외를 던지지 않는다. 일반적으로 도메인 이벤트를 구현하고 있다면 도메인에서 동일한 개념을 표시하기 위해서 예외가 발생하면 안된다. 나중에 작업 단위 패턴에서 이벤트를 처리할 때 이벤트와 예외를 함께 사용하면 어떤 작업이 왜 발생했는지에 대한 추론이 어려워진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메시지 버스는 기본적으로 &amp;ldquo;이 이벤트가 발생하면 다음 핸들러 함수를 호출해야 한다&amp;quot;라고 말한다. 다른 말로, 메시지 버스는 간단한 발행/구독 시스템이다. 핸들러는 수신된 이벤트를 구독한다.
+수신 되는 이벤트는 버스에 시스템이 발행된 것이다. 글로 쓰면 실제보다 더 어려워 보이지만 보통은 딕셔너리를 이용하여 메시지 버스를 구현한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;def handle(event: events.Event):
+    for handler in HANDLERS[type(event)]:
+        handler(event)
+
+def send_out_of_stock_notification(event: events.OutOfStock):
+    email.send_mail(
+        &#39;stock@made.com&#39;,
+        f&#39;Out of stock for {event.sku}&#39;,
+    )
+
+HANDLERS = {
+    events.OutOfStock: [send_out_of_stock_notification],
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;첫-번째-선택지--서비스-계층이-모델에서-이벤트를-가져와-메시지-버스에-싣는-방법&#34;&gt;첫 번째 선택지 : 서비스 계층이 모델에서 이벤트를 가져와 메시지 버스에 싣는 방법&lt;/h4&gt;
+&lt;pre&gt;&lt;code&gt;def allocate(
+        order_id: str, sku: str, qty: int,
+        uow: unit_of_work.AbstractionUnitOfWork
+) -&amp;gt; str:
+    line = OrderLine(orderid, sku, qty)
+    with uow:
+        product = uow.products.get(sku=line.sku)
+        if product is None:
+            raise InvalidSku(f&#39;Invalid sku {line.sku}&#39;)
+        try:
+            batchref = product.allocate(line)
+            uow.commit()
+            return batchref
+        finally:
+            messagebus.handle(product.events)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서비스 계층은 이메일 인프라에 직접 의존하는 대신에 모델에서 받은 이벤트를 직접 메시지 버스에 올리는 일만 담당하게 됩니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이와 같이 서비스 계층이 명시적으로 이벤트를 받아서 통합한 다음에 메시지 버스에 전달하는 여러 시스템을 가지게 됩니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;두-번째-선택지--서비스-계층은-자신만의-이벤트를-발생한다&#34;&gt;두 번째 선택지 : 서비스 계층은 자신만의 이벤트를 발생한다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;이에 대한 변형으로는 서비스 계층이 도메인 모델에서 발생한 이벤트를 처리하기 보다 직접 이벤트를 만들고, 발생시키는 일을 책임지는 방법이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;def allocate(orderid: str, sku: str, qty: int,
+             uow: unit_of_work.AbstractionUnitOfWork) -&amp;gt; str:
+    line = OrderLine(orderid, sku, qty)
+    with uow:
+        product = uow.products.get(sku=line.sku)
+        if product is None:
+            raise InvalidSku(f&#39;Invalid sku {line.sku}&#39;)
+        batchref = product.allocate(line)
+        uow.commit()
+
+        if batchref is None:
+            messagebus.handle(events.OutofStock(line.sku))
+        return batchref
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;세-번째-선택지--uow가-메시지-버스에-이벤트를-발행한다&#34;&gt;세 번째 선택지 : UoW가 메시지 버스에 이벤트를 발행한다&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;UoW에는 이미 &lt;code&gt;try/finally&lt;/code&gt; 문이 있으며, &lt;code&gt;UoW&lt;/code&gt;는 저장소에 대한 접근을 제한하므로 현재 어떤 애그리게이트가 작업을 수행하는지 모두 알고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 &lt;code&gt;UoW&lt;/code&gt;는 이벤트를 찾아서 메시지 버스를 전달하기 좋은 곳이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;unit_of_work.py&lt;/strong&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import abc
+
+
+class AbstractUnitOfWork(abc.ABC):
+
+    def commit(self):
+        self.commit()
+        self.publish_events()
+
+    def publish_events(self):
+        for product in self.products.seen:
+            while product.events:
+                event = product.events.pop(0)
+                messagebus.handle(event)
+
+    @abc.abstractmethod
+    def _commit(self):
+        raise NotImplementedError
+
+
+class SqlAlchemyUnitOfWork(AbstractUnitOfWork):
+
+    def _commit(self):
+        self.session.commit()
+
+
+class AbstractRepository(abc.ABC):
+
+    def __init__(self):
+        self.seen = set()
+
+    def add(self, product: model.Product):
+        self._add(product)
+        self.seen.add(product)
+
+    def get(self, sku) -&amp;gt; model.Product:
+        product = self._get(sku)
+        if product:
+            self.seen.add(product)
+        return product
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이러한 가짜 객체를 유지보수 하면 일이 많아 질 것이라는 생각을 하겠지만 실제로 일이 늘어나는 것은 사실이나 아무 많이 일이 늘지는 않는다는 입장이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;도메인-이벤트의-장단점&#34;&gt;도메인 이벤트의 장/단점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;도메인 이벤트는 시스템에서 워크플로우를 다루는 또 다른 방법이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;도메인-이벤트의-장점&#34;&gt;도메인 이벤트의 장점&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;메시지 버스를 사용하면, 어떤 요청에 대한응답으로 여러 동작을 수행하는 경우 관심사를 멋지게 분리할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트 핸들러는 &amp;lsquo;핵심&amp;rsquo; 애플리케이션 로직과 깔끔하게 분리될 수 있다. 따라서 나중에 이벤트 핸들러 구현을 쉽게 변경할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 이벤트는 실세계를 모델링하기 아주 좋은 방법이다. 관계자들과 모델을 만들 때 도메인 이벤트를 비즈니스 언어의 일부분으로 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;도메인-이벤트의-단점&#34;&gt;도메인 이벤트의 단점&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;메시지 버스는 여러분의 머리에 맴도는 또 다른 요소이다. 작업 단위가 이벤트를 발생 시키는 방식의 구현은 깔끔하지만 신비롭기도 하다. 사람들에게 이메일을 보내지만 작업을 계속하고 싶을 경우 &lt;code&gt;commit&lt;/code&gt;을 언제 호출해야하는지 불분명하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;더구나 감춰진 이벤트 처리 코드가 동기적으로 실행된다. 즉 어떤 이벤트에 대한 모든 핸들러가 끝나기 전에는 서비스 계층 함수가 끝날 수 없다는 의미이다. 따라서 웹 엔드 포인트에서 예상 할 수 없는 성능 문제가 발생할 수 있다. (비동기 처리를 추가할 수 있지만 비동기 처리를 추가하면 모든 것이 복잡해진다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;더 일반적으로, 이벤트 기반 워크 플로우는 연속적으로 여러 핸들러로 분할 된 후 시스템에서 요청을 어떻게 처리하는지 살펴볼 수 있는 단일 지점이 존재하지 않아서 혼란을 야기할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트 핸들러들이 순환적으로 서로 의존해서 무한 루프를 발생 시킬 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정리&#34;&gt;정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트는 단순히 이메일을 보내는 것보다 훨씬 더 유용하다, 트랜잭션으로 격리된 두 요소가 있다면, 이벤트를 통해서 이 둘을 서로 최종 일관성 있게 만들 수 있다. 어떤 주문이 취소되면, 이 주문에 할당된 상품을 찾아서 할당을 없애야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이벤트는 단일 책임 원칙을 지키도록 돕는다. 한곳에서 여러 관심사를 처리하면 코드가 꼬여 버린다. 이벤트를 사용하면 주된 유스케이스와 부수적인 유스 케이스를 분리해 모든 것을 깔끔하게 유지할 수 있다. 이벤트를 사용해 애그리게이트들이 서로 통신하고 여러 테이블을 락으로 잠그는 오랫동안 실행된 트랜잭션이 더 이상 필요하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;메시지 버스는 메시지를 핸들러에게 연결한다. 메시지 버스를 이벤트와 이벤트 소비자를 연결하는 사전으로 생각할 수 있다. 메시지 버스는 이벤트의 의미를 전혀 모른다. 메시지 버스는 단지 시스템에서 메시지를 전달하기 위한 둔한 인프라일 뿐이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;amp;start=slayer&#34;&gt;파이썬으로 살펴보는 아키텍처 패턴&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2021/12/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
