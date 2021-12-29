@@ -6,7 +6,168 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 25 Dec 2021 16:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Dec 2021 21:40:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데이터베이스 버퍼매니저(BUFFER MANAGER)란 무엇인가?</title>
+      <link>https://dongwooklee96.github.io/post/2021/12/29/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%B2%84%ED%8D%BC%EB%A7%A4%EB%8B%88%EC%A0%80buffer-manager%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.html</link>
+      <pubDate>Wed, 29 Dec 2021 21:40:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/12/29/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%B2%84%ED%8D%BC%EB%A7%A4%EB%8B%88%EC%A0%80buffer-manager%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.html</guid>
+      <description>&lt;h3 id=&#34;버퍼-매니저&#34;&gt;버퍼 매니저&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/a6e5b0tdkf9ii4m/Screen%20Shot%202021-12-29%20at%209.24.10%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;버퍼 매니저는 인덱스와 디스크 사이에 있는 중간 층이다. 파일과 인덱스 관리를 하는데 중간의 추상 계층을 제공한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/qk9oc1kvnugyigj/Screen%20Shot%202021-12-29%20at%209.34.21%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;버퍼 풀은 페이지 단위의 프레임이라고 하는 것의 집합으로 구성되어 있다. 버퍼 매니저의 주요 역할은 메인 메모리에서 디스크에 저장된 데이터를 조작하는 것이다. 따라서 마치 디스크에 접근하는 것이 아니라, 모든 것이 메인 메모리에서 끝나게 느끼는 것이 목적이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 실제 모든 데이터 연산은 버퍼 풀과 디스크 사이에 이루어지게 된다. 만약 데이터를 읽고 싶은 요청이 버퍼 매니저에 들어온다면 버퍼 매니저는 디스크 매니저에 다시 요청하게 되며, 버퍼 매니저로 불러온 상태로 데이터를 반환하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 이미 버퍼 매니저에 올라온 데이터를 요청할 경우 디스크 매니저에 요청할 필요없기 바로, 버퍼 매니저에 있는 데이터를 반환하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;더티-페이지&#34;&gt;더티 페이지&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/xkpfqe46zooy94a/Screen%20Shot%202021-12-29%20at%209.46.20%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;더티 페이지는 메모리에 올라간 데이터와 실제 디스크에 있는 데이터의 내용이 상이한 페이지를 말한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;더티 페이지를 관리하는데는 두가지 중요한 점이 있는데 버퍼 매니저가 더티 페이지를 어떻게 찾아 낼 것 인가에 대한 문제와 더티 페이지를 나중에 디스크에 어떻게 반영할 것인가이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 문제는 동시성 문제와, 리커버리에서 중요하다. 왜냐하면, 더티 페이지가 디스크에 반영되기 전에 시스템이 충돌하면 데이터가 유실 되기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/a5674e1w73mse9u/Screen%20Shot%202021-12-29%20at%209.52.12%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;버퍼 매니저에서 프레임은 테이블 처럼 관리되며, 페이지 아이디와, 더티 플래그를 가지고 있어서, 디스크에 반영되지 않은 페이지를 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 버퍼 매니저는 핀 카운트를 통해서 해당 페이지가 사용되고 있는지를 확인할 수 있다. 그리고 버퍼 매니저가 꽉 채워졌을 때는 교체 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;페이지-요청-시-버퍼매니저에서-생기는-일&#34;&gt;페이지 요청 시 버퍼매니저에서 생기는 일&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;핀 카운트가 0인 (사용되지 않은) 프레임을 찾는다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;만약 프레임이 더티 상태라면 디스크에 반영하여 깨끗한 상태로 만든다. 그리고 디스크 매니저에게 요청한 데이터를 프레임에 채운다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;그리고 핀 카운트를 증가시키고 주소를 반환한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특정 페이지가 요청 될 것이라고 예상 되면, 미리 디스크로부터 프리 패치한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;요청이 끝나고 나서, 데이터가 변경되면 더티 상태로 만들고, 아니더라도 사용이 끝나면 핀을 해제한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;페이지-교체&#34;&gt;페이지 교체&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;lru&#34;&gt;LRU&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/0t4xtmmq7jlxzt4/Screen%20Shot%202021-12-29%20at%2010.17.36%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;핀을 해제할 때 해제한 시간을 기록하여, 마지막으로 페이지를 사용한 시간을 알려준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 핀 카운트가 0이면서, 최근에 사용되지 않은 프레임을 찾는데 선형적으로 탐색을 하게 되고 시간이 증가하게 된다. 또한 우선순위 힙 같은 자료 구조를 사용한다고 하더라도, 구조를 유지하기 위해서 LOG(N)의 시간 복잡도를 가진다. 따라서 상수시간에 교체할 페이지를 찾기 위해서는 CLOCK을 사용하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;clock&#34;&gt;CLOCK&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/7auu7w1y1r0bd2a/Screen%20Shot%202021-12-29%20at%2010.25.23%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;클락은 시계바늘로 다음에 교체할 페이지를 가리키고 있다. 그리고 각 페이지들은 &lt;code&gt;ref_bit&lt;/code&gt;을 가지는데 최근에 참조된 페이지를 나타낸다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/udd834efl2ursdt/Screen%20Shot%202021-12-29%20at%2010.33.34%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위 그림처럼 페이지 7을 찾는 경우 우선 핀이 없는 페이지를 시계 바늘로 순서대로 찾아간다. 그리고 나서, 페이지 3을 가리킬 때 &lt;code&gt;ref_bit&lt;/code&gt;가 체크되어있다면 체크를 해제하고 다음 페이지로 넘어간다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 &lt;code&gt;ref_bit&lt;/code&gt;이 체크되어 있지 않은 페이지라면 해당 페이지를 교체하는 식으로 동작한다. 그리고 해당 페이지의 핀 카운트를 증가시킴과 동시에 &lt;code&gt;ref_bit&lt;/code&gt; 또한 체크 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/0gey3a6ku62rpni/Screen%20Shot%202021-12-29%20at%2010.36.48%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이를 코드로 구현한다면 위와 같은 그림으로 보일 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;lru--mru-어떤-것이-더-좋은가&#34;&gt;LRU / MRU 어떤 것이 더 좋은가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/bn9y5tuohfg50mb/Screen%20Shot%202021-12-29%20at%2010.42.56%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;LRU&lt;/code&gt; 알고리즘의 경우 연속적인 플루딩이라고 위의 예제에서 버퍼 매니저에 프레임이 6개 있고 디스크에 페이지가 총 7개가 있다면 순차적으로 읽으며서 공간이 없을 때마다 버퍼 매니저에서 하나를 방출하고 새로 디스크에서 읽어오고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 경우에 캐시 히트율을 0%이고 LRU의 가장 안좋은 케이스이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;연속적으로 반복해서 값을 읽어오는 것은 매우 일반적인 경우이다. 특히 NESTED LOOP에서 반복해서 같은 값을 읽는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 경우에는 MRU를 사용할 수 있다. MRU는 가장 최근에 사용된 페이지를 교체한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 버퍼매니저에 1 ~ 6까지 7 페이지를 읽어야 할 때  6을 제거하고 7을 넣는 것이다. 그려면 다시 1 ~ 5까지의 데이터를 읽을 때는 페이지 교체를 하지 않아도 되므로 연속적인 데이터를 읽을 때 페이지 교체가 덜 일어난다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;결론은 LRU와 MRU를 같이 사용하는 것이 좋다. 조인을 할 때와 같이 연속적인 데이터에 접근할 때는 MRU를 사용하면 좋고 그 외의 일반적인 경우에는 LRU를 사용하는것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;LRU와 MRU외에도 2Q, LRU-2, ARC와 같은 페이지 교체 알고리즘이 많이 존재한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;프리-패칭&#34;&gt;프리 패칭&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프리 패칭은 연속적인 페이지를 읽을 때 디스크 매니저에서 미리 여러개의 페이지를 요청하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;랜덤 I/O를 줄일 수 있고, I/O 연산을 많이 줄일 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;운영체제에-있는-파일시스템으로-버퍼와-페이지를-관리해도-되지-않는가&#34;&gt;운영체제에 있는 파일시스템으로 버퍼와 페이지를 관리해도 되지 않는가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;몇가지 문제점이 있다. 이식성 문제이다 OS 마다 파일 시스템이 달라서 이것이 힘들다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DBMS는 강제로 페이지를 디스크로 기록하는 기능이 필요하다. 리커버리 시스템 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DBMS는 자체적으로 페이지 참조 패턴을 예측할 수 있어야 한다. 이는 페이지 교체와 프리 패칭에 영향을 준다. B+TREE의 인덱스는 리프 노드 다음에 연속한 페이지가 있다는 것 을 알 수 있지만, OS의 파일 시스템은 오직 물리적인 연속적인 페이지만 알고 있다. 따라서 데이터 구조를 알지 못해 프리패칭을 하기 힘들다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/playlist?list=PLzzVuDSjP25Q0YDDDpAgfK_da5Ba357Tg&#34;&gt;CS186Berkeley&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>인덱스 (INDEX) 정리 2</title>
       <link>https://dongwooklee96.github.io/post/2021/12/25/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-2.html</link>
