@@ -27,7 +27,7 @@
 &lt;h1 id=&#34;문제-1-거스름돈&#34;&gt;문제 1: 거스름돈&lt;/h1&gt;
 &lt;hr&gt;
 &lt;p&gt;당신은 음식점의 계산을 도와주는 점원이다. 카운터에는 거스름돈으로 사용할 500원, 100원, 50원, 10원짜리 동전이 무한이 존재한다고 가정한다. 손님에게 거슬러 줘야 할 돈이 N원일 때 거슬러줘야 할 동전의 최소 개수를 구하라. 단, 거슬러 줘야할 돈 N은 항상 10의 배수이다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;def solve(money):
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;def solve(money):
     ret = 0
     if money &amp;gt;= 500:
         ret += money // 500
@@ -46,7 +46,7 @@
         money %= 10
 
     return ret
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;from problem import solve
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from problem import solve
 
 
 def test_solve1():

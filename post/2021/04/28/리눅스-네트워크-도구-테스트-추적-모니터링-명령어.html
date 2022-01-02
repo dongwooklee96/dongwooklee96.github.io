@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -77,7 +74,7 @@
   <main>
     <h3 id="hping3">hping3</h3>
 <hr>
-<pre><code>hping3 -S www.daum.net -p 80
+<pre tabindex="0"><code>hping3 -S www.daum.net -p 80
 </code></pre><ul>
 <li>
 <p>TCP/UDP, ICMP 및 다양한 종류의 패킷을 전송할 수 있다.</p>
@@ -91,7 +88,7 @@
 <ul>
 <li>이 명령어는 특정 IP 주소의 요청을 막을 수 있는 명령이다.</li>
 </ul>
-<pre><code># localhost의 UDP 요청을 차단하는 규칙을 추가하였다.
+<pre tabindex="0"><code># localhost의 UDP 요청을 차단하는 규칙을 추가하였다.
 iptables -I OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP
 
 # iptables 설정을 확인해본다.

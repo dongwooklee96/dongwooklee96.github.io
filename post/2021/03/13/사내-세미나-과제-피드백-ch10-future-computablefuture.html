@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -82,7 +79,7 @@
 </ul>
 <p><img src="https://user-images.githubusercontent.com/14002238/111016625-5a957280-83f2-11eb-847c-b5e8deaf3ac7.png" alt="Screen Shot 2021-03-13 at 11 50 40 AM"></p>
 <p>친절하게 피드백을 해주셨기 때문에, 내가 <code>ComputableFuture</code>를 잘못사용하고 있다는 사실을 알게 되었다.</p>
-<pre><code class="language-java8" data-lang="java8">repository.retrieveCategories().parallelStream()
+<pre tabindex="0"><code class="language-java8" data-lang="java8">repository.retrieveCategories().parallelStream()
                 .map(category -&gt; CompletableFuture.supplyAsync(() -&gt; repository.retrieveBooksByCategory(category)))
                 .collect(Collectors.toList())
         .parallelStream()
@@ -125,7 +122,7 @@
 </li>
 </ul>
 <p>따라서 피드백을 받은 부분을 개선한 결과는 다음과 같다.</p>
-<pre><code>final List&lt;CompletableFuture&lt;List&lt;Book&gt;&gt;&gt; futures
+<pre tabindex="0"><code>final List&lt;CompletableFuture&lt;List&lt;Book&gt;&gt;&gt; futures
             = repository.retrieveCategories().stream()
             .map(category -&gt; supplyAsync(() -&gt; repository.retrieveBooksByCategory(category), executors))
             .collect(toList());

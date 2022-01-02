@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -87,7 +84,7 @@
 <p>두 개의 파일 디스크립터 중 하나는 읽기 작업 전용 나머지 하나는 쓰기 작업 전용으로 사용할 수 있다. 두 디스크립터 사이에서의 읽기 / 쓰기 작업의 혼용은 허용되지 않는다.</p>
 </li>
 </ul>
-<pre><code>#include &lt;unistd.h&gt;
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
 
 int pipe(int pipefd[2]);
 </code></pre><ul>
@@ -137,7 +134,7 @@ int pipe(int pipefd[2]);
 <li>부모 프로세스는 자식 프로세스에게 파이프를 통해서 사용자가 입력한 문자열을 전송한다.</li>
 <li>자식 프로세슨느 부모 프로세스가 전달한 문자열을 파일에 쓴다.</li>
 </ul>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;errno.h&gt;
 #include &lt;string.h&gt;

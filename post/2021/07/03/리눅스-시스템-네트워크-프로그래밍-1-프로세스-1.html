@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -120,7 +117,7 @@
 <p>이러한 리턴 값은 3가지의 반환 형태를 가지며 각각에 따라서 처리 방법을 다르게 코딩해야 한다.</p>
 </li>
 </ul>
-<pre><code>0 -&gt; 자식 프로세스에게 리턴되는 값
+<pre tabindex="0"><code>0 -&gt; 자식 프로세스에게 리턴되는 값
 양수 -&gt; 부모 프로세스에게 리턴되며, 자식 프로세스의 PID를 의미한다.
 -1 -&gt; 에러, 복제 실패
 </code></pre><ul>
@@ -131,7 +128,7 @@
 <p>이렇게 <code>fork()</code>를 사용하면 하나의 소스코드에 부모와 자식 프로세스의 코드가 같이 들어가게 된다. 그리고 부모 프로세스에는 자식 프로세스의 종료를 기다리기 위해서 <code>wait</code>, <code>waitpid</code>를 이용할 수 있다.</p>
 </li>
 </ul>
-<pre><code>switch (ret = fork()) {
+<pre tabindex="0"><code>switch (ret = fork()) {
   case 0:
     do_child(); /* 자식 프로세스인 경우에 실행될 코드 */
     break;
@@ -150,7 +147,7 @@
 <p>주의할 점은 <code>fork()</code> 를통해서 자식 프로세스가 분기하는 구조를 제대로 만들지 않으면 이상한 현상이 발생할 수 있다는 것이다.</p>
 </li>
 </ul>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;sys/types.h&gt;
@@ -181,7 +178,7 @@ int main() {
 </code></pre><ul>
 <li>위의 코드를 보면, 전처리기 분기문 처리가 되어있어, <code>OMIT_SWITCH</code> 매크로가 정의되어 있지 않는다면, 같이 빌드되는 부분이다.</li>
 </ul>
-<pre><code>gcc -DOMIT_SWITCH _Wall -o fork_omit_swich fork_process.c 
+<pre tabindex="0"><code>gcc -DOMIT_SWITCH _Wall -o fork_omit_swich fork_process.c 
 </code></pre><ul>
 <li>위와 같이 매크로를 같이 빌드하면, 전처리기 분기문 처리가 빌드되지 않는다. 그리고 나서 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있다.</li>
 </ul>
@@ -191,7 +188,7 @@ int main() {
 </ul>
 <h3 id="exec3-계열-함수">exec(3) 계열 함수</h3>
 <hr>
-<pre><code>int execl(const char *path, const char *arg, ...);
+<pre tabindex="0"><code>int execl(const char *path, const char *arg, ...);
 int execlp(const char *file, const char *arg, ...);
 int execle(const char *path, const char *arg, ..., char * const envp[]);
 int execv(const char *path, char *const argv[]);
@@ -212,21 +209,21 @@ int execve(const char *path, char *const argv[], char *const envp[]);
 </li>
 </ul>
 <p><strong>execl 계열을 사용한 예</strong></p>
-<pre><code>execl(&quot;/bin/ls&quot;, &quot;ls&quot;, &quot;-al&quot;, NULL);
+<pre tabindex="0"><code>execl(&quot;/bin/ls&quot;, &quot;ls&quot;, &quot;-al&quot;, NULL);
 execlp(&quot;ls&quot;, &quot;ls&quot;, &quot;-al&quot;, NULL);
 </code></pre><p><strong>execv 계열을 사용한 예</strong></p>
-<pre><code>char *argv_exec[] = {&quot;ls&quot;, &quot;-al&quot;, NULL};
+<pre tabindex="0"><code>char *argv_exec[] = {&quot;ls&quot;, &quot;-al&quot;, NULL};
 execv(&quot;/bin/ls&quot;, argv_exec);
 
 char *argv_exec[] = {&quot;ls&quot;, &quot;-al&quot;, NULL};
 execvp(&quot;ls&quot;, argv_exec);
 </code></pre><ul>
 <li></li>
+<li>
+<p>이 경우에는 기존의 환경변수는 모두 초기화되고 새로 넣은 환경 변수 벡터가 사용된다.</p>
+</li>
 </ul>
-<ul>
-<li>이 경우에는 기존의 환경변수는 모두 초기화되고 새로 넣은 환경 변수 벡터가 사용된다.</li>
-</ul>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 
 int main() {
@@ -251,7 +248,7 @@ int main() {
 <li>하지만, 부모 프로세스가 <code>fork</code>를 하기 전에 특정 파일 기술자에 <code>fcntl</code>로 <code>FD_CLOEXEC</code> 플레그를 지정하면 <code>exec</code>가 실행될 때 해당 파일 기술자는 닫히게 된다. 이를 <code>close-on-exec</code>라고 부른다.</li>
 </ul>
 <p><em>forkexec_parent.c</em>*</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;sys/types.h&gt;
@@ -296,7 +293,7 @@ int main() {
   return 0;
 }
 </code></pre><p><strong>forkexec_child.c</strong></p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;sys/types.h&gt;
 #include &lt;stdlib.h&gt;
@@ -316,13 +313,13 @@ int main() {
 <p>생성된 파일을 살펴보면 다음과 같다.</p>
 </li>
 </ul>
-<pre><code>Parent[5935]: Open log file(fd=3)
+<pre tabindex="0"><code>Parent[5935]: Open log file(fd=3)
 Child[5936]: fd(3): Test fd.
 </code></pre><ul>
 <li>하지만, 부모 프로세스를 하기 전에 특정 파일 기술자에 <code>fcntl</code>로 <code>FD_CLOEXEC</code> 플래그를 지정하면, 해당 파일 기술자는 닫히게 된다. 따라서 이를 위해서 <code>APPLY_FD_CLOEXEC</code> 매크로를 정의하고 빌드를 해보자.</li>
 </ul>
-<pre><code>gcc -DAPPLY_FD_CLOEXEC -o forkexec_parent_fdcloexec forkexec_parent.c
-</code></pre><pre><code>Parent[6014]: Open log file(fd=3)
+<pre tabindex="0"><code>gcc -DAPPLY_FD_CLOEXEC -o forkexec_parent_fdcloexec forkexec_parent.c
+</code></pre><pre tabindex="0"><code>Parent[6014]: Open log file(fd=3)
 </code></pre><ul>
 <li>
 <p>매크로를 정의하고 나서는, 부모 프로세스가 자식 프로세스에게 파일 기술자를 상속하지 않으므로, <code>forkexec.log</code> 파일에 자식 프로세스에는 기록되지 않았음을 확인할 수 있다.</p>

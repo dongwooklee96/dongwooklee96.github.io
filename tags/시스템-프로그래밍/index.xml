@@ -31,7 +31,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;stat2&#34;&gt;stat(2)&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;sys/stat.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 
@@ -62,7 +62,7 @@ int lstat(const char *path, struct stat *buf);
 &lt;ul&gt;
 &lt;li&gt;시스템 콜 &lt;code&gt;stat()&lt;/code&gt;을 사용하여 &lt;code&gt;stat&lt;/code&gt; 명령어를 만들어 볼 것이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;sys/stat.h&amp;gt;
@@ -142,7 +142,7 @@ static char *filetype(mode_t mode) {
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h4 id=&#34;chmod2&#34;&gt;&lt;code&gt;chmod(2)&lt;/code&gt;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/stat.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/stat.h&amp;gt;
 
 int chmod(const char *path, mode_t mode);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -157,7 +157,7 @@ int chmod(const char *path, mode_t mode);
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;chown2&#34;&gt;&lt;code&gt;chown(2)&lt;/code&gt;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 
 int chown(const char *path, uid_t owner, gid_t group);
 int lchown(const char *path, uid_t owner, gid_t group);
@@ -179,7 +179,7 @@ int lchown(const char *path, uid_t owner, gid_t group);
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;utime2&#34;&gt;&lt;code&gt;utime(2)&lt;/code&gt;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;utime.h&amp;gt;
 
 int utime(const char *path, struct utimbuf *buf);
@@ -197,7 +197,7 @@ struct utimbuf {
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;chmod-명령어-작성하기&#34;&gt;chmod 명령어 작성하기&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;sys/stat.h&amp;gt;
 
@@ -245,7 +245,7 @@ int main(int argc, char *argv[]) {
 &lt;p&gt;링크란 파일에 새로운 이름을 붙이는 것이다. 예를 들면 다음과 같이 A 라는 파일을 만들었다고 가정을 하자.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;echo &#39;this is a file.&#39; &amp;gt; a
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &#39;this is a file.&#39; &amp;gt; a
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;이때 파일의 이름과 실체의 관계는 이름이 실체를 포인터처럼 가리키고 있는 모습이다.&lt;/p&gt;
@@ -255,7 +255,7 @@ int main(int argc, char *argv[]) {
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/l8sfgjl3kss323z/hardlink.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ln a b
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ln a b
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;이 작업은 파일 A를 가리키는 하드 링크 B를 만드는 것이다.&lt;/p&gt;
@@ -267,7 +267,7 @@ int main(int argc, char *argv[]) {
 &lt;p&gt;파일에 부여된 이름의 개수는 &lt;code&gt;ls -l&lt;/code&gt;를 사용하여 확인할 수 있다. 이름이 하나만 있는 파일을 &lt;code&gt;ls&lt;/code&gt; 명령어로 표시하면 다음과 같이 출력 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;rm -f a b
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;rm -f a b
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/k7n1p5qp75n0bua/Screen%20Shot%202021-09-01%20at%2010.10.03%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -288,7 +288,7 @@ int main(int argc, char *argv[]) {
 &lt;ul&gt;
 &lt;li&gt;하드 링크를 작성하는 시스템 콜이 &lt;code&gt;link(2)&lt;/code&gt; 이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 
 int link(const char *src, const char *dest);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -313,7 +313,7 @@ int link(const char *src, const char *dest);
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;h4 id=&#34;ln-명령어-작성하기&#34;&gt;ln 명령어 작성하기&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 
@@ -367,7 +367,7 @@ int main(int argc, char *argv[]) {
 &lt;ul&gt;
 &lt;li&gt;심볼릭 링크를 만드는 시스템 콜은 &lt;code&gt;symlink(2)&lt;/code&gt;이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 
 int symlink(const char *src, const char *dest);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -377,7 +377,7 @@ int symlink(const char *src, const char *dest);
 &lt;ul&gt;
 &lt;li&gt;심볼릭 링크가 가리키는 이름을 얻기 위해 &lt;code&gt;readlink(2)&lt;/code&gt;를 사용한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 
 int readlink(const char *path, char *buf, size_t bufsize);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -392,7 +392,7 @@ int readlink(const char *path, char *buf, size_t bufsize);
 &lt;ul&gt;
 &lt;li&gt;보통 리눅스에서 심볼릭 링크를 만들 때 &lt;code&gt;ln -s&lt;/code&gt;를 사용하는데, 여기서는 전용 명령어처럼 만들어 보기로 하겠다. 이름은 &lt;code&gt;symlink&lt;/code&gt; 이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 
@@ -446,7 +446,7 @@ int main(int argc, char *argv[]) {
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;openddir3&#34;&gt;&lt;code&gt;openddir(3)&lt;/code&gt;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;dirent.h&amp;gt;
 
 DIR *opendir(const char *path);
@@ -459,7 +459,7 @@ DIR *opendir(const char *path);
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;readdir3&#34;&gt;&lt;code&gt;readdir(3)&lt;/code&gt;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;dirent.h&amp;gt;
 
 struct dirent *readdir(DIR *d);
@@ -478,7 +478,7 @@ struct dirent *readdir(DIR *d);
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;closedir3&#34;&gt;&lt;code&gt;closedir(3)&lt;/code&gt;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;dirent.h&amp;gt;
 
 int closedir(DIR *d);
@@ -492,7 +492,7 @@ int closedir(DIR *d);
 &lt;/ul&gt;
 &lt;h3 id=&#34;ls-명령어-만들어보기&#34;&gt;ls 명령어 만들어보기&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;dirent.h&amp;gt;
@@ -546,7 +546,7 @@ static void do_ls(char *path) {
 &lt;p&gt;기본적으로 순회할 때도 &lt;code&gt;openddir()&lt;/code&gt;, &lt;code&gt;readdir()&lt;/code&gt;, &lt;code&gt;closedir()&lt;/code&gt; 의 세 가지를 사용해서 꾸준히 디렉터리를 타고 들어가면 된다. 단 이때 주의해야할 것은 &amp;lsquo;.&amp;rsquo;, &amp;lsquo;..&amp;lsquo;의 존재이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;void
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;void
 traverse(path) {
   DIR *d = openddir(path);
   struct dirent *ent;
@@ -578,7 +578,7 @@ traverse(path) {
 &lt;h3 id=&#34;디렉터리-만들기&#34;&gt;디렉터리 만들기&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h4 id=&#34;mkdir2&#34;&gt;&lt;code&gt;mkdir(2)&lt;/code&gt;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/stat.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/stat.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
 
 int mkdir(const char *path, mode_t mode);
@@ -618,7 +618,7 @@ path로 지정한 경로에 이미 파일이나 디렉터리가 존재한다.&lt
 &lt;ul&gt;
 &lt;li&gt;open()이나 mkdir()에서 실제로 사용하는 권한은 C 언어로 표현하면 &amp;lsquo;mode &amp;amp; ~umask&amp;rsquo;로 계산된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;sys/stat.h&amp;gt;
 
 mode_t umask(mode_t mask);
@@ -627,7 +627,7 @@ mode_t umask(mode_t mask);
 &lt;/ul&gt;
 &lt;h3 id=&#34;mkdir-명령어-작성하기&#34;&gt;mkdir 명령어 작성하기&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;sys/stat.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
@@ -653,13 +653,13 @@ int main(int argc, char *argv[]) {
 &lt;h3 id=&#34;디렉터리-삭제하기&#34;&gt;디렉터리 삭제하기&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h4 id=&#34;rmdir2&#34;&gt;&lt;code&gt;rmdir(2)&lt;/code&gt;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 
 int rmdir(const char *path);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;rmdir()&lt;/code&gt;은 path로 지정한 디렉터리를 삭제한다. 디렉터리는 반드시 비어있어야 한다. 성공하면 0을 반환하고 실패하면 -1을 반환하고나서 errno를 설정한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;reallinux@ubuntu:~/git/system$ clear
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;reallinux@ubuntu:~/git/system$ clear
 #include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
@@ -698,7 +698,7 @@ int main(int argc, char *argv[]) {
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;libc&lt;/code&gt;에서 제공하는 정규 표현식 API는 다음과 같다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;regex.h&amp;gt;
 
 int recomp(regex_t *reg, const char *pattern, int flags);
@@ -721,7 +721,7 @@ size_t regerror(int errcode, const regex_t *reg, char *msgbuf, size_t msgbuf_siz
 &lt;/ul&gt;
 &lt;h3 id=&#34;grep-소스-코드&#34;&gt;grep 소스 코드&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;string.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
@@ -910,7 +910,7 @@ static void do_grep(regex_t *pat, FILE *src) {
 &lt;p&gt;아래는 &lt;code&gt;head&lt;/code&gt; 명령어를 실행하는 예이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;$ head -n 5 file.c
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ head -n 5 file.c
 
 cat file.c | head -n 5
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -932,7 +932,7 @@ cat file.c | head -n 5
 &lt;p&gt;따라서 처음에는 아주 쉬운 기능을 확실히 돌아가게 만들고 나서, 조금씩 기능을 덧붙여 나가는 것이 확실한 방법이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
@@ -1032,7 +1032,7 @@ static void die(const char *s)
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;예외&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;그러나 몇가지 중요한 예외가 있다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;1. 스트림이 단말에 연결된 경우에는 버퍼가 가득찰 때까지 기다리지 않고
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 스트림이 단말에 연결된 경우에는 버퍼가 가득찰 때까지 기다리지 않고
 개행 (\n)을 만나는 시점에서 write()를 실행한다. 이유는, 반대편에 모니터와
 같은 단말이 있다면 사람이 출력을 보고 있을 가능성이 높기 때문이다.
 버퍼가 가득차기 까지는 오랜 시간이 걸릴 수도 있기 때문에 적절한 순간에
@@ -1091,7 +1091,7 @@ stdio 스트림에 데이터를 쓰면 버퍼링 없이 즉시 write()가 수행
 &lt;h3 id=&#34;fopen3&#34;&gt;&lt;code&gt;fopen(3)&lt;/code&gt;&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;표준 입출력 이외의 스트림에 대한 &lt;code&gt;FILE&lt;/code&gt;을 여는 것도 물론 가능하다. 이때는 &lt;code&gt;fopen()&lt;/code&gt; 이라는 &lt;code&gt;API&lt;/code&gt;를 사용한다. 이것은 시스템 콜 &lt;code&gt;open()&lt;/code&gt;에 대응된다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 
 FILE *fopen(const char *path, const char *mode);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1107,7 +1107,7 @@ FILE *fopen(const char *path, const char *mode);
 &lt;ul&gt;
 &lt;li&gt;시스템 콜 &lt;code&gt;open()&lt;/code&gt;에 대응하는 API가 &lt;code&gt;fopen()&lt;/code&gt;이라면 &lt;code&gt;close()&lt;/code&gt;에 대응하는 API는 &lt;code&gt;fclose()&lt;/code&gt;이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 
 int fclose(FILE *stream);
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;문자열-입출력&#34;&gt;문자열 입출력&lt;/h3&gt;
@@ -1136,7 +1136,7 @@ int fclose(FILE *stream);
       <pubDate>Sat, 24 Jul 2021 05:05:24 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/post/2021/07/24/cat-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EA%B8%B0%ED%83%80-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</guid>
-      <description>&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
@@ -1198,7 +1198,7 @@ static void die(const char *s)
 &lt;/ul&gt;
 &lt;h3 id=&#34;lseek2&#34;&gt;&lt;code&gt;lseek(2)&lt;/code&gt;&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 off_t lseek(int fd, off_t offset, int whence);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1231,7 +1231,7 @@ off_t lseek(int fd, off_t offset, int whence);
 &lt;/ul&gt;
 &lt;h3 id=&#34;dup2-dup22&#34;&gt;dup(2), dup2(2)&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 
 int dup(int oldfd);
 int dup2(int oldfd, int newfd);
@@ -1240,24 +1240,24 @@ int dup2(int oldfd, int newfd);
 &lt;/ul&gt;
 &lt;h3 id=&#34;ioctl2&#34;&gt;ioctl(2)&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/ioctl.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/ioctl.h&amp;gt;
 
 int ioctl(int fd, unsigned long request, ...);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;ioctl()&lt;/code&gt;은 스트림이 연결된 디바이스에 특화된 작업을 모두 포함하는 시스템 콜이다. 예를 들어서 아래와 같은 작업을 할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;DVD 드라이브 여닫기, 음악 CD 재생
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;DVD 드라이브 여닫기, 음악 CD 재생
 프린터 구동이나 일시정지
 SCSI 디바이스 하드웨어 옵션 설정
 단말 통신 속도 설정
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;자세한 내용은 메뉴얼에서 확인할 수 있다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;man ioctl_list
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;man ioctl_list
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;fcntl2&#34;&gt;fcntl(2)&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;ioctl()&lt;/code&gt;의 기능 중에서 파일 디스크립터 관련 작업을 분리하려고 만들어 진 것이 &lt;code&gt;fnctl&lt;/code&gt;이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 #include &amp;lt;fcnt.h&amp;gt;
 
 int fcntl(int fd, int cmd, ...);
@@ -1377,7 +1377,7 @@ int fcntl(int fd, int cmd, ...);
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;read2&#34;&gt;&lt;code&gt;read(2)&lt;/code&gt;&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 
 ssize_t read(int fd, void *buf, size_t bufsize);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1395,7 +1395,7 @@ ssize_t read(int fd, void *buf, size_t bufsize);
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;주의사항&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;C언어 문자열에는 임의의 바이트 열을 저장할 수 있지만, 일반적으로 문자열의
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C언어 문자열에는 임의의 바이트 열을 저장할 수 있지만, 일반적으로 문자열의
 끝에는 &#39;\0&#39;을 넣는 것이 관례이다. API 중에도 문자열의 끝에 &#39;\0&#39;이 있다고
 전체하는 것과 그렇지 않은 것이 있어서 사용에 주의 해야한다. 
 예를 들어, 문자열의 끝에 &#39;\0&#39;이 있다고 전제하는 API에 &#39;\0&#39;로 끝나지 
@@ -1413,7 +1413,7 @@ ssize_t read(int fd, void *buf, size_t bufsize);
 &lt;ul&gt;
 &lt;li&gt;스트림에 바이트 열을 쓸 때는 시스템 콜 &lt;code&gt;write()&lt;/code&gt;를 사용한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 
 ssize_t write(int fd, const *buf, size_t bufsize);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1444,7 +1444,7 @@ ssize_t write(int fd, const *buf, size_t bufsize);
 &lt;ul&gt;
 &lt;li&gt;파일을 읽고 쓰는 스트림을 만들려면 시스템 콜 &lt;code&gt;open()&lt;/code&gt;을 사용한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;sys/stat.h&amp;gt;
 #include &amp;lt;fcntl.h&amp;gt;
 
@@ -1486,7 +1486,7 @@ int open(const char *path, int flags, mode_t mode);
 &lt;ul&gt;
 &lt;li&gt;사용이 끝난 스트림은 &lt;code&gt;close()&lt;/code&gt;로 닫는다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;unistd.h&amp;gt;
 
 int close(int fd);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1497,7 +1497,7 @@ int close(int fd);
 &lt;p&gt;오류 없이 닫히면 &lt;code&gt;0&lt;/code&gt;, 에러가 발생하면 &lt;code&gt;-1&lt;/code&gt;를 반환한다. 일반적으로 &lt;code&gt;close()&lt;/code&gt;함수를 호출하는 코드는 다음과 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;if (close(fd) &amp;lt; 0) {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;if (close(fd) &amp;lt; 0) {
   /* 에러 처리 */
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1523,7 +1523,7 @@ int close(int fd);
       <guid>https://dongwooklee96.github.io/post/2021/07/04/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-2-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-2.html</guid>
       <description>&lt;h3 id=&#34;posix_spawn-계열-함수&#34;&gt;posix_spawn 계열 함수&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;int posix_spawn(pid_t *restrict pid, const char *restrict path, const posix_spawn_file_actions_t *file_actions, const posix_spawnattr_t *restrict attrp, char *const argv[restrict], char *const envp[restrict]);
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int posix_spawn(pid_t *restrict pid, const char *restrict path, const posix_spawn_file_actions_t *file_actions, const posix_spawnattr_t *restrict attrp, char *const argv[restrict], char *const envp[restrict]);
 
 int posix_spawnp(pid_t *restrict pid, const char *restrict file, cosnt posix_spawn_file_actions_t *file_actions, const posix_spawnattr_t *restrict attrp, char *const argv[restrict], char *const envp[restrict]);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1542,12 +1542,12 @@ int posix_spawnp(pid_t *restrict pid, const char *restrict file, cosnt posix_spa
 &lt;/ul&gt;
 &lt;h3 id=&#34;posix_spawn_file_actions_t-구조체-조작&#34;&gt;posix_spawn_file_actions_t 구조체 조작&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;int posix_spawn_file_actions_init(posix_spawn_file_actions_t *file_actions);
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int posix_spawn_file_actions_init(posix_spawn_file_actions_t *file_actions);
 int posix_spawn_file_destroy(posix_spawn_file_actions_t *file_actions);
 int posix_spawn_file_actions_addopen(posix_spawn_file_actions_t *restrict file_actions, int fildes, const char *restrict path, int oflag, mode_t mode);
 int posix_spawn_file_actions_addclose(posix_spawn_file_actions_t *file_actions, int fildes);
 int posix_spawn_file_actions_adddup2(posix_spawn_file_actions_t *file_actions, int fildes, int newfildes);
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;sys/wait.h&amp;gt;
@@ -1597,7 +1597,7 @@ int main() {
 &lt;/ul&gt;
 &lt;h3 id=&#34;posix_spawnattr_t-구조체-조작&#34;&gt;posix_spawnattr_t 구조체 조작&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;int posix_spawnattr_init(posix_spawnattr_t *attr);
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int posix_spawnattr_init(posix_spawnattr_t *attr);
 int posix_spawnattr_destroy(posix_spawnattr_t *attr);
 
 int posix_spawnattr_getflags(const posix_spawnattr_t *restrict attr, short *restrict flags);
@@ -1677,7 +1677,7 @@ int posix_spawnattr_setflags(posix_spawnattr_t *attr, short flags);
 &lt;p&gt;이러한 리턴 값은 3가지의 반환 형태를 가지며 각각에 따라서 처리 방법을 다르게 코딩해야 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;0 -&amp;gt; 자식 프로세스에게 리턴되는 값
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;0 -&amp;gt; 자식 프로세스에게 리턴되는 값
 양수 -&amp;gt; 부모 프로세스에게 리턴되며, 자식 프로세스의 PID를 의미한다.
 -1 -&amp;gt; 에러, 복제 실패
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1688,7 +1688,7 @@ int posix_spawnattr_setflags(posix_spawnattr_t *attr, short flags);
 &lt;p&gt;이렇게 &lt;code&gt;fork()&lt;/code&gt;를 사용하면 하나의 소스코드에 부모와 자식 프로세스의 코드가 같이 들어가게 된다. 그리고 부모 프로세스에는 자식 프로세스의 종료를 기다리기 위해서 &lt;code&gt;wait&lt;/code&gt;, &lt;code&gt;waitpid&lt;/code&gt;를 이용할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;switch (ret = fork()) {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;switch (ret = fork()) {
   case 0:
     do_child(); /* 자식 프로세스인 경우에 실행될 코드 */
     break;
@@ -1707,7 +1707,7 @@ int posix_spawnattr_setflags(posix_spawnattr_t *attr, short flags);
 &lt;p&gt;주의할 점은 &lt;code&gt;fork()&lt;/code&gt; 를통해서 자식 프로세스가 분기하는 구조를 제대로 만들지 않으면 이상한 현상이 발생할 수 있다는 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 #include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
@@ -1738,7 +1738,7 @@ int main() {
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 코드를 보면, 전처리기 분기문 처리가 되어있어, &lt;code&gt;OMIT_SWITCH&lt;/code&gt; 매크로가 정의되어 있지 않는다면, 같이 빌드되는 부분이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;gcc -DOMIT_SWITCH _Wall -o fork_omit_swich fork_process.c 
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;gcc -DOMIT_SWITCH _Wall -o fork_omit_swich fork_process.c 
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위와 같이 매크로를 같이 빌드하면, 전처리기 분기문 처리가 빌드되지 않는다. 그리고 나서 프로그램을 실행하면 다음과 같은 결과를 얻을 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1748,7 +1748,7 @@ int main() {
 &lt;/ul&gt;
 &lt;h3 id=&#34;exec3-계열-함수&#34;&gt;exec(3) 계열 함수&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;int execl(const char *path, const char *arg, ...);
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int execl(const char *path, const char *arg, ...);
 int execlp(const char *file, const char *arg, ...);
 int execle(const char *path, const char *arg, ..., char * const envp[]);
 int execv(const char *path, char *const argv[]);
@@ -1769,21 +1769,21 @@ int execve(const char *path, char *const argv[], char *const envp[]);
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;execl 계열을 사용한 예&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;execl(&amp;quot;/bin/ls&amp;quot;, &amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL);
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;execl(&amp;quot;/bin/ls&amp;quot;, &amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL);
 execlp(&amp;quot;ls&amp;quot;, &amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL);
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;execv 계열을 사용한 예&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;char *argv_exec[] = {&amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL};
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;char *argv_exec[] = {&amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL};
 execv(&amp;quot;/bin/ls&amp;quot;, argv_exec);
 
 char *argv_exec[] = {&amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL};
 execvp(&amp;quot;ls&amp;quot;, argv_exec);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 경우에는 기존의 환경변수는 모두 초기화되고 새로 넣은 환경 변수 벡터가 사용된다.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;ul&gt;
-&lt;li&gt;이 경우에는 기존의 환경변수는 모두 초기화되고 새로 넣은 환경 변수 벡터가 사용된다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 
 int main() {
@@ -1808,7 +1808,7 @@ int main() {
 &lt;li&gt;하지만, 부모 프로세스가 &lt;code&gt;fork&lt;/code&gt;를 하기 전에 특정 파일 기술자에 &lt;code&gt;fcntl&lt;/code&gt;로 &lt;code&gt;FD_CLOEXEC&lt;/code&gt; 플레그를 지정하면 &lt;code&gt;exec&lt;/code&gt;가 실행될 때 해당 파일 기술자는 닫히게 된다. 이를 &lt;code&gt;close-on-exec&lt;/code&gt;라고 부른다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;em&gt;forkexec_parent.c&lt;/em&gt;*&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
@@ -1853,7 +1853,7 @@ int main() {
   return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;forkexec_child.c&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
@@ -1873,13 +1873,13 @@ int main() {
 &lt;p&gt;생성된 파일을 살펴보면 다음과 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;Parent[5935]: Open log file(fd=3)
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Parent[5935]: Open log file(fd=3)
 Child[5936]: fd(3): Test fd.
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;하지만, 부모 프로세스를 하기 전에 특정 파일 기술자에 &lt;code&gt;fcntl&lt;/code&gt;로 &lt;code&gt;FD_CLOEXEC&lt;/code&gt; 플래그를 지정하면, 해당 파일 기술자는 닫히게 된다. 따라서 이를 위해서 &lt;code&gt;APPLY_FD_CLOEXEC&lt;/code&gt; 매크로를 정의하고 빌드를 해보자.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;gcc -DAPPLY_FD_CLOEXEC -o forkexec_parent_fdcloexec forkexec_parent.c
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;Parent[6014]: Open log file(fd=3)
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;gcc -DAPPLY_FD_CLOEXEC -o forkexec_parent_fdcloexec forkexec_parent.c
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Parent[6014]: Open log file(fd=3)
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;매크로를 정의하고 나서는, 부모 프로세스가 자식 프로세스에게 파일 기술자를 상속하지 않으므로, &lt;code&gt;forkexec.log&lt;/code&gt; 파일에 자식 프로세스에는 기록되지 않았음을 확인할 수 있다.&lt;/p&gt;
@@ -1951,7 +1951,7 @@ Child[5936]: fd(3): Test fd.
 &lt;p&gt;&lt;code&gt;restrict&lt;/code&gt; 포인터는 &lt;code&gt;restrict&lt;/code&gt; 포인터가 가리키는 객체를 다른 공간에서 에일리어싱 하지 않도록 강제를 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;void *memcpy(void *dest, const void *src, size_t n);
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;void *memcpy(void *dest, const void *src, size_t n);
 void *memcpy(void *restrict s1, const void *restrict s2, size_t n);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -1961,7 +1961,7 @@ void *memcpy(void *restrict s1, const void *restrict s2, size_t n);
 &lt;p&gt;새롭게 적용된 &lt;code&gt;memcpy&lt;/code&gt; 에서는 사용자가 &lt;code&gt;s1&lt;/code&gt;, &lt;code&gt;s2&lt;/code&gt;의 접근이 비순차, 비동기적으로 진행되거나 병렬처리 될 수도 있음을 암시하는 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;int *p_num, *p_alias;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int *p_num, *p_alias;
 p_num = (int *) malloc(sizeof(int) * 100);
 p_alias = p_num + 20; /* 에일리어싱 되었음 */
 memcpy(p_num, p_alias, sizeof(int) * 50);

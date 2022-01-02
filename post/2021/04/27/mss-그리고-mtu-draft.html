@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -128,11 +125,11 @@
 <p>이를 확인해보기 위해서, <code>ping</code> 보다 많은 기능을 지원하는 <code>hping3</code> 도구를 이용해서 테스트 해보겠다.</p>
 </li>
 </ul>
-<pre><code>sudo tshark -i enp0s3 -f icmp -Y &quot;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&quot;
+<pre tabindex="0"><code>sudo tshark -i enp0s3 -f icmp -Y &quot;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&quot;
 </code></pre><ul>
 <li>위의 명령어를 이용해서 패킷을 캡처하고 아래 명령어를 다른 터미널에서 입력을 해본다.</li>
 </ul>
-<pre><code>sudo hping3 -d 2000 --icmp 8.8.8.8
+<pre tabindex="0"><code>sudo hping3 -d 2000 --icmp 8.8.8.8
 </code></pre><p><img src="https://user-images.githubusercontent.com/14002238/116265856-61b3ec80-a7b6-11eb-9333-e8b070648840.png" alt="Screen Shot 2021-04-28 at 12 12 05 AM"></p>
 <ul>
 <li>

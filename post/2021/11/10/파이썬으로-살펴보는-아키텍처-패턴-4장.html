@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -83,7 +80,7 @@
 <p>오케이스트레이션은 저장소에서 여러 가지를 가져오고, 데이터베이스 상태에 따라서 입력을 검증하여 오류를 처리하고, 성공적인 경우에는 데이터베이스에 커밋하는 작업을 포함한다.</p>
 </li>
 </ul>
-<pre><code>import model
+<pre tabindex="0"><code>import model
 from model import OrderLine
 from repository import AbstractRepository
 
@@ -105,7 +102,7 @@ def allocate(line: OrderLine, repo: AbstractRepository, session) -&gt; str:
 </code></pre><ul>
 <li>서비스 계층에서는 다음과 같이, 예외처리를 하거나 커밋을 데이터베이스 커밋을 한다.</li>
 </ul>
-<pre><code>@flask.route.gubbins
+<pre tabindex="0"><code>@flask.route.gubbins
 def allocate_endpoint():
     session = get_session()
     repo = repository.SqlAlchemyRepository(session)

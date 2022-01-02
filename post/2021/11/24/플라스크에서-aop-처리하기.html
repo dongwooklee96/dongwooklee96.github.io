@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -74,7 +71,7 @@
     <h3 id="플라스크에서-aop-처리하기">플라스크에서 AOP 처리하기</h3>
 <hr>
 <p><code>exception.py</code></p>
-<pre><code>class InvalidAPIUsage(Exception):
+<pre tabindex="0"><code>class InvalidAPIUsage(Exception):
     status_code = 400
 
     def __init__(self, message, status_code=None, payload=None):
@@ -93,7 +90,7 @@
 <li>다음과 같은 예외를 만들어 준다.</li>
 </ul>
 <p><code>app.py</code></p>
-<pre><code>@app.errorhandler(InvalidAPIUsage)
+<pre tabindex="0"><code>@app.errorhandler(InvalidAPIUsage)
 def invalid_api_usage(e):
     return jsonify(error=str(e.to_dict()))
 

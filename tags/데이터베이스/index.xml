@@ -460,7 +460,7 @@
       <pubDate>Mon, 20 Dec 2021 15:20:24 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/post/2021/12/20/mysql-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%A1%9C-rds-%EC%A0%91%EC%86%8D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
-      <description>&lt;pre&gt;&lt;code&gt;mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u root -p
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u root -p
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;접속할 수 있는 &lt;code&gt;mysql&lt;/code&gt; 클라이언트를 설치한다 그리고 나서, 위의 명령어를 주소와 유저를 알맞게 입력하면 접속된다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -801,7 +801,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;더미-데이터-생성-방법&#34;&gt;더미 데이터 생성 방법&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;-- 테이블 생성
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;-- 테이블 생성
 CREATE TABLE USERS (
     id int auto_increment primary key,
     id2 int,
@@ -824,7 +824,7 @@ explain select count(*) from USERS A inner join USERS B ON A.id2=B.id2;
 &lt;li&gt;위의 예제는 &lt;code&gt;10000000&lt;/code&gt;의 데이터를 생성하는 방법이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;인덱스-크기를-확인하는-방법&#34;&gt;인덱스 크기를 확인하는 방법&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;select table_name,index_name,
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;select table_name,index_name,
 round(stat_value*16384/1024/1024) size_in_mb
 from mysql.innodb_index_stats
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -929,7 +929,7 @@ from mysql.innodb_index_stats
 &lt;p&gt;아래와 같이 &lt;code&gt;CREATE EXTENSION&lt;/code&gt;을 쓰고 그 뒤에 원하는 익스텐션을 적으면 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;CREATE EXTENSION cube;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;CREATE EXTENSION cube;
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/51279446/how-to-install-the-cube-function-for-postgresql&#34;&gt;How to install the cube function for Postgresql&lt;/a&gt;&lt;/li&gt;
@@ -1003,7 +1003,7 @@ from mysql.innodb_index_stats
 &lt;ul&gt;
 &lt;li&gt;전달된 에러를 추적하다가, 아래와 같은 데드락 에러를 만나게 되었다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;InternalError: 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;InternalError: 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;정확한 문제 해결을 위해서 이번 기회에 데드락에 대해서 한번 더 정리를 해보고, 마리아 데이터베이스에서는 어떠한 경우에 데드락이 발생할 수 있는지를 알아보자.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1023,7 +1023,7 @@ from mysql.innodb_index_stats
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;InnoDB&lt;/code&gt;는 트랜잭션을 실행시 데드락이 발생하게 되면 그것을 감지하고, 하나의 트랜잭션을 롤백하여 데드락을 해소하고, 그 정보를 로그로 남긴다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;SHOW ENGINE INNODB STATUS
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;SHOW ENGINE INNODB STATUS
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/123194595-bc7d7200-d4e1-11eb-9ceb-57e78504e5f6.png&#34; alt=&#34;Screen Shot 2021-06-24 at 11 45 24 AM&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1152,7 +1152,7 @@ UUID_SHORT()
 &lt;/ul&gt;
 &lt;h3 id=&#34;캐시-설정-및-의미&#34;&gt;캐시 설정 및 의미&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;SHOW STATUS LIKE &#39;Qcache%&#39;;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;SHOW STATUS LIKE &#39;Qcache%&#39;;
 +-------------------------+----------+
 | Variable_name           | Value    |
 +-------------------------+----------+
@@ -1817,7 +1817,7 @@ UUID_SHORT()
 &lt;li&gt;&lt;code&gt;begin&lt;/code&gt; 상태로 돌아가면, 다시 새로운 &lt;code&gt;SQL&lt;/code&gt; 문을 내보내는 새 요청이 수신될 때 새로운 &lt;code&gt;Connection&lt;/code&gt; 및 &lt;code&gt;Transaction&lt;/code&gt; 객체를 다시 호출합니다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;다음은 위의 라이프 사이클을 보여주는 예제이다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;engine = create_engine(&amp;quot;...&amp;quot;)
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;engine = create_engine(&amp;quot;...&amp;quot;)
 Session = sessionmaker(bind=engine)
 
 # 새로운 세션, 어떤 커넥션도 사용중이지 않다.
@@ -1852,7 +1852,7 @@ finally:
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;savepoint-사용하기&#34;&gt;SAVEPOINT 사용하기&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;기본 엔진에서 지원하는 경우, &lt;code&gt;SAVEPOINT&lt;/code&gt; 트랜잭션은 &lt;code&gt;Session.begin_nested()&lt;/code&gt; 메서드를 사용할 수 있다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Session = sessionmaker()
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Session = sessionmaker()
 session = Session()
 session.add(u1)
 session.add(u2)
@@ -1879,7 +1879,7 @@ session.commit() # commits u1 and u2
 &lt;p&gt;개발 레코드를 삽입할 때, 유용하게 사용할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;for record in records:
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;for record in records:
     try:
         with session.begin_nested():
             session.merge(record)
@@ -1897,7 +1897,7 @@ session.commit()
 &lt;/ul&gt;
 &lt;h4 id=&#34;세션-메이커-및-엔진-전체에-대한-고립-수준-설정&#34;&gt;세션 메이커 및 엔진 전체에 대한 고립 수준 설정&lt;/h4&gt;
 &lt;p&gt;전역 적으로 특정 고립 수준으로 &lt;code&gt;Session&lt;/code&gt; 또는 &lt;code&gt;Session Maker&lt;/code&gt;를 설정하려면 첫 번째 기술은 모든 경우에 특정 격리 수준에 대해서 엔진을 설정한 다음에, 세션 메이커의 연결 소스로 사용하는 것이다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from sqlalchemy import create_engine
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 eng = create_engine(
@@ -1907,7 +1907,7 @@ eng = create_engine(
 
 Session = sessionmaker(eng)
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;서로 다른 격리 수준을 가진 두 개의 엔진이 있는 경우 유용한 다른 옵션은 &lt;code&gt;Engine.execution_options()&lt;/code&gt; 메서드를 사용하는 것입니다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from sqlalchemy import create_engine
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 eng = create_engine(&amp;quot;postgresql://scott:tiger@localhost/test&amp;quot;)
@@ -1923,7 +1923,7 @@ autocommit_session = sessionmaker(autocommit_engine)
 &lt;h4 id=&#34;각각의-세션에-대한-고립-수준-설정&#34;&gt;각각의 세션에 대한, 고립 수준 설정&lt;/h4&gt;
 &lt;p&gt;생성자를 직접 사용하거나, 세션 메이커가 생성한 호출 가능한 객체를 호출 할 때, &lt;code&gt;bind&lt;/code&gt; 인자로 바로 전달 할 수 있다.
 예를 들어, &lt;code&gt;transactional_session&lt;/code&gt;에서 세션을 만들고, &lt;code&gt;autocommit_engine&lt;/code&gt;을 전달할 수 있다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;session = transactional_session(bind=autocommit_engine)
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;session = transactional_session(bind=autocommit_engine)
 # work with session
 session.close()
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;각각의-트랜잭션에-대한-고립-수준-설정&#34;&gt;각각의 트랜잭션에 대한 고립 수준 설정&lt;/h4&gt;
@@ -1931,7 +1931,7 @@ session.close()
 &lt;p&gt;데이터베이스는 진행중인 트랜잭션의 격리 수준을 변경할 수 없으며 일부 &lt;code&gt;DBAPI&lt;/code&gt; 및 &lt;code&gt;SQLALchemy&lt;/code&gt; 언어에서는 이러한 영역에서 일관적이지 않은 동작이 있다.&lt;/p&gt;
 &lt;p&gt;따라서 원하는 격리 수준을 가진 엔진 앞쪽에 바인딩 된 세션을 사용하는 것이 좋다.&lt;/p&gt;
 &lt;p&gt;그러나 연결 단위의 격리 수준은 트랜잭션이 시작될 때 &lt;code&gt;Session.commection()&lt;/code&gt; 메서드를 사용하여 영향 받을 수 있다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;from sqlalchemy.orm import Session
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from sqlalchemy.orm import Session
 
 sess = Session(bind=engine)
 with sess.begin():
@@ -1960,8 +1960,8 @@ with sess.begin():
 &lt;li&gt;유니크 키는 유일해야하지만, 널을 허용할 수 있다.&lt;/li&gt;
 &lt;li&gt;테이블을 생성한 후 &lt;code&gt;CREATE INDEX&lt;/code&gt; 명령 또는 &lt;code&gt;ALTER TABLE&lt;/code&gt; 명령을 사용하여, 고유 키를 추가할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;ALTER TABLE Employees ADD UNIQUE `EmpCode`(`Employee_Code`);
-&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;CREATE UNIQUE INDEX HomePhone ON Employees(Home_Phone);
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ALTER TABLE Employees ADD UNIQUE `EmpCode`(`Employee_Code`);
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;CREATE UNIQUE INDEX HomePhone ON Employees(Home_Phone);
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://mariadb.com/kb/en/getting-started-with-indexes/#unique-index&#34;&gt;mariadb-unique-index&lt;/a&gt;&lt;/li&gt;

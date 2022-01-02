@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -97,7 +94,7 @@
 <ul>
 <li>전체 <code>asyncio</code> API 중 일부는 위와 같이 요약할 수 있다.</li>
 </ul>
-<pre><code>import asyncio
+<pre tabindex="0"><code>import asyncio
 import time
 
 
@@ -117,7 +114,7 @@ asyncio.run(main())
 <ul>
 <li>눈치채지 어려울 수 도 있지만, <code>Hello!</code> 라는 문자열이 출력되고 나서 1초 후에 <code>GoodBye!</code> 라는 문자열이 출려된다.</li>
 </ul>
-<pre><code>import asyncio
+<pre tabindex="0"><code>import asyncio
 import time
 
 
@@ -153,7 +150,7 @@ loop.close() # 보통 최종 동작이다. 모든 루프의 대기열을 비우�
 <h3 id="코루틴">코루틴</h3>
 <hr>
 <p><img src="https://dl.dropbox.com/s/3gk2z30sqecf5mf/Screen%20Shot%202021-09-06%20at%2012.42.33%20AM.png" alt=""></p>
-<pre><code>async def f():
+<pre tabindex="0"><code>async def f():
   return 123
 
 &gt;&gt;&gt; type(f)
@@ -212,7 +209,7 @@ loop.close() # 보통 최종 동작이다. 모든 루프의 대기열을 비우�
 <p><code>__await__()</code> 라는 특별 매서드를 구현한 모든 객체, 이 메서드는 반드시 이터레이터를 반환해야한다.</p>
 </li>
 </ul>
-<pre><code>import asyncio
+<pre tabindex="0"><code>import asyncio
 
 
 async def f():

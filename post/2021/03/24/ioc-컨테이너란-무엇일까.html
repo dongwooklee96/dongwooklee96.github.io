@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -217,7 +214,7 @@
 <p><code>Java</code> 설정으로는 <code>@Bean</code>의 <code>initMethod</code> 속성을 사용할 수 있다.</p>
 </li>
 </ul>
-<pre><code>public class AnotherExampleBean implements InitializingBean {
+<pre tabindex="0"><code>public class AnotherExampleBean implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
@@ -238,7 +235,7 @@
 <p>또는 <code>@PreDestory</code> 주석을 사용하거나 빈 정의에서 지원하는 일반 메서드를 지정하는 것이 좋습니다.</p>
 </li>
 </ul>
-<pre><code>public class AnotherExampleBean implements DisposableBean {
+<pre tabindex="0"><code>public class AnotherExampleBean implements DisposableBean {
 
     @Override
     public void destroy() {

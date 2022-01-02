@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -79,7 +76,7 @@
 <li>서버와 클라이언트를 연결해봄으로써, 간단한 소켓 프로그래밍을 해볼 것이다.</li>
 <li>A와 B가 연결된 상태로 통신을 하려면 둘 중의 하나가 연결 요청을 해야한다. 그리고 나머지 한쪽은 상대방의 연결 요청을 처리할 준비를 해야한다.</li>
 </ul>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;sys/socket.h&gt;
 
 int listen(int sockfd, int backlog);
@@ -97,7 +94,7 @@ int listen(int sockfd, int backlog);
 <p><code>backlog</code>는 저장하고 있을 연결 요청의 최대 수를 뜻한다.</p>
 </li>
 </ul>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;sys/socket.h&gt;
 
 int accept(int sockfd, struct sockaddr *addr, socket_t addrlen);
@@ -112,7 +109,7 @@ int accept(int sockfd, struct sockaddr *addr, socket_t addrlen);
 <p>여기서 주의해야할 것은 <code>listen</code> 함수를 통해 듣기 모드에 돌입한 소켓은 <strong>연결 요청을 접수하는 역할을 하는 듣기 소켓이 되고 accept 함수의 결과 반환된 소켓은 실제 데이터 전송에 사용되는 연결 소켓이 된다는 것이다.</strong></p>
 </li>
 </ul>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;sys/socket.h&gt;
 
 int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
@@ -142,7 +139,7 @@ int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 <p>클라이언트쪽으로부터 &ldquo;How old are you?&rdquo; 라는 문자열을 전송받은 후에 이것을 전송한다.
 클라이언트쪽으로 &ldquo;I am 20 years old&rdquo; 라는 문자열을 전송한 후에 화면에 출력한다.</p>
 </blockquote>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 #include &lt;netinet/in.h&gt;
 #include &lt;unistd.h&gt;
@@ -211,7 +208,7 @@ int main() {
 연결 후 서버 프로그램으로 &lsquo;How old are you?&rsquo; 라는 문자열을 전송한 후에 화면에 출력한다.
 서버로부터 &lsquo;I am 20 years old.&rsquo; 라는 문자열을 전송 받은 후에 화면에 출력한다.</p>
 </blockquote>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;netinet/in.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;arpa/inet.h&gt;
@@ -287,7 +284,7 @@ int main() {
 <p>따라서 이 경우 다른 작업을 추가할고 싶으면 코드를 다음과 같이 구성하면 된다.</p>
 </li>
 </ul>
-<pre><code>client_sd = socket(PF_INET, SOCK_STREAM, 0);
+<pre tabindex="0"><code>client_sd = socket(PF_INET, SOCK_STREAM, 0);
 
 if (client_sd == -1) {
   if (errno == EINVAL) {
@@ -300,7 +297,7 @@ if (client_sd == -1) {
 </code></pre><ul>
 <li>화면에 에러 메시지에 대략적인 내용을 출력하는 함수를 만들고 실패가 발생하는 모든 함수에서 에러 처리 루틴을 삽입하는 것이 좋다.</li>
 </ul>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 
 void perror(const char *msg);
 

@@ -21,7 +21,7 @@
 &lt;li&gt;클래스 메서드는 인스턴스 메서드가 인스턴스를 받는 것 처럼 클래스를 암시적인 첫 번째 인수로 수신한다.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;클래스 메서드는 다음과 같이 사용한다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;class C:
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class C:
     @classmethod
     def f(cls, arg1, arg2, ...): ...
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -42,7 +42,7 @@
 &lt;li&gt;정적 메서드는 암시적으로 첫 번째 인수를 받지 않습니다.&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;사용하는 방법은 다음과 같다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;class C:
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class C:
     @staticmethod
     def f(arg1, arg2, ...): ...
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -54,12 +54,12 @@
 &lt;li&gt;데코레이터와 마찬가지로, 정적 메서드를 &lt;code&gt;regular&lt;/code&gt; 함수 처럼 호출 할 수 있다.&lt;/li&gt;
 &lt;li&gt;클래스 바디에 함수에 대한 참조가 필요하고 인스턴스 메서드로 자동 변환하지 않으려는 경우에 사용한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;class C:
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class C:
     builtin_open = staticmethod(open)
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;차이점&#34;&gt;차이점&lt;/h4&gt;
 &lt;p&gt;얼핏봐서는 차이점을 크게 못느껴서 인터넷을 찾아본 결과 좋은 글을 볼 수 있었다. &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;@classmethod&lt;/code&gt;와 &lt;code&gt;@staticmethod&lt;/code&gt;는 상속에서 차이가 난다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;class Person:
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class Person:
     default= &amp;quot;아빠&amp;quot;
 
      def __init__(self):

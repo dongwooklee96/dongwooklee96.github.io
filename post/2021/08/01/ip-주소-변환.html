@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -123,7 +120,7 @@
 </table>
 <h3 id="ip-주소를-정수로-변환하여-출력하는-예제">IP 주소를 정수로 변환하여 출력하는 예제</h3>
 <hr>
-<pre><code>#include &lt;sys/socket.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/socket.h&gt;
 #include &lt;netinet/in.h&gt;
 #include &lt;arpa/inet.h&gt;
 #include &lt;stdio.h&gt;
@@ -153,7 +150,7 @@ int main(int argc, char** argv) {
 </ul>
 <h3 id="주소-변환-함수-예제">주소 변환 함수 예제</h3>
 <hr>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;netinet/in.h&gt;
 #include &lt;arpa/inet.h&gt;
@@ -214,13 +211,13 @@ int print_addr(struct sockaddr_in *address) {
 <p>호스트 이름 문자열을 <code>IP</code> 주소로 변환하는 과정은 단순 변환이 아니다. 네임 서버에 해당 내용을 조회하고 그 결과값을 알려주는 과정이 포함된다.</p>
 </li>
 </ul>
-<pre><code>#include &lt;netdb.h&gt;
+<pre tabindex="0"><code>#include &lt;netdb.h&gt;
 #include &lt;sys/socket.h&gt;
 struct hosten *gethostbyname(const char *name);
 </code></pre><ul>
 <li>호스트 이름을 네임서버에 조회하여 성공하면 네임 서버는 여러 가지 정보를 제공한다. 이 정보를 저장하기 위해서는 <code>hostent</code> 라는 구조체가 사용된다.</li>
 </ul>
-<pre><code>struct hostent {
+<pre tabindex="0"><code>struct hostent {
   char *h_name; // 호스트의 공식 이름
   char **h_aliases; // 가명 리스트 (마지막 인자는 NULL)
   int h_addrtype; // 호스트 주소 타입 (IPv4, IPv6)
@@ -233,7 +230,7 @@ struct hosten *gethostbyname(const char *name);
 </ul>
 <h3 id="호스트-이름으로-ip-주소를-조회하는-예제">호스트 이름으로 <code>IP</code> 주소를 조회하는 예제</h3>
 <hr>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;netdb.h&gt;
 #include &lt;errno.h&gt;
 #include &lt;sys/types.h&gt;

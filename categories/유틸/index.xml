@@ -13,7 +13,7 @@
       <pubDate>Sun, 14 Nov 2021 12:00:39 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/post/2021/11/14/%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
-      <description>&lt;pre&gt;&lt;code&gt;echo &#39;export PATH=&amp;quot;$PATH:`pwd`/flutter/bin&amp;quot;&#39; &amp;gt;&amp;gt; ~/.zshrc
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &#39;export PATH=&amp;quot;$PATH:`pwd`/flutter/bin&amp;quot;&#39; &amp;gt;&amp;gt; ~/.zshrc
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;다음 명령어를 입력하면 위의 명령어가 쉘 환경 설정 파일에 들어가게 된다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -133,7 +133,7 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;모델을-사용하면-얻게-되는-장점&#34;&gt;모델을 사용하면 얻게 되는 장점&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;1. 도식화의 이점을 누릴 수 있다.
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 도식화의 이점을 누릴 수 있다.
 2. 전체 모습을 파악할 수 있다.
 3. 논리적으로 생각할 수 있다.
 4. 발상을 넓힐 수 있다.
@@ -147,7 +147,7 @@
 &lt;p&gt;빈약한 모델의 공통점은 아래와 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;1. 목적과 관점이 정해져있지 않거나, 명확하지 않다.
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 목적과 관점이 정해져있지 않거나, 명확하지 않다.
 2. 요소가 망라되어 있지 않거나, 불필요한 요소를 포함하고 있다.
 3. 요소의 추상화 수준이 너무 높거나 너무 낮다.
 4. 요소들 사이의 관계를 잘 표현하고 있지 못한다.
@@ -214,7 +214,7 @@
 &lt;p&gt;객체지향 사고를 할 때 도움이 될 것 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;1. 사물을 깊게 이해하고 싶다.
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 사물을 깊게 이해하고 싶다.
 2. 어떤 사물이나 개념을 상대방이 알기 쉽게 전달하고 싶다.
 3. 새롭고 혁신적인 발상을 하고 싶다.
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -653,7 +653,7 @@
 &lt;li&gt;캐릭터 셋은 단순히 특정 인코딩으로 나타낼 수 있는, 문자의 집합을 의미한다.&lt;/li&gt;
 &lt;li&gt;예를 들면, &amp;lsquo;☯&amp;rsquo; 같은 문자는 유니코드 문자 집합과 다른 문자 집합에도 사용할 수 있다. 하지만 이 문자에 대한 인코딩을 서로 다를 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;Unicode character: ☯
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Unicode character: ☯
 UTF-8 encoded: 0xE2 0x98 0xAF
 UTF-16 encoded: 0x26 0x2F
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;

@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -89,7 +86,7 @@
 <h1 id="문제-1-거스름돈">문제 1: 거스름돈</h1>
 <hr>
 <p>당신은 음식점의 계산을 도와주는 점원이다. 카운터에는 거스름돈으로 사용할 500원, 100원, 50원, 10원짜리 동전이 무한이 존재한다고 가정한다. 손님에게 거슬러 줘야 할 돈이 N원일 때 거슬러줘야 할 동전의 최소 개수를 구하라. 단, 거슬러 줘야할 돈 N은 항상 10의 배수이다.</p>
-<pre><code>def solve(money):
+<pre tabindex="0"><code>def solve(money):
     ret = 0
     if money &gt;= 500:
         ret += money // 500
@@ -108,7 +105,7 @@
         money %= 10
 
     return ret
-</code></pre><pre><code>from problem import solve
+</code></pre><pre tabindex="0"><code>from problem import solve
 
 
 def test_solve1():

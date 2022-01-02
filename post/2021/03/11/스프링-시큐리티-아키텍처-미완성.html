@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -86,7 +83,7 @@
 </ul>
 <h2 id="인증-authentication">인증 (Authentication)</h2>
 <hr>
-<pre><code>public interface AuthenticationManager {
+<pre tabindex="0"><code>public interface AuthenticationManager {
 
   Authentication authenticate(Authentication authentication)
     throws AuthenticationException;
@@ -149,7 +146,7 @@
 <p>일반적으로 사용되는 헬퍼는 <code>AuthenticationManagerBuilder</code>를 사용합니다.</p>
 </li>
 </ul>
-<pre><code>@Configuration
+<pre tabindex="0"><code>@Configuration
 public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
    ... // web stuff here

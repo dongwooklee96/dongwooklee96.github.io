@@ -23,7 +23,7 @@
 &lt;p&gt;오케이스트레이션은 저장소에서 여러 가지를 가져오고, 데이터베이스 상태에 따라서 입력을 검증하여 오류를 처리하고, 성공적인 경우에는 데이터베이스에 커밋하는 작업을 포함한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import model
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import model
 from model import OrderLine
 from repository import AbstractRepository
 
@@ -45,7 +45,7 @@ def allocate(line: OrderLine, repo: AbstractRepository, session) -&amp;gt; str:
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;서비스 계층에서는 다음과 같이, 예외처리를 하거나 커밋을 데이터베이스 커밋을 한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;@flask.route.gubbins
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@flask.route.gubbins
 def allocate_endpoint():
     session = get_session()
     repo = repository.SqlAlchemyRepository(session)
@@ -138,7 +138,7 @@ def allocate_endpoint():
 &lt;p&gt;도메인 서비스 계층에서 데이터에 접근할 때는 엄격하게 이 두가지 메서드만 사용할 수 있다. 이렇게 단순성을 강제로 유지하면 도메인 모델과 데이터베이스 사이의 결합을 끊을 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;from collections import abc
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from collections import abc
 
 import model
 
@@ -180,7 +180,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;/ul&gt;
 &lt;h3 id=&#34;테스트에-사용하는-가짜-저장소를-쉽게-만드는-방법&#34;&gt;테스트에 사용하는 가짜 저장소를 쉽게 만드는 방법&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;class FakeRepository(AbstractRepository):
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class FakeRepository(AbstractRepository):
 
     def __init__(self, batches):
         self._batches = set(batches)
@@ -232,7 +232,7 @@ class SqlAlchemyRepository(AbstractRepository):
       <pubDate>Tue, 09 Nov 2021 13:40:33 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/post/2021/11/09/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-1%EC%9E%A5.html</guid>
-      <description>&lt;pre&gt;&lt;code&gt;- 대부분의 개발자가 새로운 시스템을 설계하라는 요청을 받으면, 즉시 데이터베이스 스키마를 그리기 시작하고, 그 다음에 객체 모델을 생각한다. 여기서부터 모든 것이 잘못되기 시작한다...
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- 대부분의 개발자가 새로운 시스템을 설계하라는 요청을 받으면, 즉시 데이터베이스 스키마를 그리기 시작하고, 그 다음에 객체 모델을 생각한다. 여기서부터 모든 것이 잘못되기 시작한다...
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;이에 매우 공감한다. 그 이유는 대학교 졸업 작품을 이런식으로 설계해봤기 때문에 얼마나 비효율적이고 수정이 많이 발생하는지 느꼈기 때문이다.&lt;/p&gt;
@@ -244,7 +244,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;이 책에서는 아래 4가지의 핵심 설계 패턴을 소개한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;1. 저장소 패턴은 영속적인 저장소에 대한 추상화를 한다.
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 저장소 패턴은 영속적인 저장소에 대한 추상화를 한다.
 2. 서비스 계층 패턴은 유스케이스의 시작과 끝을 명확하게 정의하기 위한 패턴이다.
 3. 작업 단위 패턴은 원자적 연산을 제공한다.
 4. 애그리게이트 패턴은 데이터 정합성을 강화하기 위한 패턴이다.

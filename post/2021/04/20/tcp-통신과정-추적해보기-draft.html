@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -79,7 +76,7 @@
 <hr>
 <p>추적하기 전에 클라이언트와 서버 코드를 컴파일 한다.</p>
 <p><strong>client.c</strong></p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;arpa/inet.h&gt;
 #include &lt;string.h&gt;
@@ -123,7 +120,7 @@ int main(int argc, char **argv) {
         return 0;
 }
 </code></pre><p><strong>server.c</strong></p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
@@ -184,7 +181,7 @@ int main(void){
 </code></pre><ul>
 <li>위의 소스 코드를 복사하여, 파일을 만든다.</li>
 </ul>
-<pre><code>gcc -pg -g -o client client.c
+<pre tabindex="0"><code>gcc -pg -g -o client client.c
 gcc -pg -g -o server server.c
 </code></pre><ul>
 <li>그리고 위의 명령어를 통해서 컴파일을 해준다.</li>

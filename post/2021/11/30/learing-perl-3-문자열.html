@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -78,21 +75,21 @@
 <ul>
 <li>홑따옴표 문자열은 다음과 같이 표시할 수 있다.</li>
 </ul>
-<pre><code>'fred' # four characters: f, r, e, d
+<pre tabindex="0"><code>'fred' # four characters: f, r, e, d
 </code></pre><ul>
 <li>그리고 특수 홑따음표나 백슬레시를 표현하고 싶다면 앞에 &lsquo;' 백슬레시를 붙여주면 된다.</li>
 </ul>
-<pre><code>'Don\'t let an apostrophe end this string prematurely!'
+<pre tabindex="0"><code>'Don\'t let an apostrophe end this string prematurely!'
 </code></pre><ul>
 <li>주의할 점은 백슬레시는 오직 <code>'</code> 홑따옴표를 나타내거나, 백슬레시를 나타낼 때만 사용할 수 있다는 것이다.</li>
 </ul>
-<pre><code>'hello\nthere' # hellonthere
+<pre tabindex="0"><code>'hello\nthere' # hellonthere
 </code></pre><h3 id="쌍따옴표-문자열">쌍따옴표 문자열</h3>
 <hr>
 <ul>
 <li>쌍따옴표는 기본적으롤 홑따옴표 문자열과 큰 차이는 없지만, 백슬레시를 이용하여 활용할 수 있는 표현이 훨씬 더 많다.</li>
 </ul>
-<pre><code>&quot;barney&quot; # 'barney'와 같다.
+<pre tabindex="0"><code>&quot;barney&quot; # 'barney'와 같다.
 &quot;hello world\n&quot; # 'hello world' 다음에 개행이 추가된다.
 &quot;the last character of this string is a quote mark: \&quot;&quot;
 &quot;coke\tsprite&quot; # coke, 다음에 탭문자 그리고 sprite
@@ -106,7 +103,7 @@
 <ul>
 <li>펄에는 스트링을 반복해서 더할 수 있는 문법이 있다.</li>
 </ul>
-<pre><code>&quot;fref&quot; x 3 # &quot;fredfredfred&quot; 로 나타내진다.
+<pre tabindex="0"><code>&quot;fref&quot; x 3 # &quot;fredfredfred&quot; 로 나타내진다.
 &quot;barney&quot; x (4 + 1) # &quot;barneybarneybarneybarneybarney&quot; 로 나타내진다.
 5 x 4.8 # 5555 로 나타내진다.
 </code></pre><ul>
@@ -138,20 +135,20 @@
 <p>그리고 절대로 숫자로 변환할 수 없다면 숫자 0으로 변경되어서 계산된다.</p>
 </li>
 </ul>
-<pre><code>&quot;12abcde34&quot; * &quot; 3&quot; # 36 
+<pre tabindex="0"><code>&quot;12abcde34&quot; * &quot; 3&quot; # 36 
 </code></pre><h3 id="경고-표시">경고 표시</h3>
 <hr>
 <ul>
 <li>펄 스크립트를 작성할 때, 아래 코드를 적으면 프로그램에서 어떻게 동작할지 잘 모르겠는 부분을 워닝으로 표시해줄 수 있다.</li>
 </ul>
-<pre><code>#!/usr/bin/perl
+<pre tabindex="0"><code>#!/usr/bin/perl
 use warnings;
 </code></pre><p>또는</p>
-<pre><code>#!/usr/bin/perl -w
+<pre tabindex="0"><code>#!/usr/bin/perl -w
 </code></pre><ul>
 <li>그 경고는 모듈을 추가하였을 때 내가 작성하지 않은 부분에 대해서도 경로를 표시해준다.</li>
 </ul>
-<pre><code>$ perl -w my_program
+<pre tabindex="0"><code>$ perl -w my_program
 </code></pre><ul>
 <li>그리고 <code>use diagnostics;</code> pragma를 사용하면 더 상세한 내용을 알 수 있다. 이것은 프로그램을 최적화하는데 많은 도움이 된다.</li>
 </ul>

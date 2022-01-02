@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -84,7 +81,7 @@
 <p>물론 멘토님께서는 눈에 띄는 변화는 없을 것이라고 하셨다. 하지만, 내가 작성한 코드가 과연 성능 개선이 있을까 궁금해서 이를 측정해보고 싶었다.</p>
 </li>
 </ul>
-<pre><code>git clone https://github.com/RedisLabs/memtier_benchmark.git
+<pre tabindex="0"><code>git clone https://github.com/RedisLabs/memtier_benchmark.git
 </code></pre><p><img src="https://user-images.githubusercontent.com/14002238/112842051-1f768d00-90dc-11eb-942c-9e1b54aed4f9.png" alt="Screen Shot 2021-03-29 at 10 14 19 PM"></p>
 <ul>
 <li><code>README</code> 문서에 나와있는데로, 의존성 패키지들을 다운로드 받고 이를 빌드 하면된다.</li>
@@ -106,7 +103,7 @@
 <li>서버를 띄우면 다음과 같은 화면이 뜨고, 이제 <code>memtier_benchmark</code>를 다음의 옵션을 설정해서 실행을 시키면 끝난다.</li>
 </ul>
 <p><img src="https://user-images.githubusercontent.com/14002238/112845383-c6105d00-90df-11eb-81d9-4e9afe5634b7.png" alt="memtier"></p>
-<pre><code>./memtier_benchmark -s 127.0.0.1 -p 11216 -t 4 -c 50 -P memcache_text
+<pre tabindex="0"><code>./memtier_benchmark -s 127.0.0.1 -p 11216 -t 4 -c 50 -P memcache_text
 </code></pre><ul>
 <li>위에 작성한 명령어는 <code>localhost</code> 주소의 <code>11216</code> 포트로 쓰레드 4개와 커넥션 50개를 이용하여 <code>memcached</code> 프토로콜 테스트를 하겠다는 뜻이다.</li>
 </ul>

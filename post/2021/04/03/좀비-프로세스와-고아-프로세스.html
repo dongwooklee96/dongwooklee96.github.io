@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -107,7 +104,7 @@
 </ul>
 <h3 id="실습">실습</h3>
 <hr>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;sys/types.h&gt;
 #include &lt;sys/wait.h&gt;
@@ -145,7 +142,7 @@ int main ()
 }
 </code></pre><p>위와 같은 소스 코드를 작성하고 컴파일을 한 뒤에 실행을 해보자.
 소스 코드의 대략적인 내용은 부모 프로세스에서 자식 프로세스를 만들고 나서, <code>wait()</code> 호출을 하지 않고 종료 시켜버리는 것이다.</p>
-<pre><code>gcc -o zombie zombie.c
+<pre tabindex="0"><code>gcc -o zombie zombie.c
 </code></pre><p>실행을 하기 전에, <code>top</code> 명령어를 통해서 좀비 프로세스의 여부를 확인한 모습이다.</p>
 <p><img src="https://user-images.githubusercontent.com/14002238/113477959-c1252200-94c0-11eb-946c-384317e800aa.png" alt="Screen Shot 2021-04-03 at 9 05 53 PM copy"></p>
 <p>좀비 프로세스가 없다는 것을 확인할 수 있다. 아까 작성한 프로그램을 실행 시킨 후에, 다시 한 번더 확인하였을 때는 다음과 같이 표시됨을 확인할 수 있다.</p>

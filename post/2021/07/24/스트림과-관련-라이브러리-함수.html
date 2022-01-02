@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -115,7 +112,7 @@
 </ul>
 <p><strong>예외</strong></p>
 <p>그러나 몇가지 중요한 예외가 있다.</p>
-<pre><code>1. 스트림이 단말에 연결된 경우에는 버퍼가 가득찰 때까지 기다리지 않고
+<pre tabindex="0"><code>1. 스트림이 단말에 연결된 경우에는 버퍼가 가득찰 때까지 기다리지 않고
 개행 (\n)을 만나는 시점에서 write()를 실행한다. 이유는, 반대편에 모니터와
 같은 단말이 있다면 사람이 출력을 보고 있을 가능성이 높기 때문이다.
 버퍼가 가득차기 까지는 오랜 시간이 걸릴 수도 있기 때문에 적절한 순간에
@@ -174,7 +171,7 @@ stdio 스트림에 데이터를 쓰면 버퍼링 없이 즉시 write()가 수행
 <h3 id="fopen3"><code>fopen(3)</code></h3>
 <hr>
 <p>표준 입출력 이외의 스트림에 대한 <code>FILE</code>을 여는 것도 물론 가능하다. 이때는 <code>fopen()</code> 이라는 <code>API</code>를 사용한다. 이것은 시스템 콜 <code>open()</code>에 대응된다.</p>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 
 FILE *fopen(const char *path, const char *mode);
 </code></pre><ul>
@@ -190,7 +187,7 @@ FILE *fopen(const char *path, const char *mode);
 <ul>
 <li>시스템 콜 <code>open()</code>에 대응하는 API가 <code>fopen()</code>이라면 <code>close()</code>에 대응하는 API는 <code>fclose()</code>이다.</li>
 </ul>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 
 int fclose(FILE *stream);
 </code></pre><h3 id="문자열-입출력">문자열 입출력</h3>

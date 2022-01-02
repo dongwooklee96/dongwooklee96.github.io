@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -73,7 +70,7 @@
   <main>
     <h3 id="가장-먼저-웹-컨트롤러가-지저분해지는-일을-막기">가장 먼저 웹 컨트롤러가 지저분해지는 일을 막기</h3>
 <hr>
-<pre><code>@app.route(&quot;/allocate&quot;, methods=['POST'])
+<pre tabindex="0"><code>@app.route(&quot;/allocate&quot;, methods=['POST'])
 def allocate_endpoint():
     line = model.OrderLine(
         request.json['orderid'],
@@ -101,7 +98,7 @@ def allocate_endpoint():
 </ul>
 <h3 id="모델이-지저분-해지는-일을-막기">모델이 지저분 해지는 일을 막기</h3>
 <hr>
-<pre><code>def allocate(line: OrderLine, batches: List[Batch]) -&gt; str:
+<pre tabindex="0"><code>def allocate(line: OrderLine, batches: List[Batch]) -&gt; str:
     try:
 
         batch = next(
@@ -129,7 +126,7 @@ def allocate_endpoint():
 </ul>
 <h3 id="서비스-계층이-지저분-해지는-것을-막기">서비스 계층이 지저분 해지는 것을 막기</h3>
 <hr>
-<pre><code>def allocate(orderid: str, sku: str, qty: int, uow: unit_of_work.AbstractUnitOfWork) -&gt; str:
+<pre tabindex="0"><code>def allocate(orderid: str, sku: str, qty: int, uow: unit_of_work.AbstractUnitOfWork) -&gt; str:
     line = OrderLine(orderid, sku, qty)
     with uow:
         product = uow.products.get(sku=line.sku)
@@ -172,7 +169,7 @@ def allocate_endpoint():
 <p>이벤트는 값 객체 (VO)에 속한다. 이벤트는 순수 데이터 구조이므로 아무런 동작이 없다. 이벤트를 항상 도메인 언어로 이름을 붙여야 한다. 항상 이벤트를 도메인 모델의 일부분으로 간주한다.</p>
 </li>
 </ul>
-<pre><code>class Event:
+<pre tabindex="0"><code>class Event:
     pass
 
 
@@ -187,7 +184,7 @@ class OutOfStock(Event):
 <p>외부에서 볼 때 이벤트 발생이 어떻게 보이는지 다음 예제를 통해서 알 수 있다.</p>
 </li>
 </ul>
-<pre><code>def test_records_out_of_stock_event_if_cannot_allocate():
+<pre tabindex="0"><code>def test_records_out_of_stock_event_if_cannot_allocate():
     batch = Batch('batch1', 'SMALL-FORK', 10, eta=today)
     product = Product(sku=&quot;SMALL-FORK&quot;, batches=[batch])
     product.allocate(OrderLine('order1', 'SMALL-FORK', 10))
@@ -199,7 +196,7 @@ class OutOfStock(Event):
 </code></pre><ul>
 <li>애그리게이트는 <code>events</code>라는 새로운 속성을 외부로 노출하고 애트리뷰트에 발생한 일에 대한 사실은 <code>event</code> 객체 형태로 남긴 리스트에 남아있다.</li>
 </ul>
-<pre><code>class Product:
+<pre tabindex="0"><code>class Product:
 
     def __init__(self, sku: str, batches: List[Batch], version_number: int = 0):
         self.sku = sku
@@ -225,7 +222,7 @@ class OutOfStock(Event):
 수신 되는 이벤트는 버스에 시스템이 발행된 것이다. 글로 쓰면 실제보다 더 어려워 보이지만 보통은 딕셔너리를 이용하여 메시지 버스를 구현한다.</p>
 </li>
 </ul>
-<pre><code>def handle(event: events.Event):
+<pre tabindex="0"><code>def handle(event: events.Event):
     for handler in HANDLERS[type(event)]:
         handler(event)
 
@@ -239,7 +236,7 @@ HANDLERS = {
     events.OutOfStock: [send_out_of_stock_notification],
 }
 </code></pre><h4 id="첫-번째-선택지--서비스-계층이-모델에서-이벤트를-가져와-메시지-버스에-싣는-방법">첫 번째 선택지 : 서비스 계층이 모델에서 이벤트를 가져와 메시지 버스에 싣는 방법</h4>
-<pre><code>def allocate(
+<pre tabindex="0"><code>def allocate(
         order_id: str, sku: str, qty: int,
         uow: unit_of_work.AbstractionUnitOfWork
 ) -&gt; str:
@@ -266,7 +263,7 @@ HANDLERS = {
 <ul>
 <li>이에 대한 변형으로는 서비스 계층이 도메인 모델에서 발생한 이벤트를 처리하기 보다 직접 이벤트를 만들고, 발생시키는 일을 책임지는 방법이 있다.</li>
 </ul>
-<pre><code>def allocate(orderid: str, sku: str, qty: int,
+<pre tabindex="0"><code>def allocate(orderid: str, sku: str, qty: int,
              uow: unit_of_work.AbstractionUnitOfWork) -&gt; str:
     line = OrderLine(orderid, sku, qty)
     with uow:
@@ -289,7 +286,7 @@ HANDLERS = {
 </li>
 </ul>
 <p><strong>unit_of_work.py</strong></p>
-<pre><code>import abc
+<pre tabindex="0"><code>import abc
 
 
 class AbstractUnitOfWork(abc.ABC):

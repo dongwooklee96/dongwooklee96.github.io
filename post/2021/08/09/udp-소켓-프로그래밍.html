@@ -5,9 +5,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
     </script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1333462062809126"
-     crossorigin="anonymous">
-    </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
@@ -150,13 +147,13 @@
 <ul>
 <li>전송 계층 프로토콜로 <strong>UDP</strong>를 사용하려면, <code>socket</code> 함수의 인자를 다음과 같이 설정해야한다.</li>
 </ul>
-<pre><code>socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+<pre tabindex="0"><code>socket (AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 socket (AF_INET, SOCK_DGRAM, 0);
 </code></pre><h4 id="데이터-전송">데이터 전송</h4>
 <ul>
 <li>소켓 전용 입출력 함수인 <code>sendto</code>를 이용하여 <strong>UDP</strong> 데이터그램을 전송하는 것이 가능하다.</li>
 </ul>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;sys/socket.h&gt;
 
 ssize_t sendto (
@@ -183,8 +180,8 @@ ssize_t sendto (
 <ul>
 <li><code>sendto()</code> 함수는 목적지의 주소를 인자로 받는다. 여기서 다음과 같은 의문이 생길 수 있다.</li>
 </ul>
-<pre><code>소켓의 출발지 주소는 어떻게 설정하는가?
-</code></pre><pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>소켓의 출발지 주소는 어떻게 설정하는가?
+</code></pre><pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;sys/types.h&gt;
 #include &lt;netinet/in.h&gt;
@@ -233,7 +230,7 @@ void error_proc(const char* str) {
 </blockquote>
 <h3 id="데이터-수신">데이터 수신</h3>
 <hr>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;sys/socket.h&gt;
 
 ssize_t recvfrom (
@@ -281,7 +278,7 @@ ssize_t recvfrom (
 <p>소켓 생성(socket) -&gt; 소켓에 주소 설정(bind) -&gt; recvfrom 함수 호출(recvfrom)</p>
 </blockquote>
 <h4 id="수신-프로그램-예제">수신 프로그램 예제</h4>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;sys/types.h&gt;
 #include &lt;netinet/in.h&gt;

@@ -99,7 +99,7 @@
 &lt;p&gt;예를 들어, 상호 배제 락(뮤텍스)를 &lt;code&gt;with&lt;/code&gt; 문 안에서 사용하면 락을 소유 했을 때만, 코드 블록이 실행된다는 것을 의미한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;from threading import Lock
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from threading import Lock
 
 Lock = Lock()
 with lock:
@@ -109,7 +109,7 @@ with lock:
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;Lock&lt;/code&gt; 클래스가 &lt;code&gt;with&lt;/code&gt; 문을 적절히 활성화해주므로 위의 예제는 아래의 코드와 동등하다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;lock.acquire()
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lock.acquire()
 try:
   # 어떤 불변 조건을 유지하면서 작업을 수행한다.
   ...
@@ -135,7 +135,7 @@ finally:
 &lt;ul&gt;
 &lt;li&gt;예를 들어서, 어떤 코드 영역에서 디버깅 관련 로그를 더 많이 남기고 싶다고 가정을 할 때, 아래 코드는 디버깅 로그를 남기는 함수이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;def my_function():
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;def my_function():
    logging.debug(&#39;debug data&#39;)
    logging.error(&#39;error log&#39;)
    logging.debug(&#39;additional debug data&#39;)
@@ -151,7 +151,7 @@ finally:
 &lt;p&gt;이 헬퍼 함수는 &lt;code&gt;with&lt;/code&gt; 블록을 실행하기 직전에 로그 수준을 높이고, 블록을 실행한 후에 로그 수준을 이전 수준으로 복구 시키는 코드이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;@contextmanager
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@contextmanager
 def debug_logging(level):
     logger = logging.getLogger()
     old_level = logger.getEffectiveLevel()
@@ -170,7 +170,7 @@ def debug_logging(level):
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8as3xj5zv05jxwq/Screen%20Shot%202021-09-24%20at%202.52.31%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;with debug_logging(logging.DEBUG):
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;with debug_logging(logging.DEBUG):
     my_function()
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 사진과 같이 모든 로그가 출력된 것을 확인할 수 있다.&lt;/li&gt;
@@ -191,7 +191,7 @@ def debug_logging(level):
 &lt;p&gt;&lt;code&gt;with&lt;/code&gt; 문에 &lt;code&gt;open&lt;/code&gt;을 전달하면 이렇게 할 수 있다. &lt;code&gt;open&lt;/code&gt;은 &lt;code&gt;with&lt;/code&gt; 문에서 &lt;code&gt;as&lt;/code&gt;를 통해 대상으로 지정된 변수에게 파일 핸들을 제공하고, &lt;code&gt;with&lt;/code&gt; 블록에서 나갈 때 이 핸들을 닫는다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;with open(&#39;my_output.txt&#39;, &#39;w&#39;) as handle:
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;with open(&#39;my_output.txt&#39;, &#39;w&#39;) as handle:
   handle.write(&#39;data&#39;)
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -251,7 +251,7 @@ def debug_logging(level):
 &lt;ul&gt;
 &lt;li&gt;전체 &lt;code&gt;asyncio&lt;/code&gt; API 중 일부는 위와 같이 요약할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import asyncio
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import asyncio
 import time
 
 
@@ -271,7 +271,7 @@ asyncio.run(main())
 &lt;ul&gt;
 &lt;li&gt;눈치채지 어려울 수 도 있지만, &lt;code&gt;Hello!&lt;/code&gt; 라는 문자열이 출력되고 나서 1초 후에 &lt;code&gt;GoodBye!&lt;/code&gt; 라는 문자열이 출려된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import asyncio
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import asyncio
 import time
 
 
@@ -307,7 +307,7 @@ loop.close() # 보통 최종 동작이다. 모든 루프의 대기열을 비우�
 &lt;h3 id=&#34;코루틴&#34;&gt;코루틴&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/3gk2z30sqecf5mf/Screen%20Shot%202021-09-06%20at%2012.42.33%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;async def f():
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;async def f():
   return 123
 
 &amp;gt;&amp;gt;&amp;gt; type(f)
@@ -366,7 +366,7 @@ loop.close() # 보통 최종 동작이다. 모든 루프의 대기열을 비우�
 &lt;p&gt;&lt;code&gt;__await__()&lt;/code&gt; 라는 특별 매서드를 구현한 모든 객체, 이 메서드는 반드시 이터레이터를 반환해야한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import asyncio
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import asyncio
 
 
 async def f():
@@ -712,7 +712,7 @@ log(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/spa
 &lt;li&gt;인자가 필요하지 않을 때에는, 사용하지 않아도 된다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;가변-개수의-인수를-받는-방법의-문제점&#34;&gt;가변 개수의 인수를 받는 방법의 문제점&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;1. 가변 인수가 함수에 전달되기에 앞서, 항상 튜플로 변환된다는 점이다.
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 가변 인수가 함수에 전달되기에 앞서, 항상 튜플로 변환된다는 점이다.
 
 -&amp;gt; 함수를 호출하는 쪽에서 제네레이터를 사용하면, 결과로 만들어 지는 튜플의 개수가 많은 경우, 메모리를 많이 차지하여 프로그램이 죽을 수 있다.
 
