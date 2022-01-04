@@ -47,6 +47,48 @@
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+
   </head>
 
   <body>
@@ -262,7 +304,7 @@
   </li>
   
   <li>
-    <a href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0.html">회고</a> (203)
+    <a href="https://dongwooklee96.github.io/tags/%ED%9A%8C%EA%B3%A0.html">회고</a> (204)
   </li>
   
 </ul>
