@@ -6,7 +6,118 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 05 Jan 2022 10:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Jan 2022 19:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데이터베이스 소팅과 해싱에 대해서 정리</title>
+      <link>https://dongwooklee96.github.io/post/2022/01/05/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%86%8C%ED%8C%85%EA%B3%BC-%ED%95%B4%EC%8B%B1%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC.html</link>
+      <pubDate>Wed, 05 Jan 2022 19:00:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/01/05/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%86%8C%ED%8C%85%EA%B3%BC-%ED%95%B4%EC%8B%B1%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC.html</guid>
+      <description>&lt;h3 id=&#34;데이터베이스에서-정렬이-중요한-이유&#34;&gt;데이터베이스에서 정렬이 중요한 이유&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;(DISTINCT, GROUP BY, ORDER BY, UNION)와 같은 많은 SQL 에서 정렬을 사용한다. 또한 조인을 할 때도 소트 머지 조인 같은 방법으로 조인을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 100GB의 데이터를 1GB의 램으로 정렬을 하려고 하면 어떻게 해야하는가? 버추얼 메모리를 사용하면 안되는가?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;버추얼 메모리를 사용하면 실제 물리적인 양보다 더 많거나 심지어는 메모리 용량에 제한 받지 않는 것 처럼 사용할 수 있다. 또한 버추얼 메모리는 메모리 주소에 대한 참조를 디스크 입출력으로 변환하고 정렬을 시도할 떄 끔찍한 성능을 보여줄 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;메인-메모리를-사용하지-않는-정렬-방법&#34;&gt;메인 메모리를 사용하지 않는 정렬 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;스트리밍 방식으로 데이터를 메인 메모리로 전송하는 방법&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;데이터를 나누고 (메인 메모리 크기로) 그리고 나서 정복하는 방법&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;스트리밍-방식&#34;&gt;스트리밍 방식&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;싱글 버퍼링&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/sxuj6m8huk3k6cq/Screen%20Shot%202022-01-05%20at%2018.46.57.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터가 인풋 버퍼에서 아웃풋 버퍼로 이동하고 중간에 데이터를 변환하는 함수가 있는 형태이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;더블 버퍼링&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/bb1f75kfux9w623/Screen%20Shot%202022-01-05%20at%2018.54.18.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;계산하는 부분과 I/O를 처리하는 부분을 두 개의 스레드에서 처리하는 것이다. I/O 작업은 블록킹 되므로 백그라운드에서 동작한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;더블 버퍼링 방식은 정렬 뿐만 아니라, 스트리밍에서 많이 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정렬과-해싱&#34;&gt;정렬과 해싱&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ckb4obngpes8yd9/Screen%20Shot%202022-01-05%20at%2019.11.30.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;정렬 : 정렬 키 값을 기준으로 정렬된 파일을 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;해싱 : 동일한 해시 값을 가진 2개의 레코드가 다른 해시 값을 가진 레코드로 분리되지 않도록 파일을 정렬함. 일치하는 레코드는 항상 연속적으로 저장된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정렬-2---way&#34;&gt;정렬 2 - WAY&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/5rw81otbgj8kjcm/Screen%20Shot%202022-01-05%20at%2019.21.11.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;페이지를 읽고, 정렬하고 다시 저장하는 방식이다. 더블 버퍼링과는 상관이 없다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정렬---외부-정렬&#34;&gt;정렬 - 외부 정렬&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/kphuwzz714t1e2h/Screen%20Shot%202022-01-05%20at%2019.40.12.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;외부 정렬 방식은 처음에 버퍼 크기 만큼 나누고 나서, 이를 서로 병합하는 과정을 가진다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/bvf6z7y0ymrq59p/Screen%20Shot%202022-01-05%20at%2019.41.52.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;예를 들어서 다음과 같은 데이터가 있다고 가정을 하였을 때 각 버퍼 크기 만큼 나눈후에, 정렬을 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/upt2q3dfkgcj2po/Screen%20Shot%202022-01-05%20at%2019.43.10.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;그리고 나서 정렬된 버퍼끼리 병합을 하는데, 버퍼 상위에 있는 데이터를 화살표로 가리키면서 서서히 내려온다. 이렇게 하면 정렬된 데이터를 얻게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;해싱&#34;&gt;해싱&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;해싱은 정렬이 필요하지 않은 경우에 사용되는 방법이다. 중복을 제거하거나 GROUP BY를 사용할 때 말이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;GROUP BY에 따른 집계를 할 때 키에 따른 데이터의 집합이 필요한 것이지 정렬이 필요한 것은 아니기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;해싱의 경우에도 두 단계로 나누어 진다. 바로 분할과 정복이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;분할-divide&#34;&gt;분할 (DIVIDE)&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/v1ugskoc2ob104y/Screen%20Shot%202022-01-05%20at%2020.16.43.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해시 함수에 의해서 각 값은 버킷에 담기게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;정복-conquer&#34;&gt;정복 (CONQUER)&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/yol3mhiq9lfa5k8/Screen%20Shot%202022-01-05%20at%2020.14.54.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해시 테이블에 담긴 값을 다시 해싱을 하여 분류한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=yookWzvnic0&amp;amp;list=PLzzVuDSjP25Qpsaf7GxFDBEWwvQKCkCVl&amp;amp;index=1&#34;&gt;CS186Berkeley&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>파이썬으로 살펴보는 아키텍처 패턴 - 10장 (커맨드와 커맨드 핸들러)</title>
       <link>https://dongwooklee96.github.io/post/2022/01/05/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-10%EC%9E%A5-%EC%BB%A4%EB%A7%A8%EB%93%9C%EC%99%80-%EC%BB%A4%EB%A7%A8%EB%93%9C-%ED%95%B8%EB%93%A4%EB%9F%AC.html</link>
