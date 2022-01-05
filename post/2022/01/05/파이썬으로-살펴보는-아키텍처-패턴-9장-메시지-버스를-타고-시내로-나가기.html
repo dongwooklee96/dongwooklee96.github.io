@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>파이썬으로 살펴보는 아키텍처 패턴 - 9장 (메시지 버스를 타고 시내로 나가기) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">파이썬으로 살펴보는 아키텍처 패턴 - 9장 (메시지 버스를 타고 시내로 나가기)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/01/05</h2>
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="서비스-함수를-메시지-핸들러로-리팩터리-하기">서비스 함수를 메시지 핸들러로 리팩터리 하기</h3>
+<hr>
+<ul>
+<li>일반적으로 사용하는 서비스 레이어의 함수를 메시지 핸들럴로 변경하여 모든 서비스 계층의 메서드를 이벤트 기반으로 변경하는 것이다.</li>
+</ul>
+<pre tabindex="0"><code>def add_batch(
+        event: events.BatchCreated, uow: unit_of_work.AbstractUnitOfWork):
+    with uow:
+        product = uow.products.get(sku=event.sku)
+        ...
+
+
+def allocate(
+        event: events.AllocationRequired, uow: unit_of_work.AbstractUnitOfWork
+) -&gt; str:
+    line = OrderLine(event.orderid, event.sku, event.qty)
+    ...
+
+
+def send_out_of_stock_notification(
+        event: events.OutOfStock, uow: unit_of_work.AbstractUnitOfWork
+):
+    email.send(
+        'stock@made.com',
+        f'Out of stock for {event.sku}',
+    )
+    ...
+</code></pre><ul>
+<li>
+<p>이벤트를 도입하면 애플리케이션이 어떤 유스 케이스를 호출 할 때 기본 타입들의 특정 조합을 기억할 필요가 없다는 장점이 있다.</p>
+</li>
+<li>
+<p>단지 애플리케이션에 입력을 표현하는 단일 이벤트 클래스를 사용하면 된다. 또한 이런 이벤트들은 입력값을 검증할 수 있는 좋은 장소이다.</p>
+</li>
+<li>
+<p>따라서 이벤트로 작성하도록 API를 변경한 모습은 아래 코드와 같다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>@app.route(&quot;/allocate&quot;, methods=[&quot;POST&quot;])
+def allocate_endpoint():
+    try:
+        event = events.AllocationRequired(
+            request.json['orderid'], request.json['sku'], request.json['qty']
+        )
+        results = messagebus.handle(event, unit_of_work.SqlAlchemyUnitOfWork())
+        batchref = results.pop(0)
+    except services.InvalidSku as e:
+        return {&quot;message&quot;: str(e)}, 400
+
+    return {&quot;batchref&quot;: batchref}, 201
+</code></pre><ul>
+<li>
+<p>JSON 요청에서 기본값으로 서비스 계층을 호출하는 대신에, 이벤트를 인스턴스화 시켜서 메시지 버스에 이벤트를 전달하는 것을 확인할 수 있다.</p>
+</li>
+<li>
+<p>서비스 계층 함수들은 이제 이벤트 핸들러가 되었으며, 서비스 계층 함수 호출과 도메인 모델에서 발생한 내부 이벤트를 처리하기 위한 함수 호출이 동일해졌다.</p>
+</li>
+<li>
+<p>이벤트는 시스템 입력을 잡아내는 데이터구조로 사용이 되며 내부 작업 덩어리를 전달하기 위한 데이터 구조로도 사용된다.</p>
+</li>
+<li>
+<p>이벤트는 시스템 안의 내부 메시지와 입력에 대한 데이터 구조를 정의하는 간단한 데이터 클래스이다.</p>
+</li>
+<li>
+<p>이벤트는 비즈니스 언어로 아주 잘 번역되기 때문에, DDD 관점에서 이벤트는 상당히 강력한 개념이다.</p>
+</li>
+<li>
+<p>핸들러는 이벤트에 반응하는 방법이며, 핸들러는 모델을 호출하거나 또한 핸들러는 다른 이벤트를 만들어 낼 수도 있다.</p>
+</li>
+<li>
+<p>이를 통해서 핸들러가 수행하는 일의 크기를 세밀하게 조절해서 SRP를 유지할 수도 있다.</p>
+</li>
+</ul>
+<h3 id="이벤트-기반-아키텍처-패턴을-채택하는-이유">이벤트 기반 아키텍처 패턴을 채택하는 이유</h3>
+<hr>
+<ul>
+<li>
+<p>이런 아키텍처 패턴을 채택한 목적은 애플리케이션이 커지는 속도 보다, 복잡도가 증가하는 속도를 느리게 만들기 위해서이다.</p>
+</li>
+<li>
+<p>메시지 버스에 모든 것을 실으면 아키텍처의 복잡도 측면에서는 비용을 지불하지만, 필요한 작업을 수행하기 위해서 더 이상 개념적으로나 아키텍처적으로나 코드를 변경할 필요가 없이 복잡한 요구사항을 거의 다 처리할 수 있다.</p>
+</li>
+<li>
+<p>예제에서 복잡한 유스케이스 (수량 변경, 할당 해제, 새로운 트랜잭션 시작, 외부에 통지)를 추가했지만, 아키텍처 측면에서 보면 이런 내용을 추가해도 아무 복잡도 추가가 없다.</p>
+</li>
+</ul>
+<h3 id="전체-애플리케이션이-메시지-버스인-경우-장단점">전체 애플리케이션이 메시지 버스인 경우 장/단점</h3>
+<ul>
+<li>
+<p>애플리케이션 전체가 메시지 버스로 이루어진 경우 장점은 핸들러와 서비스가 같은 객체라서 더 단순하며, 시스템 입력을 처리하기 좋은 데이터 구조이다.</p>
+</li>
+<li>
+<p>단점은 웹이라는 관점에서는 메시지 버스가 조금 예측 하기 어려운 처리 방식이며 작업이 언제 끝나는지 예측하기도 어렵다 그리고 모델 객체와 이벤트 사이에 필드 중복이 있고, 이에 대한 유지보수가 필요하다. 한쪽에 필드를 추가한다면 다른쪽에 속한 객체에 두 개 이상 필드를 추가해야 한다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;start=slayer">파이썬으로 살펴보는 아키텍처 패턴</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
