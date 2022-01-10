@@ -601,13 +601,13 @@
 &lt;ul&gt;
 &lt;li&gt;이 책에서 정의하는 &lt;code&gt;SOLID&lt;/code&gt;의 마지막 글자인 의존성 역전 원칙은 아래와 같이 설명을 한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- 고수준 모듈은 저수준 모듈에 의존해서는 안된다.
+&lt;pre&gt;&lt;code&gt;- 고수준 모듈은 저수준 모듈에 의존해서는 안된다.
 - 추상화는 세부 사항에 의존해서는 안된다. 반대로 세분화는 추상화에 의존해야한다.
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;첫 번째는 비즈니스 로직과 인프라가 서로 결합되서는 안되고 중간 층을 두어서 분리할 수 있어야한다는 것이다. 이정도는 쉽게 이해할 수 있었다. 하지만&lt;/li&gt;
 &lt;li&gt;두번째 말은 나중에 설명을 해준다고 한다. 아직은 잘 이해가가지 않는 부분이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;대부분의 개발자가 시스템을 설계
+&lt;pre&gt;&lt;code&gt;대부분의 개발자가 시스템을 설계
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
 &lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
 &lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
@@ -1285,7 +1285,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 리더를 따르지 않는다.
+&lt;pre&gt;&lt;code&gt;1. 리더를 따르지 않는다.
 2. 잠재 고객이 아닌 실제 사람에 집착하라.
 3. 자신만의 동기를 만들기
 4. 잡초에 걸리지 않기
@@ -1475,7 +1475,7 @@
 &lt;ul&gt;
 &lt;li&gt;스티브 잡스가 한 말에서 용기를 얻었다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;우리는 자라면서 이런 말을 자주 듣습니다.
+&lt;pre&gt;&lt;code&gt;우리는 자라면서 이런 말을 자주 듣습니다.
 
 세상은 원래 그런 곳이며,
 그런 세상 안에서 살아가는 게 인생이다.
@@ -2054,7 +2054,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 주제와 그에 대해서 아는 것들을 모두 적기
+&lt;pre&gt;&lt;code&gt;1. 주제와 그에 대해서 아는 것들을 모두 적기
 -&amp;gt; 빈 페이지로 시작하여 단계를 쫒아가며 채워나간다.
 -&amp;gt; 호기심이 생긴 토픽을 확인하고 그것에 대해서 아는 것을 모두 적기
 -&amp;gt; 페이지 상단에 주제를 놓고 현재 자신의 지식을 모두 적기, 아무것도 몰라도 상관이 없음
@@ -2367,7 +2367,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- 실패와 절망을 피하지 말자. 가급적이면 경험을 통해서 투지와 인내를 배우자. 마주치기를 피하면 결국 비굴과 아부만이 남는다.
+&lt;pre&gt;&lt;code&gt;- 실패와 절망을 피하지 말자. 가급적이면 경험을 통해서 투지와 인내를 배우자. 마주치기를 피하면 결국 비굴과 아부만이 남는다.
 
 - 열악한 환경과 치열하게 싸우면서 정직하고 성실하게 사는 사람은 아름답다.
 
@@ -2828,7 +2828,7 @@
 &lt;li&gt;가끔씩 시간에 쫒겨서 성장하고자 할 때 번아웃이 오곤 하는데 좋은 글인 것 같다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 현재에 기반해서 미래를 가정하지 않는다.
+&lt;pre&gt;&lt;code&gt;1. 현재에 기반해서 미래를 가정하지 않는다.
 2. 책임질 수 있는 삶을 유지한다.
 3. 하루를 체계화하고 루틴을 만든다.
 4. 기대치로 삶을 계획하지 않는다.
@@ -3195,7 +3195,7 @@
 &lt;p&gt;참, 거짓을 리턴하는 메서드의 경우에 아래와 같이 작성한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- main description은 다음과 같이 마침표가 있는 문장형으로 작성한다.
+&lt;pre&gt;&lt;code&gt;- main description은 다음과 같이 마침표가 있는 문장형으로 작성한다.
   *서버가 대기중이라면 true, 대기중이 아니라면 false를 리턴합니다.
   * 비어 있는 문자열이면 true를 리턴합니다.
   * 적합한 문자열인 경우에만 true를 리턴합니다.
@@ -3237,7 +3237,7 @@
 &lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=rnykgyOczpM&amp;amp;list=WL&amp;amp;index=10&#34;&gt;&amp;lsquo;억&amp;rsquo;만장자가 &amp;lsquo;백&amp;rsquo;만장자에게 가르치는 것 (일반인들은 모름)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=rnykgyOczpM&amp;amp;list=WL&amp;amp;index=10&#34;&gt;&amp;lsquo;억&#39;만장자가 &amp;lsquo;백&#39;만장자에게 가르치는 것 (일반인들은 모름)&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;스스로 어떤 것을 해야할지 파악하고 처리할 수 있는 사람이 된다.&lt;/p&gt;
@@ -3552,7 +3552,7 @@
 &lt;ul&gt;
 &lt;li&gt;또한 릴리즈 노트에, 태그를 넣어서 한눈에 원하는 항목을 쉽게 찾을 수 있도록 하는 것도 좋을 것 같다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;NEW: 새로운 서비스(문서)가 출시된 경우
+&lt;pre&gt;&lt;code&gt;NEW: 새로운 서비스(문서)가 출시된 경우
 FEATURE: 새로운 기능이 추가된 경우
 CHANGED: 기존 기능이 수정 또는 변경된 경우
 FIXED: 기존의 오류 및 버그가 수정된 경우
@@ -3680,7 +3680,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;li&gt;좋은 말들을 읽을 수 있었고, 특히 내가 부족한 점 중에 사람의 마음을 사라는 글귀에 유의하면서 살아야겠다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 혼자서 밥먹지 마라
+&lt;pre&gt;&lt;code&gt;1. 혼자서 밥먹지 마라
 &amp;gt; 혼자서 밥먹는 시간보다, 다른 사람들과 밥을 먹으면 그 사람의 생각 및 내가 몰랐던 것을 알 수 있기 때문이다.
 2. 사색하는 시간을 반드시 가져라
 &amp;gt; 명상을 하는 시간을 만들어야겠다.
@@ -4275,7 +4275,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;li&gt;켄트벡이 제안한 TDD를 쉽게 하는 방법에 대한 글을 읽었다.&lt;/li&gt;
 &lt;li&gt;방법은 다음과 같다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 원래 하던대로 코드를 수정한다.
+&lt;pre&gt;&lt;code&gt;1. 원래 하던대로 코드를 수정한다.
 2. 방금 변경한 코드로 인해서 성공하는 테스트 코드를 작성한다.
 3. 변경 한 코드를 되돌린다.
 4. 테스트를 다시 작성하거나, 새롭게 추가해본다.
@@ -4511,7 +4511,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=258021255&#34;&gt;자바 개발자를 위한 97가지 제안&lt;/a&gt; 요즘 심심할 때마다 이 책을 읽고 있는데, 여기서 더 나은 소프트웨어를 더 빨리 전달하기 위한 원칙이라는 글을 읽었다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 전달 이란 코드를 작성하고 디버깅하는 것 이상의 책임을 갖는 것을 의미한다. 코드를 작성하는 것 보다 소프트웨어를 출시 하는 것에 주의를 더 기울이려면 작성한 변경 내역을 프로덕션 환경에 적용하기 위한 전반적인 절차를 이해해야 한다. 그 이후에는 알 두 가지 핵심 사항에 집중해야한다.
+&lt;pre&gt;&lt;code&gt;1. 전달 이란 코드를 작성하고 디버깅하는 것 이상의 책임을 갖는 것을 의미한다. 코드를 작성하는 것 보다 소프트웨어를 출시 하는 것에 주의를 더 기울이려면 작성한 변경 내역을 프로덕션 환경에 적용하기 위한 전반적인 절차를 이해해야 한다. 그 이후에는 알 두 가지 핵심 사항에 집중해야한다.
 
   1. 실제 구현에 앞서 모호한 요구사항을 명확하게 이해하려 하지 않고 자의적인 해석으로 업무를 수행하는 등 절차를 무시하지 않는다.
   2. 여러분이 작성하는 코드가 요구 사항에 부합하는지 확인하는 자동화된 테스트를 작성하고 실행하는 등 절차를 더 빠르게 수행하기 위해서 노력한다.
@@ -5311,7 +5311,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;ul&gt;
 &lt;li&gt;회사에서 새로운 기술을 도입할 때는 다음과 같은 사항을 고려해봐야한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 도입의 명분이 있는지?
+&lt;pre&gt;&lt;code&gt;1. 도입의 명분이 있는지?
 2. 새로운 기술을 사용함으로써 실질적인 이득을 지표로 설명 / 설득 가능한지?
 3. 비즈니스 구조에 적합한 기술인지?
 4. 유지보수 비용은 괜찮은지?
@@ -5378,7 +5378,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 위험을 감수하라
+&lt;pre&gt;&lt;code&gt;1. 위험을 감수하라
 -&amp;gt; 열정을 따르기 위해서라면 기꺼히 위험을 감수하라.
 -&amp;gt; 80세가 되었을 때 이 결정을 후회할지를 생각하면서 결정하라.
 2. 빠른 결정을 내려라.
@@ -5391,7 +5391,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 -&amp;gt; 성공은 발명, 발사, 재창조, 재도전, 다시 시작, 반복 또 반복을 통해서 온다. 성공을 향한 길은 항상 직선이 아니다.
 5. 개성을 잃지마라.
 -&amp;gt; 세상은 당신이 일반적인 사람이 되기를 원하지만, 그렇게 하지 마라. 개성을 유지하려면 지속적인 노력이 필요하지만, 개성을 유지하는 것은 그만한 가치가 있다.
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 무엇을 원하는지, 무엇이 되고 싶은지를 결정하라.
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;1. 무엇을 원하는지, 무엇이 되고 싶은지를 결정하라.
 2. 명확한 목표를 세우고, 꼭 된다는 생각 될 수 있다는 확신을 가진다.
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;목표를 이룰 만한 잠재력이 충분하다는 확신이 필요하다.&lt;/li&gt;
@@ -5405,7 +5405,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;ul&gt;
 &lt;li&gt;확신을 강화하는 방법을 매일 아침에 실천을 해야겠다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 명확한 인생목표를 정확하게 글로 적고, 그것이 결국 이뤄질 것이라는 확신으로 묵상한다. 그리고 목표를 이룬 다음 하고 싶은 것을 하며 사는 자신의 모습을 상상해본다.
+&lt;pre&gt;&lt;code&gt;1. 명확한 인생목표를 정확하게 글로 적고, 그것이 결국 이뤄질 것이라는 확신으로 묵상한다. 그리고 목표를 이룬 다음 하고 싶은 것을 하며 사는 자신의 모습을 상상해본다.
 2. 인생 목표에 도달함으로써, 얻을 수 있는 이득에 대해서 목록을 만들어본다. 그리고 그것을 날마다 여러 번 마음에 떠올리고 새김으로써, 마음을 &#39;성공 의식&#39;으로 가득 채운다. 이것은 자기 암시와 같은 것으로 어떤 일이 닥쳐도 우리를 흔들리지 않게 해준다.
 3. 부정적인 마음가짐은 신념의 능력을 파괴하므로 마음가짐에 모든 것이 달려 있음을 명심하고 마음을 장악한다. 한순간이라도 부정적으로 되지 않ㄷ록 조심하고 또 조심한다.
 4. 자신의 명확한 목표에 공감하고 도움이 되는 사람들과만 교류하고, 조금이라도 부정적인 마인드가 있는 사람과는 관계를 멀리한다. 언제 어디서나 긍정의 에너지를 얻으려 애써야 한다.
@@ -5688,7 +5688,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;p&gt;서비스를 개선하는 업무가 주어졌을 때 설계 및 작업 순서를 이렇게 수행하고 있었다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 상황 파악
+&lt;pre&gt;&lt;code&gt;1. 상황 파악
 2. 업무 프로세스 분석 -&amp;gt; 흐름도를 그려가면서, 이해가 되지 않는 것은 정리하고 흐름도를 
 그렸을 때 작업이 중복되거나 꼭 필요한 것인지 의문이 드는 것들을 정리한다.
 3. 인터뷰 -&amp;gt; 업무를 잘 알고 있는 시니어 개발자분께 인터뷰 일정을 잡고, 꼭 필요한 것인지, 왜 여기서 해야하는지? 그리고 과거에는 필요했지만 현재에는 필요하지 않은 부분을 질문한다.
@@ -5832,7 +5832,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;p&gt;재귀에 대해서 배웠고, 재귀 알고리즘이 정상적인 수행 및 완료되기 위해서 아래의 3가지 조건을 만족해야한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 베이스(BASE) 케이스가 반드시 정의되어야 한다.
+&lt;pre&gt;&lt;code&gt;1. 베이스(BASE) 케이스가 반드시 정의되어야 한다.
 베이스 케이스는 재귀 호출을 마무리 할 수 있는 조건이다.
 앞서 살펴본 예제의 베이스 케이스는 배열 요소 개수가 1인 경우로, 재귀 호출을 하지 않고 마무리 한다.
 2. 지속적으로 재귀 인자가 변경되어야 하고 변경되는 인자는 베이스 케이스로 수렴해야한다. 재귀 호출에 전달되는 인자는 맨 앞 요소가 빠진 상태로 전달되고 이를 통해서 배열의 요소의 개수가 베이스 케이스로 다가가는 모양새가 된다.
@@ -6137,7 +6137,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;p&gt;말만 하는 것이 아닌 적극적으로 행동하는 사람이 되어야 겠다. 하지만 행동을 하기 전에는 내가 무었때문에 이것을 하려는지 명확한 목표가 있어야 할 것 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;업무를 요청하는 &amp;lsquo;근본적인 이유&amp;rsquo;를 파악할 수 있도록 노력해야겠다. 그리고 고객이 요청하는 일이 정말로, 해결책이 아니라 우리가 고객이 원하는 목적을 찾을 수 있도록 해야겠다.&lt;/p&gt;
+&lt;p&gt;업무를 요청하는 &amp;lsquo;근본적인 이유&#39;를 파악할 수 있도록 노력해야겠다. 그리고 고객이 요청하는 일이 정말로, 해결책이 아니라 우리가 고객이 원하는 목적을 찾을 수 있도록 해야겠다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
@@ -6220,7 +6220,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;p&gt;나쁜 개발자가 되는법&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 자신이 작성한 코드에 버그가 있다고 가정하지 말라
+&lt;pre&gt;&lt;code&gt;1. 자신이 작성한 코드에 버그가 있다고 가정하지 말라
 2. 생각하지 않고 코드 작성 
 3. 명확하지 않은 지시 
 4. 더 많은 코드 작성을 즐기기
@@ -6322,7 +6322,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 지식을 문서화 하라.
+&lt;pre&gt;&lt;code&gt;1. 지식을 문서화 하라.
 -&amp;gt; 후임자가 당신이 필요하지 않도록 문서, 버그, 코드 주석등 어디에든 답을 적어라. 
 2. 장기 계획을 문서화하라.
 -&amp;gt; 당신이 뭔가를 실시간으로 알려주지 않더라도, 이 계획을 보고 프로젝트에 앞으로 어떤 일이 생길지를 알 수 있도록 하라
@@ -6402,7 +6402,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 사이드 프로젝트를 시작해라, 하루에 조금씩이라도 하는 것이 좋다.
+&lt;pre&gt;&lt;code&gt;1. 사이드 프로젝트를 시작해라, 하루에 조금씩이라도 하는 것이 좋다.
 2. 다른 개발자의 코드를 읽어라, 프레임워크의 코드나, 언어 라이브러리 코드를 읽는 것이 좋다.
 3. 오픈 소스 프로젝트에 기여하라
 4. 어떤 주제에 대해서 배울 때, 적어도 3가지 책(다른 저자)을 통해서 배워라
@@ -6602,7 +6602,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;ul&gt;
 &lt;li&gt;좋은 피드백을 주기 위해서 먼저 문제를 납득시키고, 원인을 설명한 다음에, 누군가의 탓이 아닌 객관적인 현상으로 설명하는 것이 좋다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;quot;지금 우리 배가 가라앉고 있어요.(문제) 오른쪽 귀퉁이에 난 구멍때문인데(객관적인 원인) 00씨가 가지고 있는 목공 기술을 발휘(능력)하면 구멍을 메우고 정상 운영(이점)이 될 것 같아요.&amp;quot;
+&lt;pre&gt;&lt;code&gt;&amp;quot;지금 우리 배가 가라앉고 있어요.(문제) 오른쪽 귀퉁이에 난 구멍때문인데(객관적인 원인) 00씨가 가지고 있는 목공 기술을 발휘(능력)하면 구멍을 메우고 정상 운영(이점)이 될 것 같아요.&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;덜 가르치고, 많은 피드백을 주는 것이 성장을 위해서 좋다.&lt;/p&gt;
@@ -6655,7 +6655,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;주어진 정수형 배열에서 2개의 숫자를 선택하여 더한 값이 특정 목표값을 만들 때, 그 선택한 2개의 정수가 있는 배열의 인덱스를 반환하는 프로그램을 작성하라. 입력 값으로 주어지는 배열에는 정확히 하나의 정답이 존재하며, 같은 요소의 값을 중복해서 사용할 수 없다.
+&lt;pre&gt;&lt;code&gt;주어진 정수형 배열에서 2개의 숫자를 선택하여 더한 값이 특정 목표값을 만들 때, 그 선택한 2개의 정수가 있는 배열의 인덱스를 반환하는 프로그램을 작성하라. 입력 값으로 주어지는 배열에는 정확히 하나의 정답이 존재하며, 같은 요소의 값을 중복해서 사용할 수 없다.
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;예를 들어서, 다음과 같은 문제가 있다고 가정을 했을 때 알고리즘 캠퍼스를 이용하면 다음과 같은 풀이가 가능하다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -6663,7 +6663,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;ul&gt;
 &lt;li&gt;우선문제를 분석하고 제공하는 제한 사항을 기록하자.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 정수형 배열
+&lt;pre&gt;&lt;code&gt;1. 정수형 배열
 2. 두 수의 합이 정수형을 초과할 수 있는가?
   - 문제에 언급이 없다.
 3. 두 수의 합이 배열 내에 무조건 존재하는가?
@@ -6673,7 +6673,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;ul&gt;
 &lt;li&gt;아이디어는 여러 가지가 가능하다. 이를 통해서 시간 . 공간 복잡도를 구성해보고, 해당 아이디어를 코딩해봐야 한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;아이디어 (Brute-force)
+&lt;pre&gt;&lt;code&gt;아이디어 (Brute-force)
 1. 배열의 모든 요소의 조합을 찾는다.
   - 루프는 i = 0 ~ n, j = i + 1 ~ n으로 2중 루프를 구성한다.
   - 1번째 루프 (n번), 2번째 루푸는 (n - 1)을 기준으로 n * (n - 1)로 계산하자.
@@ -6681,7 +6681,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 
 시간 복잡도: O(n^2)
 공간 복잡도: O(1)
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;아이디어 (Hash Tables)
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;아이디어 (Hash Tables)
 1. 해시 테이블을 구성한다.
   - 키 값으로는 배열의 요소, 값으로는 요소의 인덱스로 구성
 2. 각 요소를 순회하면서,
@@ -6889,7 +6889,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;고객 유지 단계 주요 지표&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- DAU(Daily Active User)
+&lt;pre&gt;&lt;code&gt;- DAU(Daily Active User)
 - WAU(Weekly Active User)
 - MAU(Monthly Active User)
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
@@ -7307,7 +7307,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;분산 시스템 사례 연구 : 프로젝트 시작일 3월 1일
+&lt;pre&gt;&lt;code&gt;분산 시스템 사례 연구 : 프로젝트 시작일 3월 1일
 알고리즘 공부 : 인터뷰 날짜 3월 15일
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -7316,7 +7316,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;분산 시스템 사례 연구: 프로젝트 시작일 3월 1일: 유사한 문제를 겪고 있는 회사의 해결 전략 최소 1개 도출
+&lt;pre&gt;&lt;code&gt;분산 시스템 사례 연구: 프로젝트 시작일 3월 1일: 유사한 문제를 겪고 있는 회사의 해결 전략 최소 1개 도출
 알고리즘 공부: 인터뷰 날짜 3월 15일: dynamic programming 문제 최소 20개 해결
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -7325,7 +7325,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;분산 시스템 사례 연구: 프로젝트 시작일 3월 1일: 유사한 문제를 겪고 있는 회사의 해결 전략 최소 1개 도출: 하루 1시간 x 20일 = 20시간
+&lt;pre&gt;&lt;code&gt;분산 시스템 사례 연구: 프로젝트 시작일 3월 1일: 유사한 문제를 겪고 있는 회사의 해결 전략 최소 1개 도출: 하루 1시간 x 20일 = 20시간
 알고리즘 공부: 인터뷰 날짜 3월 11일: dynamic programming 문제 최소 20개 해결: 하루 1.5시간 x 30일 = 45시간
 
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -7699,7 +7699,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;li&gt;&lt;code&gt;cgroup&lt;/code&gt;에 대한 설정은 부모 프로세스를 물려받게 된다.&lt;/li&gt;
 &lt;li&gt;“make it work, make it right, make it fast” 루틴&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 일단 동작하게 만든다.
+&lt;pre&gt;&lt;code&gt;1. 일단 동작하게 만든다.
 -&amp;gt; 필요한 것을 공부하면서, 일단 지금 내가 해결하려는 요구사항이 충족될 수 있도록 하는 것이다. 코드 가독성에 대해서 너무 신경을 쓰지 않아도 된다. 내용에 따라서 다를 수도 있지만, TDD가 적용된다면, 의미가 있는 테스트 케이스가 만들어져야 하며, 테스트 케이스가 유용하다는 것은 모듈의 책임과 역할을 다할 수 있도록 모듈의 인터페이스가 설계가 되었고 어느정도 완성이 되었다는 뜻이다.
 
 2. 옳게 만든다.
@@ -7843,7 +7843,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;의식적인 연습의 7가지 원칙
+&lt;pre&gt;&lt;code&gt;의식적인 연습의 7가지 원칙
 1. 효과적인 훈련 기법이 수립되어 있는 기술 연마
 2. 개인의 컴포트 존을 넘어간 지점에서 실행, 자신의 현재 능력을 살작 넘어가는 작업을 지속적으로 시도
 3. 명확하고 구체적인 목표를 가지고 진행
@@ -8186,7 +8186,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;p&gt;토이프로젝트를 진행할 때, 아래 항목에 유의해서 개발을 계속해야겠다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;프로젝트를 자가 진단해볼 수 있는 주요 항목이다.
+&lt;pre&gt;&lt;code&gt;프로젝트를 자가 진단해볼 수 있는 주요 항목이다.
 실제 서비스를 공개적으로 배포하고 운영해보는 경험을 해보았다.
 유저의 피드백에 따라서, 성능 및 사용성을 개선해보고 신규 기능들을 추가해보았다.
 발견되는 버그와 개선사항을 정리하고 쌓인 이슈들을 체계적으로 관리 해 보았다.
@@ -8427,7 +8427,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;ul&gt;
 &lt;li&gt;실력을 어떻게 쌓을 수 있었는지에 대한 글을 읽어보았을 때, 다음의 과정을 거쳐서 실력을 쌓은 것을 확인할 수 있었다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 자신을 관찰하는 시간을 가졌다.
+&lt;pre&gt;&lt;code&gt;1. 자신을 관찰하는 시간을 가졌다.
 2. 자신이 가지고 있었던 과거의 사고방식의 문제점을 깨달았다.
 3. 과거의 사고 방식을 버리고 새로운 사고 방식을 실천했다.
 4. 배우는 과정을 일지에 기록했고, 왜(why), 어떻게(how)를 사용하여 자기 스스로 질문하고 대답하였다.
@@ -10914,7 +10914,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;http://labs.brandi.co.kr/2020/01/07/yangjh.html&#34;&gt;http://labs.brandi.co.kr/2020/01/07/yangjh.html&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://labs.brandi.co.kr/2020/01/07/yangjh.html&#34;&gt;http://labs.brandi.co.kr/2020/01/07/yangjh.html&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
@@ -10941,6 +10941,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;p&gt;DRY 원칙은 모든 곳에 적용할 수 있을 것이다. (코드, 테스트, 문서화) 그리고 내가 DRY 원칙을 잘 지키고 있는지 생각하면 그렇지 못한 것 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;실용주의 프로그래머에서는 중복을 4가지로 분리한다.&lt;/p&gt;
 &lt;ul&gt;
@@ -10997,6 +11000,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;h3 id=&#34;good-잘한점&#34;&gt;Good (잘한점)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;여태까지 주석을 코드의 목적을 위해서 적기 보다는 과정을 설명하기 위해서 적었던 것 같다.&lt;/li&gt;
 &lt;li&gt;코드에서 중복된 부분이 많음에도 불구하고, 그냥 무심코 지나간 적이 많았던 것 같다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -11022,10 +11028,10 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;https://johngrib.github.io/wiki/dry-principle/&#34;&gt;https://johngrib.github.io/wiki/dry-principle/&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://johngrib.github.io/wiki/dry-principle/&#34;&gt;https://johngrib.github.io/wiki/dry-principle/&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;https://johngrib.github.io/wiki/law-of-demeter/&#34;&gt;https://johngrib.github.io/wiki/law-of-demeter/&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://johngrib.github.io/wiki/law-of-demeter/&#34;&gt;https://johngrib.github.io/wiki/law-of-demeter/&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
@@ -11217,7 +11223,13 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;h3 id=&#34;good-잘한점&#34;&gt;Good (잘한점)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;코딩을 할 때, 내가 작성한 코드보다 더 나은 방법은 없는지 끊임없이 고민을 할 것이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
@@ -11624,6 +11636,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Facts(사실, 객관) 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
 &lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
@@ -11727,6 +11740,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;li&gt;자신이 어떤 것을 알거나 배웠다고 어필하는 것보다 학습하는데 어떤 어려움이  있었는데, 극복을 한 내용을 적는 것이 더 공감을 받을 수 있다.&lt;/li&gt;
 &lt;li&gt;자기소개서에서 얻고 싶은 가장 큰 부분은, 생각에만 그치지 않고 얼마나 행동으로 이를 실천했는지, 또 얼마만큼의 성취를 만들었는지 어필하는 것이 더 중요한 것 같다.&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;나는 사소한 일에도 집중 및 최선을 다하면서 모든 일에 몰입을 할 것이다.&lt;/li&gt;
 &lt;li&gt;일을 하면서 배울 수 있는 것을 최대한 끌어내면서 내가 어떤 것을 배울 수 있는지, 고민을 해봐야하는지 생각을 하며 고민을 하는 내용을 기록할 것이다.&lt;/li&gt;
 &lt;li&gt;내가 작성한 코드, 그리고 옵션값 하나하나 이유를 가지고 코딩을 할 것이다. 따라서 내가 작성한 코드를 커밋할 때는 이렇게 작성한 이유, 그리고 이렇게 옵션을 준 이유를 무조건 적기로 하자!&lt;/li&gt;
@@ -11777,7 +11793,13 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;

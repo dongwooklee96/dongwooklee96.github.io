@@ -96,7 +96,7 @@
 &lt;ul&gt;
 &lt;li&gt;반면에 &lt;code&gt;VSZ&lt;/code&gt;는 프로세스의 가상 메모리 크기라고 설명되어 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ps -eo pmem,rss,vsz,comm
+&lt;pre&gt;&lt;code&gt;ps -eo pmem,rss,vsz,comm
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위의 명령어를 실행하여, 프로세스 별 실제 사용하고 있는 물리 메모리와 가상 메모리를 확인할 수 있다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113478993-3ac00e80-94c7-11eb-88a1-63a0ad9fd7f5.png&#34; alt=&#34;Screen Shot 2021-04-03 at 9 54 48 PM&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -146,7 +146,7 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;실습&#34;&gt;실습&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;sys/wait.h&amp;gt;
@@ -184,7 +184,7 @@ int main ()
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위와 같은 소스 코드를 작성하고 컴파일을 한 뒤에 실행을 해보자.
 소스 코드의 대략적인 내용은 부모 프로세스에서 자식 프로세스를 만들고 나서, &lt;code&gt;wait()&lt;/code&gt; 호출을 하지 않고 종료 시켜버리는 것이다.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;gcc -o zombie zombie.c
+&lt;pre&gt;&lt;code&gt;gcc -o zombie zombie.c
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;실행을 하기 전에, &lt;code&gt;top&lt;/code&gt; 명령어를 통해서 좀비 프로세스의 여부를 확인한 모습이다.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113477959-c1252200-94c0-11eb-946c-384317e800aa.png&#34; alt=&#34;Screen Shot 2021-04-03 at 9 05 53 PM copy&#34;&gt;&lt;/p&gt;
 &lt;p&gt;좀비 프로세스가 없다는 것을 확인할 수 있다. 아까 작성한 프로그램을 실행 시킨 후에, 다시 한 번더 확인하였을 때는 다음과 같이 표시됨을 확인할 수 있다.&lt;/p&gt;
@@ -211,7 +211,7 @@ int main ()
 &lt;li&gt;메모리에는 크게 코드, 스택, 힙 영역이 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;이를 리눅스에서 확인해보려면 다음과 같은 명령어를 사용하면 된다.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cat /proc/self/maps
+&lt;pre&gt;&lt;code&gt;cat /proc/self/maps
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;이 명령어가 뜻하는 바는 &lt;code&gt;cat&lt;/code&gt;이라는 프로그램을 실행했을 때의 메모리 구조를 의미한다.&lt;/li&gt;
 &lt;li&gt;여기서 &lt;code&gt;self&lt;/code&gt;는 자기 자신을 의미한다.&lt;/li&gt;

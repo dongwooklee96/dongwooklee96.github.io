@@ -135,7 +135,7 @@
 <li>계산이 완료될 때까지 기다린 다음에 결과를 검색한다.</li>
 <li>최대 지정된 시간까지 기다렸다가 사용 가능한 경우 결과를 검색합니다.</li>
 </ul>
-<pre tabindex="0"><code>import java.util.concurrent.Callable;
+<pre><code>import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -194,7 +194,7 @@ public class Main {
 <li>이 작업이 진행되는 동안 지정한 컬렉션이 수정되면 메서드의 결과가 정의되지 않습니다.</li>
 <li>동시에 실행한 작업중에 가장 오래걸리는 작업만큼 시간이 소요된다.</li>
 </ul>
-<pre tabindex="0"><code>import java.util.Arrays;
+<pre><code>import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -238,7 +238,7 @@ public class Main {
 <li>동시에 실행한 작업중에 제일 짧게 걸리는 작업만큼 시간이 걸린다.</li>
 <li>이 역시 또한 블록킹 콜이다.</li>
 </ul>
-<pre tabindex="0"><code>public class Main {
+<pre><code>public class Main {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 

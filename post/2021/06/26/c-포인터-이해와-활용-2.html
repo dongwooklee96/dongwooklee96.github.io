@@ -129,7 +129,7 @@
 <li><code>free</code> 함수를 이용해 할당된 메모리를 해제한다.</li>
 </ul>
 <p>위 단계는 매우 일반적인 동적 메모리 할당 순서이다. 다음 예제에선 <code>malloc</code> 함수를 사용하여 정수를 저장할 메모리를 할당한다.</p>
-<pre tabindex="0"><code>int *pi = (int*)malloc(sizeof(int));
+<pre><code>int *pi = (int*)malloc(sizeof(int));
 *pi = 5;
 printf(&quot;*pi: %d\n&quot;, *pi);
 free(pi);
@@ -165,7 +165,7 @@ free(pi);
 <p>메모리 누수의 문제점은 해당 메모리가 반환되지 않고, 다시 사용될 수 없다는 것이다. 그 결과로 힙 관리자가 사용할 수 있는 메모리의 양이 감소하게 된다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>char *chunk;
+<pre><code>char *chunk;
 
 while (1) {
   chunk = (char*)malloc(10000000);
@@ -175,7 +175,7 @@ while (1) {
 <li>만약 메모리를 반복적으로 사용하고 누수가 발생하면, 추가적인 메모리가 필요할 때, <code>malloc</code> 함수가 OOM(Out of Memory) 오류로 인해서 추가 메모리를 할당할 수 없어 프로그램이 종료된다.</li>
 </ul>
 <h4 id="메모리-주소-손실">메모리 주소 손실</h4>
-<pre tabindex="0"><code>int *pi = (int*) malloc(sizeof(int));
+<pre><code>int *pi = (int*) malloc(sizeof(int));
 
 *pi = 5;
 
@@ -183,7 +183,7 @@ pi = (int*) malloc(sizeof(int));
 </code></pre><ul>
 <li><code>pi</code> 포인터는 해제되지 않고 새로운 메모리 주소로 재할당 된다.</li>
 </ul>
-<pre tabindex="0"><code>char *name = (char*) malloc(strlen(&quot;Susan&quot;) + 1);
+<pre><code>char *name = (char*) malloc(strlen(&quot;Susan&quot;) + 1);
 strcpy(name, &quot;Susan&quot;);
 
 while (*name != 0) {
@@ -233,11 +233,11 @@ while (*name != 0) {
 <p>아래 코드는 정적 변수를 선언하고, <code>malloc</code> 함수를 사용하여 초기화를 시도 한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>static int *pi = (int*)malloc(sizeof(int));
+<pre><code>static int *pi = (int*)malloc(sizeof(int));
 </code></pre><ul>
 <li>따라서 위의 코드는 컴파일 시에 오류가 발생한다.</li>
 </ul>
-<pre tabindex="0"><code>static int *pi;
+<pre><code>static int *pi;
 pi = malloc(sizeof(int));
 </code></pre><ul>
 <li>

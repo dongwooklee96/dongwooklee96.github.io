@@ -151,7 +151,7 @@
 <p><code>restrict</code> 포인터는 <code>restrict</code> 포인터가 가리키는 객체를 다른 공간에서 에일리어싱 하지 않도록 강제를 한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>void *memcpy(void *dest, const void *src, size_t n);
+<pre><code>void *memcpy(void *dest, const void *src, size_t n);
 void *memcpy(void *restrict s1, const void *restrict s2, size_t n);
 </code></pre><ul>
 <li>
@@ -161,7 +161,7 @@ void *memcpy(void *restrict s1, const void *restrict s2, size_t n);
 <p>새롭게 적용된 <code>memcpy</code> 에서는 사용자가 <code>s1</code>, <code>s2</code>의 접근이 비순차, 비동기적으로 진행되거나 병렬처리 될 수도 있음을 암시하는 것이다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>int *p_num, *p_alias;
+<pre><code>int *p_num, *p_alias;
 p_num = (int *) malloc(sizeof(int) * 100);
 p_alias = p_num + 20; /* 에일리어싱 되었음 */
 memcpy(p_num, p_alias, sizeof(int) * 50);

@@ -112,7 +112,7 @@
   <main>
     <h3 id="가장-먼저-웹-컨트롤러가-지저분해지는-일을-막기">가장 먼저 웹 컨트롤러가 지저분해지는 일을 막기</h3>
 <hr>
-<pre tabindex="0"><code>@app.route(&quot;/allocate&quot;, methods=['POST'])
+<pre><code>@app.route(&quot;/allocate&quot;, methods=['POST'])
 def allocate_endpoint():
     line = model.OrderLine(
         request.json['orderid'],
@@ -140,7 +140,7 @@ def allocate_endpoint():
 </ul>
 <h3 id="모델이-지저분-해지는-일을-막기">모델이 지저분 해지는 일을 막기</h3>
 <hr>
-<pre tabindex="0"><code>def allocate(line: OrderLine, batches: List[Batch]) -&gt; str:
+<pre><code>def allocate(line: OrderLine, batches: List[Batch]) -&gt; str:
     try:
 
         batch = next(
@@ -160,7 +160,7 @@ def allocate_endpoint():
 <p>메일을 전송하는 코드는 인프라 영역이며, 인프라 영역에 의존하는 것은 좋지 않다. 이런 이메일 송신은 시스템의 멋지고 깔끔한 흐름을 더럽힌다.</p>
 </li>
 <li>
-<p>도메인 모델은 &lsquo;실제 할당 할 수 있는 것보다 더 많은 상품을 할당할 수는 없다&rsquo;라는 규칙에 집중 해야 한다.</p>
+<p>도메인 모델은 &lsquo;실제 할당 할 수 있는 것보다 더 많은 상품을 할당할 수는 없다'라는 규칙에 집중 해야 한다.</p>
 </li>
 <li>
 <p>도메인 모델의 역할은 재고가 부족한지 알아내는 것일 뿐, 통지를 보내는 것은 다룬 곳에서 한다. 이러한 기능은 끌 수도 있고 켤 수도 있어야 하며, 모데인 모델의 규칙을 변경하지 않아도 이메일 대신에 SMS 로도 통지를 할 수 있어야 한다.</p>
@@ -168,7 +168,7 @@ def allocate_endpoint():
 </ul>
 <h3 id="서비스-계층이-지저분-해지는-것을-막기">서비스 계층이 지저분 해지는 것을 막기</h3>
 <hr>
-<pre tabindex="0"><code>def allocate(orderid: str, sku: str, qty: int, uow: unit_of_work.AbstractUnitOfWork) -&gt; str:
+<pre><code>def allocate(orderid: str, sku: str, qty: int, uow: unit_of_work.AbstractUnitOfWork) -&gt; str:
     line = OrderLine(orderid, sku, qty)
     with uow:
         product = uow.products.get(sku=line.sku)
@@ -183,7 +183,7 @@ def allocate_endpoint():
             raise
 </code></pre><ul>
 <li>
-<p>&lsquo;재고를 할당 하려고 시도하고 할당에 실패하면 이메일을 보내야 한다&rsquo;는 요구사항은 워크 플로우 오케스트레이션에 속한다.</p>
+<p>&lsquo;재고를 할당 하려고 시도하고 할당에 실패하면 이메일을 보내야 한다'는 요구사항은 워크 플로우 오케스트레이션에 속한다.</p>
 </li>
 <li>
 <p>이 동작은 어던 목표를 달성하기 위해서 시스템을 따라야하는 단계이다. 오케스트레이션을 처리하기 위해서 서비스 계층을 작성했지만, 서비스 게층에서 이메일 기능을 추가하는 것이 적합하지 않아보인다. 예외를 잡아서 발생시키는 코드는 왠지 모르게 마음이 불편하다.</p>
@@ -211,7 +211,7 @@ def allocate_endpoint():
 <p>이벤트는 값 객체 (VO)에 속한다. 이벤트는 순수 데이터 구조이므로 아무런 동작이 없다. 이벤트를 항상 도메인 언어로 이름을 붙여야 한다. 항상 이벤트를 도메인 모델의 일부분으로 간주한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>class Event:
+<pre><code>class Event:
     pass
 
 
@@ -226,7 +226,7 @@ class OutOfStock(Event):
 <p>외부에서 볼 때 이벤트 발생이 어떻게 보이는지 다음 예제를 통해서 알 수 있다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>def test_records_out_of_stock_event_if_cannot_allocate():
+<pre><code>def test_records_out_of_stock_event_if_cannot_allocate():
     batch = Batch('batch1', 'SMALL-FORK', 10, eta=today)
     product = Product(sku=&quot;SMALL-FORK&quot;, batches=[batch])
     product.allocate(OrderLine('order1', 'SMALL-FORK', 10))
@@ -238,7 +238,7 @@ class OutOfStock(Event):
 </code></pre><ul>
 <li>애그리게이트는 <code>events</code>라는 새로운 속성을 외부로 노출하고 애트리뷰트에 발생한 일에 대한 사실은 <code>event</code> 객체 형태로 남긴 리스트에 남아있다.</li>
 </ul>
-<pre tabindex="0"><code>class Product:
+<pre><code>class Product:
 
     def __init__(self, sku: str, batches: List[Batch], version_number: int = 0):
         self.sku = sku
@@ -264,7 +264,7 @@ class OutOfStock(Event):
 수신 되는 이벤트는 버스에 시스템이 발행된 것이다. 글로 쓰면 실제보다 더 어려워 보이지만 보통은 딕셔너리를 이용하여 메시지 버스를 구현한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>def handle(event: events.Event):
+<pre><code>def handle(event: events.Event):
     for handler in HANDLERS[type(event)]:
         handler(event)
 
@@ -278,7 +278,7 @@ HANDLERS = {
     events.OutOfStock: [send_out_of_stock_notification],
 }
 </code></pre><h4 id="첫-번째-선택지--서비스-계층이-모델에서-이벤트를-가져와-메시지-버스에-싣는-방법">첫 번째 선택지 : 서비스 계층이 모델에서 이벤트를 가져와 메시지 버스에 싣는 방법</h4>
-<pre tabindex="0"><code>def allocate(
+<pre><code>def allocate(
         order_id: str, sku: str, qty: int,
         uow: unit_of_work.AbstractionUnitOfWork
 ) -&gt; str:
@@ -305,7 +305,7 @@ HANDLERS = {
 <ul>
 <li>이에 대한 변형으로는 서비스 계층이 도메인 모델에서 발생한 이벤트를 처리하기 보다 직접 이벤트를 만들고, 발생시키는 일을 책임지는 방법이 있다.</li>
 </ul>
-<pre tabindex="0"><code>def allocate(orderid: str, sku: str, qty: int,
+<pre><code>def allocate(orderid: str, sku: str, qty: int,
              uow: unit_of_work.AbstractionUnitOfWork) -&gt; str:
     line = OrderLine(orderid, sku, qty)
     with uow:
@@ -328,7 +328,7 @@ HANDLERS = {
 </li>
 </ul>
 <p><strong>unit_of_work.py</strong></p>
-<pre tabindex="0"><code>import abc
+<pre><code>import abc
 
 
 class AbstractUnitOfWork(abc.ABC):

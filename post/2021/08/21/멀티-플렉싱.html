@@ -162,7 +162,7 @@
 <p>즉 <code>select()</code> 함수는 관찰하고자 하는 파일 디스크립터를 등록하는 함수라고 볼 수 있다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
+<pre><code>int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *exceptfds, struct timeval *timeout);
 </code></pre><p><strong>인자</strong></p>
 <ul>
 <li>
@@ -230,7 +230,7 @@
 <p>또한 <code>select()</code> 함수의 관찰 시간은 <code>timeval</code> 이라는 구조체를 이용하여 <code>select()</code> 함수에 전달된다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>struct timeval {
+<pre><code>struct timeval {
   long tv_sec; // 초
   long tv_usec; // 마이크로 초
 }
@@ -289,7 +289,7 @@
 <p>서버 프로그램은 멀티 플렉싱을 사용하여 다수의 클라이언트를 처리한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;sys/types.h&gt;

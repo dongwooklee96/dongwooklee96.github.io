@@ -31,7 +31,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;sub&lt;/code&gt; 라는 키워드를 사용하고 &lt;code&gt;{  }&lt;/code&gt; 사이에 함수의 내용을 넣으면 된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sub marine {
+&lt;pre&gt;&lt;code&gt;sub marine {
   $n += 1;
   print &amp;quot;hello, sailor number $n\n&amp;quot;;
 }
@@ -51,7 +51,7 @@
 &lt;ul&gt;
 &lt;li&gt;서브 루틴을 호출하는 방법은 &lt;code&gt;&amp;amp;&lt;/code&gt;를 이용해서 호출할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;amp;marine;
+&lt;pre&gt;&lt;code&gt;&amp;amp;marine;
 &amp;amp;marine;
 &amp;amp;marine;
 &amp;amp;marnie;
@@ -74,7 +74,7 @@
 &lt;p&gt;펄에서는 따로, &lt;code&gt;return&lt;/code&gt; 와 같은 키워드를 사용하지 않는다. 마지막에 위치한 값이 자동으로 반환값이 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sub sum_of_fred_and_barney {
+&lt;pre&gt;&lt;code&gt;sub sum_of_fred_and_barney {
   print &amp;quot;hey, you called me sum_of_fred_and_barney subroutine!&amp;quot;;
   $fred + $barney;
 }
@@ -86,7 +86,7 @@
 &lt;p&gt;만약 서브루틴의 마지막에 값이 아닌 &lt;code&gt;print&lt;/code&gt;가 오면 그냥 정상적으로 출력되었다는 뜻으로 &lt;code&gt;1&lt;/code&gt; 값이 반환된다. 이러한 동작이 원한것이 아니라면 주의를 해야한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sub sum_of_fred_and_barney {
+&lt;pre&gt;&lt;code&gt;sub sum_of_fred_and_barney {
   print &amp;quot;hey, you called me sum_of_fred_and_barney subroutine!&amp;quot;;
   $fred + $barney;
   print &amp;quot;hey, I&#39;m returning a value now\n&amp;quot;;
@@ -102,7 +102,7 @@
 &lt;p&gt;그리고 마지막 예제는 큰 값을 리턴하는 서브 루틴이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sub larger_of_fred_or_barney {
+&lt;pre&gt;&lt;code&gt;sub larger_of_fred_or_barney {
   if ($fred &amp;gt; $barney) {
     $fred;
   } else {
@@ -125,7 +125,7 @@
       <guid>https://dongwooklee96.github.io/post/2021/12/08/learing-perl-4%EB%B2%88%EC%A7%B8-%ED%95%99%EC%8A%B5.html</guid>
       <description>&lt;h3 id=&#34;for-반복문&#34;&gt;FOR 반복문&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 
 foreach $rock (qw/ bedrock slate lava /) {
     print &amp;quot;one rock is $rock.\n&amp;quot;;
@@ -141,7 +141,7 @@ foreach $rock (qw/ bedrock slate lava /) {
 &lt;p&gt;만약에 &lt;code&gt;$rocks&lt;/code&gt;를 변경하면 원본 리스트가 변경된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 
 @rocks = qw/ bedrock slate lava /;
 
@@ -158,7 +158,7 @@ print &amp;quot;The rocks are:\n&amp;quot;, @rocks;
 &lt;p&gt;또 한가지 특이한 점은, 어떤 값이 들어있는 변수를 반복문의 컨트롤 변수 (리스트의 값이 들어가는 변수)로 사용한다면 반복문에서는 리스트의 값이 하나씩 대입되고 반복문이 끝나면 반복문이 시작하기 전의 값으로 복원되어 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 
 $rock = &#39;shale&#39;;
 
@@ -177,7 +177,7 @@ print &amp;quot;rock is still $rock\n&amp;quot;; # &#39;rocks is still shale&#39
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;foreach&lt;/code&gt; 문에서, 컨트롤 변수를 생략했다면, 자동으로 &lt;code&gt;$_&lt;/code&gt;라는 공간에 들어가게 된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 
 foreach (1..10) {
   print &amp;quot;I can count to $_ !\n&amp;quot;;
@@ -185,7 +185,7 @@ foreach (1..10) {
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;그리고 &lt;code&gt;$_&lt;/code&gt; 변수에 값을 대입하고 나서, &lt;code&gt;print&lt;/code&gt;를 하게 되면 이전에 대입한 값이 들어가게 된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 
 foreach (1..10) {
   print &amp;quot;I can count to $_ !\n&amp;quot;;
@@ -195,7 +195,7 @@ $_ = &amp;quot;Yabba dabba doo\n&amp;quot;;
 print; # &#39;Yadda badda doo&#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;reverse-연산자&#34;&gt;reverse 연산자&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 
 @fred = 6..10;
 print &amp;quot;@fred\n&amp;quot;;
@@ -216,7 +216,7 @@ print &amp;quot;@fred\n&amp;quot;;
 &lt;/ul&gt;
 &lt;h3 id=&#34;sort-연산자&#34;&gt;sort 연산자&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 
 @rocks = qw/ bedrock slate rubble granite /;
 print &amp;quot;@rocks\n&amp;quot;; # bedrock slate rubble granite
@@ -240,7 +240,7 @@ print &amp;quot;@numbers\n&amp;quot;;
 &lt;/ul&gt;
 &lt;h3 id=&#34;each-연산자&#34;&gt;each 연산자&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 
 @rocks = qw/ bedrock slate rubble granite /;
 while (($index, $value) = each @rocks) {
@@ -270,7 +270,7 @@ while (($index, $value) = each @rocks) {
 &lt;p&gt;이것은 마치 자연어와 같은데, 자연어도 문맥에 따라서 같은 단어임에도 불구하고 다르게 사용될 수 있다. 펄도 그렇다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@people = qw (fred barney betty);
+&lt;pre&gt;&lt;code&gt;@people = qw (fred barney betty);
 @sorted = sort @people; # list context: barney, betty, fred
 $number = 42 + @people; # 42 + 3 = 45
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -281,7 +281,7 @@ $number = 42 + @people; # 42 + 3 = 45
 &lt;p&gt;리스트를 만드는 연산을 스칼라 문맥에서 사용할 경우에는 문서를 참조하는 것이 낫다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;/usr/bin/perl
 
 @backwards = reverse qw/ yadda dabba doo/;
 print &amp;quot;@backwards\n&amp;quot;;
@@ -294,7 +294,7 @@ oodabbadabbay
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;일반적인 경우 아래와 같이 생각하면 된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$fred = something; # 스칼라
+&lt;pre&gt;&lt;code&gt;$fred = something; # 스칼라
 @pebbles = something; # 리스트
 ($wilma, $betty) = something; # 리스트
 ($dino) = something # 리스트
@@ -312,7 +312,7 @@ oodabbadabbay
 &lt;p&gt;리스트 값에 스칼라 변수를 대입하면 자동으로 리스트 값으로 변환된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@fred = 6 * 7 # list (42)
+&lt;pre&gt;&lt;code&gt;@fred = 6 * 7 # list (42)
 @barney = &amp;quot;hello&amp;quot; . &#39; &#39; . &amp;quot;world&amp;quot;;
 
 @wilma = undef # list (undef)
@@ -325,7 +325,7 @@ oodabbadabbay
 &lt;p&gt;만약 강제로 스칼라 값을 취하고 싶다면 &lt;code&gt;scalar&lt;/code&gt; 라는 함수를 사용하면 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;!/usr/bin/perl
 
 @rocks = qw( talc quartz jade obsidian );
 
@@ -353,7 +353,7 @@ I hvae 4 rocks!
 &lt;p&gt;보통 개행 문자 (\n)를 &lt;code&gt;chomp()&lt;/code&gt;를 사용하여 제거한 값을 받는다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@lines = &amp;lt;STDIN&amp;gt;;
+&lt;pre&gt;&lt;code&gt;@lines = &amp;lt;STDIN&amp;gt;;
 chomp(@lines);
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
@@ -373,21 +373,21 @@ chomp(@lines);
 &lt;ul&gt;
 &lt;li&gt;홑따옴표 문자열은 다음과 같이 표시할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#39;fred&#39; # four characters: f, r, e, d
+&lt;pre&gt;&lt;code&gt;&#39;fred&#39; # four characters: f, r, e, d
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;그리고 특수 홑따음표나 백슬레시를 표현하고 싶다면 앞에 &amp;lsquo;&#39; 백슬레시를 붙여주면 된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#39;Don\&#39;t let an apostrophe end this string prematurely!&#39;
+&lt;pre&gt;&lt;code&gt;&#39;Don\&#39;t let an apostrophe end this string prematurely!&#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;주의할 점은 백슬레시는 오직 &lt;code&gt;&#39;&lt;/code&gt; 홑따옴표를 나타내거나, 백슬레시를 나타낼 때만 사용할 수 있다는 것이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&#39;hello\nthere&#39; # hellonthere
+&lt;pre&gt;&lt;code&gt;&#39;hello\nthere&#39; # hellonthere
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;쌍따옴표-문자열&#34;&gt;쌍따옴표 문자열&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;쌍따옴표는 기본적으롤 홑따옴표 문자열과 큰 차이는 없지만, 백슬레시를 이용하여 활용할 수 있는 표현이 훨씬 더 많다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;quot;barney&amp;quot; # &#39;barney&#39;와 같다.
+&lt;pre&gt;&lt;code&gt;&amp;quot;barney&amp;quot; # &#39;barney&#39;와 같다.
 &amp;quot;hello world\n&amp;quot; # &#39;hello world&#39; 다음에 개행이 추가된다.
 &amp;quot;the last character of this string is a quote mark: \&amp;quot;&amp;quot;
 &amp;quot;coke\tsprite&amp;quot; # coke, 다음에 탭문자 그리고 sprite
@@ -401,7 +401,7 @@ chomp(@lines);
 &lt;ul&gt;
 &lt;li&gt;펄에는 스트링을 반복해서 더할 수 있는 문법이 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;quot;fref&amp;quot; x 3 # &amp;quot;fredfredfred&amp;quot; 로 나타내진다.
+&lt;pre&gt;&lt;code&gt;&amp;quot;fref&amp;quot; x 3 # &amp;quot;fredfredfred&amp;quot; 로 나타내진다.
 &amp;quot;barney&amp;quot; x (4 + 1) # &amp;quot;barneybarneybarneybarneybarney&amp;quot; 로 나타내진다.
 5 x 4.8 # 5555 로 나타내진다.
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -433,20 +433,20 @@ chomp(@lines);
 &lt;p&gt;그리고 절대로 숫자로 변환할 수 없다면 숫자 0으로 변경되어서 계산된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;quot;12abcde34&amp;quot; * &amp;quot; 3&amp;quot; # 36 
+&lt;pre&gt;&lt;code&gt;&amp;quot;12abcde34&amp;quot; * &amp;quot; 3&amp;quot; # 36 
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;경고-표시&#34;&gt;경고 표시&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;펄 스크립트를 작성할 때, 아래 코드를 적으면 프로그램에서 어떻게 동작할지 잘 모르겠는 부분을 워닝으로 표시해줄 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 use warnings;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;또는&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl -w
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl -w
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;그 경고는 모듈을 추가하였을 때 내가 작성하지 않은 부분에 대해서도 경로를 표시해준다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ perl -w my_program
+&lt;pre&gt;&lt;code&gt;$ perl -w my_program
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;그리고 &lt;code&gt;use diagnostics;&lt;/code&gt; pragma를 사용하면 더 상세한 내용을 알 수 있다. 이것은 프로그램을 최적화하는데 많은 도움이 된다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -494,7 +494,7 @@ use warnings;
 &lt;p&gt;그리고 파이썬과 같이 지수 연산을 다음과 같이 할 수 있다. 어쩌면 파이썬이 펄을 보고 참고한 것일 수도 있을 것 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2**3 # 8
+&lt;pre&gt;&lt;code&gt;2**3 # 8
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;펄에서 가장 짧은 문자열의 길이는 아무것도 없는 것이고, 가장 긴 문자열의 길이는 메모리가 허락하는 한 제한이 없다. 이는 펄이 추구하는 원칙중에 &amp;ldquo;제약 없음&amp;quot;에 기인한다.&lt;/p&gt;
@@ -509,7 +509,7 @@ use warnings;
 &lt;p&gt;하지만 펄 컴파일러가 자동적으로 유니코드로 해석하지는 않고, 아래 &lt;code&gt;pragma&lt;/code&gt;를 입력해야한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;use utf8;
+&lt;pre&gt;&lt;code&gt;use utf8;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;pragma&lt;/code&gt;는 펄 컴파일러가 어떻게 동작해야하는지 알려주는 역할을 한다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -559,7 +559,7 @@ use warnings;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;간단한-perl-문법&#34;&gt;간단한 PERL 문법&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#!/usr/bin/perl
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/perl
 @lines = `perdoc -u -f atan2`;
 foreach (@lines) {
     s/\w&amp;lt;([^&amp;gt;]+)/\U$1/g;
@@ -574,7 +574,7 @@ foreach (@lines) {
 &lt;p&gt;따라서 두 번째 줄에 있는 코드는 터미널 창에서 아래와 같이 코드를 입력한 것과 같은 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ perdoc -u -f atan2
+&lt;pre&gt;&lt;code&gt;$ perdoc -u -f atan2
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;그리고 해당 명령어의 결과는 배열에 저장된다.&lt;/p&gt;

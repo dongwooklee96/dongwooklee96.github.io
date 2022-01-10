@@ -245,7 +245,7 @@
 <p>예를 들어서 사용자 ID가 &ldquo;terry&quot;이고 비밀번호가 &ldquo;hello world&rdquo; 일 때 다음과 같이 <code>HTTP</code> 헤더에 &ldquo;terry: hello world&rdquo; 라는 문자열을 <code>Base64</code> 인코딩을 해서 <code>Authorization</code> 라는 이름의 헤더로 서버에 전송하여 인증을 요청한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>Authorization: Basic ZG9uZ3dvb2s6cGFzc3dvcmQ=
+<pre><code>Authorization: Basic ZG9uZ3dvb2s6cGFzc3dvcmQ=
 </code></pre><p><img src="https://user-images.githubusercontent.com/14002238/112743286-f0272980-8fd0-11eb-9871-dc55b2ee30f2.png" alt="img"></p>
 <ul>
 <li>다음은 Base64 인코딩을 도와주는 사이트이다. <a href="https://www.base64decode.org/">https://www.base64decode.org/</a></li>
@@ -281,7 +281,7 @@
 </ol>
 </li>
 </ul>
-<pre tabindex="0"><code>HA1 = MD5(사용자 이름:realm:비밀번호)
+<pre><code>HA1 = MD5(사용자 이름:realm:비밀번호)
 HA2 = MD5(HTTP method:HTTP URL)
   response hash = MD5(HA1:nonce:HA2)
 </code></pre><ul>
@@ -344,7 +344,7 @@ HA2 = MD5(HTTP method:HTTP URL)
 <p>토큰 자체가 정보를 가지는 방식인데, <code>JWT</code>는 이 클레임을 <code>JSON</code>을 이용해서 정리한다. 아래와 같은 형태로 표현된다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>{
+<pre><code>{
   &quot;id&quot;: &quot;terry&quot;,
   &quot;role&quot;: &quot;[&quot;admin&quot;, &quot;user&quot;]&quot;,
   &quot;company&quot;: &quot;pepsi&quot;

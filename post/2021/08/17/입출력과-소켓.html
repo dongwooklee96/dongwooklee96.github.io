@@ -176,12 +176,12 @@
 <ul>
 <li><code>dup()</code> 계열 함수를 호출하면 파일 디스크립터를 복사할 수 있다. <code>dup</code> 함수에 의해서 생성된 파일 디스크립터는 원본 파일 디스크립터와 동일한 열린 파일 테이블 엔트리를 참조한다.</li>
 </ul>
-<pre tabindex="0"><code>int dup(int oldfd);
+<pre><code>int dup(int oldfd);
 결과값 : 복사된 파일 디스크립터(새로 부여된 디스크립터)
 </code></pre><ul>
 <li>같은 프로세스 내에서 파일 디스크립터를 복제하는 함수이다.</li>
 </ul>
-<pre tabindex="0"><code>int dup2(int oldfd, int newfd);
+<pre><code>int dup2(int oldfd, int newfd);
 
 결과값 : 복사된 파일 디스크립터 (새로 부여된 디스크립터)
 </code></pre><h3 id="파일-오프셋이란">파일 오프셋이란?</h3>
@@ -203,7 +203,7 @@
 <p>따라서 <code>dup()</code>로 복제한 파일 디스크립터는 오프셋 값을 원본 디스크립터와 공유한다. 반면에 개별적인 <code>open()</code> 함수를 통해서 열린 파일 테이블에 독립적인 엔트리를 생성한 두 파일디스크립터들은 오프셋을 공유하지 않는다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
+<pre><code>#include &lt;sys/types.h&gt;
 
 #include &lt;unistd.h&gt;
 
@@ -223,7 +223,7 @@ off_t lseek(int fd, off_t offset, int whence);
 <li>SEEK_END: 파일의 마지막 지점 + 1</li>
 </ul>
 <h4 id="예제">예제</h4>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;sys/types.h&gt;
 #include &lt;string.h&gt;
@@ -310,7 +310,7 @@ int main(int argc, char *argv[]) {
 <p>이러한 함수와는 별개로 소켓 전용 입출력 함수에 대해서 알아보도록 하자.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>ssize_t send(int socket, const void *buffer, size_t length, int flags);
+<pre><code>ssize_t send(int socket, const void *buffer, size_t length, int flags);
 </code></pre><p><strong>인자</strong></p>
 <ul>
 <li>
@@ -338,7 +338,7 @@ int main(int argc, char *argv[]) {
 <p><code>flags</code> 인자에 대해서는 읽기 기능을 수행하는 소켓 전용 함수인 <code>recv</code>를 다룬 후에 자세히 알아보자.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>ssize_t recv(int socket, void *buffer, size_t length, int flags);
+<pre><code>ssize_t recv(int socket, void *buffer, size_t length, int flags);
 </code></pre><p><strong>인자</strong></p>
 <ul>
 <li><strong>socket</strong>: 데이터 읽기 작업을 위해 사용하고자하는 소켓 디스크립터</li>
@@ -397,7 +397,7 @@ int main(int argc, char *argv[]) {
 <li>서버 프로그램은 클라이언트 프로그램이 전송하는 데이터를 화면에 출력한다.</li>
 </ul>
 <p><strong>클라이언트 프로그램</strong></p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;netinet/in.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;stdlib.h&gt;
@@ -436,7 +436,7 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 </code></pre><p><strong>서버 프로그램</strong></p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;sys/types.h&gt;
@@ -553,7 +553,7 @@ void urgent_handler(int sig) {
 <p>표준 입출력 함수를 이용하는 프로그램들은 아래 소스와 같은 흐름을 따른다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>FILE *fp;
+<pre><code>FILE *fp;
 
 fp = fopen(&quot;filename.txt&quot;, &quot;r&quot;);
 ...
@@ -563,11 +563,11 @@ fclose(fp);
 </code></pre><ul>
 <li>위에서 처럼 <code>fscanf()</code>, <code>fprintf()</code>, <code>fgets()</code>, <code>fputs()</code> 등등의 표준 입출력 함수를 사용하려면, 파일을 가리키는 FILE형 포인터 즉, 스트림을 생성해야한다.</li>
 </ul>
-<pre tabindex="0"><code>FILE *fdopen(int fd, const char *mode);
+<pre><code>FILE *fdopen(int fd, const char *mode);
 </code></pre><ul>
 <li>파일 디스크립터로부터 스트림을 생성하는 방법은 <code>fdopen()</code> 함수를 이용하는 것이다.</li>
 </ul>
-<pre tabindex="0"><code>int fileno(FILE *stream)
+<pre><code>int fileno(FILE *stream)
 </code></pre><ul>
 <li>반대로 스트림에서 파일 디스크립터를 추출하는 것도 가능하다. 이때는 <code>fileno</code> 함수를 이용한다.</li>
 </ul>
@@ -586,14 +586,14 @@ fclose(fp);
 <p>따라서 경우에 따라 버퍼에 있는 내용을 강제로 배출하는 기능이 필요한다. 이러한 기능은 <code>fflush()</code> 함수가 수행한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>int fflush(FILE *stream);
+<pre><code>int fflush(FILE *stream);
 </code></pre><ul>
 <li>또한 표준 입출력에서 사용되는 버퍼의 크기를 설정하는 것이 가능하다.</li>
 </ul>
-<pre tabindex="0"><code>void setbuff(FILE *stream, char *buf);
+<pre><code>void setbuff(FILE *stream, char *buf);
 </code></pre><h4 id="예제---표준-입출력-함수를-이용한-소켓-프로그래밍">예제 - 표준 입출력 함수를 이용한 소켓 프로그래밍</h4>
 <p><strong>클라이언트</strong></p>
-<pre tabindex="0"><code>nclude &lt;stdio.h&gt;
+<pre><code>nclude &lt;stdio.h&gt;
 #include &lt;netinet/in.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;stdlib.h&gt;
@@ -634,7 +634,7 @@ int main(int argc, char *argv[]) {
 }
 
 </code></pre><p><strong>서버</strong></p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;netinet/in.h&gt;
