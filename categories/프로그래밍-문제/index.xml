@@ -26,7 +26,7 @@
 &lt;p&gt;다음과 같은 키워드가 들어가면, 동적 프로그래밍 접근법을 이용하여 풀 수 있는 문제이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;&amp;quot;shortest&amp;quot;, &amp;quot;longest&amp;quot;, &amp;quot;minimized&amp;quot;, &amp;quot;maximized&amp;quot;, 
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;quot;shortest&amp;quot;, &amp;quot;longest&amp;quot;, &amp;quot;minimized&amp;quot;, &amp;quot;maximized&amp;quot;, 
 &amp;quot;least&amp;quot;, &amp;quot;most&amp;quot;, &amp;quot;fewest&amp;quot;, &amp;quot;greatest&amp;quot;, &amp;quot;biggest&amp;quot;, &amp;quot;smallest&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;단계별-동적-프로그래밍-문제-해결-방법&#34;&gt;단계별 동적 프로그래밍 문제 해결 방법&lt;/h3&gt;
 &lt;ol&gt;

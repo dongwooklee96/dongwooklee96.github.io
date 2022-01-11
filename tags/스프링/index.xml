@@ -155,7 +155,7 @@
 &lt;p&gt;&lt;code&gt;Java&lt;/code&gt; 설정으로는 &lt;code&gt;@Bean&lt;/code&gt;의 &lt;code&gt;initMethod&lt;/code&gt; 속성을 사용할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;public class AnotherExampleBean implements InitializingBean {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class AnotherExampleBean implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
@@ -176,7 +176,7 @@
 &lt;p&gt;또는 &lt;code&gt;@PreDestory&lt;/code&gt; 주석을 사용하거나 빈 정의에서 지원하는 일반 메서드를 지정하는 것이 좋습니다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;public class AnotherExampleBean implements DisposableBean {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class AnotherExampleBean implements DisposableBean {
 
     @Override
     public void destroy() {

@@ -111,11 +111,11 @@
 &lt;p&gt;&lt;code&gt;api.my.com&lt;/code&gt;에서 응답 헤더에 다음과 같이 명시해주면 &lt;code&gt;sitea.com&lt;/code&gt;에 의해서 로딩된 자바스크립트 클라이언트 요청에 대해서만 &lt;code&gt;api.my.com&lt;/code&gt;이 요청해준다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;Access-Controll-Allow-Origin: sitea.com
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Access-Controll-Allow-Origin: sitea.com
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;만약에 다음과 같이 &lt;code&gt;*&lt;/code&gt;로 해주면 &lt;code&gt;Request Origin&lt;/code&gt;에 관계없이 사이트에서 로딩된 자바스크립트 요청에 대해서 처리해준다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;Access-Control-Allow-Origin: *
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Access-Control-Allow-Origin: *
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;pre-flight를-이용한-세세한-cors-통제&#34;&gt;Pre-flight를 이용한 세세한 CORS 통제&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;

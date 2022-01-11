@@ -52,7 +52,7 @@
 &lt;/ul&gt;
 &lt;p&gt;따라서 다음과 같은 &lt;code&gt;JSON&lt;/code&gt; 형태로 작성하면 된다.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;예제&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;------------------ Message -------------------
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;------------------ Message -------------------
 
 Topic Name: mytopic
 

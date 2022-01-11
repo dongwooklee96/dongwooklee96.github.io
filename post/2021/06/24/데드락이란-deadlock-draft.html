@@ -120,7 +120,7 @@
 <ul>
 <li>전달된 에러를 추적하다가, 아래와 같은 데드락 에러를 만나게 되었다.</li>
 </ul>
-<pre><code>InternalError: 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
+<pre tabindex="0"><code>InternalError: 1213 (40001): Deadlock found when trying to get lock; try restarting transaction
 </code></pre><ul>
 <li>정확한 문제 해결을 위해서 이번 기회에 데드락에 대해서 한번 더 정리를 해보고, 마리아 데이터베이스에서는 어떠한 경우에 데드락이 발생할 수 있는지를 알아보자.</li>
 </ul>
@@ -140,7 +140,7 @@
 <ul>
 <li><code>InnoDB</code>는 트랜잭션을 실행시 데드락이 발생하게 되면 그것을 감지하고, 하나의 트랜잭션을 롤백하여 데드락을 해소하고, 그 정보를 로그로 남긴다.</li>
 </ul>
-<pre><code>SHOW ENGINE INNODB STATUS
+<pre tabindex="0"><code>SHOW ENGINE INNODB STATUS
 </code></pre><p><img src="https://user-images.githubusercontent.com/14002238/123194595-bc7d7200-d4e1-11eb-9ceb-57e78504e5f6.png" alt="Screen Shot 2021-06-24 at 11 45 24 AM"></p>
 <ul>
 <li>

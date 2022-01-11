@@ -128,7 +128,7 @@
 <p>메시지 큐를 사용하기 위해서는 <code>mq_open()</code> 함수를 통해서 기존에 존재하는 메시지 큐에 접근할 수 있는 디스크립터를 얻어오거나 새로운 메시지 큐를 생성한 후에 생성된 메시지 큐에 접근할 수 있는 디스크립터를 얻어야한다.</p>
 </li>
 </ul>
-<pre><code>// oflag에 O_CREAT가 명시된 경우
+<pre tabindex="0"><code>// oflag에 O_CREAT가 명시된 경우
 mqd_t mq_open(const char *name, int oflag, mode_t mode, struct mq_attr *attr);
 
 // oflag에 O_CREAT가 명시되지 않은 경우
@@ -150,7 +150,7 @@ mqd_t mq_open(const char *name, int oflag);
 <p><code>oflag</code>, <code>mode</code>는 공유 메모리와 세마포어 함수의 <code>open</code> 함수에서 사용되는 인자와 비슷한 성격을 가진다.</p>
 </li>
 </ul>
-<pre><code>struct mq_attr {
+<pre tabindex="0"><code>struct mq_attr {
   long mq_flags; // 메시지 큐의 블록, 논블록 설정 여부
   long mq_maxmsg; // 메시지 큐에 저장될 수 있는 메시지의 최대 수
   long mq_msgsize; // 메시지의 최대 사이즈 (바이트)
@@ -159,7 +159,7 @@ mqd_t mq_open(const char *name, int oflag);
 </code></pre><ul>
 <li><code>mq_attr</code> 구조체는 생성되는 메시지 큐의 속성을 지정하기 위해서 사용되며 다음과 같이 정의된다.</li>
 </ul>
-<pre><code>int mq_getattr(mqd_t mqd, struct mq_attr *attr);
+<pre tabindex="0"><code>int mq_getattr(mqd_t mqd, struct mq_attr *attr);
 </code></pre><ul>
 <li>
 <p>mqd: 속성값을 얻어오려고 하는 메시지 큐를 지칭하는 디스크립터</p>
@@ -171,7 +171,7 @@ mqd_t mq_open(const char *name, int oflag);
 <p>메시지 큐의 속성 정보는 <code>mq_getattr</code> 함수를 사용하여 조회할 수 있다.</p>
 </li>
 </ul>
-<pre><code>int mq_send(mqd_t mqd, const char *ptr, size_t len, unsigned int prio);
+<pre tabindex="0"><code>int mq_send(mqd_t mqd, const char *ptr, size_t len, unsigned int prio);
 </code></pre><ul>
 <li>
 <p><strong>mqd</strong>: 접근할 메시지 큐를 지정하기 위한 디스크립터</p>
@@ -189,7 +189,7 @@ mqd_t mq_open(const char *name, int oflag);
 <p>메시지 큐에 보내야 하는 데이터를 삽입하는 함수는 <code>mq_send</code> 이다.</p>
 </li>
 </ul>
-<pre><code>ssize_t mq_receive(mqd_t mqd, char *ptr, size_t len, unsigned int *prio);
+<pre tabindex="0"><code>ssize_t mq_receive(mqd_t mqd, char *ptr, size_t len, unsigned int *prio);
 </code></pre><ul>
 <li>
 <p><strong>mqd</strong>: 접근할 메시지 큐를 지정하기 위한 디스크립터</p>
@@ -218,7 +218,7 @@ mqd_t mq_open(const char *name, int oflag);
 <li>부모 프로세스는 화면에 전송받은 문자열을 출력한다.</li>
 </ul>
 </blockquote>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;mqueue.h&gt;
 #include &lt;errno.h&gt;
 #include &lt;stdlib.h&gt;

@@ -115,7 +115,7 @@
 <ul>
 <li>일반적으로 사용하는 서비스 레이어의 함수를 메시지 핸들럴로 변경하여 모든 서비스 계층의 메서드를 이벤트 기반으로 변경하는 것이다.</li>
 </ul>
-<pre><code>def add_batch(
+<pre tabindex="0"><code>def add_batch(
         event: events.BatchCreated, uow: unit_of_work.AbstractUnitOfWork):
     with uow:
         product = uow.products.get(sku=event.sku)
@@ -148,7 +148,7 @@ def send_out_of_stock_notification(
 <p>따라서 이벤트로 작성하도록 API를 변경한 모습은 아래 코드와 같다.</p>
 </li>
 </ul>
-<pre><code>@app.route(&quot;/allocate&quot;, methods=[&quot;POST&quot;])
+<pre tabindex="0"><code>@app.route(&quot;/allocate&quot;, methods=[&quot;POST&quot;])
 def allocate_endpoint():
     try:
         event = events.AllocationRequired(

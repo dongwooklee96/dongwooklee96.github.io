@@ -114,7 +114,7 @@
   <main>
     <h3 id="for-반복문">FOR 반복문</h3>
 <hr>
-<pre><code>#!/usr/bin/perl
+<pre tabindex="0"><code>#!/usr/bin/perl
 
 foreach $rock (qw/ bedrock slate lava /) {
     print &quot;one rock is $rock.\n&quot;;
@@ -130,7 +130,7 @@ foreach $rock (qw/ bedrock slate lava /) {
 <p>만약에 <code>$rocks</code>를 변경하면 원본 리스트가 변경된다.</p>
 </li>
 </ul>
-<pre><code>#!/usr/bin/perl
+<pre tabindex="0"><code>#!/usr/bin/perl
 
 @rocks = qw/ bedrock slate lava /;
 
@@ -147,7 +147,7 @@ print &quot;The rocks are:\n&quot;, @rocks;
 <p>또 한가지 특이한 점은, 어떤 값이 들어있는 변수를 반복문의 컨트롤 변수 (리스트의 값이 들어가는 변수)로 사용한다면 반복문에서는 리스트의 값이 하나씩 대입되고 반복문이 끝나면 반복문이 시작하기 전의 값으로 복원되어 있다.</p>
 </li>
 </ul>
-<pre><code>#!/usr/bin/perl
+<pre tabindex="0"><code>#!/usr/bin/perl
 
 $rock = 'shale';
 
@@ -166,7 +166,7 @@ print &quot;rock is still $rock\n&quot;; # 'rocks is still shale'
 <ul>
 <li><code>foreach</code> 문에서, 컨트롤 변수를 생략했다면, 자동으로 <code>$_</code>라는 공간에 들어가게 된다.</li>
 </ul>
-<pre><code>#!/usr/bin/perl
+<pre tabindex="0"><code>#!/usr/bin/perl
 
 foreach (1..10) {
   print &quot;I can count to $_ !\n&quot;;
@@ -174,7 +174,7 @@ foreach (1..10) {
 </code></pre><ul>
 <li>그리고 <code>$_</code> 변수에 값을 대입하고 나서, <code>print</code>를 하게 되면 이전에 대입한 값이 들어가게 된다.</li>
 </ul>
-<pre><code>#!/usr/bin/perl
+<pre tabindex="0"><code>#!/usr/bin/perl
 
 foreach (1..10) {
   print &quot;I can count to $_ !\n&quot;;
@@ -184,7 +184,7 @@ $_ = &quot;Yabba dabba doo\n&quot;;
 print; # 'Yadda badda doo'
 </code></pre><h3 id="reverse-연산자">reverse 연산자</h3>
 <hr>
-<pre><code>#!/usr/bin/perl
+<pre tabindex="0"><code>#!/usr/bin/perl
 
 @fred = 6..10;
 print &quot;@fred\n&quot;;
@@ -205,7 +205,7 @@ print &quot;@fred\n&quot;;
 </ul>
 <h3 id="sort-연산자">sort 연산자</h3>
 <hr>
-<pre><code>#!/usr/bin/perl
+<pre tabindex="0"><code>#!/usr/bin/perl
 
 @rocks = qw/ bedrock slate rubble granite /;
 print &quot;@rocks\n&quot;; # bedrock slate rubble granite
@@ -229,7 +229,7 @@ print &quot;@numbers\n&quot;;
 </ul>
 <h3 id="each-연산자">each 연산자</h3>
 <hr>
-<pre><code>#!/usr/bin/perl
+<pre tabindex="0"><code>#!/usr/bin/perl
 
 @rocks = qw/ bedrock slate rubble granite /;
 while (($index, $value) = each @rocks) {
@@ -259,7 +259,7 @@ while (($index, $value) = each @rocks) {
 <p>이것은 마치 자연어와 같은데, 자연어도 문맥에 따라서 같은 단어임에도 불구하고 다르게 사용될 수 있다. 펄도 그렇다.</p>
 </li>
 </ul>
-<pre><code>@people = qw (fred barney betty);
+<pre tabindex="0"><code>@people = qw (fred barney betty);
 @sorted = sort @people; # list context: barney, betty, fred
 $number = 42 + @people; # 42 + 3 = 45
 </code></pre><ul>
@@ -270,7 +270,7 @@ $number = 42 + @people; # 42 + 3 = 45
 <p>리스트를 만드는 연산을 스칼라 문맥에서 사용할 경우에는 문서를 참조하는 것이 낫다.</p>
 </li>
 </ul>
-<pre><code>/usr/bin/perl
+<pre tabindex="0"><code>/usr/bin/perl
 
 @backwards = reverse qw/ yadda dabba doo/;
 print &quot;@backwards\n&quot;;
@@ -283,7 +283,7 @@ oodabbadabbay
 </code></pre><ul>
 <li>일반적인 경우 아래와 같이 생각하면 된다.</li>
 </ul>
-<pre><code>$fred = something; # 스칼라
+<pre tabindex="0"><code>$fred = something; # 스칼라
 @pebbles = something; # 리스트
 ($wilma, $betty) = something; # 리스트
 ($dino) = something # 리스트
@@ -301,7 +301,7 @@ oodabbadabbay
 <p>리스트 값에 스칼라 변수를 대입하면 자동으로 리스트 값으로 변환된다.</p>
 </li>
 </ul>
-<pre><code>@fred = 6 * 7 # list (42)
+<pre tabindex="0"><code>@fred = 6 * 7 # list (42)
 @barney = &quot;hello&quot; . ' ' . &quot;world&quot;;
 
 @wilma = undef # list (undef)
@@ -314,7 +314,7 @@ oodabbadabbay
 <p>만약 강제로 스칼라 값을 취하고 싶다면 <code>scalar</code> 라는 함수를 사용하면 된다.</p>
 </li>
 </ul>
-<pre><code>!/usr/bin/perl
+<pre tabindex="0"><code>!/usr/bin/perl
 
 @rocks = qw( talc quartz jade obsidian );
 
@@ -342,7 +342,7 @@ I hvae 4 rocks!
 <p>보통 개행 문자 (\n)를 <code>chomp()</code>를 사용하여 제거한 값을 받는다.</p>
 </li>
 </ul>
-<pre><code>@lines = &lt;STDIN&gt;;
+<pre tabindex="0"><code>@lines = &lt;STDIN&gt;;
 chomp(@lines);
 </code></pre><h3 id="참고-문헌">참고 문헌</h3>
 <ul>

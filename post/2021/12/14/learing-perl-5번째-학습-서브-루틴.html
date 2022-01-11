@@ -130,7 +130,7 @@
 <ul>
 <li><code>sub</code> 라는 키워드를 사용하고 <code>{  }</code> 사이에 함수의 내용을 넣으면 된다.</li>
 </ul>
-<pre><code>sub marine {
+<pre tabindex="0"><code>sub marine {
   $n += 1;
   print &quot;hello, sailor number $n\n&quot;;
 }
@@ -150,7 +150,7 @@
 <ul>
 <li>서브 루틴을 호출하는 방법은 <code>&amp;</code>를 이용해서 호출할 수 있다.</li>
 </ul>
-<pre><code>&amp;marine;
+<pre tabindex="0"><code>&amp;marine;
 &amp;marine;
 &amp;marine;
 &amp;marnie;
@@ -173,7 +173,7 @@
 <p>펄에서는 따로, <code>return</code> 와 같은 키워드를 사용하지 않는다. 마지막에 위치한 값이 자동으로 반환값이 된다.</p>
 </li>
 </ul>
-<pre><code>sub sum_of_fred_and_barney {
+<pre tabindex="0"><code>sub sum_of_fred_and_barney {
   print &quot;hey, you called me sum_of_fred_and_barney subroutine!&quot;;
   $fred + $barney;
 }
@@ -185,7 +185,7 @@
 <p>만약 서브루틴의 마지막에 값이 아닌 <code>print</code>가 오면 그냥 정상적으로 출력되었다는 뜻으로 <code>1</code> 값이 반환된다. 이러한 동작이 원한것이 아니라면 주의를 해야한다.</p>
 </li>
 </ul>
-<pre><code>sub sum_of_fred_and_barney {
+<pre tabindex="0"><code>sub sum_of_fred_and_barney {
   print &quot;hey, you called me sum_of_fred_and_barney subroutine!&quot;;
   $fred + $barney;
   print &quot;hey, I'm returning a value now\n&quot;;
@@ -201,7 +201,7 @@
 <p>그리고 마지막 예제는 큰 값을 리턴하는 서브 루틴이다.</p>
 </li>
 </ul>
-<pre><code>sub larger_of_fred_or_barney {
+<pre tabindex="0"><code>sub larger_of_fred_or_barney {
   if ($fred &gt; $barney) {
     $fred;
   } else {

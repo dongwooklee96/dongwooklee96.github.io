@@ -125,7 +125,7 @@
 </ul>
 <h2 id="인증-authentication">인증 (Authentication)</h2>
 <hr>
-<pre><code>public interface AuthenticationManager {
+<pre tabindex="0"><code>public interface AuthenticationManager {
 
   Authentication authenticate(Authentication authentication)
     throws AuthenticationException;
@@ -188,7 +188,7 @@
 <p>일반적으로 사용되는 헬퍼는 <code>AuthenticationManagerBuilder</code>를 사용합니다.</p>
 </li>
 </ul>
-<pre><code>@Configuration
+<pre tabindex="0"><code>@Configuration
 public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
    ... // web stuff here

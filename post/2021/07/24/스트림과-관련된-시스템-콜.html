@@ -158,7 +158,7 @@
 <p>여러 명령어를 파이프로 연결하여 데이터를 처리하는 것이 가능한 것도 각 명령어가 표준 입력에서 데이터를 읽어들이고, 처리 결과를 표준 출력에 쓰게 되어 있기 때문이다.</p>
 </li>
 <li>
-<p>이 경우의 &lsquo;표준'은 &lsquo;디폴트'에 가까운 의미이다. 표준 입력은 프로그램의 디폴트 입력 소스이며, 표준 출력은 디폴트 출력지라는 의미이다.</p>
+<p>이 경우의 &lsquo;표준&rsquo;은 &lsquo;디폴트&rsquo;에 가까운 의미이다. 표준 입력은 프로그램의 디폴트 입력 소스이며, 표준 출력은 디폴트 출력지라는 의미이다.</p>
 </li>
 <li>
 <p>여러개의 리눅스 명령어를 조합할 수 있는 것도 각 리눅스 명령어가 표준 입력에서 데이터를 읽고, 표준 출력에 쓰는 약속을 했기 때문이다.</p>
@@ -214,7 +214,7 @@
 </li>
 </ul>
 <h4 id="read2"><code>read(2)</code></h4>
-<pre><code>#include &lt;unistd.h&gt;
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
 
 ssize_t read(int fd, void *buf, size_t bufsize);
 </code></pre><ul>
@@ -232,7 +232,7 @@ ssize_t read(int fd, void *buf, size_t bufsize);
 </li>
 </ul>
 <p><strong>주의사항</strong></p>
-<pre><code>C언어 문자열에는 임의의 바이트 열을 저장할 수 있지만, 일반적으로 문자열의
+<pre tabindex="0"><code>C언어 문자열에는 임의의 바이트 열을 저장할 수 있지만, 일반적으로 문자열의
 끝에는 '\0'을 넣는 것이 관례이다. API 중에도 문자열의 끝에 '\0'이 있다고
 전체하는 것과 그렇지 않은 것이 있어서 사용에 주의 해야한다. 
 예를 들어, 문자열의 끝에 '\0'이 있다고 전제하는 API에 '\0'로 끝나지 
@@ -242,7 +242,7 @@ ssize_t read(int fd, void *buf, size_t bufsize);
 <p><code>read</code>의 경우에는 읽어들인 데이터의 끝에 <code>\0</code>가 있다고 전제하지 않는 <code>API</code>이다. 따라서 <code>read(2)</code>를 통해서 읽어 들인 문자열의 끝에 <code>\0</code>이 있다고 생각하고 코드를 작성해서는 안된다.</p>
 </li>
 <li>
-<p>예를 들어, <code>printf()</code>의 경우에는 문자열의 끝에 &lsquo;\0'이 들어가 있다고 전제하는 <code>API</code> 이므로, <code>read(2)</code>로 읽은 문자열을 그대로 <code>printf()</code>로 전달하면 안된다. 이는 보안상의 취약점이 될 수 있다.</p>
+<p>예를 들어, <code>printf()</code>의 경우에는 문자열의 끝에 &lsquo;\0&rsquo;이 들어가 있다고 전제하는 <code>API</code> 이므로, <code>read(2)</code>로 읽은 문자열을 그대로 <code>printf()</code>로 전달하면 안된다. 이는 보안상의 취약점이 될 수 있다.</p>
 </li>
 </ul>
 <h4 id="write2"><code>write(2)</code></h4>
@@ -250,7 +250,7 @@ ssize_t read(int fd, void *buf, size_t bufsize);
 <ul>
 <li>스트림에 바이트 열을 쓸 때는 시스템 콜 <code>write()</code>를 사용한다.</li>
 </ul>
-<pre><code>#include &lt;unistd.h&gt;
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
 
 ssize_t write(int fd, const *buf, size_t bufsize);
 </code></pre><ul>
@@ -281,7 +281,7 @@ ssize_t write(int fd, const *buf, size_t bufsize);
 <ul>
 <li>파일을 읽고 쓰는 스트림을 만들려면 시스템 콜 <code>open()</code>을 사용한다.</li>
 </ul>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;sys/stat.h&gt;
 #include &lt;fcntl.h&gt;
 
@@ -323,7 +323,7 @@ int open(const char *path, int flags, mode_t mode);
 <ul>
 <li>사용이 끝난 스트림은 <code>close()</code>로 닫는다.</li>
 </ul>
-<pre><code>#include &lt;unistd.h&gt;
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
 
 int close(int fd);
 </code></pre><ul>
@@ -334,7 +334,7 @@ int close(int fd);
 <p>오류 없이 닫히면 <code>0</code>, 에러가 발생하면 <code>-1</code>를 반환한다. 일반적으로 <code>close()</code>함수를 호출하는 코드는 다음과 같다.</p>
 </li>
 </ul>
-<pre><code>if (close(fd) &lt; 0) {
+<pre tabindex="0"><code>if (close(fd) &lt; 0) {
   /* 에러 처리 */
 }
 </code></pre><ul>

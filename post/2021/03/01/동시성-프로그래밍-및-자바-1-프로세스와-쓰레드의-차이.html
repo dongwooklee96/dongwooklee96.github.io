@@ -147,7 +147,7 @@
 <p>자바에서 쓰레드를 사용할 수 있는 방법에는 크게 3가지가 있다.</p>
 <h4 id="1-thread를-상속-받는-방법">1. Thread를 상속 받는 방법</h4>
 <hr>
-<pre><code>public class Main {
+<pre tabindex="0"><code>public class Main {
     public static void main(String[] args) {
         MyThread myThread = new MyThread();
         myThread.start();
@@ -164,7 +164,7 @@
 }
 </code></pre><h4 id="2-runnable을-구현하는-방법">2. Runnable을 구현하는 방법</h4>
 <hr>
-<pre><code>public class Main {
+<pre tabindex="0"><code>public class Main {
     public static void main(String[] args) {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -178,7 +178,7 @@
 }
 </code></pre><h4 id="3-람다를-사용하는-방법">3. 람다를 사용하는 방법</h4>
 <hr>
-<pre><code>public class Main {
+<pre tabindex="0"><code>public class Main {
     public static void main(String[] args) {
         Thread thread = new Thread(() -&gt; {
             System.out.println(&quot;Thread: &quot; + Thread.currentThread().getName());
@@ -191,7 +191,7 @@
 <hr>
 <h4 id="sleep"><code>sleep</code></h4>
 <p><img src="https://user-images.githubusercontent.com/14002238/109460950-d0b9e100-7aa4-11eb-86c8-29276cda855f.png" alt="Screen Shot 2021-03-01 at 3 42 59 PM"></p>
-<pre><code>public class Main {
+<pre tabindex="0"><code>public class Main {
     public static void main(String[] args) {
         Thread thread = new Thread(() -&gt; {
             System.out.println(&quot;Thread: &quot; + Thread.currentThread().getName());
@@ -212,7 +212,7 @@
 </ul>
 <h4 id="interrupt"><code>interrupt</code></h4>
 <p><img src="https://user-images.githubusercontent.com/14002238/109460917-ba138a00-7aa4-11eb-85d3-0ad70e163bdf.png" alt="Screen Shot 2021-03-01 at 3 42 22 PM"></p>
-<pre><code>public class Main {
+<pre tabindex="0"><code>public class Main {
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -&gt; {
             while (true) {
@@ -237,7 +237,7 @@
 </ul>
 <h4 id="join"><code>join</code></h4>
 <p><img src="https://user-images.githubusercontent.com/14002238/109460851-a10ad900-7aa4-11eb-8f02-8d5812cd1f80.png" alt="Screen Shot 2021-03-01 at 3 41 37 PM"></p>
-<pre><code>public class Main {
+<pre tabindex="0"><code>public class Main {
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -&gt; {
             System.out.println(&quot;Thread: &quot; + Thread.currentThread().getName());
@@ -267,10 +267,10 @@
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/">https://docs.oracle.com/javase/tutorial/essential/concurrency/</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/">https://docs.oracle.com/javase/tutorial/essential/concurrency/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html">https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html">https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>

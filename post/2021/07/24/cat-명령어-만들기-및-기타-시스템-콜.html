@@ -114,7 +114,7 @@
 
 <div class="content-wrapper">
   <main>
-    <pre><code>#include &lt;stdio.h&gt;
+    <pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;sys/types.h&gt;
@@ -176,7 +176,7 @@ static void die(const char *s)
 </ul>
 <h3 id="lseek2"><code>lseek(2)</code></h3>
 <hr>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;unistd.h&gt;
 off_t lseek(int fd, off_t offset, int whence);
 </code></pre><ul>
@@ -209,7 +209,7 @@ off_t lseek(int fd, off_t offset, int whence);
 </ul>
 <h3 id="dup2-dup22">dup(2), dup2(2)</h3>
 <hr>
-<pre><code>#include &lt;unistd.h&gt;
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
 
 int dup(int oldfd);
 int dup2(int oldfd, int newfd);
@@ -218,24 +218,24 @@ int dup2(int oldfd, int newfd);
 </ul>
 <h3 id="ioctl2">ioctl(2)</h3>
 <hr>
-<pre><code>#include &lt;sys/ioctl.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/ioctl.h&gt;
 
 int ioctl(int fd, unsigned long request, ...);
 </code></pre><ul>
 <li><code>ioctl()</code>은 스트림이 연결된 디바이스에 특화된 작업을 모두 포함하는 시스템 콜이다. 예를 들어서 아래와 같은 작업을 할 수 있다.</li>
 </ul>
-<pre><code>DVD 드라이브 여닫기, 음악 CD 재생
+<pre tabindex="0"><code>DVD 드라이브 여닫기, 음악 CD 재생
 프린터 구동이나 일시정지
 SCSI 디바이스 하드웨어 옵션 설정
 단말 통신 속도 설정
 </code></pre><p>자세한 내용은 메뉴얼에서 확인할 수 있다.</p>
-<pre><code>man ioctl_list
+<pre tabindex="0"><code>man ioctl_list
 </code></pre><h3 id="fcntl2">fcntl(2)</h3>
 <hr>
 <ul>
 <li><code>ioctl()</code>의 기능 중에서 파일 디스크립터 관련 작업을 분리하려고 만들어 진 것이 <code>fnctl</code>이다.</li>
 </ul>
-<pre><code>#include &lt;unistd.h&gt;
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
 #include &lt;fcnt.h&gt;
 
 int fcntl(int fd, int cmd, ...);

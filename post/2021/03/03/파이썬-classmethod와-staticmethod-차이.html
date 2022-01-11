@@ -122,7 +122,7 @@
 <li>클래스 메서드는 인스턴스 메서드가 인스턴스를 받는 것 처럼 클래스를 암시적인 첫 번째 인수로 수신한다.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
 </ul>
 <p>클래스 메서드는 다음과 같이 사용한다.</p>
-<pre><code>class C:
+<pre tabindex="0"><code>class C:
     @classmethod
     def f(cls, arg1, arg2, ...): ...
 </code></pre><ul>
@@ -143,7 +143,7 @@
 <li>정적 메서드는 암시적으로 첫 번째 인수를 받지 않습니다.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
 </ul>
 <p>사용하는 방법은 다음과 같다.</p>
-<pre><code>class C:
+<pre tabindex="0"><code>class C:
     @staticmethod
     def f(arg1, arg2, ...): ...
 </code></pre><ul>
@@ -155,12 +155,12 @@
 <li>데코레이터와 마찬가지로, 정적 메서드를 <code>regular</code> 함수 처럼 호출 할 수 있다.</li>
 <li>클래스 바디에 함수에 대한 참조가 필요하고 인스턴스 메서드로 자동 변환하지 않으려는 경우에 사용한다.</li>
 </ul>
-<pre><code>class C:
+<pre tabindex="0"><code>class C:
     builtin_open = staticmethod(open)
 </code></pre><h4 id="차이점">차이점</h4>
 <p>얼핏봐서는 차이점을 크게 못느껴서 인터넷을 찾아본 결과 좋은 글을 볼 수 있었다. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <p><code>@classmethod</code>와 <code>@staticmethod</code>는 상속에서 차이가 난다.</p>
-<pre><code>class Person:
+<pre tabindex="0"><code>class Person:
     default= &quot;아빠&quot;
 
      def __init__(self):
@@ -187,13 +187,13 @@ person2 = WhatPerson.static_person()   # return 아빠
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p><a href="https://docs.python.org/3/library/functions.html#classmethod">https://docs.python.org/3/library/functions.html#classmethod</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://docs.python.org/3/library/functions.html#classmethod">https://docs.python.org/3/library/functions.html#classmethod</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p><a href="https://docs.python.org/3/library/functions.html#staticmethod">https://docs.python.org/3/library/functions.html#staticmethod</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://docs.python.org/3/library/functions.html#staticmethod">https://docs.python.org/3/library/functions.html#staticmethod</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p><a href="https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372">https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372</a> <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p><a href="https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372">https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>

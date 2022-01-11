@@ -131,13 +131,13 @@
 <ul>
 <li>설치 방법은 그냥 터미널에서 다음 명령어를 입력하며 된다.</li>
 </ul>
-<pre><code>pip3 install locust
+<pre tabindex="0"><code>pip3 install locust
 </code></pre><h3 id="테스트-방법">테스트 방법</h3>
 <hr>
 <ul>
 <li>원하는 폴더에 가서, <code>locustfile.py</code> 를 만들고 나서, 아래 코드를 작성한다.</li>
 </ul>
-<pre><code>from locust import HttpUser, task
+<pre tabindex="0"><code>from locust import HttpUser, task
 
 class HelloWorldUser(HttpUser):
   @task
@@ -152,11 +152,11 @@ class HelloWorldUser(HttpUser):
 <p><code>LOCUST</code>를 실행하는 <code>locustfile.py</code>를 작성한 디렉터리에서 터미널에 아래 명령어를 입력하는 것이다.</p>
 </li>
 </ul>
-<pre><code>locust --host=&quot;server address&quot;
+<pre tabindex="0"><code>locust --host=&quot;server address&quot;
 </code></pre><ul>
 <li>실행 하면, 사용자 수와 사용자가 증가하는 기간을 설정할 수 있고, 초당 응답 시간 및 전체적인 지표를 확인할 수 있다.</li>
 </ul>
-<pre><code>
+<pre tabindex="0"><code>
 from random import randint
 from locust import HttpUser, task
 
