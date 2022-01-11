@@ -126,13 +126,13 @@
 </li>
 </ul>
 <p><strong>네트워크 프로그래밍의 정의</strong></p>
-<pre tabindex="0"><code>소켓 API를 이용하여 컴퓨터 네트워크를 사용하는 프로그램을 작성하는 것
+<pre><code>소켓 API를 이용하여 컴퓨터 네트워크를 사용하는 프로그램을 작성하는 것
 </code></pre><ul>
 <li>프로세스 - 소켓 - 컴퓨터 네트워크 - 소켓 - 프로세스로 이어지는 연결 구조에서, 복잡한 컴퓨터 네트워크에서 데이터가 어떻게 전달되는가는 프로그래머의 1차 관심사가 아니다.</li>
 </ul>
 <h3 id="소켓과-입출력">소켓과 입출력</h3>
 <hr>
-<pre tabindex="0"><code>프로세스의 입장에서, 소켓에 관계된 작업은 다른 프로세스로부터 데이터를 받는 작업과 다른 프로세스에게 데이터를 주는 작업이라고 볼 수 있다.
+<pre><code>프로세스의 입장에서, 소켓에 관계된 작업은 다른 프로세스로부터 데이터를 받는 작업과 다른 프로세스에게 데이터를 주는 작업이라고 볼 수 있다.
 </code></pre><ul>
 <li>
 <p>프로그래밍을 처음 배울 때 대부분의 책들이 <code>Hello World!</code> 라는 문자열을 출력하는 프로그램을 작성한다.</p>
@@ -146,7 +146,7 @@
 </ul>
 <h4 id="간단한-소켓-프로그래밍">간단한 소켓 프로그래밍</h4>
 <hr>
-<pre tabindex="0"><code>#include &lt;sys/socket.h&gt;
+<pre><code>#include &lt;sys/socket.h&gt;
 
 int socket(int domain, int type, int protocol);
 </code></pre><ul>
@@ -155,7 +155,7 @@ int socket(int domain, int type, int protocol);
 <li><code>protocol</code>: 소켓에서 사용할 포로토콜을 지정한다.</li>
 <li>반환값은 성공시에는 파일의 디스크립터를 반환하고 실패시에는 -1을 반환한다.</li>
 </ul>
-<pre tabindex="0"><code>#include &lt;sys/socket.h&gt;
+<pre><code>#include &lt;sys/socket.h&gt;
 #include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;fcntl.h&gt;
@@ -191,7 +191,7 @@ int main() {
 <p>대표적인 소켓 프로그램인 웹 서버를 기준으로 통신 프로토콜에 대해서 알아보도록 하자. 웹서버에 접속하는것은 아래의 세부작업으로 구성되어 있다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>1. 우리가 알고 있는 접속 주소를 네트워크 장비들이 이해할 수 있는 주소로 변환하는 작업
+<pre><code>1. 우리가 알고 있는 접속 주소를 네트워크 장비들이 이해할 수 있는 주소로 변환하는 작업
 2. 교환할 데이터를 패킷으로 만드는 작업
 3. 패킷이 이동하는 길의 이정표를 만드는 작업
 4. 패킷의 목적지와 이정표를 확인하여 올바른 경로로 패킷을 전달하는 작업
@@ -226,7 +226,7 @@ int main() {
 <p>다시 말해서, 프로세스를 특정하려면, <code>PID</code> 가 필요하다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>&quot;원거리 호스트에서 실행중인 프로그램의 PID를 통신할 때마다 알아야 하는가?&quot;
+<pre><code>&quot;원거리 호스트에서 실행중인 프로그램의 PID를 통신할 때마다 알아야 하는가?&quot;
 </code></pre><ul>
 <li>
 <p>앞에서 설명한 IP 주소 덕분에 호스트까지 데이터를 전달하는 것은 가능하지만, 호스트에 데이터가 도착하고 그 데이터가 어떤 프로세스에 전달되어야 하는지를 알려면 <code>PID</code>로 판별을 해야한다.</p>

@@ -174,7 +174,7 @@
 <li><code>BeanFactory</code>는 <code>Bean</code>을 인스턴스화 하거나 와이어링 하는 것 빼고는 <code>ApplicationContext</code>과 비교해서 많은 기능을 제공하지 않는 것을 확인할 수 있다.</li>
 </ul>
 <p>따라서 <code>BeanFactory</code>에서 사후 프로세서를 명시적으로 등록하려면, 다음의 예외 같이 프로그래밍 방식으로 <code>addBeanPostProcessor</code>를 호출해야한다.</p>
-<pre tabindex="0"><code>DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+<pre><code>DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 // populate the factory with bean definitions
 
 // now register any needed BeanPostProcessor instances

@@ -112,7 +112,7 @@
 
 <div class="content-wrapper">
   <main>
-    <pre tabindex="0"><code>- 대부분의 개발자가 새로운 시스템을 설계하라는 요청을 받으면, 즉시 데이터베이스 스키마를 그리기 시작하고, 그 다음에 객체 모델을 생각한다. 여기서부터 모든 것이 잘못되기 시작한다...
+    <pre><code>- 대부분의 개발자가 새로운 시스템을 설계하라는 요청을 받으면, 즉시 데이터베이스 스키마를 그리기 시작하고, 그 다음에 객체 모델을 생각한다. 여기서부터 모든 것이 잘못되기 시작한다...
 </code></pre><ul>
 <li>
 <p>이에 매우 공감한다. 그 이유는 대학교 졸업 작품을 이런식으로 설계해봤기 때문에 얼마나 비효율적이고 수정이 많이 발생하는지 느꼈기 때문이다.</p>
@@ -124,7 +124,7 @@
 <p>이 책에서는 아래 4가지의 핵심 설계 패턴을 소개한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>1. 저장소 패턴은 영속적인 저장소에 대한 추상화를 한다.
+<pre><code>1. 저장소 패턴은 영속적인 저장소에 대한 추상화를 한다.
 2. 서비스 계층 패턴은 유스케이스의 시작과 끝을 명확하게 정의하기 위한 패턴이다.
 3. 작업 단위 패턴은 원자적 연산을 제공한다.
 4. 애그리게이트 패턴은 데이터 정합성을 강화하기 위한 패턴이다.
@@ -141,7 +141,7 @@
 <p>파이썬에서는 아래와 같이 표현할 수 있다.</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#a6e22e">@dataclass</span>(fronzen<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#a6e22e">@dataclass</span>(fronzen<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Money</span>:
     currency: str
     value: str
@@ -161,14 +161,14 @@
 <p>사람은 이름과 다르게 영속적인 정체성이 있다. 따라서 엔티티에는 정체성 동등성이라는 특징이 있다. 이는 엔티티의 값을 바꾸더라도, 바뀐 엔티티는 이전과 같은 엔티티로 인식된다는 것이다.</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Batch</span>:
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Batch</span>:
     <span style="color:#f92672">...</span>
-    <span style="color:#66d9ef">def</span> __eq__(self, other):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__eq__</span>(self, other):
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> isinstance(other, Batch):
             <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">False</span>
         <span style="color:#66d9ef">return</span> other<span style="color:#f92672">.</span>reference <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>reference
 
-    <span style="color:#66d9ef">def</span> __hash__(self):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__hash__</span>(self):
         <span style="color:#66d9ef">return</span> hash(self<span style="color:#f92672">.</span>reference)
 </code></pre></div><ul>
 <li>

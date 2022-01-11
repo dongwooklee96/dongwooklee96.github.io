@@ -134,7 +134,7 @@
 <p>이 상황에서, 하나의 프로세스가 <code>close()</code> 함수를 실행하면 열린 파일을 가리키고 있는 파일 디스크립터 테이블의 엔트리가 존재하는 한 <code>close</code> 함수는 열린 파일 디스크립터 테이블의 해당 엔트리만 삭제한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;sys/types.h&gt;
 #include &lt;netinet/in.h&gt;
@@ -222,7 +222,7 @@ int main(int argc, char* argv[]) {
 </li>
 </ul>
 <p><strong>채팅 서버</strong></p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;sys/types.h&gt;
 #include &lt;netinet/in.h&gt;
@@ -293,7 +293,7 @@ int main(int argc, char* argv[]) {
   return 0;
 }
 </code></pre><p><strong>채팅 클라이언트</strong></p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;sys/socket.h&gt;
 #include &lt;sys/types.h&gt;
 #include &lt;signal.h&gt;

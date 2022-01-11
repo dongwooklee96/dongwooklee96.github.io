@@ -218,7 +218,7 @@
 <ul>
 <li>다음과 같은 경우에는 시그널이 발생했을 때 처리를 담당하는 핸들러 함수를 정의하고 운영체제에게 해당 사건이 발생 했을 때, 정의한 핸들러 함수를 호출해달라고 부탁하면 된다.</li>
 </ul>
-<pre tabindex="0"><code>void (*signal(int sig, void (*func) (int)))(int);
+<pre><code>void (*signal(int sig, void (*func) (int)))(int);
 </code></pre><ul>
 <li>핸들러 함수를 운영체제에 등록하는 함수는 위와 같다.</li>
 </ul>
@@ -226,7 +226,7 @@
 <ul>
 <li>터미널에서 <code>CTRL + C</code> 입력을 통해서 <code>SIGINT</code> 시그널이 발생하였을 때, 이벤트가 발생했음을 화면에 출력하는 예제 프로그램이다.</li>
 </ul>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;signal.h&gt;
 #include &lt;unistd.h&gt;
 
@@ -264,7 +264,7 @@ int main(int argc, char *argv[]) {
 <ul>
 <li>다음은 <code>signal()</code> 함수보다는 복잡하지만, 추가적인 기능을 제공하는 <code>sigaction()</code> 함수에 대해서 이야기를 해보자</li>
 </ul>
-<pre tabindex="0"><code>int sigaction(int sig, const struct sigaction *act, struct sigaction * oldact);
+<pre><code>int sigaction(int sig, const struct sigaction *act, struct sigaction * oldact);
 </code></pre><blockquote>
 <ul>
 <li>sig : 시그널 dml 종류를 지칭하는 시그널 번호</li>
@@ -272,7 +272,7 @@ int main(int argc, char *argv[]) {
 <li>oldact: 이전에 등록되었던 시그널 핸들러의 포인터</li>
 </ul>
 </blockquote>
-<pre tabindex="0"><code>struct sigaction {
+<pre><code>struct sigaction {
   void (*sa_handler)(int);
   sigset_t sa_mask;
   int sa_flags;
@@ -285,7 +285,7 @@ int main(int argc, char *argv[]) {
 <li>터미널에서 CTRL + C 입력을 통해서 SIGINT 시그널을 발생시킨다.</li>
 <li>1초에 한번 씩 카운트를 1씩 감소시켜 카운트 값이 0이되면 프로그램을 종료한다.</li>
 </ul>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;unistd.h&gt;
 #include &lt;signal.h&gt;
 
@@ -314,7 +314,7 @@ int main(int argc, char *argv[]) {
 <ul>
 <li>지금까지는 시그널을 전달받았을 때, 그것을 처리하는 방법에 대해서 다뤘고, 마지막으로 시그널을 발생시키는 함수에 대해서 다뤄볼 것이다.</li>
 </ul>
-<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
+<pre><code>#include &lt;sys/types.h&gt;
 #include &lt;signal.h&gt;
 
 int kill (pid_t pid, int sig);

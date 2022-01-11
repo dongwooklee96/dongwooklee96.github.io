@@ -127,7 +127,7 @@
 <ul>
 <li>우선 다음과 같은 명령어로 프로젝트를 생성할 디렉터리를 하나 만들어준다.</li>
 </ul>
-<pre tabindex="0"><code>mkdir multimodule
+<pre><code>mkdir multimodule
 cd multimodule
 </code></pre><ul>
 <li>
@@ -144,7 +144,7 @@ cd multimodule
 </li>
 </ul>
 <p><strong>util.c</strong></p>
-<pre tabindex="0"><code>int max(int a, int b) {
+<pre><code>int max(int a, int b) {
     if (a &gt; b) {
         return a;
     } else {
@@ -152,9 +152,9 @@ cd multimodule
     }
 }
 </code></pre><p><strong>util.h</strong></p>
-<pre tabindex="0"><code>int max(int a, int b);
+<pre><code>int max(int a, int b);
 </code></pre><p><strong>main.c</strong></p>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &quot;util.h&quot;
 
 int main(int argc, char* argv[]) {
@@ -171,7 +171,7 @@ int main(int argc, char* argv[]) {
 <li>프로젝트 루트 폴더로 올라가서, <code>Makefile.am</code> 파일을 작성해준다.</li>
 </ul>
 <p><strong>Makefile.am</strong></p>
-<pre tabindex="0"><code>AUTOMAKE_OPTIONS = subdir-objects
+<pre><code>AUTOMAKE_OPTIONS = subdir-objects
 bin_PROGRAMS = multimodule
 
 multimodule_SOURCES = \
@@ -185,7 +185,7 @@ multimodule_SOURCES = \
 <p>그려면 <code>configure.scan</code> 이라는 파일이 자동으로 생성되고, 템플릿에 원하는 내용을 채워 넣는다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>AC_PREREQ([2.69])
+<pre><code>AC_PREREQ([2.69])
 AC_INIT([multimodule], [0.0.1], [])
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADERS([config.h])
@@ -212,7 +212,7 @@ AC_OUTPUT
 <p>그런 후에 터미널에 아래 명령어를 입력한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>autoreconf -v -i
+<pre><code>autoreconf -v -i
 </code></pre><p><img src="https://dl.dropbox.com/s/mfayufu7l04trjz/Screen%20Shot%202021-11-28%20at%206.10.16%20PM.png" alt=""></p>
 <ul>
 <li>해당 명령어가 정상적으로 실행되었으면, <code>configure</code> 실행파일이 생성되고 이를 실행하고 나서, <code>Makefile.am</code> 파일이 생성되었다면 마지막으로 <code>make</code> 명령어를 입력하면 프로그램이 빌드되고 실행 파일이 생성되게 된다.</li>

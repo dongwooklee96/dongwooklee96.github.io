@@ -121,8 +121,8 @@
 <li>유니크 키는 유일해야하지만, 널을 허용할 수 있다.</li>
 <li>테이블을 생성한 후 <code>CREATE INDEX</code> 명령 또는 <code>ALTER TABLE</code> 명령을 사용하여, 고유 키를 추가할 수 있다.</li>
 </ul>
-<pre tabindex="0"><code>ALTER TABLE Employees ADD UNIQUE `EmpCode`(`Employee_Code`);
-</code></pre><pre tabindex="0"><code>CREATE UNIQUE INDEX HomePhone ON Employees(Home_Phone);
+<pre><code>ALTER TABLE Employees ADD UNIQUE `EmpCode`(`Employee_Code`);
+</code></pre><pre><code>CREATE UNIQUE INDEX HomePhone ON Employees(Home_Phone);
 </code></pre><h3 id="참고-문헌">참고 문헌</h3>
 <ul>
 <li><a href="https://mariadb.com/kb/en/getting-started-with-indexes/#unique-index">mariadb-unique-index</a></li>

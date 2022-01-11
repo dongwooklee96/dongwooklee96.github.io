@@ -15,7 +15,7 @@
       <guid>https://dongwooklee96.github.io/post/2021/04/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EB%8F%84%EA%B5%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%B6%94%EC%A0%81-%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81-%EB%AA%85%EB%A0%B9%EC%96%B4.html</guid>
       <description>&lt;h3 id=&#34;hping3&#34;&gt;hping3&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hping3 -S www.daum.net -p 80
+&lt;pre&gt;&lt;code&gt;hping3 -S www.daum.net -p 80
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;TCP/UDP, ICMP 및 다양한 종류의 패킷을 전송할 수 있다.&lt;/p&gt;
@@ -29,7 +29,7 @@
 &lt;ul&gt;
 &lt;li&gt;이 명령어는 특정 IP 주소의 요청을 막을 수 있는 명령이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# localhost의 UDP 요청을 차단하는 규칙을 추가하였다.
+&lt;pre&gt;&lt;code&gt;# localhost의 UDP 요청을 차단하는 규칙을 추가하였다.
 iptables -I OUTPUT -s localhost -d localhost -p udp --sport 7000 --dport 8000 -j DROP
 
 # iptables 설정을 확인해본다.
@@ -169,11 +169,11 @@ hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
 &lt;p&gt;이를 확인해보기 위해서, &lt;code&gt;ping&lt;/code&gt; 보다 많은 기능을 지원하는 &lt;code&gt;hping3&lt;/code&gt; 도구를 이용해서 테스트 해보겠다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f icmp -Y &amp;quot;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&amp;quot;
+&lt;pre&gt;&lt;code&gt;sudo tshark -i enp0s3 -f icmp -Y &amp;quot;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 명령어를 이용해서 패킷을 캡처하고 아래 명령어를 다른 터미널에서 입력을 해본다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo hping3 -d 2000 --icmp 8.8.8.8
+&lt;pre&gt;&lt;code&gt;sudo hping3 -d 2000 --icmp 8.8.8.8
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/116265856-61b3ec80-a7b6-11eb-9333-e8b070648840.png&#34; alt=&#34;Screen Shot 2021-04-28 at 12 12 05 AM&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -198,7 +198,7 @@ hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
 &lt;hr&gt;
 &lt;p&gt;추적하기 전에 클라이언트와 서버 코드를 컴파일 한다.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;client.c&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;sys/socket.h&amp;gt;
 #include &amp;lt;arpa/inet.h&amp;gt;
 #include &amp;lt;string.h&amp;gt;
@@ -242,7 +242,7 @@ int main(int argc, char **argv) {
         return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;server.c&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
 #include &amp;lt;string.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
@@ -303,7 +303,7 @@ int main(void){
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 소스 코드를 복사하여, 파일을 만든다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;gcc -pg -g -o client client.c
+&lt;pre&gt;&lt;code&gt;gcc -pg -g -o client client.c
 gcc -pg -g -o server server.c
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;그리고 위의 명령어를 통해서 컴파일을 해준다.&lt;/li&gt;
@@ -371,7 +371,7 @@ gcc -pg -g -o server server.c
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;직접 확인하기&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f &amp;quot;tcp port 80&amp;quot;
+&lt;pre&gt;&lt;code&gt;sudo tshark -i enp0s3 -f &amp;quot;tcp port 80&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;위의 명령어를 입력하여 포트 번호 80의 TCP 패킷들을 필터링 한다.&lt;/p&gt;
@@ -418,7 +418,7 @@ gcc -pg -g -o server server.c
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115415367-d07ecc00-a231-11eb-86cb-2b5c569c07f1.png&#34; alt=&#34;Screen Shot 2021-04-20 at 11 40 13 PM&#34;&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;watch -n0.6 &amp;quot;netstat -atnp&amp;quot;
+&lt;pre&gt;&lt;code&gt;watch -n0.6 &amp;quot;netstat -atnp&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;위는 watch 명령어를 통해서 0.6초마다 netstat의 결과를 모니터링 하였다.&lt;/p&gt;
@@ -461,7 +461,7 @@ gcc -pg -g -o server server.c
 &lt;li&gt;위와 같은 과정을 통해서, DNS 서버에 요청하고, 도메인 주소를 통해서 &lt;code&gt;IP&lt;/code&gt; 정보를 받아오는 것을 확인할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114569074-a4060580-9caf-11eb-9311-dff133504ae0.png&#34; alt=&#34;flush&#34;&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo systemd-resolve --flush-caches
+&lt;pre&gt;&lt;code&gt;sudo systemd-resolve --flush-caches
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;DNS 캐시 정보를 지우고 싶다면 위의 명령어를 입력하면 된다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -483,7 +483,7 @@ gcc -pg -g -o server server.c
 &lt;li&gt;&lt;code&gt;IP&lt;/code&gt; 네트워크 주소를 데이터 링크 프로토콜에서 사용하는 하드웨어 주소(Mac ADDRESS)에 맵핑하기 위해서 사용하는 프로토콜이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114565725-84211280-9cac-11eb-9fa7-fef4c8b44361.png&#34; alt=&#34;arp&#34;&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;arp -n
+&lt;pre&gt;&lt;code&gt;arp -n
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위의 명령어를 통해서, ARP 테이블을 확인할 수 있다.&lt;/p&gt;
 &lt;h3 id=&#34;arp-패킷-추적하기&#34;&gt;ARP 패킷 추적하기&lt;/h3&gt;
 &lt;hr&gt;
@@ -523,7 +523,7 @@ gcc -pg -g -o server server.c
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/114564433-45d72380-9cab-11eb-88c5-8529a0adb7ee.png&#34; alt=&#34;ping&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;네트워크-패킷-추적하기&#34;&gt;네트워크 패킷 추적하기&lt;/h3&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install tshark
+&lt;pre&gt;&lt;code&gt;sudo apt-get install tshark
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 명령어를 입력하여 &lt;code&gt;tshark&lt;/code&gt;를 설치한다, 네트워크 패킷 분석을 할 수 있는 툴이다.&lt;/li&gt;
 &lt;/ul&gt;

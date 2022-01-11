@@ -134,7 +134,7 @@
 <h3 id="스레드의-생성">스레드의 생성</h3>
 <hr>
 <p>기본적으로 프로그램은 하나의 스레드로 구성되어 있다. 여기에 추가의 작업 흐름을 만들기 위해서는 <code>pthread_create()</code> 함수를 호출하면 된다.</p>
-<pre tabindex="0"><code>#include &lt;pthread.h&gt;
+<pre><code>#include &lt;pthread.h&gt;
 
 int pthread_create(pthread_t *thread, const pthread_attr_r *attr, void *(start_routine)(void *), void *arg);
 </code></pre><p><strong>인자</strong></p>
@@ -181,7 +181,7 @@ int pthread_create(pthread_t *thread, const pthread_attr_r *attr, void *(start_r
 </li>
 </ul>
 <h4 id="스레드-예제">스레드 예제</h4>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;pthread.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;unistd.h&gt;
@@ -232,7 +232,7 @@ int main(int argc, char *argv[]) {
 <p>메인 함수에서 <code>pthread_join()</code>을 호출하면 지정한 스레드의 종료 시점까지 메인 함수를 대기 상태로 만들 수 있다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>int pthread_join(pthread_t thread, void **retval);
+<pre><code>int pthread_join(pthread_t thread, void **retval);
 </code></pre><p><strong>인자</strong></p>
 <ul>
 <li>thread: 종료를 기다리는 스레드의 ID</li>
@@ -249,7 +249,7 @@ int main(int argc, char *argv[]) {
 </ul>
 <p><img src="https://dl.dropbox.com/s/sdgv5o3x4gdwjhx/slide_4.jpg" alt=""></p>
 <h4 id="예제">예제</h4>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;pthread.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;unistd.h&gt;
@@ -297,7 +297,7 @@ int main(int argc, char *argv[]) {
 </li>
 </ul>
 <h4 id="예제-1">예제</h4>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;pthread.h&gt;
 #include &lt;semaphore.h&gt;
 #include &lt;stdlib.h&gt;
@@ -383,7 +383,7 @@ void *thread_b_main(void *arg) {
 <p>뮤텍스도 세마포어와 유사한 기능을 수행한다. 세마포어와 마찬가지로 생성, 크리티컬 섹션 진입, 크리티컬 섹션 탈출, 소멸을 담당하는 함수를 알아보면서 뮤텍스 예제를 만들어 볼 것이다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *mutexattr);
+<pre><code>int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *mutexattr);
 </code></pre><p><strong>인자</strong></p>
 <ul>
 <li>mutex: 생성한 뮤텍스 객체에 접근하기 위한 포인터</li>
@@ -404,7 +404,7 @@ void *thread_b_main(void *arg) {
 <p>동기화를 하고자 하는 변수에 대한 읽기 작업/쓰기 작업을 하기 전에 항상 게시판을 확인하여 현재 사용중인 스레드가 있는지 확인하는 과정이 뮤텍스이다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>int pthread_mutex_lock(pthread_mutex_t *mutex);
+<pre><code>int pthread_mutex_lock(pthread_mutex_t *mutex);
 int pthread_mutex_unlock(pthread_mutex_t *mutex);
 </code></pre><ul>
 <li>
@@ -414,7 +414,7 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex);
 <p>반면 자원에 대한 사용을 멈추고 다른 프로세스가 사용할 수 있는 기회를 주는 함수는 <code>pthread_mutex_unlock()</code>이다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>int pthread_mutex_destory(pthread_mutex_t *mutex);
+<pre><code>int pthread_mutex_destory(pthread_mutex_t *mutex);
 </code></pre><p><strong>인자</strong></p>
 <ul>
 <li>
@@ -428,7 +428,7 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex);
 <ul>
 <li>뮤텍스를 이용하여 스레드 간에 동기화를 시켜보겠다.</li>
 </ul>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+<pre><code>#include &lt;stdio.h&gt;
 #include &lt;pthread.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;unistd.h&gt;

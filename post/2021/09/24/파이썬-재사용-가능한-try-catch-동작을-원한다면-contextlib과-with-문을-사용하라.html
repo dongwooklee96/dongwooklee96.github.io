@@ -122,7 +122,7 @@
 <p>예를 들어, 상호 배제 락(뮤텍스)를 <code>with</code> 문 안에서 사용하면 락을 소유 했을 때만, 코드 블록이 실행된다는 것을 의미한다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>from threading import Lock
+<pre><code>from threading import Lock
 
 Lock = Lock()
 with lock:
@@ -132,7 +132,7 @@ with lock:
 </code></pre><ul>
 <li><code>Lock</code> 클래스가 <code>with</code> 문을 적절히 활성화해주므로 위의 예제는 아래의 코드와 동등하다.</li>
 </ul>
-<pre tabindex="0"><code>lock.acquire()
+<pre><code>lock.acquire()
 try:
   # 어떤 불변 조건을 유지하면서 작업을 수행한다.
   ...
@@ -158,7 +158,7 @@ finally:
 <ul>
 <li>예를 들어서, 어떤 코드 영역에서 디버깅 관련 로그를 더 많이 남기고 싶다고 가정을 할 때, 아래 코드는 디버깅 로그를 남기는 함수이다.</li>
 </ul>
-<pre tabindex="0"><code>def my_function():
+<pre><code>def my_function():
    logging.debug('debug data')
    logging.error('error log')
    logging.debug('additional debug data')
@@ -174,7 +174,7 @@ finally:
 <p>이 헬퍼 함수는 <code>with</code> 블록을 실행하기 직전에 로그 수준을 높이고, 블록을 실행한 후에 로그 수준을 이전 수준으로 복구 시키는 코드이다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>@contextmanager
+<pre><code>@contextmanager
 def debug_logging(level):
     logger = logging.getLogger()
     old_level = logger.getEffectiveLevel()
@@ -193,7 +193,7 @@ def debug_logging(level):
 </li>
 </ul>
 <p><img src="https://dl.dropbox.com/s/8as3xj5zv05jxwq/Screen%20Shot%202021-09-24%20at%202.52.31%20PM.png" alt=""></p>
-<pre tabindex="0"><code>with debug_logging(logging.DEBUG):
+<pre><code>with debug_logging(logging.DEBUG):
     my_function()
 </code></pre><ul>
 <li>위의 사진과 같이 모든 로그가 출력된 것을 확인할 수 있다.</li>
@@ -214,7 +214,7 @@ def debug_logging(level):
 <p><code>with</code> 문에 <code>open</code>을 전달하면 이렇게 할 수 있다. <code>open</code>은 <code>with</code> 문에서 <code>as</code>를 통해 대상으로 지정된 변수에게 파일 핸들을 제공하고, <code>with</code> 블록에서 나갈 때 이 핸들을 닫는다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>with open('my_output.txt', 'w') as handle:
+<pre><code>with open('my_output.txt', 'w') as handle:
   handle.write('data')
 </code></pre><ul>
 <li>

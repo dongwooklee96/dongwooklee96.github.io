@@ -82,7 +82,7 @@
 &lt;p&gt;대칭 키 알고리즘은 암호화와 복호화 키가 같은 알고리즘이다. 이 경우 &lt;code&gt;API&lt;/code&gt; 클라이언트와 서버가 같은 키를 알고 있어야 한다. 키를 네트워크를 통해서 보내면 중간에 해커에 의해서 낚아 채일 염려가 있기 때문에, 양쪽에 안전하게 키를 전송하는 방법이 필요하다. 따라서 다음과 같은 방법을 사용한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 서버에서 공개 키 KA1과 비공개 키 KA2 쌍을 생성한다.
+&lt;pre&gt;&lt;code&gt;1. 서버에서 공개 키 KA1과 비공개 키 KA2 쌍을 생성한다.
 2. 클라이언트에게 공개 키 KA1을 네트워크를 통해서 내려 보낸다.
 3. 클라이언트는 새로운 비공개 대칭 키 KB를 생성하고 KA1을 이용하여 암호화하여 서버로 전송한다.
 4. 서버는 전송된 암호화 메세지를 `KA2`로 복호화하여 그 안에 있는 비 공개 키 KB를 꺼낸다.
@@ -98,7 +98,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112745861-6c783780-8fe6-11eb-9f69-b693913434ed.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 먼저 클라이언트는 호출하고자 하는 REST API의 메시지를 앞에서 정의한 키를 이용하여 HMAC 알고리즘을 이용하여 해시 값을 추출한다.
+&lt;pre&gt;&lt;code&gt;1. 먼저 클라이언트는 호출하고자 하는 REST API의 메시지를 앞에서 정의한 키를 이용하여 HMAC 알고리즘을 이용하여 해시 값을 추출한다.
 
 2. API를 호출할 때, 메시지에 추출한 HMAC을 포함해서 호출한다.
 3. 서버는 호출된 메시지를 보고 HMAC을 제외한 나머지 메시지를 미리 정의된 키를 이용해서 HMAC 알고리즘으로 해시 값을 추출한다.
@@ -120,7 +120,7 @@
 &lt;p&gt;그리고 &lt;code&gt;API&lt;/code&gt;를 호출할 때 &lt;code&gt;timestamp&lt;/code&gt; 값을 같이 실어 보낸다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;http://service.myapi.com/restapiservice?xxxxx&amp;amp;hmac={hashvalue}&amp;amp;timestamp={호출시간}
+&lt;pre&gt;&lt;code&gt;http://service.myapi.com/restapiservice?xxxxx&amp;amp;hmac={hashvalue}&amp;amp;timestamp={호출시간}
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;이렇게 하면 서버는 메세지가 호출된 시간을 알 수 있고, 호출된 시간 +- 10분(또는 개발자가 정한 시간 폭)만큼의 호출만 정상적인 호출로 인식하고 시간이 지난 호출의 메시지는 비정상적인 호출로 무시하면 된다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -157,7 +157,7 @@
 &lt;/ul&gt;
 &lt;h4 id=&#34;rbacrole-based-access-control&#34;&gt;RBAC(Role Based Access Control)&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112744459-3d0ffd80-8fdb-11eb-9300-594cc1bebe93.jpg&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;일반 사용자 : 사용자 관리, 게시물 관리, 회원 가입 승인
+&lt;pre&gt;&lt;code&gt;일반 사용자 : 사용자 관리, 게시물 관리, 회원 가입 승인
 마스터 관리자 : 카폐 게시판, 관리, 메뉴 관리, 사용자 관리, 게시물 관리, 회원 가입 승인
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -403,7 +403,7 @@
 &lt;p&gt;예를 들어서 사용자 ID가 &amp;ldquo;terry&amp;quot;이고 비밀번호가 &amp;ldquo;hello world&amp;rdquo; 일 때 다음과 같이 &lt;code&gt;HTTP&lt;/code&gt; 헤더에 &amp;ldquo;terry: hello world&amp;rdquo; 라는 문자열을 &lt;code&gt;Base64&lt;/code&gt; 인코딩을 해서 &lt;code&gt;Authorization&lt;/code&gt; 라는 이름의 헤더로 서버에 전송하여 인증을 요청한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Authorization: Basic ZG9uZ3dvb2s6cGFzc3dvcmQ=
+&lt;pre&gt;&lt;code&gt;Authorization: Basic ZG9uZ3dvb2s6cGFzc3dvcmQ=
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112743286-f0272980-8fd0-11eb-9871-dc55b2ee30f2.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;다음은 Base64 인코딩을 도와주는 사이트이다. &lt;a href=&#34;https://www.base64decode.org/&#34;&gt;https://www.base64decode.org/&lt;/a&gt;&lt;/li&gt;
@@ -439,7 +439,7 @@
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HA1 = MD5(사용자 이름:realm:비밀번호)
+&lt;pre&gt;&lt;code&gt;HA1 = MD5(사용자 이름:realm:비밀번호)
 HA2 = MD5(HTTP method:HTTP URL)
   response hash = MD5(HA1:nonce:HA2)
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -502,7 +502,7 @@ HA2 = MD5(HTTP method:HTTP URL)
 &lt;p&gt;토큰 자체가 정보를 가지는 방식인데, &lt;code&gt;JWT&lt;/code&gt;는 이 클레임을 &lt;code&gt;JSON&lt;/code&gt;을 이용해서 정리한다. 아래와 같은 형태로 표현된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
+&lt;pre&gt;&lt;code&gt;{
   &amp;quot;id&amp;quot;: &amp;quot;terry&amp;quot;,
   &amp;quot;role&amp;quot;: &amp;quot;[&amp;quot;admin&amp;quot;, &amp;quot;user&amp;quot;]&amp;quot;,
   &amp;quot;company&amp;quot;: &amp;quot;pepsi&amp;quot;
@@ -665,11 +665,11 @@ HA2 = MD5(HTTP method:HTTP URL)
 &lt;p&gt;&lt;code&gt;api.my.com&lt;/code&gt;에서 응답 헤더에 다음과 같이 명시해주면 &lt;code&gt;sitea.com&lt;/code&gt;에 의해서 로딩된 자바스크립트 클라이언트 요청에 대해서만 &lt;code&gt;api.my.com&lt;/code&gt;이 요청해준다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Access-Controll-Allow-Origin: sitea.com
+&lt;pre&gt;&lt;code&gt;Access-Controll-Allow-Origin: sitea.com
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;만약에 다음과 같이 &lt;code&gt;*&lt;/code&gt;로 해주면 &lt;code&gt;Request Origin&lt;/code&gt;에 관계없이 사이트에서 로딩된 자바스크립트 요청에 대해서 처리해준다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Access-Control-Allow-Origin: *
+&lt;pre&gt;&lt;code&gt;Access-Control-Allow-Origin: *
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;pre-flight를-이용한-세세한-cors-통제&#34;&gt;Pre-flight를 이용한 세세한 CORS 통제&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -728,7 +728,7 @@ HA2 = MD5(HTTP method:HTTP URL)
 &lt;p&gt;예를 들어, 다른 곳으로 이동하기 위해 사용하는 링크 뒤에 있는 &lt;code&gt;URL&lt;/code&gt;에 악의적인 매겨변수를 포함시킴으로써 다음을 수행할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;quot;&amp;gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;quot;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;해당 도메인에 수정 권한이 있는 사용자의 경우 &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; 요소가, 사용자 모르게 동작을 수행한다.&lt;/p&gt;

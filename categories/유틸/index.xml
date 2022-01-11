@@ -13,7 +13,7 @@
       <pubDate>Sun, 14 Nov 2021 12:00:39 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/post/2021/11/14/%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
-      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &#39;export PATH=&amp;quot;$PATH:`pwd`/flutter/bin&amp;quot;&#39; &amp;gt;&amp;gt; ~/.zshrc
+      <description>&lt;pre&gt;&lt;code&gt;echo &#39;export PATH=&amp;quot;$PATH:`pwd`/flutter/bin&amp;quot;&#39; &amp;gt;&amp;gt; ~/.zshrc
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;다음 명령어를 입력하면 위의 명령어가 쉘 환경 설정 파일에 들어가게 된다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -67,10 +67,10 @@
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;모델은 &amp;lsquo;요소와 요소 사이의 관계&amp;rsquo;를 나타낸 것이다.&lt;/p&gt;
+&lt;p&gt;모델은 &amp;lsquo;요소와 요소 사이의 관계&#39;를 나타낸 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;사람들은 흔히 &amp;lsquo;이해하려면 분해해보라&amp;rsquo;고 한다. 복잡한 사물을 있는 그대로 이해하는 것이 힘들기 때문이다.&lt;/p&gt;
+&lt;p&gt;사람들은 흔히 &amp;lsquo;이해하려면 분해해보라&#39;고 한다. 복잡한 사물을 있는 그대로 이해하는 것이 힘들기 때문이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;모델을 작성할 때 중요한 점은 &lt;strong&gt;목적과 관점을 명확하게 하는 것이다.&lt;/strong&gt;&lt;/p&gt;
@@ -89,7 +89,7 @@
 &lt;p&gt;복잡한 사물은 여러 개의 요소로 구성되어 있다. &lt;strong&gt;모델링에서 가장 바람직한 방법은 각 요소를 모두 찾아내서 열거하는 작업 부터 시작해보는 것이다.&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;발상을 위한 사고법에서는 &amp;lsquo;발산&amp;rsquo;과 &amp;lsquo;수렴&amp;rsquo;의 사고과정을 반복한다.&lt;/p&gt;
+&lt;p&gt;발상을 위한 사고법에서는 &amp;lsquo;발산&#39;과 &amp;lsquo;수렴&#39;의 사고과정을 반복한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;모델의 상세한 내용을 작성하는 경우, 깊이 있게 숙고 하고, 다시 폭넓게 생각하면서 이번 작업의 목적에 부합하지 않는 요소들을 제거하여 대담하게 수렴시켜 나가는 과정을 수행한다.&lt;/p&gt;
@@ -104,7 +104,7 @@
 &lt;p&gt;그러나 정말로 무엇이든지 생각나는 모든 것을 끄집어내서 표현하면 다 좋다는 의미는 아니다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;복잡한 사물을 구성하는 &amp;lsquo;중요한 요소들&amp;rsquo;을 모두 열거해 보는 것&lt;/strong&gt;이 이 단계에서 해야할 작업이다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;복잡한 사물을 구성하는 &amp;lsquo;중요한 요소들&#39;을 모두 열거해 보는 것&lt;/strong&gt;이 이 단계에서 해야할 작업이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;요소는-명사로-작성한다&#34;&gt;요소는 명사로 작성한다&lt;/h4&gt;
@@ -113,7 +113,7 @@
 &lt;p&gt;모델이라는 것은 사물을 단순하게 표현한 것이므로 때에 따라서는 모호함이 표함되어 있어서 그 의미를 전달하기 어려운 경우도 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&amp;lsquo;요소를 명사로 한다&amp;rsquo;라는 점을 주의해서 모델링하면 자신의 의도와 모델의 표현을 서로 일치하게 만들 수 있다.&lt;/p&gt;
+&lt;p&gt;&amp;lsquo;요소를 명사로 한다&#39;라는 점을 주의해서 모델링하면 자신의 의도와 모델의 표현을 서로 일치하게 만들 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;관계를-명확하게-한다&#34;&gt;관계를 명확하게 한다&lt;/h4&gt;
@@ -133,7 +133,7 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;모델을-사용하면-얻게-되는-장점&#34;&gt;모델을 사용하면 얻게 되는 장점&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 도식화의 이점을 누릴 수 있다.
+&lt;pre&gt;&lt;code&gt;1. 도식화의 이점을 누릴 수 있다.
 2. 전체 모습을 파악할 수 있다.
 3. 논리적으로 생각할 수 있다.
 4. 발상을 넓힐 수 있다.
@@ -147,7 +147,7 @@
 &lt;p&gt;빈약한 모델의 공통점은 아래와 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 목적과 관점이 정해져있지 않거나, 명확하지 않다.
+&lt;pre&gt;&lt;code&gt;1. 목적과 관점이 정해져있지 않거나, 명확하지 않다.
 2. 요소가 망라되어 있지 않거나, 불필요한 요소를 포함하고 있다.
 3. 요소의 추상화 수준이 너무 높거나 너무 낮다.
 4. 요소들 사이의 관계를 잘 표현하고 있지 못한다.
@@ -188,7 +188,7 @@
 &lt;p&gt;문장으로 성립되는지를 확인한다. &lt;strong&gt;요소와 요소 사이의 관계가 정말로 성립하는지 논리적으로 생각해봄으로써 관계의 적절성을 확인할 수 있다.&lt;/strong&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&amp;lsquo;나무에서 떨어진다&amp;rsquo;와 같은 동사구를 명사화하여 요소로 추출하는 것이 때로는 더 좋은 모델을 만드는데 중요하다.&lt;/p&gt;
+&lt;p&gt;&amp;lsquo;나무에서 떨어진다&#39;와 같은 동사구를 명사화하여 요소로 추출하는 것이 때로는 더 좋은 모델을 만드는데 중요하다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -214,12 +214,12 @@
 &lt;p&gt;객체지향 사고를 할 때 도움이 될 것 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 사물을 깊게 이해하고 싶다.
+&lt;pre&gt;&lt;code&gt;1. 사물을 깊게 이해하고 싶다.
 2. 어떤 사물이나 개념을 상대방이 알기 쉽게 전달하고 싶다.
 3. 새롭고 혁신적인 발상을 하고 싶다.
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;위와 같은 능력을 가지고 싶다면 방법은 하나이다. &amp;lsquo;단순하게 생각하기&amp;rsquo;를 하면 된다.&lt;/p&gt;
+&lt;p&gt;위와 같은 능력을 가지고 싶다면 방법은 하나이다. &amp;lsquo;단순하게 생각하기&#39;를 하면 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&amp;lsquo;단순하게 생각하기&amp;rsquo; 이것이 무엇인지 알기 힘들다면, 답은 프로그래머들의 사고 방식에서 찾아 볼 수 있고 이를 활용하면 위의 세가지 문제를 해결할 수 있다.&lt;/p&gt;
@@ -244,7 +244,7 @@
 &lt;h3 id=&#34;모델이란-무엇인가&#34;&gt;모델이란 무엇인가?&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
-&lt;li&gt;모델이란 &amp;lsquo;사물을 단순하게 표현한 것&amp;rsquo;이라고 할 수 있다.&lt;/li&gt;
+&lt;li&gt;모델이란 &amp;lsquo;사물을 단순하게 표현한 것&#39;이라고 할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/120913795-beb79200-c6d4-11eb-842f-68abd4ce850c.JPG&#34; alt=&#34;IMG_5740&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -653,7 +653,7 @@
 &lt;li&gt;캐릭터 셋은 단순히 특정 인코딩으로 나타낼 수 있는, 문자의 집합을 의미한다.&lt;/li&gt;
 &lt;li&gt;예를 들면, &amp;lsquo;☯&amp;rsquo; 같은 문자는 유니코드 문자 집합과 다른 문자 집합에도 사용할 수 있다. 하지만 이 문자에 대한 인코딩을 서로 다를 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Unicode character: ☯
+&lt;pre&gt;&lt;code&gt;Unicode character: ☯
 UTF-8 encoded: 0xE2 0x98 0xAF
 UTF-16 encoded: 0x26 0x2F
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -821,7 +821,7 @@ UTF-16 encoded: 0x26 0x2F
 &lt;pre&gt;&lt;code&gt;  테스트 대상 코드에서 상수를 변수로 바꾸거나 변수 이름을 추출하는 것과 같은 작은 
   리펙토링은 발견하면 바로 실시하는데 반해서 메서드 추출과 같이 메서드의 구조에
   영향을 주는 리펙토링은 큰 틀에서 구현 흐름이 눈에 들어오기 시작한 후에 진행한다.
-
+    
   구현 초기에는 아직 구현의 전반적인 흐름을 모르기 때문에, 메서드 추출과 같은 
   리펙토링을 진행하면 코드 구조를 잘못 잡을 가능성이 있기 때문이다. 코드 구조를 잘못 잡으면
   테스트를 통과 시키는 과정에서 코드가 복잡해지거나 구현을 더는 진행하지 못하고 막힐 수 있다.

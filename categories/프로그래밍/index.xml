@@ -276,7 +276,7 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;예제&#34;&gt;예제&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 
 int main(int argc, char *argv[]) {
 
@@ -321,10 +321,10 @@ here:
 &lt;p&gt;사용자 정의형 타입을 만드는 방법은 다음과 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;typedef 타입정의 타입이름;
+&lt;pre&gt;&lt;code&gt;typedef 타입정의 타입이름;
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;사용-예제&#34;&gt;사용 예제&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;pre&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 
 typedef enum {true, false} bool;
 
@@ -497,7 +497,7 @@ int main(int argc, char *argv[]) {
 &lt;/ul&gt;
 &lt;h3 id=&#34;코드-카타를-만드는-절차&#34;&gt;코드 카타를 만드는 절차&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- 1. 학습 하려는 주제를 선정한다.
+&lt;pre&gt;&lt;code&gt;- 1. 학습 하려는 주제를 선정한다.
 
 - 2. 원하는 지식을 설명할 수 있으며 성공하는 단위 테스트를 작성한다.
 
@@ -583,7 +583,7 @@ int main(int argc, char *argv[]) {
 &lt;/ul&gt;
 &lt;h3 id=&#34;면접에서-자주-묻는-질문-top-7&#34;&gt;면접에서 자주 묻는 질문 TOP 7&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 1분 자기소개 해주세요.
+&lt;pre&gt;&lt;code&gt;1. 1분 자기소개 해주세요.
 2. 지원하신 직무에서 어떤 일을 했는지 아는대로 말해주세요.
 3. 지원하신 직무에서 필요한 역량은 무엇인가요?
   -  지원자께서는 그 역량을 보유하고 있나요? 사례를 통해서 말씀해주세요
@@ -700,7 +700,7 @@ int main(int argc, char *argv[]) {
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;첫번째 단계, 필요한 부분부터 흡수한다&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;책이나 자료 전체가 동일한 정도로 중요하다고 말할 수 없다. 목적이 명확하고, 목적 달성을 위해서
+&lt;pre&gt;&lt;code&gt;책이나 자료 전체가 동일한 정도로 중요하다고 말할 수 없다. 목적이 명확하고, 목적 달성을 위해서
 어디를 읽어야 할지 알고 있다면 다른 페이지는 신경쓰지 말고 바로 그곳을 읽도록 한다.
 전체 모두 읽지 않은 것이 깨름칙한가? 하지만 좌절하고 전혀 읽지 않은 것보다는 낫다.
 &#39;전부 읽지 않으면&#39;이라는 완벽주의가 배우고자 하는 동기를 짓누르고 있다면, 버려 버리는 것이 낫다.
@@ -708,7 +708,7 @@ int main(int argc, char *argv[]) {
 구조를 파악하고 있어야 한다. 만약 그게 어려우면 다음 전략인 
 &#39;대략적인 부분을 잡아서 조금씩 상세화한다.&#39;를 시험해보도록 하자.
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;두 번째 단계, 대략적인 부분을 잡아서 조금씩 상세화 한다&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;책이나 문서에는 목차가 있다. 목차를 보면 전체 구조를 대략적으로 알 수 있다.
+&lt;pre&gt;&lt;code&gt;책이나 문서에는 목차가 있다. 목차를 보면 전체 구조를 대략적으로 알 수 있다.
 그리고나서 본문을 속독으로 읽어나간다.
 자세히 보지 않고 우선은 소제목이나 강조 부분, 그림과 그림 제목 등을 본다.
 소스 코드를 읽을 때는 우선 디렉토리 구조와 파일 명을 본다. 그리고 파일을 속독으로 읽고
@@ -719,7 +719,7 @@ int main(int argc, char *argv[]) {
 안의 처리를 따라가는 것이 중요하다. 이 방법으로 읽이도 정보가 한쪽 귀로 들어와서 한쪽 귀로 나가버리는 
 느낌을 받는 경우가 있다면, 마지막 방법인 &#39;끝에서부터 차례대로 배껴간다&#39;를 시도해보자.
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;세 번째 단계, 끝에서부터 차례대로 배껴간다&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;명확히 &#39;하고 싶은 것&#39;, &#39;조사하고 싶은 것이 없이 &#39;대충 읽으면&#39; 읽은 내용이 뇌를 그냥 스쳐 지나갈 뿐이다.
+&lt;pre&gt;&lt;code&gt;명확히 &#39;하고 싶은 것&#39;, &#39;조사하고 싶은 것이 없이 &#39;대충 읽으면&#39; 읽은 내용이 뇌를 그냥 스쳐 지나갈 뿐이다.
 이런 상태에서 어떻게 배울까를 고민한다고 해도, 판단을 위한 지식 자체가 없기 때문에 무의미하다.
 그래서 지식의 밑바탕을 만들기 위해서 교과서를 그대로 배껴 쓴다. 이것이 &#39;베끼기&#39;라 불리는 기술이다.
 지식이 없는 상태에서 고민하는 것은 무익하기 때문에 우선 아무것도 생각하지 않고 지식을 복사하는 것이다.
@@ -758,7 +758,7 @@ int main(int argc, char *argv[]) {
 &lt;li&gt;&lt;code&gt;free&lt;/code&gt; 함수를 이용해 할당된 메모리를 해제한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;위 단계는 매우 일반적인 동적 메모리 할당 순서이다. 다음 예제에선 &lt;code&gt;malloc&lt;/code&gt; 함수를 사용하여 정수를 저장할 메모리를 할당한다.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int *pi = (int*)malloc(sizeof(int));
+&lt;pre&gt;&lt;code&gt;int *pi = (int*)malloc(sizeof(int));
 *pi = 5;
 printf(&amp;quot;*pi: %d\n&amp;quot;, *pi);
 free(pi);
@@ -794,7 +794,7 @@ free(pi);
 &lt;p&gt;메모리 누수의 문제점은 해당 메모리가 반환되지 않고, 다시 사용될 수 없다는 것이다. 그 결과로 힙 관리자가 사용할 수 있는 메모리의 양이 감소하게 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;char *chunk;
+&lt;pre&gt;&lt;code&gt;char *chunk;
 
 while (1) {
   chunk = (char*)malloc(10000000);
@@ -804,7 +804,7 @@ while (1) {
 &lt;li&gt;만약 메모리를 반복적으로 사용하고 누수가 발생하면, 추가적인 메모리가 필요할 때, &lt;code&gt;malloc&lt;/code&gt; 함수가 OOM(Out of Memory) 오류로 인해서 추가 메모리를 할당할 수 없어 프로그램이 종료된다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;메모리-주소-손실&#34;&gt;메모리 주소 손실&lt;/h4&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int *pi = (int*) malloc(sizeof(int));
+&lt;pre&gt;&lt;code&gt;int *pi = (int*) malloc(sizeof(int));
 
 *pi = 5;
 
@@ -812,7 +812,7 @@ pi = (int*) malloc(sizeof(int));
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;pi&lt;/code&gt; 포인터는 해제되지 않고 새로운 메모리 주소로 재할당 된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;char *name = (char*) malloc(strlen(&amp;quot;Susan&amp;quot;) + 1);
+&lt;pre&gt;&lt;code&gt;char *name = (char*) malloc(strlen(&amp;quot;Susan&amp;quot;) + 1);
 strcpy(name, &amp;quot;Susan&amp;quot;);
 
 while (*name != 0) {
@@ -862,11 +862,11 @@ while (*name != 0) {
 &lt;p&gt;아래 코드는 정적 변수를 선언하고, &lt;code&gt;malloc&lt;/code&gt; 함수를 사용하여 초기화를 시도 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;static int *pi = (int*)malloc(sizeof(int));
+&lt;pre&gt;&lt;code&gt;static int *pi = (int*)malloc(sizeof(int));
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;따라서 위의 코드는 컴파일 시에 오류가 발생한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;static int *pi;
+&lt;pre&gt;&lt;code&gt;static int *pi;
 pi = malloc(sizeof(int));
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -979,11 +979,11 @@ pi = malloc(sizeof(int));
 &lt;ul&gt;
 &lt;li&gt;포인터 변수는 데이터 타입과 별표 그리고 변수 이름을 순서대로 나열하여 선언한다. 아래 예제 에서는 정수 변수와 정수 포인터 변수를 선언하고 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int num;
+&lt;pre&gt;&lt;code&gt;int num;
 int *pi;
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;주소-연산자&#34;&gt;주소 연산자&lt;/h4&gt;
 &lt;p&gt;주소 연산자(&amp;amp;)는 변수의 주소를 반환하다. 아래와 같이 주소 연산자를 사용하여 &lt;code&gt;pi&lt;/code&gt; 포인터를 &lt;code&gt;num&lt;/code&gt; 변수의 주소로 초기화 할 수 있다.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;num = 0
+&lt;pre&gt;&lt;code&gt;num = 0
 pi = &amp;amp;num;
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;가상-메모리와-포인터&#34;&gt;가상 메모리와 포인터&lt;/h3&gt;
 &lt;ul&gt;
@@ -1016,7 +1016,7 @@ pi = &amp;amp;num;
 &lt;ul&gt;
 &lt;li&gt;간접 지정 연산자 (&lt;code&gt;*&lt;/code&gt;)는 포인터 변수가 가리키는 위치의 값을반환하며 참조 연산자로 포인터 값의 역참조를 하는 역할을 한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int num = 5;
+&lt;pre&gt;&lt;code&gt;int num = 5;
 int *pi = &amp;amp;num;
 
 
@@ -1029,18 +1029,18 @@ printf(&amp;quot;%d\n&amp;quot;, *pi); // 5
 &lt;p&gt;좌변값은 할당 연산자의 좌측에 위치한 피연산자를 말한다. 모든 좌변값은 값이 할당될 수 있도록 변경 가능한 값이어야 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;*pi = 200;
+&lt;pre&gt;&lt;code&gt;*pi = 200;
 printf(&amp;quot;%d\n&amp;quot;, num);
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;함수-포인터&#34;&gt;함수 포인터&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;포인터는 함수를 가리키도록 선언할 수 있으며 함수 포인터 선언은 일반적인 포인터 표기법에 비해서 다소 복잡하다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;void (*foo)();
+&lt;pre&gt;&lt;code&gt;void (*foo)();
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;null의-개념&#34;&gt;NULL의 개념&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;널은 흥미로운 주제이다. 하지만 종종 널이 가진 다양한 개념들이 잘못 이해되거나 혼란을 일으킨다. 널은 다음과 같은 개념들을 포함한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- 널 개념
+&lt;pre&gt;&lt;code&gt;- 널 개념
 - 널 포인터 상수
 - NULL 매크로
 - NUL 아스키 문자
@@ -1066,7 +1066,7 @@ printf(&amp;quot;%d\n&amp;quot;, num);
 &lt;p&gt;NULL 매크로는 상수 정수 0을 &lt;code&gt;void&lt;/code&gt; 포인터로 캐스팅 한 것이다. 많은 라이브러리에서 다음과 같이 정의한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#define NULL ((void*) 0)
+&lt;pre&gt;&lt;code&gt;#define NULL ((void*) 0)
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;NULL 포인터는 연결 리스트에서 종종 리스트의 끝을 표시하기 위해 사용되는 것 처럼, 많은 데이터 구조의 표현에서 매우 유용하게 사용된다.&lt;/p&gt;
@@ -1075,10 +1075,10 @@ printf(&amp;quot;%d\n&amp;quot;, num);
 &lt;p&gt;포인터 변수 &lt;code&gt;pi&lt;/code&gt;에 널 값을 할당하기 위해서는 다음과 같이 NULL 타입을 사용할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;pi = NULL;
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;널 포인터와 초기화되지 않은 포인터는 명백히 다르다. NULL을 포함한 포인터가 메모리상의 어떤 위치도 참조하지 않지만, 초기화되지 않은 포인터는 어떤 값이라도 포함될 수 있으며 참조될 수 있다.
+&lt;pre&gt;&lt;code&gt;pi = NULL;
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;널 포인터와 초기화되지 않은 포인터는 명백히 다르다. NULL을 포함한 포인터가 메모리상의 어떤 위치도 참조하지 않지만, 초기화되지 않은 포인터는 어떤 값이라도 포함될 수 있으며 참조될 수 있다.
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;포인터는 논리식에서 단독으로 피연산자로 사용될 수 있다. 예를 들어서, 아래 코드처럼 포인터가 NULL로 설정되었는지 테스트 할 수 있다.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;if (pi) {
+&lt;pre&gt;&lt;code&gt;if (pi) {
   // 널이 아닌 경우
 } else {
   // 널인 경우
@@ -1086,7 +1086,7 @@ printf(&amp;quot;%d\n&amp;quot;, num);
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;널 포인터가 포함한 주소는 유효한 주소가 아니므로 절대로 역참조 해서는 안되며, 널 포인터에 대한 역참조는 프로그램에 대한 비정상 종료를 초래한다.&lt;/p&gt;
 &lt;h3 id=&#34;void-포인터&#34;&gt;void 포인터&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;void&lt;/code&gt; 포인터는 어떤 타입의 데이터도 참조할 수 있는 범용 포인터이다.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;void *pv;
+&lt;pre&gt;&lt;code&gt;void *pv;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;void&lt;/code&gt; 포인터 선어에는 두 가지 흥미로운 것이 있다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1096,21 +1096,21 @@ printf(&amp;quot;%d\n&amp;quot;, num);
 &lt;p&gt;&lt;code&gt;void&lt;/code&gt; 포인터는 다른 포인터와 절대 같지 않다. 하지만 NULL 값이 할당된 두 개의 &lt;code&gt;void&lt;/code&gt; 포인터는 서로 같다. &lt;code&gt;void&lt;/code&gt; 포인터의 실제 동작은 시스템에 따라서 서로 다르다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int num;
+&lt;pre&gt;&lt;code&gt;int num;
 int *pi = &amp;amp;num;
 printf(&amp;quot;Value of pi: %p\n&amp;quot;, pi); // Value of pi: 0x7ffee6dfd9cc
 void* pv = pi;
 pi = (int*) pv;
 printf(&amp;quot;Value of pi: %p\n&amp;quot;, pi); // Value of pi: 0x7ffee6dfd9cc
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;void 포인터 사용시 주의가 필요하다.
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;void 포인터 사용시 주의가 필요하다.
 임의의 포인터를 void 포인터로 캐싱팅 한 후에, 기존 타입이 아닌 전혀 다른 타입의 포인터로 캐스팅하더라도 이를 막을 방법이 없다.
-&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;size_t size = sizeof(void*); // valid
+&lt;/code&gt;&lt;/pre&gt;&lt;pre&gt;&lt;code&gt;size_t size = sizeof(void*); // valid
 size_t size = sizeof(void); // invalid
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;전역-포인터와-정적-포인터&#34;&gt;전역 포인터와 정적 포인터&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;포인터가 전역 또는 정적으로 선언되면, 해당 포인터는 프로그램 시작 시에 &lt;code&gt;NULL&lt;/code&gt;로 초기화 된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int *globalpi;
+&lt;pre&gt;&lt;code&gt;int *globalpi;
 
 void foo() {
   static int *staticpi;
@@ -1137,7 +1137,7 @@ int main() {
 &lt;p&gt;컴퓨터와 컴파일러들은 C 기본 데이터 타입의 메모리 할당을 위해서 저마다 다른 옵션의 메모리 모델을 가지고 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;I In L Ln LL LLn P Pn
+&lt;pre&gt;&lt;code&gt;I In L Ln LL LLn P Pn
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/123513904-c3b3a400-d6ca-11eb-8d44-66838289b5f0.png&#34; alt=&#34;Screen Shot 2021-06-26 at 10 06 25 PM&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;사전-정의된-포인터-관련-데이터-타입&#34;&gt;사전 정의된 포인터 관련 데이터 타입&lt;/h3&gt;
 &lt;ul&gt;
@@ -1157,7 +1157,7 @@ int main() {
 &lt;p&gt;&lt;code&gt;size_t&lt;/code&gt; 타입을 쓰는 이유는 시스템에서 주소 지정이 가능한 메모리 영역과 일치하는 크기를 선언하는 이식 가능한 방법을 제공하기 위해서이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;문자의 수나 배열 인덱스와 같은 크기 변수를 선언할 때는
+&lt;pre&gt;&lt;code&gt;문자의 수나 배열 인덱스와 같은 크기 변수를 선언할 때는
 size_t 타입을 사용하는 것이 좋다.
 size_t 타입은 반복문이나 카운터나 배열의 참조 그리고 때로는 포인터 연산에서 사용될 수 있다.
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;intptr_t-uintptr_t-사용하기&#34;&gt;&lt;code&gt;intptr_t&lt;/code&gt;, &lt;code&gt;uintptr_t&lt;/code&gt; 사용하기&lt;/h4&gt;
@@ -1190,7 +1190,7 @@ size_t 타입은 반복문이나 카운터나 배열의 참조 그리고 때로�
 &lt;p&gt;다음 예제에서 상수 정수를 선언한다. 다음으로 정수에 대한 포인터와 상수 정수에 대한 포인터를 선언하고 각각의 정수로 초기화 한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int num = 0;
+&lt;pre&gt;&lt;code&gt;int num = 0;
 const int limit = 500;
 int *pi;
 const int *pci;
@@ -1200,7 +1200,7 @@ pci = &amp;amp;limit;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;상수 포인터에 대한 역참조는 단지 정수의 값을 읽기만 한다면 문제가 없다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;printf(&amp;quot;%d\n&amp;quot;, *pci);
+&lt;pre&gt;&lt;code&gt;printf(&amp;quot;%d\n&amp;quot;, *pci);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;포인터가 참조하는 값을 변경하기 위해서 상수 포인터를 역참조할 수는 없다. 그러나 포인터 값 자체는 상수가 아니므로 포인터 자체의 값은 변경할 수 있다.&lt;/p&gt;
@@ -1212,7 +1212,7 @@ pci = &amp;amp;limit;
 &lt;p&gt;상수 포인터 선언은 단지 포인터를 통해 참조된 값의 변경만을 제한한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;pci = &amp;amp;num;
+&lt;pre&gt;&lt;code&gt;pci = &amp;amp;num;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;상수 정수를 가리키는 &lt;code&gt;pci&lt;/code&gt; 포인터 변수의 선언은 다음을 의미한다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;pci&lt;/code&gt;는 다른 상수 정수를 가리키도록 할당될 수 있다.&lt;/li&gt;
@@ -1224,7 +1224,7 @@ pci = &amp;amp;limit;
 &lt;ul&gt;
 &lt;li&gt;비상수를 가리키는 상수 포인터 역시 선언할 수 있으며, 이 선언의 의미는 포인터 자체의 값, 즉 가리키는 대상은 변경할 수 없지만 포인터가 가리키는 곳의 값은 변경할 수 있음을 의미한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;int num;
+&lt;pre&gt;&lt;code&gt;int num;
 int *const cpi = &amp;amp;num;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위 선언은 다음을 의미한다.&lt;/p&gt;
 &lt;ul&gt;
@@ -1234,10 +1234,10 @@ int *const cpi = &amp;amp;num;
 &lt;/ul&gt;
 &lt;h3 id=&#34;상수를-가리키는-상수-포인터&#34;&gt;상수를 가리키는 상수 포인터&lt;/h3&gt;
 &lt;p&gt;상수를 가리키는 상수 포인터는 거의 사용되지 않는다. 포인터 값은 변경될 수 없으며, 포인터가 가리키는 값 역시 포인터를 통해 변경될 수 없다.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;const int* const cpic = &amp;amp;limit;
+&lt;pre&gt;&lt;code&gt;const int* const cpic = &amp;amp;limit;
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;다중-수준-상수-포인터&#34;&gt;다중 수준 상수 포인터&lt;/h3&gt;
 &lt;p&gt;상수 포인터는 다중 수준의 간접 지정이 가능하다.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;const int * const cpci = &amp;amp;limit;
+&lt;pre&gt;&lt;code&gt;const int * const cpci = &amp;amp;limit;
 const int * const * pcpci;
 &lt;/code&gt;&lt;/pre&gt;&lt;table&gt;
 &lt;thead&gt;
