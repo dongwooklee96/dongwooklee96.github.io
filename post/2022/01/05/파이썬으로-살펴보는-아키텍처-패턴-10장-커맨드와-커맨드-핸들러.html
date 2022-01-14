@@ -138,7 +138,7 @@
 <p>커맨드는 (송신하는 쪽에 오류를 돌려주면서) 시끄럽게 실패하고 정해진 수신자가 있다.</p>
 </li>
 </ul>
-<pre><code>class Command:
+<pre tabindex="0"><code>class Command:
     pass
 
 @dataclass
@@ -164,7 +164,7 @@ class ChangeBatchQuantity(Command):
 <ul>
 <li>이름과 동사를 변경하는 것은 아무런 문제가 없고 변경하더라도 시스템의 동작이 바뀌지는 않는다. 이제 이벤트와 커맨드를 비슷하게 처리하지만 완전히 똑같이 처리하지는 않을 것이다.</li>
 </ul>
-<pre><code>def handle(
+<pre tabindex="0"><code>def handle(
         message: Message,
         uow: unit_of_work.AbstractUnitOfWork,
 ):
@@ -241,7 +241,7 @@ COMMAND_HANDLERS = {
 <p>주문 이력이 2개 있는 고객이 3번째 주문을 넣을 때
 이 고객을 VIP로 설정한다. 처음 VIP 로 변경된 고객에게는 축하 이메일을 보낸다.</p>
 </blockquote>
-<pre><code>class History:
+<pre tabindex="0"><code>class History:
     def __init__(self, customer_id: int):
         self.orders = set()
         self.customer_id = customer_id
@@ -318,7 +318,7 @@ def congratulate_vip_customer(uow, event: CustomerBecameVIP):
 <p>이런 경우에는 재시도를 통해서 시스템 상태를 우아하게 복구 할 수 있다.  처음에는 성공하지 못했지만, 지수적으로 증가되는 백오프 시간 이후에 연산을 재시도 한다는 뜻이다.</p>
 </li>
 </ul>
-<pre><code>def handle_event(
+<pre tabindex="0"><code>def handle_event(
         event: events.Event,
         queue: List[Message],
         uow: unit_of_work.AbstractUnitOfWork

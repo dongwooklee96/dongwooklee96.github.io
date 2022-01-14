@@ -132,7 +132,7 @@
 </li>
 </ul>
 <h4 id="stat2">stat(2)</h4>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;sys/stat.h&gt;
 #include &lt;unistd.h&gt;
 
@@ -163,7 +163,7 @@ int lstat(const char *path, struct stat *buf);
 <ul>
 <li>시스템 콜 <code>stat()</code>을 사용하여 <code>stat</code> 명령어를 만들어 볼 것이다.</li>
 </ul>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;sys/types.h&gt;
 #include &lt;sys/stat.h&gt;
@@ -243,7 +243,7 @@ static char *filetype(mode_t mode) {
 </tbody>
 </table>
 <h4 id="chmod2"><code>chmod(2)</code></h4>
-<pre><code>#include &lt;sys/stat.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/stat.h&gt;
 
 int chmod(const char *path, mode_t mode);
 </code></pre><ul>
@@ -258,7 +258,7 @@ int chmod(const char *path, mode_t mode);
 </li>
 </ul>
 <h4 id="chown2"><code>chown(2)</code></h4>
-<pre><code>#include &lt;unistd.h&gt;
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
 
 int chown(const char *path, uid_t owner, gid_t group);
 int lchown(const char *path, uid_t owner, gid_t group);
@@ -280,7 +280,7 @@ int lchown(const char *path, uid_t owner, gid_t group);
 </li>
 </ul>
 <h4 id="utime2"><code>utime(2)</code></h4>
-<pre><code>#include &lt;sys/types.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/types.h&gt;
 #include &lt;utime.h&gt;
 
 int utime(const char *path, struct utimbuf *buf);
@@ -298,7 +298,7 @@ struct utimbuf {
 </li>
 </ul>
 <h4 id="chmod-명령어-작성하기">chmod 명령어 작성하기</h4>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;sys/stat.h&gt;
 

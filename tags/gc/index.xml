@@ -35,22 +35,22 @@
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;영역&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;설명&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;영역&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;설명&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;New/Young 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;New/Young 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Old 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Old 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Perm 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Perm 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -142,11 +142,11 @@
 &lt;ul&gt;
 &lt;li&gt;위는 스프링 부트로 만든 간단한 웹 애플리케이션이다. 이를 터미널에서 &lt;code&gt;jar&lt;/code&gt; 파일로 만들어 준다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;./gradlew bootjar
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;./gradlew bootjar
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113509104-b6d15980-958e-11eb-8a43-07b56114335a.png&#34; alt=&#34;jar&#34;&gt;&lt;/p&gt;
 &lt;p&gt;정상적으로 생성이 되면, 다음과 같은 경로에 &lt;code&gt;jar&lt;/code&gt; 파일이 생성된다. 터미널을 통해서 이 경로로 이동한다.&lt;/p&gt;
 &lt;p&gt;그런 후에 다음과 같은 명령어를 터미널에서 실행 시킨다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;java -jar -verbosegc app.jar
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;java -jar -verbosegc app.jar
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113509189-26474900-958f-11eb-836f-e70adb0a34ac.png&#34; alt=&#34;Screen Shot 2021-04-04 at 9 45 53 PM&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;그러면 애플리케이션이 실행되자마자 &lt;code&gt;GC&lt;/code&gt;와 관련된 로그들이 출력된다.&lt;/li&gt;

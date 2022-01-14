@@ -132,9 +132,9 @@
 <ul>
 <li>REST는 크게 리소스, 메서드, 메시지의 3가지 요소로 구성된다.</li>
 <li>예를 들어서, &ldquo;이름이 Terry인 사용자를 생성했을 때&rdquo; 사용자는 생성되는 리소스, 생성한다라는 행위는 메서드 그리고, 이름이 <code>Terry</code>는 메시지가 된다.</li>
-<li>이를 REST로 표현해보면 다음과 같은 형태가 된다, &lsquo;생성한다'라는 의미가 있는 메서드는 <code>HTTP</code> <code>POST</code>가 되고, 생성하고자 하는 대상이 되는 사용자라는 리소스는 <code>http://myweb/users</code>라는 형태의 URI로 표현되며, 생성하고자 하는 사용자의 구체적인 내용은 <code>JSON</code> 문서를 이용하여 표현된다.</li>
+<li>이를 REST로 표현해보면 다음과 같은 형태가 된다, &lsquo;생성한다&rsquo;라는 의미가 있는 메서드는 <code>HTTP</code> <code>POST</code>가 되고, 생성하고자 하는 대상이 되는 사용자라는 리소스는 <code>http://myweb/users</code>라는 형태의 URI로 표현되며, 생성하고자 하는 사용자의 구체적인 내용은 <code>JSON</code> 문서를 이용하여 표현된다.</li>
 </ul>
-<pre><code>HTTP POST, http://myweb/users/
+<pre tabindex="0"><code>HTTP POST, http://myweb/users/
 {
   &quot;users&quot;: {
     &quot;name&quot;: &quot;terry&quot;
@@ -170,21 +170,21 @@
 <h3 id="rest-api의-간단한-예제">REST API의 간단한 예제</h3>
 <hr>
 <p><strong>사용자 생성</strong></p>
-<pre><code>HTTP POST, http://myweb/users/
+<pre tabindex="0"><code>HTTP POST, http://myweb/users/
 {
   &quot;name&quot;:&quot;terry&quot;,
   &quot;address&quot;:&quot;seoul&quot;
 }
 </code></pre><p><strong>조회</strong></p>
-<pre><code>HTTP GET, http://myweb/users/terry
+<pre tabindex="0"><code>HTTP GET, http://myweb/users/terry
 </code></pre><p><strong>업데이트</strong></p>
-<pre><code>HTTP PUT, http://myweb/users/terry 
+<pre tabindex="0"><code>HTTP PUT, http://myweb/users/terry 
 {
   &quot;name&quot;: &quot;terry&quot;,
   &quot;address&quot;: &quot;suwon&quot;
 }
 </code></pre><p><strong>삭제</strong></p>
-<pre><code>HTTP DELETE, http://myweb/users/terry
+<pre tabindex="0"><code>HTTP DELETE, http://myweb/users/terry
 </code></pre><ul>
 <li>
 <p>상당히 간단하다, 단순하게 리소스를 URI로 정해주고, 거기에 HTTP 메서드를 이용해서 CRUD를 구현하고 메세지를 <code>JSON</code>으로 표현하여 <code>HTTP</code> 바디에 실어서 보내면 된다.</p>
@@ -274,7 +274,7 @@
 <p>또한 많이 사용하는 안좋은 예는 <code>POST</code>를 이용한 터널링이다. 생성 요청이 아닌데도 바디에 명령을 넘겨서 호출하는 방식인데 좋지 않다.</p>
 </li>
 </ul>
-<pre><code>HTTP POST, http://myweb/users/
+<pre tabindex="0"><code>HTTP POST, http://myweb/users/
 {
   &quot;getuser&quot;: {
     &quot;id&quot;: &quot;terry&quot;,
@@ -313,11 +313,11 @@
 <li>예를 들어서 사용자가 소유한 디바이스 목록이나, 사용자가 가진 강아지들이 예가 될 수 있다.</li>
 <li>사용자 - 디바이스 또는 사용자 - 강아지 등 각각의 리소스 간의 관계를 표현하는 방법에는 여러가지가 있다.</li>
 </ul>
-<pre><code>1. 서브 리소스로 표현하는 방법
+<pre tabindex="0"><code>1. 서브 리소스로 표현하는 방법
 /&quot;리소스명&quot;/&quot;리소스 아이디&quot;/&quot;관계가 있는 다른 리소스명&quot;
 HTTP GET, /users/{userId}/devices
 예) /users/1/devices
-</code></pre><pre><code>2. 서브 리소스에 관계를 명시하는 방법
+</code></pre><pre tabindex="0"><code>2. 서브 리소스에 관계를 명시하는 방법
 HTTP GET, /users/{userid}/likes/devices
 예) /uesrs/1/likes/devices
 </code></pre><h3 id="에러-처리">에러 처리</h3>
@@ -337,7 +337,7 @@ HTTP GET, /users/{userid}/likes/devices
 <p>여러 개의 응답 코드를 사용하면 명시적이긴 하지만, 코드 체계 관리가 복잡해져서 다음과 같이 몇 가지 응답 코드만 사용하는 것을 권장한다.</p>
 </li>
 </ul>
-<pre><code>200 - 성공
+<pre tabindex="0"><code>200 - 성공
 400 Bad Request - field validation 실패 시
 401 Unauthorized - API 인증, 인가 실패
 404 Not Found - 해당 리소스가 없음
@@ -372,7 +372,7 @@ HTTP GET, /users/{userid}/likes/devices
 <p>API 버전을 정의하는 방법에는 여러가지가 있는데, 다음과 같은 형태를 추천한다.</p>
 </li>
 </ul>
-<pre><code>{servicename}/{version}/{REST URL}
+<pre tabindex="0"><code>{servicename}/{version}/{REST URL}
 예) api.server.com/account/v2.0/groups
 </code></pre><ul>
 <li>이는 서비스의 배포 모델과 관계가 있는데, 자바 애플리케이션의 경우 <code>account.v1.0.war</code>, <code>account.v2.0.war</code>와 같이 다른 <code>war</code>로 각각 배포하여 버전별로 배포 바이너리를 관리할 수 있고, 앞단에 서비스명을 별도로 <code>URL</code>로 떼어 놓은 것은 서비스가 확장되었을 때, <code>account</code> 서비스만 별도의 서버로 분리해서 배포하는 경우를 대비하기 위함이다.</li>
@@ -403,7 +403,7 @@ HTTP GET, /users/{userid}/likes/devices
 <li>필드를 제한하는 것은 전체 응답의 양을 줄여서 네트워크 대역폭 (특히 모바일에서) 절약할 수 있고, 응답 메시지를 간소화하여 파싱 등을 간략화 할 수 있다.</li>
 <li>이러한 부분 응답 기능을 제공하는 주요 서비스를 보면 다음과 같다.</li>
 </ul>
-<pre><code>링크드인 : /people:(id, first-name, last-name, industry)
+<pre tabindex="0"><code>링크드인 : /people:(id, first-name, last-name, industry)
 페이스북 : /terry/friends?fields=id, name
 구글 : ?fields=title, media:group(media:thumnail)
 </code></pre><h3 id="검색-전역-검색과-지역-검색">검색 (전역 검색과 지역 검색)</h3>
@@ -416,28 +416,28 @@ HTTP GET, /users/{userid}/likes/devices
 <p>예를 들어, <code>name=lee</code> 이고 <code>region=seoul</code>인 사용자를 검색하는 검색을 쿼리 스트링만 사용하게 되면 다음과 같이 표현할 수 있다.</p>
 </li>
 </ul>
-<pre><code>/users?name=lee&amp;region=seoul
+<pre tabindex="0"><code>/users?name=lee&amp;region=seoul
 </code></pre><p>추가적으로 페이징 처리를 추가하면 다음과 같이 된다.</p>
-<pre><code>/users?name=cho&amp;region=seoul&amp;offset=20&amp;limit=10
+<pre tabindex="0"><code>/users?name=cho&amp;region=seoul&amp;offset=20&amp;limit=10
 </code></pre><ul>
 <li>페이징 처리에 의해서 정의된 offset과 limit 가 검색조건인지 페이징 조건인지 잘 분간이 가지 않으므로 따라서 쿼리 조건은 하나의 쿼리 스트링으로 정의하는 것이 좋다.</li>
 </ul>
-<pre><code>/user?q=name=lee, region=seoul&amp;offset=20&amp;limit=10
+<pre tabindex="0"><code>/user?q=name=lee, region=seoul&amp;offset=20&amp;limit=10
 </code></pre><ul>
 <li>이런식으로 구분자를 사용하면, 검색 조건은 다른 쿼리스트링과 분리된다.</li>
 <li>물론 이 검색 조건은 서버에 의해서 토큰 단위로 파싱 되어야 한다.</li>
 <li>다음으로는 검색 범위에 대해서 고민할 필요가 있는데, 전역 검색은 전체 리소스에 대한 검색을, 리소스에 대한 검색은 특정 리소스에 대한 검색을 정의한다.</li>
 </ul>
 <p>예를 들어서 특정 리소스 안에 대한 검색은 다음과 같이 리소스명에 쿼리 조건을 붙이는 식으로 표현할 수 있다.</p>
-<pre><code>/users?q=id=seoul
+<pre tabindex="0"><code>/users?q=id=seoul
 </code></pre><p>전역 검색은 다음과 같은 식으로 정의할 수 있다.</p>
-<pre><code>/search?q=id=lee
+<pre tabindex="0"><code>/search?q=id=lee
 </code></pre><h3 id="hateoas를-이용한-처리">HATEOAS를 이용한 처리</h3>
 <hr>
 <ul>
 <li>HATEOS는 <code>Hypermedia as the engine of application data</code>의 약자로 하이퍼미디어의 특징을 이용하여, <code>HTTP</code> 응답에 다음 액션이나 관계된 리소스에 대한 <code>HTTP</code> 링크를 함께 반환하는 것이다.</li>
 </ul>
-<pre><code>{
+<pre tabindex="0"><code>{
   [
     {
       &quot;id&quot;: &quot;user1&quot;,

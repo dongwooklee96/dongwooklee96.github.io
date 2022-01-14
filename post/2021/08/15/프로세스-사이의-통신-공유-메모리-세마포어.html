@@ -130,7 +130,7 @@
 <li>공유 메모리 객체를 프로세스 메모리 영역과 맵핑하는 과정</li>
 </ol>
 </blockquote>
-<pre><code>#include &lt;sys/mman.h&gt; // 함수 정의
+<pre tabindex="0"><code>#include &lt;sys/mman.h&gt; // 함수 정의
 #include &lt;sys/stat.h&gt; // mode 매크로의 정의
 #include &lt;fcntl.h&gt; // 0_로 시작하는 상수 매크로의 정의
 
@@ -176,11 +176,11 @@ int shm_open(const char *name, int oflag, mode_t mode);
 </tr>
 </tbody>
 </table>
-<pre><code>int ftruncate(int fd, off_t length);
+<pre tabindex="0"><code>int ftruncate(int fd, off_t length);
 </code></pre><ul>
 <li>생성한 공유 메모리의 크기를 지정하는 과정은 <code>ftruncate()</code> 함수를 통해서 이루어진다.</li>
 </ul>
-<pre><code>#include &lt;sys/mman.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/mman.h&gt;
 void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t off_set);
 </code></pre><ul>
 <li>맵핑 영역의 보호 수준을 지정하는 <code>prot</code> 매개변수의 사용을 위해서 다음과 같이 매크로 값이 정의되어 있다.</li>
@@ -219,7 +219,7 @@ void *mmap(void *addr, size_t length, int prot, int flags, int fd, off_t off_set
 <p>공유 메모리 영역의 맵핑을 제거하려면 <code>munmap</code> 함수를 사용한다.</p>
 </li>
 </ul>
-<pre><code>#include &lt;sys/mman.h&gt;
+<pre tabindex="0"><code>#include &lt;sys/mman.h&gt;
 
 int munmap(void *addr, size_t len);
 </code></pre><ul>
@@ -234,7 +234,7 @@ int munmap(void *addr, size_t len);
 <li>부모 프로세스와 자식 프로세스 간에 공유되는 정보를 확인한다.</li>
 </ul>
 </blockquote>
-<pre><code>#include &lt;stdio.h&gt;
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;fcntl.h&gt;
 #include &lt;sys/mman.h&gt;
@@ -363,7 +363,7 @@ int main(int argc, char *argv[]) {
 <ul>
 <li>세마포어를 사용하려면 객체를 세마포어 객체로 생성해야 한다. 아래 함수를 통해서 세마 포어를 생성할 수 있다.</li>
 </ul>
-<pre><code>&lt;oflag에 O_CREAT가 설정된 경우&gt;
+<pre tabindex="0"><code>&lt;oflag에 O_CREAT가 설정된 경우&gt;
 sem_t *sem_open(const char *name, int oflag, mode_t mode, unsigned int value);
 
 &lt;oflag에 OCREAT가 설정되지 않은 경우&gt;
@@ -376,7 +376,7 @@ sem_t *sem_open(const char *name, int oflag);
 <p>또한, 크리티컬 섹션에 진입한 프로세스는 다른 프로세스가 크리티컬 섹션에 들어오는 것을 방지하기 위해서 세마포어 값을 감소시켜야 한다. 이러한 기능을 하는 함수는 <code>sem_wait</code> 함수이다.</p>
 </li>
 </ul>
-<pre><code>int sem_wait(sem_t *sem);
+<pre tabindex="0"><code>int sem_wait(sem_t *sem);
 </code></pre><ul>
 <li>
 <p><code>sem_wait</code> 함수는 세마포어의 값을 확인하고 세마포어의 값이 0인 경우 그 값이 양수가 될 때까지 프로세스를 대기 상태로 전환시킨다.</p>
@@ -391,7 +391,7 @@ sem_t *sem_open(const char *name, int oflag);
 <p>크리티컬 섹션에 진입한 프로세스는 크리티컬 섹션에 해당하는 코드를 실행한 후에 다시 다른 프로세스가 크리티컬 섹션에 진입할 수 있도록 <code>sem_post</code> 함수를 통해서 자원을 반납해야한다.</p>
 </li>
 </ul>
-<pre><code>int sem_post(sem_t *sem);
+<pre tabindex="0"><code>int sem_post(sem_t *sem);
 </code></pre><h4 id="세마포어와-공유-메모리">세마포어와 공유 메모리</h4>
 <ul>
 <li>
@@ -409,7 +409,7 @@ sem_t *sem_open(const char *name, int oflag);
 <li>부모 프로세스와 자식 프로세스가 공동으로 접근할 수 있는 공유 메모리의 동기화를 위해서 세마포어를 사용한다.</li>
 </ul>
 </blockquote>
-<pre><code>nclude &lt;stdio.h&gt;
+<pre tabindex="0"><code>nclude &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;fcntl.h&gt;
 #include &lt;sys/mman.h&gt;

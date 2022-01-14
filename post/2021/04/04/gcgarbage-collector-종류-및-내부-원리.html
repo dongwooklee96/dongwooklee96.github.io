@@ -136,22 +136,22 @@
 <table>
 <thead>
 <tr>
-<th align="center">영역</th>
-<th align="center">설명</th>
+<th style="text-align:center">영역</th>
+<th style="text-align:center">설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td align="center">New/Young 영역</td>
-<td align="center">이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 <code>Old</code> 영역으로 옮겨진다.</td>
+<td style="text-align:center">New/Young 영역</td>
+<td style="text-align:center">이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 <code>Old</code> 영역으로 옮겨진다.</td>
 </tr>
 <tr>
-<td align="center">Old 영역</td>
-<td align="center"><code>New/Young</code> 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.</td>
+<td style="text-align:center">Old 영역</td>
+<td style="text-align:center"><code>New/Young</code> 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.</td>
 </tr>
 <tr>
-<td align="center">Perm 영역</td>
-<td align="center">Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.</td>
+<td style="text-align:center">Perm 영역</td>
+<td style="text-align:center">Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.</td>
 </tr>
 </tbody>
 </table>
@@ -243,11 +243,11 @@
 <ul>
 <li>위는 스프링 부트로 만든 간단한 웹 애플리케이션이다. 이를 터미널에서 <code>jar</code> 파일로 만들어 준다.</li>
 </ul>
-<pre><code>./gradlew bootjar
+<pre tabindex="0"><code>./gradlew bootjar
 </code></pre><p><img src="https://user-images.githubusercontent.com/14002238/113509104-b6d15980-958e-11eb-8a43-07b56114335a.png" alt="jar"></p>
 <p>정상적으로 생성이 되면, 다음과 같은 경로에 <code>jar</code> 파일이 생성된다. 터미널을 통해서 이 경로로 이동한다.</p>
 <p>그런 후에 다음과 같은 명령어를 터미널에서 실행 시킨다.</p>
-<pre><code>java -jar -verbosegc app.jar
+<pre tabindex="0"><code>java -jar -verbosegc app.jar
 </code></pre><p><img src="https://user-images.githubusercontent.com/14002238/113509189-26474900-958f-11eb-836f-e70adb0a34ac.png" alt="Screen Shot 2021-04-04 at 9 45 53 PM"></p>
 <ul>
 <li>그러면 애플리케이션이 실행되자마자 <code>GC</code>와 관련된 로그들이 출력된다.</li>

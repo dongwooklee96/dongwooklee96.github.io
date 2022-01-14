@@ -121,7 +121,7 @@
 <p>파이썬에서는 위치 인수를 모두 키워드로 전달하는 것도 지원한다.</p>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reminder</span>(number, divisor):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reminder</span>(number, divisor):
     <span style="color:#66d9ef">return</span> number <span style="color:#f92672">%</span> divisor
 
 reminder(<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">7</span>)
@@ -136,7 +136,7 @@ reminder(divisor<span style="color:#f92672">=</span><span style="color:#ae81ff">
 <p>키워드 인수는 함수를 정의할 때, 기본값을 설정할 수 있다. 이렇게 하면 반복적인 코드가 줄어들고, 코드가 깔끔해진다.</p>
 </li>
 </ul>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flow_rate</span>(weight_diff, time_diff, period<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">flow_rate</span>(weight_diff, time_diff, period<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>):
     <span style="color:#66d9ef">return</span> (weight_diff <span style="color:#f92672">/</span> time_diff) <span style="color:#f92672">*</span> period
 
 flow_per_second <span style="color:#f92672">=</span> flow_rate(weight_diff, time_diff)

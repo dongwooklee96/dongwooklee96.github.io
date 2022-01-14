@@ -253,7 +253,7 @@
 &lt;p&gt;물론 멘토님께서는 눈에 띄는 변화는 없을 것이라고 하셨다. 하지만, 내가 작성한 코드가 과연 성능 개선이 있을까 궁금해서 이를 측정해보고 싶었다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/RedisLabs/memtier_benchmark.git
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git clone https://github.com/RedisLabs/memtier_benchmark.git
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112842051-1f768d00-90dc-11eb-942c-9e1b54aed4f9.png&#34; alt=&#34;Screen Shot 2021-03-29 at 10 14 19 PM&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;README&lt;/code&gt; 문서에 나와있는데로, 의존성 패키지들을 다운로드 받고 이를 빌드 하면된다.&lt;/li&gt;
@@ -275,7 +275,7 @@
 &lt;li&gt;서버를 띄우면 다음과 같은 화면이 뜨고, 이제 &lt;code&gt;memtier_benchmark&lt;/code&gt;를 다음의 옵션을 설정해서 실행을 시키면 끝난다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112845383-c6105d00-90df-11eb-81d9-4e9afe5634b7.png&#34; alt=&#34;memtier&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;./memtier_benchmark -s 127.0.0.1 -p 11216 -t 4 -c 50 -P memcache_text
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;./memtier_benchmark -s 127.0.0.1 -p 11216 -t 4 -c 50 -P memcache_text
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위에 작성한 명령어는 &lt;code&gt;localhost&lt;/code&gt; 주소의 &lt;code&gt;11216&lt;/code&gt; 포트로 쓰레드 4개와 커넥션 50개를 이용하여 &lt;code&gt;memcached&lt;/code&gt; 프토로콜 테스트를 하겠다는 뜻이다.&lt;/li&gt;
 &lt;/ul&gt;

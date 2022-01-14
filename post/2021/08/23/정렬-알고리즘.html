@@ -144,7 +144,7 @@
 <p>한 번의 순회가 끝나면 다음 순회를 이어서 진행한다. 거품 정렬에서 1번의 순회는 가장 큰 수를 맨 뒤로 보내기 때문에 마지막 요소와 비교할 필요가 없다.</p>
 </li>
 </ul>
-<pre><code>def bubble_sort(arr):
+<pre tabindex="0"><code>def bubble_sort(arr):
     n = len(arr)
 
     for i in range(n):
@@ -181,7 +181,7 @@ if __name__ == &quot;__main__&quot;:
 <p>거품 정렬과는 다르게 리스트 내 하나의 요소를 선택하여 다른 요소와 비교하여 알맞은 위치에 삽입하는 정렬이다.</p>
 </li>
 </ul>
-<pre><code>def insertion_sort(arr):
+<pre tabindex="0"><code>def insertion_sort(arr):
     n = len(arr)
 
     for i in range(1, n):
@@ -223,7 +223,7 @@ if __name__ == &quot;__main__&quot;:
 <p>분할 정복은 기본적으로 문제를 작게 만들어 해결하고, 해결된 결과를 다음 하위 문제로 전달 후에 전체 문제를 해결하려고 시도하는 것이다.</p>
 </li>
 </ul>
-<pre><code>def merge_sort(arr):
+<pre tabindex="0"><code>def merge_sort(arr):
     def merge(left, right):
         left_len = len(left)
         right_len = len(right)
@@ -279,7 +279,7 @@ if __name__ == &quot;__main__&quot;:
 <p>이것을 방지하기 위해서 무작위로 피벗을 결정하여 최악의 경우를 최소화하는 방향이나 중간 값을 찾아서 LOW / HIGH 분배를 하면 안정적으로 O(nlogn)의 시간 복잡도를 가질 수 있다.</p>
 </li>
 </ul>
-<pre><code>def quicksort(arr):
+<pre tabindex="0"><code>def quicksort(arr):
     arr_len = len(arr)
     if arr_len &lt; 2:
         return arr
@@ -332,7 +332,7 @@ if __name__ == &quot;__main__&quot;:
 <p>아래는 팀정렬을 간소하게 구현해본 예제이다. 실제 사용되고 있는 팀 정렬 알고리즘을 살펴보면 설명한 내용 이외에도 성능을 높이기 위한 내용이 추가적으로 더 포함된다.</p>
 </li>
 </ul>
-<pre><code>def binary_search(arr, key, start, end):
+<pre tabindex="0"><code>def binary_search(arr, key, start, end):
     if end - start &lt;= 1:
         if arr[start] &gt; key:
             return start - 1

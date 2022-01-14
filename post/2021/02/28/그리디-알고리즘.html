@@ -119,7 +119,7 @@
 <p>현재 상황에서 좋아 보이는 것만을 선택하는 알고리즘</p>
 <ul>
 <li>어떤 문제가 있을 때 단순 무식하게 탐욕적으로 푸는 알고리즘이다.</li>
-<li>여기서 탐욕적이라는 말은 &lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법'을 의미한다.</li>
+<li>여기서 탐욕적이라는 말은 &lsquo;현재 상황에서 지금 당장 좋은 것을 고르는 방법&rsquo;을 의미한다.</li>
 <li>&lsquo;사전에 외우고 있지 않아도 풀 수 있을 가능성이 높은 유형&rsquo; 이라는 특징이 있다.</li>
 <li>그리디 알고리즘 유형의 문제는 매우 다양하기 때문에, 암기한다고 해서 항상 잘 풀수 있는 것은 아니다.</li>
 <li>많은 유형을 접해보고 문제를 풀어보며 훈련을 해야한다.</li>
@@ -128,7 +128,7 @@
 <h1 id="문제-1-거스름돈">문제 1: 거스름돈</h1>
 <hr>
 <p>당신은 음식점의 계산을 도와주는 점원이다. 카운터에는 거스름돈으로 사용할 500원, 100원, 50원, 10원짜리 동전이 무한이 존재한다고 가정한다. 손님에게 거슬러 줘야 할 돈이 N원일 때 거슬러줘야 할 동전의 최소 개수를 구하라. 단, 거슬러 줘야할 돈 N은 항상 10의 배수이다.</p>
-<pre><code>def solve(money):
+<pre tabindex="0"><code>def solve(money):
     ret = 0
     if money &gt;= 500:
         ret += money // 500
@@ -147,7 +147,7 @@
         money %= 10
 
     return ret
-</code></pre><pre><code>from problem import solve
+</code></pre><pre tabindex="0"><code>from problem import solve
 
 
 def test_solve1():

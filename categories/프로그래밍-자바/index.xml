@@ -35,22 +35,22 @@
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
-&lt;th align=&#34;center&#34;&gt;영역&lt;/th&gt;
-&lt;th align=&#34;center&#34;&gt;설명&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;영역&lt;/th&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;설명&lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;New/Young 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;New/Young 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;이 영역은 자바 객체가 생성되자마자 저장되고 생긴지 얼마 안 된 객체가 저장되는 곳이다. 자바 객체가 생성되면 이 영역에서 저장되다가 시간이 지남에 따라서 우선 순위가 낮아지면 &lt;code&gt;Old&lt;/code&gt; 영역으로 옮겨진다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Old 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Old 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;&lt;code&gt;New/Young&lt;/code&gt; 영역에서 저장되었던 객체 중에 오래된 객체가 이동되어서 저장되는 영역이다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td align=&#34;center&#34;&gt;Perm 영역&lt;/td&gt;
-&lt;td align=&#34;center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Perm 영역&lt;/td&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;Class, Method 등의 코드가 저장되는 영역으로, JVM에 의해서 사용된다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -142,11 +142,11 @@
 &lt;ul&gt;
 &lt;li&gt;위는 스프링 부트로 만든 간단한 웹 애플리케이션이다. 이를 터미널에서 &lt;code&gt;jar&lt;/code&gt; 파일로 만들어 준다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;./gradlew bootjar
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;./gradlew bootjar
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113509104-b6d15980-958e-11eb-8a43-07b56114335a.png&#34; alt=&#34;jar&#34;&gt;&lt;/p&gt;
 &lt;p&gt;정상적으로 생성이 되면, 다음과 같은 경로에 &lt;code&gt;jar&lt;/code&gt; 파일이 생성된다. 터미널을 통해서 이 경로로 이동한다.&lt;/p&gt;
 &lt;p&gt;그런 후에 다음과 같은 명령어를 터미널에서 실행 시킨다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;java -jar -verbosegc app.jar
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;java -jar -verbosegc app.jar
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113509189-26474900-958f-11eb-836f-e70adb0a34ac.png&#34; alt=&#34;Screen Shot 2021-04-04 at 9 45 53 PM&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;그러면 애플리케이션이 실행되자마자 &lt;code&gt;GC&lt;/code&gt;와 관련된 로그들이 출력된다.&lt;/li&gt;
@@ -320,7 +320,7 @@
 &lt;li&gt;&lt;code&gt;BeanFactory&lt;/code&gt;는 &lt;code&gt;Bean&lt;/code&gt;을 인스턴스화 하거나 와이어링 하는 것 빼고는 &lt;code&gt;ApplicationContext&lt;/code&gt;과 비교해서 많은 기능을 제공하지 않는 것을 확인할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;따라서 &lt;code&gt;BeanFactory&lt;/code&gt;에서 사후 프로세서를 명시적으로 등록하려면, 다음의 예외 같이 프로그래밍 방식으로 &lt;code&gt;addBeanPostProcessor&lt;/code&gt;를 호출해야한다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 // populate the factory with bean definitions
 
 // now register any needed BeanPostProcessor instances
@@ -494,7 +494,7 @@ factory.addBeanPostProcessor(new MyBeanPostProcessor());
 &lt;p&gt;&lt;code&gt;Java&lt;/code&gt; 설정으로는 &lt;code&gt;@Bean&lt;/code&gt;의 &lt;code&gt;initMethod&lt;/code&gt; 속성을 사용할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;public class AnotherExampleBean implements InitializingBean {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class AnotherExampleBean implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
@@ -515,7 +515,7 @@ factory.addBeanPostProcessor(new MyBeanPostProcessor());
 &lt;p&gt;또는 &lt;code&gt;@PreDestory&lt;/code&gt; 주석을 사용하거나 빈 정의에서 지원하는 일반 메서드를 지정하는 것이 좋습니다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;public class AnotherExampleBean implements DisposableBean {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class AnotherExampleBean implements DisposableBean {
 
     @Override
     public void destroy() {
@@ -552,7 +552,7 @@ factory.addBeanPostProcessor(new MyBeanPostProcessor());
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/111016625-5a957280-83f2-11eb-847c-b5e8deaf3ac7.png&#34; alt=&#34;Screen Shot 2021-03-13 at 11 50 40 AM&#34;&gt;&lt;/p&gt;
 &lt;p&gt;친절하게 피드백을 해주셨기 때문에, 내가 &lt;code&gt;ComputableFuture&lt;/code&gt;를 잘못사용하고 있다는 사실을 알게 되었다.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-java8&#34; data-lang=&#34;java8&#34;&gt;repository.retrieveCategories().parallelStream()
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-java8&#34; data-lang=&#34;java8&#34;&gt;repository.retrieveCategories().parallelStream()
                 .map(category -&amp;gt; CompletableFuture.supplyAsync(() -&amp;gt; repository.retrieveBooksByCategory(category)))
                 .collect(Collectors.toList())
         .parallelStream()
@@ -595,7 +595,7 @@ factory.addBeanPostProcessor(new MyBeanPostProcessor());
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;따라서 피드백을 받은 부분을 개선한 결과는 다음과 같다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;final List&amp;lt;CompletableFuture&amp;lt;List&amp;lt;Book&amp;gt;&amp;gt;&amp;gt; futures
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;final List&amp;lt;CompletableFuture&amp;lt;List&amp;lt;Book&amp;gt;&amp;gt;&amp;gt; futures
             = repository.retrieveCategories().stream()
             .map(category -&amp;gt; supplyAsync(() -&amp;gt; repository.retrieveBooksByCategory(category), executors))
             .collect(toList());
@@ -637,7 +637,7 @@ factory.addBeanPostProcessor(new MyBeanPostProcessor());
 &lt;/ul&gt;
 &lt;h2 id=&#34;인증-authentication&#34;&gt;인증 (Authentication)&lt;/h2&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;public interface AuthenticationManager {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public interface AuthenticationManager {
 
   Authentication authenticate(Authentication authentication)
     throws AuthenticationException;
@@ -700,7 +700,7 @@ factory.addBeanPostProcessor(new MyBeanPostProcessor());
 &lt;p&gt;일반적으로 사용되는 헬퍼는 &lt;code&gt;AuthenticationManagerBuilder&lt;/code&gt;를 사용합니다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;@Configuration
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@Configuration
 public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
    ... // web stuff here
@@ -869,7 +869,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 &lt;li&gt;&lt;code&gt;runAsync()&lt;/code&gt;: 리턴값이 없는 경우 사용한다.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;supplyAsync()&lt;/code&gt;: 리턴 값이 있는 경우 사용한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class Main {
@@ -889,7 +889,7 @@ public class Main {
 &lt;li&gt;역시 새로운 &lt;code&gt;ComputableFuture&lt;/code&gt;를 반환하지만 차이점은 &lt;code&gt;ExecutorService&lt;/code&gt;에서 태스크를 처리한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;따라서 &lt;code&gt;ForkJoinPool&lt;/code&gt;을 사용하지 않는다면 다음과 같이 &lt;code&gt;ExecutorService&lt;/code&gt;에서 태스트가 처리되도록 할 수 있다.&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -919,7 +919,7 @@ public class Main {
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;thenCompose()&lt;/code&gt;: 두 작업이 서로 이어서 실행하도록 조합하기&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class Main {
@@ -944,7 +944,7 @@ public class Main {
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;thenCombine()&lt;/code&gt;: 두 작업을 독립적으로 실행하고 둘다 종료했을 때, 콜백 실행&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -975,7 +975,7 @@ public class Main {
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;exceptionally(Funciton)&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class Main {
@@ -999,7 +999,7 @@ public class Main {
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;handle(BiFunction)&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class Main {
@@ -1060,7 +1060,7 @@ public class Main {
 &lt;li&gt;계산이 완료될 때까지 기다린 다음에 결과를 검색한다.&lt;/li&gt;
 &lt;li&gt;최대 지정된 시간까지 기다렸다가 사용 가능한 경우 결과를 검색합니다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import java.util.concurrent.Callable;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -1119,7 +1119,7 @@ public class Main {
 &lt;li&gt;이 작업이 진행되는 동안 지정한 컬렉션이 수정되면 메서드의 결과가 정의되지 않습니다.&lt;/li&gt;
 &lt;li&gt;동시에 실행한 작업중에 가장 오래걸리는 작업만큼 시간이 소요된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;import java.util.Arrays;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -1163,7 +1163,7 @@ public class Main {
 &lt;li&gt;동시에 실행한 작업중에 제일 짧게 걸리는 작업만큼 시간이 걸린다.&lt;/li&gt;
 &lt;li&gt;이 역시 또한 블록킹 콜이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre&gt;&lt;code&gt;public class Main {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class Main {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
@@ -1217,7 +1217,7 @@ public class Main {
 &lt;/ul&gt;
 &lt;h3 id=&#34;executorservice-인터페이스&#34;&gt;ExecutorService 인터페이스&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109465963-542b0080-7aac-11eb-929c-517e84df5f5c.png&#34; alt=&#34;Screen Shot 2021-03-01 at 4 36 24 PM&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;import java.util.concurrent.ExecutorService;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
@@ -1329,7 +1329,7 @@ public class Main {
 &lt;p&gt;자바에서 쓰레드를 사용할 수 있는 방법에는 크게 3가지가 있다.&lt;/p&gt;
 &lt;h4 id=&#34;1-thread를-상속-받는-방법&#34;&gt;1. Thread를 상속 받는 방법&lt;/h4&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;public class Main {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class Main {
     public static void main(String[] args) {
         MyThread myThread = new MyThread();
         myThread.start();
@@ -1346,7 +1346,7 @@ public class Main {
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;2-runnable을-구현하는-방법&#34;&gt;2. Runnable을 구현하는 방법&lt;/h4&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;public class Main {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class Main {
     public static void main(String[] args) {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -1360,7 +1360,7 @@ public class Main {
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;3-람다를-사용하는-방법&#34;&gt;3. 람다를 사용하는 방법&lt;/h4&gt;
 &lt;hr&gt;
-&lt;pre&gt;&lt;code&gt;public class Main {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class Main {
     public static void main(String[] args) {
         Thread thread = new Thread(() -&amp;gt; {
             System.out.println(&amp;quot;Thread: &amp;quot; + Thread.currentThread().getName());
@@ -1373,7 +1373,7 @@ public class Main {
 &lt;hr&gt;
 &lt;h4 id=&#34;sleep&#34;&gt;&lt;code&gt;sleep&lt;/code&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109460950-d0b9e100-7aa4-11eb-86c8-29276cda855f.png&#34; alt=&#34;Screen Shot 2021-03-01 at 3 42 59 PM&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;public class Main {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class Main {
     public static void main(String[] args) {
         Thread thread = new Thread(() -&amp;gt; {
             System.out.println(&amp;quot;Thread: &amp;quot; + Thread.currentThread().getName());
@@ -1394,7 +1394,7 @@ public class Main {
 &lt;/ul&gt;
 &lt;h4 id=&#34;interrupt&#34;&gt;&lt;code&gt;interrupt&lt;/code&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109460917-ba138a00-7aa4-11eb-85d3-0ad70e163bdf.png&#34; alt=&#34;Screen Shot 2021-03-01 at 3 42 22 PM&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;public class Main {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class Main {
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -&amp;gt; {
             while (true) {
@@ -1419,7 +1419,7 @@ public class Main {
 &lt;/ul&gt;
 &lt;h4 id=&#34;join&#34;&gt;&lt;code&gt;join&lt;/code&gt;&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109460851-a10ad900-7aa4-11eb-8f02-8d5812cd1f80.png&#34; alt=&#34;Screen Shot 2021-03-01 at 3 41 37 PM&#34;&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;public class Main {
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;public class Main {
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -&amp;gt; {
             System.out.println(&amp;quot;Thread: &amp;quot; + Thread.currentThread().getName());
@@ -1449,10 +1449,10 @@ public class Main {
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/essential/concurrency/&#34;&gt;https://docs.oracle.com/javase/tutorial/essential/concurrency/&lt;/a&gt; &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/essential/concurrency/&#34;&gt;https://docs.oracle.com/javase/tutorial/essential/concurrency/&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html&#34;&gt;https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html&lt;/a&gt; &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html&#34;&gt;https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
