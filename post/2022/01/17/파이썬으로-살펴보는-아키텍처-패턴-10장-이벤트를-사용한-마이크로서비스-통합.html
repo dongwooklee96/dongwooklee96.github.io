@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>파이썬으로 살펴보는 아키텍처 패턴 - 10장 (이벤트를 사용한 마이크로서비스 통합) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">파이썬으로 살펴보는 아키텍처 패턴 - 10장 (이벤트를 사용한 마이크로서비스 통합)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/01/17</h2>
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <ul>
+<li>
+<p>이전장을 통해서 내부적으로 애플리케이션의 핵심은 메시지 처리기가 되었는데, 이러한 구성에 따라서 메시지 처리기가 외부로도 메시지를 처리하도록 변경해보겠다.</p>
+</li>
+<li>
+<p>애플리케이션은 외부에서 들어오는 이벤트를 외부 메시지 버스를 통해서 받고 (레디스 발행 / 구독 대기열을 예제로 사용한다) 출력을 이벤트 형태로 외부 메시지 버스에 발행한다.</p>
+</li>
+</ul>
+<h3 id="분산된-진흙공-명사로-생각하기">분산된 진흙공, 명사로 생각하기</h3>
+<hr>
+<ul>
+<li>마이크로서비스 아키텍처를 구축하는 엔지니어와 정기적으로 이야기를 할 때 기존 애플리케이션을 마이그레이션 하는 경우가 자주 있는데, 마이그레이션을 할 때 엔지니어들이 본능적으로 하는 첫 번째 일을 시스템을 명사로 나누는 것이다.</li>
+</ul>
+<h3 id="분산-시스템에서-오류-처리하기">분산 시스템에서 오류 처리하기</h3>
+<hr>
+<ul>
+<li>
+<p>&lsquo;모든 것은 망가진다&rsquo;는 소프트웨어 엔지니어링에서 일반적인 규칙이다. 어떤 요청이 실패하면 시스템에 어떤 일이 생길까?</p>
+</li>
+<li>
+<p>두 가지를 함께 바꿔야 하는 경우를 서로 결합됐다고 말한다. 앞 단락에서 본 연쇄적인 실패를 시간적 결합이라고 부른다.</p>
+</li>
+<li>
+<p>시스템의 모든 부분이 동시에 제대로 작동할 때만 정상적으로 작동하는 경우를 시간적 결합이라고 한다. 시스템이 커지면 시스템 부품 중 일부의 성능이 나빠질 확률이 지수적으로 높아진다.</p>
+</li>
+</ul>
+<h3 id="대안--비동기-메시징을-사용한-시간적-결합">대안 : 비동기 메시징을 사용한 시간적 결합</h3>
+<hr>
+<ul>
+<li>
+<p>어떻게 하면 적절한 결합을 얻을수 있을까? 이미 해답의 일부, 즉 명사가 아니라 동사로 생각해야 한다는 점에서 살펴봤다.</p>
+</li>
+<li>
+<p>도메인 모델은 비즈니스 프로세스를 모델링하기 위함이다. 도메인 모델은 어떤 물건에 대한 정적인 데이터 모델이 아닌 동사에 대한 모델이다.</p>
+</li>
+<li>
+<p>따라서 주문에 대한 시스템과 배치에 대한 시스템을 생각하는 대신에 주문 행위에 대한 시스템과 할당 행위에 대한 시스템등을 생각한다.</p>
+</li>
+<li>
+<p>이런 방식으로 사물을 구분하면 어떤 시스템이 어떤일을 하는지에 대해서 생각하기가 쉽다. 주문 행위에 대해 생각해보면 우리가 정말 원한느 일은 주문을 넣었을 떄 주문이 들어가는 것이다. 다른 모든 일은 언젠가 발생한다는 것만 보장할 수 있다면 나중에 발생할 수 있다.</p>
+</li>
+<li>
+<p>애그리게이트와 비슷하게 마이크로서비스도 일관성 경계여야 한다. 두 서비스 사이에는 최종 일관성을 받아들일 수 있고, 이는 동기화된 호출에 의존하지 않아도 된다는 뜻이다.</p>
+</li>
+<li>
+<p>각 서비스는 외부 세계에서 커맨드를 받고 결과를 저장하기 위해 이벤트를 발생시킨다. 이런 이벤트를 리슨하는 다른 서비스는 워크 플로우의 다른 단계를 촉발한다.</p>
+</li>
+<li>
+<p>분산 진흙공 안티 패턴을 방지하기 위해 시간적으로 결합된 HTTP API를 호출하는 대신에 비동기 메시지로 시스템을 통합한다.</p>
+</li>
+</ul>
+<h4 id="이러한-구조가-더-좋은-이유">이러한 구조가 더 좋은 이유</h4>
+<ul>
+<li>
+<p>각 부분이 서로 독립적으로 실패할 수 있어서 잘못된 동작이 발생했을 때 처리하기가 더 쉽다. 할당 시스템이 좋지 않은 날이라도 여전히 주문을 받을 수 있다.</p>
+</li>
+<li>
+<p>둘째, 시스템 사이의 결합 강도를 감소시킬 수 있다. 처리 과정을 이루는 연산 순서를 바꾸거나 새로운 단계를 도입하고 싶을 떄 이를 지역적으로 할 수 있다.</p>
+</li>
+</ul>
+<h3 id="레디스-발생--구독-채널을-통합에-사용하기">레디스 발생 / 구독 채널을 통합에 사용하기</h3>
+<hr>
+<ul>
+<li>
+<p>이 모든것이 어떻게 구체적으로 작동하는지 살펴보자. 이벤트를 시스템 밖으로 보내고 다른 시스템 안으로 넣는 서비스를 위한 메시지 버스 같은 것이 필요하다. 이런 인프라를 종종 메시지 브로커 라고부른다.</p>
+</li>
+<li>
+<p>메시지 브로커의 역할은 발행자로부터 메시지를 받아서 구독자에게 배달하는 것이다.</p>
+</li>
+</ul>
+<h3 id="레디스는-메시지-버스를-감싸는-다른-얇은-어댑터">레디스는 메시지 버스를 감싸는 다른 얇은 어댑터</h3>
+<hr>
+<ul>
+<li>우리가 사용하는 레디스 발행/구독 리스너 (또는 이벤트 소비자)는 플라스크와 아주 비슷하다. 이벤트 리스너는 외부 세계를 변환해서 이벤트로 만든다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">r <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(<span style="color:#f92672">**</span>config<span style="color:#f92672">.</span>get_redis_host_and_port())
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    orm<span style="color:#f92672">.</span>start_mappers()
+    pubsub <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>pubsub(ignore_subscribe_messages<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+    pubsub<span style="color:#f92672">.</span>subscribe(<span style="color:#e6db74">&#39;change_batch_quantity&#39;</span>)
+
+    <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> pubsub<span style="color:#f92672">.</span>listen():
+        handle_change_batch_quantity(m)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_change_batch_quantity</span>(m):
+    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#39;handling </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span>, m)
+    data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(m[<span style="color:#e6db74">&#39;data&#39;</span>]) <span style="color:#75715e"># 시스템 진입점에서 해야할 일은 JSON을 역직렬화 하고 역직렬화한 객체를 Command로 변환해서 서비스 계층으로 넘기는 일이다.</span>
+    cmd <span style="color:#f92672">=</span> commands<span style="color:#f92672">.</span>ChnageBatchQuantity(ref<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#39;batchref&#39;</span>], qty<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#39;qty&#39;</span>])
+    messagebus<span style="color:#f92672">.</span>handle(cmd, uow<span style="color:#f92672">=</span>unit_of_work<span style="color:#f92672">.</span>SqlAlchemyUnitOfWork())
+
+</code></pre></div><ul>
+<li>
+<p>반대 방향의 변환 (도메인 이벤트를 공개 이벤트로 변환)을 처리하는 다운 스트림 어댑터를 만든다.</p>
+</li>
+<li>
+<p>메시지 발행은 아래 코드와 같이 발행한다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>r = redis.Redis(**config.get_redis_host_and_port())
+
+
+def publish(channel, event: events.Event):  # 여기서는 하드 코딩한 채널을 사용하지만, 이벤트 클래스 / 이름과 적절한 채널을 맵핑하는 정보를 저장할 수도 있다. 이렇게 하면 메시지 유형 중 일부에 대해 다른 채널을 사용할 수도 있다.
+    logging.debug('publishing: channel=%s, event=%s', channel, event)
+    r.publish(channel, json.dumps(asdict(event)))
+
+</code></pre><h3 id="외부로-나가는-새-이벤트">외부로 나가는 새 이벤트</h3>
+<hr>
+<pre tabindex="0"><code>@dataclass
+class Allocated(Event):
+    orderid: str
+    sku: str
+    qty: int
+    batchref: str
+</code></pre><ul>
+<li>이 이벤트는 주문 라인 상세 정보, 어떤 배치에 주문 라인이 할당됐는지 등 할당에 대해 알아야할 필요가 있는 모든 내용을 저장한다.</li>
+</ul>
+<h3 id="내부-이벤트와-외부-이벤트-비교">내부 이벤트와 외부 이벤트 비교</h3>
+<hr>
+<ul>
+<li>
+<p>내부와 외부 이벤트의 구분을 명확히 하면 좋다. 일부 이벤트는 밖에서 들어오지만 일부 이벤트는 승격되면서 외부에 이벤트를 발행할 수 있다.</p>
+</li>
+<li>
+<p>하지만 모든 이벤트가 다 외부에 이벤트를 내보내지는 않는다. 이벤트 소싱을 사용할 경우에는 이런 특징이 특히 중요하다.</p>
+</li>
+</ul>
+<h3 id="정리">정리</h3>
+<hr>
+<ul>
+<li>
+<p>이벤트는 외부에서 들어올 수도 내부에서 외부로 발행할 수도 있다. 우리가 만든 <code>publish</code> 핸들러는 이벤트를 레디스 메시지 채널의 메시지로 변환한다.</p>
+</li>
+<li>
+<p>우리는 이벤트를 통해서 외부 세계와 이야기를 하며, 이런 종류의 시간적인 결합을 사용하면 애플리케이션 통합 시 상당한 유연성을 얻을 수 있다.</p>
+</li>
+<li>
+<p>하지만 여러 가지 이벤트 통지에 대해 실행되는 논리적인 흐름이 존재한다면 프로그램 본문에서는 이러한 흐름이 명시적이지 않기 때문에 이러한 흐름을 알아보기 어렵다. 따라서 이벤트 통지를 사용한 시스템의 디버깅이나 변경이 어려워 질 수 있다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;start=slayer">파이썬으로 살펴보는 아키텍처 패턴</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
