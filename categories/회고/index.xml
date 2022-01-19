@@ -6,7 +6,67 @@
     <description>Recent content in 회고 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 14 Jan 2022 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 20 Jan 2022 08:00:36 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[일일 회고]</title>
+      <link>https://dongwooklee96.github.io/post/2022/01/20/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
+      <pubDate>Thu, 20 Jan 2022 08:00:36 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/01/20/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
+      <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://techblog.yogiyo.co.kr/%EC%9A%94%EA%B8%B0%EC%9A%94-r-d-center%EC%97%90-%EB%AC%B4%EC%97%87%EC%9D%B4%EB%93%A0-%EB%AC%BC%EC%96%B4%EB%B3%B4%EC%84%B8%EC%9A%94-1-4c7a44af92a9&#34;&gt;신입 개발자가 갖추어야 할 역량 3가지&lt;/a&gt; 신입 개발자가 갖추어야 할 역량 3가지라는 제목의 글을 읽어보았다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;신입 개발자가 갖추어야 할 능력으로 첫 번째 전공 지식, 코딩 테스트, 협업 능력을 예로 들었는데 나는 세가지 모두 부족하다는 생각이 들었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;구체적인 실천 방안이 있어서 너무 좋았던 것 같다. 특히 전공 지식을 공부할 때는 공부만 하는 것이 아니라, 나의 언어로 정리해서 말을 할 수 있는지 여부가 중요하다는 것을 느끼게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 배운 내용을 정리하면서 문제 형태로 만들어서 시험을 보면서 특정 개념에 대해서 공부하는 것이 좋다고 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;전공 과목들의 목차를 보면서, 정리를 해보면서 문제를 만들고 시험을 보는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 코딩 테스트에 대한 이야기가 나왔는데, 코딩 테스트를 통과하기 위한 공부는 습관을 만드는 것이 중요하다는 말을 했다. 특히 하루에 한 문제씩 매일 문제를 푸는 습관이 중요하다는 말을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;습관이 어느정도 만들어졌다 싶으면, 쉬운 유형부터 시작해서 천천히 하나씩 정복해 나가면 된다고 했다. 나의 수준에 맞는 문제를 선택해서 매일 매일 문제를 푸는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;마지막으로 협업 스킬인데, 이것은 해커톤을 많이 해보면 된다. 나도 작년부터 해커톤을 많이 참여하고 싶었지만, 코로나 때문에 해커톤이 많이 열리지는 않았다. 따라서 해커톤에 참여하지 못했는데 이번에는 코로나가 종식되어서 오프라인 해커톤에 참여할 수 있으면 좋겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;코딩 테스트 문제를 매일 풀어야 겠다는 생각이 들었다. 일단 매일 한 문제씩 푸는 습관을 먼저 들여야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;good-잘-한점&#34;&gt;Good (잘 한점)&lt;/h3&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;h3 id=&#34;todo-오늘-할일&#34;&gt;Todo (오늘 할일)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어제 못들었던 데이터베이스 강의를 업무가 끝나고 바로 들어야겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-확언&#34;&gt;Affimation (자기 확언)&lt;/h3&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Facts(사실, 객관) 회사에서 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
+&lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
+&lt;li&gt;Findings(배운 점) 내가 했던 일을 통해서 새롭게 배운 점이나 알게 된 점을 적는다.&lt;/li&gt;
+&lt;li&gt;Affirmation (자기 확언)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;정확한 언어 (나만의 방식으로 그 언어를 이미지화 시키는 것이다.)&lt;/li&gt;
+&lt;li&gt;명확한 시각화&lt;/li&gt;
+&lt;li&gt;상응하는 감정 (자신만의 감정을 상상한다.)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>[일일 회고]</title>
       <link>https://dongwooklee96.github.io/post/2022/01/14/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
