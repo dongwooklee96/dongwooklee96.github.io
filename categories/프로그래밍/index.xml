@@ -6,7 +6,29 @@
     <description>Recent content in 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 02 Jan 2022 10:01:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Feb 2022 01:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CTAGS 파일 버전관리에서 빼는법</title>
+      <link>https://dongwooklee96.github.io/post/2022/02/13/ctags-%ED%8C%8C%EC%9D%BC-%EB%B2%84%EC%A0%84%EA%B4%80%EB%A6%AC%EC%97%90%EC%84%9C-%EB%B9%BC%EB%8A%94%EB%B2%95.html</link>
+      <pubDate>Sun, 13 Feb 2022 01:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/02/13/ctags-%ED%8C%8C%EC%9D%BC-%EB%B2%84%EC%A0%84%EA%B4%80%EB%A6%AC%EC%97%90%EC%84%9C-%EB%B9%BC%EB%8A%94%EB%B2%95.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;최근에 터미널로 소스를 확인할 일이 있었는데 그때 &lt;code&gt;CTAGS&lt;/code&gt; 를 사용했다. 그런데 깃에 변경사항으로 포함되어서 불편하였다. 다행이 인터넷에서 이를 제외하는 법을 알게 되었는데 다음과 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;$ cd Project-Root-Directory
+$ echo &#39;tags&#39; &amp;gt;&amp;gt; ./.git/info/exclude
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이렇게 되면 더이상 &lt;code&gt;ctags&lt;/code&gt; 파일이 버전관리에 포함되지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://johngrib.github.io/wiki/ctags/&#34;&gt;ctags 명령어&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>=== [2021년 회고] ===</title>
       <link>https://dongwooklee96.github.io/post/2022/01/02/2021%EB%85%84-%ED%9A%8C%EA%B3%A0.html</link>
