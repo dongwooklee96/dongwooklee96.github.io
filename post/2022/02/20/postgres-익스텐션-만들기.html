@@ -169,7 +169,7 @@ LANGUAGE plpgsql IMMUTABLE STRICT
 <li><code>PL/pgsql</code>로 작성된 익스텐션이다.</li>
 </ul>
 <pre tabindex="0"><code>EXTENSION = base36        # the extensions name
-DATA = base36-0.0.1.sql  # script files to install
+DATA = base36--0.0.1.sql  # script files to install
 
 # postgres build stuff
 ifdef USE_PGXS
@@ -251,12 +251,9 @@ LANGUAGE C IMMUTABLE STRICT;
 <li><code>*.sql</code> 파일에 내용을 다음과 같이 입력한다.</li>
 </ul>
 <pre tabindex="0"><code>EXTENSION = base36        # the extensions name
-DATA = base36-0.0.1.sql  # script files to install
+DATA = base36--0.0.1.sql  # script files to install
 REGRESS = base36_test # our test script file (without extension)
-MODULE_big = base36
-OBJS = \
-    $(WIN32RES) \
-    base36.o
+MODULE = base36
 
 # postgres build stuff
 ifdef USE_PGXS
@@ -270,7 +267,7 @@ include $(top_builddir)/src/Makefile.global
 include $(top_srcdir)/contrib/contrib-global.mk
 endif
 </code></pre><ul>
-<li>그리고 나서, <code>MakeFile</code> 에 <code>MODULE_big</code> 필드에 컴파일하면 나오는 목적코드를 입력한다.</li>
+<li>그리고 나서, <code>MakeFile</code> 에 <code>MODULE</code> 필드에 <code>base36</code>을 입력해주면 된다.</li>
 </ul>
 <h3 id="참고-문헌">참고 문헌</h3>
 <ul>

@@ -68,7 +68,7 @@ LANGUAGE plpgsql IMMUTABLE STRICT
 &lt;li&gt;&lt;code&gt;PL/pgsql&lt;/code&gt;로 작성된 익스텐션이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;EXTENSION = base36        # the extensions name
-DATA = base36-0.0.1.sql  # script files to install
+DATA = base36--0.0.1.sql  # script files to install
 
 # postgres build stuff
 ifdef USE_PGXS
@@ -150,12 +150,9 @@ LANGUAGE C IMMUTABLE STRICT;
 &lt;li&gt;&lt;code&gt;*.sql&lt;/code&gt; 파일에 내용을 다음과 같이 입력한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;EXTENSION = base36        # the extensions name
-DATA = base36-0.0.1.sql  # script files to install
+DATA = base36--0.0.1.sql  # script files to install
 REGRESS = base36_test # our test script file (without extension)
-MODULE_big = base36
-OBJS = \
-    $(WIN32RES) \
-    base36.o
+MODULE = base36
 
 # postgres build stuff
 ifdef USE_PGXS
@@ -169,7 +166,7 @@ include $(top_builddir)/src/Makefile.global
 include $(top_srcdir)/contrib/contrib-global.mk
 endif
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;그리고 나서, &lt;code&gt;MakeFile&lt;/code&gt; 에 &lt;code&gt;MODULE_big&lt;/code&gt; 필드에 컴파일하면 나오는 목적코드를 입력한다.&lt;/li&gt;
+&lt;li&gt;그리고 나서, &lt;code&gt;MakeFile&lt;/code&gt; 에 &lt;code&gt;MODULE&lt;/code&gt; 필드에 &lt;code&gt;base36&lt;/code&gt;을 입력해주면 된다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
