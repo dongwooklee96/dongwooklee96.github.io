@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>POSTGRES 익스텐션 만들기 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">POSTGRES 익스텐션 만들기</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/02/20</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <ul>
+<li>다음 <a href="http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/">블로그 포스팅</a>을 참고하여 <code>POSTGRES</code> 익스텐션을 만드는 과정을 실습해볼 것이다, 우선 소스코드를 다운로드 받고 디렉터리를 확인해보면 다음과 같다.</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/6j86bo22nq4ohye/Screen%20Shot%202022-02-20%20at%2014.45.38.png" alt=""></p>
+<ul>
+<li>
+<p>여기서 <code>contrib</code> 라고 하는 디렉터리가 바로, 익스텐션이 저장되어 있는 디렉터리이다. 소스코드에 포함된 많은 익스텐션을 확인 할 수 있다.</p>
+</li>
+<li>
+<p>여기서 우리는 <code>base36</code> 인코딩을 하는 익스텐션을 만들어볼 예정이다.</p>
+</li>
+</ul>
+<h3 id="설정-파일-생성">설정 파일 생성</h3>
+<hr>
+<ul>
+<li>우선 익스텐션을 만들려면 총 3가지의 파일이 필요하다. 첫번째는 익스텐션에 대한 정보를 나타내는 <code>*.control</code> 파일이다. 두 번째는 해당 익스텐션의 소스코드인 <code>*.sql</code> 이다. 세 번째는 어떻게 빌드할지에 대한 <code>Makefile</code>이다. 첫번째로 <code>base36.control</code> 파일부터 작성해보겠다.</li>
+</ul>
+<pre tabindex="0"><code># base36 extension
+comment = 'base36 datatype'
+default_version = '0.0.1'
+relocatable = true
+</code></pre><ul>
+<li>base36 익스텐션에 대한 메타정보이다.</li>
+</ul>
+<pre tabindex="0"><code>-- complain if script is sourced in psql, rather than via CREATE EXTENSION
+\echo Use &quot;CREATE EXTENSION base36&quot; to load this file. \quit
+CREATE FUNCTION base36_encode(digits int)
+RETURNS text
+LANGUAGE plpgsql IMMUTABLE STRICT
+  AS $$
+    DECLARE
+      chars char[];
+      ret varchar;
+      val int;
+    BEGIN
+      chars := ARRAY[
+                '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h',
+                'i','j','k','l','m','n','o','p','q','r','s','t', 'u','v','w','x','y','z'
+              ];
+
+      val := digits;
+      ret := '';
+
+    WHILE val != 0 LOOP
+      ret := chars[(val % 36)+1] || ret;
+      val := val / 36;
+    END LOOP;
+
+    RETURN(ret);
+    END;
+  $$;
+</code></pre><ul>
+<li><code>PL/pgsql</code>로 작성된 익스텐션이다.</li>
+</ul>
+<pre tabindex="0"><code>EXTENSION = base36        # the extensions name
+DATA = base36-0.0.1.sql  # script files to install
+
+# postgres build stuff
+ifdef USE_PGXS
+PG_CONFIG = pg_config
+PGXS := $(shell $(PG_CONFIG) --pgxs)
+include $(PGXS)
+else
+subdir = contrib/base36
+top_builddir = ../..
+include $(top_builddir)/src/Makefile.global
+include $(top_srcdir)/contrib/contrib-global.mk
+endif
+</code></pre><ul>
+<li>마지막으로 <code>Makefile</code> 이다. 빌드를 어떻게 할지를 나타낸다.</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/jw81zofvmgro81c/Screen%20Shot%202022-02-20%20at%2015.06.03.png" alt=""></p>
+<ul>
+<li>그리고 나서 <code>sudo make install</code>을 해당 디렉터리에서 입력하면, 설치가 완료된다. 설치가 된다는 것은 사실 <code>postgres</code>가 설치된 파일의 <code>extension</code> 디렉터리로 <code>*.source, *.sql</code> 파일이 이동하는 것이기는 하다.</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/8wgb037vzwivf49/Screen%20Shot%202022-02-20%20at%2015.08.07.png" alt=""></p>
+<p><img src="https://dl.dropbox.com/s/usqc9fjgagantmp/Screen%20Shot%202022-02-20%20at%2015.13.55.png" alt=""></p>
+<ul>
+<li>클라이언트에 접속해서 <code>CREATE EXTENSION base36;</code> 을 실행하면 익스텐션이 생성되었다고 나오며, <code>SELECT base36_encode(123456789);</code> 다음 쿼리문을 실행하면 성공적으로 인코딩이 이루어지는 것을 확인할 수 있다.</li>
+</ul>
+<h3 id="테스트-작성">테스트 작성</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/lbl8cwrhuv5i04x/Screen%20Shot%202022-02-20%20at%2015.30.16.png" alt=""></p>
+<ul>
+<li>
+<p><code>sql</code> 디렉터리를 만든 후에, <code>base36_test.sql</code> 파일에 익스텐션에서 만든 함수를 사용하는 쿼리를 적는다. 그리고 Makefile 파일로 이동해서, REGRESS 항목에 아까 폴더에 만든 테스트 파일을 입력하면 된다.</p>
+</li>
+<li>
+<p>그리고 나서, <code>sudo make install &amp;&amp; sudo make installcheck</code> 를 입력하면 자동으로 <code>result</code> 디렉터리가 만들어지고, 쿼리의 실행결과가 저장된다.</p>
+</li>
+<li>
+<p>이 실행 결과를 <code>expected</code> 디렉터리에 만들고 나서, 다시 테스트를 실행하면 예상 결과에 맞다면 테스트가 통과하게 되고 예상 결과와 다르다면 테스트가 실패했다는 사실을 알려준다.</p>
+</li>
+</ul>
+<h3 id="성능-높히기">성능 높히기</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/ge3r4n7myft6dmr/Screen%20Shot%202022-02-20%20at%2015.36.49.png" alt=""></p>
+<ul>
+<li>익스텐션을 반복해서 많이 사용하면 성능이 좋지 못하다는 것을 확인할 수 있다. 따라서 이를 <code>C</code> 로 다시 작성해서 성능을 끌어올려볼 것이다.</li>
+</ul>
+<pre tabindex="0"><code>#include &quot;postgres.h&quot;
+#include &quot;fmgr.h&quot;
+#include &quot;utils/builtins.h&quot;
+
+PG_MODULE_MAGIC;
+
+PG_FUNCTION_INFO_V1(base36_encode);
+Datum
+base36_encode(PG_FUNCTION_ARGS)
+{
+    int32 arg = PG_GETARG_INT32(0);
+    char base36[36] = &quot;0123456789abcdefghijklmnopqrstuvwxyz&quot;;
+
+    /* max 6 char + '\0' */
+    char *buffer = palloc(7 * sizeof(char));
+    unsigned int offset = sizeof(buffer);
+    buffer[--offset] = '\0';
+
+    do {
+        buffer[--offset] = base36[arg % 36];
+    } while (arg /= 36);
+
+
+    PG_RETURN_TEXT_P(cstring_to_text(&amp;buffer[offset]));
+}
+</code></pre><ul>
+<li><code>base36.c</code> 파일을 생성하고 나서, 위의 코드를 작성한다.</li>
+</ul>
+<pre tabindex="0"><code>-- complain if script is sourced in psql, rather than via CREATE EXTENSION
+\echo Use &quot;CREATE EXTENSION base36&quot; to load this file. \quit
+CREATE FUNCTION base36_encode(integer) RETURN text
+AS '$libdir/base36'
+LANGUAGE C IMMUTABLE STRICT;
+</code></pre><ul>
+<li><code>*.sql</code> 파일에 내용을 다음과 같이 입력한다.</li>
+</ul>
+<pre tabindex="0"><code>EXTENSION = base36        # the extensions name
+DATA = base36-0.0.1.sql  # script files to install
+REGRESS = base36_test # our test script file (without extension)
+MODULE_big = base36
+OBJS = \
+    $(WIN32RES) \
+    base36.o
+
+# postgres build stuff
+ifdef USE_PGXS
+PG_CONFIG = pg_config
+PGXS := $(shell $(PG_CONFIG) --pgxs)
+include $(PGXS)
+else
+subdir = contrib/base36
+top_builddir = ../..
+include $(top_builddir)/src/Makefile.global
+include $(top_srcdir)/contrib/contrib-global.mk
+endif
+</code></pre><ul>
+<li>그리고 나서, <code>MakeFile</code> 에 <code>MODULE_big</code> 필드에 컴파일하면 나오는 목적코드를 입력한다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/">Writing Postgres Extensions - the Basics</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

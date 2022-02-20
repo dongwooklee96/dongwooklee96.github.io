@@ -6,7 +6,178 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 27 Jan 2022 09:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 20 Feb 2022 08:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>POSTGRES 익스텐션 만들기</title>
+      <link>https://dongwooklee96.github.io/post/2022/02/20/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
+      <pubDate>Sun, 20 Feb 2022 08:00:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/02/20/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;다음 &lt;a href=&#34;http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/&#34;&gt;블로그 포스팅&lt;/a&gt;을 참고하여 &lt;code&gt;POSTGRES&lt;/code&gt; 익스텐션을 만드는 과정을 실습해볼 것이다, 우선 소스코드를 다운로드 받고 디렉터리를 확인해보면 다음과 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/6j86bo22nq4ohye/Screen%20Shot%202022-02-20%20at%2014.45.38.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;여기서 &lt;code&gt;contrib&lt;/code&gt; 라고 하는 디렉터리가 바로, 익스텐션이 저장되어 있는 디렉터리이다. 소스코드에 포함된 많은 익스텐션을 확인 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여기서 우리는 &lt;code&gt;base36&lt;/code&gt; 인코딩을 하는 익스텐션을 만들어볼 예정이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;설정-파일-생성&#34;&gt;설정 파일 생성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;우선 익스텐션을 만들려면 총 3가지의 파일이 필요하다. 첫번째는 익스텐션에 대한 정보를 나타내는 &lt;code&gt;*.control&lt;/code&gt; 파일이다. 두 번째는 해당 익스텐션의 소스코드인 &lt;code&gt;*.sql&lt;/code&gt; 이다. 세 번째는 어떻게 빌드할지에 대한 &lt;code&gt;Makefile&lt;/code&gt;이다. 첫번째로 &lt;code&gt;base36.control&lt;/code&gt; 파일부터 작성해보겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# base36 extension
+comment = &#39;base36 datatype&#39;
+default_version = &#39;0.0.1&#39;
+relocatable = true
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;base36 익스텐션에 대한 메타정보이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;-- complain if script is sourced in psql, rather than via CREATE EXTENSION
+\echo Use &amp;quot;CREATE EXTENSION base36&amp;quot; to load this file. \quit
+CREATE FUNCTION base36_encode(digits int)
+RETURNS text
+LANGUAGE plpgsql IMMUTABLE STRICT
+  AS $$
+    DECLARE
+      chars char[];
+      ret varchar;
+      val int;
+    BEGIN
+      chars := ARRAY[
+                &#39;0&#39;,&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;,&#39;5&#39;,&#39;6&#39;,&#39;7&#39;,&#39;8&#39;,&#39;9&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;g&#39;,&#39;h&#39;,
+                &#39;i&#39;,&#39;j&#39;,&#39;k&#39;,&#39;l&#39;,&#39;m&#39;,&#39;n&#39;,&#39;o&#39;,&#39;p&#39;,&#39;q&#39;,&#39;r&#39;,&#39;s&#39;,&#39;t&#39;, &#39;u&#39;,&#39;v&#39;,&#39;w&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;
+              ];
+
+      val := digits;
+      ret := &#39;&#39;;
+
+    WHILE val != 0 LOOP
+      ret := chars[(val % 36)+1] || ret;
+      val := val / 36;
+    END LOOP;
+
+    RETURN(ret);
+    END;
+  $$;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PL/pgsql&lt;/code&gt;로 작성된 익스텐션이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;EXTENSION = base36        # the extensions name
+DATA = base36-0.0.1.sql  # script files to install
+
+# postgres build stuff
+ifdef USE_PGXS
+PG_CONFIG = pg_config
+PGXS := $(shell $(PG_CONFIG) --pgxs)
+include $(PGXS)
+else
+subdir = contrib/base36
+top_builddir = ../..
+include $(top_builddir)/src/Makefile.global
+include $(top_srcdir)/contrib/contrib-global.mk
+endif
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;마지막으로 &lt;code&gt;Makefile&lt;/code&gt; 이다. 빌드를 어떻게 할지를 나타낸다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/jw81zofvmgro81c/Screen%20Shot%202022-02-20%20at%2015.06.03.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;그리고 나서 &lt;code&gt;sudo make install&lt;/code&gt;을 해당 디렉터리에서 입력하면, 설치가 완료된다. 설치가 된다는 것은 사실 &lt;code&gt;postgres&lt;/code&gt;가 설치된 파일의 &lt;code&gt;extension&lt;/code&gt; 디렉터리로 &lt;code&gt;*.source, *.sql&lt;/code&gt; 파일이 이동하는 것이기는 하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8wgb037vzwivf49/Screen%20Shot%202022-02-20%20at%2015.08.07.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/usqc9fjgagantmp/Screen%20Shot%202022-02-20%20at%2015.13.55.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;클라이언트에 접속해서 &lt;code&gt;CREATE EXTENSION base36;&lt;/code&gt; 을 실행하면 익스텐션이 생성되었다고 나오며, &lt;code&gt;SELECT base36_encode(123456789);&lt;/code&gt; 다음 쿼리문을 실행하면 성공적으로 인코딩이 이루어지는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;테스트-작성&#34;&gt;테스트 작성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/lbl8cwrhuv5i04x/Screen%20Shot%202022-02-20%20at%2015.30.16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;sql&lt;/code&gt; 디렉터리를 만든 후에, &lt;code&gt;base36_test.sql&lt;/code&gt; 파일에 익스텐션에서 만든 함수를 사용하는 쿼리를 적는다. 그리고 Makefile 파일로 이동해서, REGRESS 항목에 아까 폴더에 만든 테스트 파일을 입력하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 나서, &lt;code&gt;sudo make install &amp;amp;&amp;amp; sudo make installcheck&lt;/code&gt; 를 입력하면 자동으로 &lt;code&gt;result&lt;/code&gt; 디렉터리가 만들어지고, 쿼리의 실행결과가 저장된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 실행 결과를 &lt;code&gt;expected&lt;/code&gt; 디렉터리에 만들고 나서, 다시 테스트를 실행하면 예상 결과에 맞다면 테스트가 통과하게 되고 예상 결과와 다르다면 테스트가 실패했다는 사실을 알려준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;성능-높히기&#34;&gt;성능 높히기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ge3r4n7myft6dmr/Screen%20Shot%202022-02-20%20at%2015.36.49.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;익스텐션을 반복해서 많이 사용하면 성능이 좋지 못하다는 것을 확인할 수 있다. 따라서 이를 &lt;code&gt;C&lt;/code&gt; 로 다시 작성해서 성능을 끌어올려볼 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;quot;postgres.h&amp;quot;
+#include &amp;quot;fmgr.h&amp;quot;
+#include &amp;quot;utils/builtins.h&amp;quot;
+
+PG_MODULE_MAGIC;
+
+PG_FUNCTION_INFO_V1(base36_encode);
+Datum
+base36_encode(PG_FUNCTION_ARGS)
+{
+    int32 arg = PG_GETARG_INT32(0);
+    char base36[36] = &amp;quot;0123456789abcdefghijklmnopqrstuvwxyz&amp;quot;;
+
+    /* max 6 char + &#39;\0&#39; */
+    char *buffer = palloc(7 * sizeof(char));
+    unsigned int offset = sizeof(buffer);
+    buffer[--offset] = &#39;\0&#39;;
+
+    do {
+        buffer[--offset] = base36[arg % 36];
+    } while (arg /= 36);
+
+
+    PG_RETURN_TEXT_P(cstring_to_text(&amp;amp;buffer[offset]));
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;base36.c&lt;/code&gt; 파일을 생성하고 나서, 위의 코드를 작성한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;-- complain if script is sourced in psql, rather than via CREATE EXTENSION
+\echo Use &amp;quot;CREATE EXTENSION base36&amp;quot; to load this file. \quit
+CREATE FUNCTION base36_encode(integer) RETURN text
+AS &#39;$libdir/base36&#39;
+LANGUAGE C IMMUTABLE STRICT;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;*.sql&lt;/code&gt; 파일에 내용을 다음과 같이 입력한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;EXTENSION = base36        # the extensions name
+DATA = base36-0.0.1.sql  # script files to install
+REGRESS = base36_test # our test script file (without extension)
+MODULE_big = base36
+OBJS = \
+    $(WIN32RES) \
+    base36.o
+
+# postgres build stuff
+ifdef USE_PGXS
+PG_CONFIG = pg_config
+PGXS := $(shell $(PG_CONFIG) --pgxs)
+include $(PGXS)
+else
+subdir = contrib/base36
+top_builddir = ../..
+include $(top_builddir)/src/Makefile.global
+include $(top_srcdir)/contrib/contrib-global.mk
+endif
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;그리고 나서, &lt;code&gt;MakeFile&lt;/code&gt; 에 &lt;code&gt;MODULE_big&lt;/code&gt; 필드에 컴파일하면 나오는 목적코드를 입력한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/&#34;&gt;Writing Postgres Extensions - the Basics&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>마리아 DB 락 조회 및 해제</title>
       <link>https://dongwooklee96.github.io/post/2022/01/27/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EB%9D%BD-%EC%A1%B0%ED%9A%8C-%EB%B0%8F-%ED%95%B4%EC%A0%9C.html</link>
