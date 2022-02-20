@@ -128,7 +128,7 @@ base36_encode(PG_FUNCTION_ARGS)
 
     /* max 6 char + &#39;\0&#39; */
     char *buffer = palloc(7 * sizeof(char));
-    unsigned int offset = sizeof(buffer);
+    unsigned int offset = (7 * sizeof(char));
     buffer[--offset] = &#39;\0&#39;;
 
     do {
