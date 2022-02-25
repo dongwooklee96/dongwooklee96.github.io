@@ -6,7 +6,40 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 20 Feb 2022 08:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Feb 2022 09:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>프로그램을 동적 프로파일링 하자</title>
+      <link>https://dongwooklee96.github.io/post/2022/02/25/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%A7%81-%ED%95%98%EC%9E%90.html</link>
+      <pubDate>Fri, 25 Feb 2022 09:20:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/02/25/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%A7%81-%ED%95%98%EC%9E%90.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 MySQL을 동적으로 프로파일링 하면서, 내부 동작이 어떻게 동작하는지 확인할 수 있는 영상을 시청하였다. &lt;code&gt;ftrace&lt;/code&gt; 부터 시작해서 &lt;code&gt;bpf&lt;/code&gt; 와 같은 툴을 사용하는 것을 확인하고 직접 실습해보았는데 매우 재미 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러던 와중에 &lt;code&gt;strace&lt;/code&gt; 라는 툴을 알게 되었고, 이는 실시간으로 리눅스의 시스템 콜 호출을 확인할 수 있는 툴이였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그 밖에 프로파일링 접근 방법에 대한 좋은 글들이 있어서 이번 주말에 읽어보면서 실습을 하면 많은 도움이 될 것 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=sEXgwjrIALQ&#34;&gt;MinervaDB Athena 2020 - Valerii Kravchuk - Dynamic Tracing for Finding and Solving MySQL Performance Problems on Linux&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://franckpachot.medium.com/strace-k-build-with-libunwind-f949d4802322&#34;&gt;strace -k (built with libunwind)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://erthalion.info/2019/12/06/postgresql-stay-curious/#3-vdso&#34;&gt;PostgreSQL at low level: stay curious!&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>POSTGRES 익스텐션 만들기</title>
       <link>https://dongwooklee96.github.io/post/2022/02/20/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
