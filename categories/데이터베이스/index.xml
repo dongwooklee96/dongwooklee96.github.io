@@ -6,7 +6,52 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Fri, 25 Feb 2022 09:20:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Mar 2022 23:32:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>데이터베이스 락킹과 래치의 차이점</title>
+      <link>https://dongwooklee96.github.io/post/2022/03/23/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%9D%BD%ED%82%B9%EA%B3%BC-%EB%9E%98%EC%B9%98%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90.html</link>
+      <pubDate>Wed, 23 Mar 2022 23:32:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/03/23/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%9D%BD%ED%82%B9%EA%B3%BC-%EB%9E%98%EC%B9%98%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90.html</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/rv4u4kvromaeqcf/Screen%20Shot%202022-03-23%20at%208.54.00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;2PL (Two Phase Locking)을 이용하여 B+TREE 인덱스에 접근하는 것은 최악이라는 것을 알게 되었는데, 그 이유는 인덱스에 접근할 때마다 트리의 루트 노드에 접근할기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 인덱스에서는 락킹을 사용하지 않고 래칭을 사용한다는 것을 알게 되었다. 락킹과 래칭의 차이점에 대해서 알고 싶어서 조사를 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://www.dropbox.com/s/jgy37vuz3317u59/Screen%20Shot%202022-03-23%20at%208.56.49.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위는 참고 문헌에 나와있는 서베이에 있는 내용이다. 자세히 알고 싶으면 아래 링크를 참조해서 직접 문서를 읽는 편이 도움이 될 것 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 내용을 참고한 결과 락킹은 데이터베이스 애플리케이션 내에서 트랜잭션 단위로 데이터 정합성을 보장하기 위해서 하는 것이고, 래치는 시스템 상에서 여러 스레드가 동시에 자원에 접근할 수 없도록 보장하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;락은 내부적으로 대기 큐 및 그래프를 가지고 있어 데드락을 감지 및 해결할 수 있고(대기 큐 분석 및 타임 아웃), 락 매니저에 의해서 관리된다. 그리고 다양한 락 모드가 있다. (공유 락, 배타 락, 업데이트 락, 인텐드 락&amp;hellip;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;래치는 시스템 상에서 임계 영역에 여러 스레드가 접근하지 못하도록 보장하는 것이다. 락이 데이터베이스 콘텐츠(테이블 데이터, 인덱스, 스키마&amp;hellip;)를 보호하는 것에 비해서 래치는 인메모리에 있는 자료 구조를 보호한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나중에 시간이 있을 때 아래 서베이를 자세히 공부하는 것도 좋을 것 같다. 락킹과 래치에 대해서 많은 공부를 할 수 있을 것 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/3111403/what-is-the-difference-between-a-lock-and-a-latch-in-the-context-of-concurrent-a&#34;&gt;What is the difference between a lock and a latch in the context of concurrent access to a database?&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://15721.courses.cs.cmu.edu/spring2016/papers/a16-graefe.pdf&#34;&gt;A Survey of B-Tree Locking Techniques by Goetz Graefe&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>프로그램을 동적 프로파일링 하자</title>
       <link>https://dongwooklee96.github.io/post/2022/02/25/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%A7%81-%ED%95%98%EC%9E%90.html</link>
