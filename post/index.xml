@@ -6,7 +6,149 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 05 Apr 2022 01:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 07 Apr 2022 17:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Riak 과 맵 리듀스</title>
+      <link>https://dongwooklee96.github.io/post/2022/04/07/riak-%EA%B3%BC-%EB%A7%B5-%EB%A6%AC%EB%93%80%EC%8A%A4.html</link>
+      <pubDate>Thu, 07 Apr 2022 17:00:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/04/07/riak-%EA%B3%BC-%EB%A7%B5-%EB%A6%AC%EB%93%80%EC%8A%A4.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;세븐 데이터베이스라는 책을 읽으면서 다양한 유형의 &lt;code&gt;NoSQL&lt;/code&gt;을 설치하고 사용해보고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;맵 리듀스는 분산된 여러 노드에 걸쳐서 병행으로 작업을 실행하기 위한 알고리즘 프레임워크이다. 장애에 대응 가능한 파티션된 데이터 스토어에서 커스텀 쿼리를 실행하는데 유용한 도구가 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;맵 리듀스는 두 부분으로 나누어서 처리되는데 첫 번재 부분에서는 &lt;code&gt;map()&lt;/code&gt; 함수를 사용하여 데이터 리스트 (데이터들이 저장된 자료 구조)를 다른 타입의 리스트로 변환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 둘째 부분에서는 &lt;code&gt;reduce()&lt;/code&gt; 함수를 이용하여 변환된 데이터 리스트를 하나 이상의 스칼라 값들로 변환한다. 이런 형태로 처리함으로써 시스템에서는 각 작업들을 더 작은 컴포넌트들로 쪼개어 대규모 서버 클러스터에 결처서 병렬로 실행시킬 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;예시&#34;&gt;예시&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;map = function (v) {
+  var parsedData = JSON.parse(v.values[0].data);
+  if (parsedData.country == &#39;CA&#39;)
+      return [{count : 1}];
+  else
+      return [{count: 0}];
+}
+
+reduce = function(mappedVals) {
+  var sums = {count : 0};
+  for (val i in mappedVals) {
+      sums[count] += mappedVals[i][count];
+  }
+  return [sums];
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일치하는 문서는 &lt;code&gt;{count: 1}&lt;/code&gt;로 연관시켜서 모든 카운트들의 계산을 축약 시킴으로써 &lt;code&gt;{country: &#39;CA&#39;}&lt;/code&gt;를 포함하는 값들의 합계를 구할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터베이스에서는 모든 결과를 애플리케이션 서버에 전송하고, 애플리케이션 서버의 코드에서 데이터의 합산과 같은 어떤 액션을 수행하는게 일반적이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;맵 리듀스는 반대의 방법으로 실행된다. 데이터베이스로부터 데이터를 알아내서 클라이언트에서 실행하는 대신에, 맵 리듀스는 모든 데이터베이스 노드에게 데이터 처리 알고리즘을 전달한다. 그리고 각 노드는 그 알고리즘의 결과를 반환하는 책임을 갖는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/0h5c4w85z3u0wmz/253BEA3F59381DC632.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이때 서버의 각 객체(데이터)는 데이터를 모아서 그룹화하는 어떤 공통적인 키에 맵(연관) 처리 된다. 그리고 일치되는 모든 키들은 어떤 단일의 값으로 리듀스(축약) 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 각 서버에서 알고리즘을 데이터로 전송한 다음에 반환된 데이터를 다른 서버의 알고리즘에 전송하는 것이 더 빠르기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;riak-에서의-맵-리듀스&#34;&gt;&lt;code&gt;Riak&lt;/code&gt; 에서의 맵 리듀스&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -X POST -H &amp;quot;content-type:application/json&amp;quot; \
+http://localhost:10018/mapred --data @-
+{
+    &amp;quot;inputs&amp;quot;: [
+        [&amp;quot;rooms&amp;quot;, &amp;quot;101&amp;quot;],
+        [&amp;quot;rooms&amp;quot;, &amp;quot;102&amp;quot;],
+        [&amp;quot;rooms&amp;quot;, &amp;quot;103&amp;quot;]
+    ],
+    &amp;quot;query&amp;quot;: [{
+                &amp;quot;map&amp;quot;: {
+                &amp;quot;language&amp;quot;: &amp;quot;javascript&amp;quot;,
+                &amp;quot;source&amp;quot;: &amp;quot;function(v) {
+                    var parsed_data = JSON.parse(v.values[0].data);
+                    var data = {};
+                    data[parsed_data.style] = parsed_data.capacity;
+                    return [data];
+                }&amp;quot;
+        }
+    }]
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 코드는 &lt;code&gt;Riak&lt;/code&gt; 에서 맵 처리를 하는 모습이다..&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl - X POST - H &amp;quot;content-type:application/json&amp;quot;\
+http: //localhost:10018/mapred --data @-
+    {
+        &amp;quot;inputs&amp;quot;: &amp;quot;rooms&amp;quot;,
+        &amp;quot;query&amp;quot;: [{
+                &amp;quot;map&amp;quot;: {
+                    &amp;quot;language&amp;quot;: &amp;quot;javascript&amp;quot;,
+                    &amp;quot;bucket&amp;quot;: &amp;quot;my_functions&amp;quot;,
+                    &amp;quot;key&amp;quot;: &amp;quot;map_capacity&amp;quot;
+                }},
+                {
+                    &amp;quot;reduce&amp;quot;: {
+                        &amp;quot;language&amp;quot;: &amp;quot;javascript&amp;quot;,
+                        &amp;quot;source&amp;quot;: &amp;quot;function(v) {
+                            var totals = {};
+                            for (var i in v) {
+                                for (var style in v[i]) {
+                                    if (totals[style]) totals[style] += v[i][style];
+                                    eles totals[style] = v[i][style];
+                                }
+                            }
+                            return [totals];
+                        }&amp;quot;
+                }
+            }]
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;키필터&#34;&gt;키필터&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 추가된 것이 키필터라는 개념이다. 키필터는 맵 리듀스 실행 전에 각 키를 필터링 하는 명령어들의 모음이다. 키 필터는 원하지 않는 값을 맵 리듀스 하지 않게 도와주는 역할을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;맵 리듀스는 데이터를 그룹으로 묶어서 어떤 중요한 분석을 수행할 수 있는 강력한 도구이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;일관성과-지속성&#34;&gt;일관성과 지속성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리액 서버 아키텍처에서는 단일 지점 장애가 생기지 않도록 한다 (즉, 모든 노드가 주종 관계가 없이 동등하다.) 그리고 서버 노드들이 연결된 클러스터를 원하는 대로 늘리거나 줄일 수 있게 해준다. 이것은 대규모의 분산 처리 시 중요하다. 설사 몇몇 노드에 장애가 생겨서 반응이 없을지라도 우리 데이터베이스를 항상 가용한 상태로 유지하기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다수의 서버에 걸치는 데이터분산은 내재된 문제점을 가지고 있다. 만일 네트워크의 분할이 생길 때 우리 데이터베이스가 계속 실행되기를 원한다면 (즉 일부 메시지들이 유실된다면) 타협을 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 경우 서버에 대한 요청을 가용한 (&lt;code&gt;Available&lt;/code&gt;) 상태로 두거나, 또는 요청을 거절하고 우리 데이터의 일관성 (&lt;code&gt;Consistency&lt;/code&gt;)를 보장하게 할 수 있다. 일관성과 가용성 및 분할 장애 대응 (&lt;code&gt;Partition tolerance&lt;/code&gt;) 모두가 완벽하게 가능한 분산 데이터베이스 생성은 불가능하다. 이러한 세 가지 특성 중 두 개만 함께 가질 수 있다. (분할 장애 대응과 일관성, 분할 장애 대응과 가용성, 또는 일관성과 가용성이 있지만 분산되지 않음)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이것을 &lt;code&gt;CAP(일관성 (Consistency), 가용성 (Availalbity), 분할 장애 대응 (Partition tolerance))&lt;/code&gt; 원리라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=24714891&#34;&gt;세븐 데이터베이스&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>API 개선에 대한 좋은 글을 읽고 나서 작성한 글</title>
       <link>https://dongwooklee96.github.io/post/2022/04/05/api-%EA%B0%9C%EC%84%A0%EC%97%90-%EB%8C%80%ED%95%9C-%EC%A2%8B%EC%9D%80-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%82%98%EC%84%9C-%EC%9E%91%EC%84%B1%ED%95%9C-%EA%B8%80.html</link>

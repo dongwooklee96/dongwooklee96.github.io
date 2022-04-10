@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>Riak 과 맵 리듀스 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">categories</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">tags</a>
+      </li>
+      
+
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">Riak 과 맵 리듀스</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/04/07</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <ul>
+<li>
+<p>세븐 데이터베이스라는 책을 읽으면서 다양한 유형의 <code>NoSQL</code>을 설치하고 사용해보고 있다.</p>
+</li>
+<li>
+<p>맵 리듀스는 분산된 여러 노드에 걸쳐서 병행으로 작업을 실행하기 위한 알고리즘 프레임워크이다. 장애에 대응 가능한 파티션된 데이터 스토어에서 커스텀 쿼리를 실행하는데 유용한 도구가 되었다.</p>
+</li>
+<li>
+<p>맵 리듀스는 두 부분으로 나누어서 처리되는데 첫 번재 부분에서는 <code>map()</code> 함수를 사용하여 데이터 리스트 (데이터들이 저장된 자료 구조)를 다른 타입의 리스트로 변환한다.</p>
+</li>
+<li>
+<p>그리고 둘째 부분에서는 <code>reduce()</code> 함수를 이용하여 변환된 데이터 리스트를 하나 이상의 스칼라 값들로 변환한다. 이런 형태로 처리함으로써 시스템에서는 각 작업들을 더 작은 컴포넌트들로 쪼개어 대규모 서버 클러스터에 결처서 병렬로 실행시킬 수 있다.</p>
+</li>
+</ul>
+<h3 id="예시">예시</h3>
+<hr>
+<pre tabindex="0"><code>map = function (v) {
+  var parsedData = JSON.parse(v.values[0].data);
+  if (parsedData.country == 'CA')
+      return [{count : 1}];
+  else
+      return [{count: 0}];
+}
+
+reduce = function(mappedVals) {
+  var sums = {count : 0};
+  for (val i in mappedVals) {
+      sums[count] += mappedVals[i][count];
+  }
+  return [sums];
+}
+</code></pre><ul>
+<li>
+<p>일치하는 문서는 <code>{count: 1}</code>로 연관시켜서 모든 카운트들의 계산을 축약 시킴으로써 <code>{country: 'CA'}</code>를 포함하는 값들의 합계를 구할 수 있다.</p>
+</li>
+<li>
+<p>데이터베이스에서는 모든 결과를 애플리케이션 서버에 전송하고, 애플리케이션 서버의 코드에서 데이터의 합산과 같은 어떤 액션을 수행하는게 일반적이다.</p>
+</li>
+<li>
+<p>맵 리듀스는 반대의 방법으로 실행된다. 데이터베이스로부터 데이터를 알아내서 클라이언트에서 실행하는 대신에, 맵 리듀스는 모든 데이터베이스 노드에게 데이터 처리 알고리즘을 전달한다. 그리고 각 노드는 그 알고리즘의 결과를 반환하는 책임을 갖는다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/0h5c4w85z3u0wmz/253BEA3F59381DC632.png" alt=""></p>
+<ul>
+<li>
+<p>이때 서버의 각 객체(데이터)는 데이터를 모아서 그룹화하는 어떤 공통적인 키에 맵(연관) 처리 된다. 그리고 일치되는 모든 키들은 어떤 단일의 값으로 리듀스(축약) 된다.</p>
+</li>
+<li>
+<p>이는 각 서버에서 알고리즘을 데이터로 전송한 다음에 반환된 데이터를 다른 서버의 알고리즘에 전송하는 것이 더 빠르기 때문이다.</p>
+</li>
+</ul>
+<h3 id="riak-에서의-맵-리듀스"><code>Riak</code> 에서의 맵 리듀스</h3>
+<hr>
+<pre tabindex="0"><code>curl -X POST -H &quot;content-type:application/json&quot; \
+http://localhost:10018/mapred --data @-
+{
+    &quot;inputs&quot;: [
+        [&quot;rooms&quot;, &quot;101&quot;],
+        [&quot;rooms&quot;, &quot;102&quot;],
+        [&quot;rooms&quot;, &quot;103&quot;]
+    ],
+    &quot;query&quot;: [{
+                &quot;map&quot;: {
+                &quot;language&quot;: &quot;javascript&quot;,
+                &quot;source&quot;: &quot;function(v) {
+                    var parsed_data = JSON.parse(v.values[0].data);
+                    var data = {};
+                    data[parsed_data.style] = parsed_data.capacity;
+                    return [data];
+                }&quot;
+        }
+    }]
+}
+</code></pre><ul>
+<li>위의 코드는 <code>Riak</code> 에서 맵 처리를 하는 모습이다..</li>
+</ul>
+<pre tabindex="0"><code>curl - X POST - H &quot;content-type:application/json&quot;\
+http: //localhost:10018/mapred --data @-
+    {
+        &quot;inputs&quot;: &quot;rooms&quot;,
+        &quot;query&quot;: [{
+                &quot;map&quot;: {
+                    &quot;language&quot;: &quot;javascript&quot;,
+                    &quot;bucket&quot;: &quot;my_functions&quot;,
+                    &quot;key&quot;: &quot;map_capacity&quot;
+                }},
+                {
+                    &quot;reduce&quot;: {
+                        &quot;language&quot;: &quot;javascript&quot;,
+                        &quot;source&quot;: &quot;function(v) {
+                            var totals = {};
+                            for (var i in v) {
+                                for (var style in v[i]) {
+                                    if (totals[style]) totals[style] += v[i][style];
+                                    eles totals[style] = v[i][style];
+                                }
+                            }
+                            return [totals];
+                        }&quot;
+                }
+            }]
+    }
+</code></pre><h3 id="키필터">키필터</h3>
+<hr>
+<ul>
+<li>
+<p>최근에 추가된 것이 키필터라는 개념이다. 키필터는 맵 리듀스 실행 전에 각 키를 필터링 하는 명령어들의 모음이다. 키 필터는 원하지 않는 값을 맵 리듀스 하지 않게 도와주는 역할을 한다.</p>
+</li>
+<li>
+<p>맵 리듀스는 데이터를 그룹으로 묶어서 어떤 중요한 분석을 수행할 수 있는 강력한 도구이다.</p>
+</li>
+</ul>
+<h3 id="일관성과-지속성">일관성과 지속성</h3>
+<hr>
+<ul>
+<li>
+<p>리액 서버 아키텍처에서는 단일 지점 장애가 생기지 않도록 한다 (즉, 모든 노드가 주종 관계가 없이 동등하다.) 그리고 서버 노드들이 연결된 클러스터를 원하는 대로 늘리거나 줄일 수 있게 해준다. 이것은 대규모의 분산 처리 시 중요하다. 설사 몇몇 노드에 장애가 생겨서 반응이 없을지라도 우리 데이터베이스를 항상 가용한 상태로 유지하기 때문이다.</p>
+</li>
+<li>
+<p>다수의 서버에 걸치는 데이터분산은 내재된 문제점을 가지고 있다. 만일 네트워크의 분할이 생길 때 우리 데이터베이스가 계속 실행되기를 원한다면 (즉 일부 메시지들이 유실된다면) 타협을 해야한다.</p>
+</li>
+<li>
+<p>이러한 경우 서버에 대한 요청을 가용한 (<code>Available</code>) 상태로 두거나, 또는 요청을 거절하고 우리 데이터의 일관성 (<code>Consistency</code>)를 보장하게 할 수 있다. 일관성과 가용성 및 분할 장애 대응 (<code>Partition tolerance</code>) 모두가 완벽하게 가능한 분산 데이터베이스 생성은 불가능하다. 이러한 세 가지 특성 중 두 개만 함께 가질 수 있다. (분할 장애 대응과 일관성, 분할 장애 대응과 가용성, 또는 일관성과 가용성이 있지만 분산되지 않음)</p>
+</li>
+<li>
+<p>이것을 <code>CAP(일관성 (Consistency), 가용성 (Availalbity), 분할 장애 대응 (Partition tolerance))</code> 원리라고 한다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=24714891">세븐 데이터베이스</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
