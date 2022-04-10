@@ -6,7 +6,54 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 07 Apr 2022 17:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 10 Apr 2022 20:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>코딩 테스트 공부를 다시 시작해보도록 하였다</title>
+      <link>https://dongwooklee96.github.io/post/2022/04/10/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B3%B5%EB%B6%80%EB%A5%BC-%EB%8B%A4%EC%8B%9C-%EC%8B%9C%EC%9E%91%ED%95%B4%EB%B3%B4%EB%8F%84%EB%A1%9D-%ED%95%98%EC%98%80%EB%8B%A4.html</link>
+      <pubDate>Sun, 10 Apr 2022 20:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/04/10/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B3%B5%EB%B6%80%EB%A5%BC-%EB%8B%A4%EC%8B%9C-%EC%8B%9C%EC%9E%91%ED%95%B4%EB%B3%B4%EB%8F%84%EB%A1%9D-%ED%95%98%EC%98%80%EB%8B%A4.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;작년에 인프런에서 주도하는 카톡으로 매일 코딩 테스트 문제를 풀고 올리는 스터디를 3개월 정도 하였지만, 시간이 지나면서 점차 의무적으로 하게 되어 대충고민한 후에 구글링 하여 정답을 확인한 적이 많았다. 게다가 지금은 포기하여 전혀 기억나지 않는 상태가 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 코딩 테스트를 공부해야겠다는 생각은 떠나지 않아서 빠르면 다음주부터 본격적으로 코딩 테스트 공부를 하기로 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;플랫폼으로 많은 고민을 하였지만, 일단은 리트 코드로 시작하기로 하였다. 이유는 아래와 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다른 플랫폼들과 다르게 문제가 깔끔하고 코딩 인터뷰에 최적화된 사이트라는 것을 알 수 있었다. 개인적으로는 코드 포스라는 사이트에서 랭킹을 올려보고 싶은데 리트 코드를 통해서 실력을 올린후에 코드 포스 콘테스트에 도전해봐야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 데일리 문제가 있어서 매일 어떤 문제를 풀지 고민하지 않아도 알아서 정해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;세션이라는 기능이 있어, 자신이 풀어본 문제를 새롭게 풀어볼 수 있다. 어떤 사람은 매주 자신이 풀어본 문제를 다시 새로운 세션을 통해서 복습한다고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/QasimWani/LeetHub&#34;&gt;LeetHub&lt;/a&gt; 라는 플러그인이 있어서, 자동으로 깃허브에 리트코드에서 푼 문제와 코드 실행결과를 기록해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 이유로 매우 재미있게 코딩 테스트를 공부할 수 있을 것 같다. 코딩 테스트를 게임처럼 생각하자!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;아직 유료 구독은 하지 않았지만, 블랙 프라이데이때 할인을 한다고 하니 일단은 무료 회원으로 버티다가 세일할때 구독하는 것도 나쁘지 않을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/0yiu1crw76gf6tm/Screen%20Shot%202022-04-10%20at%2021.37.54.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;방법은 위의 루틴대로 나도 해볼 생각이다. 아침에 일어나면 문제를 읽고나서 짜투리 시간에 계속 해보는 것이다. 또한 풀었던 문제를 나중에 다시 풀어보는 것도 굉장히 중요한 것 같다. 지난번과 같은 실수를 반복하지 말자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://skillist.tistory.com/211&#34;&gt;추천 75문제와 알고리즘 공부 방법&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>Riak 과 맵 리듀스</title>
       <link>https://dongwooklee96.github.io/post/2022/04/07/riak-%EA%B3%BC-%EB%A7%B5-%EB%A6%AC%EB%93%80%EC%8A%A4.html</link>
