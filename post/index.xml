@@ -6,7 +6,35 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 10 Apr 2022 20:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Apr 2022 17:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>postgreSQL 14 출시 및 기념 주화를 받았다</title>
+      <link>https://dongwooklee96.github.io/post/2022/04/14/postgresql-14-%EC%B6%9C%EC%8B%9C-%EB%B0%8F-%EA%B8%B0%EB%85%90-%EC%A3%BC%ED%99%94%EB%A5%BC-%EB%B0%9B%EC%95%98%EB%8B%A4.html</link>
+      <pubDate>Thu, 14 Apr 2022 17:09:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/04/14/postgresql-14-%EC%B6%9C%EC%8B%9C-%EB%B0%8F-%EA%B8%B0%EB%85%90-%EC%A3%BC%ED%99%94%EB%A5%BC-%EB%B0%9B%EC%95%98%EB%8B%A4.html</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/el3symbx1680ns5/IMG_7121.JPG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;PostgreSQL 14&lt;/code&gt; 버전 출시를 기념으로 기여한 사람들에게 자신의 이름이 적힌 티셔츠와 기념 주화를 주었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;기분이 정말로 좋고, 앞으로 실력을 키워서 더 많은 기여를 할 수 있으면 좋겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ubp06grb0aanted/IMG_7122.JPG&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/5yyfm4a5nensm84/IMG_7123.JPG&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;기념 주화의 이름은 &lt;code&gt;B-Tree&lt;/code&gt;다. 비슷하게 생기지는 않은 것 같은데&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.postgresql.org/docs/14/release-14.html#RELEASE-14-ACKNOWLEDGEMENTS&#34;&gt;https://www.postgresql.org/docs/14/release-14.html#RELEASE-14-ACKNOWLEDGEMENTS&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>코딩 테스트 공부를 다시 시작해보도록 하였다</title>
       <link>https://dongwooklee96.github.io/post/2022/04/10/%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EA%B3%B5%EB%B6%80%EB%A5%BC-%EB%8B%A4%EC%8B%9C-%EC%8B%9C%EC%9E%91%ED%95%B4%EB%B3%B4%EB%8F%84%EB%A1%9D-%ED%95%98%EC%98%80%EB%8B%A4.html</link>
