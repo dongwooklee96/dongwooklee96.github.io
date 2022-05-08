@@ -6,7 +6,141 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 14 Apr 2022 17:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 08 May 2022 19:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>리눅스 커널 스터디 1주차</title>
+      <link>https://dongwooklee96.github.io/post/2022/05/08/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%BB%A4%EB%84%90-%EC%8A%A4%ED%84%B0%EB%94%94-1%EC%A3%BC%EC%B0%A8.html</link>
+      <pubDate>Sun, 08 May 2022 19:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/05/08/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%BB%A4%EB%84%90-%EC%8A%A4%ED%84%B0%EB%94%94-1%EC%A3%BC%EC%B0%A8.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;아이엠루트라는 리눅스 커널 스터디 커뮤니티에서 커널 스터디 19기를 시작하게 되었다. 가족 여행 일정이 잡혀있어서 오리엔테이션에는 참석하지 못했지만, 글을 남겨주어서 대략적인 스터디 방향을 알 수 있었다. 우선은 리눅스 커널 내부구조라는 책을 통해서 특정 페이지 까지 읽은 후에 이를 공유하고 같이 토의를 하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;해당 글은 스터디 모임을 하기 전에 읽은 내용을 정리한 글이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;챕터-1장-리눅스-소개&#34;&gt;챕터 1장 (리눅스 소개)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스 역사 및 배포판 버전에 대한 내용을 읽어보았다. 새롭게 알게된 사실 중에 하나는 &lt;code&gt;Mach&lt;/code&gt; 라는 계열의 유닉스 운영체제에서 파생되어 &lt;code&gt;Windows NT&lt;/code&gt; 와 &lt;code&gt;MacOS&lt;/code&gt; 를 만들었다는 사실이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Mach&lt;/code&gt;는 마이크로 커널 구조를 채택하였는데 이는 운영체제의 기능중에서 커널 공간에 꼭 필요한 기능 (인터럽트 처리, 페이지 폴트, 스케줄링 및 콘텍스트 스위치, IPC) 등만 커널에 포함하고 나머지는 사용자 수준에서 동작하는 서버로 구현된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;챕터-2장-리눅스-커널-구조&#34;&gt;챕터 2장 (리눅스 커널 구조)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;운영체제가 관리해야할 자원은 크게 물리적인 자원과 추상적인 자원으로 구분할 수 있다. 물리적인 자원은 CPU, 메모리, 디스크, 터미널, 네트워크 등 시스템을 구성하고 있는 요소들과 주변 장치 등이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반면에 추상적인 자원은 위의 물리적인 자원을 운영체제가 관리하기 위해서 추상화를 시킨 객체들이다. 대표적인 추상적인 자원에는 CPU를 추상화시킨 태스크, 메모리를 추상화 시킨 세그먼트와 페이지, 디스크를 추상화 시킨 파일, 네트워크를 추상화시킨 통신 프로토콜 및 패킷등이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물리적인 자원에 대응되지 않으며 추상적인 객체로만 존재하는 보안이나, 접근제어 같은 자원도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물리적인 자원을 태스크라는 추상적인 자원으로 제공해주는 태스크 관리자와 메모리를 세그먼트나 페이지라는 개념으로 제공해주는 메모리 관리자, 디스크를 파일이라는 개념으로 제공해주는 파일 시스템, 네트워크 장치를 소켓이라는 개념으로 제공해주는 네트워크 관리자, 그리고 각종 장치를 디바이스 드라이버를 통해 일관되게 접근하도록 해주는 디바이스 드라이버 관리자등 크게 5가지 부분으로 나뉜다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;태스크 관리자는 태스크의 생성, 실행, 상태 전이, 스케줄링, 시그널 처리, 프로세스 간 통신 (Inter Process Communication) 등의 서비스를 제공한다. 메모리 관리자는 물리 메모리 관리, 가상 메모리 관리 그리고 이들을 위한 세그멘테이션, 페이징, 페이지 폴트 등의 서비스를 제공한다. 파일 시스템은 파일의 생성, 접근 제어 &lt;code&gt;inode&lt;/code&gt; 관리, 디렉터리 관리, 수퍼 블록 관리 등의 서비스를 제공한다. 네트워크 관리자는 소켓의 인터페이스, &lt;code&gt;TCP/IP&lt;/code&gt; 같은 통신 프로토콜 등의 서비스를 제공한다. 디바이스 드라이버는 디스크나 터미널, CD, 네트워크 카드 등과 같은 주변 장치를 구동하는 드라이버들로 구성된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;리눅스-커널-디렉터리-구조&#34;&gt;리눅스 커널 디렉터리 구조&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/9nr43nqfg4rle99/Screen%20Shot%202022-05-08%20at%2020.19.29.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://elixir.bootlin.com/linux/latest/source&#34;&gt;해당 사이트&lt;/a&gt;에 들어가면 리눅스 소스코드를 웹 페이지에서 확인할 수 있다. 따라서 리눅스 디렉터리별로 나눠진 기능을 살펴보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;kernel&#34;&gt;kernel&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;태스크 관리자가 구현된 디렉터리이다. 태스크의 생성과 소멸, 프로그램의 실행, 스케줄링, 시그널 처리 등의 기능이 이 디렉터리에 구현되어있다. 반면에 문맥 교환과 같은 하드웨어 종속적인 태스크 관리 부분은 &lt;code&gt;arch/$(ARCH)/kernel&lt;/code&gt; 디렉터리에 구현되어 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;arch&#34;&gt;arch&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;리눅스 커널 기능중 하드웨어 종속적인 부분들이 구현된 디렉터리이다. 이 디렉터리는 CPU 타입에 따라서 하위 디렉터리로 다시 구분된다. 아키텍처 별로 하위 디렉터리가 있으며 특정 아키텍처의 디렉터리에 들어가면 디렉터리가 세분화 되어있다. &lt;code&gt;boot&lt;/code&gt; 디렉터리는 시스템의 부팅 시 사용하는 부트스트랩 코드가 구현되어 있다. &lt;code&gt;kernel&lt;/code&gt; 디렉터리 안에는 문맥 교환이나, 쓰레드 관리와 같은 기능 메모리 관리자 중에서는 페이지 폴트와 같은 하드웨어 종속적인 부분이 구현되어 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;fs&#34;&gt;fs&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;리눅스에서 지원하는 다양한 파일 시스템과 &lt;code&gt;open(), read(), write()&lt;/code&gt; 등의 시스템 호출이 구현되어 있다. 리눅스에서는 많은 파일 시스템이 구현되어 있으며 계속 새로운 파일 시스템을 개발중이다. 대표적인 파일 시스템으로는 &lt;code&gt;ext2, ext3, ext4, nfs, fat, proc, sysfs, devfs, iosfs, ntfs, reisefs, f2fs, xfs&lt;/code&gt; 등이 있다. 이 처럼 다양한 파일 시스템을 일관된 인터페이스로 접근할 수 있도록 하기 위해서 가상 파일 시스템 디렉터리도 해당 디렉터리에 존재한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;mm&#34;&gt;mm&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;메모리 관리자가 구현된 디렉터리이다. 물리 메모리 관리, 가상 메모리 관리, 태스크 마다 할당되는 메모리 객체 관리 등의 기능이 구현되어 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;driver&#34;&gt;driver&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;리눅스에서 지원하는 디바이스 드라이버가 구현된 디렉터리이다. 디바이스 드라이버는 디스크, 터미널, 네트워크 카드 등 주변 장치를 추상화시키고 관리하는 커널 구성 요소이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;net&#34;&gt;net&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;리눅스가 지원하는 통신 프로토콜이 구현된 디렉터리이다. 리눅스는 대표적인 프로토콜인 &lt;code&gt;TCP/IP&lt;/code&gt; 뿐만 아니라, &lt;code&gt;UNIX&lt;/code&gt; 도메인 통신 프로토콜 등 다양한 통신 프로토콜을 구현해 놓았다. 한편 다양한 통신 프로토콜의 추상화 계층이며 사용자 인터페이스를 제공하는 소켓 역시 이 디렉터리에 구현되어 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ipc&#34;&gt;ipc&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리눅스 커널이 지원하는 프로세스간 통신 기능이 구현된 디렉터리이다. 대표적인 프로세스간 통신에는 파이프, 시그널, SYS V IPC, 소켓 등이 있는데, 이 디렉터리에는 &lt;code&gt;message passing, shared memory, semaphore&lt;/code&gt; 가 구현되어 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파이프는 &lt;code&gt;fs&lt;/code&gt;, 시그널은 &lt;code&gt;kernel&lt;/code&gt; 소켓은 &lt;code&gt;net&lt;/code&gt; 디렉터리에 구현되어 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;init&#34;&gt;init&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;커널 초기화 부분, 즉 커널의 메인 시작 함수가 구현된 디렉터리이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;include&#34;&gt;include&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;리눅스 커널이 사용하는 헤더파일이 구현된 디렉터이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;리눅스-커널을-만드는-과정&#34;&gt;리눅스 커널을 만드는 과정&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;리눅스 커널은 일반 프로그램을 컴파일하듯이 컴파일하면 된다. 따라서 아래와 같은 과정을 거친다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;커널 구성 (CONFIGURATION)&lt;/li&gt;
+&lt;li&gt;커널 컴파일 (COMPILE)&lt;/li&gt;
+&lt;li&gt;커널 인스톨 (INSTALL)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;커널 구성은 현재 시스템에 존재하는 하드웨어 특성, 커널 구성 요소, 네트워크 특성 등의 정보를 알려주는 과정이다. &lt;code&gt;include/linux/autoconf.h, .config&lt;/code&gt; 라는 파일에 저장되며 이후 커널 컴파일 과정에서 이를 이용하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;커널 구성이 완료되면 설치를 하면 되는데 &lt;code&gt;make&lt;/code&gt; 명령어를 통해서 실행 가능한 커널로 만든다. &lt;code&gt;kernel/arch/x86/boot&lt;/code&gt; 디렉터리에 생성된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그 다음으로 설치를 해야하는데 커널 인스톨이란 생성된 커널로 시스템이 부팅될 수 있도록 만드는 과정이다. 구체적으로 커널 인스톨은 생성된 커널 이미지를 루트 파일 시스템으로 복사, 모듈 인스톨, 그리고 부트 로더 수정등의 과정으로 이루어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;챕터-3장-태스크-관리&#34;&gt;챕터 3장 (태스크 관리)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;프로세스와-쓰레드-그리고-태스크&#34;&gt;프로세스와 쓰레드 그리고 태스크&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;일반적으로 운영체제 서적에서는 태스크를 자원 소유권의 단위로 쓰레드를 수행의 단위로 정의하고 있다. 실행 파일 자체는 그저 디스크에 저장되어있는 수동적인 존재에 불과하다. 파일 형태로 존재하고 있는 프로그램이 수행되기 위해서는 리눅스 커널로부터 CPU 등의 자원을 할당 받을 수 있는 동적인 객체가 되어야 한다. 이 동적인 객체가 바로 프로세스이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;사용자-입장에서는-프로세스-구조&#34;&gt;사용자 입장에서는 프로세스 구조&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;사용자 프로세스가 수행되기 위해서는 여러 가지 자원들을 커널로부터 할당 받아야 한다. 각각의 프로세스 별로 주어지는 가상 주소 공간 역시 이러한 자원중에 하나이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스는 크게 텍스트, 데이터, 스택, 힙이라는 네 영역으로 구분할 수 있다. 텍스트 영역에는 CPU에서 직접 수행되는 명령어가, 데이터 영역에는 전역 변수가 들어있다. 스택 영역에는 지역 변수와 인자 그리고 함수의 리턴 주소 등이 존재하며, 힙 영역에는 동적 할당 받은 내용이 존재한다. 이때 각 영역을 세그먼트(&lt;code&gt;segment&lt;/code&gt;) 또는 가상 메모리 객체 (&lt;code&gt;vm_area_struct&lt;/code&gt;) 라고도 부른다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=52166775&#34;&gt;리눅스 커널 내부구조&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>postgreSQL 14 출시 및 기념 주화를 받았다</title>
       <link>https://dongwooklee96.github.io/post/2022/04/14/postgresql-14-%EC%B6%9C%EC%8B%9C-%EB%B0%8F-%EA%B8%B0%EB%85%90-%EC%A3%BC%ED%99%94%EB%A5%BC-%EB%B0%9B%EC%95%98%EB%8B%A4.html</link>
