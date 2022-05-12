@@ -6,7 +6,186 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 08 May 2022 19:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 11 May 2022 13:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>스프링부트 실전 활용 마스터 (1)</title>
+      <link>https://dongwooklee96.github.io/post/2022/05/11/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EC%8B%A4%EC%A0%84-%ED%99%9C%EC%9A%A9-%EB%A7%88%EC%8A%A4%ED%84%B0-1.html</link>
+      <pubDate>Wed, 11 May 2022 13:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/05/11/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EC%8B%A4%EC%A0%84-%ED%99%9C%EC%9A%A9-%EB%A7%88%EC%8A%A4%ED%84%B0-1.html</guid>
+      <description>&lt;h3 id=&#34;리액터-타입&#34;&gt;리액터 타입&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리액티브 스트림은 수요 조절에 기반하고 있다. 프로젝트 리액터는 핵심 타입인 &lt;code&gt;Flux&amp;lt;T&amp;gt;&lt;/code&gt;를 사용해서 수요를 조절한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;레스토랑에서 일하는 서빙 점원에 비유를 하자면, 주방에서 요리가 완성되면, 점원이 주방에서 요리를 받아서 손님에게 가져다주고, 다시 제자리로 돌아와서 다음 요리를 기다린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;KitchenService&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    Flux&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Dish&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;getDishes&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Flux&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;just&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Dish&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Sesame chicken:),
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;            new Dish(&amp;#34;&lt;/span&gt;Lo mein noodles&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; planin&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;),
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;            new Dish(&amp;#34;&lt;/span&gt;Sweet &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; sour beef&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;));&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서빙 점원은 손님에게 가져다줄 &lt;code&gt;Dish&lt;/code&gt; 객체를 달라고 요청할 수 있고, 모두 요리가 완료된 다음에 받을 수 도 있지만, &lt;code&gt;Flux&amp;lt;Dish&amp;gt;&lt;/code&gt; 객체로 바로 받을 수 있다. &lt;code&gt;Flux&amp;lt;Dish&amp;gt;&lt;/code&gt; 안에 포함된 요리는 아직 완성되지 않았지만, 머지 않아서 완성될 것이다. 하지만 정확히 언제 완성될지는 모른다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 요리가 완성되기 전에 논블로킹이기 때문에, 점원은 다른 일을 못 한 채 계속 기다리지 않는다. 결과가 아직 정해지지 않았고 미래 시점에 알 수 있는 점에서 &lt;code&gt;Future&lt;/code&gt;와 비슷하지만, &lt;code&gt;Future&lt;/code&gt;는 이미 시작되었음으로 나타내는 반면에, &lt;code&gt;Flux&lt;/code&gt;는 시작할 수 있음을 나타낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;future는-제공하지-않지만-flux-에서는-제공해주는-특징&#34;&gt;&lt;code&gt;Future&lt;/code&gt;는 제공하지 않지만, &lt;code&gt;Flux&lt;/code&gt; 에서는 제공해주는 특징&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- 하나 이상의 `Dish` 포함 가능
+- 각 `Dish`가 제공될 때 어떤 일이 발생하는지 지정 가능
+- 성공과 실패의 두 가지 경로 모두에 대한 처리 방향 정의 가능
+- 결과 폴링 불필요
+- 함수형 프로그래밍 지원
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Future&lt;/code&gt;는 하나의 값을 정확하게 제공하는 것이 목적이었고, &lt;code&gt;Flux&lt;/code&gt;는 다수의 값을 지원하는 것이 목적이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SimpleServer&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; KitchenService kitchen&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+
+    SimpleServer&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;KitchenService kitchen&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;kitchen&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; kitchen&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+    Flux&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;Dish&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;doingMyJob&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;kitchen&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;getDishes&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+            &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;map&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;dish &lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt; Dish&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;deliver&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;dish&lt;span style=&#34;color:#f92672&#34;&gt;));&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;doingMyJob()&lt;/code&gt; 함수는 레스토랑 매니저가 서빙 점원을 툭, 치면 주방에 가서 요리를 받아오는 임무를 수행하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;주방에 요리를 요청한 후에는 요리 완성 후 해야할 일을 &lt;code&gt;map()&lt;/code&gt; 함수를 호출해서 지정한다. 예제에서는 &lt;code&gt;deliver(dish)&lt;/code&gt;를 호출해서 요리를 손님에게 가져다주는 일을 지정했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;deliver(dish)&lt;/code&gt; 는 요리의 &lt;code&gt;delivered&lt;/code&gt; 상태를 &lt;code&gt;true&lt;/code&gt;로 설정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예제 코드는 단순한 형태의 리액티브 컨슈머이다. 리액티브 컨슈머는 다른 리액티브 서비스를 호출하고 결과를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;map()&lt;/code&gt; 함수는 인자로 받은 맵핑 함수를 &lt;code&gt;Flux&lt;/code&gt;에 담겨있는 각 요리에 적용해서 변환하고 &lt;code&gt;Flux&lt;/code&gt;에 담아 반환하므로, 맵핑 함수는 무언가를 반드시 반환해야 한다. 그래서 맵핑 함수의 내부에서 호출되는 &lt;code&gt;deliver()&lt;/code&gt; 함수는 &lt;code&gt;void&lt;/code&gt;를 반환할 수 없고 &lt;code&gt;dish&lt;/code&gt;를 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로젝트 리액터는 풍부한 프로그래밍 모델을 제공한다. 함수형 프로그래밍에서 수행하는 변환 뿐만 아니라, &lt;code&gt;onNext(), onError(), onComplete()&lt;/code&gt; 시그널처럼 &lt;code&gt;Future&lt;/code&gt; 객체에는 없는 리액티브 스트림 수명 주기에 연결 지을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class PoliteServer {
+    private final KitchenService kitchen;
+
+    public PoliteServer(KitchenService kitchen) {
+        this.kitchen = kitchen;
+    }
+
+    Flux&amp;lt;Dish&amp;gt; dongMyJob() {
+        return this.kitchen.getDishes()
+            .doOnNext(dish -&amp;gt; System.out.println(&amp;quot;thank you for &amp;quot; + dish + &amp;quot;!&amp;quot;))
+            .doOnError(error -&amp;gt; System.out.println(&amp;quot;so sorry about&amp;quot; + error.getMessage()))
+            .doOnComplete(() -&amp;gt; System.out.println(&amp;quot;thanks for all your hard work!&amp;quot;))
+            .map(Dish::deliver);
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;doOnNext()&lt;/code&gt;를 사용해서 리액티브 스트림의 &lt;code&gt;onNext()&lt;/code&gt; 시그널을 받으면 &lt;code&gt;kitchen&lt;/code&gt; 에게 감사합니다라는 말을 하는 기능이 추가되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;doOnError()&lt;/code&gt; 를 사용해서 &lt;code&gt;onError()&lt;/code&gt; 시그널을 받으면 처리해야 할 일을 지정해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;doOnComplete()&lt;/code&gt;를 사용해서 주방에서 모든 요리가 완료되었음을 의미하는 &lt;code&gt;onComplete()&lt;/code&gt; 시그널을 받으면 처리해야 할 일을 지정해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;doOnNext(), doOnError(), doOnComplete()&lt;/code&gt; 메서드는 필요한 만큼 사용할 수 있다. 해당 메서드들은 리액티브 스트림의 시그널이라는 점을 잊지 말고, 이 시그널을 개발자가 작성하는 코드에서 직접 사용해야하는 것은 아니지만, 알아두면 더 다양한 기능을 더 손쉽게 구현할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 리액터 기반 애플리케이션에서는 실제 구독하기 전까지는 아무런 일도 일어나지 않기 때문에 &lt;code&gt;main()&lt;/code&gt; 메서드 안에서 &lt;code&gt;subscribe()&lt;/code&gt; 가 호출되어야 비로소 그때부터 뭔가가 동작하기 시작한다. 프로젝터 리액터는 태생적으로 &lt;code&gt;lazy&lt;/code&gt; 방식이다. 누군가가 구독하고 결과를 당겨가기 전까지 아무런 일도 일어나지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mono&#34;&gt;Mono&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;Mono&lt;/code&gt;는 0 또는 1개의 원소만 담을 수 있는 리액티브 발행자로서, 프로젝트 리액터에서 제공해주는 구현체이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로젝트 리액터 개발 초기에 &lt;code&gt;Mono&lt;/code&gt;의 필요성에 대한 고민 끝에 하나의 원소만 비동기적으로 반환하는 경우가 압도적으로 많음을 깨닫고 &lt;code&gt;Mono&lt;/code&gt;를 추가하기로 했다. &lt;code&gt;Mono&lt;/code&gt;는 함수형 프로그래밍을 무기로 무장한 &lt;code&gt;Future&lt;/code&gt;라고 생각하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271824446&#34;&gt;스프링부트 실전 활용 마스터&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>스프링부트 실전 활용 마스터 (2)</title>
+      <link>https://dongwooklee96.github.io/post/2022/05/11/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EC%8B%A4%EC%A0%84-%ED%99%9C%EC%9A%A9-%EB%A7%88%EC%8A%A4%ED%84%B0-2.html</link>
+      <pubDate>Wed, 11 May 2022 13:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/05/11/%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8-%EC%8B%A4%EC%A0%84-%ED%99%9C%EC%9A%A9-%EB%A7%88%EC%8A%A4%ED%84%B0-2.html</guid>
+      <description>&lt;h3 id=&#34;리액티브-데이터-스토어-요건&#34;&gt;리액티브 데이터 스토어 요건&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;데이터를 데이터베이스에 넣기 전에, 먼저 리액티브 프로그래밍의 핵심 요건을 이해해야 한다. 리액티브 프로그래밍을 사용하려면 모든 과정이 리액티브여야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;웹 컨트롤러를 리액티브 방식으로 동작하게 만들고 서비스 계층도 리액티브 방식으로 동작하게 만들었는데, 블로킹 방식으로 연결되는 데이터베이스를 호출하면 리액티브는 무너진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;블로킹 방식으로 호출한 스레드는 응답을 받을 때까지 다른 작업을 하지 못한 채 기다려야 한다. 리액터 기반 애플리케이션은 많은 수의 스레드를 가지고 있지 않으므로 데이터베이스 호출 후 블로킹 되는 스레드가 많아지면 스레드가 모두 고갈되서 결국 전체 애플리케이션이 데이터베이스부터 결과를 기다리면서 아무런 일도 할 수 없는 상태가 되어 망가지게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리액티브 프로그래밍고 관련해서 흔히 떠올리는 선입견 중 하나는 리액티브가 태생적으로 빠르다는 주장이다. 이는 물론 사실이 아니다. 작업을 수행하는 단일 스레드의 처리 속도 기준으로 보면 리액티브 프로그래밍은 여러 가지 오버헤드를 수반하므로 성능 저하가 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;똑같은 화물을 나른다고 해도 소형차와 대형 트럭은 차이가 있는데 대형 트럭이 소형차보다 훨씬 많은 화물을 실어 나를 수 있는 것은 분명하다. 하지만 물건 하나만 나르는데 트럭을 사용하는 것은 낭비인 것과 같다. 불필요한 오버헤드를 감수하면서 리액티브를 사용하는 것은 낭비다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;리포지토리-만들기&#34;&gt;리포지토리 만들기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;업계에서는 &lt;code&gt;NoSQL&lt;/code&gt; 데이터 스토어를 표준화하는 방법을 찾기 위해서 다양한 시도를 해왔지만, 아직까지 성공한 사례가 없다. 이유는 모든 &lt;code&gt;NoSQL&lt;/code&gt; 엔진을 하나의 API로 통일해서 표준화하려면 매우 복잡한 과정을 거쳐야 하고, 그렇게 해도 개별 엔진의 고유한 특성을 잃게 되므로, 결국에는 실패로 이어진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스프링은 &lt;code&gt;JdbcTemplate, RestTemplate, JmsTemplate&lt;/code&gt; 같은 템플릿 패턴으로 이를 해결한다. 템플릿이라는 이름이 붙은 이 다양한 도구는 타입 안전 방식으로 연산을 처리하고, 다루기 복잡하고 귀찮은 것들을 추상화해서 데이터베이스 등 협력 대상과의 상호작용이 바르게 동작하도록 보장한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ReactiveCurdRepository&lt;/code&gt;를 상속하며, 상속받는 메서드는 다음과 같다, &lt;code&gt;save(), saveAll(), findById(), findAll(), findAllbyId(), existsById(), count(), deleteById(), delete(), deleteAll()&lt;/code&gt; 여러가지 풍부한 CRUD 연산이 포함되어 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;눈여겨봐야할 부분은 모든 메서드의 반환 타입이 &lt;code&gt;Mono&lt;/code&gt; 나 &lt;code&gt;Flux&lt;/code&gt; 둘 중에 하나라는 점이다. 이 부분이 매우 중요한데, &lt;code&gt;Mono&lt;/code&gt; 나 &lt;code&gt;Flux&lt;/code&gt;를 구독하고 있다가 몽고디비가 데이터를 제공할 준비가 되었을 때 데이터를 받을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271824446&#34;&gt;스프링부트 실전 활용 마스터&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://dzone.com/articles/you-dont-need-hibernate-with-spring-webflux-and-r2&#34;&gt;WebFlux + R2DBC&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>리눅스 커널 스터디 1주차</title>
       <link>https://dongwooklee96.github.io/post/2022/05/08/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%BB%A4%EB%84%90-%EC%8A%A4%ED%84%B0%EB%94%94-1%EC%A3%BC%EC%B0%A8.html</link>

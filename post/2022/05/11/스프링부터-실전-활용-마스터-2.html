@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>알고리즘 문제 - 1이 될때까지 | 개발자 이동욱</title>
+    <title>스프링부터 실전 활용 마스터 (2) | 개발자 이동욱</title>
     <link rel="stylesheet" href="../../../../css/style.css" />
     <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
@@ -98,13 +98,11 @@
     <br/>
 
 <div class="article-meta">
-<h1><span class="title">알고리즘 문제 - 1이 될때까지</span></h1>
+<h1><span class="title">스프링부터 실전 활용 마스터 (2)</span></h1>
 <h2 class="author">이동욱</h2>
-<h2 class="date">2021/08/27</h2>
+<h2 class="date">2022/05/11</h2>
 <p class="terms">
   
-  
-  Categories: <a href="../../../../categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">알고리즘</a> 
   
   
   
@@ -115,92 +113,50 @@
 
 <div class="content-wrapper">
   <main>
-    <h3 id="문제---1이-될때까지">문제 - 1이 될때까지</h3>
+    <h3 id="리액티브-데이터-스토어-요건">리액티브 데이터 스토어 요건</h3>
 <hr>
 <ul>
-<li>어떠한 수 N이 1이 될떄가지 다음의 두 과정 중에 하나를 반복적으로 선택하여 수행하려고 한다.</li>
-</ul>
-<ol>
-<li>N에서 1을 뺀다.</li>
-<li>N을 K로 나눈다.</li>
-</ol>
-<ul>
 <li>
-<p>두 번째 연산은 N이 K로 나누어질때만 선택할 수 있다.</p>
+<p>데이터를 데이터베이스에 넣기 전에, 먼저 리액티브 프로그래밍의 핵심 요건을 이해해야 한다. 리액티브 프로그래밍을 사용하려면 모든 과정이 리액티브여야 한다.</p>
 </li>
 <li>
-<p>예를 들어서 N이 17, K가 4라면 1번의 과정을 1번하면 16이 되고 이후 2번의 과정을 2번하면 N은 1이 된다. 결과적으로 이 경우 전체 과정을 실행한 횟수는 3이 된다.</p>
+<p>웹 컨트롤러를 리액티브 방식으로 동작하게 만들고 서비스 계층도 리액티브 방식으로 동작하게 만들었는데, 블로킹 방식으로 연결되는 데이터베이스를 호출하면 리액티브는 무너진다.</p>
 </li>
 <li>
-<p>N과 K가 주어질 때, N이 1이 될떄까지 1번 혹은 2번의 과정을 수행해야하는 최소 횟수를 구하는 프로그램을 작성하라.</p>
+<p>블로킹 방식으로 호출한 스레드는 응답을 받을 때까지 다른 작업을 하지 못한 채 기다려야 한다. 리액터 기반 애플리케이션은 많은 수의 스레드를 가지고 있지 않으므로 데이터베이스 호출 후 블로킹 되는 스레드가 많아지면 스레드가 모두 고갈되서 결국 전체 애플리케이션이 데이터베이스부터 결과를 기다리면서 아무런 일도 할 수 없는 상태가 되어 망가지게 된다.</p>
+</li>
+<li>
+<p>리액티브 프로그래밍고 관련해서 흔히 떠올리는 선입견 중 하나는 리액티브가 태생적으로 빠르다는 주장이다. 이는 물론 사실이 아니다. 작업을 수행하는 단일 스레드의 처리 속도 기준으로 보면 리액티브 프로그래밍은 여러 가지 오버헤드를 수반하므로 성능 저하가 발생한다.</p>
+</li>
+<li>
+<p>똑같은 화물을 나른다고 해도 소형차와 대형 트럭은 차이가 있는데 대형 트럭이 소형차보다 훨씬 많은 화물을 실어 나를 수 있는 것은 분명하다. 하지만 물건 하나만 나르는데 트럭을 사용하는 것은 낭비인 것과 같다. 불필요한 오버헤드를 감수하면서 리액티브를 사용하는 것은 낭비다.</p>
 </li>
 </ul>
-<h3 id="제한-사항">제한 사항</h3>
-<hr>
-<h3 id="아이디어">아이디어</h3>
-<hr>
-<h4 id="그리디">그리디</h4>
-<ul>
-<li>K로 나눌 수 있는지 보고, 나눌 수 없으면 1을 뺀다.</li>
-<li>N이 1이 될때까지 위의 과정을 반복한다.</li>
-</ul>
-<h4 id="재귀">재귀</h4>
-<ul>
-<li>K로 나눈 경우와, 1을 뺀 경우를 선택한다.</li>
-<li>그리고 결과적으로 더 작은 값을 선택한다.</li>
-</ul>
-<h3 id="코드">코드</h3>
-<hr>
-<pre tabindex="0"><code>def solution(n: int, k: int) -&gt; int:
-    &quot;&quot;&quot;
-    :param n: 특정한 수
-    :param k: 나눌 수
-    :return: 수행한 최소 횟수
-    &quot;&quot;&quot;
-    tot = 0
-    while not n == 1:
-        if n % k == 0:
-            n //= k
-        else:
-            n -= 1
-        tot += 1
-    return tot
-
-
-def solution2(n: int, k: int) -&gt; int:
-    result = 0
-
-    while n &gt;= k:
-        while n % k != 0:
-            n -= 1
-            result += 1
-        n //= k
-        result += 1
-
-    while n &gt; 1:
-        n -= 1
-        result += 1
-    return result
-
-
-if __name__ == &quot;__main__&quot;:
-    n, k = map(int, input().split())
-    print(solution(n, k))
-
-</code></pre><h3 id="더-나은-방법">더 나은 방법</h3>
+<h3 id="리포지토리-만들기">리포지토리 만들기</h3>
 <hr>
 <ul>
 <li>
-<p>조금 더 효율적으로 풀 수 있는 방법이 있다.</p>
+<p>업계에서는 <code>NoSQL</code> 데이터 스토어를 표준화하는 방법을 찾기 위해서 다양한 시도를 해왔지만, 아직까지 성공한 사례가 없다. 이유는 모든 <code>NoSQL</code> 엔진을 하나의 API로 통일해서 표준화하려면 매우 복잡한 과정을 거쳐야 하고, 그렇게 해도 개별 엔진의 고유한 특성을 잃게 되므로, 결국에는 실패로 이어진다.</p>
 </li>
 <li>
-<p>입력이 적을 때는 일일이 하나씩 빼도 문제가 없지만, 큰 숫자를 빼야하는 경우에는 N이 K의 배수가 되도록 효율적으로 한번에 빼는 것 이 좋다.</p>
+<p>스프링은 <code>JdbcTemplate, RestTemplate, JmsTemplate</code> 같은 템플릿 패턴으로 이를 해결한다. 템플릿이라는 이름이 붙은 이 다양한 도구는 타입 안전 방식으로 연산을 처리하고, 다루기 복잡하고 귀찮은 것들을 추상화해서 데이터베이스 등 협력 대상과의 상호작용이 바르게 동작하도록 보장한다.</p>
+</li>
+<li>
+<p><code>ReactiveCurdRepository</code>를 상속하며, 상속받는 메서드는 다음과 같다, <code>save(), saveAll(), findById(), findAll(), findAllbyId(), existsById(), count(), deleteById(), delete(), deleteAll()</code> 여러가지 풍부한 CRUD 연산이 포함되어 있다.</p>
+</li>
+<li>
+<p>눈여겨봐야할 부분은 모든 메서드의 반환 타입이 <code>Mono</code> 나 <code>Flux</code> 둘 중에 하나라는 점이다. 이 부분이 매우 중요한데, <code>Mono</code> 나 <code>Flux</code>를 구독하고 있다가 몽고디비가 데이터를 제공할 준비가 되었을 때 데이터를 받을 수 있다.</p>
 </li>
 </ul>
 <h3 id="참고-문헌">참고 문헌</h3>
 <hr>
 <ul>
-<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118">이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어</a></li>
+<li>
+<p><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271824446">스프링부트 실전 활용 마스터</a></p>
+</li>
+<li>
+<p><a href="https://dzone.com/articles/you-dont-need-hibernate-with-spring-webflux-and-r2">WebFlux + R2DBC</a></p>
+</li>
 </ul>
 
     <a href="../../../../"> >> Home</a>

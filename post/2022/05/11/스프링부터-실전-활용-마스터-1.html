@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>스프링부터 실전 활용 마스터 (1) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">스프링부터 실전 활용 마스터 (1)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/05/11</h2>
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="리액터-타입">리액터 타입</h3>
+<hr>
+<ul>
+<li>
+<p>리액티브 스트림은 수요 조절에 기반하고 있다. 프로젝트 리액터는 핵심 타입인 <code>Flux&lt;T&gt;</code>를 사용해서 수요를 조절한다.</p>
+</li>
+<li>
+<p>레스토랑에서 일하는 서빙 점원에 비유를 하자면, 주방에서 요리가 완성되면, 점원이 주방에서 요리를 받아서 손님에게 가져다주고, 다시 제자리로 돌아와서 다음 요리를 기다린다.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KitchenService</span> <span style="color:#f92672">{</span>
+    Flux<span style="color:#f92672">&lt;</span>Dish<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getDishes</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> Flux<span style="color:#f92672">.</span><span style="color:#a6e22e">just</span><span style="color:#f92672">(</span>
+            <span style="color:#66d9ef">new</span> Dish<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Sesame chicken:),
+</span><span style="color:#e6db74">            new Dish(&#34;</span>Lo mein noodles<span style="color:#f92672">,</span> planin<span style="color:#e6db74">&#34;),
+</span><span style="color:#e6db74">            new Dish(&#34;</span>Sweet <span style="color:#f92672">&amp;</span> sour beef<span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">));</span>
+        <span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>
+<p>서빙 점원은 손님에게 가져다줄 <code>Dish</code> 객체를 달라고 요청할 수 있고, 모두 요리가 완료된 다음에 받을 수 도 있지만, <code>Flux&lt;Dish&gt;</code> 객체로 바로 받을 수 있다. <code>Flux&lt;Dish&gt;</code> 안에 포함된 요리는 아직 완성되지 않았지만, 머지 않아서 완성될 것이다. 하지만 정확히 언제 완성될지는 모른다.</p>
+</li>
+<li>
+<p>하지만 요리가 완성되기 전에 논블로킹이기 때문에, 점원은 다른 일을 못 한 채 계속 기다리지 않는다. 결과가 아직 정해지지 않았고 미래 시점에 알 수 있는 점에서 <code>Future</code>와 비슷하지만, <code>Future</code>는 이미 시작되었음으로 나타내는 반면에, <code>Flux</code>는 시작할 수 있음을 나타낸다.</p>
+</li>
+</ul>
+<h3 id="future는-제공하지-않지만-flux-에서는-제공해주는-특징"><code>Future</code>는 제공하지 않지만, <code>Flux</code> 에서는 제공해주는 특징</h3>
+<hr>
+<pre tabindex="0"><code>- 하나 이상의 `Dish` 포함 가능
+- 각 `Dish`가 제공될 때 어떤 일이 발생하는지 지정 가능
+- 성공과 실패의 두 가지 경로 모두에 대한 처리 방향 정의 가능
+- 결과 폴링 불필요
+- 함수형 프로그래밍 지원
+</code></pre><ul>
+<li><code>Future</code>는 하나의 값을 정확하게 제공하는 것이 목적이었고, <code>Flux</code>는 다수의 값을 지원하는 것이 목적이다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleServer</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> KitchenService kitchen<span style="color:#f92672">;</span>
+
+    SimpleServer<span style="color:#f92672">(</span>KitchenService kitchen<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">kitchen</span> <span style="color:#f92672">=</span> kitchen<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    Flux<span style="color:#f92672">&lt;</span>Dish<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">doingMyJob</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">kitchen</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getDishes</span><span style="color:#f92672">()</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>dish <span style="color:#f92672">-&gt;</span> Dish<span style="color:#f92672">.</span><span style="color:#a6e22e">deliver</span><span style="color:#f92672">(</span>dish<span style="color:#f92672">));</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
+<li>
+<p><code>doingMyJob()</code> 함수는 레스토랑 매니저가 서빙 점원을 툭, 치면 주방에 가서 요리를 받아오는 임무를 수행하는 것이다.</p>
+</li>
+<li>
+<p>주방에 요리를 요청한 후에는 요리 완성 후 해야할 일을 <code>map()</code> 함수를 호출해서 지정한다. 예제에서는 <code>deliver(dish)</code>를 호출해서 요리를 손님에게 가져다주는 일을 지정했다.</p>
+</li>
+<li>
+<p><code>deliver(dish)</code> 는 요리의 <code>delivered</code> 상태를 <code>true</code>로 설정한다.</p>
+</li>
+<li>
+<p>예제 코드는 단순한 형태의 리액티브 컨슈머이다. 리액티브 컨슈머는 다른 리액티브 서비스를 호출하고 결과를 반환한다.</p>
+</li>
+<li>
+<p><code>map()</code> 함수는 인자로 받은 맵핑 함수를 <code>Flux</code>에 담겨있는 각 요리에 적용해서 변환하고 <code>Flux</code>에 담아 반환하므로, 맵핑 함수는 무언가를 반드시 반환해야 한다. 그래서 맵핑 함수의 내부에서 호출되는 <code>deliver()</code> 함수는 <code>void</code>를 반환할 수 없고 <code>dish</code>를 반환한다.</p>
+</li>
+<li>
+<p>프로젝트 리액터는 풍부한 프로그래밍 모델을 제공한다. 함수형 프로그래밍에서 수행하는 변환 뿐만 아니라, <code>onNext(), onError(), onComplete()</code> 시그널처럼 <code>Future</code> 객체에는 없는 리액티브 스트림 수명 주기에 연결 지을 수 있다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>class PoliteServer {
+    private final KitchenService kitchen;
+
+    public PoliteServer(KitchenService kitchen) {
+        this.kitchen = kitchen;
+    }
+
+    Flux&lt;Dish&gt; dongMyJob() {
+        return this.kitchen.getDishes()
+            .doOnNext(dish -&gt; System.out.println(&quot;thank you for &quot; + dish + &quot;!&quot;))
+            .doOnError(error -&gt; System.out.println(&quot;so sorry about&quot; + error.getMessage()))
+            .doOnComplete(() -&gt; System.out.println(&quot;thanks for all your hard work!&quot;))
+            .map(Dish::deliver);
+    }
+}
+</code></pre><ul>
+<li>
+<p><code>doOnNext()</code>를 사용해서 리액티브 스트림의 <code>onNext()</code> 시그널을 받으면 <code>kitchen</code> 에게 감사합니다라는 말을 하는 기능이 추가되었다.</p>
+</li>
+<li>
+<p><code>doOnError()</code> 를 사용해서 <code>onError()</code> 시그널을 받으면 처리해야 할 일을 지정해준다.</p>
+</li>
+<li>
+<p><code>doOnComplete()</code>를 사용해서 주방에서 모든 요리가 완료되었음을 의미하는 <code>onComplete()</code> 시그널을 받으면 처리해야 할 일을 지정해준다.</p>
+</li>
+<li>
+<p><code>doOnNext(), doOnError(), doOnComplete()</code> 메서드는 필요한 만큼 사용할 수 있다. 해당 메서드들은 리액티브 스트림의 시그널이라는 점을 잊지 말고, 이 시그널을 개발자가 작성하는 코드에서 직접 사용해야하는 것은 아니지만, 알아두면 더 다양한 기능을 더 손쉽게 구현할 수 있다.</p>
+</li>
+<li>
+<p>하지만 리액터 기반 애플리케이션에서는 실제 구독하기 전까지는 아무런 일도 일어나지 않기 때문에 <code>main()</code> 메서드 안에서 <code>subscribe()</code> 가 호출되어야 비로소 그때부터 뭔가가 동작하기 시작한다. 프로젝터 리액터는 태생적으로 <code>lazy</code> 방식이다. 누군가가 구독하고 결과를 당겨가기 전까지 아무런 일도 일어나지 않는다.</p>
+</li>
+</ul>
+<h3 id="mono">Mono</h3>
+<hr>
+<ul>
+<li>
+<p><code>Mono</code>는 0 또는 1개의 원소만 담을 수 있는 리액티브 발행자로서, 프로젝트 리액터에서 제공해주는 구현체이다.</p>
+</li>
+<li>
+<p>프로젝트 리액터 개발 초기에 <code>Mono</code>의 필요성에 대한 고민 끝에 하나의 원소만 비동기적으로 반환하는 경우가 압도적으로 많음을 깨닫고 <code>Mono</code>를 추가하기로 했다. <code>Mono</code>는 함수형 프로그래밍을 무기로 무장한 <code>Future</code>라고 생각하면 된다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271824446">스프링부트 실전 활용 마스터</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
