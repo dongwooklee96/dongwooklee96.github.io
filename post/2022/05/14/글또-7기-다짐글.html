@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>알고리즘 문제 - 1이 될때까지 | 개발자 이동욱</title>
+    <title>글또 7기 다짐글 | 개발자 이동욱</title>
     <link rel="stylesheet" href="../../../../css/style.css" />
     <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
@@ -98,13 +98,13 @@
     <br/>
 
 <div class="article-meta">
-<h1><span class="title">알고리즘 문제 - 1이 될때까지</span></h1>
+<h1><span class="title">글또 7기 다짐글</span></h1>
 <h2 class="author">이동욱</h2>
-<h2 class="date">2021/08/27</h2>
+<h2 class="date">2022/05/14</h2>
 <p class="terms">
   
   
-  Categories: <a href="../../../../categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">알고리즘</a> 
+  Categories: <a href="../../../../categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">프로그래밍</a> 
   
   
   
@@ -115,110 +115,50 @@
 
 <div class="content-wrapper">
   <main>
-    <h3 id="문제---1이-될때까지">문제 - 1이 될때까지</h3>
-<hr>
+    <h1 id="글또-다짐글">글또 다짐글</h1>
+<p><img src="https://dl.dropbox.com/s/9kz1jtraslny6xf/download.jpg" alt=""></p>
 <ul>
-<li>어떠한 수 N이 1이 될떄가지 다음의 두 과정 중에 하나를 반복적으로 선택하여 수행하려고 한다.</li>
+<li>이번에 글또 7기를 시작하면서 목표를 세우고 마음가짐을 새롭게 하기 위해서 다짐글을 작성하게 되었다.</li>
 </ul>
-<ol>
-<li>N에서 1을 뺀다.</li>
-<li>N을 K로 나눈다.</li>
-</ol>
+<h3 id="글또-6기를-마치고-느낀점">글또 6기를 마치고 느낀점</h3>
+<hr>
 <ul>
 <li>
-<p>두 번째 연산은 N이 K로 나누어질때만 선택할 수 있다.</p>
+<p>지난 글또 6기에 이어서, 7기를 신청하게 되었다. 처음에는 목표했던 퀄리티있는 글과 단순히 정보를 나열한 글이 아닌 정보를 소화해서 이해하기 쉬운 글로 변경하는 것이 목표였다.</p>
 </li>
 <li>
-<p>예를 들어서 N이 17, K가 4라면 1번의 과정을 1번하면 16이 되고 이후 2번의 과정을 2번하면 N은 1이 된다. 결과적으로 이 경우 전체 과정을 실행한 횟수는 3이 된다.</p>
+<p>지난 기수에서 내가 목표했던 것을 이루었는가를 생각해보면, 그렇지는 못했던 것 같다. 우선 퀄리티 있는 글을 작성하기로 마음을 먹었는데 항상 공부를 하면서 책의 내용을 요약하는 것을 글또 글로 올리거나, 짤막한 정보를 기록하는 용도로 작성했던 것 같다.</p>
 </li>
 <li>
-<p>N과 K가 주어질 때, N이 1이 될떄까지 1번 혹은 2번의 과정을 수행해야하는 최소 횟수를 구하는 프로그램을 작성하라.</p>
+<p>하지만 그렇다고 해서 완전히 실패한 것은 아니라고 생각한다. 지난 글을 읽다보면 내가 이런 것도 공부했었구나 하면서 내가 지나온 길을 확인 할 수 있었고 내가 앞으로 어떤 방향으로 나아가야할지 방향을 잡을 수 있었다.</p>
+</li>
+<li>
+<p>하지만 아쉬웠던 점은 그때 당시의 나의 생각 및 느낌점을 알고 싶었지만 이는 기록되어있지 않았다. 따라서 앞으로 이러한 점을 위주로 기록한다면 나중에 나의 글을 다시 읽었을 때 많은 것을 느끼고 되집어 볼 수 있을 것 같다.</p>
 </li>
 </ul>
-<h3 id="제한-사항">제한 사항</h3>
-<hr>
-<h3 id="아이디어">아이디어</h3>
-<hr>
-<h4 id="그리디">그리디</h4>
-<ul>
-<li>K로 나눌 수 있는지 보고, 나눌 수 없으면 1을 뺀다.</li>
-<li>N이 1이 될때까지 위의 과정을 반복한다.</li>
-</ul>
-<h4 id="재귀">재귀</h4>
-<ul>
-<li>K로 나눈 경우와, 1을 뺀 경우를 선택한다.</li>
-<li>그리고 결과적으로 더 작은 값을 선택한다.</li>
-</ul>
-<h3 id="코드">코드</h3>
-<hr>
-<pre tabindex="0"><code>def solution(n: int, k: int) -&gt; int:
-    &quot;&quot;&quot;
-    :param n: 특정한 수
-    :param k: 나눌 수
-    :return: 수행한 최소 횟수
-    &quot;&quot;&quot;
-    tot = 0
-    while not n == 1:
-        if n % k == 0:
-            n //= k
-        else:
-            n -= 1
-        tot += 1
-    return tot
-
-
-def solution2(n: int, k: int) -&gt; int:
-    result = 0
-
-    while n &gt;= k:
-        while n % k != 0:
-            n -= 1
-            result += 1
-        n //= k
-        result += 1
-
-    while n &gt; 1:
-        n -= 1
-        result += 1
-    return result
-
-def solution3(n: int, k: int) -&gt; int:
-    cnt = 0
-
-    while not n &lt;= 1:
-        if n % k == 0:
-            n //= k
-            cnt += 1
-        else:
-            target = (n // k) * k
-            cnt += n - target
-            n = target
-
-    return cnt
-
-
-if __name__ == &quot;__main__&quot;:
-    n, k = map(int, input().split())
-    print(solution(n, k))
-
-</code></pre><h3 id="더-나은-방법">더 나은 방법</h3>
-<hr>
+<h3 id="글또-7기의-목표">글또 7기의 목표</h3>
 <ul>
 <li>
-<p>조금 더 효율적으로 풀 수 있는 방법이 있다.</p>
+<p>위와 같은 이유로 글또 7기의 목표는 글을 작성할 때 사실 위주의 글도 좋지만 그보다는 나의 개인적인 생각을 위주로 글을 남기자는 것이다.</p>
 </li>
 <li>
-<p>입력이 적을 때는 일일이 하나씩 빼도 문제가 없지만, 큰 숫자를 빼야하는 경우에는 N이 K의 배수가 되도록 효율적으로 한번에 빼는 것 이 좋다.</p>
+<p>예를 들어서 어떤 기술을 공부할 때 이 기술이 내가 알고 있는 다른 기술과의 차이점과 배웠을 때 어떤 부분이 어려웠고, 이를 해결하기 위해서 어떤 것을 해야겠다는 생각을 적는 것이다.</p>
 </li>
 <li>
-<p>앞으로 하나씩 빼는 패턴이 보이면 한번에 뺄 수 없는지 고민을 해봐야겠다.</p>
+<p>그리고 앞으로의 커리어와 내가 최근에 공부하고 있는 것 같은 일상 글을 올려도 좋을 것이다.</p>
+</li>
+</ul>
+<h3 id="마무리">마무리</h3>
+<ul>
+<li>
+<p>이번에도 글또 7기를 무사히 마쳤으면 좋겠다. 그리고 이번년도 후반기에는 오프라인 컨퍼런스도 많이 열려서 이를 리뷰하는 글을 작성하는 것도 재미있을 것 같다.</p>
+</li>
+<li>
+<p>이번 년도를 알차게 보내서, 작성할 수 있는 많은 글이 있으면 좋겠다.</p>
 </li>
 </ul>
 <h3 id="참고-문헌">참고 문헌</h3>
 <hr>
-<ul>
-<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118">이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어</a></li>
-</ul>
 
     <a href="../../../../"> >> Home</a>
   </main>
