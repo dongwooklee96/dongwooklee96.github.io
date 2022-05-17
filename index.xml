@@ -6,7 +6,189 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 14 May 2022 15:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 14 May 2022 20:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>리눅스 커널 스터디 2주차</title>
+      <link>https://dongwooklee96.github.io/post/2022/05/14/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%BB%A4%EB%84%90-%EC%8A%A4%ED%84%B0%EB%94%94-2%EC%A3%BC%EC%B0%A8.html</link>
+      <pubDate>Sat, 14 May 2022 20:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/05/14/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%BB%A4%EB%84%90-%EC%8A%A4%ED%84%B0%EB%94%94-2%EC%A3%BC%EC%B0%A8.html</guid>
+      <description>&lt;h3 id=&#34;프로세스와-쓰레드의-생성과-수행&#34;&gt;프로세스와 쓰레드의 생성과 수행&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;프로세스&#34;&gt;프로세스&lt;/h4&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+int g = 2;
+
+int main() {
+    pid_t pid;
+    int i = 3;
+
+    printf(&amp;quot;PID(%d): parent g=%d, l=%d\n&amp;quot;, getpid(), g, i);
+
+    if ((pid = fork()) &amp;lt; 0) {
+        perror(&amp;quot;fork error&amp;quot;);
+        exit(1);
+    } else if (pid == 0) {
+        g++;
+        i++;
+    } else {
+        wait();
+    }
+    printf(&amp;quot;PID(%d): parent g=%d, l=%d\n&amp;quot;, getpid(), g, i);
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/saro0csd55v20r1/Screen%20Shot%202022-05-14%20at%2020.48.06.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;전역변수 &lt;code&gt;g&lt;/code&gt;와 &lt;code&gt;l&lt;/code&gt;을 가지고 있는 프로그램을 &lt;code&gt;fork()&lt;/code&gt; 함수를 통해서 새로운 프로세스를 생성하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;자식 프로세스에 전역 변수와 지역 변수를 각각 1씩 증가시켰기 때문에 값이 3, 4로 증가되어있는 모습을 확인할 수 있다. 반면에 부모 프로세스에서 &lt;code&gt;g&lt;/code&gt;와 &lt;code&gt;l&lt;/code&gt;을 다시 출력하면 각각 2, 3으로 되어있는 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 통해서 프로세스가 생성되면 주소 공간을 포함하여 이 프로세스를 위한 모든 자원들이 새롭게 할당 됨을 확인할 수 있다. 따라서 자식 프로세스의 연산 결과는 자식 프로세스 주소 공간의 변수에만 영향을 줄 뿐 부모 프로세스 주소 공간의 변수에는 영향이 없으며, 결국 지역 변수, 전역 변수 등의 값이 다르게 출력된 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;쓰레드&#34;&gt;쓰레드&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;만약 쓰레드에서는 수행 결과가 어떠한지 차이를 살펴보자. 리눅스에서는 쓰레드 생성을 위해서 &lt;code&gt;clone()&lt;/code&gt; 이라는 시스템 호출을 제공한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#define _GNU_SOURCE
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+#include &amp;lt;sched.h&amp;gt;
+
+int g = 2;
+
+int sub_func(void *arg)
+{
+    g++;
+    printf(&amp;quot;PID(%d): child=%d\n&amp;quot;, getpid(), g);
+    sleep(2);
+    return 0;
+}
+
+int main() {
+    int pid;
+    int child_stack[4096];
+    int l = 3;
+    printf(&amp;quot;PID(%d) : parent g=%d, l=%d\n&amp;quot;, getpid(), g, l);
+    clone(sub_func, (void *)(child_stack + 4095), CLONE_VM | CLONE_THREAD | CLONE_SIGHAND, NULL);
+    sleep(1);
+    printf(&amp;quot;PID(%d) : parent g=%d, l=%d\n&amp;quot;, getpid(), g, l);
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/70hiewjpfti8nrv/Screen%20Shot%202022-05-14%20at%2021.09.49.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;결과를 확인해보면, 일단 프로세스가 같은 것을 확인할 수 있다. 그리고, 전역 변수 값이 변경된 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;즉, 기존에 수행되던 쓰레드는 자신이 생성한 쓰레드가 변수를 수정하면 그 수정된 결과를 그대로 볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;결론은 새로운 프로세스를 생성하면, 생성된 프로세스 (자식 프로세스)와 생성한 프로세스 (부모 프로세스) 는 서로 다른 주소의 공간을 갖는 반면에 새로운 쓰레드를 생성하면 같은 주소 공간을 공유한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;한 프로세스에서 여러 쓰레드가 동작하는 모델을 다중 쓰레드 시스템이라고 하며 쓰레드 생성은 모든 자원을 새롭게 생성해 주어야 했던 프로세스에 비해서 생성에 드는 비용이 비교적 적다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 자식 쓰레드에서 결함이 발생하면 그것은 부모 쓰레드로 전파된다. 반면에 자식 프로세스에서 발생한 결함은 부모 프로세스에게 전파되지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;결국 쓰레드 모델은 지원 공유에 적합하며, 프로세스 모델은 결함 고립에 적합한 모델이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;프로세스의-수행&#34;&gt;프로세스의 수행&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;리눅스는 태스크의 수행을 위해 &lt;code&gt;excel()&lt;/code&gt; 이라는 시스템 호출을 제공한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;sys/types.h&amp;gt;
+#include &amp;lt;unistd.h&amp;gt;
+#include &amp;lt;stdio.h&amp;gt;
+#include &amp;lt;stdlib.h&amp;gt;
+
+int main() {
+    pid_t pid;
+
+    int exit_status;
+
+    if ((pid = fork()) &amp;lt; 0) {
+        perror(&amp;quot;fork error&amp;quot;);
+        exit(1);
+    } else if (pid == 0) {
+        printf(&amp;quot;before exec\n&amp;quot;);
+        execl(&amp;quot;./fork&amp;quot;, &amp;quot;fork&amp;quot;, (char *)0);
+        printf(&amp;quot;after exec\n&amp;quot;);
+    } else {
+        pid = wait(&amp;amp;exit_status);
+    }
+    printf(&amp;quot;parent\n&amp;quot;);
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/nccyio8r0del165/Screen%20Shot%202022-05-14%20at%2021.20.00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;새로운 프로세스를 생성한 후에 생성된 프로세스에서 &lt;code&gt;execl()&lt;/code&gt;를 호출하여 &lt;code&gt;fork&lt;/code&gt; 라는 바이너리 파일을 수행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;after exec&amp;rdquo; 라는 문자열은 출력되지 않았는데 이는 &lt;code&gt;execl()&lt;/code&gt; 이 성공적으로 수행되면 프로세스의 수행 이미지 (텍스트, 데이터, 스택 등)가 기존의 것에서 새로운 것으로 바뀌며 이 때문에 &amp;ldquo;after exec&amp;quot;를 출력하는 &lt;code&gt;printf()&lt;/code&gt;는 수행되지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;마지막으로 프로세스 생성 및 수행과 관련되어서 하나만 더 언급하지만 &lt;code&gt;fork()&lt;/code&gt; 와 &lt;code&gt;vfork()&lt;/code&gt;의 차이이다. 둘다 프로세스를 생성하지만, &lt;code&gt;fork()&lt;/code&gt;는 부모 프로세스의 공간을 복사하여 자식 프로세스의 공간을 따로 만들지만 &lt;code&gt;vfork()&lt;/code&gt;의 경우 일단은 같은 주소 공간을 가리킨다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이때 &lt;code&gt;execl()&lt;/code&gt; 이 자식 프로세스에서 수행되었다고 가정을 하면, 기존에 사용하던 프로세스의 주소 공간을 모두 없애고, 요청된 바이너리를 기반으로 새로운 주소 공간을 생성하는데, 이러면 자식 프로세스의 공간을 따로 만들어주었던 것이 불필요한 작업이 된다. 따라서 이러한 비효율을 제거하는 것이 바로 &lt;code&gt;vfork()&lt;/code&gt; 이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;최근 리눅스는 &lt;code&gt;COW&lt;/code&gt; 기법을 도입하여 &lt;code&gt;fork()&lt;/code&gt; 할 떄 야기되는 주소 공간 복사 비용을 많이 줄였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;리눅스의-태스크-모델&#34;&gt;리눅스의 태스크 모델&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위에서는 사용자 입장에서 프로세스와 쓰레드를 어떻게 생성하는지 살펴보았지만, 리눅스 커널에서는 이러한 객체들을 어떻게 구현하는지 살펴보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로세스는 자신이 사용하는 자원과 그 자원에서 수행되는 수행 흐름으로 구성된다. 그리고 리눅스에서는 이를 관리하기 위해서 각 프로세스마다 &lt;code&gt;task_struct&lt;/code&gt; 라는 자료 구조를 생성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그럼 자원을 의미하는 사각형이 하나 그려지고 이 자원에서 수행되는 수행의 흐름을 의미하는 실선이 하나 생성된다. 그리고 리눅스에서는 &lt;code&gt;task_struct&lt;/code&gt; 자료 구조를 생성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스레드를 만들었을 때도 기존에 존재하는 프로세스에 실선이 하나 생성되고 리눅스 커널에서는 &lt;code&gt;task_struct&lt;/code&gt; 가 하나 생성된다. 결국 리눅스에서는 프로세스가 생성되든 쓰레드가 생성되든 &lt;code&gt;task_struct&lt;/code&gt; 라는 동일한 자료 구조를 생성하여 관리한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;결국 리눅스 커널은 프로세스 또는 쓰레드 중에서 어떤 것이 요청될 지라도 모두, &lt;code&gt;task_struct&lt;/code&gt; 자료 구조로 동일하게 관리한다. 단지 &lt;code&gt;task_struct&lt;/code&gt; 자료 구조 중에서 수행 이미지를 공유하는가, 같은 쓰레드 그룹에 속해 있는가 등의 여부에 따라 프로세스, 또는 쓰레드로 사용자에게 해석되는 차이가 있을 뿐이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;커널 내부에서는 쓰레드이건 프로세스이건 모두 태스크 구조체로 표현이 되는데 그렇다면 사용자들은 어떤 조건이 만족될 때 태스크를 프로세스라고 부르며 반대로 어던 조건이 만족될 떄 태스크를 쓰레드라고 부를까?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;시스템에 존재하는 모든 태스크는 유일하게 구분이 가능해야 한다. 태스크 별로 유일한 이 값은 &lt;code&gt;task_struct&lt;/code&gt; 구조체 내의 &lt;code&gt;pid&lt;/code&gt; 필드에 담겨있다. 그런데 &lt;code&gt;POSIX&lt;/code&gt; 표준에 의하면 &amp;lsquo;한 프로세스 내의 쓰래드는 동일한 PID를 공유해야 한다&amp;rsquo; 라고 명시되어 있다. 리눅스에서는 이를 위해 &lt;code&gt;tgid&lt;/code&gt; (Thread Group ID) 라는 개념을 도입했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;태스크가 생성되면 이 태스크를 위한 유일한 번호를 &lt;code&gt;pid&lt;/code&gt;로 할당해 준다. 그런 다음에 만약 사용자가 프로세스를 원하는 경우라면 생성된 태스크의 &lt;code&gt;tgid&lt;/code&gt; 값을 새로 할당된 &lt;code&gt;pid&lt;/code&gt; 값과 동일하게 넣어준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 &lt;code&gt;tgid&lt;/code&gt; 값도 유일한 번호를 갖게 된다. 사용자가 쓰레드를 원하는 경우라면 부모 쓰레드의 &lt;code&gt;tgid&lt;/code&gt; 값과 동일한 값으로 생성된 태스크의 &lt;code&gt;tgid&lt;/code&gt; 를 설정한다. 결국 부모 태스크의 자식 태스크는 동일한 &lt;code&gt;tgid&lt;/code&gt;를 갖게 되며 동일한 프로세스에 속해있는 것으로 해석된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=52166775&#34;&gt;리눅스 커널 내부구조&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>글또 7기 다짐글</title>
       <link>https://dongwooklee96.github.io/post/2022/05/14/%EA%B8%80%EB%98%90-7%EA%B8%B0-%EB%8B%A4%EC%A7%90%EA%B8%80.html</link>
@@ -414,6 +596,175 @@
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=52166775&#34;&gt;리눅스 커널 내부구조&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>useReducer로 복잡한 상태 처리하기</title>
+      <link>https://dongwooklee96.github.io/post/2022/04/16/usereducer%EB%A1%9C-%EB%B3%B5%EC%9E%A1%ED%95%9C-%EC%83%81%ED%83%9C-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.html</link>
+      <pubDate>Sat, 16 Apr 2022 13:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/04/16/usereducer%EB%A1%9C-%EB%B3%B5%EC%9E%A1%ED%95%9C-%EC%83%81%ED%83%9C-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.html</guid>
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import {useState} from &amp;quot;react&amp;quot;;
+
+const firstUser = {
+    id: &amp;quot;0391-3233-3201&amp;quot;,
+    firstName: &amp;quot;Bill&amp;quot;,
+    lastName: &amp;quot;Wilson&amp;quot;,
+    city: &amp;quot;Missoula&amp;quot;,
+    state: &amp;quot;Montana&amp;quot;,
+    email: &amp;quot;bwilson@mtnwilsons.com&amp;quot;,
+    admin: false
+}
+
+function User() {
+    const [user, setUser] = useState(firstUser);
+
+    return (
+        &amp;lt;p&amp;gt;Email: {user.email}&amp;lt;/p&amp;gt;
+        &amp;lt;p&amp;gt;Location: {user.city}, {user.state}&amp;lt;/p&amp;gt;
+        &amp;lt;button&amp;gt;make admin&amp;lt;/button&amp;gt;
+    )
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;상태를 관리할 때 일반적으로 저지르는 실수로 상태를 덮어쓰는 경우가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;button
+    onClick={() =&amp;gt; {setUser({ admin: true }); }}
+&amp;gt;
+    Make Admin
+&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이렇게 하면 &lt;code&gt;firstUser&lt;/code&gt;의 상태를 덮어써서 방금 &lt;code&gt;setUser&lt;/code&gt; 함수에 전달한 &lt;code&gt;{admin:true}&lt;/code&gt;로 변경한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;button onClick={() =&amp;gt; {setUser({ ...user, admin: true); }}&amp;gt;
+  Make Admin
+&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이렇게 하면 초기 상태를 받아서 새로운 키 / 값 쌍인 &lt;code&gt;{admin: true}&lt;/code&gt; 를 넣는다. 코드의 모든 &lt;code&gt;onClick&lt;/code&gt; 에 대해서 코드를 이런 식으로 바꿔야 한다. 이 과정에서 실수를 저질르기가 쉬운데 리듀서를 사용하면 이를 쉽게 해결 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;function User() {
+    const [user, setUser] = useReducer(
+        (user, newDetails) =&amp;gt; ({...user, ...newDetails }),
+        firstUser
+    );
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이제 새로운 상태 값을 리듀서에 보내면 프로퍼티가 객체에 추가되거나 기존 프로퍼티가 갱신된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상태가 여러 하위 값으로 구성되거나 다음 상태가 이전 상태에 의존적일 때 이런 패턴이 유용하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=273792432&#34;&gt;러닝 리액트&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>리액트 훅스 규칙</title>
+      <link>https://dongwooklee96.github.io/post/2022/04/16/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%9B%85%EC%8A%A4-%EA%B7%9C%EC%B9%99.html</link>
+      <pubDate>Sat, 16 Apr 2022 13:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/04/16/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%9B%85%EC%8A%A4-%EA%B7%9C%EC%B9%99.html</guid>
+      <description>&lt;h3 id=&#34;훅스의-규칙&#34;&gt;훅스의 규칙&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;훅스를 사용할 때는 버그나 예기치 못한 동작을 방지하기 위해서 염두해 둬야 하는 몇 가지 규칙이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;훅스는-컴포넌트의-영역-안에서만-작동한다&#34;&gt;훅스는 컴포넌트의 영역 안에서만 작동한다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리액트 컴포넌트 내부에서만 훅스를 호출해야 한다. 그리고 커스텀 훅을 추가할 수도 있지만, 이런 커스텀 훅도 결국에는 컴포넌트에 추가되어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;훅스는 일반 자바스크립트가 아니라, 리액트 패턴이라는 점을 염두하라, 하지만 다른 라이브러리에서도 훅을 모델링하고 훅과 협력하는 경우가 많아졌다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;기능을-여러-훅으로-나누면-좋다&#34;&gt;기능을 여러 훅으로 나누면 좋다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;여러 기능이 있을 때 구독과 관련된 모든 기능을 한 효과에, 사운드와 관련한 모든 기능을 다른 효과에 넣었다. 이렇게 하니까 코드가 읽기 쉬워졌는데, 효과를 분리하면 다른 이점도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;훅스가 순서대로 호출되기 때문에, 각 훅을 작게 유지하면 좋다. 호출되고 나면 리액트는 훅의 값을 배열에 저장하고 추적할 수 있게 해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;최상위-수준에서만-훅을-호출해야-한다&#34;&gt;최상위 수준에서만 훅을 호출해야 한다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;리액트 함수의 최상위 수준에서만 훅을 사용해야 한다. 조건문이나 루프, 내포된 함수 안에서 훅을 사용하면 안된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import {useEffect, useState} from &amp;quot;react&amp;quot;;
+
+function Counter() {
+    const [count, setCount] = useState(0);
+
+    if (count &amp;gt; 5) {
+        useEffect(() =&amp;gt; {
+            ...
+        });
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;useEffect&lt;/code&gt;를 &lt;code&gt;if&lt;/code&gt; 문 안에서 사용하면 &lt;code&gt;count&lt;/code&gt; 값이 5보다 클때만 호출되므로 이로 인해서 배열 값이 사라진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리액트에서는 이 배열안에 있는 효과의 위치가 중요하지, 효과가 어떻게 저장되어있는지는 중요하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물론 조건에 따른 로직을 사용할 수 없다는 말은 아니다. 하지만 위와 같은 방식이 아니라, 아래와 같은 방식으로 조정해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;function Counter() {
+    const [count, setCount] = useState(0);
+    const [checked, toggle] = useState(
+        count =&amp;gt; (count &amp;lt; 5) ? undefined : !count, (count &amp;lt; 5) ? undefined : &amp;quot;&amp;quot;
+    );
+
+    useEffect(() =&amp;gt; {
+
+    });
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;훅 안에 &lt;code&gt;if&lt;/code&gt; 문이나 루프나 다른 조건을 내포시키는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;조건 로직과 마찬가지로 비동기적인 동작도 훅 안에 넣을 필요가 있는데, &lt;code&gt;useEffect&lt;/code&gt; 는 첫 번째 인자로 프로미스가 아니라, 함수로 받는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 &lt;code&gt;useEffect(async () =&amp;gt; {})&lt;/code&gt;와 같이 첫 번째 인자에 &lt;code&gt;async&lt;/code&gt; 함수를 넣을 수 없다. 하지만 아래와 같이 내포된 함수 안에서 &lt;code&gt;async&lt;/code&gt; 함수를 만들 수 는 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;useEffect(() =&amp;gt; {
+        (
+         async () =&amp;gt; {
+         await SomePromise();
+         })();
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;언제-리펙터링-하면-좋은가&#34;&gt;언제 리펙터링 하면 좋은가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일반적으로 &lt;code&gt;useMemo()&lt;/code&gt;, &lt;code&gt;useCallback()&lt;/code&gt;, &lt;code&gt;memo&lt;/code&gt;가 과용되는 경향이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리액트는 빨리 작동되도록 설계되었고 컴포넌트가 많이 렌더링 되도록 되어있다. 따라서 성능 최적화가 필요할 때만 위와같은 훅을 사용하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;useCallback()&lt;/code&gt; 이나 &lt;code&gt;useMemo()&lt;/code&gt;가 좋은 생각인것 같아서 아무데서나 사용하면 오히려 성능이 떨어질 수 있다는 점을 주의하고 코드를 리펙터링할 때는 항상 목표를 설정하는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=273792432&#34;&gt;러닝 리액트&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

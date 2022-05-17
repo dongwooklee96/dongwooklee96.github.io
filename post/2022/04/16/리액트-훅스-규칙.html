@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>리액트 훅스 규칙 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">리액트 훅스 규칙</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/04/16</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%A6%AC%EC%95%A1%ED%8A%B8">리액트</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C">프론트엔드</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="훅스의-규칙">훅스의 규칙</h3>
+<hr>
+<ul>
+<li>훅스를 사용할 때는 버그나 예기치 못한 동작을 방지하기 위해서 염두해 둬야 하는 몇 가지 규칙이 있다.</li>
+</ul>
+<h4 id="훅스는-컴포넌트의-영역-안에서만-작동한다">훅스는 컴포넌트의 영역 안에서만 작동한다</h4>
+<ul>
+<li>
+<p>리액트 컴포넌트 내부에서만 훅스를 호출해야 한다. 그리고 커스텀 훅을 추가할 수도 있지만, 이런 커스텀 훅도 결국에는 컴포넌트에 추가되어야 한다.</p>
+</li>
+<li>
+<p>훅스는 일반 자바스크립트가 아니라, 리액트 패턴이라는 점을 염두하라, 하지만 다른 라이브러리에서도 훅을 모델링하고 훅과 협력하는 경우가 많아졌다.</p>
+</li>
+</ul>
+<h4 id="기능을-여러-훅으로-나누면-좋다">기능을 여러 훅으로 나누면 좋다</h4>
+<ul>
+<li>
+<p>여러 기능이 있을 때 구독과 관련된 모든 기능을 한 효과에, 사운드와 관련한 모든 기능을 다른 효과에 넣었다. 이렇게 하니까 코드가 읽기 쉬워졌는데, 효과를 분리하면 다른 이점도 있다.</p>
+</li>
+<li>
+<p>훅스가 순서대로 호출되기 때문에, 각 훅을 작게 유지하면 좋다. 호출되고 나면 리액트는 훅의 값을 배열에 저장하고 추적할 수 있게 해준다.</p>
+</li>
+</ul>
+<h4 id="최상위-수준에서만-훅을-호출해야-한다">최상위 수준에서만 훅을 호출해야 한다</h4>
+<ul>
+<li>리액트 함수의 최상위 수준에서만 훅을 사용해야 한다. 조건문이나 루프, 내포된 함수 안에서 훅을 사용하면 안된다.</li>
+</ul>
+<pre tabindex="0"><code>import {useEffect, useState} from &quot;react&quot;;
+
+function Counter() {
+    const [count, setCount] = useState(0);
+
+    if (count &gt; 5) {
+        useEffect(() =&gt; {
+            ...
+        });
+    }
+</code></pre><ul>
+<li>
+<p><code>useEffect</code>를 <code>if</code> 문 안에서 사용하면 <code>count</code> 값이 5보다 클때만 호출되므로 이로 인해서 배열 값이 사라진다.</p>
+</li>
+<li>
+<p>리액트에서는 이 배열안에 있는 효과의 위치가 중요하지, 효과가 어떻게 저장되어있는지는 중요하지 않다.</p>
+</li>
+<li>
+<p>물론 조건에 따른 로직을 사용할 수 없다는 말은 아니다. 하지만 위와 같은 방식이 아니라, 아래와 같은 방식으로 조정해야 한다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>function Counter() {
+    const [count, setCount] = useState(0);
+    const [checked, toggle] = useState(
+        count =&gt; (count &lt; 5) ? undefined : !count, (count &lt; 5) ? undefined : &quot;&quot;
+    );
+
+    useEffect(() =&gt; {
+
+    });
+
+}
+</code></pre><ul>
+<li>
+<p>훅 안에 <code>if</code> 문이나 루프나 다른 조건을 내포시키는 방식이다.</p>
+</li>
+<li>
+<p>조건 로직과 마찬가지로 비동기적인 동작도 훅 안에 넣을 필요가 있는데, <code>useEffect</code> 는 첫 번째 인자로 프로미스가 아니라, 함수로 받는다.</p>
+</li>
+<li>
+<p>따라서 <code>useEffect(async () =&gt; {})</code>와 같이 첫 번째 인자에 <code>async</code> 함수를 넣을 수 없다. 하지만 아래와 같이 내포된 함수 안에서 <code>async</code> 함수를 만들 수 는 있다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>useEffect(() =&gt; {
+        (
+         async () =&gt; {
+         await SomePromise();
+         })();
+});
+</code></pre><h3 id="언제-리펙터링-하면-좋은가">언제 리펙터링 하면 좋은가?</h3>
+<hr>
+<ul>
+<li>
+<p>일반적으로 <code>useMemo()</code>, <code>useCallback()</code>, <code>memo</code>가 과용되는 경향이 있다.</p>
+</li>
+<li>
+<p>리액트는 빨리 작동되도록 설계되었고 컴포넌트가 많이 렌더링 되도록 되어있다. 따라서 성능 최적화가 필요할 때만 위와같은 훅을 사용하면 된다.</p>
+</li>
+<li>
+<p><code>useCallback()</code> 이나 <code>useMemo()</code>가 좋은 생각인것 같아서 아무데서나 사용하면 오히려 성능이 떨어질 수 있다는 점을 주의하고 코드를 리펙터링할 때는 항상 목표를 설정하는 것이 중요하다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=273792432">러닝 리액트</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

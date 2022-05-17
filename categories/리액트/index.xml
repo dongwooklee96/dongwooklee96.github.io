@@ -6,7 +6,176 @@
     <description>Recent content in 리액트 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Thu, 15 Apr 2021 22:07:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%A6%AC%EC%95%A1%ED%8A%B8/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 16 Apr 2022 13:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EB%A6%AC%EC%95%A1%ED%8A%B8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>useReducer로 복잡한 상태 처리하기</title>
+      <link>https://dongwooklee96.github.io/post/2022/04/16/usereducer%EB%A1%9C-%EB%B3%B5%EC%9E%A1%ED%95%9C-%EC%83%81%ED%83%9C-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.html</link>
+      <pubDate>Sat, 16 Apr 2022 13:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/04/16/usereducer%EB%A1%9C-%EB%B3%B5%EC%9E%A1%ED%95%9C-%EC%83%81%ED%83%9C-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.html</guid>
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import {useState} from &amp;quot;react&amp;quot;;
+
+const firstUser = {
+    id: &amp;quot;0391-3233-3201&amp;quot;,
+    firstName: &amp;quot;Bill&amp;quot;,
+    lastName: &amp;quot;Wilson&amp;quot;,
+    city: &amp;quot;Missoula&amp;quot;,
+    state: &amp;quot;Montana&amp;quot;,
+    email: &amp;quot;bwilson@mtnwilsons.com&amp;quot;,
+    admin: false
+}
+
+function User() {
+    const [user, setUser] = useState(firstUser);
+
+    return (
+        &amp;lt;p&amp;gt;Email: {user.email}&amp;lt;/p&amp;gt;
+        &amp;lt;p&amp;gt;Location: {user.city}, {user.state}&amp;lt;/p&amp;gt;
+        &amp;lt;button&amp;gt;make admin&amp;lt;/button&amp;gt;
+    )
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;상태를 관리할 때 일반적으로 저지르는 실수로 상태를 덮어쓰는 경우가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;button
+    onClick={() =&amp;gt; {setUser({ admin: true }); }}
+&amp;gt;
+    Make Admin
+&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이렇게 하면 &lt;code&gt;firstUser&lt;/code&gt;의 상태를 덮어써서 방금 &lt;code&gt;setUser&lt;/code&gt; 함수에 전달한 &lt;code&gt;{admin:true}&lt;/code&gt;로 변경한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;button onClick={() =&amp;gt; {setUser({ ...user, admin: true); }}&amp;gt;
+  Make Admin
+&amp;lt;/button&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;이렇게 하면 초기 상태를 받아서 새로운 키 / 값 쌍인 &lt;code&gt;{admin: true}&lt;/code&gt; 를 넣는다. 코드의 모든 &lt;code&gt;onClick&lt;/code&gt; 에 대해서 코드를 이런 식으로 바꿔야 한다. 이 과정에서 실수를 저질르기가 쉬운데 리듀서를 사용하면 이를 쉽게 해결 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;function User() {
+    const [user, setUser] = useReducer(
+        (user, newDetails) =&amp;gt; ({...user, ...newDetails }),
+        firstUser
+    );
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이제 새로운 상태 값을 리듀서에 보내면 프로퍼티가 객체에 추가되거나 기존 프로퍼티가 갱신된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상태가 여러 하위 값으로 구성되거나 다음 상태가 이전 상태에 의존적일 때 이런 패턴이 유용하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=273792432&#34;&gt;러닝 리액트&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>리액트 훅스 규칙</title>
+      <link>https://dongwooklee96.github.io/post/2022/04/16/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%9B%85%EC%8A%A4-%EA%B7%9C%EC%B9%99.html</link>
+      <pubDate>Sat, 16 Apr 2022 13:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/04/16/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%9B%85%EC%8A%A4-%EA%B7%9C%EC%B9%99.html</guid>
+      <description>&lt;h3 id=&#34;훅스의-규칙&#34;&gt;훅스의 규칙&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;훅스를 사용할 때는 버그나 예기치 못한 동작을 방지하기 위해서 염두해 둬야 하는 몇 가지 규칙이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;훅스는-컴포넌트의-영역-안에서만-작동한다&#34;&gt;훅스는 컴포넌트의 영역 안에서만 작동한다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리액트 컴포넌트 내부에서만 훅스를 호출해야 한다. 그리고 커스텀 훅을 추가할 수도 있지만, 이런 커스텀 훅도 결국에는 컴포넌트에 추가되어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;훅스는 일반 자바스크립트가 아니라, 리액트 패턴이라는 점을 염두하라, 하지만 다른 라이브러리에서도 훅을 모델링하고 훅과 협력하는 경우가 많아졌다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;기능을-여러-훅으로-나누면-좋다&#34;&gt;기능을 여러 훅으로 나누면 좋다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;여러 기능이 있을 때 구독과 관련된 모든 기능을 한 효과에, 사운드와 관련한 모든 기능을 다른 효과에 넣었다. 이렇게 하니까 코드가 읽기 쉬워졌는데, 효과를 분리하면 다른 이점도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;훅스가 순서대로 호출되기 때문에, 각 훅을 작게 유지하면 좋다. 호출되고 나면 리액트는 훅의 값을 배열에 저장하고 추적할 수 있게 해준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;최상위-수준에서만-훅을-호출해야-한다&#34;&gt;최상위 수준에서만 훅을 호출해야 한다&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;리액트 함수의 최상위 수준에서만 훅을 사용해야 한다. 조건문이나 루프, 내포된 함수 안에서 훅을 사용하면 안된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import {useEffect, useState} from &amp;quot;react&amp;quot;;
+
+function Counter() {
+    const [count, setCount] = useState(0);
+
+    if (count &amp;gt; 5) {
+        useEffect(() =&amp;gt; {
+            ...
+        });
+    }
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;useEffect&lt;/code&gt;를 &lt;code&gt;if&lt;/code&gt; 문 안에서 사용하면 &lt;code&gt;count&lt;/code&gt; 값이 5보다 클때만 호출되므로 이로 인해서 배열 값이 사라진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리액트에서는 이 배열안에 있는 효과의 위치가 중요하지, 효과가 어떻게 저장되어있는지는 중요하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물론 조건에 따른 로직을 사용할 수 없다는 말은 아니다. 하지만 위와 같은 방식이 아니라, 아래와 같은 방식으로 조정해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;function Counter() {
+    const [count, setCount] = useState(0);
+    const [checked, toggle] = useState(
+        count =&amp;gt; (count &amp;lt; 5) ? undefined : !count, (count &amp;lt; 5) ? undefined : &amp;quot;&amp;quot;
+    );
+
+    useEffect(() =&amp;gt; {
+
+    });
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;훅 안에 &lt;code&gt;if&lt;/code&gt; 문이나 루프나 다른 조건을 내포시키는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;조건 로직과 마찬가지로 비동기적인 동작도 훅 안에 넣을 필요가 있는데, &lt;code&gt;useEffect&lt;/code&gt; 는 첫 번째 인자로 프로미스가 아니라, 함수로 받는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 &lt;code&gt;useEffect(async () =&amp;gt; {})&lt;/code&gt;와 같이 첫 번째 인자에 &lt;code&gt;async&lt;/code&gt; 함수를 넣을 수 없다. 하지만 아래와 같이 내포된 함수 안에서 &lt;code&gt;async&lt;/code&gt; 함수를 만들 수 는 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;useEffect(() =&amp;gt; {
+        (
+         async () =&amp;gt; {
+         await SomePromise();
+         })();
+});
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;언제-리펙터링-하면-좋은가&#34;&gt;언제 리펙터링 하면 좋은가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일반적으로 &lt;code&gt;useMemo()&lt;/code&gt;, &lt;code&gt;useCallback()&lt;/code&gt;, &lt;code&gt;memo&lt;/code&gt;가 과용되는 경향이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리액트는 빨리 작동되도록 설계되었고 컴포넌트가 많이 렌더링 되도록 되어있다. 따라서 성능 최적화가 필요할 때만 위와같은 훅을 사용하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;useCallback()&lt;/code&gt; 이나 &lt;code&gt;useMemo()&lt;/code&gt;가 좋은 생각인것 같아서 아무데서나 사용하면 오히려 성능이 떨어질 수 있다는 점을 주의하고 코드를 리펙터링할 때는 항상 목표를 설정하는 것이 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=273792432&#34;&gt;러닝 리액트&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>SHADOW DOM 이란 (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/04/15/shadow-dom-%EC%9D%B4%EB%9E%80-draft.html</link>

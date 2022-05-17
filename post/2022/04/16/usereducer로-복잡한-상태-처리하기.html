@@ -7,17 +7,17 @@
     </script>
     <script>hljs.initHighlightingOnLoad();</script>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="../images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../images/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../images/favicon-16x16.png">
-    <link rel="manifest" href="../images/site.webmanifest">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>리액트 | 개발자 이동욱</title>
-    <link rel="stylesheet" href="../css/style.css" />
-    <link rel="stylesheet" href="../css/fonts.css" />
+    <title>useReducer로 복잡한 상태 처리하기 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
     <header>
 
@@ -31,17 +31,17 @@
       
       
       <li class="pull-left ">
-        <a href="../categories/">카테고리</a>
+        <a href="../../../../categories/">카테고리</a>
       </li>
       
       
       <li class="pull-left ">
-        <a href="../tags/">태그</a>
+        <a href="../../../../tags/">태그</a>
       </li>
       
       
       <li class="pull-left ">
-        <a href="../works.html">포트폴리오</a>
+        <a href="../../../../works.html">포트폴리오</a>
       </li>
       
 
@@ -97,44 +97,94 @@
   <body>
     <br/>
 
+<div class="article-meta">
+<h1><span class="title">useReducer로 복잡한 상태 처리하기</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/04/16</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EB%A6%AC%EC%95%A1%ED%8A%B8">리액트</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%ED%94%84%EB%A1%A0%ED%8A%B8%EC%97%94%EB%93%9C">프론트엔드</a> 
+  
+  
+</p>
+</div>
+
 
 <div class="content-wrapper">
+  <main>
+    <pre tabindex="0"><code>import {useState} from &quot;react&quot;;
 
-  
+const firstUser = {
+    id: &quot;0391-3233-3201&quot;,
+    firstName: &quot;Bill&quot;,
+    lastName: &quot;Wilson&quot;,
+    city: &quot;Missoula&quot;,
+    state: &quot;Montana&quot;,
+    email: &quot;bwilson@mtnwilsons.com&quot;,
+    admin: false
+}
 
-  
+function User() {
+    const [user, setUser] = useState(firstUser);
 
-  <ul>
-     
-     
-     
-     <li>
-       <span class="date">2022/04/16</span>
-       <a href="../post/2022/04/16/usereducer%EB%A1%9C-%EB%B3%B5%EC%9E%A1%ED%95%9C-%EC%83%81%ED%83%9C-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.html">useReducer로 복잡한 상태 처리하기</a>
-     </li>
-     
-     <li>
-       <span class="date">2022/04/16</span>
-       <a href="../post/2022/04/16/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%9B%85%EC%8A%A4-%EA%B7%9C%EC%B9%99.html">리액트 훅스 규칙</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/04/15</span>
-       <a href="../post/2021/04/15/shadow-dom-%EC%9D%B4%EB%9E%80-draft.html">SHADOW DOM 이란 (draft)</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/04/14</span>
-       <a href="../post/2021/04/14/%EB%94%94%EB%B0%94%EC%9A%B4%EC%8A%A4%EB%9E%80-draft.html">디바운스란? (draft)</a>
-     </li>
-     
-     <li>
-       <span class="date">2021/03/30</span>
-       <a href="../post/2021/03/30/%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%97%90%EC%84%9C-%EA%B5%AC%EA%B8%80-%EB%B2%88%EC%97%AD%EA%B8%B0%EA%B0%80-%EB%B2%88%EC%97%AD%ED%95%98%EB%A9%B4%EC%84%9C-dom-%ED%8A%B8%EB%A6%AC%EB%A5%BC-%EB%B3%80%EA%B2%BD%ED%95%B4-%EB%A0%8C%EB%8D%94%EB%A7%81%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EB%8A%94-%ED%98%84%EC%83%81.html">리액트에서 구글 번역기가 번역하면서, DOM 트리를 변경해 렌더링이 되지 않는 현상</a>
-     </li>
-     
-   </ul>
+    return (
+        &lt;p&gt;Email: {user.email}&lt;/p&gt;
+        &lt;p&gt;Location: {user.city}, {user.state}&lt;/p&gt;
+        &lt;button&gt;make admin&lt;/button&gt;
+    )
+}
+</code></pre><ul>
+<li>상태를 관리할 때 일반적으로 저지르는 실수로 상태를 덮어쓰는 경우가 있다.</li>
+</ul>
+<pre tabindex="0"><code>&lt;button
+    onClick={() =&gt; {setUser({ admin: true }); }}
+&gt;
+    Make Admin
+&lt;/button&gt;
+</code></pre><ul>
+<li>이렇게 하면 <code>firstUser</code>의 상태를 덮어써서 방금 <code>setUser</code> 함수에 전달한 <code>{admin:true}</code>로 변경한다.</li>
+</ul>
+<pre tabindex="0"><code>&lt;button onClick={() =&gt; {setUser({ ...user, admin: true); }}&gt;
+  Make Admin
+&lt;/button&gt;
+</code></pre><ul>
+<li>이렇게 하면 초기 상태를 받아서 새로운 키 / 값 쌍인 <code>{admin: true}</code> 를 넣는다. 코드의 모든 <code>onClick</code> 에 대해서 코드를 이런 식으로 바꿔야 한다. 이 과정에서 실수를 저질르기가 쉬운데 리듀서를 사용하면 이를 쉽게 해결 할 수 있다.</li>
+</ul>
+<pre tabindex="0"><code>function User() {
+    const [user, setUser] = useReducer(
+        (user, newDetails) =&gt; ({...user, ...newDetails }),
+        firstUser
+    );
+}
+</code></pre><ul>
+<li>
+<p>이제 새로운 상태 값을 리듀서에 보내면 프로퍼티가 객체에 추가되거나 기존 프로퍼티가 갱신된다.</p>
+</li>
+<li>
+<p>상태가 여러 하위 값으로 구성되거나 다음 상태가 이전 상태에 의존적일 때 이런 패턴이 유용하다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=273792432">러닝 리액트</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
 </div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
   <footer>
       
 <script>
