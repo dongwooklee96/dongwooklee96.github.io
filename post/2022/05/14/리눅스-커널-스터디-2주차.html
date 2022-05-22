@@ -269,6 +269,15 @@ int main() {
 <p>결국 리눅스 커널은 프로세스 또는 쓰레드 중에서 어떤 것이 요청될 지라도 모두, <code>task_struct</code> 자료 구조로 동일하게 관리한다. 단지 <code>task_struct</code> 자료 구조 중에서 수행 이미지를 공유하는가, 같은 쓰레드 그룹에 속해 있는가 등의 여부에 따라 프로세스, 또는 쓰레드로 사용자에게 해석되는 차이가 있을 뿐이다.</p>
 </li>
 <li>
+<p>결국에는 사용자의 프로세스 혹은 쓰레드 생성 요청은 라이브러리를 거쳐서 시스템 호출을 통해 리눅스 커널에 전달된다. 결국에 <code>fork(), vfork(), clone(), pthread_create()</code> 함수들은 모두 <code>do_work()</code>를 호출한다.</p>
+</li>
+<li>
+<p><code>fork()</code>는 비교적 부모 태스크와 덜 공유하는 태스크이고, <code>clone()</code>으로 생성되는 태스크는 비교적 부모 태스크와 많이 공유하는 태스크이다. 즉, <code>do_fork()</code>를 호출할 때 이 함수의 인자로 부모 태스크와 얼마나 공유할지는 정해줌으로써 fork(), clone() 모두를 지원할 수 있는 것이다.</p>
+</li>
+<li>
+<p><code>do_fork()</code>는 우선 새로 생성되는 태스크를 위해서 일종의 이름표를 하나 준비한다. 이 이름표에 새로이 생성된 태스크의 이름과 태어난 시간, 부모님 이름, 소지품 등 매우 자세한 정보를 기록해 둔다. 그래야 나중에 새롭게 생성된 태스크를 쉽게 찾아내고 그 태스크의 정보를 알 수 있을 것이다. 이름표라는 것은 <code>task_struct</code> 구조체이다.</p>
+</li>
+<li>
 <p>커널 내부에서는 쓰레드이건 프로세스이건 모두 태스크 구조체로 표현이 되는데 그렇다면 사용자들은 어떤 조건이 만족될 때 태스크를 프로세스라고 부르며 반대로 어던 조건이 만족될 떄 태스크를 쓰레드라고 부를까?</p>
 </li>
 <li>
@@ -279,6 +288,151 @@ int main() {
 </li>
 <li>
 <p>따라서 <code>tgid</code> 값도 유일한 번호를 갖게 된다. 사용자가 쓰레드를 원하는 경우라면 부모 쓰레드의 <code>tgid</code> 값과 동일한 값으로 생성된 태스크의 <code>tgid</code> 를 설정한다. 결국 부모 태스크의 자식 태스크는 동일한 <code>tgid</code>를 갖게 되며 동일한 프로세스에 속해있는 것으로 해석된다.</p>
+</li>
+</ul>
+<h3 id="예제">예제</h3>
+<hr>
+<ul>
+<li>다음은 위의 내용을 실험해본 내용이다.</li>
+</ul>
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;linux/unistd.h&gt;
+
+int main() {
+    int pid;
+
+    printf(&quot;before fork\n&quot;);
+
+    if ((pid = fork()) &lt; 0) {
+        printf(&quot;fork error\n&quot;);
+        exit(-2);
+    } else if (pid == 0) {
+        printf(&quot;TGID(%d), PID(%ld): child \n&quot;, getpid(), syscall(__NR_gettid));
+    } else {
+        printf(&quot;TGID(%d), PID(%ld): parent \n&quot;, getpid(), syscall(__NR_gettid));
+        sleep(2);
+    }
+    printf(&quot;after fork\n&quot;);
+
+    return 0;
+}
+</code></pre><p><img src="https://dl.dropbox.com/s/aqiaxbawp9phd5z/Screen%20Shot%202022-05-21%20at%2016.41.23.png" alt=""></p>
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;linux/unistd.h&gt;
+
+int main() {
+    int pid;
+
+    printf(&quot;before fork\n&quot;);
+
+    if ((pid = vfork()) &lt; 0) {
+        printf(&quot;fork error\n&quot;);
+        exit(-2);
+    } else if (pid == 0) {
+        printf(&quot;TGID(%d), PID(%ld): child \n&quot;, getpid(), syscall(__NR_gettid));
+        _exit(0);
+    } else {
+        printf(&quot;TGID(%d), PID(%ld): parent \n&quot;, getpid(), syscall(__NR_gettid));
+        sleep(2);
+    }
+    printf(&quot;after fork\n&quot;);
+
+    return 0;
+}
+</code></pre><p><img src="https://dl.dropbox.com/s/qnx5i2hc8tbuk4f/Screen%20Shot%202022-05-21%20at%2016.47.18.png" alt=""></p>
+<ul>
+<li>
+<p><code>fork(), vfork()</code> 에서는 각 태스크의 <code>pid</code>와 <code>tgid</code>가 부모 태스크와 자식 태스크 간에 서로 다른 것을 확인할 수 있다.</p>
+</li>
+<li>
+<p>즉 사용자 입장에서는 서로 다른 프로세스가 만들어진 것이다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;linux/unistd.h&gt;
+#include &lt;pthread.h&gt;
+
+void *t_function(void *data) {
+    int id;
+    int i = 0;
+    pthread_t t_id;
+    id = *((int *) data);
+    printf(&quot;TGID (%d), PID(%d), pthread_self(%d) : child \n&quot;, getpid(), syscall(__NR_gettid), pthread_self());
+    sleep(2);
+}
+
+int main() {
+    int pid, status;
+    int a = 1;
+    int b = 2;
+    pthread_t p_thread[2];
+    printf(&quot;before pthread_create \n&quot;);
+    if ((pid = pthread_create(&amp;p_thread[0], NULL, t_function, (void *)&amp;a)) &lt; 0) {
+        perror(&quot;thread create error: &quot;);
+        exit(1);
+    }
+
+    if ((pid = pthread_create(&amp;p_thread[1], NULL, t_function, (void *)&amp;b)) &lt; 0) {
+        perror(&quot;thread create error: &quot;);
+        exit(2);
+    }
+    pthread_join(p_thread[0], (void **)&amp;status);
+    printf(&quot;pthread_join(%d)\n&quot;, status);
+    pthread_join(p_thread[1], (void **)&amp;status);
+    printf(&quot;pthread_join(%d)\n&quot;, status);
+    printf(&quot;TGID(%d), PID(%d) : parent\n&quot;, getpid(), syscall(__NR_gettid));
+    return 0;
+}
+</code></pre><ul>
+<li>
+<p>반면에 <code>pthread_create()</code> 에서는 각 태스크의 <code>pid</code>는 서로 다르지만 <code>tgid</code>는 서로 동일함을 알 수 있다.</p>
+</li>
+<li>
+<p>같은 프로세스 내부에 서로다른 쓰레드 2개가 생긴 것이다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>#define _GNU_SOURCE
+#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;linux/unistd.h&gt;
+#include &lt;sched.h&gt;
+
+int sub_func(void *arg)
+{
+    printf(&quot;TGID(%d), PID(%d): child \n&quot;, getpid(), syscall(__NR_gettid));
+    sleep(2);
+    return 0;
+}
+
+int main() {
+    int pid;
+    int child_a_stack[4096], child_b_stack[4096];
+
+    printf(&quot;before clone \n\n&quot;);
+    printf(&quot;TGID(%d), PID(%d) : parent \n&quot;, getpid(), syscall(__NR_gettid));
+
+    clone(sub_func, (void *)(child_a_stack + 4095), CLONE_CHILD_CLEARTID | CLONE_CHILD_SETTID, NULL);
+    clone(sub_func, (void *)(child_b_stack + 4095), CLONE_VM | CLONE_THREAD | CLONE_SIGHAND, NULL);
+
+    sleep(1);
+
+    printf(&quot;after clone \n\n&quot;);
+    return 0;
+}
+</code></pre><p><img src="https://dl.dropbox.com/s/81ih3ttcv4zuqc8/Screen%20Shot%202022-05-21%20at%2017.14.52.png" alt=""></p>
+<ul>
+<li>
+<p>해당 코드는 <code>clone()</code>을 이용해서, 프로세스와 쓰레드를 만드는 예를 보여준다.</p>
+</li>
+<li>
+<p>리눅스에서는 <code>pid</code>, <code>tgid</code>, 자원 공유 여부의 선택이 자유로워, 어떤 형태의 태스크라도 만들 수 있다.</p>
 </li>
 </ul>
 <h3 id="참고-문헌">참고 문헌</h3>
