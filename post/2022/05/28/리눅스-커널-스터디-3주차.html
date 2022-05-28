@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>리눅스 커널 스터디 3주차 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">리눅스 커널 스터디 3주차</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/05/28</h2>
+<p class="terms">
+  
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="메모리-관리-4장">메모리 관리 (4장)</h3>
+<hr>
+<ul>
+<li>
+<p>운영체제가 사용하는 메모리 관리 정책에 대해서 알아본다. 리눅스에서 시스템의 모든 물리 메모리를 효율적으로 관리하기 위한 구조와 물리 메모리를 할당/해제 하는 기법을 알아본다.</p>
+</li>
+<li>
+<p>그리고 가상 메모리를 할당/해제 하는 기법에 대해서 살펴본다. 끝으로 가상 메모리 공간을 물리 메모리 공간으로 변환하는 방법에 대해서 논의한다.</p>
+</li>
+</ul>
+<h3 id="메모리-관리-기법과-가상-메모리">메모리 관리 기법과 가상 메모리</h3>
+<hr>
+<ul>
+<li>
+<p>초창기에 컴퓨터가 개발될 때부터 사용자는 시스템에 물리적으로 존재하는 것보다 더 많은 양의 메모리를 필요로 해 왔다.</p>
+</li>
+<li>
+<p>물리 메모리의 한계를 극복하기 위해 여러 가지 기법들이 개발되었는데 그 중에서 가장 성공적이며 지금 대부분의 시스템에서 사용하는 방법이 바로 가상 메모리이다.</p>
+</li>
+<li>
+<p>가상 메모리는 실제 시스템에 존재하는 물리 메모리의 크기와 관계없이 가상적인 주소 공간을 사용자 태스크에게 제공한다.</p>
+</li>
+<li>
+<p>한가지 주의해야 할 점은 물리적으로 <code>4GB</code> 의 메모리를 모두 사용자 태스크에게 제공하는 것은 아니라는 점이다. <code>4GB</code> 라는 공간은 프로그래머에게 개념적으로 제공되는 공간이며 실제로는 사용자가 필요한 만큼의 물리 메모리를 제공한다.</p>
+</li>
+<li>
+<p>결국에 가상 메모리는 사용자에게 개념적으로 <code>4GB</code>의 큰 공간을 제공함과 동시에 물리 메모리는 필요한 만큼의 메모리를 사용하므로, 가능한 많은 태스크가 동시에 수행될 수 있다는 장점을 제공한다. 이외에 메모리 배치 정책이 불필요하며 태스크 간 메모리 공유/보호가 손쉽고, 태스크의 빠른 생성이 가능하다는 장점을 가진다.</p>
+</li>
+</ul>
+<h3 id="물리-메모리-관리-자료-구조">물리 메모리 관리 자료 구조</h3>
+<hr>
+<ul>
+<li>
+<p>물리 메모리는 시스템에는 없어서는 안 될 귀장한 자원이다. 그러므로 무엇보다 먼저 리눅스는 시스템에 존재하는 전체 물리 메모리에 대한 정보를 가지고 있어야 한다.</p>
+</li>
+<li>
+<p>우선 메모리라는 물리적 자원이 리눅스에서 어떻게 표현되고 있는지를 알아본 후, 한정된 용량의 메모리를 효율적으로 사용하기 위해 어떤 정책을 사용하고 있는지 알아보도록 하자.</p>
+</li>
+<li>
+<p>리눅스에선 접근 속도가 같은 메모리의 집합을 뱅크라 부른다. <code>UMA</code> 구조라면 한 개의 뱅크가 존재하고, <code>NUMA</code> 구조라면 복수개의 뱅크가 존재하게 된다.</p>
+</li>
+<li>
+<p>리눅스에서 뱅크를 표현하는 구조가 노드(<code>~/include/linux/mmzone.h</code>)이다. 만약 <code>UMA</code> 구조의 시스템에서 리눅스가 수행된다면 한 개의 노드가 존재할 것이고, 이 노드는 리눅스의 전역변수인 <code>contig_page_data</code>를 통해서 접근 가능하다.</p>
+</li>
+<li>
+<p>만약 <code>NUMA</code> 구조의 시스템에서 리눅스가 수행된다면 복수 개의 노드가 존재할 것이다. 복수 개의 노드는 리스트를 통해 관리되며, 이는 <code>pgdat_list</code> 라는 이름의 배열을 통해서 접근 가능하다. 따라서 리눅스는 하드웨어 시스템에 관계없이 노드라는 일관된 자료구조를 통해서 전체 물리 메모리에 접근할 수 있다.</p>
+</li>
+<li>
+<p>만약 리눅스가 물리 메모리의 할당 요청을 받게 되면, 되도록 할당을 요청한 태스크가 수행되고 있는 <code>CPU</code>와 가까운 노드에서 메모리를 할당하려 한다. 리눅스는 태스크가 되도록 이전에 수행되었던 <code>CPU</code>에서 다시 수행되도록 하기 때문에 이러한 정책을 통해서 보다 높은 성능을 얻을 수 있게 된다.</p>
+</li>
+</ul>
+<h3 id="zone">Zone</h3>
+<hr>
+<ul>
+<li>
+<p>노드 안에 존재하고 있는 메모리는 모두 어떠한 용도로도 사용될 수 있어야 한다. 그런데 (비록 최근에는 점차 사용하지 않는 추세지만) 일분 ISA 버스 기반 디바이스의 경우 정상적인 동작을 위해서는 반드시 물리 메모리 중 16MB 이하 부분을 할당해줘야 하는 경우가 있다.</p>
+</li>
+<li>
+<p>물론 <code>ISA</code> 버스를 채택하고 있지 않은 시스템도 있지만, <code>UMA</code>와 <code>NUMA</code> 구조 모두를 고려했떤 것과 마찬가지 이유로 리눅스 개발자는 <code>ISA</code> 디바이를 사용하던 사용하지 않던 관계 없이 리눅스가 원활히 수행될 수 있도록 설계하였다.</p>
+</li>
+<li>
+<p>그 결과 노드에 존재하는 물리 메모리 중 <code>16MB</code> 이하 부분은 리눅스에서 <code>ZONE_DMA</code>, <code>ZONE_DMA32</code> 라는 이름으로 불린다. 그럼 <code>ZONE_DMA</code>에 속하지 않는, <code>16MB</code> 이상의 메모리는 뭐라 부른까? 이는 <code>ZONE_NOMAL</code> 이라 부른다.</p>
+</li>
+<li>
+<p>각각의 <code>zone</code>은 자신에게 속해있는 물리 메모리를 관리 하기 위해 <code>zone</code> 구조체를 사용한다. 이 구조체에는 해당 <code>zone</code> 에 속해있는 물리 메모리의 시작 주소와 크기, 추후에 설명될 버디 할당자가 사용할 <code>free_area</code> 구조체를 담는 변수 등이 존재한다.</p>
+</li>
+<li>
+<p><code>watermark</code>와 <code>vm_stat</code>를 통해 남이있는 빈 공간이 부족한 경우, 적절한 메모리 해제 정책을 결정하게 된다. 또한 프로세스가 <code>zone</code>에 메모리 할당 요청을 하였으나, <code>free</code> 페이지가 부족하여 할당해주지 못한 경우 이러한 프로세스들을 <code>wait_queue</code>에 넣고, 이를 해싱(<code>hashing</code>) 하여 <code>wait_table</code> 변수가 가리키게 한다.</p>
+</li>
+<li>
+<p>현재 시스템의 <code>zone</code> 관련 사항은 <code>cat /proc/zoneinfo</code> 명령을 통해서 확인 가능하다.</p>
+</li>
+</ul>
+<h3 id="페이지-프레임">페이지 프레임</h3>
+<hr>
+<ul>
+<li>
+<p>각각의 <code>zone</code> 은 자신에 속해있는 물리 메모리를 관리하는데, 바로 이 물리 메모리의 최소 단위를 페이지 프레임이라고 부른다.</p>
+</li>
+<li>
+<p>페이지 프레임은 <code>~/include/linux/mm_types.h</code> 라는 이름의 구조체에 의해 관리된다. 리눅스는 시스템 내의 모든 물리 메모리에 접근 가능해야한다. 이를 위해 모든 페이지 프레임 당 하나의 <code>page</code> 구조체가 존재한다.</p>
+</li>
+<li>
+<p>이는 시스템이 부팅되는 순간에 구축되어 역시 물리 메모리 특정 위치에 저장된다. 이 위치는 <code>mem_map</code> 이라는 전역 배열을 통해서 접근할 수 있다.</p>
+</li>
+<li>
+<p>결국 복수 개의 페이지 프레임이 <code>zone</code>을 구성하며, 때에 따라서 하나 혹은 그 이상의 <code>zone</code> 이 <code>node</code>를 구성하며, 역시 시스템의 구조에 따라서 하나 혹은 그 이상의 <code>node</code>가 존재하는 것이 리눅스의 전체 메모리 관리 구조이다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>struct page {
+    page_flags_t flags;
+    union {
+        struct address_space *mapping;
+        void *s_mem;
+    }
+    struct {
+        union {
+            pgoff_t index;
+            void *freelist;
+            bool pfmemalloc
+        };
+        union {
+            ...
+        }
+    }
+    union {
+        struct list_head lru;
+        struct {
+            struct page *next;
+            int pages; pobjects;
+        }
+        struct slab *slab_page;
+        struct rcu_head rcu_head;
+    }
+    ...
+#if defined(WANT_PAGE_VIRTUAL)
+    void *virtual;
+#endif /* WANT_PAGE_VIRTUAL */
+};
+</code></pre><h3 id="버디와-슬랩">버디와 슬랩</h3>
+<hr>
+<ul>
+<li>
+<p>리눅스는 <code>page frame</code>, <code>zone</code>, <code>node</code> 라는 구조를 통해서 시스템에 존재하는 전체 물리 메모리를 관리할 수 있게 되었다.</p>
+</li>
+<li>
+<p>그럼 리눅스는 자신이 가지고 있는 물리 메모리를 어떻게 할당 또는 해제 하는가? 사용자 프로세스가 <code>1Byte</code>의 물리 메모리 공간을 할당해달라고 요청했다면, 어떨까?</p>
+</li>
+<li>
+<p>물리 메모리 중 <code>1 Byte</code>를 할당해주면 좋을까? 조금만 생각해본다면 이는 매우 불합리하며, 심지어 거의 불가능하다는 것을 알 수 있을 것이다.</p>
+</li>
+<li>
+<p>왜냐하면 할당 된 공간마다 이를 관리하기 위한 메타 데이터가 필요한데 <code>1 Byte</code> 단위로 할당을 하는 경우 이 메타 데이터의 양이 너무 방대해 지기 때문이다.</p>
+</li>
+<li>
+<p>따라서 <code>1 Byte</code> 보다는 큰 단위로 메모리를 할당해주어야 하는데 리눅스는 물리 메모리의 최소 관리 단위인 페이지 프레임 단위로 할당하도록 결정하였다. 결국에 <code>4KB</code> 가 최소 할당 단위가 된다. (8KB, 2MB) 등 크기는 설정 가능하다.</p>
+</li>
+<li>
+<p>이제 두 가지 고려사항이 발생한다. 첫째는 만약 <code>4KB</code> 보다 적은 크기를 요청하면 어떻게 되는가? 아주 작은 크기를 요청하는 경우 <code>4KB</code>를 할당해주면 내부 단편화가 발행한다. 리눅스에서는 이를 위해서 슬랩 할당자(<code>Slab Allocator</code>)를 도입하였다.</p>
+</li>
+<li>
+<p>두번째는 <code>4KB</code> 보다 큰 공간을 요청하면 어떻게 되는가? 이다. 예를 들어서 <code>10KB</code>를 요청할 경우 세 개의 페이지 프레임을 할당하면 내부 단편화를 최소화 시킬 수 있도록 할당할 수 있다.</p>
+</li>
+<li>
+<p>하지만 리눅스는 이 요청에 대해서 <code>16KB</code>를 할당해주는 버디 할당자를 사용한다. 버디 할당자(<code>Buddy Allocator</code>)가 메모리 관리의 부하가 적으며 외부 단편화를 줄일 수 있다는 장점을 제공하기 때문이다.</p>
+</li>
+</ul>
+<h3 id="버디-할당자-buddy-allocator">버디 할당자 (Buddy Allocator)</h3>
+<hr>
+<ul>
+<li>
+<p>버디 할당자는 <code>zone</code> 구조체에 존재하는 <code>free_area[]</code> 배열을 통해서 구축된다. 따라서 버디는 <code>zone</code> 당 하나씩 존재하게 된다.</p>
+</li>
+<li>
+<p><code>free_area</code> 라는 각 엔트리는 <code>free_area</code> 라는 이름의 구조체이며, 이 구조체는 <code>free_list</code>와 <code>map</code> 이라는 필드를 갖는다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>// ~/include/linux/mmzone.h
+
+#define MAX_ORDER 10
+
+struct zone {
+    ...
+    struct free_area free_area[MAX_ORDER];
+    ...
+};
+
+struct free_area {
+    struct list_head free_list;
+    unsigned long *map;
+}
+</code></pre><h3 id="슬랩-할당자-slab-allocator">슬랩 할당자 (Slab Allocator)</h3>
+<hr>
+<ul>
+<li>
+<p>버디 할당자를 이용하면 최대한 큰 연속된 공간을 유지하면서 효율적으로 메모리를 관리할 수 있었다. 그런데 한 가지 문제가 있다. 만약 사용자가 <code>64KB</code> 의 공간을 요청하면 어떻게 해야할까?</p>
+</li>
+<li>
+<p>어쩔 수 없이 최소 할당 단위의 페이지 프레임 한개를 할당해 줘야 한다. 페이지 프레임 크기가 클 수록 내부 단편화로 인한 낭비되는 공간 역시 증가될 것이다.</p>
+</li>
+<li>
+<p>페이지 프레임의 크기가 <code>4KB</code> 라고 가정할 때 미리 <code>4KB</code> 페이지 프레임을 할당 받은 뒤 이 공간을 <code>64B</code>로 분할해 둔다. 그렇다면 (64 X 64 = 4096 (4KB)).</p>
+</li>
+<li>
+<p>그런 뒤 사용자가 <code>64KB</code> 공간을 요청하면 버디 할당자로부터 할당 받아오는 것이 아니라, 미리 할당받아 분할하여 관리하고 있던 바로 이 공간에서 떼어주는 것이다.</p>
+</li>
+<li>
+<p>마치 일종의 캐시로 사용하는 것이다. 이러한 <code>cache</code> 의 집합을 통해서 메모리를 관리하는 정책을 바로 슬랩 할당자로 부른다. 현재 시스템의 슬랩 할당자와 관련된 정보는 바로 <code>cat /proc/slabinfo</code> 있다.</p>
+</li>
+<li>
+<p>그렇다면 어떤 크기의 <code>cache</code>를 가지고 있어야 할까? 자주 할당되고 해제되는 크기의 <code>cache</code>를 가지고 있어야 내부 단편화를 최소화 시킬 수 있을 것이다.까? 자주 할당되고 해제되는 크기의 <code>cache</code>를 가지고 있어야 내부 단편화를 최소화 시킬 수 있을 것이다.</p>
+</li>
+<li>
+<p>따라서 태스크가 생성되고 제거될 때마다 할당 / 해제 되어야 하는 <code>task_struct</code>를 위한 공간처럼 커널 내부에서 자주 할당 . 해제되는 자료 구조의 크기를 위한 <code>cache</code>를 유지한다.</p>
+</li>
+<li>
+<p>또한 일반적인 메모리 할당 요청에 대비하기 위해 <code>32B</code>에서부터 시작되는 2의 승수의 크기를 가지는 캐시까지 유지한다.</p>
+</li>
+<li>
+<p>결국 슬랩할당자에게 메모리 공간읜 할당 요청이 들어온다면 가장 적합한 크기의 캐시를 찾아가서 <code>partial</code> 슬랩으로부터 객체를 할당해준다.</p>
+</li>
+<li>
+<p>리눅스는 다양한 크기의 캐시를 효율적으로 관리하기 위해 <code>kmem_cache</code> 라는 자료 구조를 정의해 두었다. 이 구조체는 각각의 캐시가 담고 있는 크기는 얼마인지 등의 정보를 표현한다.</p>
+</li>
+<li>
+<p>따라서 새로운 캐시를 생성하기 위해서는 <code>kmem_cache</code> 라는 구조체부터 할당 받아야 한다. 만약 버디 할당자로부터 할당받는다면 <code>4KB</code> 만큼의 공간이 낭비될 것이다.</p>
+</li>
+</ul>
+<h3 id="가상-메모리-관리-기법">가상 메모리 관리 기법</h3>
+<hr>
+<ul>
+<li>
+<p>커널의 가상 메모리 관리 기법에 대해서 알아보기 위해 우선 태스크 당 하나씩 존재하는 <code>task_struct</code> 자료 구조와 태스크의 가상 주소 공간의 관계에 대해서 살펴보자.</p>
+</li>
+<li>
+<p>그런 뒤에 리눅스가 어떻게 가상 주소 공간을 할당/해제 하는지에 대해서 살펴보기로 한다. 태스크는 자신의 공유한 가상 메모리를 갖는다. 따라서 커널은 태스크의 가상 메모리가 어디에 존재하는지 관리를 해야한다.</p>
+</li>
+<li>
+<p>어디에 <code>text</code> 영역이 있고, 어디에 <code>data</code> 영역이 있는지 그리고 어느 영역이 사용중이며 어느 영역이 사용 가능한지 등등의 정보를 알고 있어야 한다.</p>
+</li>
+</ul>
+<h3 id="가상-메모리와-물리-메모리의-연결-및-변환">가상 메모리와 물리 메모리의 연결 및 변환</h3>
+<hr>
+<ul>
+<li>
+<p>가상 메모리와 물리 메모리의 연결 및 주소 변환 기법에 대해서 알아보기 전에 프로그램이 시작되는 과정부터 살펴보기로 하자.</p>
+</li>
+<li>
+<p>컴파일 되어 디스크에 저장되어 있는 프로그램을 수행시키기 위해서는 우선 태스크를 하나 생성해야 한다. 그런 뒤에 생성된 태스크에게 가상 주소 공간을 제공해주고, 필요하다면 물리 메모리의 일부를 할당해 준 뒤에 태스크가 원하는 디스크 상의 내용을 읽어서 물리 메모리에 올려 놓고, 이 물리 메모리의 실제 주소와 태스크의 가상 주소 공간을 연결해 주어야 한다.</p>
+</li>
+<li>
+<p>디스크에 저장되어 있는 실행 파일의 어느 부분을 읽어서 물리 메모리에 올려 놓을 것인가는 <code>ELF</code> 포맷 파일의 헤드를 읽음으로써 가능하고, 이를 가상 주소 몇 번지와 연결해줄 것인가는 미리 정해져 있는 규칙을 따른다. (<code>/include/linux.elf.h</code>) 우선 실행 파일의 헤더를 확인하고, 헤더의 내용에 따라서 각 내용을 읽어서 물리 메모리에 올려 놓은 뒤 미리 약속되어 있는 가상 메모리 주소에 연결 시켜주는 것이다.</p>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=52166775">리눅스 커널 내부구조</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+
