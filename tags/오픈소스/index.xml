@@ -61,6 +61,24 @@
     </item>
     
     <item>
+      <title>펄 Test::More 모듈 도큐먼트 </title>
+      <link>https://dongwooklee96.github.io/post/2022/06/01/%ED%8E%84-testmore-%EB%AA%A8%EB%93%88-%EB%8F%84%ED%81%90%EB%A8%BC%ED%8A%B8.html</link>
+      <pubDate>Wed, 01 Jun 2022 21:04:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/06/01/%ED%8E%84-testmore-%EB%AA%A8%EB%93%88-%EB%8F%84%ED%81%90%EB%A8%BC%ED%8A%B8.html</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/orgrd8l01vekuek/Screen%20Shot%202022-06-01%20at%2022.15.16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;앞으로 테스트를 작성할 때 많이 읽어야할 API 문서이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://perldoc.perl.org/Test::More&#34;&gt;Perl - Test::More&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>PostgresSQL 번역으로 기여하는 방법</title>
       <link>https://dongwooklee96.github.io/post/2021/12/09/postgressql-%EB%B2%88%EC%97%AD%EC%9C%BC%EB%A1%9C-%EA%B8%B0%EC%97%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Thu, 09 Dec 2021 15:04:24 +0900</pubDate>
