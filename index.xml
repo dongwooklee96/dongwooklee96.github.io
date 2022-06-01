@@ -6,7 +6,60 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 28 May 2022 13:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Jun 2022 21:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PostgresSQL 기여 프로세스 및 Commitfest</title>
+      <link>https://dongwooklee96.github.io/post/2022/06/01/postgressql-%EA%B8%B0%EC%97%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B0%8F-commitfest.html</link>
+      <pubDate>Wed, 01 Jun 2022 21:04:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/06/01/postgressql-%EA%B8%B0%EC%97%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B0%8F-commitfest.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;우선 여태까지 이것을 몰랐다는 것이 조금은 부끄럽지만 적어보도록 하겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/u42mqoyj3j89ge3/Screen%20Shot%202022-06-01%20at%2021.56.14.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;기여를 하는 프로세스는 위의 그림과 같이 두 가지가 있다. 첫 번째는 메일링 리스트에 바로 패치를 보내면, 커미터가 그것을 바로 커밋하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;두 번째는 먼저 패치를 메일링 리스트에 올리고 나서, &lt;a href=&#34;https://commitfest.postgresql.org/&#34;&gt;Commitfests&lt;/a&gt; 에다가 올리는 것이다. 그래야지 지속적으로 관리가 된다고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나는 여태까지 그냥 메일링 리스트에 올라가면 자동으로 커밋 페스트에 올라가거나 아니면 메인테이너가 컨트리뷰터들이 올려주는 줄 알았다. 아마도 사소한 패치 위주로 올려서 그런 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/riipboe76hjiztk/Screen%20Shot%202022-06-01%20at%2021.59.25.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 커밋페스트에서 패치를 만드는 폼인데 디스크립션이랑 토픽은 상황에 맞게 알아서 정해주고 맨 아래 &lt;code&gt;Specify thread msgId&lt;/code&gt; 부분만, 아까 메일링 리스트에 할당된 쓰레드 아이디를 넣어주면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/b3ljq1pzh1egzm7/Screen%20Shot%202022-06-01%20at%2022.03.31.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그렇게 되면, 패치가 올라가게 되고, 패치가 관리될 수 있는 것이다. 마치 깃 허브 이슈나 지라 티켓처럼 이슈를 관리한다고 보면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여태까지 바보 같이 메일링 리스트만 열심히 보고 있었다. 사실 메일 제목만 보는 날이 더 많지만 물론 커밋 페스트의 존재는 알고 있었지만, 정확히 어떻게 사용하는지 몰라서 안보고 있었는데 적극적으로 보도록 해야겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스테판은 나에게 리뷰가 필요한 패치에 대해서 리뷰를 해도 좋고, 테스트 코드를 작성하면 더 좋을 것이라고 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;빨리 테스트코드를 작성하는 법에 익숙해져서 리뷰를 기다리는 패치들이나 테스트 코드가 없는 패치들에게 왕창 테스트 코드를 날릴 날이 왔으면 좋겠다. :)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://wiki.postgresql.org/wiki/Submitting_a_Patch&#34;&gt;Postgres Wiki - Submitting_a_Patch&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://commitfest.postgresql.org/&#34;&gt;PostgreSQL - Commitfest&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>리눅스 커널 스터디 3주차</title>
       <link>https://dongwooklee96.github.io/post/2022/05/28/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%BB%A4%EB%84%90-%EC%8A%A4%ED%84%B0%EB%94%94-3%EC%A3%BC%EC%B0%A8.html</link>
