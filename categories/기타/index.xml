@@ -6,7 +6,40 @@
     <description>Recent content in 기타 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Tue, 05 Apr 2022 01:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%83%80/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 02 Jun 2022 17:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%83%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>쓸만한 파이썬 디버거</title>
+      <link>https://dongwooklee96.github.io/post/2022/06/02/%EC%93%B8%EB%A7%8C%ED%95%9C-%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%94%94%EB%B2%84%EA%B1%B0.html</link>
+      <pubDate>Thu, 02 Jun 2022 17:00:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/06/02/%EC%93%B8%EB%A7%8C%ED%95%9C-%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%94%94%EB%B2%84%EA%B1%B0.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;쓸만한 파이썬 디버거를 찾아보다가, &lt;a href=&#34;https://pypi.org/project/pudb/&#34;&gt;PUDB&lt;/a&gt; 라는 것을 알게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용하기는 가장 간단한 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 GDB 처럼 실행하고 있는 프로세스에 바로 붙는 것은 안되는 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;GDB&lt;/code&gt;로 PYTHON 프로세스에 붙을 수 는 있지만 라인별로 실행되는 것은 아니고 스택 트레이스를 확인하는 정도 였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=WKzsyTj5sY0&#34;&gt;debugging python with pdb stripe flask example&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.hahwul.com/2017/02/26/python-pudbconsole-base-debugger-python/&#34;&gt;PuDB 이용하여 cli에서 python 디버깅하기&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>효과적인 코드 리뷰 방법 (카카오 기술 블로그를 읽고나서..)</title>
       <link>https://dongwooklee96.github.io/post/2022/04/05/%ED%9A%A8%EA%B3%BC%EC%A0%81%EC%9D%B8-%EC%BD%94%EB%93%9C-%EB%A6%AC%EB%B7%B0-%EB%B0%A9%EB%B2%95-%EC%B9%B4%EC%B9%B4%EC%98%A4-%EA%B8%B0%EC%88%A0-%EB%B8%94%EB%A1%9C%EA%B7%B8%EB%A5%BC-%EC%9D%BD%EA%B3%A0%EB%82%98%EC%84%9C...html</link>
