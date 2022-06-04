@@ -29484,6 +29484,33 @@ int main ()
     </item>
     
     <item>
+      <title>POSTGRESQL 익스텐션을 만드는데 참고할 만한 좋은글 목록</title>
+      <link>https://dongwooklee96.github.io/post/2021/03/31/postgresql-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%B0%B8%EA%B3%A0%ED%95%A0-%EB%A7%8C%ED%95%9C-%EC%A2%8B%EC%9D%80%EA%B8%80-%EB%AA%A9%EB%A1%9D.html</link>
+      <pubDate>Wed, 31 Mar 2021 22:56:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/03/31/postgresql-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%B0%B8%EA%B3%A0%ED%95%A0-%EB%A7%8C%ED%95%9C-%EC%A2%8B%EC%9D%80%EA%B8%80-%EB%AA%A9%EB%A1%9D.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/&#34;&gt;Writing Postgres Extensions - the Basics&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://big-elephants.com/2015-10/writing-postgres-extensions-part-ii/&#34;&gt;Writing Postgres Extensions - Types and Operators&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://big-elephants.com/2015-10/writing-postgres-extensions-part-iii/&#34;&gt;Writing Postgres Extensions - Debugging&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://big-elephants.com/2015-11/writing-postgres-extensions-part-iv/&#34;&gt;Writing Postgres Extensions - Testing&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://big-elephants.com/2015-11/writing-postgres-extensions-part-v/&#34;&gt;Writing Postgres Extensions Code Organization and Versioning&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+</description>
+    </item>
+    
+    <item>
       <title>일일 회고</title>
       <link>https://dongwooklee96.github.io/post/2021/03/31/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</link>
       <pubDate>Wed, 31 Mar 2021 22:25:36 +0900</pubDate>
