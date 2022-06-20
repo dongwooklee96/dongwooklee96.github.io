@@ -240,11 +240,10 @@ def allocate(
     with uow:
         batches = uow.batches.list()
         if not is_valid_sku(line.sku, batches):
-            raise InvalidSku(f&quot;Invalid sku {line.sku}&quot;)
+            raise InvalidSku(f&#34;Invalid sku {line.sku}&#34;)
         batchref = model.allocate(line, batches)
         uow.commit()
     return batchref
-
 </code></pre><h3 id="정리">정리</h3>
 <hr>
 <h4 id="애그리게이트와-일관성-경계-1">애그리게이트와 일관성 경계</h4>

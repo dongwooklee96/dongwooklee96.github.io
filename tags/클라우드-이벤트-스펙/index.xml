@@ -67,16 +67,16 @@ content-type: application/cloudevents+json; charset=UTF-8
 ------------------- value --------------------
 
 {
-    &amp;quot;specversion&amp;quot; : &amp;quot;1.0&amp;quot;,
-    &amp;quot;type&amp;quot; : &amp;quot;com.example.someevent&amp;quot;,
-    &amp;quot;source&amp;quot; : &amp;quot;/mycontext/subcontext&amp;quot;,
-    &amp;quot;id&amp;quot; : &amp;quot;1234-1234-1234&amp;quot;,
-    &amp;quot;time&amp;quot; : &amp;quot;2018-04-05T03:56:24Z&amp;quot;,
-    &amp;quot;datacontenttype&amp;quot; : &amp;quot;application/xml&amp;quot;,
+    &amp;#34;specversion&amp;#34; : &amp;#34;1.0&amp;#34;,
+    &amp;#34;type&amp;#34; : &amp;#34;com.example.someevent&amp;#34;,
+    &amp;#34;source&amp;#34; : &amp;#34;/mycontext/subcontext&amp;#34;,
+    &amp;#34;id&amp;#34; : &amp;#34;1234-1234-1234&amp;#34;,
+    &amp;#34;time&amp;#34; : &amp;#34;2018-04-05T03:56:24Z&amp;#34;,
+    &amp;#34;datacontenttype&amp;#34; : &amp;#34;application/xml&amp;#34;,
 
     ... further attributes omitted ...
 
-    &amp;quot;data&amp;quot; : {
+    &amp;#34;data&amp;#34; : {
         ... application data encoded in XML ...
     }
 }

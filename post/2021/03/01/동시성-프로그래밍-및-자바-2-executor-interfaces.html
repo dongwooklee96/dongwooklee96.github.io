@@ -139,13 +139,12 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
         executorService.submit(() -&gt; {
-            System.out.println(&quot;Thread &quot; + Thread.currentThread().getName());
+            System.out.println(&#34;Thread &#34; + Thread.currentThread().getName());
         });
 
         executorService.shutdown();
     }
 }
-
 </code></pre><ul>
 <li>다음작업이 들어올 때가지 계속 대기를 하기 때문에 명시적으로 종료를 시켜줘야 한다.</li>
 <li>따라서 <code>showdown()</code> 메서드를 사용하여 명시적으로 종료를 시켜줘야 한다.</li>

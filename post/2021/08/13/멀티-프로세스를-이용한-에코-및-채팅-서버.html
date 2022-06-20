@@ -160,10 +160,10 @@ int main(int argc, char* argv[]) {
   pid_t pid;
 
   if (argc != 2) {
-    printf(&quot;usage: %s [port] \n&quot;, argv[0]);
+    printf(&#34;usage: %s [port] \n&#34;, argv[0]);
     exit(1);
   }
-  printf(&quot;server start...\n&quot;);
+  printf(&#34;server start...\n&#34;);
 
   server_sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
   if (server_sd == -1) error_proc();
@@ -185,21 +185,21 @@ int main(int argc, char* argv[]) {
       error_print();
       continue;
     }
-    printf(&quot;client %s: %d is connected...\n&quot;, inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
+    printf(&#34;client %s: %d is connected...\n&#34;, inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
     pid = fork();
     if (pid == 0) { /* child process */
       close(server_sd);
       while (1) {
         read_len = read(client_sd, read_buffer, sizeof(read_buffer) - 1);
         if (read_len == 0) break;
-        read_buffer[read_len] = '\0';
-        printf(&quot;client (%d): %s\n&quot;, ntohs(client_addr.sin_port), read_buffer);
+        read_buffer[read_len] = &#39;\0&#39;;
+        printf(&#34;client (%d): %s\n&#34;, ntohs(client_addr.sin_port), read_buffer);
         write(client_sd, read_buffer, strlen(read_buffer));
       }
-      printf(&quot;client (%d) : is disconnected\n&quot;, ntohs(client_addr.sin_port));
+      printf(&#34;client (%d) : is disconnected\n&#34;, ntohs(client_addr.sin_port));
       close(client_sd);
       return 0;
-    } else if (pid == -1) error_proc(&quot;fork&quot;);
+    } else if (pid == -1) error_proc(&#34;fork&#34;);
     else {
       close(client_sd);
     }
@@ -207,7 +207,6 @@ int main(int argc, char* argv[]) {
   close(server_sd);
   return 0;
 }
-
 </code></pre><h3 id="간단한-udp-멀티-프로세스-채팅-프로그램">간단한 UDP 멀티 프로세스 채팅 프로그램</h3>
 <hr>
 <p>채팅 서버의 역할은 다음과 같다.</p>
@@ -252,13 +251,13 @@ int main(int argc, char* argv[]) {
   struct sockaddr_in sockets[MAX_CLIENT];
 
   if (argc != 2) {
-    fprintf(stderr, &quot;usage: %s port&quot;, argv[0]);
+    fprintf(stderr, &#34;usage: %s port&#34;, argv[0]);
     return 0;
   }
 
   memset(&amp;sockets, 0, sizeof(sockets[0])*MAX_CLIENT);
   my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-  if (my_sock == -1) error_proc(&quot;socket&quot;);
+  if (my_sock == -1) error_proc(&#34;socket&#34;);
 
   memset(&amp;src_addr, 0, sizeof(src_addr));
   src_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -266,13 +265,13 @@ int main(int argc, char* argv[]) {
   src_addr.sin_port = htons(atoi(argv[1]));
 
   res = bind(my_sock, (struct sockaddr*)&amp;src_addr, sizeof(src_addr));
-  if (res == -1) error_proc(&quot;bind&quot;);
+  if (res == -1) error_proc(&#34;bind&#34;);
   addr_len = sizeof(dest_addr);
 
   while (1) {
     n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0,
         (struct sockaddr *) &amp;dest_addr, &amp;addr_len);
-    if (n_recv == -1) error_proc(&quot;recvfrom&quot;);
+    if (n_recv == -1) error_proc(&#34;recvfrom&#34;);
     res = check_sock_list(&amp;dest_addr, sockets, n_client);
 
     if (res == n_client) {
@@ -283,9 +282,9 @@ int main(int argc, char* argv[]) {
         n_client++;
       }
     }
-    printf(&quot;n_client: %d\n&quot;, n_client);
+    printf(&#34;n_client: %d\n&#34;, n_client);
     str_addr = inet_ntoa(dest_addr.sin_addr);
-    sprintf(name_buffer, &quot;%s: %d &gt;&gt; &quot;, str_addr, ntohs(dest_addr.sin_port));
+    sprintf(name_buffer, &#34;%s: %d &gt;&gt; &#34;, str_addr, ntohs(dest_addr.sin_port));
 
     for (i = 0; i &lt; n_client; i++) {
       if (i == res) continue; // sender == receiver skip
@@ -326,22 +325,22 @@ int main(int argc, char* argv[]) {
   addr_len = sizeof(dest_addr);
 
   pid = fork();
-  if (pid == -1) error_proc(&quot;fork&quot;);
+  if (pid == -1) error_proc(&#34;fork&#34;);
   if (pid == 0) {
     while (1) {
       n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0, (struct sockaddr*) &amp;dest_addr, &amp;addr_len);
-      if (n_recv == -1) error_proc(&quot;read&quot;);
+      if (n_recv == -1) error_proc(&#34;read&#34;);
       write(1, buff, n_recv);
     }
   } else {
     while (1) {
       fgets(buff, BUFSIZ - 1, stdin);
       read_len = strlen(buff);
-      if (read_len == 0) error_proc(&quot;fgets&quot;);
+      if (read_len == 0) error_proc(&#34;fgets&#34;);
       n_sent = sendto(my_sock, buff, read_len, 0, (struct sockaddr*) &amp;dest_addr, addr_len);
-      if (n_sent == -1) error_proc(&quot;write&quot;);
-      buff[read_len - 1] = '\0';
-      if (!strcmp(buff, &quot;END&quot;)) break;
+      if (n_sent == -1) error_proc(&#34;write&#34;);
+      buff[read_len - 1] = &#39;\0&#39;;
+      if (!strcmp(buff, &#34;END&#34;)) break;
     }
     kill(pid, SIGTERM);
   }
@@ -349,7 +348,7 @@ int main(int argc, char* argv[]) {
 }
 
 void error_proc(const char* str) {
-  fprintf(stderr, &quot;%s:%s \n&quot;, str, strerror(errno));
+  fprintf(stderr, &#34;%s:%s \n&#34;, str, strerror(errno));
   exit(1);
 }
 </code></pre><p><strong>서버 화면</strong>

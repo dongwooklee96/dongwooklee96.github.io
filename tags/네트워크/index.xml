@@ -169,7 +169,7 @@ hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
 &lt;p&gt;이를 확인해보기 위해서, &lt;code&gt;ping&lt;/code&gt; 보다 많은 기능을 지원하는 &lt;code&gt;hping3&lt;/code&gt; 도구를 이용해서 테스트 해보겠다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f icmp -Y &amp;quot;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&amp;quot;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f icmp -Y &amp;#34;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 명령어를 이용해서 패킷을 캡처하고 아래 명령어를 다른 터미널에서 입력을 해본다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -213,32 +213,32 @@ int main(int argc, char **argv) {
         char buf[MAXLINE];
 
         if((server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-                perror(&amp;quot;error : &amp;quot;);
+                perror(&amp;#34;error : &amp;#34;);
                 return 1;
         }
         serveraddr.sin_family = AF_INET;
-        serveraddr.sin_addr.s_addr = inet_addr(&amp;quot;127.0.0.1&amp;quot;);
+        serveraddr.sin_addr.s_addr = inet_addr(&amp;#34;127.0.0.1&amp;#34;);
         serveraddr.sin_port = htons(4000);
 
         client_len = sizeof(serveraddr);
 
         if(connect(server_sockfd, (struct sockaddr*)&amp;amp;serveraddr, client_len) == -1) {
-                perror(&amp;quot;connect error : &amp;quot;);
+                perror(&amp;#34;connect error : &amp;#34;);
                 return 1;
         }
         memset(buf, 0x00, MAXLINE);
         read(0, buf, MAXLINE);
         if(write(server_sockfd, buf, MAXLINE) &amp;lt;= 0) {
-                perror(&amp;quot;write error : &amp;quot;);
+                perror(&amp;#34;write error : &amp;#34;);
                 return 1;
         }
         memset(buf, 0x00, MAXLINE);
         if(read(server_sockfd, buf, MAXLINE) &amp;lt;= 0) {
-                perror(&amp;quot;read error: &amp;quot;);
+                perror(&amp;#34;read error: &amp;#34;);
                 return 1;
         }
         close(server_sockfd);
-        printf(&amp;quot;server:%s\n&amp;quot;, buf);
+        printf(&amp;#34;server:%s\n&amp;#34;, buf);
         return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;server.c&lt;/strong&gt;&lt;/p&gt;
@@ -263,7 +263,7 @@ int main(void){
 
    server_socket = socket(PF_INET, SOCK_STREAM, 0);
    if(-1 == server_socket){
-      printf( &amp;quot;server socket 생성 실패n&amp;quot;);
+      printf( &amp;#34;server socket 생성 실패n&amp;#34;);
       exit( 1);
    }
 
@@ -273,13 +273,13 @@ int main(void){
    server_addr.sin_addr.s_addr= htonl(INADDR_ANY);
 
    if(-1 == bind(server_socket, (struct sockaddr*)&amp;amp;server_addr, sizeof(server_addr))){
-      printf( &amp;quot;bind() 실행 에러n&amp;quot;);
+      printf( &amp;#34;bind() 실행 에러n&amp;#34;);
       exit(1);
    }
 
    while(1){
       if(-1 == listen(server_socket, 5)){
-         printf( &amp;quot;대기상태 모드 설정 실패n&amp;quot;);
+         printf( &amp;#34;대기상태 모드 설정 실패n&amp;#34;);
          exit(1);
       }
 
@@ -287,19 +287,18 @@ int main(void){
       client_socket     = accept( server_socket, (struct sockaddr*)&amp;amp;client_addr, &amp;amp;client_addr_size);
 
       if (-1 == client_socket){
-         printf( &amp;quot;클라이언트 연결 수락 실패n&amp;quot;);
+         printf( &amp;#34;클라이언트 연결 수락 실패n&amp;#34;);
          exit(1);
       }
 
       read (client_socket, buff_rcv, BUFF_SIZE);
-      printf(&amp;quot;receive: %s\n&amp;quot;, buff_rcv);
+      printf(&amp;#34;receive: %s\n&amp;#34;, buff_rcv);
 
-      sprintf(buff_snd, &amp;quot;%ld : %s&amp;quot;, strlen(buff_rcv), buff_rcv);
+      sprintf(buff_snd, &amp;#34;%ld : %s&amp;#34;, strlen(buff_rcv), buff_rcv);
       write(client_socket, buff_snd, strlen(buff_snd)+1);          // +1: NULL까지 포함해서 전송
       close(client_socket);
    }
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 소스 코드를 복사하여, 파일을 만든다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -371,7 +370,7 @@ gcc -pg -g -o server server.c
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;직접 확인하기&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f &amp;quot;tcp port 80&amp;quot;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f &amp;#34;tcp port 80&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;위의 명령어를 입력하여 포트 번호 80의 TCP 패킷들을 필터링 한다.&lt;/p&gt;
@@ -418,7 +417,7 @@ gcc -pg -g -o server server.c
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115415367-d07ecc00-a231-11eb-86cb-2b5c569c07f1.png&#34; alt=&#34;Screen Shot 2021-04-20 at 11 40 13 PM&#34;&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;watch -n0.6 &amp;quot;netstat -atnp&amp;quot;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;watch -n0.6 &amp;#34;netstat -atnp&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;위는 watch 명령어를 통해서 0.6초마다 netstat의 결과를 모니터링 하였다.&lt;/p&gt;

@@ -135,7 +135,7 @@
 <hr>
 <pre tabindex="0"><code>map = function (v) {
   var parsedData = JSON.parse(v.values[0].data);
-  if (parsedData.country == 'CA')
+  if (parsedData.country == &#39;CA&#39;)
       return [{count : 1}];
   else
       return [{count: 0}];
@@ -170,43 +170,43 @@ reduce = function(mappedVals) {
 </ul>
 <h3 id="riak-에서의-맵-리듀스"><code>Riak</code> 에서의 맵 리듀스</h3>
 <hr>
-<pre tabindex="0"><code>curl -X POST -H &quot;content-type:application/json&quot; \
+<pre tabindex="0"><code>curl -X POST -H &#34;content-type:application/json&#34; \
 http://localhost:10018/mapred --data @-
 {
-    &quot;inputs&quot;: [
-        [&quot;rooms&quot;, &quot;101&quot;],
-        [&quot;rooms&quot;, &quot;102&quot;],
-        [&quot;rooms&quot;, &quot;103&quot;]
+    &#34;inputs&#34;: [
+        [&#34;rooms&#34;, &#34;101&#34;],
+        [&#34;rooms&#34;, &#34;102&#34;],
+        [&#34;rooms&#34;, &#34;103&#34;]
     ],
-    &quot;query&quot;: [{
-                &quot;map&quot;: {
-                &quot;language&quot;: &quot;javascript&quot;,
-                &quot;source&quot;: &quot;function(v) {
+    &#34;query&#34;: [{
+                &#34;map&#34;: {
+                &#34;language&#34;: &#34;javascript&#34;,
+                &#34;source&#34;: &#34;function(v) {
                     var parsed_data = JSON.parse(v.values[0].data);
                     var data = {};
                     data[parsed_data.style] = parsed_data.capacity;
                     return [data];
-                }&quot;
+                }&#34;
         }
     }]
 }
 </code></pre><ul>
 <li>위의 코드는 <code>Riak</code> 에서 맵 처리를 하는 모습이다..</li>
 </ul>
-<pre tabindex="0"><code>curl - X POST - H &quot;content-type:application/json&quot;\
+<pre tabindex="0"><code>curl - X POST - H &#34;content-type:application/json&#34;\
 http: //localhost:10018/mapred --data @-
     {
-        &quot;inputs&quot;: &quot;rooms&quot;,
-        &quot;query&quot;: [{
-                &quot;map&quot;: {
-                    &quot;language&quot;: &quot;javascript&quot;,
-                    &quot;bucket&quot;: &quot;my_functions&quot;,
-                    &quot;key&quot;: &quot;map_capacity&quot;
+        &#34;inputs&#34;: &#34;rooms&#34;,
+        &#34;query&#34;: [{
+                &#34;map&#34;: {
+                    &#34;language&#34;: &#34;javascript&#34;,
+                    &#34;bucket&#34;: &#34;my_functions&#34;,
+                    &#34;key&#34;: &#34;map_capacity&#34;
                 }},
                 {
-                    &quot;reduce&quot;: {
-                        &quot;language&quot;: &quot;javascript&quot;,
-                        &quot;source&quot;: &quot;function(v) {
+                    &#34;reduce&#34;: {
+                        &#34;language&#34;: &#34;javascript&#34;,
+                        &#34;source&#34;: &#34;function(v) {
                             var totals = {};
                             for (var i in v) {
                                 for (var style in v[i]) {
@@ -215,7 +215,7 @@ http: //localhost:10018/mapred --data @-
                                 }
                             }
                             return [totals];
-                        }&quot;
+                        }&#34;
                 }
             }]
     }
