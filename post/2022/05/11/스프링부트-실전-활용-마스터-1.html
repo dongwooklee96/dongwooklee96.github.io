@@ -123,16 +123,16 @@
 <p>레스토랑에서 일하는 서빙 점원에 비유를 하자면, 주방에서 요리가 완성되면, 점원이 주방에서 요리를 받아서 손님에게 가져다주고, 다시 제자리로 돌아와서 다음 요리를 기다린다.</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KitchenService</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    Flux<span style="color:#f92672">&lt;</span>Dish<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getDishes</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> Flux<span style="color:#f92672">.</span><span style="color:#a6e22e">just</span><span style="color:#f92672">(</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">new</span> Dish<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Sesame chicken:),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            new Dish(&#34;</span>Lo mein noodles<span style="color:#f92672">,</span> planin<span style="color:#e6db74">&#34;),
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            new Dish(&#34;</span>Sweet <span style="color:#f92672">&amp;</span> sour beef<span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">));</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#f92672">)</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KitchenService</span> <span style="color:#f92672">{</span>
+    Flux<span style="color:#f92672">&lt;</span>Dish<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">getDishes</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> Flux<span style="color:#f92672">.</span><span style="color:#a6e22e">just</span><span style="color:#f92672">(</span>
+            <span style="color:#66d9ef">new</span> Dish<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Sesame chicken:),
+</span><span style="color:#e6db74">            new Dish(&#34;</span>Lo mein noodles<span style="color:#f92672">,</span> planin<span style="color:#e6db74">&#34;),
+</span><span style="color:#e6db74">            new Dish(&#34;</span>Sweet <span style="color:#f92672">&amp;</span> sour beef<span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">));</span>
+        <span style="color:#f92672">)</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
 <li>
 <p>서빙 점원은 손님에게 가져다줄 <code>Dish</code> 객체를 달라고 요청할 수 있고, 모두 요리가 완료된 다음에 받을 수 도 있지만, <code>Flux&lt;Dish&gt;</code> 객체로 바로 받을 수 있다. <code>Flux&lt;Dish&gt;</code> 안에 포함된 요리는 아직 완성되지 않았지만, 머지 않아서 완성될 것이다. 하지만 정확히 언제 완성될지는 모른다.</p>
 </li>
@@ -150,19 +150,19 @@
 </code></pre><ul>
 <li><code>Future</code>는 하나의 값을 정확하게 제공하는 것이 목적이었고, <code>Flux</code>는 다수의 값을 지원하는 것이 목적이다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleServer</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> KitchenService kitchen<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    SimpleServer<span style="color:#f92672">(</span>KitchenService kitchen<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">kitchen</span> <span style="color:#f92672">=</span> kitchen<span style="color:#f92672">;</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    Flux<span style="color:#f92672">&lt;</span>Dish<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">doingMyJob</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">kitchen</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getDishes</span><span style="color:#f92672">()</span>
-</span></span><span style="display:flex;"><span>            <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>dish <span style="color:#f92672">-&gt;</span> Dish<span style="color:#f92672">.</span><span style="color:#a6e22e">deliver</span><span style="color:#f92672">(</span>dish<span style="color:#f92672">));</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#f92672">}</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SimpleServer</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">final</span> KitchenService kitchen<span style="color:#f92672">;</span>
+
+    SimpleServer<span style="color:#f92672">(</span>KitchenService kitchen<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">kitchen</span> <span style="color:#f92672">=</span> kitchen<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+
+    Flux<span style="color:#f92672">&lt;</span>Dish<span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">doingMyJob</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">kitchen</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getDishes</span><span style="color:#f92672">()</span>
+            <span style="color:#f92672">.</span><span style="color:#a6e22e">map</span><span style="color:#f92672">(</span>dish <span style="color:#f92672">-&gt;</span> Dish<span style="color:#f92672">.</span><span style="color:#a6e22e">deliver</span><span style="color:#f92672">(</span>dish<span style="color:#f92672">));</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><ul>
 <li>
 <p><code>doingMyJob()</code> 함수는 레스토랑 매니저가 서빙 점원을 툭, 치면 주방에 가서 요리를 받아오는 임무를 수행하는 것이다.</p>
 </li>
@@ -191,9 +191,9 @@
 
     Flux&lt;Dish&gt; dongMyJob() {
         return this.kitchen.getDishes()
-            .doOnNext(dish -&gt; System.out.println(&#34;thank you for &#34; + dish + &#34;!&#34;))
-            .doOnError(error -&gt; System.out.println(&#34;so sorry about&#34; + error.getMessage()))
-            .doOnComplete(() -&gt; System.out.println(&#34;thanks for all your hard work!&#34;))
+            .doOnNext(dish -&gt; System.out.println(&quot;thank you for &quot; + dish + &quot;!&quot;))
+            .doOnError(error -&gt; System.out.println(&quot;so sorry about&quot; + error.getMessage()))
+            .doOnComplete(() -&gt; System.out.println(&quot;thanks for all your hard work!&quot;))
             .map(Dish::deliver);
     }
 }

@@ -13,7 +13,7 @@
       <pubDate>Sun, 14 Nov 2021 12:00:39 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/post/2021/11/14/%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
-      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &amp;#39;export PATH=&amp;#34;$PATH:`pwd`/flutter/bin&amp;#34;&amp;#39; &amp;gt;&amp;gt; ~/.zshrc
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &#39;export PATH=&amp;quot;$PATH:`pwd`/flutter/bin&amp;quot;&#39; &amp;gt;&amp;gt; ~/.zshrc
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;다음 명령어를 입력하면 위의 명령어가 쉘 환경 설정 파일에 들어가게 된다.&lt;/li&gt;
 &lt;/ul&gt;

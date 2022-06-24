@@ -144,12 +144,13 @@ import time
 
 
 async def main():
-    print(f&#39;{time.ctime()} Hello!&#39;)
+    print(f'{time.ctime()} Hello!')
     await asyncio.sleep(1.0)
-    print(f&#39;{time.ctime()} GoodBye!&#39;)
+    print(f'{time.ctime()} GoodBye!')
 
 
 asyncio.run(main())
+
 </code></pre><ul>
 <li>위는 간단한 파이썬의 Asyncio를 사용한 예제이다.</li>
 <li>실행결과는 아래와 같다.</li>
@@ -163,9 +164,9 @@ import time
 
 
 async def main():
-    print(f&#39;{time.ctime()} Hello!&#39;)
+    print(f'{time.ctime()} Hello!')
     await asyncio.sleep(1.0)
-    print(f&#39;{time.ctime()} GoodBye!&#39;)
+    print(f'{time.ctime()} GoodBye!')
 
 loop = asyncio.get_event_loop() # 코루틴을 실행하기 위한 루프 인스턴스를 얻는 방법이다.
 task = loop.create_task(main()) # create_task()를 호출해서 루프에 코루틴을 스케줄링 한다.
@@ -264,6 +265,7 @@ async def f():
 async def main():
     result = await f()
     return result
+
 </code></pre><ul>
 <li>
 <p>함수 <code>f()</code>를 호출하면 코루틴을 반환하고 이는 <code>f()</code>에 대해서 <code>await()</code> 할 수 있다는 뜻이다.</p>

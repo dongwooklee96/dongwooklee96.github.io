@@ -171,7 +171,7 @@
 def solution2():
     input_data = input()
     x = int(input_data[1])
-    y = int(ord(input_data[0])) - int(ord(&#39;a&#39;)) + 1
+    y = int(ord(input_data[0])) - int(ord('a')) + 1
 
     steps = [
         (-2, -1), (-1, -2), (1, -2), (2, -1),
@@ -187,9 +187,9 @@ def solution2():
     print(result)
 
 
-if __name__ == &#39;__main__&#39;:
+if __name__ == '__main__':
     split = list(input())
-    hash_table = {&#39;a&#39;: 1, &#39;b&#39;: 2, &#39;c&#39;: 3, &#39;d&#39;: 4, &#39;e&#39;: 5, &#39;f&#39;: 6, &#39;g&#39;: 7, &#39;h&#39;: 8}
+    hash_table = {'a': 1, 'b': 2, 'c': 3, 'd': 4, 'e': 5, 'f': 6, 'g': 7, 'h': 8}
 
     print(solution(hash_table[split[0]], int(split[1]))
 </code></pre><h3 id="개선할-점">개선할 점</h3>
