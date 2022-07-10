@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>uftrace를 이용하여 postgreSQL을 분석해보았다 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">uftrace를 이용하여 postgreSQL을 분석해보았다</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/07/10</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B8%B0%ED%83%80">기타</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <ul>
+<li>
+<p><code>uftrace</code>라는 도구를 사용하여 <code>postgreSQL</code>을 분석해보았다.</p>
+</li>
+<li>
+<p><code>uftrace</code>는 함수의 흐름을 추적하거나, 시간을 측정할 수 있는 프로파일링 도구이다.</p>
+</li>
+<li>
+<p>이름의 유래는 리눅스 커널 함수를 트레이싱 할 수 있는 <code>ftrace</code> 라는 도구에서 앞에 유저 스페이스 함수도 추적할 수 있다는 <code>user</code>의 줄일말인 <code>u</code>가 붙은 것이다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>(cd &#34;$BUILD&#34; &amp;&amp; \
+ CFLAGS=&#34;-fpatchable-function-entry=5 -I/usr/include/mit-krb5 -I/usr/include/python3.8/ -fuse-ld=gold -ggdb -Og -g3 -fno-omit-frame-pointer -U HAVE_POSIX_FADVISE&#34; LDFLAGS=-L/usr/lib/x86_64-linux-gnu/mit-krb5 &#34;$SOURCE&#34;/configure --silent --prefix=&#34;$INSTALL&#34; --with-openssl --with-tcl --with-tclconfig=/usr/lib/tcl8.6 --with-perl --with-libxml --with-libxslt --with-python --with-gssapi --with-systemd --with-ldap --enable-nls --enable-debug --enable-cassert --enable-tap-tests --enable-depend &amp;&amp; \
+ # CFLAGS=&#34;-I/usr/include/mit-krb5 -fuse-ld=gold -ggdb -Og -g3 -fno-omit-frame-pointer -U HAVE_POSIX_FADVISE&#34; LDFLAGS=-L/usr/lib/x86_64-linux-gnu/mit-krb5 &#34;$SOURCE&#34;/configure --silent --prefix=&#34;$INSTALL&#34; --with-ssl=nss --with-tcl --with-tclconfig=/usr/lib/tcl8.6 --with-perl --with-libxml --with-libxslt --with-python --with-gssapi --with-systemd --with-ldap --enable-nls --enable-debug --enable-cassert --enable-tap-tests --enable-depend &amp;&amp; \
+ make -s -j4 PG_TEST_EXTRA=&#39;kerberos ssl&#39; &amp;&amp; \
+ make -s -j4 install PG_TEST_EXTRA=&#39;kerberos ssl&#39; &amp;&amp; \
+ make -s -j4 check PG_TEST_EXTRA=&#39;kerberos ssl&#39; &amp;&amp; \
+ make -s -j4 world PG_TEST_EXTRA=&#39;kerberos ssl&#39; &amp;&amp; \
+ make -s -j4 install-world PG_TEST_EXTRA=&#39;kerberos ssl&#39; &amp;&amp; \
+ make -s -j4 check-world PG_TEST_EXTRA=&#39;kerberos ssl&#39; -O PROVE_FLAGS=-j4 \
+)
+</code></pre><ul>
+<li>
+<p>이건 내가 <code>postgres</code>를 빌드할 때 사용하는 <code>configure</code> 옵션인데, <code>CFLAGS</code> 옵션중에 <code>-fpatchable-function-entry=5</code> 를 추가하거나, <code>-pg</code>를 추가하면 함수 진입점을 내부적으로 표시를 하여 <code>uftrace</code>를 이용하여 분석 할 수 있다.</p>
+</li>
+<li>
+<p>참고로, <code>-fpatchable-function-entry=5</code> 를 추가하는 방식은 최신 버전에서 사용할 수 있는 방법인데 <code>-pg</code> 방식에 비해서 오버헤드가 적은 방식이라고 알고 있다.</p>
+</li>
+</ul>
+<h3 id="분석">분석</h3>
+<hr>
+<ul>
+<li>
+<p>참고로 현재 <code>postgres</code>를 <code>uftrace</code>로 분석하면 오류가 발생한다. 그 이유는 <code>postgres</code>에서 사용하는 라이브러리와 <code>uftrace</code> 사이의 문제가 있어서 그런데, 곧 해결될 예정이다.</p>
+</li>
+<li>
+<p>하지만 우선은 <code>--no-libcal</code> 이라는 옵션을 통해서 이러한 문제를 우회할 수 있다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>uftace record -no-libcal --srcline ./postmaster -D ../data
+</code></pre><ul>
+<li><code>postgres</code>의 서버를 uftrace를 통해서 분석함과 동시에 실행을 해보자.</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/jpx9la8apa5dlqg/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-07-10%20%EC%98%A4%ED%9B%84%208.51.20.png" alt=""></p>
+<ul>
+<li>
+<p>해당 명령어를 실행하면 평상시와 다른게 없이 실행이 될 것이다.</p>
+</li>
+<li>
+<p><code>psql</code>을 이용하여 서버에 접속을 하고 쿼리를 날리면 <code>postmaster</code> 서버에 수행되는 함수들이 기록이 된다.</p>
+</li>
+<li>
+<p>서버를 종료하고 디렉터리를 확인하면 <code>uftrace.data, uftrace.data.old</code> 라는 파일이 생성되어 있을 것이다.</p>
+</li>
+<li>
+<p><code>uftrace replay</code> 명령어를 통해서 트레이싱 된 함수들을 확인할 수 있다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/97l6udhtyqfms35/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-07-10%20%EC%98%A4%ED%9B%84%208.56.17.png" alt=""></p>
+<ul>
+<li>
+<p><code>main</code> 함수부터 실행된 함수들이 기록이 된다.</p>
+</li>
+<li>
+<p>만약 <code>tui</code> 모드로 확인하고 싶다면 <code>uftrace tui</code> 라는 명령어를 입력하면 <code>tui</code> 모드로 확인할 수 있다.</p>
+</li>
+<li>
+<p><code>tui</code> 모드에서는 함수 목록을 접었다가 펼수 있으며, 가장 오래걸린 함수를 빠르게 찾을 수 있다.</p>
+</li>
+<li>
+<p>그리고 함수에 커서를 가지고 간 상태에서 <code>O</code> 키를 누른다면 해당 소스로 넘어갈 수도 있다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/xd3yuz9b62mgjd6/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-07-10%20%EC%98%A4%ED%9B%84%209.01.04.png" alt=""></p>
+<ul>
+<li>정말 유용하게 사용할 수 있을 것 같고, 좀 더 사용이 익숙해지면 쿼리에 따라서 <code>postgres</code> 내부가 어떻게 동작하고 분석할 수 있을 것 같다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://github.com/namhyung/uftrace">uftrace</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+</html>
+

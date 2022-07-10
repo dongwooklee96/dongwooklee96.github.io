@@ -35,8 +35,8 @@
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP POST, http://myweb/users/
 {
-  &amp;quot;users&amp;quot;: {
-    &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;
+  &amp;#34;users&amp;#34;: {
+    &amp;#34;name&amp;#34;: &amp;#34;terry&amp;#34;
   }
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;http-메서드&#34;&gt;HTTP 메서드&lt;/h3&gt;
@@ -71,16 +71,16 @@
 &lt;p&gt;&lt;strong&gt;사용자 생성&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP POST, http://myweb/users/
 {
-  &amp;quot;name&amp;quot;:&amp;quot;terry&amp;quot;,
-  &amp;quot;address&amp;quot;:&amp;quot;seoul&amp;quot;
+  &amp;#34;name&amp;#34;:&amp;#34;terry&amp;#34;,
+  &amp;#34;address&amp;#34;:&amp;#34;seoul&amp;#34;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;조회&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP GET, http://myweb/users/terry
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;업데이트&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP PUT, http://myweb/users/terry 
 {
-  &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;,
-  &amp;quot;address&amp;quot;: &amp;quot;suwon&amp;quot;
+  &amp;#34;name&amp;#34;: &amp;#34;terry&amp;#34;,
+  &amp;#34;address&amp;#34;: &amp;#34;suwon&amp;#34;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;삭제&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP DELETE, http://myweb/users/terry
@@ -175,8 +175,8 @@
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP POST, http://myweb/users/
 {
-  &amp;quot;getuser&amp;quot;: {
-    &amp;quot;id&amp;quot;: &amp;quot;terry&amp;quot;,
+  &amp;#34;getuser&amp;#34;: {
+    &amp;#34;id&amp;#34;: &amp;#34;terry&amp;#34;,
   }
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;self-descriptiveness-속성을-사용하지-않음&#34;&gt;Self-descriptiveness 속성을 사용하지 않음&lt;/h4&gt;
@@ -213,7 +213,7 @@
 &lt;li&gt;사용자 - 디바이스 또는 사용자 - 강아지 등 각각의 리소스 간의 관계를 표현하는 방법에는 여러가지가 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 서브 리소스로 표현하는 방법
-/&amp;quot;리소스명&amp;quot;/&amp;quot;리소스 아이디&amp;quot;/&amp;quot;관계가 있는 다른 리소스명&amp;quot;
+/&amp;#34;리소스명&amp;#34;/&amp;#34;리소스 아이디&amp;#34;/&amp;#34;관계가 있는 다른 리소스명&amp;#34;
 HTTP GET, /users/{userId}/devices
 예) /users/1/devices
 &lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2. 서브 리소스에 관계를 명시하는 방법
@@ -339,22 +339,22 @@ HTTP GET, /users/{userid}/likes/devices
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
   [
     {
-      &amp;quot;id&amp;quot;: &amp;quot;user1&amp;quot;,
-      &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;
+      &amp;#34;id&amp;#34;: &amp;#34;user1&amp;#34;,
+      &amp;#34;name&amp;#34;: &amp;#34;terry&amp;#34;
     },
     {
-      &amp;quot;id&amp;quot;: &amp;quot;user2&amp;quot;,
-      &amp;quot;name&amp;quot;: &amp;quot;carry&amp;quot;
+      &amp;#34;id&amp;#34;: &amp;#34;user2&amp;#34;,
+      &amp;#34;name&amp;#34;: &amp;#34;carry&amp;#34;
     }
   ],
-  &amp;quot;links&amp;quot;: [
+  &amp;#34;links&amp;#34;: [
     {
-      &amp;quot;rel&amp;quot;: &amp;quot;pre_page&amp;quot;,
-      &amp;quot;href&amp;quot;: &amp;quot;http://xxx/users?offset=6&amp;amp;limit=5&amp;quot;
+      &amp;#34;rel&amp;#34;: &amp;#34;pre_page&amp;#34;,
+      &amp;#34;href&amp;#34;: &amp;#34;http://xxx/users?offset=6&amp;amp;limit=5&amp;#34;
     },
     {
-      &amp;quot;rel&amp;quot;: &amp;quot;next_page&amp;quot;,
-      &amp;quot;href&amp;quot;: &amp;quot;http://xxx/users?offset=11&amp;amp;limit=5&amp;quot;
+      &amp;#34;rel&amp;#34;: &amp;#34;next_page&amp;#34;,
+      &amp;#34;href&amp;#34;: &amp;#34;http://xxx/users?offset=11&amp;amp;limit=5&amp;#34;
     }
   ]
 }

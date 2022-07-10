@@ -188,16 +188,16 @@ def solution(n: int, maps: List[str]) -&gt; Tuple[int, int]:
     current_y = 1
 
     for map in maps:
-        if map == 'L':
+        if map == &#39;L&#39;:
             if 1 &lt;= current_x - 1 &lt;= n:
                 current_x -= 1
-        elif map == 'R':
+        elif map == &#39;R&#39;:
             if 1 &lt;= current_x + 1 &lt;= n:
                 current_x += 1
-        elif map == 'U':
+        elif map == &#39;U&#39;:
             if 1 &lt;= current_y - 1 &lt;= n:
                 current_y -= 1
-        elif map == 'D':
+        elif map == &#39;D&#39;:
             if 1 &lt;= current_y + 1 &lt;= n:
                 current_y += 1
 
@@ -208,7 +208,7 @@ def solution2(n: int, plans: List[str]) -&gt; Tuple[int, int]:
     x, y = 1, 1
     dx = [0, 0, -1, 1]
     dy = [-1, 1, 0, 0]
-    move_types = ['L', 'R', 'U', 'D']
+    move_types = [&#39;L&#39;, &#39;R&#39;, &#39;U&#39;, &#39;D&#39;]
 
     for plan in plans:
         for i in range(len(move_types)):
@@ -221,11 +221,10 @@ def solution2(n: int, plans: List[str]) -&gt; Tuple[int, int]:
     return x, y
 
 
-if __name__ == '__main__':
+if __name__ == &#39;__main__&#39;:
     n = int(input())
     maps = list(input().split())
     print(solution(n, maps))
-
 </code></pre><h3 id="개선할-점">개선할 점</h3>
 <hr>
 <ul>

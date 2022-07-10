@@ -24,7 +24,7 @@
 &lt;p&gt;예를 들어, 다른 곳으로 이동하기 위해 사용하는 링크 뒤에 있는 &lt;code&gt;URL&lt;/code&gt;에 악의적인 매겨변수를 포함시킴으로써 다음을 수행할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;quot;&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;img src=&amp;#34;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;#34;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;해당 도메인에 수정 권한이 있는 사용자의 경우 &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; 요소가, 사용자 모르게 동작을 수행한다.&lt;/p&gt;

@@ -178,7 +178,7 @@ int main(int argc, char *argv[]) {
   struct stat st;
 
   if (argc != 2) {
-    fprintf(stderr, &quot;wrong argument\n&quot;);
+    fprintf(stderr, &#34;wrong argument\n&#34;);
     exit(1);
   }
 
@@ -187,33 +187,33 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  printf(&quot;type\t%o (%s)\n&quot;, (st.st_mode &amp; S_IFMT), filetype(st.st_mode));
-  printf(&quot;mode\t%o\n&quot;, st.st_mode &amp; ~S_IFMT);
-  printf(&quot;dev\t%llu\n&quot;, (unsigned long long)st.st_dev);
-  printf(&quot;ino\t%lu\n&quot;, (unsigned long)st.st_ino);
-  printf(&quot;rdev\t%lu\n&quot;, (unsigned long)st.st_rdev);
-  printf(&quot;nlink\t%lu\n&quot;, (unsigned long)st.st_nlink);
-  printf(&quot;uid\t%d\n&quot;, st.st_uid);
-  printf(&quot;gid\t%d\n&quot;, st.st_gid);
-  printf(&quot;size\t%ld\n&quot;, st.st_size);
-  printf(&quot;blksize\t%ld\n&quot;, (unsigned long)st.st_blksize);
-  printf(&quot;blocks\t%lu\n&quot;, (unsigned long)st.st_blocks);
-  printf(&quot;atime\t%s&quot;, ctime(&amp;st.st_atime));
-  printf(&quot;mtime\t%s&quot;, ctime(&amp;st.st_mtime));
-  printf(&quot;ctime\t%s&quot;, ctime(&amp;st.st_ctime));
+  printf(&#34;type\t%o (%s)\n&#34;, (st.st_mode &amp; S_IFMT), filetype(st.st_mode));
+  printf(&#34;mode\t%o\n&#34;, st.st_mode &amp; ~S_IFMT);
+  printf(&#34;dev\t%llu\n&#34;, (unsigned long long)st.st_dev);
+  printf(&#34;ino\t%lu\n&#34;, (unsigned long)st.st_ino);
+  printf(&#34;rdev\t%lu\n&#34;, (unsigned long)st.st_rdev);
+  printf(&#34;nlink\t%lu\n&#34;, (unsigned long)st.st_nlink);
+  printf(&#34;uid\t%d\n&#34;, st.st_uid);
+  printf(&#34;gid\t%d\n&#34;, st.st_gid);
+  printf(&#34;size\t%ld\n&#34;, st.st_size);
+  printf(&#34;blksize\t%ld\n&#34;, (unsigned long)st.st_blksize);
+  printf(&#34;blocks\t%lu\n&#34;, (unsigned long)st.st_blocks);
+  printf(&#34;atime\t%s&#34;, ctime(&amp;st.st_atime));
+  printf(&#34;mtime\t%s&#34;, ctime(&amp;st.st_mtime));
+  printf(&#34;ctime\t%s&#34;, ctime(&amp;st.st_ctime));
 
   exit(0);
 }
 
 static char *filetype(mode_t mode) {
-  if (S_ISREG(mode)) return &quot;file&quot;;
-  if (S_ISDIR(mode)) return &quot;directory&quot;;
-  if (S_ISCHR(mode)) return &quot;chardev&quot;;
-  if (S_ISBLK(mode)) return &quot;blockdev&quot;;
-  if (S_ISFIFO(mode)) return &quot;fifo&quot;;
-  if (S_ISLNK(mode)) return &quot;symlink&quot;;
-  if (S_ISSOCK(mode)) return &quot;socket&quot;;
-  return &quot;unknown&quot;;
+  if (S_ISREG(mode)) return &#34;file&#34;;
+  if (S_ISDIR(mode)) return &#34;directory&#34;;
+  if (S_ISCHR(mode)) return &#34;chardev&#34;;
+  if (S_ISBLK(mode)) return &#34;blockdev&#34;;
+  if (S_ISFIFO(mode)) return &#34;fifo&#34;;
+  if (S_ISLNK(mode)) return &#34;symlink&#34;;
+  if (S_ISSOCK(mode)) return &#34;socket&#34;;
+  return &#34;unknown&#34;;
 }
 </code></pre><p><img src="https://dl.dropbox.com/s/8a8mzrp95wvqhdr/Screen%20Shot%202021-09-05%20at%202.37.04%20PM.png" alt=""></p>
 <ul>
@@ -310,7 +310,7 @@ int main(int argc, char *argv[]) {
   int i;
 
   if (argc &lt; 2) {
-    fprintf(stderr, &quot;no mode given\n&quot;);
+    fprintf(stderr, &#34;no mode given\n&#34;);
     exit(1);
   }
 
@@ -322,7 +322,6 @@ int main(int argc, char *argv[]) {
   }
   exit(0);
 }
-
 </code></pre><ul>
 <li><code>strtol()</code>은 <code>atoi()</code> 와 같이 정수가 표현된 문자열을 정수 타입의 값으로 변환하는 함수이다. 그러나 <code>atoi()</code>와 다르게 세번째 인자로 진수를 설정할 수 있다.</li>
 </ul>

@@ -199,25 +199,25 @@ int main(int argc, char *argv[]) {
   int open_fd, status;
 
   if (argc != 2) {
-    fprintf(stderr, &quot;usage: %s [file] \n&quot;, argv[0]);
+    fprintf(stderr, &#34;usage: %s [file] \n&#34;, argv[0]);
   }
 
   res = pipe(pipe_fd);
-  if (res == -1) error_proc(&quot;pipe&quot;);
+  if (res == -1) error_proc(&#34;pipe&#34;);
 
   pid = fork();
   
-  if (pid == -1) error_proc(&quot;fork&quot;);
+  if (pid == -1) error_proc(&#34;fork&#34;);
   if (pid == 0) { // child
     close(pipe_fd[1]);
     open_fd = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC);
     while (1) {
       read_len = read(pipe_fd[0], buff, BUFSIZ - 1);
-      if (read_len == -1) error_proc(&quot;read&quot;);
+      if (read_len == -1) error_proc(&#34;read&#34;);
       if (read_len == 0) break;
       write(open_fd, buff, read_len);
     }
-    printf(&quot;parent process closed the pipe. \n&quot;);
+    printf(&#34;parent process closed the pipe. \n&#34;);
     close(open_fd);
     close(pipe_fd[0]);
     return 0;
@@ -226,11 +226,11 @@ int main(int argc, char *argv[]) {
     while (1) {
       fgets(buff, BUFSIZ - 1, stdin);
       read_len = strlen(buff);
-      if (read_len == 4 &amp;&amp; !strncmp(buff, &quot;END&quot;, 3))
+      if (read_len == 4 &amp;&amp; !strncmp(buff, &#34;END&#34;, 3))
         break;
       n_write = write(pipe_fd[1], buff, read_len);
-      if (n_write == -1) error_proc(&quot;write&quot;);
-      printf(&quot;%d bytes are written \n&quot;, n_write);
+      if (n_write == -1) error_proc(&#34;write&#34;);
+      printf(&#34;%d bytes are written \n&#34;, n_write);
     }
     close(pipe_fd[1]);
     wait(&amp;status);
@@ -239,10 +239,9 @@ int main(int argc, char *argv[]) {
 }
 
 void error_proc(const char *str) {
-  fprintf(stderr, &quot;%s: %s\n&quot;, str, strerror(errno));
+  fprintf(stderr, &#34;%s: %s\n&#34;, str, strerror(errno));
   exit(1);
 }
-
 </code></pre><h3 id="참고-문헌">참고 문헌</h3>
 <hr>
 <ul>
