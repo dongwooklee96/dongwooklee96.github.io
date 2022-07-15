@@ -29,19 +29,19 @@
 &lt;p&gt;아래는 &lt;code&gt;groupby&lt;/code&gt;를 사용한 예제이다.&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from itertools import groupby
 
-things = [(&amp;#34;animal&amp;#34;, &amp;#34;bear&amp;#34;), (&amp;#34;animal&amp;#34;, &amp;#34;duck&amp;#34;), (&amp;#34;plant&amp;#34;, &amp;#34;cactus&amp;#34;), (&amp;#34;vehicle&amp;#34;, &amp;#34;speed boat&amp;#34;), (&amp;#34;vehicle&amp;#34;, &amp;#34;school bus&amp;#34;)]
+things = [(&amp;quot;animal&amp;quot;, &amp;quot;bear&amp;quot;), (&amp;quot;animal&amp;quot;, &amp;quot;duck&amp;quot;), (&amp;quot;plant&amp;quot;, &amp;quot;cactus&amp;quot;), (&amp;quot;vehicle&amp;quot;, &amp;quot;speed boat&amp;quot;), (&amp;quot;vehicle&amp;quot;, &amp;quot;school bus&amp;quot;)]
 
 for key, group in groupby(things, lambda x: x[0]):
     for thing in group:
-        print(&amp;#34;A %s is a %s.&amp;#34; % (thing[1], key))
-    print(&amp;#34;&amp;#34;)
+        print(&amp;quot;A %s is a %s.&amp;quot; % (thing[1], key))
+    print(&amp;quot;&amp;quot;)
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;키 값으로 튜플의 첫 번째 값을 사용하여 정렬 하였고, 키 값에 따른 그룹이 생성될 때마다 이를 출력한 것이다.&lt;/p&gt;
 &lt;h4 id=&#34;주의할-점&#34;&gt;주의할 점&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;앞에서 말했듯이 사용하기 전에, 키 값을 기준으로 정렬이 된 리스트인지, 그리고 보장을 하지 못한다면 정렬을 해줘야하는 것을 알 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# [k for k, g in groupby(&amp;#39;AAAABBBCCDAABBB&amp;#39;)] --&amp;gt; A B C D A B
-# [list(g) for k, g in groupby(&amp;#39;AAAABBBCCD&amp;#39;)] --&amp;gt; AAAA BBB CC D
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# [k for k, g in groupby(&#39;AAAABBBCCDAABBB&#39;)] --&amp;gt; A B C D A B
+# [list(g) for k, g in groupby(&#39;AAAABBBCCD&#39;)] --&amp;gt; AAAA BBB CC D
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;정렬을 해주지 않으면 위와 같은 형태로 만들어 지게 된다.&lt;/p&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;

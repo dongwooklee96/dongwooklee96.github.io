@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>커맨드라인 인자 | 개발자 이동욱</title>
+    <title>CSCOPE 설정 예제 | 개발자 이동욱</title>
     <link rel="stylesheet" href="../../../../css/style.css" />
     <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
@@ -98,13 +98,13 @@
     <br/>
 
 <div class="article-meta">
-<h1><span class="title">커맨드라인 인자</span></h1>
+<h1><span class="title">CSCOPE 설정 예제</span></h1>
 <h2 class="author">이동욱</h2>
-<h2 class="date">2021/07/22</h2>
+<h2 class="date">2022/06/28</h2>
 <p class="terms">
   
   
-  Categories: <a href="../../../../categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템 프로그래밍</a> 
+  Categories: <a href="../../../../categories/%EA%B8%B0%ED%83%80">기타</a> 
   
   
   
@@ -115,45 +115,10 @@
 
 <div class="content-wrapper">
   <main>
-    <h3 id="커맨드-라인-인자">커맨드 라인 인자</h3>
+    <h3 id="참고-문헌">참고 문헌</h3>
 <hr>
-<pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &lt;stdlib.h&gt;
-
-int main(int argc, char* argv[]) {
-  int i;
-  printf(&quot;argc=[%d]\n&quot;, argc);
-  for (i = 0; i &lt; argc; i++) {
-    printf(&quot;argv[%d]=%s\n&quot;, i, argv[i]);
-  }
-  exit(0);
-}
-</code></pre><ul>
-<li>
-<p><code>argc</code>, <code>argv</code>는 실행 인자에 대한 정보를 담고 있다.</p>
-</li>
-<li>
-<p><code>argc</code>는 실행 인자의 개수를 담고 있고, <code>argv</code>는 실행 인자의 내용을 문자열 배열 형태로 담고 있다.</p>
-</li>
-<li>
-<p><code>argv[0]</code>에는 실행할 때 입력한 명령어가 들어가는데, 예를 들어서 <code>./hello</code> 라는 명령어를 실행하면 <code>argv[0]</code>에 <code>./hello\0</code>이라는 값이 들어간다. 따라서 <code>argc</code>는 언제나 1 이상이다.</p>
-</li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/14002238/126514030-9633c6d5-1a59-40ab-a450-ead604263969.png" alt="Screen Shot 2021-07-22 at 12 16 25 AM"></p>
 <ul>
-<li>프로그램을 실행할 때의 이름이 <code>argv[0]</code>에 항상 들어있는 것과, 실행 인자를 늘리면 <code>argc</code>도 증가하는 것을 확인할 수 있다.</li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/14002238/126514473-f311278c-30db-4700-82d4-81f2caf18a28.png" alt="Screen Shot 2021-07-22 at 12 18 59 AM"></p>
-<ul>
-<li>
-<p>추가적으로, 실행인자를 &ldquo;&ldquo;로 묶어서, 감싼 부분을 하나의 실행 인자로 묶어 주는 효과를 낼 수 있다.</p>
-</li>
-<li>
-<p>그리고 <code>*</code>, <code>?</code> 같은 와일드 카드(<code>glob</code>) 패턴을 이용하여 파일 이름의 집합을 인자로 넘겨줄 수 있다.</p>
-</li>
-<li>
-<p><code>glob</code> 패턴을 문자 그대로 사용하고 싶은 경우에는 위와 같이 큰 따옴표로 주면 된다.</p>
-</li>
+<li><a href="https://dhkoo.github.io/2019/09/22/vim/">Vim 개발 환경 구축 및 사용법</a></li>
 </ul>
 
     <a href="../../../../"> >> Home</a>

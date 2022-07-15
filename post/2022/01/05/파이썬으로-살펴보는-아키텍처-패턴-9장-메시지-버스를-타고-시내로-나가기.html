@@ -136,8 +136,8 @@ def send_out_of_stock_notification(
         event: events.OutOfStock, uow: unit_of_work.AbstractUnitOfWork
 ):
     email.send(
-        &#39;stock@made.com&#39;,
-        f&#39;Out of stock for {event.sku}&#39;,
+        'stock@made.com',
+        f'Out of stock for {event.sku}',
     )
     ...
 </code></pre><ul>
@@ -151,18 +151,18 @@ def send_out_of_stock_notification(
 <p>따라서 이벤트로 작성하도록 API를 변경한 모습은 아래 코드와 같다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>@app.route(&#34;/allocate&#34;, methods=[&#34;POST&#34;])
+<pre tabindex="0"><code>@app.route(&quot;/allocate&quot;, methods=[&quot;POST&quot;])
 def allocate_endpoint():
     try:
         event = events.AllocationRequired(
-            request.json[&#39;orderid&#39;], request.json[&#39;sku&#39;], request.json[&#39;qty&#39;]
+            request.json['orderid'], request.json['sku'], request.json['qty']
         )
         results = messagebus.handle(event, unit_of_work.SqlAlchemyUnitOfWork())
         batchref = results.pop(0)
     except services.InvalidSku as e:
-        return {&#34;message&#34;: str(e)}, 400
+        return {&quot;message&quot;: str(e)}, 400
 
-    return {&#34;batchref&#34;: batchref}, 201
+    return {&quot;batchref&quot;: batchref}, 201
 </code></pre><ul>
 <li>
 <p>JSON 요청에서 기본값으로 서비스 계층을 호출하는 대신에, 이벤트를 인스턴스화 시켜서 메시지 버스에 이벤트를 전달하는 것을 확인할 수 있다.</p>

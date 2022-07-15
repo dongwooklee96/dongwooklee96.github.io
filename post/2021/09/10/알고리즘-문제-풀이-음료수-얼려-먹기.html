@@ -149,42 +149,43 @@
 </ul>
 <h3 id="코드">코드</h3>
 <hr>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(maps: List[List[int]], n: int, m: int) <span style="color:#f92672">-&gt;</span> int:
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dfs</span>(x, y):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&lt;=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> x <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">or</span> y <span style="color:#f92672">&lt;=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> y <span style="color:#f92672">&gt;=</span> m:
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> maps[x][y] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-</span></span><span style="display:flex;"><span>            maps[x][y] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>            dfs(x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, y)
-</span></span><span style="display:flex;"><span>            dfs(x, y <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>            dfs(x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, y)
-</span></span><span style="display:flex;"><span>            dfs(x, y <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(n):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(m):
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> dfs(x, y):
-</span></span><span style="display:flex;"><span>                cnt <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> cnt
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-</span></span><span style="display:flex;"><span>    n, m <span style="color:#f92672">=</span> map(int, input()<span style="color:#f92672">.</span>split())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    maps <span style="color:#f92672">=</span> []
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(n):
-</span></span><span style="display:flex;"><span>        maps<span style="color:#f92672">.</span>append(list(map(int, input())))
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    print(solution(maps, n, m))
-</span></span></code></pre></div><h3 id="배운점">배운점</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(maps: List[List[int]], n: int, m: int) <span style="color:#f92672">-&gt;</span> int:
+
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">dfs</span>(x, y):
+        <span style="color:#66d9ef">if</span> x <span style="color:#f92672">&lt;=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> x <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">or</span> y <span style="color:#f92672">&lt;=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">or</span> y <span style="color:#f92672">&gt;=</span> m:
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+
+        <span style="color:#66d9ef">if</span> maps[x][y] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            maps[x][y] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+            dfs(x <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, y)
+            dfs(x, y <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)
+            dfs(x <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, y)
+            dfs(x, y <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+
+    cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> range(n):
+        <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> range(m):
+            <span style="color:#66d9ef">if</span> dfs(x, y):
+                cnt <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> cnt
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    n, m <span style="color:#f92672">=</span> map(int, input()<span style="color:#f92672">.</span>split())
+
+    maps <span style="color:#f92672">=</span> []
+    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(n):
+        maps<span style="color:#f92672">.</span>append(list(map(int, input())))
+
+    print(solution(maps, n, m))
+
+</code></pre></div><h3 id="배운점">배운점</h3>
 <hr>
 <ul>
 <li>DFS 문제를 어떻게 풀어야할 지 대략적으로 감을 잡은 것 같다.</li>

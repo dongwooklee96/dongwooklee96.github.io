@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
   struct stat st;
 
   if (argc != 2) {
-    fprintf(stderr, &amp;#34;wrong argument\n&amp;#34;);
+    fprintf(stderr, &amp;quot;wrong argument\n&amp;quot;);
     exit(1);
   }
 
@@ -83,33 +83,33 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  printf(&amp;#34;type\t%o (%s)\n&amp;#34;, (st.st_mode &amp;amp; S_IFMT), filetype(st.st_mode));
-  printf(&amp;#34;mode\t%o\n&amp;#34;, st.st_mode &amp;amp; ~S_IFMT);
-  printf(&amp;#34;dev\t%llu\n&amp;#34;, (unsigned long long)st.st_dev);
-  printf(&amp;#34;ino\t%lu\n&amp;#34;, (unsigned long)st.st_ino);
-  printf(&amp;#34;rdev\t%lu\n&amp;#34;, (unsigned long)st.st_rdev);
-  printf(&amp;#34;nlink\t%lu\n&amp;#34;, (unsigned long)st.st_nlink);
-  printf(&amp;#34;uid\t%d\n&amp;#34;, st.st_uid);
-  printf(&amp;#34;gid\t%d\n&amp;#34;, st.st_gid);
-  printf(&amp;#34;size\t%ld\n&amp;#34;, st.st_size);
-  printf(&amp;#34;blksize\t%ld\n&amp;#34;, (unsigned long)st.st_blksize);
-  printf(&amp;#34;blocks\t%lu\n&amp;#34;, (unsigned long)st.st_blocks);
-  printf(&amp;#34;atime\t%s&amp;#34;, ctime(&amp;amp;st.st_atime));
-  printf(&amp;#34;mtime\t%s&amp;#34;, ctime(&amp;amp;st.st_mtime));
-  printf(&amp;#34;ctime\t%s&amp;#34;, ctime(&amp;amp;st.st_ctime));
+  printf(&amp;quot;type\t%o (%s)\n&amp;quot;, (st.st_mode &amp;amp; S_IFMT), filetype(st.st_mode));
+  printf(&amp;quot;mode\t%o\n&amp;quot;, st.st_mode &amp;amp; ~S_IFMT);
+  printf(&amp;quot;dev\t%llu\n&amp;quot;, (unsigned long long)st.st_dev);
+  printf(&amp;quot;ino\t%lu\n&amp;quot;, (unsigned long)st.st_ino);
+  printf(&amp;quot;rdev\t%lu\n&amp;quot;, (unsigned long)st.st_rdev);
+  printf(&amp;quot;nlink\t%lu\n&amp;quot;, (unsigned long)st.st_nlink);
+  printf(&amp;quot;uid\t%d\n&amp;quot;, st.st_uid);
+  printf(&amp;quot;gid\t%d\n&amp;quot;, st.st_gid);
+  printf(&amp;quot;size\t%ld\n&amp;quot;, st.st_size);
+  printf(&amp;quot;blksize\t%ld\n&amp;quot;, (unsigned long)st.st_blksize);
+  printf(&amp;quot;blocks\t%lu\n&amp;quot;, (unsigned long)st.st_blocks);
+  printf(&amp;quot;atime\t%s&amp;quot;, ctime(&amp;amp;st.st_atime));
+  printf(&amp;quot;mtime\t%s&amp;quot;, ctime(&amp;amp;st.st_mtime));
+  printf(&amp;quot;ctime\t%s&amp;quot;, ctime(&amp;amp;st.st_ctime));
 
   exit(0);
 }
 
 static char *filetype(mode_t mode) {
-  if (S_ISREG(mode)) return &amp;#34;file&amp;#34;;
-  if (S_ISDIR(mode)) return &amp;#34;directory&amp;#34;;
-  if (S_ISCHR(mode)) return &amp;#34;chardev&amp;#34;;
-  if (S_ISBLK(mode)) return &amp;#34;blockdev&amp;#34;;
-  if (S_ISFIFO(mode)) return &amp;#34;fifo&amp;#34;;
-  if (S_ISLNK(mode)) return &amp;#34;symlink&amp;#34;;
-  if (S_ISSOCK(mode)) return &amp;#34;socket&amp;#34;;
-  return &amp;#34;unknown&amp;#34;;
+  if (S_ISREG(mode)) return &amp;quot;file&amp;quot;;
+  if (S_ISDIR(mode)) return &amp;quot;directory&amp;quot;;
+  if (S_ISCHR(mode)) return &amp;quot;chardev&amp;quot;;
+  if (S_ISBLK(mode)) return &amp;quot;blockdev&amp;quot;;
+  if (S_ISFIFO(mode)) return &amp;quot;fifo&amp;quot;;
+  if (S_ISLNK(mode)) return &amp;quot;symlink&amp;quot;;
+  if (S_ISSOCK(mode)) return &amp;quot;socket&amp;quot;;
+  return &amp;quot;unknown&amp;quot;;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8a8mzrp95wvqhdr/Screen%20Shot%202021-09-05%20at%202.37.04%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -206,7 +206,7 @@ int main(int argc, char *argv[]) {
   int i;
 
   if (argc &amp;lt; 2) {
-    fprintf(stderr, &amp;#34;no mode given\n&amp;#34;);
+    fprintf(stderr, &amp;quot;no mode given\n&amp;quot;);
     exit(1);
   }
 
@@ -218,6 +218,7 @@ int main(int argc, char *argv[]) {
   }
   exit(0);
 }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;strtol()&lt;/code&gt;은 &lt;code&gt;atoi()&lt;/code&gt; 와 같이 정수가 표현된 문자열을 정수 타입의 값으로 변환하는 함수이다. 그러나 &lt;code&gt;atoi()&lt;/code&gt;와 다르게 세번째 인자로 진수를 설정할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -244,7 +245,7 @@ int main(int argc, char *argv[]) {
 &lt;p&gt;링크란 파일에 새로운 이름을 붙이는 것이다. 예를 들면 다음과 같이 A 라는 파일을 만들었다고 가정을 하자.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &amp;#39;this is a file.&amp;#39; &amp;gt; a
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &#39;this is a file.&#39; &amp;gt; a
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;이때 파일의 이름과 실체의 관계는 이름이 실체를 포인터처럼 가리키고 있는 모습이다.&lt;/p&gt;
@@ -318,7 +319,7 @@ int link(const char *src, const char *dest);
 
 int main(int argc, char *argv[]) {
   if (argc != 3) {
-    fprintf(stderr, &amp;#34;%s: wrong arguments\n&amp;#34;, argv[0]);
+    fprintf(stderr, &amp;quot;%s: wrong arguments\n&amp;quot;, argv[0]);
     exit(1);
   }
 
@@ -328,6 +329,7 @@ int main(int argc, char *argv[]) {
   }
   exit(0);
 }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/moh0m14brkjpxhi/Screen%20Shot%202021-09-01%20at%2010.31.32%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;ls -l&lt;/code&gt; 출력하는 항목 중 왼쪽에서 두 번재 열에 주목을 하면 &lt;code&gt;ln.c&lt;/code&gt;의 링크 카운터가 2로 증가한 것을 확인할 수 있다.&lt;/li&gt;
@@ -396,7 +398,7 @@ int readlink(const char *path, char *buf, size_t bufsize);
 
 int main(int argc, char *argv[]) {
   if (argc != 3) {
-    fprintf(stderr, &amp;#34;%s: wrong number of arguments\n&amp;#34;, argv[0]);
+    fprintf(stderr, &amp;quot;%s: wrong number of arguments\n&amp;quot;, argv[0]);
     exit(1);
   }
 
@@ -406,6 +408,7 @@ int main(int argc, char *argv[]) {
   }
   exit(0);
 }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;심볼링 링크가 제대로 이루어진 것을 확인할 수 있고, 파일 목록을 조회하였을 때 화살표로 어떤 파일을 가리키는지 알려준다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -500,7 +503,7 @@ int main(int argc, char *argv[]) {
   int i;
 
   if (argc &amp;lt; 2) {
-    fprintf(stderr, &amp;#34;%s: no argument\n&amp;#34;, argv[0]);
+    fprintf(stderr, &amp;quot;%s: no argument\n&amp;quot;, argv[0]);
     exit(1);
   }
 
@@ -521,10 +524,11 @@ static void do_ls(char *path) {
     exit(1);
   }
   while (ent = readdir(d)) {
-    printf(&amp;#34;%s\n&amp;#34;, ent-&amp;gt;d_name); // 더 읽어 들일 엔트리가 없을 때까지 (즉, NULL이 반환될 때까지) 이름을 출력한다.
+    printf(&amp;quot;%s\n&amp;quot;, ent-&amp;gt;d_name); // 더 읽어 들일 엔트리가 없을 때까지 (즉, NULL이 반환될 때까지) 이름을 출력한다.
   }
   closedir(d);
 }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/0lqtqhtpi797aln/Screen%20Shot%202021-08-31%20at%207.02.41%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;실행 결과는 위와 같다.&lt;/li&gt;
@@ -632,7 +636,7 @@ int main(int argc, char *argv[]) {
   int i;
 
   if (argc &amp;lt; 2) {
-    fprintf(stderr, &amp;#34;%s: no arguments\n&amp;#34;, argv[0]);
+    fprintf(stderr, &amp;quot;%s: no arguments\n&amp;quot;, argv[0]);
     exit(1);
   }
 
@@ -644,6 +648,7 @@ int main(int argc, char *argv[]) {
   }
   exit(0);
 }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/5xe4zj3wrn5z3t5/Screen%20Shot%202021-08-31%20at%207.26.23%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;디렉터리-삭제하기&#34;&gt;디렉터리 삭제하기&lt;/h3&gt;
 &lt;hr&gt;
@@ -662,7 +667,7 @@ int rmdir(const char *path);
 int main(int argc, char *argv[]) {
   int i;
   if (argc &amp;lt; 2) {
-    fprintf(stderr, &amp;#34;%s: no arguments\n&amp;#34;, argv[0]);
+    fprintf(stderr, &amp;quot;%s: no arguments\n&amp;quot;, argv[0]);
     exit(1);
   }
 
@@ -673,6 +678,7 @@ int main(int argc, char *argv[]) {
     }
   }
 }
+
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ldi7fgq7pca2qbs/Screen%20Shot%202021-08-31%20at%207.54.59%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
@@ -729,7 +735,7 @@ int main(int argc, char *argv[]) {
   int i;
 
   if (argc &amp;lt; 2) {
-    fputs(&amp;#34;no pattern\n&amp;#34;, stderr);
+    fputs(&amp;quot;no pattern\n&amp;quot;, stderr);
     exit(1);
   }
   err = regcomp(&amp;amp;pat, argv[1], REG_EXTENDED | REG_NOSUB | REG_NEWLINE);
@@ -744,7 +750,7 @@ int main(int argc, char *argv[]) {
     for (i = 2; i &amp;lt; argc; i++) {
       FILE *f;
 
-      f = fopen(argv[i], &amp;#34;r&amp;#34;);
+      f = fopen(argv[i], &amp;quot;r&amp;quot;);
       if (!f) {
         perror(argv[i]);
         exit(1);
@@ -939,7 +945,7 @@ static void die(const char *s);
 int main(int argc, char *argv[]) {
   int i;
   if (argc &amp;lt; 2) {
-    fprintf(stdout, &amp;#34;%s: file name not given\n&amp;#34;, argv[0]);
+    fprintf(stdout, &amp;quot;%s: file name not given\n&amp;quot;, argv[0]);
     exit(1);
   }
   for (i = 1; i &amp;lt; argc; i++) {
@@ -1143,7 +1149,7 @@ static void die(const char *s);
 int main(int argc, char *argv[]) {
   int i;
   if (argc &amp;lt; 2) {
-    fprintf(stderr, &amp;#34;%s: file name not given\n&amp;#34;, argv[0]);
+    fprintf(stderr, &amp;quot;%s: file name not given\n&amp;quot;, argv[0]);
     exit(1);
   }
   for (i = 1; i &amp;lt; argc; i++) {
@@ -1390,9 +1396,9 @@ ssize_t read(int fd, void *buf, size_t bufsize);
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;주의사항&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;C언어 문자열에는 임의의 바이트 열을 저장할 수 있지만, 일반적으로 문자열의
-끝에는 &amp;#39;\0&amp;#39;을 넣는 것이 관례이다. API 중에도 문자열의 끝에 &amp;#39;\0&amp;#39;이 있다고
+끝에는 &#39;\0&#39;을 넣는 것이 관례이다. API 중에도 문자열의 끝에 &#39;\0&#39;이 있다고
 전체하는 것과 그렇지 않은 것이 있어서 사용에 주의 해야한다. 
-예를 들어, 문자열의 끝에 &amp;#39;\0&amp;#39;이 있다고 전제하는 API에 &amp;#39;\0&amp;#39;로 끝나지 
+예를 들어, 문자열의 끝에 &#39;\0&#39;이 있다고 전제하는 API에 &#39;\0&#39;로 끝나지 
 않는 문자열을 전달하면 문제가 될 수 있다.
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -1522,9 +1528,9 @@ int close(int fd);
 
 int main(int argc, char* argv[]) {
   int i;
-  printf(&amp;#34;argc=[%d]\n&amp;#34;, argc);
+  printf(&amp;quot;argc=[%d]\n&amp;quot;, argc);
   for (i = 0; i &amp;lt; argc; i++) {
-    printf(&amp;#34;argv[%d]=%s\n&amp;#34;, i, argv[i]);
+    printf(&amp;quot;argv[%d]=%s\n&amp;quot;, i, argv[i]);
   }
   exit(0);
 }
@@ -1604,18 +1610,18 @@ int main() {
 	pid_t pid_child;
 	char buf_err[64];
 	posix_spawn_file_actions_t posix_faction; /* file action struct */
-	char *argv_child[] = { &amp;#34;forkexec_child&amp;#34;, NULL };
-	printf(&amp;#34;Parent[%d]: Start\n&amp;#34;, getpid());
+	char *argv_child[] = { &amp;quot;forkexec_child&amp;quot;, NULL };
+	printf(&amp;quot;Parent[%d]: Start\n&amp;quot;, getpid());
 
 	if((ret_err = posix_spawn_file_actions_init(&amp;amp;posix_faction)) != 0) { /* init */
 		strerror_r(ret_err, buf_err, sizeof(buf_err));
-		fprintf(stderr, &amp;#34;Fail: file_actions_init :%s\n&amp;#34;, buf_err);
+		fprintf(stderr, &amp;quot;Fail: file_actions_init :%s\n&amp;quot;, buf_err);
 		exit(EXIT_FAILURE);
 	}
 	if ((ret_err = posix_spawn_file_actions_addopen(&amp;amp;posix_faction, 3,
-					&amp;#34;pspawn.log&amp;#34;, O_WRONLY | O_CREAT | O_APPEND, 0664 )) != 0) {
+					&amp;quot;pspawn.log&amp;quot;, O_WRONLY | O_CREAT | O_APPEND, 0664 )) != 0) {
 		strerror_r(ret_err, buf_err, sizeof(buf_err));
-		fprintf(stderr, &amp;#34;Fail: file_actions_addopen: %s\n&amp;#34;, buf_err);
+		fprintf(stderr, &amp;quot;Fail: file_actions_addopen: %s\n&amp;quot;, buf_err);
 		exit(EXIT_FAILURE);
 	}
 	ret_err = posix_spawn(&amp;amp;pid_child,
@@ -1627,12 +1633,12 @@ int main() {
 
 	if ((ret_err = posix_spawn_file_actions_destroy(&amp;amp;posix_faction)) != 0) {
 		strerror_r(ret_err, buf_err, sizeof(buf_err));
-		fprintf(stderr, &amp;#34;Fail: file_actions_destory: %s\n&amp;#34;, buf_err);
+		fprintf(stderr, &amp;quot;Fail: file_actions_destory: %s\n&amp;quot;, buf_err);
 		exit(EXIT_FAILURE);
 	}
-	printf(&amp;#34;Parent[%d]: Wait for child(%d)\n&amp;#34;, getpid(), (int)pid_child);
+	printf(&amp;quot;Parent[%d]: Wait for child(%d)\n&amp;quot;, getpid(), (int)pid_child);
 	(void)wait(NULL);
-	printf(&amp;#34;Parent[%d]: Exit\n&amp;#34;, getpid());
+	printf(&amp;quot;Parent[%d]: Exit\n&amp;quot;, getpid());
 	return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1762,7 +1768,7 @@ int main() {
 
   for (i = 0; i &amp;lt; 3; i++) {
     ret = fork();
-    printf(&amp;#34;[%d] PID(%d) PPID(%d)\n&amp;#34;, i, getpid(), getppid());
+    printf(&amp;quot;[%d] PID(%d) PPID(%d)\n&amp;quot;, i, getpid(), getppid());
 #ifndef OMIT_SWITCH
     switch (ret) {
       case 0:
@@ -1812,14 +1818,14 @@ int execve(const char *path, char *const argv[], char *const envp[]);
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;execl 계열을 사용한 예&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;execl(&amp;#34;/bin/ls&amp;#34;, &amp;#34;ls&amp;#34;, &amp;#34;-al&amp;#34;, NULL);
-execlp(&amp;#34;ls&amp;#34;, &amp;#34;ls&amp;#34;, &amp;#34;-al&amp;#34;, NULL);
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;execl(&amp;quot;/bin/ls&amp;quot;, &amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL);
+execlp(&amp;quot;ls&amp;quot;, &amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL);
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;execv 계열을 사용한 예&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;char *argv_exec[] = {&amp;#34;ls&amp;#34;, &amp;#34;-al&amp;#34;, NULL};
-execv(&amp;#34;/bin/ls&amp;#34;, argv_exec);
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;char *argv_exec[] = {&amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL};
+execv(&amp;quot;/bin/ls&amp;quot;, argv_exec);
 
-char *argv_exec[] = {&amp;#34;ls&amp;#34;, &amp;#34;-al&amp;#34;, NULL};
-execvp(&amp;#34;ls&amp;#34;, argv_exec);
+char *argv_exec[] = {&amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL};
+execvp(&amp;quot;ls&amp;quot;, argv_exec);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;li&gt;
@@ -1830,10 +1836,10 @@ execvp(&amp;#34;ls&amp;#34;, argv_exec);
 #include &amp;lt;unistd.h&amp;gt;
 
 int main() {
-  if (execl(&amp;#34;/bin/ls&amp;#34;, &amp;#34;ls&amp;#34;, &amp;#34;-al&amp;#34;, NULL) == -1) {
-    perror(&amp;#34;excel&amp;#34;);
+  if (execl(&amp;quot;/bin/ls&amp;quot;, &amp;quot;ls&amp;quot;, &amp;quot;-al&amp;quot;, NULL) == -1) {
+    perror(&amp;quot;excel&amp;quot;);
   }
-  printf(&amp;#34;+ arfter execl\n&amp;#34;);
+  printf(&amp;quot;+ arfter execl\n&amp;quot;);
   return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1860,39 +1866,39 @@ int main() {
 
 int main() {
   pid_t pid_child;
-  printf(&amp;#34;Parent[%d]: Start\n&amp;#34;, getpid());
-  int fd = open(&amp;#34;forkexec.log&amp;#34;, O_WRONLY | O_CREAT | O_APPEND, 0644);
+  printf(&amp;quot;Parent[%d]: Start\n&amp;quot;, getpid());
+  int fd = open(&amp;quot;forkexec.log&amp;quot;, O_WRONLY | O_CREAT | O_APPEND, 0644);
 
   if (fd == -1) {
-    perror(&amp;#34;FAIL: open&amp;#34;);
+    perror(&amp;quot;FAIL: open&amp;quot;);
     exit(EXIT_FAILURE);
   }
 
-  dprintf(fd, &amp;#34;Parent[%d]: Open log file(fd=%d)\n&amp;#34;, getpid(), fd);
+  dprintf(fd, &amp;quot;Parent[%d]: Open log file(fd=%d)\n&amp;quot;, getpid(), fd);
 
 #ifdef APPLY_FD_CLOEXEC
   int ret_fcntl;
   if ((ret_fcntl = fcntl(fd, F_SETFD, FD_CLOEXEC)) == -1) {
-    perror(&amp;#34;FAIL: fcntl(F_SETFD, FD_CLOEXEC)&amp;#34;);
+    perror(&amp;quot;FAIL: fcntl(F_SETFD, FD_CLOEXEC)&amp;quot;);
     exit(EXIT_FAILURE);
   }
 #endif
 
   /* fork-exec code */
-  char *argv_exec[] = {&amp;#34;fork_exec_child&amp;#34;, (char*) NULL};
+  char *argv_exec[] = {&amp;quot;fork_exec_child&amp;quot;, (char*) NULL};
 
   switch ((pid_child = fork())) {
     case 0: /* child process */
       execv(argv_exec[0], argv_exec);
       break;
     case -1: /* error */
-      perror(&amp;#34;FAIL: FORK&amp;#34;);
+      perror(&amp;quot;FAIL: FORK&amp;quot;);
       break;
     default: /* parent process */
       wait(NULL);
       break;
   }
-  printf(&amp;#34;Parent[%d]: Exit\n&amp;#34;, getpid());
+  printf(&amp;quot;Parent[%d]: Exit\n&amp;quot;, getpid());
   return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;forkexec_child.c&lt;/strong&gt;&lt;/p&gt;
@@ -1902,10 +1908,10 @@ int main() {
 #include &amp;lt;stdlib.h&amp;gt;
 
 int main() {
-  dprintf(STDOUT_FILENO, &amp;#34;Child[%d]: Start\n&amp;#34;, getpid());
-  dprintf(3, &amp;#34;Child[%d]: fd(3): Test fd.\n&amp;#34;, getpid());
+  dprintf(STDOUT_FILENO, &amp;quot;Child[%d]: Start\n&amp;quot;, getpid());
+  dprintf(3, &amp;quot;Child[%d]: fd(3): Test fd.\n&amp;quot;, getpid());
   close(3);
-  dprintf(STDOUT_FILENO, &amp;#34;Child[%d]: Exit\n&amp;#34;, getpid());
+  dprintf(STDOUT_FILENO, &amp;quot;Child[%d]: Exit\n&amp;quot;, getpid());
   return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;

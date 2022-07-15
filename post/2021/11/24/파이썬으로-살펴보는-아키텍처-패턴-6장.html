@@ -156,16 +156,17 @@
 
 def test_add_batch():
     uow = FakeUnitOfWork()
-    services.add_batch(&#34;b1&#34;, &#34;CRUNCHY-ARMCHAIR&#34;, 100, None, uow)
-    assert uow.batches.get(&#34;b1&#34;) is not None
+    services.add_batch(&quot;b1&quot;, &quot;CRUNCHY-ARMCHAIR&quot;, 100, None, uow)
+    assert uow.batches.get(&quot;b1&quot;) is not None
     assert uow.commited
 
 
 def test_allocate_returns_allocation():
     uow = FakeUnitOfWork()
-    services.add_batch(&#34;batch1&#34;, &#34;CRUNCHY-ARMCHAIR&#34;, 100, None, uow)
-    result = services.allocate(&#34;o1&#34;, &#34;COMPLICATED-LAMP&#34;, 10, uow)
-    assert result == &#34;batch1&#34;
+    services.add_batch(&quot;batch1&quot;, &quot;CRUNCHY-ARMCHAIR&quot;, 100, None, uow)
+    result = services.allocate(&quot;o1&quot;, &quot;COMPLICATED-LAMP&quot;, 10, uow)
+    assert result == &quot;batch1&quot;
+
 </code></pre><ul>
 <li>
 <p>세션을 사용하는 것 보다, <code>UoW</code>를 모킹하기가 더 편하다 이들은 영속성 계층을 변경하여 실제 데이터베이스를 사용하지 않고도 메모리상에서 테스트를 진행할 수 있게 해준다.</p>
@@ -186,10 +187,10 @@ def test_allocate_returns_allocation():
 <pre tabindex="0"><code>def test_rolls_back_uncommited_work_by_default(session_factory):
     uow = unit_of_work.SqlAlchemyUnitOfWork(session_factory)
     with uow:
-        insert_batch(uow.session, &#39;batch1&#39;, &#39;MEDIUM-PLINTH&#39;, 100, None)
+        insert_batch(uow.session, 'batch1', 'MEDIUM-PLINTH', 100, None)
 
     new_session = session_factory()
-    rows = list(new_session.execute(&#39;SELECT * FROM &#34;batches&#34;&#39;))
+    rows = list(new_session.execute('SELECT * FROM &quot;batches&quot;'))
     assert rows == []
 
 def test_rolls_back_on_error(session_factory):
@@ -199,10 +200,10 @@ def test_rolls_back_on_error(session_factory):
     uow = unit_of_work.SqlAlchemyUnitOfWork(session_factory)
     with pytest.raises(MyException):
         with uow:
-            insert_batch(uow.session, &#39;batch1&#39;, &#39;LARGE-FORK&#39;, 100, None)
+            insert_batch(uow.session, 'batch1', 'LARGE-FORK', 100, None)
             raise MyException()
         new_session = session_factory()
-        rows = list(new_session.execute(&#34;SELECT * FROM &#39;batches&#39;&#34;))
+        rows = list(new_session.execute(&quot;SELECT * FROM 'batches'&quot;))
         assert rows == []
 </code></pre><ul>
 <li><code>UoW</code> 패턴을 이용하여 서비스 코드를 테스트 한 것이다.</li>
