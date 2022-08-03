@@ -6,7 +6,16 @@
     <description>Recent content in Tags on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sun, 19 Jun 2022 15:40:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 03 Aug 2022 09:29:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>문서화</title>
+      <link>https://dongwooklee96.github.io/tags/%EB%AC%B8%EC%84%9C%ED%99%94.html</link>
+      <pubDate>Wed, 03 Aug 2022 09:29:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/tags/%EB%AC%B8%EC%84%9C%ED%99%94.html</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>EDA</title>
       <link>https://dongwooklee96.github.io/tags/eda.html</link>
@@ -184,15 +193,6 @@
       <pubDate>Wed, 28 Apr 2021 00:09:24 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/tags/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>문서화</title>
-      <link>https://dongwooklee96.github.io/tags/%EB%AC%B8%EC%84%9C%ED%99%94.html</link>
-      <pubDate>Tue, 13 Apr 2021 15:47:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/tags/%EB%AC%B8%EC%84%9C%ED%99%94.html</guid>
       <description></description>
     </item>
     
