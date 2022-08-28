@@ -212,26 +212,26 @@ int main(int argc, char *argv[]) {
   int res, i;
 
   if (argc != 2) {
-    printf(&amp;quot;usage: %s [port number]\n&amp;quot;, argv[0]);
+    printf(&amp;#34;usage: %s [port number]\n&amp;#34;, argv[0]);
     return -1;
   }
 
-  printf(&amp;quot;server start...\n&amp;quot;);
+  printf(&amp;#34;server start...\n&amp;#34;);
   listen_sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-  if (listen_sd == -1) error_proc(&amp;quot;socket&amp;quot;);
+  if (listen_sd == -1) error_proc(&amp;#34;socket&amp;#34;);
   memset(&amp;amp;server_addr, 0, sizeof(server_addr));
 
                                                                                         31,0-1        10%
         } else { // 듣기 소켓 외의 다른 소켓이 읽기 준비 상태가 되면 IO를 수정
           read_len = read(i, read_buffer, sizeof(read_buffer) -1);
           if (read_len == 0) {
-            fprintf(stderr, &amp;quot;a client is disconnected... \n&amp;quot;);
+            fprintf(stderr, &amp;#34;a client is disconnected... \n&amp;#34;);
             FD_CLR(i, &amp;amp;default_fds);
             close(i);
             continue;
           }
-          read_buffer[read_len] = &#39;\0&#39;;
-          printf(&amp;quot;client (%d): %s\n&amp;quot;, i - 3, read_buffer);
+          read_buffer[read_len] = &amp;#39;\0&amp;#39;;
+          printf(&amp;#34;client (%d): %s\n&amp;#34;, i - 3, read_buffer);
           write(i, read_buffer, strlen(read_buffer));
         }
       }
@@ -242,10 +242,9 @@ int main(int argc, char *argv[]) {
 }
 
 void error_proc(const char *str) {
-  fprintf(stderr, &amp;quot;error: %s\n&amp;quot;, str);
+  fprintf(stderr, &amp;#34;error: %s\n&amp;#34;, str);
   exit(1);
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;select()&lt;/code&gt; 함수는 소켓 프로래밍에만 특화되어 있는 함수가 아니라 파일 디스크립터를 관리하는 방법을 제공하는 함수로 볼 수 있다.&lt;/p&gt;
@@ -345,25 +344,24 @@ int pthread_create(pthread_t *thread, const pthread_attr_r *attr, void *(start_r
 void *init_thread(void *perm) {
   int i;
   for (i = 1; i &amp;lt; 10; i++) {
-    printf(&amp;quot;counter: %d\n&amp;quot;, i);
+    printf(&amp;#34;counter: %d\n&amp;#34;, i);
     sleep(1);
   }
-  printf(&amp;quot;thread is now terminated. \n&amp;quot;);
+  printf(&amp;#34;thread is now terminated. \n&amp;#34;);
 }
 
 int main(int argc, char *argv[]) {
   pthread_t thread_id;
 
   if (pthread_create(&amp;amp;thread_id, NULL, init_thread, NULL) != 0) {
-    fprintf(stderr, &amp;quot;pthread creation error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;pthread creation error\n&amp;#34;);
     exit(0);
   }
 
   sleep(5);
-  printf(&amp;quot;main function is terminated.\n&amp;quot;);
+  printf(&amp;#34;main function is terminated.\n&amp;#34;);
   return 0;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/nil12xld856vtus/Screen%20Shot%202021-08-18%20at%201.34.53%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -413,10 +411,10 @@ int main(int argc, char *argv[]) {
 void *init_thread(void *perm) {
   int i;
   for (i = 0; i &amp;lt; 10; i++) {
-    printf(&amp;quot;counter: %d\n&amp;quot;, i);
+    printf(&amp;#34;counter: %d\n&amp;#34;, i);
     sleep(1);
   }
-  printf(&amp;quot;thread is now terminated. \n&amp;quot;);
+  printf(&amp;#34;thread is now terminated. \n&amp;#34;);
 }
 
 int main(int argc, char *argv[]) {
@@ -424,18 +422,17 @@ int main(int argc, char *argv[]) {
   int res;
 
   if (pthread_create(&amp;amp;thread_id, NULL, init_thread, NULL) != 0) {
-    fprintf(stderr, &amp;quot;pthread creation error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;pthread creation error\n&amp;#34;);
     exit(0);
   }
 
   if (pthread_join(thread_id, (void **)&amp;amp;res) != 0) {
-    fprintf(stderr, &amp;quot;pthread join error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;pthread join error\n&amp;#34;);
     exit(0);
   }
-  printf(&amp;quot;main function is terminated\n&amp;quot;);
+  printf(&amp;#34;main function is terminated\n&amp;#34;);
   return 0;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/vt5fr1n58vhwetp/Screen%20Shot%202021-08-18%20at%201.49.44%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;실행결과 스레드가 종료되기 전까지는 메인 함수가 종료되지 않는 것을 확인할 수 있다.&lt;/li&gt;
@@ -460,7 +457,7 @@ int main(int argc, char *argv[]) {
 #include &amp;lt;fcntl.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 
-#define SEM_NAME &amp;quot;/test&amp;quot;
+#define SEM_NAME &amp;#34;/test&amp;#34;
 
 void *thread_a_main(void *arg);
 void *thread_b_main(void *arg);
@@ -474,27 +471,27 @@ int main(int argc, char *argv[]) {
 
   sem = sem_open(SEM_NAME, O_RDWR | O_CREAT, 0777, 1);
   if (sem == SEM_FAILED) {
-    fprintf(stderr, &amp;quot;sem open error \n&amp;quot;);
+    fprintf(stderr, &amp;#34;sem open error \n&amp;#34;);
     exit(1);
   }
 
   if (pthread_create(&amp;amp;thread_id_1, NULL, thread_a_main, NULL) != 0) {
-    fprintf(stderr, &amp;quot;pthread 1 creation error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;pthread 1 creation error\n&amp;#34;);
     exit(0);
   }
 
   if (pthread_create(&amp;amp;thread_id_2, NULL, thread_b_main, NULL) != 0) {
-    fprintf(stderr, &amp;quot;pthread 2 creation error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;pthread 2 creation error\n&amp;#34;);
     exit(0);
   }
 
   if (pthread_join(thread_id_1, (void **) &amp;amp;res) != 0) {
-    fprintf(stderr, &amp;quot;pthread 1 join error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;pthread 1 join error\n&amp;#34;);
     exit(0);
   }
 
   if (pthread_join(thread_id_2, (void **) &amp;amp;res) != 0) {
-    fprintf(stderr, &amp;quot;pthread 2 join error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;pthread 2 join error\n&amp;#34;);
     exit(0);
   }
 
@@ -508,7 +505,7 @@ void *thread_a_main(void *arg) {
   for (i = 0; i &amp;lt; 60000; i++) {
     sem_wait(sem);
     counter += 2;
-    printf(&amp;quot;thread a increases the counter by 2: counter - %d\n&amp;quot;, counter);
+    printf(&amp;#34;thread a increases the counter by 2: counter - %d\n&amp;#34;, counter);
     sem_post(sem);
   }
   return NULL;
@@ -519,12 +516,11 @@ void *thread_b_main(void *arg) {
   for (i = 0; i &amp;lt; 60000; i++) {
     sem_wait(sem);
     counter += 3;
-    printf(&amp;quot;thread b increases the counter by 3: counter - %d \n&amp;quot;, counter);
+    printf(&amp;#34;thread b increases the counter by 3: counter - %d \n&amp;#34;, counter);
     sem_post(sem);
   }
   return NULL;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/621yp4ga0p58a1l/2021-08-18%2002.10.10.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;실행 결과 A, B 스레드가 각각 카운터 변수에 접근해서 값을 증가시키는 것을 확인할 수 있다.&lt;/li&gt;
@@ -615,7 +611,7 @@ void *thread_a_main(void *arg) {
   for (i = 0; i &amp;lt; 10000; i++) {
     pthread_mutex_lock(&amp;amp;mutex);
     counter += 2;
-    printf(&amp;quot;thread a increases the counter by 2: counter - %d\n&amp;quot;, counter);
+    printf(&amp;#34;thread a increases the counter by 2: counter - %d\n&amp;#34;, counter);
     pthread_mutex_unlock(&amp;amp;mutex);
   }
   return NULL;
@@ -626,12 +622,11 @@ void *thread_b_main(void *arg) {
   for (i = 0; i &amp;lt; 10000; i++) {
     pthread_mutex_lock(&amp;amp;mutex);
     counter += 3;
-    printf(&amp;quot;thread b increases the counter by 3: counter - %d\n&amp;quot;, counter);
+    printf(&amp;#34;thread b increases the counter by 3: counter - %d\n&amp;#34;, counter);
     pthread_mutex_unlock(&amp;amp;mutex);
   }
   return NULL;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/41pxocbi6r6wz7a/2021-08-18%2002.34.13.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
@@ -770,7 +765,7 @@ int main(int argc, char *argv[]) {
   char buff[BUFSIZ];
   int read_len, n_write;
   if (argc != 2) {
-    printf(&amp;quot;usage: %s filename \n&amp;quot;, argv[0]);
+    printf(&amp;#34;usage: %s filename \n&amp;#34;, argv[0]);
     return -1;
   }
 
@@ -781,22 +776,22 @@ int main(int argc, char *argv[]) {
   fgets(buff, BUFSIZ - 1, stdin);
 
   read_len = strlen(buff);
-  n_write = write(fd1, &amp;quot;abc&amp;quot;, 3);
+  n_write = write(fd1, &amp;#34;abc&amp;#34;, 3);
   n_write += write(fd1, buff, read_len + 1);
-  if (n_write == -1) printf(&amp;quot;error&amp;quot;);
+  if (n_write == -1) printf(&amp;#34;error&amp;#34;);
 
-  printf(&amp;quot;offset (fd1): %d\n&amp;quot;, (int) lseek(fd1, 0, SEEK_CUR));
-  printf(&amp;quot;offset (fd2): %d\n&amp;quot;, (int) lseek(fd2, 0, SEEK_CUR));
-  printf(&amp;quot;offset (fd3): %d\n&amp;quot;, (int) lseek(fd3, 0, SEEK_CUR));
+  printf(&amp;#34;offset (fd1): %d\n&amp;#34;, (int) lseek(fd1, 0, SEEK_CUR));
+  printf(&amp;#34;offset (fd2): %d\n&amp;#34;, (int) lseek(fd2, 0, SEEK_CUR));
+  printf(&amp;#34;offset (fd3): %d\n&amp;#34;, (int) lseek(fd3, 0, SEEK_CUR));
 
   read(fd2, buff, 4);
   write(1, buff, 4);
 
-  printf(&amp;quot;-----\n&amp;quot;);
+  printf(&amp;#34;-----\n&amp;#34;);
 
-  printf(&amp;quot;offset (fd1): %d\n&amp;quot;, (int) lseek(fd1, 0, SEEK_CUR));
-  printf(&amp;quot;offset (fd2): %d\n&amp;quot;, (int) lseek(fd2, 0, SEEK_CUR));
-  printf(&amp;quot;offset (fd3): %d\n&amp;quot;, (int) lseek(fd3, 0, SEEK_CUR));
+  printf(&amp;#34;offset (fd1): %d\n&amp;#34;, (int) lseek(fd1, 0, SEEK_CUR));
+  printf(&amp;#34;offset (fd2): %d\n&amp;#34;, (int) lseek(fd2, 0, SEEK_CUR));
+  printf(&amp;#34;offset (fd3): %d\n&amp;#34;, (int) lseek(fd3, 0, SEEK_CUR));
 
   close(fd1);
   fgets(buff, BUFSIZ - 1, stdin);
@@ -947,13 +942,13 @@ int main(int argc, char *argv[]) {
   char write_buffer[BUFSIZ];
 
   if (argc != 3) {
-    printf(&amp;quot;usage: %s &amp;lt;IP Address&amp;gt; &amp;lt;Port Number&amp;gt;\n&amp;quot;, argv[0]);
+    printf(&amp;#34;usage: %s &amp;lt;IP Address&amp;gt; &amp;lt;Port Number&amp;gt;\n&amp;#34;, argv[0]);
     return -1;
   }
 
   connect_sd = socket(PF_INET, SOCK_STREAM, 0);
 
-  printf(&amp;quot;=== client program ===\n&amp;quot;);
+  printf(&amp;#34;=== client program ===\n&amp;#34;);
 
   memset(&amp;amp;client_addr, 0, sizeof(client_addr));
   client_addr.sin_family = AF_INET;
@@ -962,10 +957,10 @@ int main(int argc, char *argv[]) {
 
   connect(connect_sd, (struct sockaddr *) &amp;amp;client_addr, sizeof(client_addr));
 
-  send(connect_sd, &amp;quot;normal_msg1&amp;quot;, strlen(&amp;quot;normal_msg1&amp;quot;), 0);
-  send(connect_sd, &amp;quot;normal_msg2&amp;quot;, strlen(&amp;quot;normal_msg2&amp;quot;), 0);
-  send(connect_sd, &amp;quot;urgent_msg&amp;quot;, strlen(&amp;quot;urgent msg&amp;quot;), MSG_OOB);
-  send(connect_sd, &amp;quot;normal_msg3&amp;quot;, strlen(&amp;quot;normal_msg3&amp;quot;), 0);
+  send(connect_sd, &amp;#34;normal_msg1&amp;#34;, strlen(&amp;#34;normal_msg1&amp;#34;), 0);
+  send(connect_sd, &amp;#34;normal_msg2&amp;#34;, strlen(&amp;#34;normal_msg2&amp;#34;), 0);
+  send(connect_sd, &amp;#34;urgent_msg&amp;#34;, strlen(&amp;#34;urgent msg&amp;#34;), MSG_OOB);
+  send(connect_sd, &amp;#34;normal_msg3&amp;#34;, strlen(&amp;#34;normal_msg3&amp;#34;), 0);
   close(connect_sd);
 
   return 0;
@@ -994,7 +989,7 @@ int main(int argc, char *argv[]) {
   struct sigaction act;
 
   if (argc != 2) {
-    printf(&amp;quot;usage: %s [port number]\n&amp;quot;, argv[0]);
+    printf(&amp;#34;usage: %s [port number]\n&amp;#34;, argv[0]);
     return -1;
   }
 
@@ -1002,7 +997,7 @@ int main(int argc, char *argv[]) {
   sigemptyset(&amp;amp;act.sa_mask);
   act.sa_flags = 0;
 
-  printf(&amp;quot;server start...\n&amp;quot;);
+  printf(&amp;#34;server start...\n&amp;#34;);
   listen_sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
   memset(&amp;amp;server_addr, 0, sizeof(server_addr));
@@ -1015,21 +1010,21 @@ int main(int argc, char *argv[]) {
 
   client_addr_len = sizeof(client_addr);
   connect_sd = accept(listen_sd, (struct sockaddr *) &amp;amp;client_addr, &amp;amp;client_addr_len);
-  fprintf(stderr, &amp;quot;a client is connected...\n&amp;quot;);
+  fprintf(stderr, &amp;#34;a client is connected...\n&amp;#34;);
 
   fcntl(connect_sd, F_SETOWN, getpid());
   state = sigaction(SIGURG, &amp;amp;act, 0);
 
   while (1) {
     read_len = recv(connect_sd, read_buffer, sizeof(read_buffer), 0);
-    read_buffer[read_len] = &#39;\0&#39;;
-    printf(&amp;quot;client: %s\n&amp;quot;, read_buffer);
+    read_buffer[read_len] = &amp;#39;\0&amp;#39;;
+    printf(&amp;#34;client: %s\n&amp;#34;, read_buffer);
     if (read_len == 0) {
       close(connect_sd);
       break;
     }
   }
-  fprintf(stderr, &amp;quot;the client is disconnected.\n&amp;quot;);
+  fprintf(stderr, &amp;#34;the client is disconnected.\n&amp;#34;);
   close(listen_sd);
   return 0;
 }
@@ -1039,10 +1034,9 @@ void urgent_handler(int sig) {
   char read_buffer[BUFSIZ];
 
   read_len = recv(connect_sd, read_buffer, sizeof(read_buffer), MSG_OOB);
-  read_buffer[read_len] = &#39;\0&#39;;
-  printf(&amp;quot;client(urgent): %s\n&amp;quot;, read_buffer);
+  read_buffer[read_len] = &amp;#39;\0&amp;#39;;
+  printf(&amp;#34;client(urgent): %s\n&amp;#34;, read_buffer);
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;OOB&lt;/code&gt; 전송에 대해서 정리하자면 긴급 데이터 처리를 위해서 &lt;code&gt;OOB&lt;/code&gt; 전송을 하더라도 데이터가 빨리 전송되는 것은 아니며 데이터 중에 한 바이트만 긴급 데이터로 취급된다는 것을 알 수 있다.&lt;/p&gt;
@@ -1090,9 +1084,9 @@ void urgent_handler(int sig) {
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;FILE *fp;
 
-fp = fopen(&amp;quot;filename.txt&amp;quot;, &amp;quot;r&amp;quot;);
+fp = fopen(&amp;#34;filename.txt&amp;#34;, &amp;#34;r&amp;#34;);
 ...
-fprintffp, &amp;quot;....&amp;quot;);
+fprintffp, &amp;#34;....&amp;#34;);
 ....
 fclose(fp);
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1143,12 +1137,12 @@ int main(int argc, char *argv[]) {
   FILE *wfp;
 
   if (argc != 3) {
-    printf(&amp;quot;usage: %s &amp;lt;IP Address&amp;gt; &amp;lt;Port Number&amp;gt;\n&amp;quot;, argv[0]);
+    printf(&amp;#34;usage: %s &amp;lt;IP Address&amp;gt; &amp;lt;Port Number&amp;gt;\n&amp;#34;, argv[0]);
     return -1;
   }
 
   connect_sd = socket(PF_INET, SOCK_STREAM, 0);
-  printf(&amp;quot;=== client program ===\n&amp;quot;);
+  printf(&amp;#34;=== client program ===\n&amp;#34;);
 
   memset(&amp;amp;client_addr, 0, sizeof(client_addr));
   client_addr.sin_family = AF_INET;
@@ -1156,18 +1150,17 @@ int main(int argc, char *argv[]) {
   client_addr.sin_port = htons(atoi(argv[2]));
 
   connect(connect_sd, (struct sockaddr *)&amp;amp;client_addr, sizeof(client_addr));
-  wfp = fdopen(connect_sd, &amp;quot;w&amp;quot;);
+  wfp = fdopen(connect_sd, &amp;#34;w&amp;#34;);
   while (1) {
-    printf(&amp;quot;send msg: &amp;quot;);
+    printf(&amp;#34;send msg: &amp;#34;);
     fgets(write_buffer, BUFSIZ, stdin);
     fputs(write_buffer, wfp);
     fflush(wfp);
-    if (!strcmp(write_buffer, &amp;quot;END\n&amp;quot;)) break;
+    if (!strcmp(write_buffer, &amp;#34;END\n&amp;#34;)) break;
   }
   fclose(wfp);
   return 0;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;서버&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
@@ -1185,11 +1178,11 @@ int main(int argc, char *argv[]) {
   FILE *rfp;
 
   if (argc != 2) {
-    printf(&amp;quot;usage %s [port number]\n&amp;quot;, argv[0]);
+    printf(&amp;#34;usage %s [port number]\n&amp;#34;, argv[0]);
     return -1;
   }
 
-  printf(&amp;quot;server start...\n&amp;quot;);
+  printf(&amp;#34;server start...\n&amp;#34;);
   listen_sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
   memset(&amp;amp;server_addr, 0, sizeof(server_addr));
@@ -1204,19 +1197,18 @@ int main(int argc, char *argv[]) {
   client_addr_len = sizeof(client_addr);
 
   connect_sd = accept(listen_sd, (struct sockaddr*)&amp;amp;client_addr, &amp;amp;client_addr_len);
-  fprintf(stderr, &amp;quot;a client is connected...\n&amp;quot;);
+  fprintf(stderr, &amp;#34;a client is connected...\n&amp;#34;);
 
-  rfp = fdopen(connect_sd, &amp;quot;r&amp;quot;);
+  rfp = fdopen(connect_sd, &amp;#34;r&amp;#34;);
 
   while (!feof(rfp)) {
     fgets(read_buffer, BUFSIZ, rfp);
-    printf(&amp;quot;%s&amp;quot;, read_buffer);
+    printf(&amp;#34;%s&amp;#34;, read_buffer);
   }
-  fprintf(stderr, &amp;quot;the client is disconnected. \n&amp;quot;);
+  fprintf(stderr, &amp;#34;the client is disconnected. \n&amp;#34;);
   fclose(rfp);
   return 0;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/q3lp1q6nxe1d91s/Screen%20Shot%202021-08-17%20at%203.43.38%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/r63x0947s1x2kp0/Screen%20Shot%202021-08-17%20at%203.44.34%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -1347,7 +1339,7 @@ mqd_t mq_open(const char *name, int oflag);
 #include &amp;lt;sys/types.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 
-#define MQ_NAME &amp;quot;/test_mq&amp;quot;
+#define MQ_NAME &amp;#34;/test_mq&amp;#34;
 
 int main(int argc, char **argv)
 {
@@ -1366,34 +1358,33 @@ int main(int argc, char **argv)
   mqfd = mq_open(MQ_NAME, O_CREAT|O_RDWR, 644, &amp;amp;attr);
   if (mqfd == (mqd_t)-1)
   {
-    perror(&amp;quot;mq_open failure from main&amp;quot;);
-    printf(&amp;quot;Errno = %d\n&amp;quot;,errno);
+    perror(&amp;#34;mq_open failure from main&amp;#34;);
+    printf(&amp;#34;Errno = %d\n&amp;#34;,errno);
     exit(0);
   }
 
   pid = fork();
   if (pid == 0) {
-    printf(&amp;quot;child: &amp;quot;);
-    scanf(&amp;quot;%s&amp;quot;, send_buff);
+    printf(&amp;#34;child: &amp;#34;);
+    scanf(&amp;#34;%s&amp;#34;, send_buff);
     if (mq_send(mqfd, send_buff, strlen(send_buff), priority) == -1) {
-      fprintf(stderr, &amp;quot;MQ SEND ERROR\n&amp;quot;);
+      fprintf(stderr, &amp;#34;MQ SEND ERROR\n&amp;#34;);
       exit(1);
     }
   } else if (pid &amp;lt; 0) {
-    fprintf(stderr, &amp;quot;FORK FAILURE\n&amp;quot;);
+    fprintf(stderr, &amp;#34;FORK FAILURE\n&amp;#34;);
     exit(1);
   } else {
     if (mq_getattr(mqfd, &amp;amp;attr) == -1) {
-      fprintf(stderr, &amp;quot;MQ_GET_ATTR ERROR \n&amp;quot;);
+      fprintf(stderr, &amp;#34;MQ_GET_ATTR ERROR \n&amp;#34;);
       exit(1);
     }
     read_buff = malloc(attr.mq_msgsize);
     read_len = mq_receive(mqfd, read_buff, attr.mq_msgsize, &amp;amp;priority);
-    printf(&amp;quot;parent receives: %s\n&amp;quot;, (char*)read_buff);
+    printf(&amp;#34;parent receives: %s\n&amp;#34;, (char*)read_buff);
   }
   return 0;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/yjytov82iozfi4s/Screen%20Shot%202021-08-15%20at%208.51.54%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1552,7 +1543,7 @@ int munmap(void *addr, size_t len);
 #include &amp;lt;string.h&amp;gt;
 #include &amp;lt;unistd.h&amp;gt;
 
-#define SM_NAME &amp;quot;/Test&amp;quot;
+#define SM_NAME &amp;#34;/Test&amp;#34;
 
 int main(int argc, char *argv[]) {
   int shmfd;
@@ -1562,12 +1553,12 @@ int main(int argc, char *argv[]) {
 
   shmfd = shm_open(SM_NAME, O_RDWR | O_CREAT, 0777);
   if (shmfd == -1) {
-    fprintf(stderr, &amp;quot;open error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;open error\n&amp;#34;);
     exit(1);
   }
 
   if (ftruncate(shmfd, sizeof(int)) == -1) {
-    fprintf(stderr, &amp;quot;truncate error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;truncate error\n&amp;#34;);
     exit(1);
   }
 
@@ -1576,30 +1567,29 @@ int main(int argc, char *argv[]) {
 
   *test_value = 10;
 
-  printf(&amp;quot;test value: %d\n&amp;quot;, *test_value);
+  printf(&amp;#34;test value: %d\n&amp;#34;, *test_value);
 
   pid = fork();
   if (pid == 0) {
     *test_value = *test_value + 1;
-    printf(&amp;quot;child process test value: %d\n&amp;quot;, *test_value);
+    printf(&amp;#34;child process test value: %d\n&amp;#34;, *test_value);
     sleep(3);
     *test_value = *test_value + 1;
-    printf(&amp;quot;child process test value: %d\n&amp;quot;, *test_value);
+    printf(&amp;#34;child process test value: %d\n&amp;#34;, *test_value);
     exit(1);
   } else if (pid &amp;lt; 0) {
-    fprintf(stderr, &amp;quot;fork failure\n&amp;quot;);
+    fprintf(stderr, &amp;#34;fork failure\n&amp;#34;);
     exit(1);
   }
   else {
     sleep(1);
     *test_value = *test_value + 5;
-    printf(&amp;quot;parent process test value: %d\n&amp;quot;, *test_value);
+    printf(&amp;#34;parent process test value: %d\n&amp;#34;, *test_value);
     wait(&amp;amp;status);
   }
   shm_unlink(SM_NAME);
   return 0;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/2ofu5de7n9htzw8/Screen%20Shot%202021-08-15%20at%201.31.57%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1728,8 +1718,8 @@ sem_t *sem_open(const char *name, int oflag);
 #include &amp;lt;unistd.h&amp;gt;
 #include &amp;lt;semaphore.h&amp;gt;
 
-#define SM_NAME &amp;quot;/Test&amp;quot;
-#define SEM_NAME &amp;quot;/SemTest&amp;quot;
+#define SM_NAME &amp;#34;/Test&amp;#34;
+#define SEM_NAME &amp;#34;/SemTest&amp;#34;
 
 int main(int argc, char *argv[]) {
   int shmfd, pid, status, i;
@@ -1738,43 +1728,43 @@ int main(int argc, char *argv[]) {
 
   sem = sem_open(SEM_NAME, O_RDWR | O_CREAT, 0777, 1);
   if (sem == SEM_FAILED) {
-    fprintf(stderr, &amp;quot;sem open error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;sem open error\n&amp;#34;);
     exit(1);
   }
 
   shmfd = shm_open(SM_NAME, O_RDWR | O_CREAT, 0777);
   if (shmfd == -1) {
-    fprintf(stderr, &amp;quot;shm open error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;shm open error\n&amp;#34;);
     exit(1);
   }
 
   if (ftruncate(shmfd, sizeof(int)) == -1) {
-    fprintf(stderr, &amp;quot;truncate error\n&amp;quot;);
+    fprintf(stderr, &amp;#34;truncate error\n&amp;#34;);
     exit(1);
   }
 
   test_value = mmap(0, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, shmfd, 0);
   close(shmfd);
   *test_value = 10;
-  printf(&amp;quot;test value: %d\n&amp;quot;, *test_value);
+  printf(&amp;#34;test value: %d\n&amp;#34;, *test_value);
 
   pid = fork();
   if (pid == 0) { // child process
     for (i = 0; i &amp;lt; 10; i++) {
       sem_wait(sem);
       *test_value = *test_value + 1;
-      printf(&amp;quot;child process test value: %d\n&amp;quot;, *test_value);
+      printf(&amp;#34;child process test value: %d\n&amp;#34;, *test_value);
       sem_post(sem);
     }
     exit(1);
   } else if (pid &amp;lt; 0) {
-    fprintf(stderr, &amp;quot;fork failure\n&amp;quot;);
+    fprintf(stderr, &amp;#34;fork failure\n&amp;#34;);
     exit(1);
   } else {
     for (i = 0; i &amp;lt; 10; i++) {
       sem_wait(sem);
       *test_value = *test_value + 5;
-      printf(&amp;quot;parent process test value: %d\n&amp;quot;, *test_value);
+      printf(&amp;#34;parent process test value: %d\n&amp;#34;, *test_value);
       sem_post(sem);
     }
     wait(&amp;amp;status);
@@ -1886,25 +1876,25 @@ int main(int argc, char *argv[]) {
   int open_fd, status;
 
   if (argc != 2) {
-    fprintf(stderr, &amp;quot;usage: %s [file] \n&amp;quot;, argv[0]);
+    fprintf(stderr, &amp;#34;usage: %s [file] \n&amp;#34;, argv[0]);
   }
 
   res = pipe(pipe_fd);
-  if (res == -1) error_proc(&amp;quot;pipe&amp;quot;);
+  if (res == -1) error_proc(&amp;#34;pipe&amp;#34;);
 
   pid = fork();
   
-  if (pid == -1) error_proc(&amp;quot;fork&amp;quot;);
+  if (pid == -1) error_proc(&amp;#34;fork&amp;#34;);
   if (pid == 0) { // child
     close(pipe_fd[1]);
     open_fd = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC);
     while (1) {
       read_len = read(pipe_fd[0], buff, BUFSIZ - 1);
-      if (read_len == -1) error_proc(&amp;quot;read&amp;quot;);
+      if (read_len == -1) error_proc(&amp;#34;read&amp;#34;);
       if (read_len == 0) break;
       write(open_fd, buff, read_len);
     }
-    printf(&amp;quot;parent process closed the pipe. \n&amp;quot;);
+    printf(&amp;#34;parent process closed the pipe. \n&amp;#34;);
     close(open_fd);
     close(pipe_fd[0]);
     return 0;
@@ -1913,11 +1903,11 @@ int main(int argc, char *argv[]) {
     while (1) {
       fgets(buff, BUFSIZ - 1, stdin);
       read_len = strlen(buff);
-      if (read_len == 4 &amp;amp;&amp;amp; !strncmp(buff, &amp;quot;END&amp;quot;, 3))
+      if (read_len == 4 &amp;amp;&amp;amp; !strncmp(buff, &amp;#34;END&amp;#34;, 3))
         break;
       n_write = write(pipe_fd[1], buff, read_len);
-      if (n_write == -1) error_proc(&amp;quot;write&amp;quot;);
-      printf(&amp;quot;%d bytes are written \n&amp;quot;, n_write);
+      if (n_write == -1) error_proc(&amp;#34;write&amp;#34;);
+      printf(&amp;#34;%d bytes are written \n&amp;#34;, n_write);
     }
     close(pipe_fd[1]);
     wait(&amp;amp;status);
@@ -1926,10 +1916,9 @@ int main(int argc, char *argv[]) {
 }
 
 void error_proc(const char *str) {
-  fprintf(stderr, &amp;quot;%s: %s\n&amp;quot;, str, strerror(errno));
+  fprintf(stderr, &amp;#34;%s: %s\n&amp;#34;, str, strerror(errno));
   exit(1);
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -2066,7 +2055,7 @@ int global_count = 10;
 
 void sigint_handler(int sig) {
   if (sig == SIGINT) {
-    printf(&amp;quot;received SIGINT... %d lives left \n&amp;quot;, global_count--);
+    printf(&amp;#34;received SIGINT... %d lives left \n&amp;#34;, global_count--);
   }
 
   if (global_count &amp;lt;= 0) {
@@ -2078,7 +2067,7 @@ int main(int argc, char *argv[]) {
   int i = 0;
   signal(SIGINT, sigint_handler); // 터미널 창에서 CTRL + C 입력을 받으면 운영체제에게 sigint_handler 함수를 호출해 달라는 요청을 하는 과정이다.
   while (1) {
-    printf(&amp;quot;%d: sleep and awake \n&amp;quot;, ++i);
+    printf(&amp;#34;%d: sleep and awake \n&amp;#34;, ++i);
     sleep(5);
   }
   return 1;
@@ -2132,7 +2121,7 @@ int main(int argc, char *argv[]) {
   sigaction(SIGINT, &amp;amp;new_action, &amp;amp;old_action);
 
   while (1) {
-    printf(&amp;quot;%d: sleep and awake \n&amp;quot;, i--);
+    printf(&amp;#34;%d: sleep and awake \n&amp;#34;, i--);
     sleep(1);
     if (i == 0) break;
   }
@@ -2222,10 +2211,10 @@ int main(int argc, char* argv[]) {
   pid_t pid;
 
   if (argc != 2) {
-    printf(&amp;quot;usage: %s [port] \n&amp;quot;, argv[0]);
+    printf(&amp;#34;usage: %s [port] \n&amp;#34;, argv[0]);
     exit(1);
   }
-  printf(&amp;quot;server start...\n&amp;quot;);
+  printf(&amp;#34;server start...\n&amp;#34;);
 
   server_sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
   if (server_sd == -1) error_proc();
@@ -2247,21 +2236,21 @@ int main(int argc, char* argv[]) {
       error_print();
       continue;
     }
-    printf(&amp;quot;client %s: %d is connected...\n&amp;quot;, inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
+    printf(&amp;#34;client %s: %d is connected...\n&amp;#34;, inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
     pid = fork();
     if (pid == 0) { /* child process */
       close(server_sd);
       while (1) {
         read_len = read(client_sd, read_buffer, sizeof(read_buffer) - 1);
         if (read_len == 0) break;
-        read_buffer[read_len] = &#39;\0&#39;;
-        printf(&amp;quot;client (%d): %s\n&amp;quot;, ntohs(client_addr.sin_port), read_buffer);
+        read_buffer[read_len] = &amp;#39;\0&amp;#39;;
+        printf(&amp;#34;client (%d): %s\n&amp;#34;, ntohs(client_addr.sin_port), read_buffer);
         write(client_sd, read_buffer, strlen(read_buffer));
       }
-      printf(&amp;quot;client (%d) : is disconnected\n&amp;quot;, ntohs(client_addr.sin_port));
+      printf(&amp;#34;client (%d) : is disconnected\n&amp;#34;, ntohs(client_addr.sin_port));
       close(client_sd);
       return 0;
-    } else if (pid == -1) error_proc(&amp;quot;fork&amp;quot;);
+    } else if (pid == -1) error_proc(&amp;#34;fork&amp;#34;);
     else {
       close(client_sd);
     }
@@ -2269,7 +2258,6 @@ int main(int argc, char* argv[]) {
   close(server_sd);
   return 0;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;간단한-udp-멀티-프로세스-채팅-프로그램&#34;&gt;간단한 UDP 멀티 프로세스 채팅 프로그램&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;채팅 서버의 역할은 다음과 같다.&lt;/p&gt;
@@ -2314,13 +2302,13 @@ int main(int argc, char* argv[]) {
   struct sockaddr_in sockets[MAX_CLIENT];
 
   if (argc != 2) {
-    fprintf(stderr, &amp;quot;usage: %s port&amp;quot;, argv[0]);
+    fprintf(stderr, &amp;#34;usage: %s port&amp;#34;, argv[0]);
     return 0;
   }
 
   memset(&amp;amp;sockets, 0, sizeof(sockets[0])*MAX_CLIENT);
   my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-  if (my_sock == -1) error_proc(&amp;quot;socket&amp;quot;);
+  if (my_sock == -1) error_proc(&amp;#34;socket&amp;#34;);
 
   memset(&amp;amp;src_addr, 0, sizeof(src_addr));
   src_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -2328,13 +2316,13 @@ int main(int argc, char* argv[]) {
   src_addr.sin_port = htons(atoi(argv[1]));
 
   res = bind(my_sock, (struct sockaddr*)&amp;amp;src_addr, sizeof(src_addr));
-  if (res == -1) error_proc(&amp;quot;bind&amp;quot;);
+  if (res == -1) error_proc(&amp;#34;bind&amp;#34;);
   addr_len = sizeof(dest_addr);
 
   while (1) {
     n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0,
         (struct sockaddr *) &amp;amp;dest_addr, &amp;amp;addr_len);
-    if (n_recv == -1) error_proc(&amp;quot;recvfrom&amp;quot;);
+    if (n_recv == -1) error_proc(&amp;#34;recvfrom&amp;#34;);
     res = check_sock_list(&amp;amp;dest_addr, sockets, n_client);
 
     if (res == n_client) {
@@ -2345,9 +2333,9 @@ int main(int argc, char* argv[]) {
         n_client++;
       }
     }
-    printf(&amp;quot;n_client: %d\n&amp;quot;, n_client);
+    printf(&amp;#34;n_client: %d\n&amp;#34;, n_client);
     str_addr = inet_ntoa(dest_addr.sin_addr);
-    sprintf(name_buffer, &amp;quot;%s: %d &amp;gt;&amp;gt; &amp;quot;, str_addr, ntohs(dest_addr.sin_port));
+    sprintf(name_buffer, &amp;#34;%s: %d &amp;gt;&amp;gt; &amp;#34;, str_addr, ntohs(dest_addr.sin_port));
 
     for (i = 0; i &amp;lt; n_client; i++) {
       if (i == res) continue; // sender == receiver skip
@@ -2388,22 +2376,22 @@ int main(int argc, char* argv[]) {
   addr_len = sizeof(dest_addr);
 
   pid = fork();
-  if (pid == -1) error_proc(&amp;quot;fork&amp;quot;);
+  if (pid == -1) error_proc(&amp;#34;fork&amp;#34;);
   if (pid == 0) {
     while (1) {
       n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0, (struct sockaddr*) &amp;amp;dest_addr, &amp;amp;addr_len);
-      if (n_recv == -1) error_proc(&amp;quot;read&amp;quot;);
+      if (n_recv == -1) error_proc(&amp;#34;read&amp;#34;);
       write(1, buff, n_recv);
     }
   } else {
     while (1) {
       fgets(buff, BUFSIZ - 1, stdin);
       read_len = strlen(buff);
-      if (read_len == 0) error_proc(&amp;quot;fgets&amp;quot;);
+      if (read_len == 0) error_proc(&amp;#34;fgets&amp;#34;);
       n_sent = sendto(my_sock, buff, read_len, 0, (struct sockaddr*) &amp;amp;dest_addr, addr_len);
-      if (n_sent == -1) error_proc(&amp;quot;write&amp;quot;);
-      buff[read_len - 1] = &#39;\0&#39;;
-      if (!strcmp(buff, &amp;quot;END&amp;quot;)) break;
+      if (n_sent == -1) error_proc(&amp;#34;write&amp;#34;);
+      buff[read_len - 1] = &amp;#39;\0&amp;#39;;
+      if (!strcmp(buff, &amp;#34;END&amp;#34;)) break;
     }
     kill(pid, SIGTERM);
   }
@@ -2411,7 +2399,7 @@ int main(int argc, char* argv[]) {
 }
 
 void error_proc(const char* str) {
-  fprintf(stderr, &amp;quot;%s:%s \n&amp;quot;, str, strerror(errno));
+  fprintf(stderr, &amp;#34;%s:%s \n&amp;#34;, str, strerror(errno));
   exit(1);
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;서버 화면&lt;/strong&gt;
@@ -2567,7 +2555,7 @@ int main(int argc, char *argv[]) {
 
   my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
-  if (my_sock == -1) error_proc(&amp;quot;socket&amp;quot;);
+  if (my_sock == -1) error_proc(&amp;#34;socket&amp;#34;);
   memset(&amp;amp;dest_addr, 0, sizeof(dest_addr));
   dest_addr.sin_addr.s_addr = inet_addr(argv[1]);
   dest_addr.sin_family = AF_INET;
@@ -2579,16 +2567,15 @@ int main(int argc, char *argv[]) {
     read_len = strlen(buff);
     n_sent = sendto(my_sock, buff, read_len, 0, (struct sockaddr *) &amp;amp;dest_addr,
 addr_len);
-    printf(&amp;quot;%d bytes were sent. \n&amp;quot;, n_sent);
+    printf(&amp;#34;%d bytes were sent. \n&amp;#34;, n_sent);
   }
   return 0;
 }
 
 void error_proc(const char* str) {
-  fprintf(stderr, &amp;quot;%s: %s \n&amp;quot;, str, strerror(errno));
+  fprintf(stderr, &amp;#34;%s: %s \n&amp;#34;, str, strerror(errno));
   exit(1);
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;다음 예제를 실행하고 패킷을 캡처해본면 다음과 같은 사실을 확인할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -2663,12 +2650,12 @@ int main(int argc, char **argv) {
   socklen_t addr_len;
 
   if (argc != 2) {
-    fprintf(stderr, &amp;quot;usage: %s port&amp;quot;, argv[0]);
+    fprintf(stderr, &amp;#34;usage: %s port&amp;#34;, argv[0]);
     return 0;
   }
 
   my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-  if (my_sock == -1) error_proc(&amp;quot;socket&amp;quot;);
+  if (my_sock == -1) error_proc(&amp;#34;socket&amp;#34;);
 
   memset(&amp;amp;src_addr, 0, sizeof(src_addr));
   src_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -2677,23 +2664,22 @@ int main(int argc, char **argv) {
 
   res = bind(my_sock, (struct sockaddr *)&amp;amp;src_addr, sizeof(src_addr));
 
-  if (res == -1) error_proc(&amp;quot;bind&amp;quot;);
+  if (res == -1) error_proc(&amp;#34;bind&amp;#34;);
 
   addr_len = sizeof(dest_addr);
 
   while(1) {
     n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0, (struct sockaddr *)&amp;amp;dest_addr, &amp;amp;addr_len);
-  if (n_recv == -1) error_proc(&amp;quot;recv_from&amp;quot;);
-  printf(&amp;quot;%d bytes were recv. \n&amp;quot;, n_recv);
+  if (n_recv == -1) error_proc(&amp;#34;recv_from&amp;#34;);
+  printf(&amp;#34;%d bytes were recv. \n&amp;#34;, n_recv);
   }
   return 0;
 }
 
 void error_proc(const char *str) {
-  fprintf(stderr, &amp;quot;%s: %s\n&amp;quot;, str, strerror(errno));
+  fprintf(stderr, &amp;#34;%s: %s\n&amp;#34;, str, strerror(errno));
   exit(1);
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;전송-측-화면&#34;&gt;전송 측 화면&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/i5c8w5mne3it4ya/Screen%20Shot%202021-08-09%20at%2011.28.45%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h4 id=&#34;수신측-화면&#34;&gt;수신측 화면&lt;/h4&gt;
@@ -3063,15 +3049,15 @@ int main() {
   struct sockaddr_in srv_addr, client_addr;
   int client_addr_len, read_len;
   char read_buff[BUFSIZ];
-  char write_buff[BUFSIZ] = &amp;quot;I am 20 years old.&amp;quot;;
+  char write_buff[BUFSIZ] = &amp;#34;I am 20 years old.&amp;#34;;
 
   srv_sd = socket(PF_INET, SOCK_STREAM, 0);
 
   if (srv_sd == -1) {
-    printf(&amp;quot;socket creation error&amp;quot;);
+    printf(&amp;#34;socket creation error&amp;#34;);
     return -1;
   }
-  printf(&amp;quot;==== server program ====\n&amp;quot;);
+  printf(&amp;#34;==== server program ====\n&amp;#34;);
 
   memset(&amp;amp;srv_addr, 0, sizeof(srv_addr));
   srv_addr.sin_family = AF_INET;
@@ -3079,12 +3065,12 @@ int main() {
   srv_addr.sin_port = htons(PORT);
 
   if (bind(srv_sd, (struct sockaddr *) &amp;amp;srv_addr, sizeof(srv_addr)) == -1) {
-    printf(&amp;quot;bind error&amp;quot;);
+    printf(&amp;#34;bind error&amp;#34;);
     return -1;
   }
 
   if (listen(srv_sd, 5) == -1) {
-    printf(&amp;quot;listen error&amp;quot;);
+    printf(&amp;#34;listen error&amp;#34;);
     return -1;
   }
 
@@ -3092,20 +3078,20 @@ int main() {
   client_sd = accept(srv_sd, (struct sockaddr*)&amp;amp;client_addr, &amp;amp;client_addr_len);
 
   if (client_sd == -1) {
-    printf(&amp;quot;accept error&amp;quot;);
+    printf(&amp;#34;accept error&amp;#34;);
     return -1;
   }
   write(client_sd, write_buff, sizeof(write_buff));
-  printf(&amp;quot;server: %s\n&amp;quot;, write_buff);
+  printf(&amp;#34;server: %s\n&amp;#34;, write_buff);
 
   read_len = read(client_sd, read_buff, sizeof(read_buff));
   if (read_len == -1) {
-    printf(&amp;quot;read error&amp;quot;);
+    printf(&amp;#34;read error&amp;#34;);
     return -1;
   }
 
-  read_buff[read_len] = &#39;\0&#39;;
-  printf(&amp;quot;client: %s\n&amp;quot;, read_buff);
+  read_buff[read_len] = &amp;#39;\0&amp;#39;;
+  printf(&amp;#34;client: %s\n&amp;#34;, read_buff);
 
   close(client_sd);
   close(srv_sd);
@@ -3133,37 +3119,37 @@ int main() {
   struct sockaddr_in client_addr;
 
   int client_addr_len, read_len;
-  char write_buff[BUFSIZ] = &amp;quot;How old are you?&amp;quot;;
+  char write_buff[BUFSIZ] = &amp;#34;How old are you?&amp;#34;;
   char read_buff[BUFSIZ];
 
   client_sd = socket(PF_INET, SOCK_STREAM, 0);
   if (client_sd == -1) {
-    printf(&amp;quot;socket creation error&amp;quot;);
+    printf(&amp;#34;socket creation error&amp;#34;);
     return -1;
   }
-  printf(&amp;quot;==== client program ====\n&amp;quot;);
+  printf(&amp;#34;==== client program ====\n&amp;#34;);
 
   memset(&amp;amp;client_addr, 0, sizeof(client_addr));
   client_addr.sin_family = AF_INET;
-  client_addr.sin_addr.s_addr = inet_addr(&amp;quot;127.0.0.1&amp;quot;);
+  client_addr.sin_addr.s_addr = inet_addr(&amp;#34;127.0.0.1&amp;#34;);
   client_addr.sin_port = htons(PORT);
 
   if (connect(client_sd, (struct sockaddr *) &amp;amp;client_addr, sizeof(client_addr)) == -1) {
-    printf(&amp;quot;connection error&amp;quot;);
+    printf(&amp;#34;connection error&amp;#34;);
     close(client_sd);
     return -1;
   }
 
   write(client_sd, write_buff, sizeof(write_buff));
-  printf(&amp;quot;client: %s\n&amp;quot;, write_buff);
+  printf(&amp;#34;client: %s\n&amp;#34;, write_buff);
 
   read_len = read(client_sd, read_buff, sizeof(read_buff));
   if (read_len == -1) {
-    printf(&amp;quot;read error&amp;quot;);
+    printf(&amp;#34;read error&amp;#34;);
     return -1;
   }
-  read_buff[read_len] = &#39;\0&#39;;
-  printf(&amp;quot;server: %s\n&amp;quot;, read_buff);
+  read_buff[read_len] = &amp;#39;\0&amp;#39;;
+  printf(&amp;#34;server: %s\n&amp;#34;, read_buff);
   close(client_sd);
   return 0;
 }
@@ -3199,10 +3185,10 @@ int main() {
 
 if (client_sd == -1) {
   if (errno == EINVAL) {
-    printf(&amp;quot;protocol family error&amp;quot;);
+    printf(&amp;#34;protocol family error&amp;#34;);
     return -1;
   }
-  printf(&amp;quot;socket creation error&amp;quot;);
+  printf(&amp;#34;socket creation error&amp;#34;);
   return -1;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -3216,7 +3202,7 @@ int foo(int domain, int type, int protocol) {
   int res;
   res = socket(domain, type, protocol);
   if (res == -1) {
-    perror(&amp;quot;socket&amp;quot;);
+    perror(&amp;#34;socket&amp;#34;);
   }
   return res;
 }
@@ -3291,15 +3277,15 @@ int foo(int domain, int type, int protocol) {
 
 int main(int argc, char** argv) {
   uint32_t ip_int;
-  char *ip_str = &amp;quot;127.0.0.1&amp;quot;;
+  char *ip_str = &amp;#34;127.0.0.1&amp;#34;;
 
   ip_int = inet_network(ip_str);
 
-  printf(&amp;quot;string: %s, decimal: %u, hex: %x\n&amp;quot;,
+  printf(&amp;#34;string: %s, decimal: %u, hex: %x\n&amp;#34;,
     ip_str, ip_int, ip_int);
 
   ip_int = htonl(ip_int);
-  printf(&amp;quot;after htonl - decimal: %u, hex: %x \n&amp;quot;,
+  printf(&amp;#34;after htonl - decimal: %u, hex: %x \n&amp;#34;,
     ip_int, ip_int);
 
   return 0;
@@ -3323,7 +3309,7 @@ int print_addr(struct sockaddr_in *);
 
 int main(char argc, char* argv[]) {
 
-  char *sample_ip = &amp;quot;127.0.0.1&amp;quot;;
+  char *sample_ip = &amp;#34;127.0.0.1&amp;#34;;
 
   int port = 9002;
 
@@ -3349,10 +3335,10 @@ int main(char argc, char* argv[]) {
   print_addr(&amp;amp;sock_addr2);
   print_addr(&amp;amp;sock_addr3);
 
-  printf(&amp;quot;===== ntoa =====\n&amp;quot;);
-  printf(&amp;quot;IP: %s \n&amp;quot;, inet_ntoa(sock_addr1.sin_addr));
-  printf(&amp;quot;IP: %s \n&amp;quot;, inet_ntoa(sock_addr2.sin_addr));
-  printf(&amp;quot;IP: %s \n&amp;quot;, inet_ntoa(sock_addr3.sin_addr));
+  printf(&amp;#34;===== ntoa =====\n&amp;#34;);
+  printf(&amp;#34;IP: %s \n&amp;#34;, inet_ntoa(sock_addr1.sin_addr));
+  printf(&amp;#34;IP: %s \n&amp;#34;, inet_ntoa(sock_addr2.sin_addr));
+  printf(&amp;#34;IP: %s \n&amp;#34;, inet_ntoa(sock_addr3.sin_addr));
   return 0;
 }
 
@@ -3361,10 +3347,9 @@ int print_addr(struct sockaddr_in *address) {
   char txt[INET_ADDRSTRLEN];
   port = ntohs(address-&amp;gt;sin_port);
   inet_ntop(AF_INET, &amp;amp;(((struct sockaddr_in *) address) -&amp;gt; sin_addr), txt, sizeof(struct sockaddr_in));
-  printf(&amp;quot;ip: %s, port: %d \n&amp;quot;, txt, address-&amp;gt;sin_port);
+  printf(&amp;#34;ip: %s, port: %d \n&amp;#34;, txt, address-&amp;gt;sin_port);
   return 0;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;호스트-이름과-ip-주소&#34;&gt;호스트 이름과 IP 주소&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -3412,27 +3397,26 @@ int main(int argc, char *argv[]) {
   int i = 0;
 
   if (argc != 2) {
-    fprintf(stderr, &amp;quot;usage: %s &amp;lt;hostname&amp;gt; \n&amp;quot;, argv[0]);
+    fprintf(stderr, &amp;#34;usage: %s &amp;lt;hostname&amp;gt; \n&amp;#34;, argv[0]);
     return -1;
   }
 
   ent = gethostbyname(argv[1]);
-  if (ent == NULL) err_proc(&amp;quot;gethostbyname&amp;quot;);
+  if (ent == NULL) err_proc(&amp;#34;gethostbyname&amp;#34;);
 
   res = (struct in_addr **) ent-&amp;gt;h_addr_list;
-  printf(&amp;quot;hostname: %s \n&amp;quot;, ent-&amp;gt;h_name);
+  printf(&amp;#34;hostname: %s \n&amp;#34;, ent-&amp;gt;h_name);
   while(res[i] != NULL) {
-    printf(&amp;quot;%s&amp;quot;, inet_ntoa(*res[i]));
+    printf(&amp;#34;%s&amp;#34;, inet_ntoa(*res[i]));
     i++;
   }
-  printf(&amp;quot;\n&amp;quot;);
+  printf(&amp;#34;\n&amp;#34;);
 }
 
 void err_proc(const char *str) {
-  fprintf(stderr, &amp;quot;%s: %s\n&amp;quot;, str, strerror(errno));
+  fprintf(stderr, &amp;#34;%s: %s\n&amp;#34;, str, strerror(errno));
   exit(errno);
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;예제 프로그램은 프로그램 실행시에 호스트 이름을 입력 인자로 받는다.&lt;/p&gt;
@@ -3608,10 +3592,10 @@ int socket(int domain, int type, int protocol);
 int main() {
   int sd1, fd1, sd2, fd2;
   sd1 = socket(PF_INET, SOCK_STREAM, 0);
-  fd1 = open(&amp;quot;test&amp;quot;, O_RDONLY);
+  fd1 = open(&amp;#34;test&amp;#34;, O_RDONLY);
   sd2 = socket(PF_INET, SOCK_STREAM, 0);
-  fd2 = open(&amp;quot;test2&amp;quot;, O_RDONLY | O_CREAT);
-  printf(&amp;quot;sd1: %d, fd1: %d, sd2: %d, fd2: %d\n&amp;quot;, sd1, fd1, sd2, fd2);
+  fd2 = open(&amp;#34;test2&amp;#34;, O_RDONLY | O_CREAT);
+  printf(&amp;#34;sd1: %d, fd1: %d, sd2: %d, fd2: %d\n&amp;#34;, sd1, fd1, sd2, fd2);
   close(sd1);
   close(fd1);
   close(sd2);
@@ -3671,7 +3655,7 @@ int main() {
 &lt;p&gt;다시 말해서, 프로세스를 특정하려면, &lt;code&gt;PID&lt;/code&gt; 가 필요하다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;quot;원거리 호스트에서 실행중인 프로그램의 PID를 통신할 때마다 알아야 하는가?&amp;quot;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#34;원거리 호스트에서 실행중인 프로그램의 PID를 통신할 때마다 알아야 하는가?&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;앞에서 설명한 IP 주소 덕분에 호스트까지 데이터를 전달하는 것은 가능하지만, 호스트에 데이터가 도착하고 그 데이터가 어떤 프로세스에 전달되어야 하는지를 알려면 &lt;code&gt;PID&lt;/code&gt;로 판별을 해야한다.&lt;/p&gt;
@@ -3859,7 +3843,7 @@ hping3 --udp 127.0.0.1 -s 7000 -p 8000 --fast
 &lt;p&gt;이를 확인해보기 위해서, &lt;code&gt;ping&lt;/code&gt; 보다 많은 기능을 지원하는 &lt;code&gt;hping3&lt;/code&gt; 도구를 이용해서 테스트 해보겠다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f icmp -Y &amp;quot;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&amp;quot;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f icmp -Y &amp;#34;ip.dst == 8.8.8.8 or ip.src == 8.8.8.8&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 명령어를 이용해서 패킷을 캡처하고 아래 명령어를 다른 터미널에서 입력을 해본다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -3903,32 +3887,32 @@ int main(int argc, char **argv) {
         char buf[MAXLINE];
 
         if((server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-                perror(&amp;quot;error : &amp;quot;);
+                perror(&amp;#34;error : &amp;#34;);
                 return 1;
         }
         serveraddr.sin_family = AF_INET;
-        serveraddr.sin_addr.s_addr = inet_addr(&amp;quot;127.0.0.1&amp;quot;);
+        serveraddr.sin_addr.s_addr = inet_addr(&amp;#34;127.0.0.1&amp;#34;);
         serveraddr.sin_port = htons(4000);
 
         client_len = sizeof(serveraddr);
 
         if(connect(server_sockfd, (struct sockaddr*)&amp;amp;serveraddr, client_len) == -1) {
-                perror(&amp;quot;connect error : &amp;quot;);
+                perror(&amp;#34;connect error : &amp;#34;);
                 return 1;
         }
         memset(buf, 0x00, MAXLINE);
         read(0, buf, MAXLINE);
         if(write(server_sockfd, buf, MAXLINE) &amp;lt;= 0) {
-                perror(&amp;quot;write error : &amp;quot;);
+                perror(&amp;#34;write error : &amp;#34;);
                 return 1;
         }
         memset(buf, 0x00, MAXLINE);
         if(read(server_sockfd, buf, MAXLINE) &amp;lt;= 0) {
-                perror(&amp;quot;read error: &amp;quot;);
+                perror(&amp;#34;read error: &amp;#34;);
                 return 1;
         }
         close(server_sockfd);
-        printf(&amp;quot;server:%s\n&amp;quot;, buf);
+        printf(&amp;#34;server:%s\n&amp;#34;, buf);
         return 0;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;server.c&lt;/strong&gt;&lt;/p&gt;
@@ -3953,7 +3937,7 @@ int main(void){
 
    server_socket = socket(PF_INET, SOCK_STREAM, 0);
    if(-1 == server_socket){
-      printf( &amp;quot;server socket 생성 실패n&amp;quot;);
+      printf( &amp;#34;server socket 생성 실패n&amp;#34;);
       exit( 1);
    }
 
@@ -3963,13 +3947,13 @@ int main(void){
    server_addr.sin_addr.s_addr= htonl(INADDR_ANY);
 
    if(-1 == bind(server_socket, (struct sockaddr*)&amp;amp;server_addr, sizeof(server_addr))){
-      printf( &amp;quot;bind() 실행 에러n&amp;quot;);
+      printf( &amp;#34;bind() 실행 에러n&amp;#34;);
       exit(1);
    }
 
    while(1){
       if(-1 == listen(server_socket, 5)){
-         printf( &amp;quot;대기상태 모드 설정 실패n&amp;quot;);
+         printf( &amp;#34;대기상태 모드 설정 실패n&amp;#34;);
          exit(1);
       }
 
@@ -3977,19 +3961,18 @@ int main(void){
       client_socket     = accept( server_socket, (struct sockaddr*)&amp;amp;client_addr, &amp;amp;client_addr_size);
 
       if (-1 == client_socket){
-         printf( &amp;quot;클라이언트 연결 수락 실패n&amp;quot;);
+         printf( &amp;#34;클라이언트 연결 수락 실패n&amp;#34;);
          exit(1);
       }
 
       read (client_socket, buff_rcv, BUFF_SIZE);
-      printf(&amp;quot;receive: %s\n&amp;quot;, buff_rcv);
+      printf(&amp;#34;receive: %s\n&amp;#34;, buff_rcv);
 
-      sprintf(buff_snd, &amp;quot;%ld : %s&amp;quot;, strlen(buff_rcv), buff_rcv);
+      sprintf(buff_snd, &amp;#34;%ld : %s&amp;#34;, strlen(buff_rcv), buff_rcv);
       write(client_socket, buff_snd, strlen(buff_snd)+1);          // +1: NULL까지 포함해서 전송
       close(client_socket);
    }
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 소스 코드를 복사하여, 파일을 만든다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -4061,7 +4044,7 @@ gcc -pg -g -o server server.c
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;직접 확인하기&lt;/strong&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f &amp;quot;tcp port 80&amp;quot;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo tshark -i enp0s3 -f &amp;#34;tcp port 80&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;위의 명령어를 입력하여 포트 번호 80의 TCP 패킷들을 필터링 한다.&lt;/p&gt;
@@ -4108,7 +4091,7 @@ gcc -pg -g -o server server.c
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/115415367-d07ecc00-a231-11eb-86cb-2b5c569c07f1.png&#34; alt=&#34;Screen Shot 2021-04-20 at 11 40 13 PM&#34;&gt;&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;watch -n0.6 &amp;quot;netstat -atnp&amp;quot;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;watch -n0.6 &amp;#34;netstat -atnp&amp;#34;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;위는 watch 명령어를 통해서 0.6초마다 netstat의 결과를 모니터링 하였다.&lt;/p&gt;
@@ -4352,16 +4335,16 @@ content-type: application/cloudevents+json; charset=UTF-8
 ------------------- value --------------------
 
 {
-    &amp;quot;specversion&amp;quot; : &amp;quot;1.0&amp;quot;,
-    &amp;quot;type&amp;quot; : &amp;quot;com.example.someevent&amp;quot;,
-    &amp;quot;source&amp;quot; : &amp;quot;/mycontext/subcontext&amp;quot;,
-    &amp;quot;id&amp;quot; : &amp;quot;1234-1234-1234&amp;quot;,
-    &amp;quot;time&amp;quot; : &amp;quot;2018-04-05T03:56:24Z&amp;quot;,
-    &amp;quot;datacontenttype&amp;quot; : &amp;quot;application/xml&amp;quot;,
+    &amp;#34;specversion&amp;#34; : &amp;#34;1.0&amp;#34;,
+    &amp;#34;type&amp;#34; : &amp;#34;com.example.someevent&amp;#34;,
+    &amp;#34;source&amp;#34; : &amp;#34;/mycontext/subcontext&amp;#34;,
+    &amp;#34;id&amp;#34; : &amp;#34;1234-1234-1234&amp;#34;,
+    &amp;#34;time&amp;#34; : &amp;#34;2018-04-05T03:56:24Z&amp;#34;,
+    &amp;#34;datacontenttype&amp;#34; : &amp;#34;application/xml&amp;#34;,
 
     ... further attributes omitted ...
 
-    &amp;quot;data&amp;quot; : {
+    &amp;#34;data&amp;#34; : {
         ... application data encoded in XML ...
     }
 }
@@ -4439,8 +4422,8 @@ content-type: application/cloudevents+json; charset=UTF-8
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP POST, http://myweb/users/
 {
-  &amp;quot;users&amp;quot;: {
-    &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;
+  &amp;#34;users&amp;#34;: {
+    &amp;#34;name&amp;#34;: &amp;#34;terry&amp;#34;
   }
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;http-메서드&#34;&gt;HTTP 메서드&lt;/h3&gt;
@@ -4475,16 +4458,16 @@ content-type: application/cloudevents+json; charset=UTF-8
 &lt;p&gt;&lt;strong&gt;사용자 생성&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP POST, http://myweb/users/
 {
-  &amp;quot;name&amp;quot;:&amp;quot;terry&amp;quot;,
-  &amp;quot;address&amp;quot;:&amp;quot;seoul&amp;quot;
+  &amp;#34;name&amp;#34;:&amp;#34;terry&amp;#34;,
+  &amp;#34;address&amp;#34;:&amp;#34;seoul&amp;#34;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;조회&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP GET, http://myweb/users/terry
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;업데이트&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP PUT, http://myweb/users/terry 
 {
-  &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;,
-  &amp;quot;address&amp;quot;: &amp;quot;suwon&amp;quot;
+  &amp;#34;name&amp;#34;: &amp;#34;terry&amp;#34;,
+  &amp;#34;address&amp;#34;: &amp;#34;suwon&amp;#34;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;삭제&lt;/strong&gt;&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP DELETE, http://myweb/users/terry
@@ -4579,8 +4562,8 @@ content-type: application/cloudevents+json; charset=UTF-8
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;HTTP POST, http://myweb/users/
 {
-  &amp;quot;getuser&amp;quot;: {
-    &amp;quot;id&amp;quot;: &amp;quot;terry&amp;quot;,
+  &amp;#34;getuser&amp;#34;: {
+    &amp;#34;id&amp;#34;: &amp;#34;terry&amp;#34;,
   }
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;self-descriptiveness-속성을-사용하지-않음&#34;&gt;Self-descriptiveness 속성을 사용하지 않음&lt;/h4&gt;
@@ -4617,7 +4600,7 @@ content-type: application/cloudevents+json; charset=UTF-8
 &lt;li&gt;사용자 - 디바이스 또는 사용자 - 강아지 등 각각의 리소스 간의 관계를 표현하는 방법에는 여러가지가 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 서브 리소스로 표현하는 방법
-/&amp;quot;리소스명&amp;quot;/&amp;quot;리소스 아이디&amp;quot;/&amp;quot;관계가 있는 다른 리소스명&amp;quot;
+/&amp;#34;리소스명&amp;#34;/&amp;#34;리소스 아이디&amp;#34;/&amp;#34;관계가 있는 다른 리소스명&amp;#34;
 HTTP GET, /users/{userId}/devices
 예) /users/1/devices
 &lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;2. 서브 리소스에 관계를 명시하는 방법
@@ -4743,22 +4726,22 @@ HTTP GET, /users/{userid}/likes/devices
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
   [
     {
-      &amp;quot;id&amp;quot;: &amp;quot;user1&amp;quot;,
-      &amp;quot;name&amp;quot;: &amp;quot;terry&amp;quot;
+      &amp;#34;id&amp;#34;: &amp;#34;user1&amp;#34;,
+      &amp;#34;name&amp;#34;: &amp;#34;terry&amp;#34;
     },
     {
-      &amp;quot;id&amp;quot;: &amp;quot;user2&amp;quot;,
-      &amp;quot;name&amp;quot;: &amp;quot;carry&amp;quot;
+      &amp;#34;id&amp;#34;: &amp;#34;user2&amp;#34;,
+      &amp;#34;name&amp;#34;: &amp;#34;carry&amp;#34;
     }
   ],
-  &amp;quot;links&amp;quot;: [
+  &amp;#34;links&amp;#34;: [
     {
-      &amp;quot;rel&amp;quot;: &amp;quot;pre_page&amp;quot;,
-      &amp;quot;href&amp;quot;: &amp;quot;http://xxx/users?offset=6&amp;amp;limit=5&amp;quot;
+      &amp;#34;rel&amp;#34;: &amp;#34;pre_page&amp;#34;,
+      &amp;#34;href&amp;#34;: &amp;#34;http://xxx/users?offset=6&amp;amp;limit=5&amp;#34;
     },
     {
-      &amp;quot;rel&amp;quot;: &amp;quot;next_page&amp;quot;,
-      &amp;quot;href&amp;quot;: &amp;quot;http://xxx/users?offset=11&amp;amp;limit=5&amp;quot;
+      &amp;#34;rel&amp;#34;: &amp;#34;next_page&amp;#34;,
+      &amp;#34;href&amp;#34;: &amp;#34;http://xxx/users?offset=11&amp;amp;limit=5&amp;#34;
     }
   ]
 }

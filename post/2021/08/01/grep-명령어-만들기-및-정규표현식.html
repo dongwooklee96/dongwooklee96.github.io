@@ -159,7 +159,7 @@ int main(int argc, char *argv[]) {
   int i;
 
   if (argc &lt; 2) {
-    fputs(&quot;no pattern\n&quot;, stderr);
+    fputs(&#34;no pattern\n&#34;, stderr);
     exit(1);
   }
   err = regcomp(&amp;pat, argv[1], REG_EXTENDED | REG_NOSUB | REG_NEWLINE);
@@ -174,7 +174,7 @@ int main(int argc, char *argv[]) {
     for (i = 2; i &lt; argc; i++) {
       FILE *f;
 
-      f = fopen(argv[i], &quot;r&quot;);
+      f = fopen(argv[i], &#34;r&#34;);
       if (!f) {
         perror(argv[i]);
         exit(1);

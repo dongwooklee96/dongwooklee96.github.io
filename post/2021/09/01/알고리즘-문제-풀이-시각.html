@@ -133,28 +133,28 @@
 </ul>
 <h3 id="코드">코드</h3>
 <hr>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(n: int) <span style="color:#f92672">-&gt;</span> int:
-    ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">for</span> h <span style="color:#f92672">in</span> range(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
-        <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">60</span>):
-            <span style="color:#66d9ef">for</span> s <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">60</span>):
-                <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">in</span> [h <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, h <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>, m <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, m <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>, s <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, s <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>]:
-                    ret <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">return</span> ret
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(n: int) <span style="color:#f92672">-&gt;</span> int:
-    count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-    <span style="color:#66d9ef">for</span> h <span style="color:#f92672">in</span> range(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
-        <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">60</span>):
-            <span style="color:#66d9ef">for</span> s <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">60</span>):
-                <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;3&#39;</span> <span style="color:#f92672">in</span> str(h) <span style="color:#f92672">+</span> str(m) <span style="color:#f92672">+</span> str(s):
-                    count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">return</span> count
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    n <span style="color:#f92672">=</span> int(input())
-    print(solution(n))
-</code></pre></div><h3 id="개선할-점">개선할 점</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(n: int) <span style="color:#f92672">-&gt;</span> int:
+</span></span><span style="display:flex;"><span>    ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> h <span style="color:#f92672">in</span> range(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">60</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> s <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">60</span>):
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">in</span> [h <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, h <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>, m <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, m <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>, s <span style="color:#f92672">//</span> <span style="color:#ae81ff">10</span>, s <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>]:
+</span></span><span style="display:flex;"><span>                    ret <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ret
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(n: int) <span style="color:#f92672">-&gt;</span> int:
+</span></span><span style="display:flex;"><span>    count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> h <span style="color:#f92672">in</span> range(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">60</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> s <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">60</span>):
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#39;3&#39;</span> <span style="color:#f92672">in</span> str(h) <span style="color:#f92672">+</span> str(m) <span style="color:#f92672">+</span> str(s):
+</span></span><span style="display:flex;"><span>                    count <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> count
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> int(input())
+</span></span><span style="display:flex;"><span>    print(solution(n))
+</span></span></code></pre></div><h3 id="개선할-점">개선할 점</h3>
 <hr>
 <ul>
 <li>

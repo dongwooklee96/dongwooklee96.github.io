@@ -503,9 +503,9 @@ HA2 = MD5(HTTP method:HTTP URL)
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;{
-  &amp;quot;id&amp;quot;: &amp;quot;terry&amp;quot;,
-  &amp;quot;role&amp;quot;: &amp;quot;[&amp;quot;admin&amp;quot;, &amp;quot;user&amp;quot;]&amp;quot;,
-  &amp;quot;company&amp;quot;: &amp;quot;pepsi&amp;quot;
+  &amp;#34;id&amp;#34;: &amp;#34;terry&amp;#34;,
+  &amp;#34;role&amp;#34;: &amp;#34;[&amp;#34;admin&amp;#34;, &amp;#34;user&amp;#34;]&amp;#34;,
+  &amp;#34;company&amp;#34;: &amp;#34;pepsi&amp;#34;
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;이 토큰을 이용해서 요청을 받는 서버나 서비스 입장에서는 이 서비스를 호출한 사용자에 대한 추가 정보는 이미 토큰 안에 다 들어가 있기 때문에, 다른 곳에서 가져올 필요가 없다는 장점이 있다.&lt;/li&gt;
@@ -728,7 +728,7 @@ HA2 = MD5(HTTP method:HTTP URL)
 &lt;p&gt;예를 들어, 다른 곳으로 이동하기 위해 사용하는 링크 뒤에 있는 &lt;code&gt;URL&lt;/code&gt;에 악의적인 매겨변수를 포함시킴으로써 다음을 수행할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;quot;&amp;gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;lt;img src=&amp;#34;https://www.example.com/index.php?action=delete&amp;amp;id=123&amp;#34;&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;해당 도메인에 수정 권한이 있는 사용자의 경우 &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; 요소가, 사용자 모르게 동작을 수행한다.&lt;/p&gt;

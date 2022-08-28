@@ -229,7 +229,7 @@ mqd_t mq_open(const char *name, int oflag);
 #include &lt;sys/types.h&gt;
 #include &lt;unistd.h&gt;
 
-#define MQ_NAME &quot;/test_mq&quot;
+#define MQ_NAME &#34;/test_mq&#34;
 
 int main(int argc, char **argv)
 {
@@ -248,34 +248,33 @@ int main(int argc, char **argv)
   mqfd = mq_open(MQ_NAME, O_CREAT|O_RDWR, 644, &amp;attr);
   if (mqfd == (mqd_t)-1)
   {
-    perror(&quot;mq_open failure from main&quot;);
-    printf(&quot;Errno = %d\n&quot;,errno);
+    perror(&#34;mq_open failure from main&#34;);
+    printf(&#34;Errno = %d\n&#34;,errno);
     exit(0);
   }
 
   pid = fork();
   if (pid == 0) {
-    printf(&quot;child: &quot;);
-    scanf(&quot;%s&quot;, send_buff);
+    printf(&#34;child: &#34;);
+    scanf(&#34;%s&#34;, send_buff);
     if (mq_send(mqfd, send_buff, strlen(send_buff), priority) == -1) {
-      fprintf(stderr, &quot;MQ SEND ERROR\n&quot;);
+      fprintf(stderr, &#34;MQ SEND ERROR\n&#34;);
       exit(1);
     }
   } else if (pid &lt; 0) {
-    fprintf(stderr, &quot;FORK FAILURE\n&quot;);
+    fprintf(stderr, &#34;FORK FAILURE\n&#34;);
     exit(1);
   } else {
     if (mq_getattr(mqfd, &amp;attr) == -1) {
-      fprintf(stderr, &quot;MQ_GET_ATTR ERROR \n&quot;);
+      fprintf(stderr, &#34;MQ_GET_ATTR ERROR \n&#34;);
       exit(1);
     }
     read_buff = malloc(attr.mq_msgsize);
     read_len = mq_receive(mqfd, read_buff, attr.mq_msgsize, &amp;priority);
-    printf(&quot;parent receives: %s\n&quot;, (char*)read_buff);
+    printf(&#34;parent receives: %s\n&#34;, (char*)read_buff);
   }
   return 0;
 }
-
 </code></pre><p><img src="https://dl.dropbox.com/s/yjytov82iozfi4s/Screen%20Shot%202021-08-15%20at%208.51.54%20AM.png" alt=""></p>
 <ul>
 <li>
