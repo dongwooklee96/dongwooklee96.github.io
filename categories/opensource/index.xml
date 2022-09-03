@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>OpenSource on 개발자 이동욱</title>
+    <link>https://dongwooklee96.github.io/categories/opensource.html</link>
+    <description>Recent content in OpenSource on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 03 Sep 2022 11:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/opensource/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GSoC 2022 Final Report - PostgreSQL</title>
+      <link>https://dongwooklee96.github.io/post/2022/09/03/gsoc-2022-final-report-postgresql.html</link>
+      <pubDate>Sat, 03 Sep 2022 11:04:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/09/03/gsoc-2022-final-report-postgresql.html</guid>
+      <description>&lt;h3 id=&#34;intro&#34;&gt;Intro&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I worked with PostgreSQL project in Google Summer of Code 2022 this summer.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I tried to improve test coverage for various modules.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;goal&#34;&gt;Goal&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;My Goal is to improve the test coverage of PostgreSQL, as indicated in the &lt;a href=&#34;https://wiki.postgresql.org/wiki/GSoC_2022#Improve_PostgreSQL_Regression_Test_Coverage_(2022)&#34;&gt;postgres wiki - gsoc 2022&lt;/a&gt; document.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Here is my Proposal &lt;a href=&#34;https://dl.dropbox.com/s/mgop5q1mycvpl0a/gAAAAABjErgY_7TGz_qtSy2lceFAH09AtKxa_dh0NelFvmxO0a14dV5ExNZgIwYxzW-NCryXgYs4Z5RV1iLsPzSKaCKXg2HKqr6g28fz4E5WERJXjMCE-a0%3D.pdf&#34;&gt;Improve PostgreSQL Regression Test Coverage - DongWook Lee&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;My original goal was to increase the test coverage of the modules below.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- pg_dump
+- psql
+- pg_ctl
+- initdb
+- pg_stat_statments
+- pg_buffercache
+- pg_prewarm
+- pgrowlocks
+- pgstattuple
+- pg_waldump
+- pg_basebackup
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;Except for &lt;code&gt;pg_dump&lt;/code&gt;, &lt;code&gt;pg_ctl&lt;/code&gt;, &lt;code&gt;initdb&lt;/code&gt;, and &lt;code&gt;pg_stat_statments&lt;/code&gt;, I attempted all to improve test coverage, and several succeeded.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;coverage-result&#34;&gt;Coverage Result&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;pgrowlocks&#34;&gt;pgrowlocks&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Before&lt;/strong&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/jg9tpvnnzmm43tu/Screen%20Shot%202022-09-03%20at%2012.15.18%20PM.png&#34; alt=&#34;before&#34;&gt;
+&lt;strong&gt;After&lt;/strong&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/kz1j469zxynmfvc/Screen%20Shot%202022-09-03%20at%2012.17.15%20PM.png&#34; alt=&#34;after&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve coverage &lt;code&gt;0%&lt;/code&gt; to &lt;code&gt;90.7%&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;pg_prewram&#34;&gt;pg_prewram&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Before&lt;/strong&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/99tslxr4yq9q1ly/Screen%20Shot%202022-09-03%20at%2012.19.13%20PM.png&#34; alt=&#34;before&#34;&gt;
+&lt;strong&gt;After&lt;/strong&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/dajhpb9cllffaeh/Screen%20Shot%202022-09-03%20at%2012.19.31%20PM.png&#34; alt=&#34;after&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve coverage &lt;code&gt;11.6%&lt;/code&gt; to &lt;code&gt;77.3%&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;pg_buffercache&#34;&gt;pg_buffercache&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;Before&lt;/strong&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/1z04900ai33x0nl/Screen%20Shot%202022-09-03%20at%2012.25.48%20PM.png&#34; alt=&#34;before&#34;&gt;
+&lt;strong&gt;After&lt;/strong&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/2df9i1vuft59mfo/Screen%20Shot%202022-09-03%20at%2012.26.01%20PM.png&#34; alt=&#34;after&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Improve coverage &lt;code&gt;0%&lt;/code&gt; to &lt;code&gt;97.6%&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;commitfest&#34;&gt;Commitfest&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/38/3732/&#34;&gt;pg_prewarm add configuration example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/38/3674/&#34;&gt;pg_buffercache: add sql test&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/38/3723/&#34;&gt;Add test of pg_prewarm extension&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/38/3677/&#34;&gt;Add TAP test for auth_delay extension&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/39/3805/&#34;&gt;old_snapshot: add test for coverage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/39/3834/&#34;&gt;pg_waldump: add test for coverage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/39/3835/&#34;&gt;pg_basebackup: add test about zstd compress option&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/39/3793/&#34;&gt;pgstattuple: add test for coverage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/39/3833/&#34;&gt;xml2: add test for coverage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/39/3852/&#34;&gt;pg_checksum: add test for coverage&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/39/3724/&#34;&gt;add test: pg_rowlocks extension&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/40/3877/&#34;&gt;vacuumlo: add test to vacuumlo for test coverage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;patch-series&#34;&gt;Patch Series&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/postgres/postgres/commit/90247e742f849794d061a0444071647728054b45&#34;&gt;Add a regression test for contrib/pgrowlocks&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/postgres/postgres/commit/2865b4060a434855f90fda41f1b8f4bca7c55b0e&#34;&gt;Add a regression test for contrib/pg_prewarm&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/postgres/postgres/commit/be39d88934331c47c43d8c51500305e928f06240&#34;&gt;Add regression test coverage for contrib/pg_buffercache&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/postgres/postgres/commit/aa31b29375b9afbe1330d7726855645ff82a2e51&#34;&gt;doc: add pg_prewarm example&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
