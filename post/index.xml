@@ -6,7 +6,73 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 12 Sep 2022 17:09:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Sep 2022 15:05:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>사칙 연산을 수행하는 POSTGRES 익스텐션 만들기</title>
+      <link>https://dongwooklee96.github.io/post/2022/09/17/%EC%82%AC%EC%B9%99-%EC%97%B0%EC%82%B0%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
+      <pubDate>Sat, 17 Sep 2022 15:05:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/09/17/%EC%82%AC%EC%B9%99-%EC%97%B0%EC%82%B0%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h3 id=&#34;확장-프로그램을-만드는-방법&#34;&gt;확장 프로그램을 만드는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;일반적인 확장 프로그램을 만드려면, 두 개의 파일이 필요합니다. &lt;code&gt;.control&lt;/code&gt; 파일과, &lt;code&gt;SQL&lt;/code&gt; 스크립트 파일이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;.control&lt;/code&gt; 파일은 &lt;code&gt;extension_name.control&lt;/code&gt; 을 사용하고 내용은 다음과 같이 사용합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# basic_oper extension
+comment = &amp;#39;basic oper class&amp;#39;
+default_version = &amp;#39;0.0.1&amp;#39;
+module_pathname = &amp;#39;$libdir/basic_oper&amp;#39;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;commnet&lt;/code&gt; 는 익스텐션에 대한 간단한 설명을 나타냅니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;default_version&lt;/code&gt; 은 이 후에 만들 스크립트 파일의 기본 버전을 나타냅니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;module_pathname&lt;/code&gt; 은 &lt;code&gt;shared library&lt;/code&gt; 경로를 나타냅니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sql-스크립트&#34;&gt;SQL 스크립트&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;SQL 스크립트 파일은 {익스텐션이름}&amp;ndash;version.sql 형식으로 작성되어야 합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;--complain if script is sourced in psql, rather than via CREATE EXTENSION
+\echo Use &amp;#34;CREATE EXTENSION basic_oper&amp;#34; to load this file. \quit
+
+CREATE FUNCTION get_sum(int, int) RETURNS int
+AS &amp;#39;$libdir/basic_oper&amp;#39;, &amp;#39;get_sum&amp;#39;
+LANGUAGE C IMMUTABLE STRICT;
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;\quit 을 통해서 SQL 스크립트가 psql에서 로딩되는 것을 막는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나머지는 우리가 생성할 함수가 공유 라이브러리에 생성될 것이라고 적습니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.highgo.ca/2020/01/10/how-to-create-test-and-debug-an-extension-written-in-c-for-postgresql/&#34;&gt;How to create, test and debug an extension written in C for PostgreSQL&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/&#34;&gt;Writing Postgres Extensions - the Basics&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>나에게 행복과 성공은 무엇일까</title>
       <link>https://dongwooklee96.github.io/post/2022/09/12/%EB%82%98%EC%97%90%EA%B2%8C-%ED%96%89%EB%B3%B5%EA%B3%BC-%EC%84%B1%EA%B3%B5%EC%9D%80-%EB%AC%B4%EC%97%87%EC%9D%BC%EA%B9%8C.html</link>
@@ -38605,6 +38671,390 @@ def assertMoney(money, count):
 &lt;li&gt;Findings: 코드도 중요하지만, 솔루션에 대한 이해가 없으면 내가 지금 하고 있는 것이 맞는지 틀리는지 판단하기 어렵다. 그리고 평소에 시간이 날 때마다 솔루션에 대한 공부를 해야겠다.&lt;/li&gt;
 &lt;li&gt;Affirmation : 앞으로 솔루션을 많이 사용해보면서 존재하는 기능들을 따로 정리를 해두고, 활자로써의 지식이 아니라, 경험적인 지식으로 이를 발전시켜서 생산성을 증가시켜야겠다는 생각을 했다.&lt;/li&gt;
 &lt;/ol&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dongwooklee96.github.io/post/1/01/01.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/1/01/01.html</guid>
+      <description>&lt;h3 id=&#34;postgresql-메모리-아키텍처&#34;&gt;&lt;code&gt;PostgreSQL&lt;/code&gt; 메모리 아키텍처&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;![[fig-2-02.png|500]]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;PostgreSQL&lt;/code&gt; 에서 메모리 아키텍처는 크게 두 가지로 볼 수 있다.&lt;/li&gt;
+&lt;li&gt;첫 번째는 로컬 메모리 영역(&lt;code&gt;Local Memory Area&lt;/code&gt;)이다. 로컬 메모리 영역은 백엔드 프로세스가 독립적으로 사용하는 메모리 공간이다.&lt;/li&gt;
+&lt;li&gt;두 번째는 공유 메모리 영역 (&lt;code&gt;Shared Memory Area&lt;/code&gt;) 이다. &lt;code&gt;PostgreSQL&lt;/code&gt; 에서 모든 프로세스가 사용하는 영역이다.&lt;/li&gt;
+&lt;li&gt;위의 그림을 보면, 백엔드 프로세스 마다 로컬 메모리 영역을 가지고 있는 것을 확인할 수 있고, 공유 메모리 영역을 백엔드 프로세스들끼리 공유하는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;로컬-메모리-영역-local-mermoy-area&#34;&gt;로컬 메모리 영역 (&lt;code&gt;Local Mermoy Area&lt;/code&gt;)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;각 백엔드 프로세스는 쿼리를 수행하기 위해서 로컬 메모리를 할당 받게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;영역&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;work_mem&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;쿼리에서 &lt;code&gt;ORDER BY&lt;/code&gt;, &lt;code&gt;DISTINCT&lt;/code&gt; 를 이용하여 정렬 작업이 일어나거나, 머지 조인이나, 해시 조인이 일어날 때 이 영역에서 수행된다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;maintenance_work_mem&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;VACUUM&lt;/code&gt;, &lt;code&gt;REINDEX&lt;/code&gt; 와 같은 작업들이 해당 영역에서 수행된다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;temp_buffers&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;임시 테이블을 저장하는데 해당 영역을 사용한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;공유-메모리-영역-shared-memory-area&#34;&gt;공유 메모리 영역 (&lt;code&gt;Shared Memory Area&lt;/code&gt;)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;공유 메모리 영역은 &lt;code&gt;PostgreSQL&lt;/code&gt; 서버가 시작할 때 할당된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;영역&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;shared buffer pool&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;PostgreSQL&lt;/code&gt; 은 디스크에서 저장된 테이블이나 인덱스에 있는 페이지를 로드하고 직접적으로 접근한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;WAL buffer&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;데이터베이스 장애로인한 데이터 유실을 막기 위해 &lt;code&gt;WAL&lt;/code&gt; 매커니즘을 사용하며, &lt;code&gt;WAL&lt;/code&gt; 로그를 디스크에 쓰기 전에 보관하는 장소이다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;commit log&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Commit Log&lt;/code&gt; (&lt;code&gt;CLOG&lt;/code&gt;) 동시성 제어 매커니즘에 대한 모든 트랜잭션의 상태를 유지한다. EX) (&lt;code&gt;in_progress&lt;/code&gt;, &lt;code&gt;commited&lt;/code&gt;, &lt;code&gt;aborted&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그 외에도 &lt;code&gt;PostgreSQL&lt;/code&gt; 는 다양한 영역에 대해서 메모리를 할당한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;액세스 컨트롤 (세마포어, 경량 락, 공유 락 및 배타락)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;checkpointer&lt;/code&gt;, &lt;code&gt;autovacuum&lt;/code&gt; 와 같은 백그라운드 프로세스를 위한 영역&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;save-point&lt;/code&gt;, &lt;code&gt;two-phase-commit&lt;/code&gt; 과 같은 트랜잭션 프로세싱에 대한 영역&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;출처&#34;&gt;출처&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.interdb.jp/pg/pgsql02.html&#34;&gt;https://www.interdb.jp/pg/pgsql02.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dongwooklee96.github.io/post/1/01/01.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/1/01/01.html</guid>
+      <description>&lt;h1 id=&#34;shared-buffer-구성요소&#34;&gt;&lt;code&gt;Shared Buffer&lt;/code&gt; 구성요소&lt;/h1&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;shared-buffer-를-구성하는-요소&#34;&gt;&lt;code&gt;Shared Buffer&lt;/code&gt; 를 구성하는 요소&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;해시 테이블&lt;/li&gt;
+&lt;li&gt;해시 테이블에 딸린 해시 엘리먼트 (및 엘리먼트 키)&lt;/li&gt;
+&lt;li&gt;버퍼 상태를 관리하는 버퍼 디스크립터&lt;/li&gt;
+&lt;li&gt;실제 블록을 저장하는 버퍼 풀&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;1-해시테이블&#34;&gt;1. 해시테이블&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;![[IMG_0388.jpg | 500]]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해시 테이블은 메모리 내의 버퍼를 관리 (검색, 입력) 할 떄 매우 효과적인 자료 구조이다.&lt;/li&gt;
+&lt;li&gt;해시 테이블은 해시 충돌 (&lt;code&gt;Hash Collision&lt;/code&gt;) 이 발생하면 성능이 떨어지는 문제점이 있다.&lt;/li&gt;
+&lt;li&gt;해시 충돌 문제를 완화하기 위한 방법의 하나는 해시 테이블을 논리적인 &lt;code&gt;N&lt;/code&gt; 개의 세그먼트로 나누어서 관리하는 것이다.&lt;/li&gt;
+&lt;li&gt;이것을 &lt;code&gt;PostgreSQL&lt;/code&gt; 에서는 &lt;code&gt;Segmented&lt;/code&gt; 해시 테이블이라고 한다.&lt;/li&gt;
+&lt;li&gt;해시 세그먼트는 &lt;code&gt;256&lt;/code&gt; 개의 버킷으로 구성된다.&lt;/li&gt;
+&lt;li&gt;디렉토리는 나누어진 해시 세그먼트의 시작 주소를 저장하는 배열이다. 디렉토리의 기본 설정값은 &lt;code&gt;256&lt;/code&gt; 이며, &lt;code&gt;Shared Buffer&lt;/code&gt; 를 크게 설정한 경우에는 디렉토리 크기가 증가한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;버퍼-파티션이란&#34;&gt;버퍼 파티션이란?&lt;/h5&gt;
+&lt;hr&gt;
+&lt;p&gt;![[IMG_0389.jpg | 500]]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위에서 언급한 디렉토리, 해시 세그먼트, 해시 테이블은 모두 &lt;code&gt;Shared Buffer&lt;/code&gt; 내에 존재하는 공유 리소스이다.&lt;/li&gt;
+&lt;li&gt;공유 리소스는 &lt;code&gt;LW (Light Weight)&lt;/code&gt; 락을 이용하여 보호한다. 즉 백엔드 프로세스가 공유 메모리를 액세스 하기 위해서는 &lt;code&gt;LW&lt;/code&gt;  락을 획득해야 한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LW&lt;/code&gt; 락은 공유 리소스를 보호한다는 긍정적인 측면이 있지만, &lt;code&gt;LW&lt;/code&gt; 락 경합 때문에 성능 저하가 발생할 수 있다는 문제점이 있다.&lt;/li&gt;
+&lt;li&gt;예를 들어서 해시 테이블을 관리하는 &lt;code&gt;LW&lt;/code&gt; 락이 하나라면, 해시 테이블에 액세스하는 대다수의 프로세는 &lt;code&gt;LW&lt;/code&gt; 락을 대기하게 된다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PostgreSQL&lt;/code&gt; 에서는 해당 문제는 해결하기 위해서, 해시 테이블을 &lt;code&gt;N&lt;/code&gt; 개의 &amp;lsquo;버퍼 파티션&amp;rsquo; 으로 나누고 버퍼 파티션마다 &lt;code&gt;1&lt;/code&gt; 개의 &lt;code&gt;LW&lt;/code&gt; 락을 할당하는 방식을 사용한다.&lt;/li&gt;
+&lt;li&gt;이전에는 버퍼 파티션의 개수는 16개 밖에 되지 않았으며, 이로 인해서 동시성이 높은 환경에서는 버퍼 파티션 액세스 시에 &lt;code&gt;LW&lt;/code&gt; 락 경합이 발생한 가능성이 컸고, 실제로 이로 인한 성능 문제가 발생하기도 하였다. 이러한 문제를 해결하기 위해서 버퍼 파티션의 개수가 늘어났다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;LW 락은 &lt;code&gt;Light Weight&lt;/code&gt; 의 줄인말인데, 매우 가벼운 락을 의미하여 메모리에 액세스 할 때 사용하는 방식이다. LW 락은 테이블 내의 데이터를 보호하는 락과는 다른 개념이며, 참고로 오라클은 LW 락을 &lt;code&gt;Latch&lt;/code&gt; 라고 표현한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;2-해시-엘리먼트&#34;&gt;2. 해시 엘리먼트&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;해시 엘리먼트는 엘리먼트와 엘리먼트 키로 구성된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * HASHELEMENT is the private part of a hashtable entry.  The caller&amp;#39;s data
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * follows the HASHELEMENT structure (on a MAXALIGN&amp;#39;d boundary).  The hash key
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * is expected to be at the start of the caller&amp;#39;s hash entry data structure.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; HASHELEMENT
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; HASHELEMENT &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;link;   &lt;span style=&#34;color:#75715e&#34;&gt;/* link to next entry in same bucket */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    uint32      hashvalue;      &lt;span style=&#34;color:#75715e&#34;&gt;/* hash function result for this entry */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} HASHELEMENT;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;엘리먼트는 다음 엘리먼트를 가리키는 엘리먼트 포인터와 해시 값으로 구성된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;엘리먼트-key-구성-요소&#34;&gt;엘리먼트 &lt;code&gt;Key&lt;/code&gt; 구성 요소&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;엘리먼트 &lt;code&gt;KEY&lt;/code&gt; 는 다음과 같이 구성된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- 엘리먼트 `KEY` 는 `BufferTag` 구조체와 버퍼 디스크립터 배열 인덱스로 구성된다.
+- `BufferTag` 구조체는 `spcOid`, `dbOid`, `RelNumber`, `forkNum`, `blockNum` 으로 구성된다.
+- `RelFileNode` 구조체는 테이블 스페이스 번호, 데이터베이스 번호, 오브젝트 번호로 구성된다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;buffer-tag-란&#34;&gt;Buffer Tag 란?&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/* entry for buffer lookup hashtable */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    BufferTag   key;            &lt;span style=&#34;color:#75715e&#34;&gt;/* Tag of a disk page */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;         id;             &lt;span style=&#34;color:#75715e&#34;&gt;/* Associated buffer ID */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} BufferLookupEnt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * Buffer tag identifies which disk block the buffer contains.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; *
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * Note: the BufferTag data must be sufficient to determine where to write the
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * block, without reference to pg_class or pg_tablespace entries.  It&amp;#39;s
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * possible that the backend flushing the buffer doesn&amp;#39;t even believe the
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * relation is visible yet (its xact may have started before the xact that
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * created the rel).  The storage manager must be able to cope anyway.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; *
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * Note: if there&amp;#39;s any pad bytes in the struct, InitBufferTag will have
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * to be fixed to zero them, since this struct is used as a hash key.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; buftag
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Oid         spcOid;         &lt;span style=&#34;color:#75715e&#34;&gt;/* tablespace oid */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Oid         dbOid;          &lt;span style=&#34;color:#75715e&#34;&gt;/* database oid */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    RelFileNumber relNumber;    &lt;span style=&#34;color:#75715e&#34;&gt;/* relation file number */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ForkNumber  forkNum;        &lt;span style=&#34;color:#75715e&#34;&gt;/* fork number */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    BlockNumber blockNum;       &lt;span style=&#34;color:#75715e&#34;&gt;/* blknum relative to begin of reln */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} BufferTag;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Buffer Tag&lt;/code&gt; 는 블록의 주민 등록번호와 같은 개념이다. 즉, 클러스터 데이터베이스 내에서 각 블록을 유일하게 식별할 수 있는 데이터로 구성된다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Buffer Tag&lt;/code&gt; 는 &lt;code&gt;pg_class&lt;/code&gt; 또는  &lt;code&gt;pg_tablespace&lt;/code&gt; 항목을 참조하지 않고 블록을 쓸 위치를 결정하기 충분해야합니다.&lt;/li&gt;
+&lt;li&gt;테이블 스페이스, 데이터베이스 와 비롯한 여러가지 정보를 가지고 있는데 그래야만 클러스터 데이터베이스 내에서 유일한 오브젝트를 획득할 수 있기 때문이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;enum&lt;/span&gt; ForkNumber
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    InvalidForkNumber &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    MAIN_FORKNUM &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    FSM_FORKNUM,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    VISIBILITYMAP_FORKNUM,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    INIT_FORKNUM
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     * NOTE: if you add a new fork, change MAX_FORKNUM and possibly
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     * FORKNAMECHARS below, and update the forkNames array in
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     * src/common/relpath.c
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;     */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} ForkNumber;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ForkNumber&lt;/code&gt; 는 오브젝트 유형을 의미한다. 0은 테이블 또는 인덱스, 1은  &lt;code&gt;FSM&lt;/code&gt;  , 2는 &lt;code&gt;VM&lt;/code&gt; 이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-버퍼-디스크립터&#34;&gt;3. 버퍼 디스크립터&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;버퍼 디스크립터는 버퍼 메타데이터를 관리하기 위한 구조체이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;typedef&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;struct&lt;/span&gt; BufferDesc
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    BufferTag   tag;            &lt;span style=&#34;color:#75715e&#34;&gt;/* ID of page contained in buffer */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;         buf_id;         &lt;span style=&#34;color:#75715e&#34;&gt;/* buffer&amp;#39;s index number (from 0) */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;/* state of the tag, containing flags, refcount and usagecount */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    pg_atomic_uint32 state;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;         wait_backend_pgprocno;  &lt;span style=&#34;color:#75715e&#34;&gt;/* backend of pin-count waiter */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;         freeNext;       &lt;span style=&#34;color:#75715e&#34;&gt;/* link in freelist chain */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    LWLock      content_lock;   &lt;span style=&#34;color:#75715e&#34;&gt;/* to lock access to buffer contents */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} BufferDesc;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;tag&lt;/code&gt; : &lt;code&gt;BufferTag&lt;/code&gt; 를 저장한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;buf_id&lt;/code&gt;: 실제 버퍼가 저장된 &amp;lsquo;버퍼 풀&amp;rsquo; 배열 내의 인덱스 번호이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;state&lt;/code&gt;: 이전에는 버퍼를 액세스 하기 위해서 프로세스 수, 버퍼 액세스 횟수, 버퍼 상태 플래그를 제공했었지만, 이 3가지 항목을 &lt;code&gt;state&lt;/code&gt; 값으로 제공하고 비트 마스크와 비스 시프트 연산을 통해서 추출하도록 변경하였다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;freeNext&lt;/code&gt;: 다음번 &lt;code&gt;empty&lt;/code&gt; 버퍼를 가리키는 포인터이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;spin-락과-lw-락&#34;&gt;&lt;code&gt;SPIN&lt;/code&gt; 락과 &lt;code&gt;LW&lt;/code&gt; 락&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Shared Buffer&lt;/code&gt; 를 액세스 할 때 &lt;code&gt;Spin&lt;/code&gt; 락과 &lt;code&gt;LW&lt;/code&gt; 락을 획득해야한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Spin&lt;/code&gt; 락과 &lt;code&gt;LW&lt;/code&gt; 락을 구분하는 이유는 성능 향상을 위해서이다. &lt;code&gt;LW&lt;/code&gt; 락은 매우 가벼운 락이고, &lt;code&gt;Spin&lt;/code&gt;  락은 이보다 더 가벼운 락이다.&lt;/li&gt;
+&lt;li&gt;따라서 가능하다면 &lt;code&gt;Spin&lt;/code&gt; 락을 사용하는 것이 성능상 유리하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;항목&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;Spin&lt;/code&gt; 락&lt;/th&gt;
+&lt;th&gt;&lt;code&gt;LW&lt;/code&gt; 락&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;사용부하&lt;/td&gt;
+&lt;td&gt;매우 매우 적음&lt;/td&gt;
+&lt;td&gt;매우 적음&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;콘텍스트 스위칭&lt;/td&gt;
+&lt;td&gt;발생하지 않음&lt;/td&gt;
+&lt;td&gt;발생할 수 있음&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;동작 방식&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;Spin&lt;/code&gt; 방식&lt;/td&gt;
+&lt;td&gt;큐 &amp;amp; 포스팅 방식&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;사용 용도&lt;/td&gt;
+&lt;td&gt;구조체 내 변수를 액세스 할 대 사용&lt;/td&gt;
+&lt;td&gt;구조체를 액세스 할 대 사용&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;사용모드&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXCLUSIVE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SHARE &amp;amp; EXCLUSIVE&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;spin-락&#34;&gt;&lt;code&gt;Spin&lt;/code&gt; 락&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;구조체 변수를 변경한다고 가정하면 구조체 변수도 공유 메모리 안에 있기 때문에 해당 값을 읽거나 변경하기 위해서는 락이 필요하다 이때 &lt;code&gt;Spin&lt;/code&gt; 락을 사용한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Spin&lt;/code&gt; 락을 사용하는 이융는 변수 값을 변경하는 것과 같은 오퍼레이션은 매우 짧은 시간에 수행될 수 있기 때문이다.&lt;/li&gt;
+&lt;li&gt;다른 프로세스가 이미 &lt;code&gt;Spin&lt;/code&gt; 락을 획득한 상태라고 할지라도, 몇 차례 &lt;code&gt;Spin(루프)&lt;/code&gt; 를 수행한 후에는 &lt;code&gt;Spin&lt;/code&gt; 락을 획득할 가능성이 매우 크다&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Spin&lt;/code&gt; 을 수행하면, &lt;code&gt;Sleep&lt;/code&gt; 상태로 빠지지 않기 때문에, &lt;code&gt;Context Switching&lt;/code&gt; 이 발생하지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;Spin&lt;/code&gt; 락 구현방식&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- `mutex` 를 이용하는 방식
+- TAS (`Test` &amp;amp; `Set`)를 인라인 어셈블리어로 구현하는 방식
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;PostgreSQL&lt;/code&gt; 은 두 번재 방식을 사용한다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;src/backend/storage/lmgr.s_lock.c&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * s_lock(lock) - platform-independent portion of waiting for a spinlock.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;s_lock&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;volatile&lt;/span&gt; slock_t &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;lock, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;file, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; line, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;func)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    SpinDelayStatus delayStatus;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    init_spin_delay(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;delayStatus, file, line, func);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (TAS_SPIN(lock))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        perform_spin_delay(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;delayStatus);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    finish_spin_delay(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;delayStatus);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; delayStatus.delays;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;lw-락&#34;&gt;&lt;code&gt;LW&lt;/code&gt; 락&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;PostgreSQL 은 &lt;code&gt;Queue &amp;amp; Posting&lt;/code&gt; 방식을 사용하여, &lt;code&gt;LW&lt;/code&gt; 락을 획득한다.&lt;/li&gt;
+&lt;li&gt;해시 버킷에 딸린 해시 엘리먼트를 검색한다고 가정을 했을 때, 이때는 읽기 모드이므로 &lt;code&gt;LW&lt;/code&gt; 락을 &lt;code&gt;SHARED&lt;/code&gt; 모드로 획득해야 한다.&lt;/li&gt;
+&lt;li&gt;해시 엘리먼트 내에 &lt;code&gt;BufferTag&lt;/code&gt; 정보를 입력한다고 가정을 했을 떄 이때는 쓰기 모드이므로, &lt;code&gt;LW&lt;/code&gt; 락을 &lt;code&gt;EXCLUSIVE&lt;/code&gt; 모드로 획득해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;&lt;code&gt;LW&lt;/code&gt; 락 획득 절차&lt;/strong&gt;
+&lt;code&gt;src/backend/storage/lmgr/lwlock.c&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * LWLockAcquire - acquire a lightweight lock in the specified mode
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; *
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * If the lock is not available, sleep until it is.  Returns true if the lock
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * was available immediately, false if we had to sleep.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; *
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * Side effect: cancel/die interrupts are held off until lock release.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LWLockAcquire(LWLock &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;lock, LWLockMode mode)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LOOP
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	LWLockAttemptLock() &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;함수를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;호출해서&lt;/span&gt; LW &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;시도한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하면&lt;/span&gt; LOOP를 &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;탈출한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;만일&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하지&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;못하면&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;대기&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;큐에&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;등록한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;한&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;번&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;더&lt;/span&gt; LwLockAttemptLock() &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;함수를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;호출한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;만일&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하면&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;대기&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;큐에&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;등록된&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;항목을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;삭제한&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;후&lt;/span&gt; LOOP를 &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;탈출한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;만일&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하지&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;ㅁ소하면&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;대기&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;상태를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;시작한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	(&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;다른&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;프로세스가&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;깨워줄&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;때까지&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;대기&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;상태가&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;유지&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;된다&lt;/span&gt;.)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;END
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;정리&#34;&gt;정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;![[IMG_0389.jpg | 500]]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Shared Buffer&lt;/code&gt; 는 크게 해시 테이블, 해시 엘리먼트, 버퍼 디스크립터와 버퍼 풀로 구성된다.&lt;/li&gt;
+&lt;li&gt;해시 테이블은 배열 구조이며, 해시 충돌을 최소화 하기 위해 &lt;code&gt;Segmented&lt;/code&gt; 해시 테이블 구조를 사용한다.&lt;/li&gt;
+&lt;li&gt;동시성을 높이기 위해 논리적인 파티션으로 나눠서 관리한다. 이때 파티션 당 &lt;code&gt;LW&lt;/code&gt; 락은 1개이다.&lt;/li&gt;
+&lt;li&gt;해시 엘리먼트는 엘리먼트와 엘리먼트 키로 구성된다.&lt;/li&gt;
+&lt;li&gt;엘리먼트는 &lt;code&gt;BufferTag&lt;/code&gt; 에 대한 &lt;code&gt;hashvalue&lt;/code&gt; 와 다음번 엘리먼트를 가리키는 포인터로 구성된다.&lt;/li&gt;
+&lt;li&gt;엘리먼트 키는 &lt;code&gt;BufferTag&lt;/code&gt; 와 버퍼 &lt;code&gt;id&lt;/code&gt; 를 저장한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BufferTag&lt;/code&gt; 란 블록에 대한 주민등록번호와 같다.&lt;/li&gt;
+&lt;li&gt;해시 엘리먼트는 32개의 &lt;code&gt;freeList&lt;/code&gt;로 관리된다. 이는 경합 해소를 위함이다.&lt;/li&gt;
+&lt;li&gt;버퍼 디스크립터는 버퍼의 메타정보를 관리하는 구조체 배열이다. 이때 배열 수는 버퍼의 수와 동일하다.&lt;/li&gt;
+&lt;li&gt;버퍼 디스크립터에서 관리하는 주요 메타 정보는 &lt;code&gt;refcount&lt;/code&gt;, &lt;code&gt;usage_count&lt;/code&gt;, &lt;code&gt;flags&lt;/code&gt;, &lt;code&gt;freeNext&lt;/code&gt; 등이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;출처&#34;&gt;출처&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=107542125&#34;&gt;PostgreSQL 9.6 성능 이야기&lt;/a&gt;(&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=107542125&#34;&gt;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=107542125&lt;/a&gt;)&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://dongwooklee96.github.io/post/1/01/01.html</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/1/01/01.html</guid>
+      <description>&lt;h3 id=&#34;shared-buffer&#34;&gt;SHARED BUFFER&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;효율적인 IO 처리를 위한 필수적인 요소이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Shared Buffer&lt;/code&gt; 를 적당한 크기 (수 &lt;code&gt;GB&lt;/code&gt; 또는 수십 &lt;code&gt;GB&lt;/code&gt;, 심지어는 수백 &lt;code&gt;GB&lt;/code&gt;  로 설정하면 &lt;code&gt;Shared Buffer&lt;/code&gt;  때문에 발생하는 성능 문제는 없을 수 도 있다.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;성능-향상을-위한-shared-buffer의-3-가지-목표&#34;&gt;성능 향상을 위한 Shared Buffer의 3 가지 목표&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;매우 큰 (수십, 수백 GB) 의 버퍼를 빠르게 액세스 가능해야 한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Shared Buffer&lt;/code&gt; 내에 있는 블록을 매우 빠르게 찾을 수 있어야 한다. 또한 읽어야 할 블록이 &lt;code&gt;Shared Buffer&lt;/code&gt;  내에 없다면 , 없다는 사실을 빠르게 확인할 수 있어야 한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;많은 사용자가 동시에 접근할 때 경합을 최소화 해야한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Shared Buffer&lt;/code&gt; 는 많은 사용자가 동시에 사용하는 공유 자원이다. 공유 자원을 보호하기 위해서는 반드시 &lt;code&gt;Lock&lt;/code&gt; 매커니즘이 필요하다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;자주 사용되는 블록은 최대한 오래동안 버퍼 내에 있어야 한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;Shared Buffer&lt;/code&gt; 의 효율성과의 관련이 있다. 자주 액세스 되는 블록은 최대한 오래동안 &lt;code&gt;Shared Buffer&lt;/code&gt; 내에 유지하는 것은 매우 중요한 일이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;출처&#34;&gt;출처&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=107542125&#34;&gt;PostgreSQL 9.6 성능 이야기&lt;/a&gt;(&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=107542125&#34;&gt;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=107542125&lt;/a&gt;)&lt;/p&gt;
 </description>
     </item>
     
