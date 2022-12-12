@@ -6,7 +6,64 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 17 Sep 2022 15:05:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Dec 2022 20:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PostgreSQL - Fix gin index cost estimation 이슈 분석</title>
+      <link>https://dongwooklee96.github.io/post/2022/12/12/postgresql-fix-gin-index-cost-estimation-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</link>
+      <pubDate>Mon, 12 Dec 2022 20:04:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/12/12/postgresql-fix-gin-index-cost-estimation-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;해당 이슈는 &lt;code&gt;GIN&lt;/code&gt; 인덱스의 비용 측정에서 버그가 있다는 이슈이고, 이를 해결하기 위한 패치를 포함하고 있다. 아래의 글을 잘 읽어보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/3574rb3kzuvqjw1/Screenshot%202022-12-12%20at%2021.14.32.png&#34; alt=&#34;&#34;&gt;
+&lt;a href=&#34;https://www.postgresql.org/message-id/3188617.44csPzL39Z%40aivenronan&#34;&gt;Ronan Dunklau -&amp;gt; PG Hackers&lt;/a&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. B+TREE와 비교해서, GIN, GIST, SP-GIST 인덱스들을 CPU 비용을 계산하지 않는다. 엔트리 트리를 내려가는 동안에... -&amp;gt; 이는 낮는 IO 비용을 가지고 있는 연산에서 문제가 될 수 있다.
+
+2. 네스티드 루프에서 많은 반복에 의해서 IO 비용이 줄어들 떄 모든 것이 SHARED BUFFER 에있기 때문에 비용이 무료라고 간주한다.
+
+3. 해당 이슈는 PG14 버전에서 발견되었으며, 해당 버전에서는 PG_TRGM, GIN 인덱스에서 &amp;#39;=&amp;#39; 연산자를 사용할 수 있다.
+
+4. 이전에는 B+TREE에 대해서만, 고려를 하고 있었다. 따라서 BTREE_GIN 익스텐션 역시 위와 같은 문제를 일으킬 것이라고 생각한다.
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;우선 패치는 &lt;code&gt;/src/backend/utils/adt/selfuncs.c&lt;/code&gt; 에서 이루어진 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;해당 파일의 앞부분의 주석을 읽어보면, 선택도(SELECTIVITY) 함수와 표준 연산 및 인덱스 접근 메서드를 위한 인덱스 비용 추정 기능이라고 적혀 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; temp &lt;span style=&#34;color:#66d9ef&#34;&gt;table&lt;/span&gt; t_gin_test_tbl(i int4[], j int4[]);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;create&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;on&lt;/span&gt; t_gin_test_tbl &lt;span style=&#34;color:#66d9ef&#34;&gt;using&lt;/span&gt; gin (i, j);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;insert&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;into&lt;/span&gt; t_gin_test_tbl
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;values&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;,    &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{}&amp;#39;&lt;/span&gt;,    &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{1}&amp;#39;&lt;/span&gt;,   &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{1,2}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;,    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{}&amp;#39;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;,    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{10}&amp;#39;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{1,2}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{10}&amp;#39;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{2}&amp;#39;&lt;/span&gt;,   &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{10}&amp;#39;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{1,3}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{}&amp;#39;&lt;/span&gt;),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{1,1}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{10}&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;set&lt;/span&gt; enable_seqscan &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;off&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;explain&lt;/span&gt; (costs &lt;span style=&#34;color:#66d9ef&#34;&gt;off&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;from&lt;/span&gt; t_gin_test_tbl &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt; array[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;@&lt;/span&gt; i;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;from&lt;/span&gt; t_gin_test_tbl &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt; array[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;@&lt;/span&gt; i;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;from&lt;/span&gt; t_gin_test_tbl &lt;span style=&#34;color:#66d9ef&#34;&gt;where&lt;/span&gt; array[&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;@&lt;/span&gt; i &lt;span style=&#34;color:#66d9ef&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;{}&amp;#39;&lt;/span&gt;::int4[] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;@&lt;/span&gt; j;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gincostestimate&lt;/code&gt; 함수에 디버거를 걸로 위의 스크립트를 실행시키면, &lt;code&gt;gin&lt;/code&gt; 인덱스를 사용하게 되면서 &lt;code&gt;gincostestimate&lt;/code&gt; 함수가 실행되는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/41/3796/&#34;&gt;Fix GIN indexes cost estimation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>사칙 연산을 수행하는 POSTGRES 익스텐션 만들기</title>
       <link>https://dongwooklee96.github.io/post/2022/09/17/%EC%82%AC%EC%B9%99-%EC%97%B0%EC%82%B0%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
