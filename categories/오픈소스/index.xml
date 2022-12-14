@@ -138,9 +138,29 @@ explain (analyze, buffers) select * from t1 join t2 on t1.id = t2.t1_id ;
 DROP INDEX t1_bloom_index;
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/a6azc6el4ao8whb/Screenshot%202022-12-13%20at%2023.59.11.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;확실히 B+TREE를 기준으로 보았을 때, 예상 비용이 더 적게 나왔음에도 불구하고, 실제 실행시간은 훨씬 오래걸린 것을 확인할 수 있다.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;확실히 B+TREE를 기준으로 보았을 때, 예상 비용이 더 적게 나왔음에도 불구하고, 실제 실행시간은 훨씬 오래걸린 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;패치에 대한 리뷰는 아래 이메일에서 이루어지는 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/2h3cha5iv86cuxd/Screenshot%202022-12-15%20at%200.01.16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리뷰한 내용을 간략하게 요약하자면, &lt;code&gt;searchEntries&lt;/code&gt; 에 대한 초기 탐색 비용은 계산하지만, 캐시 효과와 비슷하게 &lt;code&gt;arrayScans&lt;/code&gt; 에 대해서도 확장을 해야한다고 말하는 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 트리의 높이를 구하는 계산식을 이해하지 못하겠고 (트리 높이가 1 일 때만 유효하게 보인다.) 주석이 지나치게 간단하다는 리뷰를 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한, &lt;code&gt;btcostestimate&lt;/code&gt; 에 있는 주석을 중복해서 사용하는 것이 소스코드를 읽는 사람들이 추측하는 것보다는 낫다고 하면서 아래 주석을 달 것을 추천했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;* If there are ScalarArrayOpExprs, charge this once per SA scan.  The
+* ones after the first one are not startup cost so far as the overall
+* plan is concerned, so add them only to &amp;#34;total&amp;#34; cost.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://commitfest.postgresql.org/41/3796/&#34;&gt;Fix GIN indexes cost estimation&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
