@@ -6,7 +6,139 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 12 Dec 2022 20:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Dec 2022 20:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PostgreSQL - GROUP BY ALL 명령어 만들기 이슈 분석</title>
+      <link>https://dongwooklee96.github.io/post/2022/12/19/postgresql-group-by-all-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</link>
+      <pubDate>Mon, 19 Dec 2022 20:04:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/12/19/postgresql-group-by-all-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;해당 기능은 머지될지는 모르겠으나, 쿼리 명령어를 확장 할 때 좋은 자료가 될 것 같으므로, 살펴보기로 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;취지는 앞서 나온 컬럼에 대해서 모두 GROUP BY 를 하고 싶으면, 귀찮게 GROUP BY 절에다가 적지 말고, GROUP BY ALL 이라는 쿼리로 한번에 GROUP BY 하자는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.postgresql.org/message-id/flat/CAAhFRxjyTO5BHn9y1oOSEp0TtpTDTTTb7HJBNhTG%2Bi3-hXC0XQ%40mail.gmail.com&#34;&gt;GROUP BY ALL&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PROGRAMMING PHOENIX_(1)</title>
+      <link>https://dongwooklee96.github.io/post/2022/12/19/programming-phoenix_1.html</link>
+      <pubDate>Mon, 19 Dec 2022 19:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/12/19/programming-phoenix_1.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;엘릭서를 어느정도 공부하고나니 해당 언어를 이용하는 웹 프레임워크인 피닉스와, 라이브뷰에 대해서 공부를 하고 싶어졌다. 하지만 아쉽게도 이에대한 한글 책은 존재하지 않아서 영어책을 읽을 수 밖에 없었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사실 토이 프로젝트를 만들려고 해도, 요즘 같은 경우에는 프론트엔드와 서버를 같이 만들어줘야하기 때문에, 귀차니즘이 발동하지만, 라이브 뷰 같은 경우에는 서버에 있기 때문에 좀 더 편하지 않을까 하는 헛된 기대를 품으며 공부하고 있기는 하다. 공식 홈페이지 가보니까, &lt;code&gt;TAILWIND CSS&lt;/code&gt; 랑 연동할 수 있는 기능을 베타로 출시 했던 것 같은데 기대가 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;피닉스-소개&#34;&gt;피닉스 소개&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;피닉스의 장점으로는 생산성이 있다. 피닉스는 프로그래머를 생산적으로 만들어주고, 웹 개발자가 기대하는 모든 것을 기본적으로 제공한다. (애플리케이션 기본 아키텍처, 데이터베이스 액세스, 라우팅, HTML 템플릿, JSON 인코딩, 다국어 처리&amp;hellip;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;엘릭서는 운영 체제 수준의 동시성이 아니라, 유저 수준의 동시성을 활용하므로, 새로운 요청을 받으면 모든 코어에 자연스럽게 분배를 할 수 있다. 이와 대조적으로 운영체제 수준의 동시성은 각 코어마다 인스턴스가 실행되기 때문에, 상태 공유를 위한 오버헤드 및 캐시 효율이 낮아진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;엘릭서는 매크로를 활용하여, 가독성 좋은 코드를 만들 수 있다. 물론 어렵게 만들 수 도 있다. 하지만 이 책에서 말하는 포인터는 다른 프레임워크는 얽히고 설킨 상속 체인을 이용하지만 엘릭서의 기능을 통해서 피닉스는 단순히 이를 치환하는 매크로를 이용한다는 것이다. 이를 통해서 성능을 포기하지 않고도 추상화가 가능하다고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;엘릭서는 수십만개의 경량 프로세스를 생성 및 추적이 용이하다. 다른 언어나 프레임워크에서도 웹 소켓을 이용할 수 있지만, 엘릭서의 경우에는 각 상태를 가지는 경량 프로세스를 통해서 연결을 하기 때문에 해당 코드가 수행되는 프로세스에 버그가 있더라도 다른 프로세스에 전파가 되지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;함수형-mvc-구축하기&#34;&gt;함수형 MVC 구축하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;웹 서버는 함수라고 생각할 수 있다. URL 을 브라우저에 입력할 때마다, 원격 서버에 있는 함수를 실행하는 것이다. 이러한 실행은 응답을 생성한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;def inc(x), do: x + 1
+def dec(x), do: x - 1
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위와 같은 엘릭서 함수가 있다고 가정을 할 때, 아래와 같은 연산을 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;|&amp;gt; inc |&amp;gt; inc |&amp;gt; dec&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;위는 엘릭서의 파이프 연사이며, 반환값을 다음 함수의 파라미터로 전달한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;connection |&amp;gt; phoenix&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;위의 의미는 브라우저가 피닉스 서버로 연결을 했다는 의미이다. 해당 연결은 우리가 사용자 연결에 요청에 대해서 알아야할 모든 것이며, HTTP, HTTPS 인지, URL이 무엇인지, 매개변수가 어떻게 보이는지 등에 대한 정보를 제공한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;피닉스의-계층&#34;&gt;피닉스의 계층&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;connection
+|&amp;gt; endpoint()
+|&amp;gt; router()
+|&amp;gt; pipelines()
+|&amp;gt; controller()
+|&amp;gt; common_servies()
+|&amp;gt; action()
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;많은 프레임워크에서 MVC 라는 패턴을 도입하였으며, 모델은 데이터에 액세스하고, 뷰는 데이터를 제공하며, 컨트롤러는 둘 사이를 조정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;웹 서버의 목적은 올바른 작업을 수행하는 기능에 대한 요청을 받는 것이며, 위와 같이 추상화를 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;컨트롤러를 통해서 공통 서비스를 호출한다. 피닉스에서는 이러한 공통 서비스가 플러그를 통해서 구현된다. 지금은 플러그를 웹 애플리케이션을 구축하기 위한 전략으로 생각하고 전략을 가능하게 하는 라이브러리라고 생각하면 마음이 편할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;connection
+|&amp;gt; find_user()
+|&amp;gt; view()
+|&amp;gt; template()
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;데이터베이스에서 유저를 찾고나서, 이를 렌더링 한다면 위와 같은 작업을 거칠 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;scope &amp;#34;/&amp;#34;, HelloWeb do
+    pipe_through :browser
+
+    get &amp;#34;/hello&amp;#34;, HelloController, :world
+    get &amp;#34;/&amp;#34;, PageController, :index
+  end
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;해당 코드는 &lt;code&gt;router.ex&lt;/code&gt; 파일에 있는 라우터 부분인데, 새롭게 &lt;code&gt;/hello&lt;/code&gt; 라는 엔드포인트를 추가하고, 이는 &lt;code&gt;:world&lt;/code&gt; 함수를 실행시킨다. 이를 추가하고 서버에 해당 엔드포인트를 입력하면 오류가 난다. 이유는 &lt;code&gt;HelloConroller&lt;/code&gt; 라는 모듈을 만들어주지 않음과 동시에 &lt;code&gt;world&lt;/code&gt; 함수도 없기 때문이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;defmodule HelloWeb.HelloController do
+  use HelloWeb, :controller # 해당 부분에서, 피닉스 컨트롤러 API 를 사용함을 알린다.
+
+  def world(conn, _params) do
+    render(conn, &amp;#34;world.html&amp;#34;)
+  end
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;또 해당 부분을 실행하면, 이번에는 &lt;code&gt;(module HelloWeb.HelloView is not available)&lt;/code&gt; 를 찾지 못한다고 뜬다. 당연하다 만든적이 없기 때문이다. 따라서 &lt;code&gt;/views/hello_view.ex&lt;/code&gt; 를 만들고 아래와 같은 코드를 입력한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;defmodule HelloWeb.HelloView do
+  use HelloWeb, :view
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;그리고 나서 최종적으로 템플릭에 &lt;code&gt;hello_view.ex&lt;/code&gt; 파일과 &lt;code&gt;html&lt;/code&gt; 코드를 입력하면 화면에 렌더링 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pragprog.com/titles/phoenix14/programming-phoenix-1-4/&#34;&gt;Programming Phoenix 1.4&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>PostgreSQL - Fix gin index cost estimation 이슈 분석</title>
       <link>https://dongwooklee96.github.io/post/2022/12/12/postgresql-fix-gin-index-cost-estimation-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</link>

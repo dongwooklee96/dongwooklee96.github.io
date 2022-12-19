@@ -6,7 +6,28 @@
     <description>Recent content in 오픈소스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 12 Dec 2022 20:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 19 Dec 2022 20:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PostgreSQL - GROUP BY ALL 명령어 만들기 이슈 분석</title>
+      <link>https://dongwooklee96.github.io/post/2022/12/19/postgresql-group-by-all-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</link>
+      <pubDate>Mon, 19 Dec 2022 20:04:24 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2022/12/19/postgresql-group-by-all-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;해당 기능은 머지될지는 모르겠으나, 쿼리 명령어를 확장 할 때 좋은 자료가 될 것 같으므로, 살펴보기로 하였다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;취지는 앞서 나온 컬럼에 대해서 모두 GROUP BY 를 하고 싶으면, 귀찮게 GROUP BY 절에다가 적지 말고, GROUP BY ALL 이라는 쿼리로 한번에 GROUP BY 하자는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.postgresql.org/message-id/flat/CAAhFRxjyTO5BHn9y1oOSEp0TtpTDTTTb7HJBNhTG%2Bi3-hXC0XQ%40mail.gmail.com&#34;&gt;GROUP BY ALL&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>PostgreSQL - Fix gin index cost estimation 이슈 분석</title>
       <link>https://dongwooklee96.github.io/post/2022/12/12/postgresql-fix-gin-index-cost-estimation-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</link>

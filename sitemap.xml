@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://dongwooklee96.github.io/post/2022/12/19/postgresql-group-by-all-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</loc>
+    <lastmod>2022-12-19T20:04:24+09:00</lastmod>
+  </url>
+
+  <url>
+    <loc>https://dongwooklee96.github.io/post/2022/12/19/programming-phoenix_1.html</loc>
+    <lastmod>2022-12-19T19:20:39+09:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://dongwooklee96.github.io/post/2022/12/12/postgresql-fix-gin-index-cost-estimation-%EC%9D%B4%EC%8A%88-%EB%B6%84%EC%84%9D.html</loc>
     <lastmod>2022-12-12T20:04:24+09:00</lastmod>
   </url>
