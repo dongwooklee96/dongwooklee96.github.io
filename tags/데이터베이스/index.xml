@@ -27,9 +27,9 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# basic_oper extension
-comment = &amp;#39;basic oper class&amp;#39;
-default_version = &amp;#39;0.0.1&amp;#39;
-module_pathname = &amp;#39;$libdir/basic_oper&amp;#39;
+comment = &#39;basic oper class&#39;
+default_version = &#39;0.0.1&#39;
+module_pathname = &#39;$libdir/basic_oper&#39;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;commnet&lt;/code&gt; 는 익스텐션에 대한 간단한 설명을 나타냅니다.&lt;/p&gt;
@@ -47,10 +47,10 @@ module_pathname = &amp;#39;$libdir/basic_oper&amp;#39;
 &lt;li&gt;SQL 스크립트 파일은 {익스텐션이름}&amp;ndash;version.sql 형식으로 작성되어야 합니다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;--complain if script is sourced in psql, rather than via CREATE EXTENSION
-\echo Use &amp;#34;CREATE EXTENSION basic_oper&amp;#34; to load this file. \quit
+\echo Use &amp;quot;CREATE EXTENSION basic_oper&amp;quot; to load this file. \quit
 
 CREATE FUNCTION get_sum(int, int) RETURNS int
-AS &amp;#39;$libdir/basic_oper&amp;#39;, &amp;#39;get_sum&amp;#39;
+AS &#39;$libdir/basic_oper&#39;, &#39;get_sum&#39;
 LANGUAGE C IMMUTABLE STRICT;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
@@ -97,7 +97,7 @@ LANGUAGE C IMMUTABLE STRICT;
 &lt;hr&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;map = function (v) {
   var parsedData = JSON.parse(v.values[0].data);
-  if (parsedData.country == &amp;#39;CA&amp;#39;)
+  if (parsedData.country == &#39;CA&#39;)
       return [{count : 1}];
   else
       return [{count: 0}];
@@ -132,43 +132,43 @@ reduce = function(mappedVals) {
 &lt;/ul&gt;
 &lt;h3 id=&#34;riak-에서의-맵-리듀스&#34;&gt;&lt;code&gt;Riak&lt;/code&gt; 에서의 맵 리듀스&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -X POST -H &amp;#34;content-type:application/json&amp;#34; \
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -X POST -H &amp;quot;content-type:application/json&amp;quot; \
 http://localhost:10018/mapred --data @-
 {
-    &amp;#34;inputs&amp;#34;: [
-        [&amp;#34;rooms&amp;#34;, &amp;#34;101&amp;#34;],
-        [&amp;#34;rooms&amp;#34;, &amp;#34;102&amp;#34;],
-        [&amp;#34;rooms&amp;#34;, &amp;#34;103&amp;#34;]
+    &amp;quot;inputs&amp;quot;: [
+        [&amp;quot;rooms&amp;quot;, &amp;quot;101&amp;quot;],
+        [&amp;quot;rooms&amp;quot;, &amp;quot;102&amp;quot;],
+        [&amp;quot;rooms&amp;quot;, &amp;quot;103&amp;quot;]
     ],
-    &amp;#34;query&amp;#34;: [{
-                &amp;#34;map&amp;#34;: {
-                &amp;#34;language&amp;#34;: &amp;#34;javascript&amp;#34;,
-                &amp;#34;source&amp;#34;: &amp;#34;function(v) {
+    &amp;quot;query&amp;quot;: [{
+                &amp;quot;map&amp;quot;: {
+                &amp;quot;language&amp;quot;: &amp;quot;javascript&amp;quot;,
+                &amp;quot;source&amp;quot;: &amp;quot;function(v) {
                     var parsed_data = JSON.parse(v.values[0].data);
                     var data = {};
                     data[parsed_data.style] = parsed_data.capacity;
                     return [data];
-                }&amp;#34;
+                }&amp;quot;
         }
     }]
 }
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;위의 코드는 &lt;code&gt;Riak&lt;/code&gt; 에서 맵 처리를 하는 모습이다..&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl - X POST - H &amp;#34;content-type:application/json&amp;#34;\
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl - X POST - H &amp;quot;content-type:application/json&amp;quot;\
 http: //localhost:10018/mapred --data @-
     {
-        &amp;#34;inputs&amp;#34;: &amp;#34;rooms&amp;#34;,
-        &amp;#34;query&amp;#34;: [{
-                &amp;#34;map&amp;#34;: {
-                    &amp;#34;language&amp;#34;: &amp;#34;javascript&amp;#34;,
-                    &amp;#34;bucket&amp;#34;: &amp;#34;my_functions&amp;#34;,
-                    &amp;#34;key&amp;#34;: &amp;#34;map_capacity&amp;#34;
+        &amp;quot;inputs&amp;quot;: &amp;quot;rooms&amp;quot;,
+        &amp;quot;query&amp;quot;: [{
+                &amp;quot;map&amp;quot;: {
+                    &amp;quot;language&amp;quot;: &amp;quot;javascript&amp;quot;,
+                    &amp;quot;bucket&amp;quot;: &amp;quot;my_functions&amp;quot;,
+                    &amp;quot;key&amp;quot;: &amp;quot;map_capacity&amp;quot;
                 }},
                 {
-                    &amp;#34;reduce&amp;#34;: {
-                        &amp;#34;language&amp;#34;: &amp;#34;javascript&amp;#34;,
-                        &amp;#34;source&amp;#34;: &amp;#34;function(v) {
+                    &amp;quot;reduce&amp;quot;: {
+                        &amp;quot;language&amp;quot;: &amp;quot;javascript&amp;quot;,
+                        &amp;quot;source&amp;quot;: &amp;quot;function(v) {
                             var totals = {};
                             for (var i in v) {
                                 for (var style in v[i]) {
@@ -177,7 +177,7 @@ http: //localhost:10018/mapred --data @-
                                 }
                             }
                             return [totals];
-                        }&amp;#34;
+                        }&amp;quot;
                 }
             }]
     }
@@ -317,14 +317,14 @@ http: //localhost:10018/mapred --data @-
 &lt;li&gt;우선 익스텐션을 만들려면 총 3가지의 파일이 필요하다. 첫번째는 익스텐션에 대한 정보를 나타내는 &lt;code&gt;*.control&lt;/code&gt; 파일이다. 두 번째는 해당 익스텐션의 소스코드인 &lt;code&gt;*.sql&lt;/code&gt; 이다. 세 번째는 어떻게 빌드할지에 대한 &lt;code&gt;Makefile&lt;/code&gt;이다. 첫번째로 &lt;code&gt;base36.control&lt;/code&gt; 파일부터 작성해보겠다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# base36 extension
-comment = &amp;#39;base36 datatype&amp;#39;
-default_version = &amp;#39;0.0.1&amp;#39;
+comment = &#39;base36 datatype&#39;
+default_version = &#39;0.0.1&#39;
 relocatable = true
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;base36 익스텐션에 대한 메타정보이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;-- complain if script is sourced in psql, rather than via CREATE EXTENSION
-\echo Use &amp;#34;CREATE EXTENSION base36&amp;#34; to load this file. \quit
+\echo Use &amp;quot;CREATE EXTENSION base36&amp;quot; to load this file. \quit
 CREATE FUNCTION base36_encode(digits int)
 RETURNS text
 LANGUAGE plpgsql IMMUTABLE STRICT
@@ -335,12 +335,12 @@ LANGUAGE plpgsql IMMUTABLE STRICT
       val int;
     BEGIN
       chars := ARRAY[
-                &amp;#39;0&amp;#39;,&amp;#39;1&amp;#39;,&amp;#39;2&amp;#39;,&amp;#39;3&amp;#39;,&amp;#39;4&amp;#39;,&amp;#39;5&amp;#39;,&amp;#39;6&amp;#39;,&amp;#39;7&amp;#39;,&amp;#39;8&amp;#39;,&amp;#39;9&amp;#39;,&amp;#39;a&amp;#39;,&amp;#39;b&amp;#39;,&amp;#39;c&amp;#39;,&amp;#39;d&amp;#39;,&amp;#39;e&amp;#39;,&amp;#39;f&amp;#39;,&amp;#39;g&amp;#39;,&amp;#39;h&amp;#39;,
-                &amp;#39;i&amp;#39;,&amp;#39;j&amp;#39;,&amp;#39;k&amp;#39;,&amp;#39;l&amp;#39;,&amp;#39;m&amp;#39;,&amp;#39;n&amp;#39;,&amp;#39;o&amp;#39;,&amp;#39;p&amp;#39;,&amp;#39;q&amp;#39;,&amp;#39;r&amp;#39;,&amp;#39;s&amp;#39;,&amp;#39;t&amp;#39;, &amp;#39;u&amp;#39;,&amp;#39;v&amp;#39;,&amp;#39;w&amp;#39;,&amp;#39;x&amp;#39;,&amp;#39;y&amp;#39;,&amp;#39;z&amp;#39;
+                &#39;0&#39;,&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;,&#39;5&#39;,&#39;6&#39;,&#39;7&#39;,&#39;8&#39;,&#39;9&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;g&#39;,&#39;h&#39;,
+                &#39;i&#39;,&#39;j&#39;,&#39;k&#39;,&#39;l&#39;,&#39;m&#39;,&#39;n&#39;,&#39;o&#39;,&#39;p&#39;,&#39;q&#39;,&#39;r&#39;,&#39;s&#39;,&#39;t&#39;, &#39;u&#39;,&#39;v&#39;,&#39;w&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;
               ];
 
       val := digits;
-      ret := &amp;#39;&amp;#39;;
+      ret := &#39;&#39;;
 
     WHILE val != 0 LOOP
       ret := chars[(val % 36)+1] || ret;
@@ -399,9 +399,9 @@ endif
 &lt;ul&gt;
 &lt;li&gt;익스텐션을 반복해서 많이 사용하면 성능이 좋지 못하다는 것을 확인할 수 있다. 따라서 이를 &lt;code&gt;C&lt;/code&gt; 로 다시 작성해서 성능을 끌어올려볼 것이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;#34;postgres.h&amp;#34;
-#include &amp;#34;fmgr.h&amp;#34;
-#include &amp;#34;utils/builtins.h&amp;#34;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;quot;postgres.h&amp;quot;
+#include &amp;quot;fmgr.h&amp;quot;
+#include &amp;quot;utils/builtins.h&amp;quot;
 
 PG_MODULE_MAGIC;
 
@@ -410,12 +410,12 @@ Datum
 base36_encode(PG_FUNCTION_ARGS)
 {
     int32 arg = PG_GETARG_INT32(0);
-    char base36[36] = &amp;#34;0123456789abcdefghijklmnopqrstuvwxyz&amp;#34;;
+    char base36[36] = &amp;quot;0123456789abcdefghijklmnopqrstuvwxyz&amp;quot;;
 
-    /* max 6 char + &amp;#39;\0&amp;#39; */
+    /* max 6 char + &#39;\0&#39; */
     char *buffer = palloc(7 * sizeof(char));
     unsigned int offset = (7 * sizeof(char));
-    buffer[--offset] = &amp;#39;\0&amp;#39;;
+    buffer[--offset] = &#39;\0&#39;;
 
     do {
         buffer[--offset] = base36[arg % 36];
@@ -428,9 +428,9 @@ base36_encode(PG_FUNCTION_ARGS)
 &lt;li&gt;&lt;code&gt;base36.c&lt;/code&gt; 파일을 생성하고 나서, 위의 코드를 작성한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;-- complain if script is sourced in psql, rather than via CREATE EXTENSION
-\echo Use &amp;#34;CREATE EXTENSION base36&amp;#34; to load this file. \quit
+\echo Use &amp;quot;CREATE EXTENSION base36&amp;quot; to load this file. \quit
 CREATE FUNCTION base36_encode(integer) RETURN text
-AS &amp;#39;$libdir/base36&amp;#39;
+AS &#39;$libdir/base36&#39;
 LANGUAGE C IMMUTABLE STRICT;
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;*.sql&lt;/code&gt; 파일에 내용을 다음과 같이 입력한다.&lt;/li&gt;
@@ -536,7 +536,7 @@ SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;
 SET GLOBAL EVENT_SCHEDULER = ON;
 
 # 이벤트 설정 ON 확인
-SHOW VARIABLES WHERE VARIABLE_NAME = &amp;#39;EVENT_SCHEDULER&amp;#39;;
+SHOW VARIABLES WHERE VARIABLE_NAME = &#39;EVENT_SCHEDULER&#39;;
 
 # 이벤트 생성
 CREATE EVENT IF NOT EXISTS LOOP_INSERT_SCH_EMAIL
@@ -548,7 +548,7 @@ DO
 SHOW EVENTS;
 
 # 마지막으로 실행된 이벤트 조회
-SELECT LAST_EXECUTED FROM INFORMATION_SCHEMA.EVENTS WHERE EVENT_NAME = &amp;#39;LOOP_INSERT_SCH_EMAIL&amp;#39;;
+SELECT LAST_EXECUTED FROM INFORMATION_SCHEMA.EVENTS WHERE EVENT_NAME = &#39;LOOP_INSERT_SCH_EMAIL&#39;;
 
 # 이벤트 삭제
 DROP EVENT LOOP_INSERT_SCH_EMAIL
@@ -1762,52 +1762,52 @@ from mysql.innodb_index_stats
 &lt;p&gt;설정이 되어있는지 확인하고 싶다면, 아래와 같은 쿼리 문을 입력한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HAVE_QUERY_CACHE&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HAVE_QUERY_CACHE&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;조회 결과 &lt;code&gt;YES&lt;/code&gt;로 나온다면, 쿼리 캐시 기능을 사용할 수 있다는 뜻이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;QUERY_CACHE_TYPE&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;QUERY_CACHE_TYPE&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;그 다음에는 현재 시스템에서 쿼리 캐시 기능을 사용하고 있는지를 조회해 볼 것이다. 위의 쿼리 결과가 &lt;code&gt;ON&lt;/code&gt;으로 나온다면 이미 쿼리 캐시 기능을 적용하고 있다는 뜻이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;쿼리-캐시가-되지-않는-경우&#34;&gt;쿼리 캐시가 되지 않는 경우&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;아래와 같은 함수를 사용하면, 기본적으로 쿼리가 캐싱되지 않는다.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BENCHMARK()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CONNECTION_ID()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CONVERT_TZ()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CURDATE()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_DATE&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_TIME&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_TIMESTAMP&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CURTIME()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ENCRYPT() (one &lt;span style=&#34;color:#66d9ef&#34;&gt;parameter&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FOUND_ROWS()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GET_LOCK()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LAST_INSERT_ID()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LOAD_FILE()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MASTER_POS_WAIT()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NOW()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RAND()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RELEASE_LOCK()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SLEEP()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SYSDATE()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UNIX_TIMESTAMP()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;no&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;parameters&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;USER&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UUID()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UUID_SHORT()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;BENCHMARK()
+CONNECTION_ID()
+CONVERT_TZ()
+CURDATE()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_DATE&lt;/span&gt;()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_TIME&lt;/span&gt;()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_TIMESTAMP&lt;/span&gt;()
+CURTIME()
+&lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt;()
+ENCRYPT() (one &lt;span style=&#34;color:#66d9ef&#34;&gt;parameter&lt;/span&gt;)
+FOUND_ROWS()
+GET_LOCK()
+LAST_INSERT_ID()
+LOAD_FILE()
+MASTER_POS_WAIT()
+NOW()
+RAND()
+RELEASE_LOCK()
+SLEEP()
+SYSDATE()
+UNIX_TIMESTAMP()
+(&lt;span style=&#34;color:#66d9ef&#34;&gt;no&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;parameters&lt;/span&gt;)
+&lt;span style=&#34;color:#66d9ef&#34;&gt;USER&lt;/span&gt;()
+UUID()
+UUID_SHORT()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;또한 쿼리에 아래와 같은 구문이 있을 경우 쿼리가 캐싱되지 않는다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; SQL_NO_CACHE ...
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; OUTFILE ...
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; DUMPFILE ...
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;FOR&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;UPDATE&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; autoincrement_column &lt;span style=&#34;color:#66d9ef&#34;&gt;IS&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;LOCK&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SHARE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;MODE&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;쿼리-캐시-크기를-제한하기&#34;&gt;쿼리 캐시 크기를 제한하기&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; SQL_NO_CACHE ...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; OUTFILE ...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; DUMPFILE ...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;FOR&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;UPDATE&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; autoincrement_column &lt;span style=&#34;color:#66d9ef&#34;&gt;IS&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;LOCK&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SHARE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;MODE&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;쿼리-캐시-크기를-제한하기&#34;&gt;쿼리 캐시 크기를 제한하기&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/120759865-6f475980-c54e-11eb-8b81-ad5975fa0449.png&#34; alt=&#34;Screen Shot 2021-06-04 at 4 03 22 PM&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -1823,7 +1823,7 @@ from mysql.innodb_index_stats
 &lt;/ul&gt;
 &lt;h3 id=&#34;캐시-설정-및-의미&#34;&gt;캐시 설정 및 의미&lt;/h3&gt;
 &lt;hr&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;SHOW STATUS LIKE &amp;#39;Qcache%&amp;#39;;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;SHOW STATUS LIKE &#39;Qcache%&#39;;
 +-------------------------+----------+
 | Variable_name           | Value    |
 +-------------------------+----------+
@@ -2515,7 +2515,7 @@ from mysql.innodb_index_stats
 &lt;li&gt;&lt;code&gt;begin&lt;/code&gt; 상태로 돌아가면, 다시 새로운 &lt;code&gt;SQL&lt;/code&gt; 문을 내보내는 새 요청이 수신될 때 새로운 &lt;code&gt;Connection&lt;/code&gt; 및 &lt;code&gt;Transaction&lt;/code&gt; 객체를 다시 호출합니다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;다음은 위의 라이프 사이클을 보여주는 예제이다.&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;engine = create_engine(&amp;#34;...&amp;#34;)
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;engine = create_engine(&amp;quot;...&amp;quot;)
 Session = sessionmaker(bind=engine)
 
 # 새로운 세션, 어떤 커넥션도 사용중이지 않다.
@@ -2529,8 +2529,8 @@ try:
     item2 = session.query(Item).get(2)
 
     # 아직 반영되지 않은 변경 사항이 생성된다.
-    item1.foo = &amp;#39;bar&amp;#39;
-    item2.bar = &amp;#39;foo&amp;#39;
+    item1.foo = &#39;bar&#39;
+    item2.bar = &#39;foo&#39;
     
     # 커밋을 수행한다.
     # 아직 반영되지 않은 변경사항이 모두 `flush` 된다.
@@ -2582,7 +2582,7 @@ session.commit() # commits u1 and u2
         with session.begin_nested():
             session.merge(record)
     except:
-        print(&amp;#34;Skipped record %s&amp;#34; % record)
+        print(&amp;quot;Skipped record %s&amp;quot; % record)
 session.commit()
 &lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;트랜잭션-격리-수준-설정--dbapi-autocommit&#34;&gt;트랜잭션 격리 수준 설정 / DBAPI AUTOCOMMIT&lt;/h3&gt;
 &lt;hr&gt;
@@ -2599,8 +2599,8 @@ session.commit()
 from sqlalchemy.orm import sessionmaker
 
 eng = create_engine(
-    &amp;#34;postgresql://scott:tiger@localhost/test&amp;#34;,
-    isolation_level=&amp;#39;REPEATABLE READ&amp;#39;
+    &amp;quot;postgresql://scott:tiger@localhost/test&amp;quot;,
+    isolation_level=&#39;REPEATABLE READ&#39;
 )
 
 Session = sessionmaker(eng)
@@ -2608,9 +2608,9 @@ Session = sessionmaker(eng)
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-eng = create_engine(&amp;#34;postgresql://scott:tiger@localhost/test&amp;#34;)
+eng = create_engine(&amp;quot;postgresql://scott:tiger@localhost/test&amp;quot;)
 
-autocommit_engine = eng.execution_options(isolation_level=&amp;#34;AUTOCOMMIT&amp;#34;)
+autocommit_engine = eng.execution_options(isolation_level=&amp;quot;AUTOCOMMIT&amp;quot;)
 
 transactional_session = sessionmaker(eng)
 autocommit_session = sessionmaker(autocommit_engine)
@@ -2633,7 +2633,7 @@ session.close()
 
 sess = Session(bind=engine)
 with sess.begin():
-    sess.connection(execution_options={&amp;#39;isolation_level&amp;#39;: &amp;#39;SERIALIZABLE&amp;#39;})
+    sess.connection(execution_options={&#39;isolation_level&#39;: &#39;SERIALIZABLE&#39;})
 
 # commits transaction.  the connection is released
 # and reverted to its previous isolation level.

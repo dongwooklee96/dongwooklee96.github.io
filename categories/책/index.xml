@@ -85,11 +85,11 @@ def dec(x), do: x - 1
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;데이터베이스에서 유저를 찾고나서, 이를 렌더링 한다면 위와 같은 작업을 거칠 것이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;scope &amp;#34;/&amp;#34;, HelloWeb do
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;scope &amp;quot;/&amp;quot;, HelloWeb do
     pipe_through :browser
 
-    get &amp;#34;/hello&amp;#34;, HelloController, :world
-    get &amp;#34;/&amp;#34;, PageController, :index
+    get &amp;quot;/hello&amp;quot;, HelloController, :world
+    get &amp;quot;/&amp;quot;, PageController, :index
   end
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;해당 코드는 &lt;code&gt;router.ex&lt;/code&gt; 파일에 있는 라우터 부분인데, 새롭게 &lt;code&gt;/hello&lt;/code&gt; 라는 엔드포인트를 추가하고, 이는 &lt;code&gt;:world&lt;/code&gt; 함수를 실행시킨다. 이를 추가하고 서버에 해당 엔드포인트를 입력하면 오류가 난다. 이유는 &lt;code&gt;HelloConroller&lt;/code&gt; 라는 모듈을 만들어주지 않음과 동시에 &lt;code&gt;world&lt;/code&gt; 함수도 없기 때문이다.&lt;/li&gt;
@@ -98,9 +98,10 @@ def dec(x), do: x - 1
   use HelloWeb, :controller # 해당 부분에서, 피닉스 컨트롤러 API 를 사용함을 알린다.
 
   def world(conn, _params) do
-    render(conn, &amp;#34;world.html&amp;#34;)
+    render(conn, &amp;quot;world.html&amp;quot;)
   end
 end
+
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;또 해당 부분을 실행하면, 이번에는 &lt;code&gt;(module HelloWeb.HelloView is not available)&lt;/code&gt; 를 찾지 못한다고 뜬다. 당연하다 만든적이 없기 때문이다. 따라서 &lt;code&gt;/views/hello_view.ex&lt;/code&gt; 를 만들고 아래와 같은 코드를 입력한다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -374,9 +375,9 @@ end
 3. 투자는 장기적으로 아주 따문해야 하고 수익성이 있어야 한다. 그래서 나는 투자 수익을 확인하는 것보다 타고를 먹는 일이 더 흥분된다.
 4. 당신이 아낄 수 있는 금액에는 한계가 있지만 벌 수 있는 금액에는 한계가 없다. 나의 독자 중에는 연 수입이 5만 달러인 사람도 있고 75만
  달러인 사람도 있다. 지출을 통제하는 것도 중요하지만 그와 더불에서 소득을 크게 늘리는 것 또한 중요하다.
-5. 재테크를 시작하면 가족과 친구들이 많은 &amp;#39;팁&amp;#39;을 알려줄 것이다. 정중하게 듣고 이 책에 나오는 프로그램을 고수하라.
-6. 구매 결정에 활용할 &amp;#39;지출 기준&amp;#39;을 만들어라 대부분 무언가를 제한하는 규칙 (&amp;#34;외식을 줄여야겠더&amp;#34;)을 정한다. 하지만 반대로 지출할 내역&amp;gt;을 정할 수 있다.
-7. &amp;#39;고급&amp;#39; 팁을 계속 찾아다니지 마라, 단계별로 상황을 개선하는 것은 힘들지만 실질적인 일을 피하고 고차원적인 해답만 찾는 사람이 많다. 매일 아침 10분 조깅하는 것보다는 보스턴 마라톤에서 우승하는 꿈을 꾸는 편이 더 쉽기 때문이다. 꾸준히 기본적인 일을 하는 것이 앞으로 나
+5. 재테크를 시작하면 가족과 친구들이 많은 &#39;팁&#39;을 알려줄 것이다. 정중하게 듣고 이 책에 나오는 프로그램을 고수하라.
+6. 구매 결정에 활용할 &#39;지출 기준&#39;을 만들어라 대부분 무언가를 제한하는 규칙 (&amp;quot;외식을 줄여야겠더&amp;quot;)을 정한다. 하지만 반대로 지출할 내역&amp;gt;을 정할 수 있다.
+7. &#39;고급&#39; 팁을 계속 찾아다니지 마라, 단계별로 상황을 개선하는 것은 힘들지만 실질적인 일을 피하고 고차원적인 해답만 찾는 사람이 많다. 매일 아침 10분 조깅하는 것보다는 보스턴 마라톤에서 우승하는 꿈을 꾸는 편이 더 쉽기 때문이다. 꾸준히 기본적인 일을 하는 것이 앞으로 나
 아가는 최선의 길임을 잊지 마라.
 8. 통제권은 당신에게 있다. 디즈니 영화처럼 누군가 나타나서 당신을 구해주지는 않는다. 다행이 당신은 재테크를 통제하여 풍족한 삶을 구축
 할 수 있다.

@@ -166,10 +166,10 @@ int socket(int domain, int type, int protocol);
 int main() {
   int sd1, fd1, sd2, fd2;
   sd1 = socket(PF_INET, SOCK_STREAM, 0);
-  fd1 = open(&#34;test&#34;, O_RDONLY);
+  fd1 = open(&quot;test&quot;, O_RDONLY);
   sd2 = socket(PF_INET, SOCK_STREAM, 0);
-  fd2 = open(&#34;test2&#34;, O_RDONLY | O_CREAT);
-  printf(&#34;sd1: %d, fd1: %d, sd2: %d, fd2: %d\n&#34;, sd1, fd1, sd2, fd2);
+  fd2 = open(&quot;test2&quot;, O_RDONLY | O_CREAT);
+  printf(&quot;sd1: %d, fd1: %d, sd2: %d, fd2: %d\n&quot;, sd1, fd1, sd2, fd2);
   close(sd1);
   close(fd1);
   close(sd2);
@@ -229,7 +229,7 @@ int main() {
 <p>다시 말해서, 프로세스를 특정하려면, <code>PID</code> 가 필요하다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>&#34;원거리 호스트에서 실행중인 프로그램의 PID를 통신할 때마다 알아야 하는가?&#34;
+<pre tabindex="0"><code>&quot;원거리 호스트에서 실행중인 프로그램의 PID를 통신할 때마다 알아야 하는가?&quot;
 </code></pre><ul>
 <li>
 <p>앞에서 설명한 IP 주소 덕분에 호스트까지 데이터를 전달하는 것은 가능하지만, 호스트에 데이터가 도착하고 그 데이터가 어떤 프로세스에 전달되어야 하는지를 알려면 <code>PID</code>로 판별을 해야한다.</p>

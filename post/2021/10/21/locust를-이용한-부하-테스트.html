@@ -145,8 +145,8 @@
 class HelloWorldUser(HttpUser):
   @task
    def hello_world(self):
-     self.client.get(&#34;/hello&#34;)
-     self.client.get(&#34;/world&#34;)
+     self.client.get(&quot;/hello&quot;)
+     self.client.get(&quot;/world&quot;)
 </code></pre><ul>
 <li>
 <p>가장 간단한 예제 코드이며, 해당 코드를 실행하면 <code>HTTP</code> 요청을 서버에 전송한다.</p>
@@ -155,7 +155,7 @@ class HelloWorldUser(HttpUser):
 <p><code>LOCUST</code>를 실행하는 <code>locustfile.py</code>를 작성한 디렉터리에서 터미널에 아래 명령어를 입력하는 것이다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>locust --host=&#34;server address&#34;
+<pre tabindex="0"><code>locust --host=&quot;server address&quot;
 </code></pre><ul>
 <li>실행 하면, 사용자 수와 사용자가 증가하는 기간을 설정할 수 있고, 초당 응답 시간 및 전체적인 지표를 확인할 수 있다.</li>
 </ul>
@@ -173,239 +173,240 @@ class UserBehavior(HttpUser):
         self.logout()
 
     def login(self):
-        response = self.client.post(&#34;/api/v1/auth/login&#34;, json={&#34;user-id&#34;: &#34;id&#34;,
-                                                                &#34;user-pwd&#34;: &#34;pass&#34;})
-        access_token = response.json()[&#39;data&#39;][&#39;access_token&#39;]
-        self.client.headers.update({&#39;Authorization&#39;: &#39;Bearer &#39; + access_token})
+        response = self.client.post(&quot;/api/v1/auth/login&quot;, json={&quot;user-id&quot;: &quot;id&quot;,
+                                                                &quot;user-pwd&quot;: &quot;pass&quot;})
+        access_token = response.json()['data']['access_token']
+        self.client.headers.update({'Authorization': 'Bearer ' + access_token})
 
         # # user info
-        self.user_company_key = response.json()[&#39;data&#39;][&#39;user_info&#39;][&#39;company_key&#39;]
+        self.user_company_key = response.json()['data']['user_info']['company_key']
 
     def logout(self):
-        self.client.delete(&#34;/api/v1/auth/logout_access_token&#34;)
+        self.client.delete(&quot;/api/v1/auth/logout_access_token&quot;)
 
     # 조회
     @task
     def view_dashboard(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         HOME - DASH BOARD
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/dashboard/summary-info?role=ADMIN&amp;company_key=26&#39;)
-        response = self.client.get(&#39;/api/v1/notice/dashboard-notices?company_key=26&#39;)
-        response = self.client.get(&#39;/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=0&#39;)
-        response = self.client.get(&#39;/api/v1/dashboard/compliance-list?offset=0&amp;count=12&amp;group_list=&amp;company_key=26&#39;)
+        response = self.client.get('/api/v1/dashboard/summary-info?role=ADMIN&amp;company_key=26')
+        response = self.client.get('/api/v1/notice/dashboard-notices?company_key=26')
+        response = self.client.get('/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=0')
+        response = self.client.get('/api/v1/dashboard/compliance-list?offset=0&amp;count=12&amp;group_list=&amp;company_key=26')
 
     @task
     def view_home_notice(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         HOME - NOTICE
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
         response = self.client.get(
-            &#39;/api/v1/notice/notices?offset=0&amp;count=20&amp;company_key=26&amp;show_deleted=0&amp;is_cm=1&amp;is_admin=1&amp;is_service_admin=0&#39;)
+            '/api/v1/notice/notices?offset=0&amp;count=20&amp;company_key=26&amp;show_deleted=0&amp;is_cm=1&amp;is_admin=1&amp;is_service_admin=0')
 
     @task
     def view_training_my_training_to_do_list(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         TRAINING - MY TRAINING - TO DO LIST
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
         response = self.client.get(
-            &#39;/api/v1/contents/my-lecture/to-do-list?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;my_status=NOT+OPEN,+IN+PROGRESS,+OVERDUE&amp;status_list=ACTIVE,+EXPIRED&amp;after_active_date=1&amp;exclude_previous=1&amp;validity=1&amp;company_key=26&#39;)
+            '/api/v1/contents/my-lecture/to-do-list?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;my_status=NOT+OPEN,+IN+PROGRESS,+OVERDUE&amp;status_list=ACTIVE,+EXPIRED&amp;after_active_date=1&amp;exclude_previous=1&amp;validity=1&amp;company_key=26')
 
     @task
     def view_training_my_training_optional_list(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         TRAINING - MY TRAINING - OPTIONAL
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
         response = self.client.get(
-            &#39;/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;status=ACTIVE&amp;training_type=OPTIONAL&amp;category_list=&amp;attended=0&amp;validity=1&amp;my_lecture=0&amp;sorting_mode=due_date_desc&amp;exclude_previous=1&amp;type=LECTURE&amp;company_key=26&#39;)
+            '/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;status=ACTIVE&amp;training_type=OPTIONAL&amp;category_list=&amp;attended=0&amp;validity=1&amp;my_lecture=0&amp;sorting_mode=due_date_desc&amp;exclude_previous=1&amp;type=LECTURE&amp;company_key=26')
 
     @task
     def view_training_my_training_all_lectures(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         TRAINING - MY TRAINING - ALL
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
         response = self.client.get(
-            &#39;/api/v1/contents/my-lecture/to-do-list?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=238,239,267,268,240,242,489,366,367,368,488,343,369,370,472,473,371,312,382,467,476,483,490,482,495,491,493,496,497&amp;validity=1&amp;company_key=26&#39;)
+            '/api/v1/contents/my-lecture/to-do-list?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=238,239,267,268,240,242,489,366,367,368,488,343,369,370,472,473,371,312,382,467,476,483,490,482,495,491,493,496,497&amp;validity=1&amp;company_key=26')
 
     @task
     def view_all_training_list(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         TRAINING - ALL TRAINING
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE&#39;)
-        response = self.client.get(&#39;/api/v1/job-title/all-job-titles?company_key=26&#39;)
-        response = self.client.get(&#39;/api/v1/contents/categories-from-dic?exclude_previous=1&amp;company_key=26&#39;)
+        response = self.client.get('/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE')
+        response = self.client.get('/api/v1/job-title/all-job-titles?company_key=26')
+        response = self.client.get('/api/v1/contents/categories-from-dic?exclude_previous=1&amp;company_key=26')
         response = self.client.get(
-            &#39;/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;exclude_previous=1&amp;company_key=26&#39;)
+            '/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;exclude_previous=1&amp;company_key=26')
 
     @task
     def view_user_management_group(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         USER_MANAGEMENT - GROUP
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=0&#39;)
+        response = self.client.get('/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=0')
 
     @task
     def view_user_management_job_title(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         USER_MANAGEMENT - JOB TITLE
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/job-title/job-titles?show_deleted=0&amp;offset=0&amp;count=20&amp;company_key=26&#39;)
+        response = self.client.get('/api/v1/job-title/job-titles?show_deleted=0&amp;offset=0&amp;count=20&amp;company_key=26')
 
     @task
     def view_user_management_user(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         USER_MANAGEMENT - USER
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE&#39;)
-        response = self.client.get(&#39;/api/v1/job-title/all-job-titles?company_key=26&#39;)
-        response = self.client.get(&#39;/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=0&#39;)
+        response = self.client.get('/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE')
+        response = self.client.get('/api/v1/job-title/all-job-titles?company_key=26')
+        response = self.client.get('/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=0')
 
         response = self.client.get(
-            &#39;/api/v1/user/users?status=ACTIVE,INACTIVE&amp;offset=0&amp;count=20&amp;roles=&amp;group_list=&amp;show_deleted=0&amp;company_key=26&#39;)
+            '/api/v1/user/users?status=ACTIVE,INACTIVE&amp;offset=0&amp;count=20&amp;roles=&amp;group_list=&amp;show_deleted=0&amp;company_key=26')
 
     @task
     def view_contents_management_category(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         CONTENTS MANAGEMENT - CATEGORY
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/contents/categories?show_deleted=0&amp;exclude_previous=0&amp;company_key=26&#39;)
+        response = self.client.get('/api/v1/contents/categories?show_deleted=0&amp;exclude_previous=0&amp;company_key=26')
 
     @task
     def view_contents_management_lecture(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         CONTENTS MANAGEMENT - LECTURE
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/job-title/all-job-titles?company_key=26&#39;)
-        response = self.client.get(&#39;/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE&#39;)
+        response = self.client.get('/api/v1/job-title/all-job-titles?company_key=26')
+        response = self.client.get('/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE')
 
         response = self.client.get(
-            &#39;/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;exclude_previous=1&amp;type=LECTURE&amp;company_key=26&#39;)
+            '/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;exclude_previous=1&amp;type=LECTURE&amp;company_key=26')
 
     @task
     def view_contents_management_quiz(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         CONTENTS MANAGEMENT - QUIZ
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
         response = self.client.get(
-            &#39;/api/v1/contents/quizzes?show_deleted=0&amp;offset=0&amp;count=20&amp;status=ACTIVE,+INACTIVE&amp;company_key=26&#39;)
+            '/api/v1/contents/quizzes?show_deleted=0&amp;offset=0&amp;count=20&amp;status=ACTIVE,+INACTIVE&amp;company_key=26')
 
     @task
     def view_contents_management_course(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         CONTENTS MANAGEMENT - COURSE
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/job-title/all-job-titles?company_key=26&#39;)
-        response = self.client.get(&#39;/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE&#39;)
-        response = self.client.get(&#39;/api/v1/contents/categories-from-dic?exclude_previous=1&amp;company_key=26&#39;)
+        response = self.client.get('/api/v1/job-title/all-job-titles?company_key=26')
+        response = self.client.get('/api/v1/user/all_user_list?company_key=26&amp;user_status_list=ACTIVE')
+        response = self.client.get('/api/v1/contents/categories-from-dic?exclude_previous=1&amp;company_key=26')
         response = self.client.get(
-            &#39;/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;exclude_previous=1&amp;type=COURSE&amp;company_key=26&#39;)
+            '/api/v1/contents/lectures?show_deleted=0&amp;offset=0&amp;count=20&amp;category_list=&amp;exclude_previous=1&amp;type=COURSE&amp;company_key=26')
 
     @task
     def view_learning_progress_training(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         LEARNING PROGRESS - TRAINING
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/contents/categories-from-dic?company_key=26&#39;)
-        response = self.client.get(&#39;/api/v1/progress/lectures?offset=0&amp;count=20&amp;category_list=&amp;company_key=26&#39;)
+        response = self.client.get('/api/v1/contents/categories-from-dic?company_key=26')
+        response = self.client.get('/api/v1/progress/lectures?offset=0&amp;count=20&amp;category_list=&amp;company_key=26')
 
     @task
     def view_learning_progress_user(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         LEARNING PROGRESS - USER
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         # get list
-        response = self.client.get(&#39;/api/v1/user/all_user_list_by_requester?company_key=26&amp;user_status_list=ACTIVE&#39;)
-        response = self.client.get(&#39;/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=1&#39;)
-        response = self.client.get(&#39;/api/v1/contents/categories-from-dic?company_key=26&#39;)
+        response = self.client.get('/api/v1/user/all_user_list_by_requester?company_key=26&amp;user_status_list=ACTIVE')
+        response = self.client.get('/api/v1/group/groups?show_deleted=0&amp;company_key=26&amp;by_requestor=1')
+        response = self.client.get('/api/v1/contents/categories-from-dic?company_key=26')
         response = self.client.get(
-            &#39;/api/v1/progress/users?offset=0&amp;count=20&amp;show_deleted=0&amp;category_list=&amp;show_inactive_user=false&amp;company_key=26&#39;)
+            '/api/v1/progress/users?offset=0&amp;count=20&amp;show_deleted=0&amp;category_list=&amp;show_inactive_user=false&amp;company_key=26')
 
     @task
     def view_system_management(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         SYSTEM MANAGEMENT
-        &#34;&#34;&#34;
-        response = self.client.get(&#39;/api/v1/sys/system?company_key=26&#39;)
+        &quot;&quot;&quot;
+        response = self.client.get('/api/v1/sys/system?company_key=26')
 
     # 생성
     @task
     def add_category(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         CONTENTS MANAGEMENT - CATEGORY - ADD
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         num1 = randint(0, 5000)
         num2 = randint(0, 5000)
-        response = self.client.post(&#39;/api/v1/contents/categories&#39;, json={
-            &#34;parent_category_name&#34;: &#34;NEW COMPANY 1&#34;,
-            &#34;parent_category_key&#34;: 0,
-            &#34;category_name&#34;: &#34;test_category_&#34; + str(num1) + &#34;_&#34; + str(num2),
-            &#34;note&#34;: None,
-            &#34;training_type&#34;: &#34;MANDATORY&#34;,
-            &#34;due_days&#34;: None,
-            &#34;alarm&#34;: 0,
-            &#34;alarm_days&#34;: 0,
-            &#34;deleted&#34;: 0,
-            &#34;status&#34;: &#34;ACTIVE&#34;,
-            &#34;trainee_list&#34;: [],
-            &#34;mandatory_trainee_list&#34;: [],
-            &#34;optional_trainee_list&#34;: [],
-            &#34;category_key&#34;: -1,
-            &#34;inactive_date&#34;: None,
-            &#34;will_inactive&#34;: 0,
-            &#34;name&#34;: &#34;test_category_1&#34;,
-            &#34;company_key&#34;: 26
+        response = self.client.post('/api/v1/contents/categories', json={
+            &quot;parent_category_name&quot;: &quot;NEW COMPANY 1&quot;,
+            &quot;parent_category_key&quot;: 0,
+            &quot;category_name&quot;: &quot;test_category_&quot; + str(num1) + &quot;_&quot; + str(num2),
+            &quot;note&quot;: None,
+            &quot;training_type&quot;: &quot;MANDATORY&quot;,
+            &quot;due_days&quot;: None,
+            &quot;alarm&quot;: 0,
+            &quot;alarm_days&quot;: 0,
+            &quot;deleted&quot;: 0,
+            &quot;status&quot;: &quot;ACTIVE&quot;,
+            &quot;trainee_list&quot;: [],
+            &quot;mandatory_trainee_list&quot;: [],
+            &quot;optional_trainee_list&quot;: [],
+            &quot;category_key&quot;: -1,
+            &quot;inactive_date&quot;: None,
+            &quot;will_inactive&quot;: 0,
+            &quot;name&quot;: &quot;test_category_1&quot;,
+            &quot;company_key&quot;: 26
         })
 
     @task
     def add_lecture(self):
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         CONTENTS MANAGEMENT - LECTURE - ADD
-        &#34;&#34;&#34;
+        &quot;&quot;&quot;
         num1 = randint(0, 5000)
         num2 = randint(0, 5000)
-        response = self.client.post(&#39;/api/v1/contents/lectures&#39;, json={
-            &#34;category_key&#34;: 497,
-            &#34;name&#34;: &#34;lecture_&#34; + str(num1) + &#34;_&#34; + str(num2),
-            &#34;practitioner_type&#34;: None,
-            &#34;training_year&#34;: None,
-            &#34;note&#34;: None,
-            &#34;training_type&#34;: &#34;MANDATORY&#34;,
-            &#34;lecture_length&#34;: 0,
-            &#34;active_date&#34;: &#34;2021-10-20&#34;,
-            &#34;inactive_date&#34;: &#34;9999-12-31&#34;,
-            &#34;due_date&#34;: None,
-            &#34;due_days&#34;: 1,
-            &#34;alarm&#34;: 0,
-            &#34;alarm_days&#34;: 0,
-            &#34;certificate&#34;: 0,
-            &#34;complete_date_mode&#34;: &#34;AUTO_ASSIGN&#34;,
-            &#34;trainee_list&#34;: [
-                {&#34;trainee_key&#34;: 1013, &#34;value&#34;: &#34;dwlee&#34;, &#34;trainee_type&#34;: &#34;USER&#34;, &#34;training_type&#34;: &#34;MANDATORY&#34;}],
-            &#34;mandatory_trainee_list&#34;: [
-                {&#34;trainee_key&#34;: 1013, &#34;value&#34;: &#34;dwlee&#34;, &#34;trainee_type&#34;: &#34;USER&#34;, &#34;training_type&#34;: &#34;MANDATORY&#34;}],
-            &#34;optional_trainee_list&#34;: [], &#34;include_contents&#34;: 0, &#34;contents_type&#34;: None, &#34;contents_name&#34;: None,
-            &#34;contents_url&#34;: None,
-            &#34;contents_link&#34;: &#34;&#34;, &#34;completion_period&#34;: 0, &#34;visibility&#34;: False, &#34;add_on_file_name&#34;: None,
-            &#34;add_on_file_url&#34;: None,
-            &#34;include_quiz&#34;: 0, &#34;quiz_type&#34;: None, &#34;quiz_key&#34;: None, &#34;number_of_quiz&#34;: 0, &#34;passing_score&#34;: 0,
-            &#34;start_date&#34;: None,
-            &#34;end_date&#34;: None, &#34;has_quiz_time_limit&#34;: 0, &#34;quiz_time_limit&#34;: 0, &#34;company_key&#34;: 26
+        response = self.client.post('/api/v1/contents/lectures', json={
+            &quot;category_key&quot;: 497,
+            &quot;name&quot;: &quot;lecture_&quot; + str(num1) + &quot;_&quot; + str(num2),
+            &quot;practitioner_type&quot;: None,
+            &quot;training_year&quot;: None,
+            &quot;note&quot;: None,
+            &quot;training_type&quot;: &quot;MANDATORY&quot;,
+            &quot;lecture_length&quot;: 0,
+            &quot;active_date&quot;: &quot;2021-10-20&quot;,
+            &quot;inactive_date&quot;: &quot;9999-12-31&quot;,
+            &quot;due_date&quot;: None,
+            &quot;due_days&quot;: 1,
+            &quot;alarm&quot;: 0,
+            &quot;alarm_days&quot;: 0,
+            &quot;certificate&quot;: 0,
+            &quot;complete_date_mode&quot;: &quot;AUTO_ASSIGN&quot;,
+            &quot;trainee_list&quot;: [
+                {&quot;trainee_key&quot;: 1013, &quot;value&quot;: &quot;dwlee&quot;, &quot;trainee_type&quot;: &quot;USER&quot;, &quot;training_type&quot;: &quot;MANDATORY&quot;}],
+            &quot;mandatory_trainee_list&quot;: [
+                {&quot;trainee_key&quot;: 1013, &quot;value&quot;: &quot;dwlee&quot;, &quot;trainee_type&quot;: &quot;USER&quot;, &quot;training_type&quot;: &quot;MANDATORY&quot;}],
+            &quot;optional_trainee_list&quot;: [], &quot;include_contents&quot;: 0, &quot;contents_type&quot;: None, &quot;contents_name&quot;: None,
+            &quot;contents_url&quot;: None,
+            &quot;contents_link&quot;: &quot;&quot;, &quot;completion_period&quot;: 0, &quot;visibility&quot;: False, &quot;add_on_file_name&quot;: None,
+            &quot;add_on_file_url&quot;: None,
+            &quot;include_quiz&quot;: 0, &quot;quiz_type&quot;: None, &quot;quiz_key&quot;: None, &quot;number_of_quiz&quot;: 0, &quot;passing_score&quot;: 0,
+            &quot;start_date&quot;: None,
+            &quot;end_date&quot;: None, &quot;has_quiz_time_limit&quot;: 0, &quot;quiz_time_limit&quot;: 0, &quot;company_key&quot;: 26
         })
+
 </code></pre><ul>
 <li>
 <p>위는 내가 작성한 스크립트이다. 특이한 점으로는 부하 테스트를 실행하고 끝낼 때 <code>on_start()</code> 메서드와, <code>on_stop()</code> 메서드를 이용하여 로그인과 로그아웃을 하는 것이다.</p>

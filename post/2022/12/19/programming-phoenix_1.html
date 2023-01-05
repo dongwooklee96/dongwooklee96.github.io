@@ -189,11 +189,11 @@ def dec(x), do: x - 1
 </code></pre><ul>
 <li>데이터베이스에서 유저를 찾고나서, 이를 렌더링 한다면 위와 같은 작업을 거칠 것이다.</li>
 </ul>
-<pre tabindex="0"><code>scope &#34;/&#34;, HelloWeb do
+<pre tabindex="0"><code>scope &quot;/&quot;, HelloWeb do
     pipe_through :browser
 
-    get &#34;/hello&#34;, HelloController, :world
-    get &#34;/&#34;, PageController, :index
+    get &quot;/hello&quot;, HelloController, :world
+    get &quot;/&quot;, PageController, :index
   end
 </code></pre><ul>
 <li>해당 코드는 <code>router.ex</code> 파일에 있는 라우터 부분인데, 새롭게 <code>/hello</code> 라는 엔드포인트를 추가하고, 이는 <code>:world</code> 함수를 실행시킨다. 이를 추가하고 서버에 해당 엔드포인트를 입력하면 오류가 난다. 이유는 <code>HelloConroller</code> 라는 모듈을 만들어주지 않음과 동시에 <code>world</code> 함수도 없기 때문이다.</li>
@@ -202,9 +202,10 @@ def dec(x), do: x - 1
   use HelloWeb, :controller # 해당 부분에서, 피닉스 컨트롤러 API 를 사용함을 알린다.
 
   def world(conn, _params) do
-    render(conn, &#34;world.html&#34;)
+    render(conn, &quot;world.html&quot;)
   end
 end
+
 </code></pre><ul>
 <li>또 해당 부분을 실행하면, 이번에는 <code>(module HelloWeb.HelloView is not available)</code> 를 찾지 못한다고 뜬다. 당연하다 만든적이 없기 때문이다. 따라서 <code>/views/hello_view.ex</code> 를 만들고 아래와 같은 코드를 입력한다.</li>
 </ul>

@@ -164,23 +164,23 @@ int main ()
   child_pid = fork ();
   if (child_pid &gt; 0) {
     // parent process will sleep for 30 seconds and exit, without a call to wait()
-    fprintf(stderr,&#34;parent process - %d\n&#34;, getpid());
+    fprintf(stderr,&quot;parent process - %d\n&quot;, getpid());
     sleep(30);
     exit(0);
   }
   else if (child_pid == 0) {
     // child process will exit immediately
-    fprintf(stderr,&#34;child process - %d\n&#34;, getpid());
+    fprintf(stderr,&quot;child process - %d\n&quot;, getpid());
     exit(0);
   }
   else if (child_pid == -1) {
     // fork() error
-    perror(&#34;fork() call failed&#34;);
+    perror(&quot;fork() call failed&quot;);
     exit (-1);
   }
   else {
     // this should not happen
-    fprintf(stderr, &#34;unknown return value of %d from fork() call&#34;, child_pid);
+    fprintf(stderr, &quot;unknown return value of %d from fork() call&quot;, child_pid);
     exit (-2);
   }
   return 0;

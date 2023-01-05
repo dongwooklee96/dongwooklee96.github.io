@@ -245,7 +245,7 @@ int main(int argc, char *argv[]) {
 
   my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
 
-  if (my_sock == -1) error_proc(&#34;socket&#34;);
+  if (my_sock == -1) error_proc(&quot;socket&quot;);
   memset(&amp;dest_addr, 0, sizeof(dest_addr));
   dest_addr.sin_addr.s_addr = inet_addr(argv[1]);
   dest_addr.sin_family = AF_INET;
@@ -257,15 +257,16 @@ int main(int argc, char *argv[]) {
     read_len = strlen(buff);
     n_sent = sendto(my_sock, buff, read_len, 0, (struct sockaddr *) &amp;dest_addr,
 addr_len);
-    printf(&#34;%d bytes were sent. \n&#34;, n_sent);
+    printf(&quot;%d bytes were sent. \n&quot;, n_sent);
   }
   return 0;
 }
 
 void error_proc(const char* str) {
-  fprintf(stderr, &#34;%s: %s \n&#34;, str, strerror(errno));
+  fprintf(stderr, &quot;%s: %s \n&quot;, str, strerror(errno));
   exit(1);
 }
+
 </code></pre><ul>
 <li>다음 예제를 실행하고 패킷을 캡처해본면 다음과 같은 사실을 확인할 수 있다.</li>
 </ul>
@@ -340,12 +341,12 @@ int main(int argc, char **argv) {
   socklen_t addr_len;
 
   if (argc != 2) {
-    fprintf(stderr, &#34;usage: %s port&#34;, argv[0]);
+    fprintf(stderr, &quot;usage: %s port&quot;, argv[0]);
     return 0;
   }
 
   my_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-  if (my_sock == -1) error_proc(&#34;socket&#34;);
+  if (my_sock == -1) error_proc(&quot;socket&quot;);
 
   memset(&amp;src_addr, 0, sizeof(src_addr));
   src_addr.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -354,22 +355,23 @@ int main(int argc, char **argv) {
 
   res = bind(my_sock, (struct sockaddr *)&amp;src_addr, sizeof(src_addr));
 
-  if (res == -1) error_proc(&#34;bind&#34;);
+  if (res == -1) error_proc(&quot;bind&quot;);
 
   addr_len = sizeof(dest_addr);
 
   while(1) {
     n_recv = recvfrom(my_sock, buff, BUFSIZ - 1, 0, (struct sockaddr *)&amp;dest_addr, &amp;addr_len);
-  if (n_recv == -1) error_proc(&#34;recv_from&#34;);
-  printf(&#34;%d bytes were recv. \n&#34;, n_recv);
+  if (n_recv == -1) error_proc(&quot;recv_from&quot;);
+  printf(&quot;%d bytes were recv. \n&quot;, n_recv);
   }
   return 0;
 }
 
 void error_proc(const char *str) {
-  fprintf(stderr, &#34;%s: %s\n&#34;, str, strerror(errno));
+  fprintf(stderr, &quot;%s: %s\n&quot;, str, strerror(errno));
   exit(1);
 }
+
 </code></pre><h4 id="전송-측-화면">전송 측 화면</h4>
 <p><img src="https://dl.dropbox.com/s/i5c8w5mne3it4ya/Screen%20Shot%202021-08-09%20at%2011.28.45%20PM.png" alt=""></p>
 <h4 id="수신측-화면">수신측 화면</h4>
