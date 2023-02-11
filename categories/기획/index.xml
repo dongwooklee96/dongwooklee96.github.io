@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>기획 on 개발자 이동욱</title>
+    <link>https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%9A%8D.html</link>
+    <description>Recent content in 기획 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 11 Feb 2023 17:02:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%9A%8D/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>UX 분석 방법 및 특징 정리</title>
+      <link>https://dongwooklee96.github.io/post/2023/02/11/ux-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95-%EB%B0%8F-%ED%8A%B9%EC%A7%95-%EC%A0%95%EB%A6%AC.html</link>
+      <pubDate>Sat, 11 Feb 2023 17:02:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2023/02/11/ux-%EB%B6%84%EC%84%9D-%EB%B0%A9%EB%B2%95-%EB%B0%8F-%ED%8A%B9%EC%A7%95-%EC%A0%95%EB%A6%AC.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;워터풀과 애자일의 UX 분석 방법 비교&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;구분&lt;/th&gt;
+&lt;th&gt;연역적 분석&lt;/th&gt;
+&lt;th&gt;귀납적 분석&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;정성적 조사&lt;/td&gt;
+&lt;td&gt;페르소나 기법, 페르소나 스펙트럼&lt;/td&gt;
+&lt;td&gt;컨텍스휴얼 인쿼리, 쉐도잉 (필드 리서치)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;정량적 조사&lt;/td&gt;
+&lt;td&gt;사용자 트래킹 분석 (GA, 와이즈 로그, 뷰저블, 파이버베이스)&lt;/td&gt;
+&lt;td&gt;A/B 태스트&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;페르소나-스펙트럼-정성적-x-연역적&#34;&gt;페르소나 스펙트럼 (정성적 X 연역적)&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;페르소나 기법이란 서비스를 이용하는 고객을 대표하는 가상의 인물을 상정하고 서비스 프로세스에 따라서 인물의 상황과 감정 등 모든 경험을 고려하는 것이다.&lt;/li&gt;
+&lt;li&gt;예시) 30 대 워킹맘 김진주 씨&lt;/li&gt;
+&lt;li&gt;서비스가 운영 중일 때는 실제 이용 고객의 특징을 잡아서 정의하고, 서비스가 아직 런칭되지 않는 상태라면 목표하는 타깃을 명확히 그리면 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;컨텍스츄얼-인쿼리-쉐도잉-정성적-x-귀납적&#34;&gt;컨텍스츄얼 인쿼리, 쉐도잉 (정성적 X 귀납적)&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서비스 이용자들의 실제 상황에 들어가서 조사를 해보는 것이므로, 운영중인 서비스의 고객 판단에 적합하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;연구자는 서비스의 이용 빈도 등 정량적 평가를 통해 대표 사용자를 선정한다. 그리고는 서비스의 이용 빈도 등 정량적 평가를 통해 대표 사용자를 선정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;컨텍스츄얼 인쿼리는 사용자에게 중간 중간 질의를 하면서, 의도나 검정 목적을 묻는 것을 허용하지만, 쉐도잉은 절대 사용자의 과정을 방해하지 않는다. 쉐도잉은 주로 동영상을 찍어 관찰만 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ga-와이즈-로그-뷰저블-파이어베이스-정량적-x-연역적&#34;&gt;GA, 와이즈 로그, 뷰저블, 파이어베이스 (정량적 X 연역적)&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;트레픽 분석, 클릭 분석, 퍼널 분석을 통해서 사용자의 행동 및 인사이트를 얻는 방법이다. 주로 로그나 BI, 시각화 툴을 이용하여 분석을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;트레픽 분석 : 접속한 이용자 수, 또는 이용자가 접근한 페이지 수를 보는 방법이다. 페이지별 또는 서비스 단위로 트레픽의 변화량을 체크한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;클릭 분석 : 화면 내 특정 위치나 행동을 기준으로 이벤트를 생성하고 로그 분석을 통해 영역별 클릭 수나 사용 패턴을 분석하는 방법이다. 하나의 화면에서도 고객이 더 많이 클릭하는 영역이 있고 그렇지 않은 영역이 있다. 만약 기획에서 의도한 영역이 클릭 수가 낮다면 의도대로 움직이지 않는다고 보면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;퍼널 분석: 고객의 동선이 원하는 방향대로 잘 움직이는 지를 판단하는 방법이다. 쇼핑 몰에서는 &amp;lsquo;메인 전시 페이지 - 상품 상세 페이지 - 주문서 - 주문 완료&amp;rsquo;로 넘어가는 흐름이 가장 빠르게 구매로 전환시키는 메인 프로세스이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ab-테스트-정량적-x-귀납적&#34;&gt;A/B 테스트 (정량적 X 귀납적)&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A/B 테스트는 조금 더 귀납적인 방법이다. 목표에 맞는 A/B 케이스를 각각 만들어 놓고 예상한 목표에 좀 더 근접하게 UI 또는 프로세스를 채택하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어느 것이 더 옳은지 찾느라 고민하는 시간을 줄이고, 능동적인 실험을 통해 고객의 행동이나 목적을 좀 더 확실하게 알아낼 수 있다는 장점이 있다. 필요시에는 일부러 A/B 테스트를 위한 개발을 하기도 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A/B 테스트를 잘하려면, 테스트 설계를 위한 가설 설정과 이에 대한 데이터 해석이 모두 있어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A/B 테스트의 결과를 보면서, 적절한 결과를 추론하고 결과적으로 A/B 중 하나를 채택하는 방식이기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=242492448&#34;&gt;현업 기획자 도그냥이 알려주는 서비스 기획 스쿨&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
