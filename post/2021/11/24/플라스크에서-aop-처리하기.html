@@ -128,9 +128,8 @@
 
     def to_dict(self):
         rv = dict(self.payload or ())
-        rv['message'] = self.message
+        rv[&#39;message&#39;] = self.message
         return rv
-
 </code></pre><ul>
 <li>다음과 같은 예외를 만들어 준다.</li>
 </ul>
@@ -139,9 +138,9 @@
 def invalid_api_usage(e):
     return jsonify(error=str(e.to_dict()))
 
-@app.route(&quot;/&quot;)
+@app.route(&#34;/&#34;)
 def index():
-    raise InvalidAPIUsage(&quot;No user id provided!&quot;)
+    raise InvalidAPIUsage(&#34;No user id provided!&#34;)
 </code></pre><ul>
 <li>다음과 같이 <code>errorhandler</code>에 생성한 예외를 등록한 후에, 예외를 호출하면 처리하는 것을 확인할 수 있다.</li>
 </ul>

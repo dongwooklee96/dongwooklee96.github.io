@@ -13,15 +13,15 @@
       <pubDate>Sat, 16 Apr 2022 13:20:39 +0900</pubDate>
       
       <guid>https://dongwooklee96.github.io/post/2022/04/16/usereducer%EB%A1%9C-%EB%B3%B5%EC%9E%A1%ED%95%9C-%EC%83%81%ED%83%9C-%EC%B2%98%EB%A6%AC%ED%95%98%EA%B8%B0.html</guid>
-      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import {useState} from &amp;quot;react&amp;quot;;
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import {useState} from &amp;#34;react&amp;#34;;
 
 const firstUser = {
-    id: &amp;quot;0391-3233-3201&amp;quot;,
-    firstName: &amp;quot;Bill&amp;quot;,
-    lastName: &amp;quot;Wilson&amp;quot;,
-    city: &amp;quot;Missoula&amp;quot;,
-    state: &amp;quot;Montana&amp;quot;,
-    email: &amp;quot;bwilson@mtnwilsons.com&amp;quot;,
+    id: &amp;#34;0391-3233-3201&amp;#34;,
+    firstName: &amp;#34;Bill&amp;#34;,
+    lastName: &amp;#34;Wilson&amp;#34;,
+    city: &amp;#34;Missoula&amp;#34;,
+    state: &amp;#34;Montana&amp;#34;,
+    email: &amp;#34;bwilson@mtnwilsons.com&amp;#34;,
     admin: false
 }
 
@@ -106,7 +106,7 @@ function User() {
 &lt;ul&gt;
 &lt;li&gt;리액트 함수의 최상위 수준에서만 훅을 사용해야 한다. 조건문이나 루프, 내포된 함수 안에서 훅을 사용하면 안된다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import {useEffect, useState} from &amp;quot;react&amp;quot;;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import {useEffect, useState} from &amp;#34;react&amp;#34;;
 
 function Counter() {
     const [count, setCount] = useState(0);
@@ -130,7 +130,7 @@ function Counter() {
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;function Counter() {
     const [count, setCount] = useState(0);
     const [checked, toggle] = useState(
-        count =&amp;gt; (count &amp;lt; 5) ? undefined : !count, (count &amp;lt; 5) ? undefined : &amp;quot;&amp;quot;
+        count =&amp;gt; (count &amp;lt; 5) ? undefined : !count, (count &amp;lt; 5) ? undefined : &amp;#34;&amp;#34;
     );
 
     useEffect(() =&amp;gt; {

@@ -140,32 +140,31 @@
 </ul>
 <h3 id="코드">코드</h3>
 <hr>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(exchange: int) <span style="color:#f92672">-&gt;</span> int:
-  cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-  coins <span style="color:#f92672">=</span> [<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">10</span>]
-
-  <span style="color:#66d9ef">for</span> coin <span style="color:#f92672">in</span> coins:
-    <span style="color:#66d9ef">while</span> exchange <span style="color:#f92672">&gt;=</span> coin:
-      exchange <span style="color:#f92672">-=</span> coin
-      cnt <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">else</span>:
-      <span style="color:#66d9ef">continue</span>
-  <span style="color:#66d9ef">return</span> cnt
-
-<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution2</span>(exchange: int) <span style="color:#f92672">-&gt;</span> int:
-  cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-  coins <span style="color:#f92672">=</span> [<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">10</span>]
-
-  <span style="color:#66d9ef">for</span> coin <span style="color:#f92672">in</span> coins:
-      cnt <span style="color:#f92672">+=</span> exchange <span style="color:#f92672">//</span> coin
-      exchange <span style="color:#f92672">=</span> exchange <span style="color:#f92672">%</span> coin
-  <span style="color:#66d9ef">return</span> cnt
-
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-  n <span style="color:#f92672">=</span> int(input())
-  print(solution2(n)
-
-</code></pre></div><h3 id="참고-문헌">참고 문헌</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(exchange: int) <span style="color:#f92672">-&gt;</span> int:
+</span></span><span style="display:flex;"><span>  cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  coins <span style="color:#f92672">=</span> [<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">10</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> coin <span style="color:#f92672">in</span> coins:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> exchange <span style="color:#f92672">&gt;=</span> coin:
+</span></span><span style="display:flex;"><span>      exchange <span style="color:#f92672">-=</span> coin
+</span></span><span style="display:flex;"><span>      cnt <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">continue</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> cnt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution2</span>(exchange: int) <span style="color:#f92672">-&gt;</span> int:
+</span></span><span style="display:flex;"><span>  cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>  coins <span style="color:#f92672">=</span> [<span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">10</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> coin <span style="color:#f92672">in</span> coins:
+</span></span><span style="display:flex;"><span>      cnt <span style="color:#f92672">+=</span> exchange <span style="color:#f92672">//</span> coin
+</span></span><span style="display:flex;"><span>      exchange <span style="color:#f92672">=</span> exchange <span style="color:#f92672">%</span> coin
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> cnt
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>  n <span style="color:#f92672">=</span> int(input())
+</span></span><span style="display:flex;"><span>  print(solution2(n)
+</span></span></code></pre></div><h3 id="참고-문헌">참고 문헌</h3>
 <hr>
 <ul>
 <li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118">이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어</a></li>

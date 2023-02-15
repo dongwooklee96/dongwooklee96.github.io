@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>세미나 on 개발자 이동욱</title>
+    <link>https://dongwooklee96.github.io/categories/%EC%84%B8%EB%AF%B8%EB%82%98.html</link>
+    <description>Recent content in 세미나 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <lastBuildDate>Sat, 27 Feb 2021 22:28:35 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%84%B8%EB%AF%B8%EB%82%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>스타트업과 적정기술 성공적으로 신기술을 도입하는 법 -후기</title>
+      <link>https://dongwooklee96.github.io/post/2021/02/27/%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85%EA%B3%BC-%EC%A0%81%EC%A0%95%EA%B8%B0%EC%88%A0-%EC%84%B1%EA%B3%B5%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%8B%A0%EA%B8%B0%EC%88%A0%EC%9D%84-%EB%8F%84%EC%9E%85%ED%95%98%EB%8A%94-%EB%B2%95-%ED%9B%84%EA%B8%B0.html</link>
+      <pubDate>Sat, 27 Feb 2021 22:28:35 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2021/02/27/%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85%EA%B3%BC-%EC%A0%81%EC%A0%95%EA%B8%B0%EC%88%A0-%EC%84%B1%EA%B3%B5%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%8B%A0%EA%B8%B0%EC%88%A0%EC%9D%84-%EB%8F%84%EC%9E%85%ED%95%98%EB%8A%94-%EB%B2%95-%ED%9B%84%EA%B8%B0.html</guid>
+      <description>&lt;h3 id=&#34;신기술-도입-원칙&#34;&gt;신기술 도입 원칙&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;리스크보다 큰 이점이 있는가?&lt;/li&gt;
+&lt;li&gt;많이 사용하는 기술인가?
+-&amp;gt; 내부 구조를 잘 파악하고, 레퍼런스가 많이 있는지?&lt;/li&gt;
+&lt;li&gt;팀원들의 공감을 얻었는가?&lt;/li&gt;
+&lt;li&gt;지속 가능한 기술인가?
+-&amp;gt; 관리가 되고 있는 프로젝트 인지, 오버 엔지니어링 경계
+-&amp;gt; 의외로 많은 개발자들이 단순히 호기심으로 신기술 도입을 시도한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;실패-사례의-공통점&#34;&gt;실패 사례의 공통점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;특정 기술에 과하게 몰입&lt;/li&gt;
+&lt;li&gt;기술에 몰입한 나머지, 판단력이 흐려진 상태&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;단점-찾기--모르는거-알아보기&#34;&gt;단점 찾기 / 모르는거 알아보기&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;기술 소개 페이지는 장점만 나온다.&lt;/li&gt;
+&lt;li&gt;다른 기술과 비교는 필수이다.&lt;/li&gt;
+&lt;li&gt;여러개의 단점보다 하나의 단점이 큰 문제를 일으킨다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;회사와-신기술&#34;&gt;회사와 신기술&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;지금 사용하는 기술은 언젠가 레거시가 된다.&lt;/li&gt;
+&lt;li&gt;신기술 도입은 회사 브랜딩에 도움이 되지만, 개발자를 뽑기 힘들고, 많은 시행착오가 필요하다.&lt;/li&gt;
+&lt;li&gt;생각 보다 신기술이 모든 문제를 해결해주지 않는다.&lt;/li&gt;
+&lt;li&gt;학습을 하는데 많은 시간이 걸린다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;도입하기-전에-할것&#34;&gt;도입하기 전에 할것&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li&gt;상대방에게 도입하려는 신기술에 대해서 이야기한다.&lt;/li&gt;
+&lt;li&gt;이야기하기 불편한 사람도 설득할 수 있어야 한다.&lt;/li&gt;
+&lt;li&gt;진짜 필요한지 생각을 많이 해야하고, 유행에 따라서 도입하는것은 아닌지 생각을 해봐야한다.&lt;/li&gt;
+&lt;li&gt;도입하기 전에 사내 내부적으로 스터디를 하고, 사이드 프로젝트를 진행해본다. (중요) -&amp;gt; 프로젝트에 적용하기 전에 무조건 사이드 프로젝트를 해야한다.&lt;/li&gt;
+&lt;li&gt;성공적으로 도입했다면, 사내 홍보 및 서서히 부담없는 프로젝트에서 사용을 해본다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;기술보다-중요한-것은-팀원들의-공감이다&#34;&gt;기술보다 중요한 것은 팀원들의 공감이다&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;새로운 기술을 도입하고, 테스트해야하는 여유가 있는지 확인을 해야한다. -&amp;gt; 회사의 레거시를 줄이고, 인력분배가 먼저 선행되어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;관성은 변경하기 힘들다 -&amp;gt; 바꾸기 힘들다면 바꿀 수 있는 부분에 집중하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;결론&#34;&gt;결론&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;기술보다는 해결하려는 문제를 해결 할 수 있는 방법을 생각하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;신기술 도입보다는 기존에 사용하는 기술을 좀 더 깊게 사용해보는것도 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.goorm.io/commit_5th/&#34;&gt;스타트업과 적정기술 : 성공적으로 신기술을 도입하는 법&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

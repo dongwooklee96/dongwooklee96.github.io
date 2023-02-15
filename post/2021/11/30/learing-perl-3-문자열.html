@@ -120,26 +120,26 @@
 <ul>
 <li>홑따옴표 문자열은 다음과 같이 표시할 수 있다.</li>
 </ul>
-<pre tabindex="0"><code>'fred' # four characters: f, r, e, d
+<pre tabindex="0"><code>&#39;fred&#39; # four characters: f, r, e, d
 </code></pre><ul>
 <li>그리고 특수 홑따음표나 백슬레시를 표현하고 싶다면 앞에 &lsquo;' 백슬레시를 붙여주면 된다.</li>
 </ul>
-<pre tabindex="0"><code>'Don\'t let an apostrophe end this string prematurely!'
+<pre tabindex="0"><code>&#39;Don\&#39;t let an apostrophe end this string prematurely!&#39;
 </code></pre><ul>
 <li>주의할 점은 백슬레시는 오직 <code>'</code> 홑따옴표를 나타내거나, 백슬레시를 나타낼 때만 사용할 수 있다는 것이다.</li>
 </ul>
-<pre tabindex="0"><code>'hello\nthere' # hellonthere
+<pre tabindex="0"><code>&#39;hello\nthere&#39; # hellonthere
 </code></pre><h3 id="쌍따옴표-문자열">쌍따옴표 문자열</h3>
 <hr>
 <ul>
 <li>쌍따옴표는 기본적으롤 홑따옴표 문자열과 큰 차이는 없지만, 백슬레시를 이용하여 활용할 수 있는 표현이 훨씬 더 많다.</li>
 </ul>
-<pre tabindex="0"><code>&quot;barney&quot; # 'barney'와 같다.
-&quot;hello world\n&quot; # 'hello world' 다음에 개행이 추가된다.
-&quot;the last character of this string is a quote mark: \&quot;&quot;
-&quot;coke\tsprite&quot; # coke, 다음에 탭문자 그리고 sprite
-&quot;\x{2668}&quot; # 유니코드로 '♨' 문자가 표현된다.
-&quot;\N{SNOWMAN}&quot; # 유니코드로 '☃' 문자가 표현된다.
+<pre tabindex="0"><code>&#34;barney&#34; # &#39;barney&#39;와 같다.
+&#34;hello world\n&#34; # &#39;hello world&#39; 다음에 개행이 추가된다.
+&#34;the last character of this string is a quote mark: \&#34;&#34;
+&#34;coke\tsprite&#34; # coke, 다음에 탭문자 그리고 sprite
+&#34;\x{2668}&#34; # 유니코드로 &#39;♨&#39; 문자가 표현된다.
+&#34;\N{SNOWMAN}&#34; # 유니코드로 &#39;☃&#39; 문자가 표현된다.
 </code></pre><ul>
 <li>그리고 쌍따옴표 문자열은 변수의 값을 표현할 수 있는 장치가 있다.</li>
 </ul>
@@ -148,8 +148,8 @@
 <ul>
 <li>펄에는 스트링을 반복해서 더할 수 있는 문법이 있다.</li>
 </ul>
-<pre tabindex="0"><code>&quot;fref&quot; x 3 # &quot;fredfredfred&quot; 로 나타내진다.
-&quot;barney&quot; x (4 + 1) # &quot;barneybarneybarneybarneybarney&quot; 로 나타내진다.
+<pre tabindex="0"><code>&#34;fref&#34; x 3 # &#34;fredfredfred&#34; 로 나타내진다.
+&#34;barney&#34; x (4 + 1) # &#34;barneybarneybarneybarneybarney&#34; 로 나타내진다.
 5 x 4.8 # 5555 로 나타내진다.
 </code></pre><ul>
 <li>
@@ -180,7 +180,7 @@
 <p>그리고 절대로 숫자로 변환할 수 없다면 숫자 0으로 변경되어서 계산된다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>&quot;12abcde34&quot; * &quot; 3&quot; # 36 
+<pre tabindex="0"><code>&#34;12abcde34&#34; * &#34; 3&#34; # 36 
 </code></pre><h3 id="경고-표시">경고 표시</h3>
 <hr>
 <ul>

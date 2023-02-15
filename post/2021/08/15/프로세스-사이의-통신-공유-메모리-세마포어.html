@@ -245,7 +245,7 @@ int munmap(void *addr, size_t len);
 #include &lt;string.h&gt;
 #include &lt;unistd.h&gt;
 
-#define SM_NAME &quot;/Test&quot;
+#define SM_NAME &#34;/Test&#34;
 
 int main(int argc, char *argv[]) {
   int shmfd;
@@ -255,12 +255,12 @@ int main(int argc, char *argv[]) {
 
   shmfd = shm_open(SM_NAME, O_RDWR | O_CREAT, 0777);
   if (shmfd == -1) {
-    fprintf(stderr, &quot;open error\n&quot;);
+    fprintf(stderr, &#34;open error\n&#34;);
     exit(1);
   }
 
   if (ftruncate(shmfd, sizeof(int)) == -1) {
-    fprintf(stderr, &quot;truncate error\n&quot;);
+    fprintf(stderr, &#34;truncate error\n&#34;);
     exit(1);
   }
 
@@ -269,30 +269,29 @@ int main(int argc, char *argv[]) {
 
   *test_value = 10;
 
-  printf(&quot;test value: %d\n&quot;, *test_value);
+  printf(&#34;test value: %d\n&#34;, *test_value);
 
   pid = fork();
   if (pid == 0) {
     *test_value = *test_value + 1;
-    printf(&quot;child process test value: %d\n&quot;, *test_value);
+    printf(&#34;child process test value: %d\n&#34;, *test_value);
     sleep(3);
     *test_value = *test_value + 1;
-    printf(&quot;child process test value: %d\n&quot;, *test_value);
+    printf(&#34;child process test value: %d\n&#34;, *test_value);
     exit(1);
   } else if (pid &lt; 0) {
-    fprintf(stderr, &quot;fork failure\n&quot;);
+    fprintf(stderr, &#34;fork failure\n&#34;);
     exit(1);
   }
   else {
     sleep(1);
     *test_value = *test_value + 5;
-    printf(&quot;parent process test value: %d\n&quot;, *test_value);
+    printf(&#34;parent process test value: %d\n&#34;, *test_value);
     wait(&amp;status);
   }
   shm_unlink(SM_NAME);
   return 0;
 }
-
 </code></pre><p><img src="https://dl.dropbox.com/s/2ofu5de7n9htzw8/Screen%20Shot%202021-08-15%20at%201.31.57%20AM.png" alt=""></p>
 <ul>
 <li>
@@ -421,8 +420,8 @@ sem_t *sem_open(const char *name, int oflag);
 #include &lt;unistd.h&gt;
 #include &lt;semaphore.h&gt;
 
-#define SM_NAME &quot;/Test&quot;
-#define SEM_NAME &quot;/SemTest&quot;
+#define SM_NAME &#34;/Test&#34;
+#define SEM_NAME &#34;/SemTest&#34;
 
 int main(int argc, char *argv[]) {
   int shmfd, pid, status, i;
@@ -431,43 +430,43 @@ int main(int argc, char *argv[]) {
 
   sem = sem_open(SEM_NAME, O_RDWR | O_CREAT, 0777, 1);
   if (sem == SEM_FAILED) {
-    fprintf(stderr, &quot;sem open error\n&quot;);
+    fprintf(stderr, &#34;sem open error\n&#34;);
     exit(1);
   }
 
   shmfd = shm_open(SM_NAME, O_RDWR | O_CREAT, 0777);
   if (shmfd == -1) {
-    fprintf(stderr, &quot;shm open error\n&quot;);
+    fprintf(stderr, &#34;shm open error\n&#34;);
     exit(1);
   }
 
   if (ftruncate(shmfd, sizeof(int)) == -1) {
-    fprintf(stderr, &quot;truncate error\n&quot;);
+    fprintf(stderr, &#34;truncate error\n&#34;);
     exit(1);
   }
 
   test_value = mmap(0, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, shmfd, 0);
   close(shmfd);
   *test_value = 10;
-  printf(&quot;test value: %d\n&quot;, *test_value);
+  printf(&#34;test value: %d\n&#34;, *test_value);
 
   pid = fork();
   if (pid == 0) { // child process
     for (i = 0; i &lt; 10; i++) {
       sem_wait(sem);
       *test_value = *test_value + 1;
-      printf(&quot;child process test value: %d\n&quot;, *test_value);
+      printf(&#34;child process test value: %d\n&#34;, *test_value);
       sem_post(sem);
     }
     exit(1);
   } else if (pid &lt; 0) {
-    fprintf(stderr, &quot;fork failure\n&quot;);
+    fprintf(stderr, &#34;fork failure\n&#34;);
     exit(1);
   } else {
     for (i = 0; i &lt; 10; i++) {
       sem_wait(sem);
       *test_value = *test_value + 5;
-      printf(&quot;parent process test value: %d\n&quot;, *test_value);
+      printf(&#34;parent process test value: %d\n&#34;, *test_value);
       sem_post(sem);
     }
     wait(&amp;status);

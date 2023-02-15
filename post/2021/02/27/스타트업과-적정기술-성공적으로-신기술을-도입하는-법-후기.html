@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>파이썬 테스트코드의 케이스를 쉽게 추가할 수 있는 도구 parameterized | 개발자 이동욱</title>
+    <title>스타트업과 적정기술 성공적으로 신기술을 도입하는 법 -후기 | 개발자 이동욱</title>
     <link rel="stylesheet" href="../../../../css/style.css" />
     <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
@@ -98,13 +98,13 @@
     <br/>
 
 <div class="article-meta">
-<h1><span class="title">파이썬 테스트코드의 케이스를 쉽게 추가할 수 있는 도구 parameterized</span></h1>
+<h1><span class="title">스타트업과 적정기술 성공적으로 신기술을 도입하는 법 -후기</span></h1>
 <h2 class="author">이동욱</h2>
-<h2 class="date">2023/01/05</h2>
+<h2 class="date">2021/02/27</h2>
 <p class="terms">
   
   
-  Categories: <a href="../../../../categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> 
+  Categories: <a href="../../../../categories/%EC%84%B8%EB%AF%B8%EB%82%98">세미나</a> 
   
   
   
@@ -115,36 +115,68 @@
 
 <div class="content-wrapper">
   <main>
-    <h3 id="parameterized">parameterized</h3>
+    <h3 id="신기술-도입-원칙">신기술 도입 원칙</h3>
+<hr>
+<ol>
+<li>리스크보다 큰 이점이 있는가?</li>
+<li>많이 사용하는 기술인가?
+-&gt; 내부 구조를 잘 파악하고, 레퍼런스가 많이 있는지?</li>
+<li>팀원들의 공감을 얻었는가?</li>
+<li>지속 가능한 기술인가?
+-&gt; 관리가 되고 있는 프로젝트 인지, 오버 엔지니어링 경계
+-&gt; 의외로 많은 개발자들이 단순히 호기심으로 신기술 도입을 시도한다.</li>
+</ol>
+<h3 id="실패-사례의-공통점">실패 사례의 공통점</h3>
+<hr>
+<ol>
+<li>특정 기술에 과하게 몰입</li>
+<li>기술에 몰입한 나머지, 판단력이 흐려진 상태</li>
+</ol>
+<h3 id="단점-찾기--모르는거-알아보기">단점 찾기 / 모르는거 알아보기</h3>
+<ol>
+<li>기술 소개 페이지는 장점만 나온다.</li>
+<li>다른 기술과 비교는 필수이다.</li>
+<li>여러개의 단점보다 하나의 단점이 큰 문제를 일으킨다.</li>
+</ol>
+<h3 id="회사와-신기술">회사와 신기술</h3>
+<hr>
+<ol>
+<li>지금 사용하는 기술은 언젠가 레거시가 된다.</li>
+<li>신기술 도입은 회사 브랜딩에 도움이 되지만, 개발자를 뽑기 힘들고, 많은 시행착오가 필요하다.</li>
+<li>생각 보다 신기술이 모든 문제를 해결해주지 않는다.</li>
+<li>학습을 하는데 많은 시간이 걸린다.</li>
+</ol>
+<h3 id="도입하기-전에-할것">도입하기 전에 할것</h3>
+<hr>
+<ol>
+<li>상대방에게 도입하려는 신기술에 대해서 이야기한다.</li>
+<li>이야기하기 불편한 사람도 설득할 수 있어야 한다.</li>
+<li>진짜 필요한지 생각을 많이 해야하고, 유행에 따라서 도입하는것은 아닌지 생각을 해봐야한다.</li>
+<li>도입하기 전에 사내 내부적으로 스터디를 하고, 사이드 프로젝트를 진행해본다. (중요) -&gt; 프로젝트에 적용하기 전에 무조건 사이드 프로젝트를 해야한다.</li>
+<li>성공적으로 도입했다면, 사내 홍보 및 서서히 부담없는 프로젝트에서 사용을 해본다.</li>
+</ol>
+<h3 id="기술보다-중요한-것은-팀원들의-공감이다">기술보다 중요한 것은 팀원들의 공감이다</h3>
 <hr>
 <ul>
 <li>
-<p>특정 함수에 대한 테스트 코드를 작성할 때, 파라미터로 어떤 인풋이 들어오면 결과가 어떻게 된다는 형식의 테스트 코드를 작성할 것이다.</p>
+<p>새로운 기술을 도입하고, 테스트해야하는 여유가 있는지 확인을 해야한다. -&gt; 회사의 레거시를 줄이고, 인력분배가 먼저 선행되어야 한다.</p>
 </li>
 <li>
-<p>이러한 경우, 다양한 경우에 대해서 테스트를 해서 안전한지 테스트를 해봐야하는데 다음과 같이 확인할 수 있다.</p>
+<p>관성은 변경하기 힘들다 -&gt; 바꾸기 힘들다면 바꿀 수 있는 부분에 집중하는 것이 좋다.</p>
 </li>
 </ul>
-<h3 id="사용-예제">사용 예제</h3>
-<hr>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestMathUnitTest</span>(unittest<span style="color:#f92672">.</span>TestCase):
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@parameterized</span><span style="color:#f92672">.</span>expand([
-</span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">&#34;negative&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>),
-</span></span><span style="display:flex;"><span>                    (<span style="color:#e6db74">&#34;integer&#34;</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>),
-</span></span><span style="display:flex;"><span>                        ])
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_add</span>(self, name, a, b, expected):
-</span></span><span style="display:flex;"><span>            assert_equal(a <span style="color:#f92672">+</span> b, expected)
-</span></span></code></pre></div><ul>
+<h3 id="결론">결론</h3>
+<ul>
 <li>
-<p>간단하게 <code>@parameterized.expand</code> 라는 데코레이터를 사용하고, 리스트안에 튜플 형태로 케이스를 추가하면 된다.</p>
+<p>기술보다는 해결하려는 문제를 해결 할 수 있는 방법을 생각하자.</p>
 </li>
 <li>
-<p>이는 순서대로, 테스트 코드 함수의 매개변수로 들어가게 된다.</p>
+<p>신기술 도입보다는 기존에 사용하는 기술을 좀 더 깊게 사용해보는것도 좋다.</p>
 </li>
 </ul>
 <h3 id="참고-문헌">참고 문헌</h3>
 <ul>
-<li><a href="https://pypi.org/project/parameterized/">parameterized</a></li>
+<li><a href="https://blog.goorm.io/commit_5th/">스타트업과 적정기술 : 성공적으로 신기술을 도입하는 법</a></li>
 </ul>
 
     <a href="../../../../"> >> Home</a>

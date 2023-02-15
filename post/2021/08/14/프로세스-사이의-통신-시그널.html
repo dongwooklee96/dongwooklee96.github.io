@@ -237,7 +237,7 @@ int global_count = 10;
 
 void sigint_handler(int sig) {
   if (sig == SIGINT) {
-    printf(&quot;received SIGINT... %d lives left \n&quot;, global_count--);
+    printf(&#34;received SIGINT... %d lives left \n&#34;, global_count--);
   }
 
   if (global_count &lt;= 0) {
@@ -249,7 +249,7 @@ int main(int argc, char *argv[]) {
   int i = 0;
   signal(SIGINT, sigint_handler); // 터미널 창에서 CTRL + C 입력을 받으면 운영체제에게 sigint_handler 함수를 호출해 달라는 요청을 하는 과정이다.
   while (1) {
-    printf(&quot;%d: sleep and awake \n&quot;, ++i);
+    printf(&#34;%d: sleep and awake \n&#34;, ++i);
     sleep(5);
   }
   return 1;
@@ -303,7 +303,7 @@ int main(int argc, char *argv[]) {
   sigaction(SIGINT, &amp;new_action, &amp;old_action);
 
   while (1) {
-    printf(&quot;%d: sleep and awake \n&quot;, i--);
+    printf(&#34;%d: sleep and awake \n&#34;, i--);
     sleep(1);
     if (i == 0) break;
   }
