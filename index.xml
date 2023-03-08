@@ -6,7 +6,109 @@
     <description>Recent content in Home on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Sat, 04 Mar 2023 10:45:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Mar 2023 17:28:35 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>구름 세미나 - 기술 부채를 바라보는 다른 시각 - 후기</title>
+      <link>https://dongwooklee96.github.io/post/2023/03/08/%EA%B5%AC%EB%A6%84-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B8%B0%EC%88%A0-%EB%B6%80%EC%B1%84%EB%A5%BC-%EB%B0%94%EB%9D%BC%EB%B3%B4%EB%8A%94-%EB%8B%A4%EB%A5%B8-%EC%8B%9C%EA%B0%81-%ED%9B%84%EA%B8%B0.html</link>
+      <pubDate>Wed, 08 Mar 2023 17:28:35 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2023/03/08/%EA%B5%AC%EB%A6%84-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B8%B0%EC%88%A0-%EB%B6%80%EC%B1%84%EB%A5%BC-%EB%B0%94%EB%9D%BC%EB%B3%B4%EB%8A%94-%EB%8B%A4%EB%A5%B8-%EC%8B%9C%EA%B0%81-%ED%9B%84%EA%B8%B0.html</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ofvhot26e3lmst5/IMG_974CC6DD12C2-1.jpeg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;기술-부채를-없앨-수-있을까&#34;&gt;기술 부채를 없앨 수 있을까?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;기술 부채는 코딩을 하는 이상 없앨 수 없다. 차라리 부채를 어쩔 수 없이 같이 동반하는 동반자로 긍정적으로 바라보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이상적인 개발 사이클은 &amp;ldquo;만들고 - 측정하고 - 배우고&amp;rdquo; 해당 사이클로 이루어진다. 하지만, 현실은 쉽지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;아름다운 코드 리뷰, 개발 문화 다 좋은데, 결국에는 앞으로 나가야한다. -&amp;gt; 아주 아름다운 복지와 개발 문화를 가지고 여유로운 회사가 있었다. -&amp;gt; 결국에는 없어졌다. -&amp;gt; 결국에는 회사는 제품을 만들고, 비지니스를 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;발표자가 외국에서 보고 느낀점은, 외국에는 (캘리포니아) 자신이 맡은 역할을 어떻게 해서든 해결은 해야한다. 많은 개발자들이 퇴근은 하지만 결국에 끝내지 못한일을 집에서 개발을 한 것을 보았다고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;완성도-vs-적시성&#34;&gt;완성도 VS 적시성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;개발자 관점으로만 생각할 것이 아니라, 결국 회사는 돈을 벌어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;기술 부채라는 것은 사실 회사의 관점에 따라서 달라지는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;주기적인-이자-상환&#34;&gt;주기적인 이자 상환&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;리펙토링, 페어 프로그래밍&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드보다 속도가 중요하더라도, 조금씩이라도 상환을 해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;은행의 핵심은 리스크 관리다, 이러한 개념을 가져야 한다. 코드 및 테크니컬한 부분에 대해서 대다수의 회사가 관리를 안한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;평소에 테스트 코드를 작성하던가, 확인하지 않았던 코드를 확인하던가 하는 식의 이자를 상환 (기술 부채를 줄여야한다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;돈-있을-때-원금-상환&#34;&gt;돈 있을 때 원금 상환&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;구조를 변경해야한다. (&lt;code&gt;Resturcturing&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;죽은 코드 탐지 (&lt;code&gt;Dead code detection&lt;/code&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;지속적으로 라이브러리 업데이트 및 레거시 시스템을 제거해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;리스크 관리를 해야한다. (충분한 테스트 및 감당을 하지 못한다고 판단되면, 하지 않는 것이 좋다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;테스트 코드, &lt;code&gt;CI/CD&lt;/code&gt;, 정적 분석, 커뮤니케이션&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;qa&#34;&gt;Q&amp;amp;A&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;구성원의 기술 숙련도가 낮다면, 외부 인력을 영입해야하는게 좋나요? -&amp;gt; 영입보다는, 세미나 스터디를 통해서 인력을 스킬을 높이는게 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;목적이 없는 개발을 하면 안된다, 시간이 남아도는 스타트업이 없고, 개발자가 할 일이 없는 회사가 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;돈을 받고 하는 일과 개인적인 성취를 위해서 하는 일에 대한 균형이 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;안좋은 경험은 없다, 자신이 경험을 하고 판단을 해야한다. 배운것을 가지고 정체되느냐, 아니면 다음 스텝으로 넘어가는가가 더 중요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;월급을 받는것은 한계가 있다, 어느시점이 되면 자의든 타의든 창업을 하게 된다. 언젠가는 직면해야할 현실이다.
+-&amp;gt; 요즘에는 마이크로크레딧이라고 하는, 작은 서비스들에게 투자를 하는 외국에서 굉장히 활발하게 이루어지고 있다.
+-&amp;gt; 챗 GPT를 이용해서 어느정도는 노동력을 상쇄하고, 개발자의 생산성을 높여주는 일인 창업을 추천한다.
+-&amp;gt; 비 개발자 직군에게는 개발자아는 다른 언어를 말한다. 따라서 숫자로 말하는 것이 커뮤니케이션이 빠르다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;결론&#34;&gt;결론&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;해결 안되는 문제는 없다. 문제를 안고 가다보면 해결을 하나씩 시키는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://blog.goorm.io/commit_6th/&#34;&gt;기술 부채를 바라보는 다른 시각&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>린 스타트업 - 서평 </title>
       <link>https://dongwooklee96.github.io/post/2023/03/04/%EB%A6%B0-%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85-%EC%84%9C%ED%8F%89.html</link>
