@@ -117,39 +117,39 @@
 <div class="content-wrapper">
   <main>
     <h2 id="batter-way-21-키워드-전용-인수로-명료성을-강요하자">BATTER WAY 21. 키워드 전용 인수로 명료성을 강요하자.</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">safe_division</span>(number, divisor, <span style="color:#f92672">*</span>,
-</span></span><span style="display:flex;"><span>    ignore_overflow<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> number <span style="color:#f92672">/</span> divisor
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">OverflowError</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ignore_overflow:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">raise</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ZeroDivisionError</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ignore_zero_division:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> float(<span style="color:#e6db74">&#39;inf&#39;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">raise</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">safe_division</span>(number, divisor, <span style="color:#f92672">*</span>,
+    ignore_overflow<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
+  <span style="color:#66d9ef">try</span>:
+    <span style="color:#66d9ef">return</span> number <span style="color:#f92672">/</span> divisor
+  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">OverflowError</span>:
+    <span style="color:#66d9ef">if</span> ignore_overflow:
+      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">else</span>:
+      <span style="color:#66d9ef">raise</span>
+  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ZeroDivisionError</span>:
+    <span style="color:#66d9ef">if</span> ignore_zero_division:
+      <span style="color:#66d9ef">return</span> float(<span style="color:#e6db74">&#39;inf&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+      <span style="color:#66d9ef">raise</span>
+</code></pre></div><ul>
 <li>함수는 아래와 같은 방법으로 사용될 수 있다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">500</span>, <span style="color:#66d9ef">True</span>, <span style="color:#66d9ef">False</span>)
-</span></span><span style="display:flex;"><span>print(result)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">False</span>, <span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>print(result)
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">500</span>, <span style="color:#66d9ef">True</span>, <span style="color:#66d9ef">False</span>)
+print(result)
+
+result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">False</span>, <span style="color:#66d9ef">True</span>)
+print(result)
+</code></pre></div><ul>
 <li>문제는 두 인수의 위치를 혼동하기 쉽기 때문에 찾기 어려운 버그가 발생할 수 있다.</li>
 <li>따라서, 키워드 인수를 이용하여 매우 주의 깊고 항상 예외를 발생하도록 만들어 줄 수 있다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>ult <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">500</span>, ignore_overflow<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>print(result)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>print(result)
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">ult <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">500</span>, ignore_overflow<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+print(result)
+
+
+result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+print(result)
+</code></pre></div><ul>
 <li>
 <p>호출하는 쪽에서, 특정 키워드 인수로 특정 연산에는 기본 값을 덮어쓰고 무시할 플래그를 지정할 할 수 있다.</p>
 </li>
@@ -163,30 +163,30 @@
 <p>파이썬3 에서는 키워드 전용 인수로 함수를 정의해서 의도를 명확히 드러내도록 요구할 수 있다.</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">safe_division</span>(number, divisor, <span style="color:#f92672">*</span>,
-</span></span><span style="display:flex;"><span>    ignore_overflow<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">try</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> number <span style="color:#f92672">/</span> divisor
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">OverflowError</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ignore_overflow:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">raise</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ZeroDivisionError</span>:
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ignore_zero_division:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> float(<span style="color:#e6db74">&#39;inf&#39;</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">raise</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">safe_division</span>(number, divisor, <span style="color:#f92672">*</span>,
+    ignore_overflow<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>):
+  <span style="color:#66d9ef">try</span>:
+    <span style="color:#66d9ef">return</span> number <span style="color:#f92672">/</span> divisor
+  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">OverflowError</span>:
+    <span style="color:#66d9ef">if</span> ignore_overflow:
+      <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">else</span>:
+      <span style="color:#66d9ef">raise</span>
+  <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ZeroDivisionError</span>:
+    <span style="color:#66d9ef">if</span> ignore_zero_division:
+      <span style="color:#66d9ef">return</span> float(<span style="color:#e6db74">&#39;inf&#39;</span>)
+    <span style="color:#66d9ef">else</span>:
+      <span style="color:#66d9ef">raise</span>
+</code></pre></div><ul>
 <li>키워드 인수가 아닌, 위치 인수를 사용하는 함수 호출은 더 이상 동작하지 않는다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">500</span>, <span style="color:#66d9ef">True</span>, <span style="color:#66d9ef">False</span>) <span style="color:#75715e"># 에러 발생</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">result <span style="color:#f92672">=</span> safe_division(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">10</span><span style="color:#f92672">**</span><span style="color:#ae81ff">500</span>, <span style="color:#66d9ef">True</span>, <span style="color:#66d9ef">False</span>) <span style="color:#75715e"># 에러 발생</span>
+</code></pre></div><ul>
 <li>키워드 인수와 그 기본 값은 의도한 대로 동작한다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>safe_devision(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) <span style="color:#75715e"># 정상 동작</span>
-</span></span></code></pre></div><h3 id="핵심-정리">핵심 정리</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">safe_devision(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, ignore_zero_division<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>) <span style="color:#75715e"># 정상 동작</span>
+</code></pre></div><h3 id="핵심-정리">핵심 정리</h3>
 <ul>
 <li>키워드 인수는 함수 호출의 의도를 더 명확하게 해준다.</li>
 <li>특히 불 플래그를 여러 개 받는 함수처럼 헷갈리기 쉬운 함수를 호출할 때, 키워드 인수를 넘기게 하려면 키워드 전용 인수를 사용하자.</li>

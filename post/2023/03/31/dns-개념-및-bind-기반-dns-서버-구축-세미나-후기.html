@@ -15,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="개발자 이동욱의 블로그 입니다.">
-    <title>[알고리즘 문제 풀이] 상하좌우 | 개발자 이동욱</title>
+    <title>DNS 개념 및 BIND 기반 DNS 서버 구축 - 세미나 후기 | 개발자 이동욱</title>
     <link rel="stylesheet" href="../../../../css/style.css" />
     <link rel="stylesheet" href="../../../../css/fonts.css" />
     <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
@@ -99,13 +99,13 @@
     <br/>
 
 <div class="article-meta">
-<h1><span class="title">[알고리즘 문제 풀이] 상하좌우</span></h1>
+<h1><span class="title">DNS 개념 및 BIND 기반 DNS 서버 구축 - 세미나 후기</span></h1>
 <h2 class="author">이동욱</h2>
-<h2 class="date">2021/08/31</h2>
+<h2 class="date">2023/03/31</h2>
 <p class="terms">
   
   
-  Categories: <a href="../../../../categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">알고리즘</a> 
+  Categories: <a href="../../../../categories/%EC%84%B8%EB%AF%B8%EB%82%98">세미나</a> 
   
   
   
@@ -116,131 +116,124 @@
 
 <div class="content-wrapper">
   <main>
-    <h3 id="문제---상하좌우">문제 - 상하좌우</h3>
+    <p><img src="https://dl.dropbox.com/s/buyfi90op86r8q2/Screenshot%202023-03-31%20at%2014.00.07.png" alt=""></p>
+<h3 id="dns란-무엇인가">DNS란 무엇인가?</h3>
 <hr>
 <ul>
 <li>
-<p>여행가 A는 N X N 크기의 정사각형 공간위에 서 있다.</p>
+<p>최초 개발 시 네트워크상에서 외우기 어렵고 복잡한 IP 주소를 호스트 이름에 맵핑 시키는 방법론이다.</p>
 </li>
 <li>
-<p>이 공간은 1 X 1 크기의 정사각형으로 나누어져있다. 가장 왼쪽 좌표는 (1, 1)이며, 가장 오른쪽 좌표는 (N, N)에 해당한다.</p>
+<p>인터넷에 연결된 호스트가 늘어남에 따라서 호스트 주소를 기억하기 힘들다.</p>
 </li>
 <li>
-<p>여행가 A는 상, 하, 좌, 우 방향으로 이동할 수 있으며 시작 좌표는 항상 (1, 1)이다.</p>
+<p>인터넷 연결 호스트의 증가로, HOSTS.TXT 파일의 내용을 갱신/관리하기 곤란하다.</p>
 </li>
 <li>
-<p>우리 앞에는 여행가 A가 이동할 계획이 적힌 계획서가 놓여 있다.</p>
-</li>
-<li>
-<p>계획서에는 하나의 줄에 띄어쓰기를 기준으로 하여 L, R, U, D 중 하나의 문자가 반복적으로 적혀있고 각 문자의 의미는 아래와 같다.</p>
+<p>DNS 도입으로 도메인 네임을 사용한 호스트 접속, 전자메일 송수신을 위한 전자메일 라우팅 체계가 DNS를 기반으로 확립</p>
 </li>
 </ul>
-<blockquote>
-<ul>
-<li>L: 왼쪽으로 한 칸 이동</li>
-<li>R: 오른쪽으로 한 칸 이동</li>
-<li>U: 위로 한 칸 이동</li>
-<li>D: 아래로 한 칸 이동</li>
-</ul>
-</blockquote>
-<ul>
-<li>
-<p>이때 여행가 A가 N X N 크기의 정사각형 공간을 벗어나는 움직임은 무시된다.</p>
-</li>
-<li>
-<p>계획서가 주어졌을 때 여행가 A가 최종적으로 도착할 지점의 좌표를 출력하는 프로그램을 작성하라.</p>
-</li>
-</ul>
-<h3 id="제한-사항">제한 사항</h3>
-<hr>
-<h4 id="입력">입력</h4>
-<ul>
-<li>첫 째 줄에 공간을 나타내는 N이 주어진다. (1 ~ 100)</li>
-<li>둘 째 줄에 여행가 A가 이동할 계획서가 주어진다. (1 ~ 100)</li>
-</ul>
-<h4 id="출력">출력</h4>
-<ul>
-<li>
-<p>첫 째 줄에 여행가 A가 최종적으로 도착할 지점의 좌표 (X, Y)를 공백으로 구분하여 출력한다.</p>
-</li>
-<li>
-<p>정사각형 공간을 벗어나는 움직임은 무시된다.</p>
-</li>
-</ul>
-<h3 id="아이디어">아이디어</h3>
-<hr>
-<ul>
-<li>계획서를 읽고 현재 좌표에 더해본다. (L, R, U, D)</li>
-<li>정사각형 공간을 벗어났는지 판단한다.
-<ul>
-<li>IF (1 &lt;= X &lt;= N, 1 &lt;= Y &lt;= N)</li>
-</ul>
-</li>
-<li>이상이 없다면 좌표를 갱신하고 다음 계획서를 끝날때까지 읽는다.</li>
-</ul>
-<h3 id="코드">코드</h3>
-<hr>
-<pre tabindex="0"><code>from typing import List
-from typing import Tuple
-
-
-def solution(n: int, maps: List[str]) -&gt; Tuple[int, int]:
-    current_x = 1
-    current_y = 1
-
-    for map in maps:
-        if map == 'L':
-            if 1 &lt;= current_x - 1 &lt;= n:
-                current_x -= 1
-        elif map == 'R':
-            if 1 &lt;= current_x + 1 &lt;= n:
-                current_x += 1
-        elif map == 'U':
-            if 1 &lt;= current_y - 1 &lt;= n:
-                current_y -= 1
-        elif map == 'D':
-            if 1 &lt;= current_y + 1 &lt;= n:
-                current_y += 1
-
-    return current_y, current_x
-
-
-def solution2(n: int, plans: List[str]) -&gt; Tuple[int, int]:
-    x, y = 1, 1
-    dx = [0, 0, -1, 1]
-    dy = [-1, 1, 0, 0]
-    move_types = ['L', 'R', 'U', 'D']
-
-    for plan in plans:
-        for i in range(len(move_types)):
-            if plan == move_types[i]:
-                nx = x + dx[i]
-                ny = y + dy[i]
-            if nx &lt; 1 or ny &lt; 1 or nx &gt; n or ny &gt; n:
-                continue
-            x, y = nx, ny
-    return x, y
-
-
-if __name__ == '__main__':
-    n = int(input())
-    maps = list(input().split())
-    print(solution(n, maps))
-
-</code></pre><h3 id="개선할-점">개선할 점</h3>
+<h3 id="dns의-중요성">DNS의 중요성</h3>
 <hr>
 <ul>
 <li>
-<p>좌표 문제를 풀 때 배열에 미리 상, 하, 좌, 우 값을 입력해두는 것이 좀 더 깔끔한것 같다.</p>
+<p>우리가 일상에서 사용하는 대부분의 인터넷 서비스가 영향을 받는다.</p>
 </li>
 <li>
-<p>맵을 읽을 때 리스트에 가능한 수를 넣어두고 반복문으로 일치하는지 확인하는 패턴도 유용하게 사용할 수 있을 것 같다.</p>
+<p>장애가 아닌 설정 오류도 이용자의 서비스 접속시 영향을 줄 수 있다.</p>
+</li>
+</ul>
+<h3 id="dns-특징">DNS 특징</h3>
+<hr>
+<ul>
+<li>
+<p>트리 구조의 도메인 네임 체계</p>
+</li>
+<li>
+<p>생성된 도메인 네임은 언제나 유일하도록 네임 체계를 구성한다.</p>
+</li>
+<li>
+<p>분산 구조형 데이터베이스</p>
+<ul>
+<li>데이터베이스 시스템 (DNS 네임서버)의 분산 구성</li>
+<li>데이터의 영역별 구분 및 분산관리</li>
+<li>HOSTS.TXT는 중앙의 NIC에서 일관 관리 -&gt; 호스트 증가에 따른 갱신 관리 문제가 발생한다.</li>
+</ul>
+</li>
+<li>
+<p>상위로부터 하위 도메인은 위임 받는다.</p>
+</li>
+<li>
+<p>DNS 레코드를 이용한 다양한 정보 제공</p>
+<ul>
+<li>도메인 네임에 설정하는 데이터 유형은 리소스 레코드로 정의한다.</li>
+<li>레코드 타입의 예시 i.e. A(IPv4), AAAA(IPv4), MX(메일서버), NS(네임서버)</li>
+</ul>
+</li>
+</ul>
+<h3 id="도메인-네임의-구성">도메인 네임의 구성</h3>
+<hr>
+<ul>
+<li>도메인 네임은 레이블의 조합으로 구성
+<ul>
+<li><code>kisa.or.kr</code>, <code>kisa</code>, <code>or</code>, <code>kr</code> 의 레이블로 구성된다.</li>
+<li>&quot;&quot; 레이블은 특수한 레이블로써 루트 도메인을 의미한다.</li>
+<li>레이블은 최대 63 바이트를 초과할 수 없다.</li>
+<li>도메인 네임의 인터넷에 유일하게 존재해야 함</li>
+</ul>
+</li>
+</ul>
+<h3 id="dns-서버-구성">DNS 서버 구성</h3>
+<hr>
+<ul>
+<li>
+<p>권한 DNS (Authoritative 네임 서버)</p>
+<ul>
+<li>도메인 존 데이터를 적재하여 응답하는 네임서버를 가지는 서버</li>
+<li>마스터와 슬레이브로 구성된다. (이중화 / 다중화 구현)
+일부 DNS 서버 시스템의 장애 시에도 도메인 존 데이터는 언제나 가용 상태 유지</li>
+<li>마스터와 슬레이브 서버는 관리자 입장에서 구분하는 것이다.</li>
+<li>BIND 프로그램에서는 설정 타입을 마스터로 구성하면 마스터, 슬레이브로 구성하면 슬레이브로 사용할 수 있다.</li>
+</ul>
+</li>
+<li>
+<p>캐시 DNS 서버 (리커시브 네임 서버)</p>
+<ul>
+<li>타 호스트를 대신해서 인터넷 전체에서 질의된 DNS 데이터를 조회, 응답하는 네임서버</li>
+<li>네임서버 기능부와 리졸버 기능부를 조합하여 구현된 서버 프로세스 S/W</li>
+<li>캐시 관리, 질의 응답 절차를 통해서 파악된 데이터의 캐싱</li>
+<li>리졸버 기능을 위해 루트 네임서버 IP 주소 정보의 설정을 필요로 한다.</li>
+</ul>
+</li>
+</ul>
+<h3 id="인터넷-서비스에서-dns-동작">인터넷 서비스에서 DNS 동작</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/0o3734ugz5rofdu/Screenshot%202023-03-31%20at%2014.26.35.png" alt=""></p>
+<h3 id="dns-관리는-기본적으로-어떻게-이루어지는가">DNS 관리는 기본적으로 어떻게 이루어지는가?</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/uqapx474femd5y1/Screenshot%202023-03-31%20at%2014.31.34.png" alt=""></p>
+<ul>
+<li>
+<p>도메인을 등록할 때 네임서버를 두대를 등록하고 마스터를 등록하지 않는다.</p>
+</li>
+<li>
+<p>마스터는 숨겨져 있고, 슬레이브만 외부로 노출되어있다.</p>
+</li>
+</ul>
+<h3 id="네임서버-구성-설정-1-단계--도메인의-위임설정-등록">네임서버 구성 설정 1 단계- 도메인의 위임설정 등록</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/mlidygq7hhmy7au/Screenshot%202023-03-31%20at%2014.35.15.png" alt=""></p>
+<ul>
+<li>
+<p>도메인 주소를 네임 서버에 등록한다.</p>
+</li>
+<li>
+<p>마스터 네임서버에만 존 반영하면, 슬레이브에는 자동으로 반영된다.</p>
 </li>
 </ul>
 <h3 id="참고-문헌">참고 문헌</h3>
-<hr>
 <ul>
-<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118">이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어</a></li>
+<li><a href="https://event-us.kr/Ut2KSHw11cCG/event/57853">DNS 개념 및 BIND 기반 DNS 서버 구축</a></li>
 </ul>
 
     <a href="../../../../"> >> Home</a>

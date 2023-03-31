@@ -116,24 +116,24 @@
   <main>
     <h3 id="가장-먼저-웹-컨트롤러가-지저분해지는-일을-막기">가장 먼저 웹 컨트롤러가 지저분해지는 일을 막기</h3>
 <hr>
-<pre tabindex="0"><code>@app.route(&#34;/allocate&#34;, methods=[&#39;POST&#39;])
+<pre tabindex="0"><code>@app.route(&quot;/allocate&quot;, methods=['POST'])
 def allocate_endpoint():
     line = model.OrderLine(
-        request.json[&#39;orderid&#39;],
-        request.json[&#39;sku&#39;],
-        request.json[&#39;qty&#39;],
+        request.json['orderid'],
+        request.json['sku'],
+        request.json['qty'],
     )
     try:
         uow = unit_of_work.SqlAlchemyUnitOfWork()
         batchref = services.allocate(line, uow)
     except (model.OutOfStock, services.InvalidSku) as e:
         send_mail(
-            &#39;out of stock&#39;,
-            &#39;stock_admin@made.com&#39;,
-            f&#39;{line.orderid} - {line.sku}&#39;
+            'out of stock',
+            'stock_admin@made.com',
+            f'{line.orderid} - {line.sku}'
         )
-        return jsonify({&#39;message&#39;: str(e)}), 400
-    return jsonify({&#39;batchref&#39;: batchref}), 201
+        return jsonify({'message': str(e)}), 400
+    return jsonify({'batchref': batchref}), 201
 </code></pre><ul>
 <li>
 <p>해당 코드는 재고가 없을 때 이메일을 전송하는 코드이다, 이처럼 컨트롤러 여기저기에 기능을 끼워 넣으면 전체가 빠르게 더러워진다.</p>
@@ -153,8 +153,9 @@ def allocate_endpoint():
         batch.allocate(line)
         return batch.reference
     except StopIteration:
-        email.send_mail(&#39;stock@made.com&#39;, f&#39;Out of stock for {line.sku}&#39;)
-        raise OutOfStock(f&#39;Out of stock for sku {line.sku}&#39;)
+        email.send_mail('stock@made.com', f'Out of stock for {line.sku}')
+        raise OutOfStock(f'Out of stock for sku {line.sku}')
+
 </code></pre><ul>
 <li>
 <p>컨트롤러가 복잡해지는 것을 막기 위해서, 모델에서 이메일을 전송하는 코드를 넣었는데 이 역시도 좋지 않은 구조이다.</p>
@@ -176,13 +177,13 @@ def allocate_endpoint():
     with uow:
         product = uow.products.get(sku=line.sku)
         if product is None:
-            raise InvalidSku(f&#39;Invalid sku {line.sku}&#39;)
+            raise InvalidSku(f'Invalid sku {line.sku}')
         try:
             batchref = product.allocate(line)
             uow.commit()
             return batchref
         except model.OutOfStock:
-            email.send_mail(&#39;stock@made.com&#39;, f&#39;Out of stock for {line.sku}&#39;)
+            email.send_mail('stock@made.com', f'Out of stock for {line.sku}')
             raise
 </code></pre><ul>
 <li>
@@ -230,13 +231,13 @@ class OutOfStock(Event):
 </li>
 </ul>
 <pre tabindex="0"><code>def test_records_out_of_stock_event_if_cannot_allocate():
-    batch = Batch(&#39;batch1&#39;, &#39;SMALL-FORK&#39;, 10, eta=today)
-    product = Product(sku=&#34;SMALL-FORK&#34;, batches=[batch])
-    product.allocate(OrderLine(&#39;order1&#39;, &#39;SMALL-FORK&#39;, 10))
+    batch = Batch('batch1', 'SMALL-FORK', 10, eta=today)
+    product = Product(sku=&quot;SMALL-FORK&quot;, batches=[batch])
+    product.allocate(OrderLine('order1', 'SMALL-FORK', 10))
 
-    allocation = product.allocate(OrderLine(&#39;order2&#39;, &#39;SMALL-FORK&#39;, 1))
+    allocation = product.allocate(OrderLine('order2', 'SMALL-FORK', 1))
 
-    assert product.events[-1] == events.OutofStock(sku=&#34;SMALL-FORK&#34;)
+    assert product.events[-1] == events.OutofStock(sku=&quot;SMALL-FORK&quot;)
     assert allocation is None
 </code></pre><ul>
 <li>애그리게이트는 <code>events</code>라는 새로운 속성을 외부로 노출하고 애트리뷰트에 발생한 일에 대한 사실은 <code>event</code> 객체 형태로 남긴 리스트에 남아있다.</li>
@@ -273,8 +274,8 @@ class OutOfStock(Event):
 
 def send_out_of_stock_notification(event: events.OutOfStock):
     email.send_mail(
-        &#39;stock@made.com&#39;,
-        f&#39;Out of stock for {event.sku}&#39;,
+        'stock@made.com',
+        f'Out of stock for {event.sku}',
     )
 
 HANDLERS = {
@@ -289,7 +290,7 @@ HANDLERS = {
     with uow:
         product = uow.products.get(sku=line.sku)
         if product is None:
-            raise InvalidSku(f&#39;Invalid sku {line.sku}&#39;)
+            raise InvalidSku(f'Invalid sku {line.sku}')
         try:
             batchref = product.allocate(line)
             uow.commit()
@@ -314,7 +315,7 @@ HANDLERS = {
     with uow:
         product = uow.products.get(sku=line.sku)
         if product is None:
-            raise InvalidSku(f&#39;Invalid sku {line.sku}&#39;)
+            raise InvalidSku(f'Invalid sku {line.sku}')
         batchref = product.allocate(line)
         uow.commit()
 

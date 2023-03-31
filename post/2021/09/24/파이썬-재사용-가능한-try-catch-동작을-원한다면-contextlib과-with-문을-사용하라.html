@@ -132,6 +132,7 @@ Lock = Lock()
 with lock:
   # 어떤 불변 조건을 유지하면서 작업을 수행한다.
   ...
+
 </code></pre><ul>
 <li><code>Lock</code> 클래스가 <code>with</code> 문을 적절히 활성화해주므로 위의 예제는 아래의 코드와 동등하다.</li>
 </ul>
@@ -141,6 +142,7 @@ try:
   ...
 finally:
   lock.release()
+
 </code></pre><ul>
 <li>
 <p>위와 같은 경우엔느  <code>with</code> 문을 사용하는 것이 훨씬 더 낫다. 이유는 try/finally 구조를 반복적으로 사용할 필요가 없고, <code>acquire</code>에 대응하는 <code>release</code> 를 실수로 빠뜨리는 경우를 방지할 수 있기 때문이다.</p>
@@ -161,9 +163,9 @@ finally:
 <li>예를 들어서, 어떤 코드 영역에서 디버깅 관련 로그를 더 많이 남기고 싶다고 가정을 할 때, 아래 코드는 디버깅 로그를 남기는 함수이다.</li>
 </ul>
 <pre tabindex="0"><code>def my_function():
-   logging.debug(&#39;debug data&#39;)
-   logging.error(&#39;error log&#39;)
-   logging.debug(&#39;additional debug data&#39;)
+   logging.debug('debug data')
+   logging.error('error log')
+   logging.debug('additional debug data')
 </code></pre><p><img src="https://dl.dropbox.com/s/hpaxrrh45y2556w/Screen%20Shot%202021-09-24%20at%202.40.57%20PM.png" alt=""></p>
 <ul>
 <li>
@@ -185,6 +187,7 @@ def debug_logging(level):
         yield
     finally:
         logger.setLevel(old_level)
+
 </code></pre><ul>
 <li>
 <p><code>yield</code> 식은 <code>with</code> 블록의 내용이 실행되는 부분을 지정한다.</p>
@@ -215,8 +218,8 @@ def debug_logging(level):
 <p><code>with</code> 문에 <code>open</code>을 전달하면 이렇게 할 수 있다. <code>open</code>은 <code>with</code> 문에서 <code>as</code>를 통해 대상으로 지정된 변수에게 파일 핸들을 제공하고, <code>with</code> 블록에서 나갈 때 이 핸들을 닫는다.</p>
 </li>
 </ul>
-<pre tabindex="0"><code>with open(&#39;my_output.txt&#39;, &#39;w&#39;) as handle:
-  handle.write(&#39;data&#39;)
+<pre tabindex="0"><code>with open('my_output.txt', 'w') as handle:
+  handle.write('data')
 </code></pre><ul>
 <li>
 <p>이러한 접근 방법은 파일 핸들을 매번 수동으로 열고 닫는 것보다 파이썬 다운 방식이며, 이 방식을 사용하면 코드 실행이 <code>with</code> 문을 벗어날 때 결국에는 파일이 닫힌다고 확신할 수 있다.</p>

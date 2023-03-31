@@ -122,8 +122,8 @@ set shiftwidth=8
 
 set nu
 
-&#34; 불필요한 공백이나 들여쓰기에 빨간색으로 보여준다.
-if has(&#34;autocmd&#34;)
+&quot; 불필요한 공백이나 들여쓰기에 빨간색으로 보여준다.
+if has(&quot;autocmd&quot;)
   highlight ExtraWhitespace ctermbg=red guibg=red
   match ExtraWhitespace /\s\+$\|\t/
   autocmd BufWinEnter * match ExtraWhitespace /\s\+$\|\t/
@@ -132,20 +132,20 @@ if has(&#34;autocmd&#34;)
   autocmd BufWinLeave * call clearmatches()
 endif
 
-&#34; 파일을 열었을 때 이전의 위치를 기억하고 다시 그 위치에서 열어주는 기능
-if has(&#34;autocmd&#34;)
-  au bufreadpost * if line(&#34;&#39;\&#34;&#34;) &gt; 0 &amp;&amp; line(&#34;&#39;\&#34;&#34;) &lt;= line(&#34;$&#34;)
-    \| exe &#34;normal g &#39;\&#34;&#34; |
+&quot; 파일을 열었을 때 이전의 위치를 기억하고 다시 그 위치에서 열어주는 기능
+if has(&quot;autocmd&quot;)
+  au bufreadpost * if line(&quot;'\&quot;&quot;) &gt; 0 &amp;&amp; line(&quot;'\&quot;&quot;) &lt;= line(&quot;$&quot;)
+    \| exe &quot;normal g '\&quot;&quot; |
 endif
 
-&#34; CTRL + 이동키로 파일간 이동 가능하게 하는 핫키
+&quot; CTRL + 이동키로 파일간 이동 가능하게 하는 핫키
 
 nmap &lt;C-H&gt; &lt;C-W&gt;h
 nmap &lt;C-J&gt; &lt;C-W&gt;j
 nmap &lt;C-K&gt; &lt;C-W&gt;k
 nmap &lt;C-L&gt; &lt;C-W&gt;l
 
-&#34; CTAGS / CSCOPE
+&quot; CTAGS / CSCOPE
 set tags=/home/reallinux/git/linux/tags
 set csprg=/usr/local/bin/cscope
 cs add /home/reallinux/git/linux/cscope.out

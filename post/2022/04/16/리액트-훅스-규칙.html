@@ -145,7 +145,7 @@
 <ul>
 <li>리액트 함수의 최상위 수준에서만 훅을 사용해야 한다. 조건문이나 루프, 내포된 함수 안에서 훅을 사용하면 안된다.</li>
 </ul>
-<pre tabindex="0"><code>import {useEffect, useState} from &#34;react&#34;;
+<pre tabindex="0"><code>import {useEffect, useState} from &quot;react&quot;;
 
 function Counter() {
     const [count, setCount] = useState(0);
@@ -169,7 +169,7 @@ function Counter() {
 <pre tabindex="0"><code>function Counter() {
     const [count, setCount] = useState(0);
     const [checked, toggle] = useState(
-        count =&gt; (count &lt; 5) ? undefined : !count, (count &lt; 5) ? undefined : &#34;&#34;
+        count =&gt; (count &lt; 5) ? undefined : !count, (count &lt; 5) ? undefined : &quot;&quot;
     );
 
     useEffect(() =&gt; {

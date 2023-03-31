@@ -140,8 +140,8 @@
 </ul>
 <pre tabindex="0"><code>HTTP POST, http://myweb/users/
 {
-  &#34;users&#34;: {
-    &#34;name&#34;: &#34;terry&#34;
+  &quot;users&quot;: {
+    &quot;name&quot;: &quot;terry&quot;
   }
 }
 </code></pre><h3 id="http-메서드">HTTP 메서드</h3>
@@ -176,16 +176,16 @@
 <p><strong>사용자 생성</strong></p>
 <pre tabindex="0"><code>HTTP POST, http://myweb/users/
 {
-  &#34;name&#34;:&#34;terry&#34;,
-  &#34;address&#34;:&#34;seoul&#34;
+  &quot;name&quot;:&quot;terry&quot;,
+  &quot;address&quot;:&quot;seoul&quot;
 }
 </code></pre><p><strong>조회</strong></p>
 <pre tabindex="0"><code>HTTP GET, http://myweb/users/terry
 </code></pre><p><strong>업데이트</strong></p>
 <pre tabindex="0"><code>HTTP PUT, http://myweb/users/terry 
 {
-  &#34;name&#34;: &#34;terry&#34;,
-  &#34;address&#34;: &#34;suwon&#34;
+  &quot;name&quot;: &quot;terry&quot;,
+  &quot;address&quot;: &quot;suwon&quot;
 }
 </code></pre><p><strong>삭제</strong></p>
 <pre tabindex="0"><code>HTTP DELETE, http://myweb/users/terry
@@ -280,8 +280,8 @@
 </ul>
 <pre tabindex="0"><code>HTTP POST, http://myweb/users/
 {
-  &#34;getuser&#34;: {
-    &#34;id&#34;: &#34;terry&#34;,
+  &quot;getuser&quot;: {
+    &quot;id&quot;: &quot;terry&quot;,
   }
 }
 </code></pre><h4 id="self-descriptiveness-속성을-사용하지-않음">Self-descriptiveness 속성을 사용하지 않음</h4>
@@ -318,7 +318,7 @@
 <li>사용자 - 디바이스 또는 사용자 - 강아지 등 각각의 리소스 간의 관계를 표현하는 방법에는 여러가지가 있다.</li>
 </ul>
 <pre tabindex="0"><code>1. 서브 리소스로 표현하는 방법
-/&#34;리소스명&#34;/&#34;리소스 아이디&#34;/&#34;관계가 있는 다른 리소스명&#34;
+/&quot;리소스명&quot;/&quot;리소스 아이디&quot;/&quot;관계가 있는 다른 리소스명&quot;
 HTTP GET, /users/{userId}/devices
 예) /users/1/devices
 </code></pre><pre tabindex="0"><code>2. 서브 리소스에 관계를 명시하는 방법
@@ -444,22 +444,22 @@ HTTP GET, /users/{userid}/likes/devices
 <pre tabindex="0"><code>{
   [
     {
-      &#34;id&#34;: &#34;user1&#34;,
-      &#34;name&#34;: &#34;terry&#34;
+      &quot;id&quot;: &quot;user1&quot;,
+      &quot;name&quot;: &quot;terry&quot;
     },
     {
-      &#34;id&#34;: &#34;user2&#34;,
-      &#34;name&#34;: &#34;carry&#34;
+      &quot;id&quot;: &quot;user2&quot;,
+      &quot;name&quot;: &quot;carry&quot;
     }
   ],
-  &#34;links&#34;: [
+  &quot;links&quot;: [
     {
-      &#34;rel&#34;: &#34;pre_page&#34;,
-      &#34;href&#34;: &#34;http://xxx/users?offset=6&amp;limit=5&#34;
+      &quot;rel&quot;: &quot;pre_page&quot;,
+      &quot;href&quot;: &quot;http://xxx/users?offset=6&amp;limit=5&quot;
     },
     {
-      &#34;rel&#34;: &#34;next_page&#34;,
-      &#34;href&#34;: &#34;http://xxx/users?offset=11&amp;limit=5&#34;
+      &quot;rel&quot;: &quot;next_page&quot;,
+      &quot;href&quot;: &quot;http://xxx/users?offset=11&amp;limit=5&quot;
     }
   ]
 }

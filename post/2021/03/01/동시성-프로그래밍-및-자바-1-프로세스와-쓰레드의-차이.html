@@ -156,13 +156,13 @@
         MyThread myThread = new MyThread();
         myThread.start();
 
-        System.out.println(&#34;Hello&#34;);
+        System.out.println(&quot;Hello&quot;);
     }
 
     static class MyThread extends Thread {
         @Override
         public void run() {
-            System.out.println(&#34;Thread: &#34; + Thread.currentThread().getName());
+            System.out.println(&quot;Thread: &quot; + Thread.currentThread().getName());
         }
     }
 }
@@ -173,11 +173,11 @@
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println(&#34;Thread: &#34; + Thread.currentThread().getName());
+                System.out.println(&quot;Thread: &quot; + Thread.currentThread().getName());
             }
         });
         thread.start();
-        System.out.println(&#34;Hello: &#34; + Thread.currentThread().getName());
+        System.out.println(&quot;Hello: &quot; + Thread.currentThread().getName());
     }
 }
 </code></pre><h4 id="3-람다를-사용하는-방법">3. 람다를 사용하는 방법</h4>
@@ -185,10 +185,10 @@
 <pre tabindex="0"><code>public class Main {
     public static void main(String[] args) {
         Thread thread = new Thread(() -&gt; {
-            System.out.println(&#34;Thread: &#34; + Thread.currentThread().getName());
+            System.out.println(&quot;Thread: &quot; + Thread.currentThread().getName());
         });
         thread.start();
-        System.out.println(&#34;Hello: &#34; + Thread.currentThread().getName());
+        System.out.println(&quot;Hello: &quot; + Thread.currentThread().getName());
     }
 }
 </code></pre><h1 id="쓰레드의-주요-기능">쓰레드의 주요 기능</h1>
@@ -198,7 +198,7 @@
 <pre tabindex="0"><code>public class Main {
     public static void main(String[] args) {
         Thread thread = new Thread(() -&gt; {
-            System.out.println(&#34;Thread: &#34; + Thread.currentThread().getName());
+            System.out.println(&quot;Thread: &quot; + Thread.currentThread().getName());
             try {
                 Thread.sleep(1000L);
             } catch (InterruptedException e) {
@@ -206,7 +206,7 @@
             }
         });
         thread.start();
-        System.out.println(&#34;Hello: &#34; + Thread.currentThread().getName());
+        System.out.println(&quot;Hello: &quot; + Thread.currentThread().getName());
     }
 }
 </code></pre><ul>
@@ -220,17 +220,17 @@
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -&gt; {
             while (true) {
-                System.out.println(&#34;Thread: &#34; + Thread.currentThread().getName());
+                System.out.println(&quot;Thread: &quot; + Thread.currentThread().getName());
                 try {
                     Thread.sleep(1000L);
                 } catch (InterruptedException e) {
-                    System.out.println(&#34;interrupt!&#34;);
+                    System.out.println(&quot;interrupt!&quot;);
                     return;
                 }
             }
         });
         thread.start();
-        System.out.println(&#34;Hello: &#34; + Thread.currentThread().getName());
+        System.out.println(&quot;Hello: &quot; + Thread.currentThread().getName());
         Thread.sleep(3000L);
         thread.interrupt();
     }
@@ -244,7 +244,7 @@
 <pre tabindex="0"><code>public class Main {
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -&gt; {
-            System.out.println(&#34;Thread: &#34; + Thread.currentThread().getName());
+            System.out.println(&quot;Thread: &quot; + Thread.currentThread().getName());
             try {
                 Thread.sleep(3000L);
             } catch (InterruptedException e) {
@@ -253,9 +253,9 @@
         });
         thread.start();
 
-        System.out.println(&#34;Hello: &#34; + Thread.currentThread().getName());
+        System.out.println(&quot;Hello: &quot; + Thread.currentThread().getName());
         thread.join();
-        System.out.println(thread + &#34; is finished&#34;);
+        System.out.println(thread + &quot; is finished&quot;);
     }
 }
 </code></pre><ul>
@@ -267,17 +267,17 @@
 <li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=200069290">모던 자바 인 액션, 책, 한빛미디어</a></li>
 <li><a href="https://www.inflearn.com/course/the-java-java8/dashboard">더 자바, Java8, 프로그래밍 강의, 백기선</a></li>
 </ul>
-<div class="footnotes" role="doc-endnotes">
+<section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1">
+<li id="fn:1" role="doc-endnote">
 <p><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/">https://docs.oracle.com/javase/tutorial/essential/concurrency/</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2">
+<li id="fn:2" role="doc-endnote">
 <p><a href="https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html">https://docs.oracle.com/javase/tutorial/essential/concurrency/procthread.html</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</div>
+</section>
 
     <a href="../../../../"> >> Home</a>
   </main>

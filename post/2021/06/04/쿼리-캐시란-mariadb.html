@@ -141,52 +141,52 @@
 <p>설정이 되어있는지 확인하고 싶다면, 아래와 같은 쿼리 문을 입력한다.</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SHOW</span> VARIABLES <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;HAVE_QUERY_CACHE&#39;</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SHOW</span> VARIABLES <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;HAVE_QUERY_CACHE&#39;</span>
+</code></pre></div><ul>
 <li>조회 결과 <code>YES</code>로 나온다면, 쿼리 캐시 기능을 사용할 수 있다는 뜻이다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SHOW</span> VARIABLES <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;QUERY_CACHE_TYPE&#39;</span>
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SHOW</span> VARIABLES <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;QUERY_CACHE_TYPE&#39;</span>
+</code></pre></div><ul>
 <li>그 다음에는 현재 시스템에서 쿼리 캐시 기능을 사용하고 있는지를 조회해 볼 것이다. 위의 쿼리 결과가 <code>ON</code>으로 나온다면 이미 쿼리 캐시 기능을 적용하고 있다는 뜻이다.</li>
 </ul>
 <h3 id="쿼리-캐시가-되지-않는-경우">쿼리 캐시가 되지 않는 경우</h3>
 <hr>
 <p>아래와 같은 함수를 사용하면, 기본적으로 쿼리가 캐싱되지 않는다.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>BENCHMARK()
-</span></span><span style="display:flex;"><span>CONNECTION_ID()
-</span></span><span style="display:flex;"><span>CONVERT_TZ()
-</span></span><span style="display:flex;"><span>CURDATE()
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CURRENT_DATE</span>()
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CURRENT_TIME</span>()
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CURRENT_TIMESTAMP</span>()
-</span></span><span style="display:flex;"><span>CURTIME()
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">DATABASE</span>()
-</span></span><span style="display:flex;"><span>ENCRYPT() (one <span style="color:#66d9ef">parameter</span>)
-</span></span><span style="display:flex;"><span>FOUND_ROWS()
-</span></span><span style="display:flex;"><span>GET_LOCK()
-</span></span><span style="display:flex;"><span>LAST_INSERT_ID()
-</span></span><span style="display:flex;"><span>LOAD_FILE()
-</span></span><span style="display:flex;"><span>MASTER_POS_WAIT()
-</span></span><span style="display:flex;"><span>NOW()
-</span></span><span style="display:flex;"><span>RAND()
-</span></span><span style="display:flex;"><span>RELEASE_LOCK()
-</span></span><span style="display:flex;"><span>SLEEP()
-</span></span><span style="display:flex;"><span>SYSDATE()
-</span></span><span style="display:flex;"><span>UNIX_TIMESTAMP()
-</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">no</span> <span style="color:#66d9ef">parameters</span>)
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">USER</span>()
-</span></span><span style="display:flex;"><span>UUID()
-</span></span><span style="display:flex;"><span>UUID_SHORT()
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">BENCHMARK()
+CONNECTION_ID()
+CONVERT_TZ()
+CURDATE()
+<span style="color:#66d9ef">CURRENT_DATE</span>()
+<span style="color:#66d9ef">CURRENT_TIME</span>()
+<span style="color:#66d9ef">CURRENT_TIMESTAMP</span>()
+CURTIME()
+<span style="color:#66d9ef">DATABASE</span>()
+ENCRYPT() (one <span style="color:#66d9ef">parameter</span>)
+FOUND_ROWS()
+GET_LOCK()
+LAST_INSERT_ID()
+LOAD_FILE()
+MASTER_POS_WAIT()
+NOW()
+RAND()
+RELEASE_LOCK()
+SLEEP()
+SYSDATE()
+UNIX_TIMESTAMP()
+(<span style="color:#66d9ef">no</span> <span style="color:#66d9ef">parameters</span>)
+<span style="color:#66d9ef">USER</span>()
+UUID()
+UUID_SHORT()
+</code></pre></div><ul>
 <li>또한 쿼리에 아래와 같은 구문이 있을 경우 쿼리가 캐싱되지 않는다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> SQL_NO_CACHE ...
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> ... <span style="color:#66d9ef">INTO</span> OUTFILE ...
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> ... <span style="color:#66d9ef">INTO</span> DUMPFILE ...
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> ... <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> ... <span style="color:#66d9ef">WHERE</span> autoincrement_column <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NULL</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">SELECT</span> ... <span style="color:#66d9ef">LOCK</span> <span style="color:#66d9ef">IN</span> <span style="color:#66d9ef">SHARE</span> <span style="color:#66d9ef">MODE</span>
-</span></span></code></pre></div><h3 id="쿼리-캐시-크기를-제한하기">쿼리 캐시 크기를 제한하기</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> SQL_NO_CACHE ...
+<span style="color:#66d9ef">SELECT</span> ... <span style="color:#66d9ef">INTO</span> OUTFILE ...
+<span style="color:#66d9ef">SELECT</span> ... <span style="color:#66d9ef">INTO</span> DUMPFILE ...
+<span style="color:#66d9ef">SELECT</span> ... <span style="color:#66d9ef">FOR</span> <span style="color:#66d9ef">UPDATE</span>
+<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> ... <span style="color:#66d9ef">WHERE</span> autoincrement_column <span style="color:#66d9ef">IS</span> <span style="color:#66d9ef">NULL</span>
+<span style="color:#66d9ef">SELECT</span> ... <span style="color:#66d9ef">LOCK</span> <span style="color:#66d9ef">IN</span> <span style="color:#66d9ef">SHARE</span> <span style="color:#66d9ef">MODE</span>
+</code></pre></div><h3 id="쿼리-캐시-크기를-제한하기">쿼리 캐시 크기를 제한하기</h3>
 <hr>
 <p><img src="https://user-images.githubusercontent.com/14002238/120759865-6f475980-c54e-11eb-8b81-ad5975fa0449.png" alt="Screen Shot 2021-06-04 at 4 03 22 PM"></p>
 <ul>
@@ -202,7 +202,7 @@
 </ul>
 <h3 id="캐시-설정-및-의미">캐시 설정 및 의미</h3>
 <hr>
-<pre tabindex="0"><code>SHOW STATUS LIKE &#39;Qcache%&#39;;
+<pre tabindex="0"><code>SHOW STATUS LIKE 'Qcache%';
 +-------------------------+----------+
 | Variable_name           | Value    |
 +-------------------------+----------+

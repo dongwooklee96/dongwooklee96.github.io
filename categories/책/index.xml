@@ -85,11 +85,11 @@ def dec(x), do: x - 1
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;데이터베이스에서 유저를 찾고나서, 이를 렌더링 한다면 위와 같은 작업을 거칠 것이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;scope &amp;#34;/&amp;#34;, HelloWeb do
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;scope &amp;quot;/&amp;quot;, HelloWeb do
     pipe_through :browser
 
-    get &amp;#34;/hello&amp;#34;, HelloController, :world
-    get &amp;#34;/&amp;#34;, PageController, :index
+    get &amp;quot;/hello&amp;quot;, HelloController, :world
+    get &amp;quot;/&amp;quot;, PageController, :index
   end
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;해당 코드는 &lt;code&gt;router.ex&lt;/code&gt; 파일에 있는 라우터 부분인데, 새롭게 &lt;code&gt;/hello&lt;/code&gt; 라는 엔드포인트를 추가하고, 이는 &lt;code&gt;:world&lt;/code&gt; 함수를 실행시킨다. 이를 추가하고 서버에 해당 엔드포인트를 입력하면 오류가 난다. 이유는 &lt;code&gt;HelloConroller&lt;/code&gt; 라는 모듈을 만들어주지 않음과 동시에 &lt;code&gt;world&lt;/code&gt; 함수도 없기 때문이다.&lt;/li&gt;
@@ -98,9 +98,10 @@ def dec(x), do: x - 1
   use HelloWeb, :controller # 해당 부분에서, 피닉스 컨트롤러 API 를 사용함을 알린다.
 
   def world(conn, _params) do
-    render(conn, &amp;#34;world.html&amp;#34;)
+    render(conn, &amp;quot;world.html&amp;quot;)
   end
 end
+
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;또 해당 부분을 실행하면, 이번에는 &lt;code&gt;(module HelloWeb.HelloView is not available)&lt;/code&gt; 를 찾지 못한다고 뜬다. 당연하다 만든적이 없기 때문이다. 따라서 &lt;code&gt;/views/hello_view.ex&lt;/code&gt; 를 만들고 아래와 같은 코드를 입력한다.&lt;/li&gt;
 &lt;/ul&gt;

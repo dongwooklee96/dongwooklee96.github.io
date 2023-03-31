@@ -136,14 +136,14 @@
 <li>우선 익스텐션을 만들려면 총 3가지의 파일이 필요하다. 첫번째는 익스텐션에 대한 정보를 나타내는 <code>*.control</code> 파일이다. 두 번째는 해당 익스텐션의 소스코드인 <code>*.sql</code> 이다. 세 번째는 어떻게 빌드할지에 대한 <code>Makefile</code>이다. 첫번째로 <code>base36.control</code> 파일부터 작성해보겠다.</li>
 </ul>
 <pre tabindex="0"><code># base36 extension
-comment = &#39;base36 datatype&#39;
-default_version = &#39;0.0.1&#39;
+comment = 'base36 datatype'
+default_version = '0.0.1'
 relocatable = true
 </code></pre><ul>
 <li>base36 익스텐션에 대한 메타정보이다.</li>
 </ul>
 <pre tabindex="0"><code>-- complain if script is sourced in psql, rather than via CREATE EXTENSION
-\echo Use &#34;CREATE EXTENSION base36&#34; to load this file. \quit
+\echo Use &quot;CREATE EXTENSION base36&quot; to load this file. \quit
 CREATE FUNCTION base36_encode(digits int)
 RETURNS text
 LANGUAGE plpgsql IMMUTABLE STRICT
@@ -154,12 +154,12 @@ LANGUAGE plpgsql IMMUTABLE STRICT
       val int;
     BEGIN
       chars := ARRAY[
-                &#39;0&#39;,&#39;1&#39;,&#39;2&#39;,&#39;3&#39;,&#39;4&#39;,&#39;5&#39;,&#39;6&#39;,&#39;7&#39;,&#39;8&#39;,&#39;9&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;g&#39;,&#39;h&#39;,
-                &#39;i&#39;,&#39;j&#39;,&#39;k&#39;,&#39;l&#39;,&#39;m&#39;,&#39;n&#39;,&#39;o&#39;,&#39;p&#39;,&#39;q&#39;,&#39;r&#39;,&#39;s&#39;,&#39;t&#39;, &#39;u&#39;,&#39;v&#39;,&#39;w&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;
+                '0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h',
+                'i','j','k','l','m','n','o','p','q','r','s','t', 'u','v','w','x','y','z'
               ];
 
       val := digits;
-      ret := &#39;&#39;;
+      ret := '';
 
     WHILE val != 0 LOOP
       ret := chars[(val % 36)+1] || ret;
@@ -218,9 +218,9 @@ endif
 <ul>
 <li>익스텐션을 반복해서 많이 사용하면 성능이 좋지 못하다는 것을 확인할 수 있다. 따라서 이를 <code>C</code> 로 다시 작성해서 성능을 끌어올려볼 것이다.</li>
 </ul>
-<pre tabindex="0"><code>#include &#34;postgres.h&#34;
-#include &#34;fmgr.h&#34;
-#include &#34;utils/builtins.h&#34;
+<pre tabindex="0"><code>#include &quot;postgres.h&quot;
+#include &quot;fmgr.h&quot;
+#include &quot;utils/builtins.h&quot;
 
 PG_MODULE_MAGIC;
 
@@ -229,12 +229,12 @@ Datum
 base36_encode(PG_FUNCTION_ARGS)
 {
     int32 arg = PG_GETARG_INT32(0);
-    char base36[36] = &#34;0123456789abcdefghijklmnopqrstuvwxyz&#34;;
+    char base36[36] = &quot;0123456789abcdefghijklmnopqrstuvwxyz&quot;;
 
-    /* max 6 char + &#39;\0&#39; */
+    /* max 6 char + '\0' */
     char *buffer = palloc(7 * sizeof(char));
     unsigned int offset = (7 * sizeof(char));
-    buffer[--offset] = &#39;\0&#39;;
+    buffer[--offset] = '\0';
 
     do {
         buffer[--offset] = base36[arg % 36];
@@ -247,9 +247,9 @@ base36_encode(PG_FUNCTION_ARGS)
 <li><code>base36.c</code> 파일을 생성하고 나서, 위의 코드를 작성한다.</li>
 </ul>
 <pre tabindex="0"><code>-- complain if script is sourced in psql, rather than via CREATE EXTENSION
-\echo Use &#34;CREATE EXTENSION base36&#34; to load this file. \quit
+\echo Use &quot;CREATE EXTENSION base36&quot; to load this file. \quit
 CREATE FUNCTION base36_encode(integer) RETURN text
-AS &#39;$libdir/base36&#39;
+AS '$libdir/base36'
 LANGUAGE C IMMUTABLE STRICT;
 </code></pre><ul>
 <li><code>*.sql</code> 파일에 내용을 다음과 같이 입력한다.</li>

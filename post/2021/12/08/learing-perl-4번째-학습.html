@@ -121,7 +121,7 @@
 <pre tabindex="0"><code>#!/usr/bin/perl
 
 foreach $rock (qw/ bedrock slate lava /) {
-    print &#34;one rock is $rock.\n&#34;;
+    print &quot;one rock is $rock.\n&quot;;
 }
 </code></pre><ul>
 <li>
@@ -139,10 +139,10 @@ foreach $rock (qw/ bedrock slate lava /) {
 @rocks = qw/ bedrock slate lava /;
 
 foreach $rock (@rocks) {
-    $rock = &#34;\t$rock&#34;;
-    $rock .= &#34;\n&#34;;
+    $rock = &quot;\t$rock&quot;;
+    $rock .= &quot;\n&quot;;
 }
-print &#34;The rocks are:\n&#34;, @rocks;
+print &quot;The rocks are:\n&quot;, @rocks;
 </code></pre><ul>
 <li>
 <p>따라서 이렇게 작성한다면, 원본 배열과 다른 결과가 나올 것이다.</p>
@@ -153,15 +153,15 @@ print &#34;The rocks are:\n&#34;, @rocks;
 </ul>
 <pre tabindex="0"><code>#!/usr/bin/perl
 
-$rock = &#39;shale&#39;;
+$rock = 'shale';
 
-@rocks = qw&#34; bedrock slate lava &#34;;
+@rocks = qw&quot; bedrock slate lava &quot;;
 
 foreach $rock (@rocks) {
-  print &#34;$rock\n&#34;;
+  print &quot;$rock\n&quot;;
 }
 
-print &#34;rock is still $rock\n&#34;; # &#39;rocks is still shale&#39;
+print &quot;rock is still $rock\n&quot;; # 'rocks is still shale'
 </code></pre><ul>
 <li>따라서, 반복문에서 사용하는 컨트롤 변수를 위에서 사용하고 있는지 걱정할 필요가 없다.</li>
 </ul>
@@ -173,7 +173,7 @@ print &#34;rock is still $rock\n&#34;; # &#39;rocks is still shale&#39;
 <pre tabindex="0"><code>#!/usr/bin/perl
 
 foreach (1..10) {
-  print &#34;I can count to $_ !\n&#34;;
+  print &quot;I can count to $_ !\n&quot;;
 }
 </code></pre><ul>
 <li>그리고 <code>$_</code> 변수에 값을 대입하고 나서, <code>print</code>를 하게 되면 이전에 대입한 값이 들어가게 된다.</li>
@@ -181,23 +181,24 @@ foreach (1..10) {
 <pre tabindex="0"><code>#!/usr/bin/perl
 
 foreach (1..10) {
-  print &#34;I can count to $_ !\n&#34;;
+  print &quot;I can count to $_ !\n&quot;;
 }
 
-$_ = &#34;Yabba dabba doo\n&#34;;
-print; # &#39;Yadda badda doo&#39;
+$_ = &quot;Yabba dabba doo\n&quot;;
+print; # 'Yadda badda doo'
 </code></pre><h3 id="reverse-연산자">reverse 연산자</h3>
 <hr>
 <pre tabindex="0"><code>#!/usr/bin/perl
 
 @fred = 6..10;
-print &#34;@fred\n&#34;;
+print &quot;@fred\n&quot;;
 @barney = reverse(@fred);
-print &#34;@fred\n&#34;;
+print &quot;@fred\n&quot;;
 @wilma = reverse 6..10;
-print &#34;@wilma\n&#34;;
+print &quot;@wilma\n&quot;;
 @fred = reverse @fred;
-print &#34;@fred\n&#34;;
+print &quot;@fred\n&quot;;
+
 </code></pre><ul>
 <li>
 <p><code>reverse</code> 연산자는 리스트의 값을 거꾸로 변환해서 반환한다.</p>
@@ -211,16 +212,17 @@ print &#34;@fred\n&#34;;
 <pre tabindex="0"><code>#!/usr/bin/perl
 
 @rocks = qw/ bedrock slate rubble granite /;
-print &#34;@rocks\n&#34;; # bedrock slate rubble granite
+print &quot;@rocks\n&quot;; # bedrock slate rubble granite
 
 @sorted = sort(@rocks);
-print &#34;@sorted\n&#34;; # bedrock granite rubble slate
+print &quot;@sorted\n&quot;; # bedrock granite rubble slate
 @back = reverse sort @rocks;
-print &#34;@back\n&#34;; # slate rubble granite bedrock
+print &quot;@back\n&quot;; # slate rubble granite bedrock
 @rocks = sort @rocks;
-print &#34;@rocks\n&#34;; # bedrock granite rubble slate
+print &quot;@rocks\n&quot;; # bedrock granite rubble slate
 @numbers = sort 97..102; # 100 101 102 97 98 99
-print &#34;@numbers\n&#34;;
+print &quot;@numbers\n&quot;;
+
 </code></pre><ul>
 <li>
 <p>이를 실행해보면 마지막 결과가 예상과 다르게 나오는데 그 이유는 문자열로 취급하기 때문이다.</p>
@@ -235,7 +237,7 @@ print &#34;@numbers\n&#34;;
 
 @rocks = qw/ bedrock slate rubble granite /;
 while (($index, $value) = each @rocks) {
-  print &#34;$index: $value\n&#34;;
+  print &quot;$index: $value\n&quot;;
 }
 
 # 결과
@@ -275,9 +277,9 @@ $number = 42 + @people; # 42 + 3 = 45
 <pre tabindex="0"><code>/usr/bin/perl
 
 @backwards = reverse qw/ yadda dabba doo/;
-print &#34;@backwards\n&#34;;
+print &quot;@backwards\n&quot;;
 $backwards = reverse qw/ yabba dabba doo /;
-print &#34;$backwards\n&#34;;
+print &quot;$backwards\n&quot;;
 
 == result ==
 doo dabba yadda
@@ -304,7 +306,7 @@ oodabbadabbay
 </li>
 </ul>
 <pre tabindex="0"><code>@fred = 6 * 7 # list (42)
-@barney = &#34;hello&#34; . &#39; &#39; . &#34;world&#34;;
+@barney = &quot;hello&quot; . ' ' . &quot;world&quot;;
 
 @wilma = undef # list (undef)
 @betty = (  ); # empty array
@@ -320,9 +322,9 @@ oodabbadabbay
 
 @rocks = qw( talc quartz jade obsidian );
 
-print &#34;How many rocks do you have?\n&#34;;
-print &#34;I have &#34;, @rocks, &#34; rocks!\n&#34;;
-print &#34;I hvae &#34;, scalar @rocks, &#34; rocks!\n&#34;;
+print &quot;How many rocks do you have?\n&quot;;
+print &quot;I have &quot;, @rocks, &quot; rocks!\n&quot;;
+print &quot;I hvae &quot;, scalar @rocks, &quot; rocks!\n&quot;;
 
 === result ===
 How many rocks do you have?

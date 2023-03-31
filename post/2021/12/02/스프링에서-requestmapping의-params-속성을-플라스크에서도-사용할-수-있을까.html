@@ -120,16 +120,16 @@
 <li>스프링에서는 아래와 같은 방법으로 URL을 컨트롤러에 맵핑 할 수 있다.</li>
 </ul>
 <pre tabindex="0"><code>// /user?actions=migration 일 경우 호출됨
-@RequestMapping(value=&#34;/user&#34;, params=&#34;actions=migration&#34;)
+@RequestMapping(value=&quot;/user&quot;, params=&quot;actions=migration&quot;)
 
 // not equal도 가능
-@RequestMapping(value=&#34;/user&#34;, params=&#34;actions!=migration&#34;)
+@RequestMapping(value=&quot;/user&quot;, params=&quot;actions!=migration&quot;)
 
 // 값에 상관없이 파라미터에 actions 이 있을 경우 호출됨
-@RequestMapping(value=&#34;/user&#34;, parmas=&#34;actions&#34;)
+@RequestMapping(value=&quot;/user&quot;, parmas=&quot;actions&quot;)
 
 // 파라미터에 actions 이 없어야 호출됨
-@RequestMapping(value=&#34;/user&#34;, params=&#34;!actions&#34;)
+@RequestMapping(value=&quot;/user&quot;, params=&quot;!actions&quot;)
 </code></pre><ul>
 <li>
 <p>이 경우 앞의 동작을 RESTFUL 하기 만들고, 뒤에 명확한 동작을 넣을 수 있어서, URI 설계하기가 훨씬 수월하다.</p>

@@ -189,22 +189,23 @@
 <ul>
 <li>우리가 사용하는 레디스 발행/구독 리스너 (또는 이벤트 소비자)는 플라스크와 아주 비슷하다. 이벤트 리스너는 외부 세계를 변환해서 이벤트로 만든다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span>r <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(<span style="color:#f92672">**</span>config<span style="color:#f92672">.</span>get_redis_host_and_port())
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
-</span></span><span style="display:flex;"><span>    orm<span style="color:#f92672">.</span>start_mappers()
-</span></span><span style="display:flex;"><span>    pubsub <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>pubsub(ignore_subscribe_messages<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>    pubsub<span style="color:#f92672">.</span>subscribe(<span style="color:#e6db74">&#39;change_batch_quantity&#39;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> pubsub<span style="color:#f92672">.</span>listen():
-</span></span><span style="display:flex;"><span>        handle_change_batch_quantity(m)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_change_batch_quantity</span>(m):
-</span></span><span style="display:flex;"><span>    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#39;handling </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span>, m)
-</span></span><span style="display:flex;"><span>    data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(m[<span style="color:#e6db74">&#39;data&#39;</span>]) <span style="color:#75715e"># 시스템 진입점에서 해야할 일은 JSON을 역직렬화 하고 역직렬화한 객체를 Command로 변환해서 서비스 계층으로 넘기는 일이다.</span>
-</span></span><span style="display:flex;"><span>    cmd <span style="color:#f92672">=</span> commands<span style="color:#f92672">.</span>ChnageBatchQuantity(ref<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#39;batchref&#39;</span>], qty<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#39;qty&#39;</span>])
-</span></span><span style="display:flex;"><span>    messagebus<span style="color:#f92672">.</span>handle(cmd, uow<span style="color:#f92672">=</span>unit_of_work<span style="color:#f92672">.</span>SqlAlchemyUnitOfWork())
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3">r <span style="color:#f92672">=</span> redis<span style="color:#f92672">.</span>Redis(<span style="color:#f92672">**</span>config<span style="color:#f92672">.</span>get_redis_host_and_port())
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
+    orm<span style="color:#f92672">.</span>start_mappers()
+    pubsub <span style="color:#f92672">=</span> r<span style="color:#f92672">.</span>pubsub(ignore_subscribe_messages<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+    pubsub<span style="color:#f92672">.</span>subscribe(<span style="color:#e6db74">&#39;change_batch_quantity&#39;</span>)
+
+    <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> pubsub<span style="color:#f92672">.</span>listen():
+        handle_change_batch_quantity(m)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_change_batch_quantity</span>(m):
+    logging<span style="color:#f92672">.</span>debug(<span style="color:#e6db74">&#39;handling </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span>, m)
+    data <span style="color:#f92672">=</span> json<span style="color:#f92672">.</span>loads(m[<span style="color:#e6db74">&#39;data&#39;</span>]) <span style="color:#75715e"># 시스템 진입점에서 해야할 일은 JSON을 역직렬화 하고 역직렬화한 객체를 Command로 변환해서 서비스 계층으로 넘기는 일이다.</span>
+    cmd <span style="color:#f92672">=</span> commands<span style="color:#f92672">.</span>ChnageBatchQuantity(ref<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#39;batchref&#39;</span>], qty<span style="color:#f92672">=</span>data[<span style="color:#e6db74">&#39;qty&#39;</span>])
+    messagebus<span style="color:#f92672">.</span>handle(cmd, uow<span style="color:#f92672">=</span>unit_of_work<span style="color:#f92672">.</span>SqlAlchemyUnitOfWork())
+
+</code></pre></div><ul>
 <li>
 <p>반대 방향의 변환 (도메인 이벤트를 공개 이벤트로 변환)을 처리하는 다운 스트림 어댑터를 만든다.</p>
 </li>
@@ -216,8 +217,9 @@
 
 
 def publish(channel, event: events.Event):  # 여기서는 하드 코딩한 채널을 사용하지만, 이벤트 클래스 / 이름과 적절한 채널을 맵핑하는 정보를 저장할 수도 있다. 이렇게 하면 메시지 유형 중 일부에 대해 다른 채널을 사용할 수도 있다.
-    logging.debug(&#39;publishing: channel=%s, event=%s&#39;, channel, event)
+    logging.debug('publishing: channel=%s, event=%s', channel, event)
     r.publish(channel, json.dumps(asdict(event)))
+
 </code></pre><h3 id="외부로-나가는-새-이벤트">외부로 나가는 새 이벤트</h3>
 <hr>
 <pre tabindex="0"><code>@dataclass

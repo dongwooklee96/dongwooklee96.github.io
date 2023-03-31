@@ -193,24 +193,25 @@ int pthread_create(pthread_t *thread, const pthread_attr_r *attr, void *(start_r
 void *init_thread(void *perm) {
   int i;
   for (i = 1; i &lt; 10; i++) {
-    printf(&#34;counter: %d\n&#34;, i);
+    printf(&quot;counter: %d\n&quot;, i);
     sleep(1);
   }
-  printf(&#34;thread is now terminated. \n&#34;);
+  printf(&quot;thread is now terminated. \n&quot;);
 }
 
 int main(int argc, char *argv[]) {
   pthread_t thread_id;
 
   if (pthread_create(&amp;thread_id, NULL, init_thread, NULL) != 0) {
-    fprintf(stderr, &#34;pthread creation error\n&#34;);
+    fprintf(stderr, &quot;pthread creation error\n&quot;);
     exit(0);
   }
 
   sleep(5);
-  printf(&#34;main function is terminated.\n&#34;);
+  printf(&quot;main function is terminated.\n&quot;);
   return 0;
 }
+
 </code></pre><p><img src="https://dl.dropbox.com/s/nil12xld856vtus/Screen%20Shot%202021-08-18%20at%201.34.53%20AM.png" alt=""></p>
 <ul>
 <li>
@@ -260,10 +261,10 @@ int main(int argc, char *argv[]) {
 void *init_thread(void *perm) {
   int i;
   for (i = 0; i &lt; 10; i++) {
-    printf(&#34;counter: %d\n&#34;, i);
+    printf(&quot;counter: %d\n&quot;, i);
     sleep(1);
   }
-  printf(&#34;thread is now terminated. \n&#34;);
+  printf(&quot;thread is now terminated. \n&quot;);
 }
 
 int main(int argc, char *argv[]) {
@@ -271,17 +272,18 @@ int main(int argc, char *argv[]) {
   int res;
 
   if (pthread_create(&amp;thread_id, NULL, init_thread, NULL) != 0) {
-    fprintf(stderr, &#34;pthread creation error\n&#34;);
+    fprintf(stderr, &quot;pthread creation error\n&quot;);
     exit(0);
   }
 
   if (pthread_join(thread_id, (void **)&amp;res) != 0) {
-    fprintf(stderr, &#34;pthread join error\n&#34;);
+    fprintf(stderr, &quot;pthread join error\n&quot;);
     exit(0);
   }
-  printf(&#34;main function is terminated\n&#34;);
+  printf(&quot;main function is terminated\n&quot;);
   return 0;
 }
+
 </code></pre><p><img src="https://dl.dropbox.com/s/vt5fr1n58vhwetp/Screen%20Shot%202021-08-18%20at%201.49.44%20AM.png" alt=""></p>
 <ul>
 <li>실행결과 스레드가 종료되기 전까지는 메인 함수가 종료되지 않는 것을 확인할 수 있다.</li>
@@ -306,7 +308,7 @@ int main(int argc, char *argv[]) {
 #include &lt;fcntl.h&gt;
 #include &lt;unistd.h&gt;
 
-#define SEM_NAME &#34;/test&#34;
+#define SEM_NAME &quot;/test&quot;
 
 void *thread_a_main(void *arg);
 void *thread_b_main(void *arg);
@@ -320,27 +322,27 @@ int main(int argc, char *argv[]) {
 
   sem = sem_open(SEM_NAME, O_RDWR | O_CREAT, 0777, 1);
   if (sem == SEM_FAILED) {
-    fprintf(stderr, &#34;sem open error \n&#34;);
+    fprintf(stderr, &quot;sem open error \n&quot;);
     exit(1);
   }
 
   if (pthread_create(&amp;thread_id_1, NULL, thread_a_main, NULL) != 0) {
-    fprintf(stderr, &#34;pthread 1 creation error\n&#34;);
+    fprintf(stderr, &quot;pthread 1 creation error\n&quot;);
     exit(0);
   }
 
   if (pthread_create(&amp;thread_id_2, NULL, thread_b_main, NULL) != 0) {
-    fprintf(stderr, &#34;pthread 2 creation error\n&#34;);
+    fprintf(stderr, &quot;pthread 2 creation error\n&quot;);
     exit(0);
   }
 
   if (pthread_join(thread_id_1, (void **) &amp;res) != 0) {
-    fprintf(stderr, &#34;pthread 1 join error\n&#34;);
+    fprintf(stderr, &quot;pthread 1 join error\n&quot;);
     exit(0);
   }
 
   if (pthread_join(thread_id_2, (void **) &amp;res) != 0) {
-    fprintf(stderr, &#34;pthread 2 join error\n&#34;);
+    fprintf(stderr, &quot;pthread 2 join error\n&quot;);
     exit(0);
   }
 
@@ -354,7 +356,7 @@ void *thread_a_main(void *arg) {
   for (i = 0; i &lt; 60000; i++) {
     sem_wait(sem);
     counter += 2;
-    printf(&#34;thread a increases the counter by 2: counter - %d\n&#34;, counter);
+    printf(&quot;thread a increases the counter by 2: counter - %d\n&quot;, counter);
     sem_post(sem);
   }
   return NULL;
@@ -365,11 +367,12 @@ void *thread_b_main(void *arg) {
   for (i = 0; i &lt; 60000; i++) {
     sem_wait(sem);
     counter += 3;
-    printf(&#34;thread b increases the counter by 3: counter - %d \n&#34;, counter);
+    printf(&quot;thread b increases the counter by 3: counter - %d \n&quot;, counter);
     sem_post(sem);
   }
   return NULL;
 }
+
 </code></pre><p><img src="https://dl.dropbox.com/s/621yp4ga0p58a1l/2021-08-18%2002.10.10.gif" alt=""></p>
 <ul>
 <li>실행 결과 A, B 스레드가 각각 카운터 변수에 접근해서 값을 증가시키는 것을 확인할 수 있다.</li>
@@ -460,7 +463,7 @@ void *thread_a_main(void *arg) {
   for (i = 0; i &lt; 10000; i++) {
     pthread_mutex_lock(&amp;mutex);
     counter += 2;
-    printf(&#34;thread a increases the counter by 2: counter - %d\n&#34;, counter);
+    printf(&quot;thread a increases the counter by 2: counter - %d\n&quot;, counter);
     pthread_mutex_unlock(&amp;mutex);
   }
   return NULL;
@@ -471,11 +474,12 @@ void *thread_b_main(void *arg) {
   for (i = 0; i &lt; 10000; i++) {
     pthread_mutex_lock(&amp;mutex);
     counter += 3;
-    printf(&#34;thread b increases the counter by 3: counter - %d\n&#34;, counter);
+    printf(&quot;thread b increases the counter by 3: counter - %d\n&quot;, counter);
     pthread_mutex_unlock(&amp;mutex);
   }
   return NULL;
 }
+
 </code></pre><p><img src="https://dl.dropbox.com/s/41pxocbi6r6wz7a/2021-08-18%2002.34.13.gif" alt=""></p>
 <h3 id="참고-문헌">참고 문헌</h3>
 <hr>

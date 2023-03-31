@@ -6,7 +6,135 @@
     <description>Recent content in 세미나 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 08 Mar 2023 17:28:35 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%84%B8%EB%AF%B8%EB%82%98/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 31 Mar 2023 10:28:35 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EC%84%B8%EB%AF%B8%EB%82%98/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DNS 개념 및 BIND 기반 DNS 서버 구축 - 세미나 후기</title>
+      <link>https://dongwooklee96.github.io/post/2023/03/31/dns-%EA%B0%9C%EB%85%90-%EB%B0%8F-bind-%EA%B8%B0%EB%B0%98-dns-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95-%EC%84%B8%EB%AF%B8%EB%82%98-%ED%9B%84%EA%B8%B0.html</link>
+      <pubDate>Fri, 31 Mar 2023 10:28:35 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2023/03/31/dns-%EA%B0%9C%EB%85%90-%EB%B0%8F-bind-%EA%B8%B0%EB%B0%98-dns-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%B6%95-%EC%84%B8%EB%AF%B8%EB%82%98-%ED%9B%84%EA%B8%B0.html</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/buyfi90op86r8q2/Screenshot%202023-03-31%20at%2014.00.07.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dns란-무엇인가&#34;&gt;DNS란 무엇인가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최초 개발 시 네트워크상에서 외우기 어렵고 복잡한 IP 주소를 호스트 이름에 맵핑 시키는 방법론이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;인터넷에 연결된 호스트가 늘어남에 따라서 호스트 주소를 기억하기 힘들다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;인터넷 연결 호스트의 증가로, HOSTS.TXT 파일의 내용을 갱신/관리하기 곤란하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DNS 도입으로 도메인 네임을 사용한 호스트 접속, 전자메일 송수신을 위한 전자메일 라우팅 체계가 DNS를 기반으로 확립&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dns의-중요성&#34;&gt;DNS의 중요성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;우리가 일상에서 사용하는 대부분의 인터넷 서비스가 영향을 받는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;장애가 아닌 설정 오류도 이용자의 서비스 접속시 영향을 줄 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dns-특징&#34;&gt;DNS 특징&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;트리 구조의 도메인 네임 체계&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;생성된 도메인 네임은 언제나 유일하도록 네임 체계를 구성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;분산 구조형 데이터베이스&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터베이스 시스템 (DNS 네임서버)의 분산 구성&lt;/li&gt;
+&lt;li&gt;데이터의 영역별 구분 및 분산관리&lt;/li&gt;
+&lt;li&gt;HOSTS.TXT는 중앙의 NIC에서 일관 관리 -&amp;gt; 호스트 증가에 따른 갱신 관리 문제가 발생한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;상위로부터 하위 도메인은 위임 받는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DNS 레코드를 이용한 다양한 정보 제공&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;도메인 네임에 설정하는 데이터 유형은 리소스 레코드로 정의한다.&lt;/li&gt;
+&lt;li&gt;레코드 타입의 예시 i.e. A(IPv4), AAAA(IPv4), MX(메일서버), NS(네임서버)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;도메인-네임의-구성&#34;&gt;도메인 네임의 구성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;도메인 네임은 레이블의 조합으로 구성
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;kisa.or.kr&lt;/code&gt;, &lt;code&gt;kisa&lt;/code&gt;, &lt;code&gt;or&lt;/code&gt;, &lt;code&gt;kr&lt;/code&gt; 의 레이블로 구성된다.&lt;/li&gt;
+&lt;li&gt;&amp;quot;&amp;quot; 레이블은 특수한 레이블로써 루트 도메인을 의미한다.&lt;/li&gt;
+&lt;li&gt;레이블은 최대 63 바이트를 초과할 수 없다.&lt;/li&gt;
+&lt;li&gt;도메인 네임의 인터넷에 유일하게 존재해야 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;dns-서버-구성&#34;&gt;DNS 서버 구성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;권한 DNS (Authoritative 네임 서버)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;도메인 존 데이터를 적재하여 응답하는 네임서버를 가지는 서버&lt;/li&gt;
+&lt;li&gt;마스터와 슬레이브로 구성된다. (이중화 / 다중화 구현)
+일부 DNS 서버 시스템의 장애 시에도 도메인 존 데이터는 언제나 가용 상태 유지&lt;/li&gt;
+&lt;li&gt;마스터와 슬레이브 서버는 관리자 입장에서 구분하는 것이다.&lt;/li&gt;
+&lt;li&gt;BIND 프로그램에서는 설정 타입을 마스터로 구성하면 마스터, 슬레이브로 구성하면 슬레이브로 사용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;캐시 DNS 서버 (리커시브 네임 서버)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;타 호스트를 대신해서 인터넷 전체에서 질의된 DNS 데이터를 조회, 응답하는 네임서버&lt;/li&gt;
+&lt;li&gt;네임서버 기능부와 리졸버 기능부를 조합하여 구현된 서버 프로세스 S/W&lt;/li&gt;
+&lt;li&gt;캐시 관리, 질의 응답 절차를 통해서 파악된 데이터의 캐싱&lt;/li&gt;
+&lt;li&gt;리졸버 기능을 위해 루트 네임서버 IP 주소 정보의 설정을 필요로 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;인터넷-서비스에서-dns-동작&#34;&gt;인터넷 서비스에서 DNS 동작&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/0o3734ugz5rofdu/Screenshot%202023-03-31%20at%2014.26.35.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dns-관리는-기본적으로-어떻게-이루어지는가&#34;&gt;DNS 관리는 기본적으로 어떻게 이루어지는가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/uqapx474femd5y1/Screenshot%202023-03-31%20at%2014.31.34.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;도메인을 등록할 때 네임서버를 두대를 등록하고 마스터를 등록하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;마스터는 숨겨져 있고, 슬레이브만 외부로 노출되어있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;네임서버-구성-설정-1-단계--도메인의-위임설정-등록&#34;&gt;네임서버 구성 설정 1 단계- 도메인의 위임설정 등록&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/mlidygq7hhmy7au/Screenshot%202023-03-31%20at%2014.35.15.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 주소를 네임 서버에 등록한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;마스터 네임서버에만 존 반영하면, 슬레이브에는 자동으로 반영된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://event-us.kr/Ut2KSHw11cCG/event/57853&#34;&gt;DNS 개념 및 BIND 기반 DNS 서버 구축&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>구름 세미나 - 기술 부채를 바라보는 다른 시각 - 후기</title>
       <link>https://dongwooklee96.github.io/post/2023/03/08/%EA%B5%AC%EB%A6%84-%EC%84%B8%EB%AF%B8%EB%82%98-%EA%B8%B0%EC%88%A0-%EB%B6%80%EC%B1%84%EB%A5%BC-%EB%B0%94%EB%9D%BC%EB%B3%B4%EB%8A%94-%EB%8B%A4%EB%A5%B8-%EC%8B%9C%EA%B0%81-%ED%9B%84%EA%B8%B0.html</link>

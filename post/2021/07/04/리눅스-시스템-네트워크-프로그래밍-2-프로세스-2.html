@@ -158,18 +158,18 @@ int main() {
 	pid_t pid_child;
 	char buf_err[64];
 	posix_spawn_file_actions_t posix_faction; /* file action struct */
-	char *argv_child[] = { &#34;forkexec_child&#34;, NULL };
-	printf(&#34;Parent[%d]: Start\n&#34;, getpid());
+	char *argv_child[] = { &quot;forkexec_child&quot;, NULL };
+	printf(&quot;Parent[%d]: Start\n&quot;, getpid());
 
 	if((ret_err = posix_spawn_file_actions_init(&amp;posix_faction)) != 0) { /* init */
 		strerror_r(ret_err, buf_err, sizeof(buf_err));
-		fprintf(stderr, &#34;Fail: file_actions_init :%s\n&#34;, buf_err);
+		fprintf(stderr, &quot;Fail: file_actions_init :%s\n&quot;, buf_err);
 		exit(EXIT_FAILURE);
 	}
 	if ((ret_err = posix_spawn_file_actions_addopen(&amp;posix_faction, 3,
-					&#34;pspawn.log&#34;, O_WRONLY | O_CREAT | O_APPEND, 0664 )) != 0) {
+					&quot;pspawn.log&quot;, O_WRONLY | O_CREAT | O_APPEND, 0664 )) != 0) {
 		strerror_r(ret_err, buf_err, sizeof(buf_err));
-		fprintf(stderr, &#34;Fail: file_actions_addopen: %s\n&#34;, buf_err);
+		fprintf(stderr, &quot;Fail: file_actions_addopen: %s\n&quot;, buf_err);
 		exit(EXIT_FAILURE);
 	}
 	ret_err = posix_spawn(&amp;pid_child,
@@ -181,12 +181,12 @@ int main() {
 
 	if ((ret_err = posix_spawn_file_actions_destroy(&amp;posix_faction)) != 0) {
 		strerror_r(ret_err, buf_err, sizeof(buf_err));
-		fprintf(stderr, &#34;Fail: file_actions_destory: %s\n&#34;, buf_err);
+		fprintf(stderr, &quot;Fail: file_actions_destory: %s\n&quot;, buf_err);
 		exit(EXIT_FAILURE);
 	}
-	printf(&#34;Parent[%d]: Wait for child(%d)\n&#34;, getpid(), (int)pid_child);
+	printf(&quot;Parent[%d]: Wait for child(%d)\n&quot;, getpid(), (int)pid_child);
 	(void)wait(NULL);
-	printf(&#34;Parent[%d]: Exit\n&#34;, getpid());
+	printf(&quot;Parent[%d]: Exit\n&quot;, getpid());
 	return 0;
 }
 </code></pre><ul>

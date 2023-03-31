@@ -159,15 +159,15 @@ cd multimodule
 <pre tabindex="0"><code>int max(int a, int b);
 </code></pre><p><strong>main.c</strong></p>
 <pre tabindex="0"><code>#include &lt;stdio.h&gt;
-#include &#34;util.h&#34;
+#include &quot;util.h&quot;
 
 int main(int argc, char* argv[]) {
     int a, b, max_num;
 
-    printf(&#34;please input two numbers: &#34;);
-    scanf(&#34;%d %d&#34;, &amp;a, &amp;b);
+    printf(&quot;please input two numbers: &quot;);
+    scanf(&quot;%d %d&quot;, &amp;a, &amp;b);
     max_num = max(a, b);
-    printf(&#34;max number is %d\n&#34;, max_num);
+    printf(&quot;max number is %d\n&quot;, max_num);
     return 0;
 }
 </code></pre><h4 id="make-파일-작성">MAKE 파일 작성</h4>

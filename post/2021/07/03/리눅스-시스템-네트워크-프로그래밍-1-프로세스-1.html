@@ -205,7 +205,7 @@ int main() {
 
   for (i = 0; i &lt; 3; i++) {
     ret = fork();
-    printf(&#34;[%d] PID(%d) PPID(%d)\n&#34;, i, getpid(), getppid());
+    printf(&quot;[%d] PID(%d) PPID(%d)\n&quot;, i, getpid(), getppid());
 #ifndef OMIT_SWITCH
     switch (ret) {
       case 0:
@@ -255,14 +255,14 @@ int execve(const char *path, char *const argv[], char *const envp[]);
 </li>
 </ul>
 <p><strong>execl 계열을 사용한 예</strong></p>
-<pre tabindex="0"><code>execl(&#34;/bin/ls&#34;, &#34;ls&#34;, &#34;-al&#34;, NULL);
-execlp(&#34;ls&#34;, &#34;ls&#34;, &#34;-al&#34;, NULL);
+<pre tabindex="0"><code>execl(&quot;/bin/ls&quot;, &quot;ls&quot;, &quot;-al&quot;, NULL);
+execlp(&quot;ls&quot;, &quot;ls&quot;, &quot;-al&quot;, NULL);
 </code></pre><p><strong>execv 계열을 사용한 예</strong></p>
-<pre tabindex="0"><code>char *argv_exec[] = {&#34;ls&#34;, &#34;-al&#34;, NULL};
-execv(&#34;/bin/ls&#34;, argv_exec);
+<pre tabindex="0"><code>char *argv_exec[] = {&quot;ls&quot;, &quot;-al&quot;, NULL};
+execv(&quot;/bin/ls&quot;, argv_exec);
 
-char *argv_exec[] = {&#34;ls&#34;, &#34;-al&#34;, NULL};
-execvp(&#34;ls&#34;, argv_exec);
+char *argv_exec[] = {&quot;ls&quot;, &quot;-al&quot;, NULL};
+execvp(&quot;ls&quot;, argv_exec);
 </code></pre><ul>
 <li></li>
 <li>
@@ -273,10 +273,10 @@ execvp(&#34;ls&#34;, argv_exec);
 #include &lt;unistd.h&gt;
 
 int main() {
-  if (execl(&#34;/bin/ls&#34;, &#34;ls&#34;, &#34;-al&#34;, NULL) == -1) {
-    perror(&#34;excel&#34;);
+  if (execl(&quot;/bin/ls&quot;, &quot;ls&quot;, &quot;-al&quot;, NULL) == -1) {
+    perror(&quot;excel&quot;);
   }
-  printf(&#34;+ arfter execl\n&#34;);
+  printf(&quot;+ arfter execl\n&quot;);
   return 0;
 }
 </code></pre><ul>
@@ -303,39 +303,39 @@ int main() {
 
 int main() {
   pid_t pid_child;
-  printf(&#34;Parent[%d]: Start\n&#34;, getpid());
-  int fd = open(&#34;forkexec.log&#34;, O_WRONLY | O_CREAT | O_APPEND, 0644);
+  printf(&quot;Parent[%d]: Start\n&quot;, getpid());
+  int fd = open(&quot;forkexec.log&quot;, O_WRONLY | O_CREAT | O_APPEND, 0644);
 
   if (fd == -1) {
-    perror(&#34;FAIL: open&#34;);
+    perror(&quot;FAIL: open&quot;);
     exit(EXIT_FAILURE);
   }
 
-  dprintf(fd, &#34;Parent[%d]: Open log file(fd=%d)\n&#34;, getpid(), fd);
+  dprintf(fd, &quot;Parent[%d]: Open log file(fd=%d)\n&quot;, getpid(), fd);
 
 #ifdef APPLY_FD_CLOEXEC
   int ret_fcntl;
   if ((ret_fcntl = fcntl(fd, F_SETFD, FD_CLOEXEC)) == -1) {
-    perror(&#34;FAIL: fcntl(F_SETFD, FD_CLOEXEC)&#34;);
+    perror(&quot;FAIL: fcntl(F_SETFD, FD_CLOEXEC)&quot;);
     exit(EXIT_FAILURE);
   }
 #endif
 
   /* fork-exec code */
-  char *argv_exec[] = {&#34;fork_exec_child&#34;, (char*) NULL};
+  char *argv_exec[] = {&quot;fork_exec_child&quot;, (char*) NULL};
 
   switch ((pid_child = fork())) {
     case 0: /* child process */
       execv(argv_exec[0], argv_exec);
       break;
     case -1: /* error */
-      perror(&#34;FAIL: FORK&#34;);
+      perror(&quot;FAIL: FORK&quot;);
       break;
     default: /* parent process */
       wait(NULL);
       break;
   }
-  printf(&#34;Parent[%d]: Exit\n&#34;, getpid());
+  printf(&quot;Parent[%d]: Exit\n&quot;, getpid());
   return 0;
 }
 </code></pre><p><strong>forkexec_child.c</strong></p>
@@ -345,10 +345,10 @@ int main() {
 #include &lt;stdlib.h&gt;
 
 int main() {
-  dprintf(STDOUT_FILENO, &#34;Child[%d]: Start\n&#34;, getpid());
-  dprintf(3, &#34;Child[%d]: fd(3): Test fd.\n&#34;, getpid());
+  dprintf(STDOUT_FILENO, &quot;Child[%d]: Start\n&quot;, getpid());
+  dprintf(3, &quot;Child[%d]: fd(3): Test fd.\n&quot;, getpid());
   close(3);
-  dprintf(STDOUT_FILENO, &#34;Child[%d]: Exit\n&#34;, getpid());
+  dprintf(STDOUT_FILENO, &quot;Child[%d]: Exit\n&quot;, getpid());
   return 0;
 }
 </code></pre><ul>

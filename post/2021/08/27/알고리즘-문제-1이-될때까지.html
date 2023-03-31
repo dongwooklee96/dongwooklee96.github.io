@@ -153,11 +153,11 @@
 <h3 id="코드">코드</h3>
 <hr>
 <pre tabindex="0"><code>def solution(n: int, k: int) -&gt; int:
-    &#34;&#34;&#34;
+    &quot;&quot;&quot;
     :param n: 특정한 수
     :param k: 나눌 수
     :return: 수행한 최소 횟수
-    &#34;&#34;&#34;
+    &quot;&quot;&quot;
     tot = 0
     while not n == 1:
         if n % k == 0:
@@ -198,9 +198,10 @@ def solution3(n: int, k: int) -&gt; int:
     return cnt
 
 
-if __name__ == &#34;__main__&#34;:
+if __name__ == &quot;__main__&quot;:
     n, k = map(int, input().split())
     print(solution(n, k))
+
 </code></pre><h3 id="더-나은-방법">더 나은 방법</h3>
 <hr>
 <ul>

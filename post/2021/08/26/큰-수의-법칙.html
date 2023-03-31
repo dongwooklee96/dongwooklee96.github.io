@@ -162,75 +162,76 @@
 </ol>
 <h3 id="코드">코드</h3>
 <hr>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(n: int, m: int, k: int, lists: List[int]) <span style="color:#f92672">-&gt;</span> int:
-</span></span><span style="display:flex;"><span>    lists<span style="color:#f92672">.</span>sort(reverse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>    first, second <span style="color:#f92672">=</span> lists[<span style="color:#ae81ff">0</span>], lists[<span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span>    tot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(m):
-</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> cnt <span style="color:#f92672">==</span> k:
-</span></span><span style="display:flex;"><span>            tot <span style="color:#f92672">+=</span> second
-</span></span><span style="display:flex;"><span>            cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>            tot <span style="color:#f92672">+=</span> first
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tot
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution1</span>(n: int, m: int, k: int, arrays: List[int]) <span style="color:#f92672">-&gt;</span> int:
-</span></span><span style="display:flex;"><span>    arrays<span style="color:#f92672">.</span>sort(reverse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-</span></span><span style="display:flex;"><span>    first, second <span style="color:#f92672">=</span> arrays[<span style="color:#ae81ff">0</span>], arrays[<span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span>    tot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, m <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> (k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-</span></span><span style="display:flex;"><span>            tot <span style="color:#f92672">+=</span> second
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>            tot <span style="color:#f92672">+=</span> first
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> tot
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution2</span>(n: int, m: int, k: int, arrays: List[int]) <span style="color:#f92672">-&gt;</span> int:
-</span></span><span style="display:flex;"><span>    arrays<span style="color:#f92672">.</span>sort()
-</span></span><span style="display:flex;"><span>    first <span style="color:#f92672">=</span> arrays[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span>    second <span style="color:#f92672">=</span> arrays[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(k):
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>
-</span></span><span style="display:flex;"><span>            result <span style="color:#f92672">+=</span> first
-</span></span><span style="display:flex;"><span>            m <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">break</span>
-</span></span><span style="display:flex;"><span>        result <span style="color:#f92672">+=</span> second
-</span></span><span style="display:flex;"><span>        m <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> result
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution3</span>(n: int, m: int, k: int, arrays: List[int]) <span style="color:#f92672">-&gt;</span> int:
-</span></span><span style="display:flex;"><span>    arrays<span style="color:#f92672">.</span>sort()
-</span></span><span style="display:flex;"><span>    first <span style="color:#f92672">=</span> arrays[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
-</span></span><span style="display:flex;"><span>    second <span style="color:#f92672">=</span> arrays[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>]
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    count <span style="color:#f92672">=</span> int(m <span style="color:#f92672">/</span> (k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">*</span> k
-</span></span><span style="display:flex;"><span>    count <span style="color:#f92672">+=</span> m <span style="color:#f92672">%</span> (k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">+=</span> (count) <span style="color:#f92672">*</span> first
-</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">+=</span> (m <span style="color:#f92672">-</span> count) <span style="color:#f92672">*</span> second
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
-</span></span><span style="display:flex;"><span>    n, m, k <span style="color:#f92672">=</span> map(int, input()<span style="color:#f92672">.</span>split())
-</span></span><span style="display:flex;"><span>    lists <span style="color:#f92672">=</span> list(map(int, input()<span style="color:#f92672">.</span>split()))
-</span></span><span style="display:flex;"><span>    print(solution1(n, m, k, lists))
-</span></span></code></pre></div><h3 id="참고-문헌">참고 문헌</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> List
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution</span>(n: int, m: int, k: int, lists: List[int]) <span style="color:#f92672">-&gt;</span> int:
+    lists<span style="color:#f92672">.</span>sort(reverse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+    first, second <span style="color:#f92672">=</span> lists[<span style="color:#ae81ff">0</span>], lists[<span style="color:#ae81ff">1</span>]
+    tot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(m):
+        cnt <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>
+
+        <span style="color:#66d9ef">if</span> cnt <span style="color:#f92672">==</span> k:
+            tot <span style="color:#f92672">+=</span> second
+            cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+        <span style="color:#66d9ef">else</span>:
+            tot <span style="color:#f92672">+=</span> first
+    <span style="color:#66d9ef">return</span> tot
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution1</span>(n: int, m: int, k: int, arrays: List[int]) <span style="color:#f92672">-&gt;</span> int:
+    arrays<span style="color:#f92672">.</span>sort(reverse<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+    first, second <span style="color:#f92672">=</span> arrays[<span style="color:#ae81ff">0</span>], arrays[<span style="color:#ae81ff">1</span>]
+    tot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, m <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+        <span style="color:#66d9ef">if</span> i <span style="color:#f92672">%</span> (k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            tot <span style="color:#f92672">+=</span> second
+        <span style="color:#66d9ef">else</span>:
+            tot <span style="color:#f92672">+=</span> first
+    <span style="color:#66d9ef">return</span> tot
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution2</span>(n: int, m: int, k: int, arrays: List[int]) <span style="color:#f92672">-&gt;</span> int:
+    arrays<span style="color:#f92672">.</span>sort()
+    first <span style="color:#f92672">=</span> arrays[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
+    second <span style="color:#f92672">=</span> arrays[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>]
+
+    result <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+
+    <span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(k):
+            <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+                <span style="color:#66d9ef">break</span>
+            result <span style="color:#f92672">+=</span> first
+            m <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+        <span style="color:#66d9ef">if</span> m <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+            <span style="color:#66d9ef">break</span>
+        result <span style="color:#f92672">+=</span> second
+        m <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>
+    <span style="color:#66d9ef">return</span> result
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">solution3</span>(n: int, m: int, k: int, arrays: List[int]) <span style="color:#f92672">-&gt;</span> int:
+    arrays<span style="color:#f92672">.</span>sort()
+    first <span style="color:#f92672">=</span> arrays[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]
+    second <span style="color:#f92672">=</span> arrays[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>]
+
+    count <span style="color:#f92672">=</span> int(m <span style="color:#f92672">/</span> (k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">*</span> k
+    count <span style="color:#f92672">+=</span> m <span style="color:#f92672">%</span> (k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)
+
+    result <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+    result <span style="color:#f92672">+=</span> (count) <span style="color:#f92672">*</span> first
+    result <span style="color:#f92672">+=</span> (m <span style="color:#f92672">-</span> count) <span style="color:#f92672">*</span> second
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+    n, m, k <span style="color:#f92672">=</span> map(int, input()<span style="color:#f92672">.</span>split())
+    lists <span style="color:#f92672">=</span> list(map(int, input()<span style="color:#f92672">.</span>split()))
+    print(solution1(n, m, k, lists))
+
+</code></pre></div><h3 id="참고-문헌">참고 문헌</h3>
 <hr>
 <ul>
 <li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118">이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어</a></li>

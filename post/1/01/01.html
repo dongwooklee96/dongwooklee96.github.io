@@ -152,17 +152,17 @@
 <ul>
 <li>해시 엘리먼트는 엘리먼트와 엘리먼트 키로 구성된다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * HASHELEMENT is the private part of a hashtable entry.  The caller&#39;s data
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * follows the HASHELEMENT structure (on a MAXALIGN&#39;d boundary).  The hash key
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * is expected to be at the start of the caller&#39;s hash entry data structure.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> HASHELEMENT
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> HASHELEMENT <span style="color:#f92672">*</span>link;   <span style="color:#75715e">/* link to next entry in same bucket */</span>
-</span></span><span style="display:flex;"><span>    uint32      hashvalue;      <span style="color:#75715e">/* hash function result for this entry */</span>
-</span></span><span style="display:flex;"><span>} HASHELEMENT;
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * HASHELEMENT is the private part of a hashtable entry.  The caller&#39;s data
+</span><span style="color:#75715e"> * follows the HASHELEMENT structure (on a MAXALIGN&#39;d boundary).  The hash key
+</span><span style="color:#75715e"> * is expected to be at the start of the caller&#39;s hash entry data structure.
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> HASHELEMENT
+{
+    <span style="color:#66d9ef">struct</span> HASHELEMENT <span style="color:#f92672">*</span>link;   <span style="color:#75715e">/* link to next entry in same bucket */</span>
+    uint32      hashvalue;      <span style="color:#75715e">/* hash function result for this entry */</span>
+} HASHELEMENT;
+</code></pre></div><ul>
 <li>엘리먼트는 다음 엘리먼트를 가리키는 엘리먼트 포인터와 해시 값으로 구성된다.</li>
 </ul>
 <h4 id="엘리먼트-key-구성-요소">엘리먼트 <code>Key</code> 구성 요소</h4>
@@ -173,53 +173,53 @@
 - `BufferTag` 구조체는 `spcOid`, `dbOid`, `RelNumber`, `forkNum`, `blockNum` 으로 구성된다.
 - `RelFileNode` 구조체는 테이블 스페이스 번호, 데이터베이스 번호, 오브젝트 번호로 구성된다.
 </code></pre><h4 id="buffer-tag-란">Buffer Tag 란?</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/* entry for buffer lookup hashtable */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span>
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    BufferTag   key;            <span style="color:#75715e">/* Tag of a disk page */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>         id;             <span style="color:#75715e">/* Associated buffer ID */</span>
-</span></span><span style="display:flex;"><span>} BufferLookupEnt;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Buffer tag identifies which disk block the buffer contains.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Note: the BufferTag data must be sufficient to determine where to write the
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * block, without reference to pg_class or pg_tablespace entries.  It&#39;s
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * possible that the backend flushing the buffer doesn&#39;t even believe the
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * relation is visible yet (its xact may have started before the xact that
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * created the rel).  The storage manager must be able to cope anyway.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Note: if there&#39;s any pad bytes in the struct, InitBufferTag will have
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * to be fixed to zero them, since this struct is used as a hash key.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> buftag
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    Oid         spcOid;         <span style="color:#75715e">/* tablespace oid */</span>
-</span></span><span style="display:flex;"><span>    Oid         dbOid;          <span style="color:#75715e">/* database oid */</span>
-</span></span><span style="display:flex;"><span>    RelFileNumber relNumber;    <span style="color:#75715e">/* relation file number */</span>
-</span></span><span style="display:flex;"><span>    ForkNumber  forkNum;        <span style="color:#75715e">/* fork number */</span>
-</span></span><span style="display:flex;"><span>    BlockNumber blockNum;       <span style="color:#75715e">/* blknum relative to begin of reln */</span>
-</span></span><span style="display:flex;"><span>} BufferTag;
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/* entry for buffer lookup hashtable */</span>
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span>
+{
+    BufferTag   key;            <span style="color:#75715e">/* Tag of a disk page */</span>
+    <span style="color:#66d9ef">int</span>         id;             <span style="color:#75715e">/* Associated buffer ID */</span>
+} BufferLookupEnt;
+
+<span style="color:#75715e">/*
+</span><span style="color:#75715e"> * Buffer tag identifies which disk block the buffer contains.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Note: the BufferTag data must be sufficient to determine where to write the
+</span><span style="color:#75715e"> * block, without reference to pg_class or pg_tablespace entries.  It&#39;s
+</span><span style="color:#75715e"> * possible that the backend flushing the buffer doesn&#39;t even believe the
+</span><span style="color:#75715e"> * relation is visible yet (its xact may have started before the xact that
+</span><span style="color:#75715e"> * created the rel).  The storage manager must be able to cope anyway.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Note: if there&#39;s any pad bytes in the struct, InitBufferTag will have
+</span><span style="color:#75715e"> * to be fixed to zero them, since this struct is used as a hash key.
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> buftag
+{
+    Oid         spcOid;         <span style="color:#75715e">/* tablespace oid */</span>
+    Oid         dbOid;          <span style="color:#75715e">/* database oid */</span>
+    RelFileNumber relNumber;    <span style="color:#75715e">/* relation file number */</span>
+    ForkNumber  forkNum;        <span style="color:#75715e">/* fork number */</span>
+    BlockNumber blockNum;       <span style="color:#75715e">/* blknum relative to begin of reln */</span>
+} BufferTag;
+</code></pre></div><ul>
 <li><code>Buffer Tag</code> 는 블록의 주민 등록번호와 같은 개념이다. 즉, 클러스터 데이터베이스 내에서 각 블록을 유일하게 식별할 수 있는 데이터로 구성된다.</li>
 <li><code>Buffer Tag</code> 는 <code>pg_class</code> 또는  <code>pg_tablespace</code> 항목을 참조하지 않고 블록을 쓸 위치를 결정하기 충분해야합니다.</li>
 <li>테이블 스페이스, 데이터베이스 와 비롯한 여러가지 정보를 가지고 있는데 그래야만 클러스터 데이터베이스 내에서 유일한 오브젝트를 획득할 수 있기 때문이다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> ForkNumber
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    InvalidForkNumber <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
-</span></span><span style="display:flex;"><span>    MAIN_FORKNUM <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
-</span></span><span style="display:flex;"><span>    FSM_FORKNUM,
-</span></span><span style="display:flex;"><span>    VISIBILITYMAP_FORKNUM,
-</span></span><span style="display:flex;"><span>    INIT_FORKNUM
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * NOTE: if you add a new fork, change MAX_FORKNUM and possibly
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * FORKNAMECHARS below, and update the forkNames array in
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * src/common/relpath.c
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
-</span></span><span style="display:flex;"><span>} ForkNumber;
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">enum</span> ForkNumber
+{
+    InvalidForkNumber <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,
+    MAIN_FORKNUM <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>,
+    FSM_FORKNUM,
+    VISIBILITYMAP_FORKNUM,
+    INIT_FORKNUM
+
+    <span style="color:#75715e">/*
+</span><span style="color:#75715e">     * NOTE: if you add a new fork, change MAX_FORKNUM and possibly
+</span><span style="color:#75715e">     * FORKNAMECHARS below, and update the forkNames array in
+</span><span style="color:#75715e">     * src/common/relpath.c
+</span><span style="color:#75715e">     */</span>
+} ForkNumber;
+</code></pre></div><ul>
 <li><code>ForkNumber</code> 는 오브젝트 유형을 의미한다. 0은 테이블 또는 인덱스, 1은  <code>FSM</code>  , 2는 <code>VM</code> 이다.</li>
 </ul>
 <h3 id="3-버퍼-디스크립터">3. 버퍼 디스크립터</h3>
@@ -227,19 +227,19 @@
 <ul>
 <li>버퍼 디스크립터는 버퍼 메타데이터를 관리하기 위한 구조체이다.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> BufferDesc
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    BufferTag   tag;            <span style="color:#75715e">/* ID of page contained in buffer */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>         buf_id;         <span style="color:#75715e">/* buffer&#39;s index number (from 0) */</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/* state of the tag, containing flags, refcount and usagecount */</span>
-</span></span><span style="display:flex;"><span>    pg_atomic_uint32 state;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>         wait_backend_pgprocno;  <span style="color:#75715e">/* backend of pin-count waiter */</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span>         freeNext;       <span style="color:#75715e">/* link in freelist chain */</span>
-</span></span><span style="display:flex;"><span>    LWLock      content_lock;   <span style="color:#75715e">/* to lock access to buffer contents */</span>
-</span></span><span style="display:flex;"><span>} BufferDesc;
-</span></span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> BufferDesc
+{
+    BufferTag   tag;            <span style="color:#75715e">/* ID of page contained in buffer */</span>
+    <span style="color:#66d9ef">int</span>         buf_id;         <span style="color:#75715e">/* buffer&#39;s index number (from 0) */</span>
+
+    <span style="color:#75715e">/* state of the tag, containing flags, refcount and usagecount */</span>
+    pg_atomic_uint32 state;
+
+    <span style="color:#66d9ef">int</span>         wait_backend_pgprocno;  <span style="color:#75715e">/* backend of pin-count waiter */</span>
+    <span style="color:#66d9ef">int</span>         freeNext;       <span style="color:#75715e">/* link in freelist chain */</span>
+    LWLock      content_lock;   <span style="color:#75715e">/* to lock access to buffer contents */</span>
+} BufferDesc;
+</code></pre></div><ul>
 <li><code>tag</code> : <code>BufferTag</code> 를 저장한다.</li>
 <li><code>buf_id</code>: 실제 버퍼가 저장된 &lsquo;버퍼 풀&rsquo; 배열 내의 인덱스 번호이다.</li>
 <li><code>state</code>: 이전에는 버퍼를 액세스 하기 위해서 프로세스 수, 버퍼 액세스 횟수, 버퍼 상태 플래그를 제공했었지만, 이 3가지 항목을 <code>state</code> 값으로 제공하고 비트 마스크와 비스 시프트 연산을 통해서 추출하도록 변경하였다.</li>
@@ -300,26 +300,26 @@
 - TAS (`Test` &amp; `Set`)를 인라인 어셈블리어로 구현하는 방식
 </code></pre><p><code>PostgreSQL</code> 은 두 번재 방식을 사용한다.</p>
 <p><code>src/backend/storage/lmgr.s_lock.c</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * s_lock(lock) - platform-independent portion of waiting for a spinlock.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">s_lock</span>(<span style="color:#66d9ef">volatile</span> slock_t <span style="color:#f92672">*</span>lock, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>file, <span style="color:#66d9ef">int</span> line, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>func)
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span>    SpinDelayStatus delayStatus;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    init_spin_delay(<span style="color:#f92672">&amp;</span>delayStatus, file, line, func);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (TAS_SPIN(lock))
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        perform_spin_delay(<span style="color:#f92672">&amp;</span>delayStatus);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    finish_spin_delay(<span style="color:#f92672">&amp;</span>delayStatus);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> delayStatus.delays;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="lw-락"><code>LW</code> 락</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * s_lock(lock) - platform-independent portion of waiting for a spinlock.
+</span><span style="color:#75715e"> */</span>
+<span style="color:#66d9ef">int</span>
+<span style="color:#a6e22e">s_lock</span>(<span style="color:#66d9ef">volatile</span> slock_t <span style="color:#f92672">*</span>lock, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>file, <span style="color:#66d9ef">int</span> line, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>func)
+{
+    SpinDelayStatus delayStatus;
+
+    init_spin_delay(<span style="color:#f92672">&amp;</span>delayStatus, file, line, func);
+
+    <span style="color:#66d9ef">while</span> (TAS_SPIN(lock))
+    {
+        perform_spin_delay(<span style="color:#f92672">&amp;</span>delayStatus);
+    }
+
+    finish_spin_delay(<span style="color:#f92672">&amp;</span>delayStatus);
+
+    <span style="color:#66d9ef">return</span> delayStatus.delays;
+}
+</code></pre></div><h4 id="lw-락"><code>LW</code> 락</h4>
 <ul>
 <li>PostgreSQL 은 <code>Queue &amp; Posting</code> 방식을 사용하여, <code>LW</code> 락을 획득한다.</li>
 <li>해시 버킷에 딸린 해시 엘리먼트를 검색한다고 가정을 했을 때, 이때는 읽기 모드이므로 <code>LW</code> 락을 <code>SHARED</code> 모드로 획득해야 한다.</li>
@@ -327,27 +327,27 @@
 </ul>
 <p><strong><code>LW</code> 락 획득 절차</strong>
 <code>src/backend/storage/lmgr/lwlock.c</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * LWLockAcquire - acquire a lightweight lock in the specified mode
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * If the lock is not available, sleep until it is.  Returns true if the lock
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * was available immediately, false if we had to sleep.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Side effect: cancel/die interrupts are held off until lock release.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span>LWLockAcquire(LWLock <span style="color:#f92672">*</span>lock, LWLockMode mode)
-</span></span><span style="display:flex;"><span>LOOP
-</span></span><span style="display:flex;"><span>	LWLockAttemptLock() <span style="color:#960050;background-color:#1e0010">함수를</span> <span style="color:#960050;background-color:#1e0010">호출해서</span> LW <span style="color:#960050;background-color:#1e0010">락</span> <span style="color:#960050;background-color:#1e0010">획득을</span> <span style="color:#960050;background-color:#1e0010">시도한다</span>.
-</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하면</span> LOOP를 <span style="color:#960050;background-color:#1e0010">탈출한다</span>.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하지</span> <span style="color:#960050;background-color:#1e0010">못하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">큐에</span> <span style="color:#960050;background-color:#1e0010">등록한다</span>.
-</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">한</span> <span style="color:#960050;background-color:#1e0010">번</span> <span style="color:#960050;background-color:#1e0010">더</span> LwLockAttemptLock() <span style="color:#960050;background-color:#1e0010">함수를</span> <span style="color:#960050;background-color:#1e0010">호출한다</span>.
-</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">큐에</span> <span style="color:#960050;background-color:#1e0010">등록된</span> <span style="color:#960050;background-color:#1e0010">항목을</span> <span style="color:#960050;background-color:#1e0010">삭제한</span> <span style="color:#960050;background-color:#1e0010">후</span> LOOP를 <span style="color:#960050;background-color:#1e0010">탈출한다</span>.
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하지</span> <span style="color:#960050;background-color:#1e0010">ㅁ소하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">상태를</span> <span style="color:#960050;background-color:#1e0010">시작한다</span>.
-</span></span><span style="display:flex;"><span>	(<span style="color:#960050;background-color:#1e0010">다른</span> <span style="color:#960050;background-color:#1e0010">프로세스가</span> <span style="color:#960050;background-color:#1e0010">깨워줄</span> <span style="color:#960050;background-color:#1e0010">때까지</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">상태가</span> <span style="color:#960050;background-color:#1e0010">유지</span> <span style="color:#960050;background-color:#1e0010">된다</span>.)
-</span></span><span style="display:flex;"><span>END
-</span></span></code></pre></div><h3 id="정리">정리</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#75715e">/*
+</span><span style="color:#75715e"> * LWLockAcquire - acquire a lightweight lock in the specified mode
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * If the lock is not available, sleep until it is.  Returns true if the lock
+</span><span style="color:#75715e"> * was available immediately, false if we had to sleep.
+</span><span style="color:#75715e"> *
+</span><span style="color:#75715e"> * Side effect: cancel/die interrupts are held off until lock release.
+</span><span style="color:#75715e"> */</span>
+LWLockAcquire(LWLock <span style="color:#f92672">*</span>lock, LWLockMode mode)
+LOOP
+	LWLockAttemptLock() <span style="color:#960050;background-color:#1e0010">함수를</span> <span style="color:#960050;background-color:#1e0010">호출해서</span> LW <span style="color:#960050;background-color:#1e0010">락</span> <span style="color:#960050;background-color:#1e0010">획득을</span> <span style="color:#960050;background-color:#1e0010">시도한다</span>.
+	<span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하면</span> LOOP를 <span style="color:#960050;background-color:#1e0010">탈출한다</span>.
+
+	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하지</span> <span style="color:#960050;background-color:#1e0010">못하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">큐에</span> <span style="color:#960050;background-color:#1e0010">등록한다</span>.
+	<span style="color:#960050;background-color:#1e0010">한</span> <span style="color:#960050;background-color:#1e0010">번</span> <span style="color:#960050;background-color:#1e0010">더</span> LwLockAttemptLock() <span style="color:#960050;background-color:#1e0010">함수를</span> <span style="color:#960050;background-color:#1e0010">호출한다</span>.
+	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">큐에</span> <span style="color:#960050;background-color:#1e0010">등록된</span> <span style="color:#960050;background-color:#1e0010">항목을</span> <span style="color:#960050;background-color:#1e0010">삭제한</span> <span style="color:#960050;background-color:#1e0010">후</span> LOOP를 <span style="color:#960050;background-color:#1e0010">탈출한다</span>.
+
+	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하지</span> <span style="color:#960050;background-color:#1e0010">ㅁ소하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">상태를</span> <span style="color:#960050;background-color:#1e0010">시작한다</span>.
+	(<span style="color:#960050;background-color:#1e0010">다른</span> <span style="color:#960050;background-color:#1e0010">프로세스가</span> <span style="color:#960050;background-color:#1e0010">깨워줄</span> <span style="color:#960050;background-color:#1e0010">때까지</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">상태가</span> <span style="color:#960050;background-color:#1e0010">유지</span> <span style="color:#960050;background-color:#1e0010">된다</span>.)
+END
+</code></pre></div><h3 id="정리">정리</h3>
 <hr>
 <p>![[IMG_0389.jpg | 500]]</p>
 <ul>

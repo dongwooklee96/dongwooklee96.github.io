@@ -137,32 +137,32 @@ int main(int argc, char **argv) {
         char buf[MAXLINE];
 
         if((server_sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-                perror(&#34;error : &#34;);
+                perror(&quot;error : &quot;);
                 return 1;
         }
         serveraddr.sin_family = AF_INET;
-        serveraddr.sin_addr.s_addr = inet_addr(&#34;127.0.0.1&#34;);
+        serveraddr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);
         serveraddr.sin_port = htons(4000);
 
         client_len = sizeof(serveraddr);
 
         if(connect(server_sockfd, (struct sockaddr*)&amp;serveraddr, client_len) == -1) {
-                perror(&#34;connect error : &#34;);
+                perror(&quot;connect error : &quot;);
                 return 1;
         }
         memset(buf, 0x00, MAXLINE);
         read(0, buf, MAXLINE);
         if(write(server_sockfd, buf, MAXLINE) &lt;= 0) {
-                perror(&#34;write error : &#34;);
+                perror(&quot;write error : &quot;);
                 return 1;
         }
         memset(buf, 0x00, MAXLINE);
         if(read(server_sockfd, buf, MAXLINE) &lt;= 0) {
-                perror(&#34;read error: &#34;);
+                perror(&quot;read error: &quot;);
                 return 1;
         }
         close(server_sockfd);
-        printf(&#34;server:%s\n&#34;, buf);
+        printf(&quot;server:%s\n&quot;, buf);
         return 0;
 }
 </code></pre><p><strong>server.c</strong></p>
@@ -187,7 +187,7 @@ int main(void){
 
    server_socket = socket(PF_INET, SOCK_STREAM, 0);
    if(-1 == server_socket){
-      printf( &#34;server socket 생성 실패n&#34;);
+      printf( &quot;server socket 생성 실패n&quot;);
       exit( 1);
    }
 
@@ -197,13 +197,13 @@ int main(void){
    server_addr.sin_addr.s_addr= htonl(INADDR_ANY);
 
    if(-1 == bind(server_socket, (struct sockaddr*)&amp;server_addr, sizeof(server_addr))){
-      printf( &#34;bind() 실행 에러n&#34;);
+      printf( &quot;bind() 실행 에러n&quot;);
       exit(1);
    }
 
    while(1){
       if(-1 == listen(server_socket, 5)){
-         printf( &#34;대기상태 모드 설정 실패n&#34;);
+         printf( &quot;대기상태 모드 설정 실패n&quot;);
          exit(1);
       }
 
@@ -211,18 +211,19 @@ int main(void){
       client_socket     = accept( server_socket, (struct sockaddr*)&amp;client_addr, &amp;client_addr_size);
 
       if (-1 == client_socket){
-         printf( &#34;클라이언트 연결 수락 실패n&#34;);
+         printf( &quot;클라이언트 연결 수락 실패n&quot;);
          exit(1);
       }
 
       read (client_socket, buff_rcv, BUFF_SIZE);
-      printf(&#34;receive: %s\n&#34;, buff_rcv);
+      printf(&quot;receive: %s\n&quot;, buff_rcv);
 
-      sprintf(buff_snd, &#34;%ld : %s&#34;, strlen(buff_rcv), buff_rcv);
+      sprintf(buff_snd, &quot;%ld : %s&quot;, strlen(buff_rcv), buff_rcv);
       write(client_socket, buff_snd, strlen(buff_snd)+1);          // +1: NULL까지 포함해서 전송
       close(client_socket);
    }
 }
+
 </code></pre><ul>
 <li>위의 소스 코드를 복사하여, 파일을 만든다.</li>
 </ul>

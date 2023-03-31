@@ -198,15 +198,15 @@ int main() {
   struct sockaddr_in srv_addr, client_addr;
   int client_addr_len, read_len;
   char read_buff[BUFSIZ];
-  char write_buff[BUFSIZ] = &#34;I am 20 years old.&#34;;
+  char write_buff[BUFSIZ] = &quot;I am 20 years old.&quot;;
 
   srv_sd = socket(PF_INET, SOCK_STREAM, 0);
 
   if (srv_sd == -1) {
-    printf(&#34;socket creation error&#34;);
+    printf(&quot;socket creation error&quot;);
     return -1;
   }
-  printf(&#34;==== server program ====\n&#34;);
+  printf(&quot;==== server program ====\n&quot;);
 
   memset(&amp;srv_addr, 0, sizeof(srv_addr));
   srv_addr.sin_family = AF_INET;
@@ -214,12 +214,12 @@ int main() {
   srv_addr.sin_port = htons(PORT);
 
   if (bind(srv_sd, (struct sockaddr *) &amp;srv_addr, sizeof(srv_addr)) == -1) {
-    printf(&#34;bind error&#34;);
+    printf(&quot;bind error&quot;);
     return -1;
   }
 
   if (listen(srv_sd, 5) == -1) {
-    printf(&#34;listen error&#34;);
+    printf(&quot;listen error&quot;);
     return -1;
   }
 
@@ -227,20 +227,20 @@ int main() {
   client_sd = accept(srv_sd, (struct sockaddr*)&amp;client_addr, &amp;client_addr_len);
 
   if (client_sd == -1) {
-    printf(&#34;accept error&#34;);
+    printf(&quot;accept error&quot;);
     return -1;
   }
   write(client_sd, write_buff, sizeof(write_buff));
-  printf(&#34;server: %s\n&#34;, write_buff);
+  printf(&quot;server: %s\n&quot;, write_buff);
 
   read_len = read(client_sd, read_buff, sizeof(read_buff));
   if (read_len == -1) {
-    printf(&#34;read error&#34;);
+    printf(&quot;read error&quot;);
     return -1;
   }
 
-  read_buff[read_len] = &#39;\0&#39;;
-  printf(&#34;client: %s\n&#34;, read_buff);
+  read_buff[read_len] = '\0';
+  printf(&quot;client: %s\n&quot;, read_buff);
 
   close(client_sd);
   close(srv_sd);
@@ -268,37 +268,37 @@ int main() {
   struct sockaddr_in client_addr;
 
   int client_addr_len, read_len;
-  char write_buff[BUFSIZ] = &#34;How old are you?&#34;;
+  char write_buff[BUFSIZ] = &quot;How old are you?&quot;;
   char read_buff[BUFSIZ];
 
   client_sd = socket(PF_INET, SOCK_STREAM, 0);
   if (client_sd == -1) {
-    printf(&#34;socket creation error&#34;);
+    printf(&quot;socket creation error&quot;);
     return -1;
   }
-  printf(&#34;==== client program ====\n&#34;);
+  printf(&quot;==== client program ====\n&quot;);
 
   memset(&amp;client_addr, 0, sizeof(client_addr));
   client_addr.sin_family = AF_INET;
-  client_addr.sin_addr.s_addr = inet_addr(&#34;127.0.0.1&#34;);
+  client_addr.sin_addr.s_addr = inet_addr(&quot;127.0.0.1&quot;);
   client_addr.sin_port = htons(PORT);
 
   if (connect(client_sd, (struct sockaddr *) &amp;client_addr, sizeof(client_addr)) == -1) {
-    printf(&#34;connection error&#34;);
+    printf(&quot;connection error&quot;);
     close(client_sd);
     return -1;
   }
 
   write(client_sd, write_buff, sizeof(write_buff));
-  printf(&#34;client: %s\n&#34;, write_buff);
+  printf(&quot;client: %s\n&quot;, write_buff);
 
   read_len = read(client_sd, read_buff, sizeof(read_buff));
   if (read_len == -1) {
-    printf(&#34;read error&#34;);
+    printf(&quot;read error&quot;);
     return -1;
   }
-  read_buff[read_len] = &#39;\0&#39;;
-  printf(&#34;server: %s\n&#34;, read_buff);
+  read_buff[read_len] = '\0';
+  printf(&quot;server: %s\n&quot;, read_buff);
   close(client_sd);
   return 0;
 }
@@ -334,10 +334,10 @@ int main() {
 
 if (client_sd == -1) {
   if (errno == EINVAL) {
-    printf(&#34;protocol family error&#34;);
+    printf(&quot;protocol family error&quot;);
     return -1;
   }
-  printf(&#34;socket creation error&#34;);
+  printf(&quot;socket creation error&quot;);
   return -1;
 }
 </code></pre><ul>
@@ -351,7 +351,7 @@ int foo(int domain, int type, int protocol) {
   int res;
   res = socket(domain, type, protocol);
   if (res == -1) {
-    perror(&#34;socket&#34;);
+    perror(&quot;socket&quot;);
   }
   return res;
 }
