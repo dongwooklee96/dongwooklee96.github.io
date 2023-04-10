@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -241,11 +242,10 @@ def allocate(
     with uow:
         batches = uow.batches.list()
         if not is_valid_sku(line.sku, batches):
-            raise InvalidSku(f&quot;Invalid sku {line.sku}&quot;)
+            raise InvalidSku(f&#34;Invalid sku {line.sku}&#34;)
         batchref = model.allocate(line, batches)
         uow.commit()
     return batchref
-
 </code></pre><h3 id="정리">정리</h3>
 <hr>
 <h4 id="애그리게이트와-일관성-경계-1">애그리게이트와 일관성 경계</h4>
@@ -325,5 +325,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

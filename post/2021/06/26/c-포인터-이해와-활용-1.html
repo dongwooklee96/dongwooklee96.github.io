@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -207,7 +208,7 @@ pi = &amp;num;
 int *pi = &amp;num;
 
 
-printf(&quot;%d\n&quot;, *pi); // 5
+printf(&#34;%d\n&#34;, *pi); // 5
 </code></pre><ul>
 <li>
 <p>그리고 또한 좌변값(left-value)에 의해서 참조 연산자의 결과를 사용할 수 있다.</p>
@@ -217,7 +218,7 @@ printf(&quot;%d\n&quot;, *pi); // 5
 </li>
 </ul>
 <pre tabindex="0"><code>*pi = 200;
-printf(&quot;%d\n&quot;, num);
+printf(&#34;%d\n&#34;, num);
 </code></pre><h3 id="함수-포인터">함수 포인터</h3>
 <ul>
 <li>포인터는 함수를 가리키도록 선언할 수 있으며 함수 포인터 선언은 일반적인 포인터 표기법에 비해서 다소 복잡하다.</li>
@@ -285,10 +286,10 @@ printf(&quot;%d\n&quot;, num);
 </ul>
 <pre tabindex="0"><code>int num;
 int *pi = &amp;num;
-printf(&quot;Value of pi: %p\n&quot;, pi); // Value of pi: 0x7ffee6dfd9cc
+printf(&#34;Value of pi: %p\n&#34;, pi); // Value of pi: 0x7ffee6dfd9cc
 void* pv = pi;
 pi = (int*) pv;
-printf(&quot;Value of pi: %p\n&quot;, pi); // Value of pi: 0x7ffee6dfd9cc
+printf(&#34;Value of pi: %p\n&#34;, pi); // Value of pi: 0x7ffee6dfd9cc
 </code></pre><pre tabindex="0"><code>void 포인터 사용시 주의가 필요하다.
 임의의 포인터를 void 포인터로 캐싱팅 한 후에, 기존 타입이 아닌 전혀 다른 타입의 포인터로 캐스팅하더라도 이를 막을 방법이 없다.
 </code></pre><pre tabindex="0"><code>size_t size = sizeof(void*); // valid
@@ -387,7 +388,7 @@ pci = &amp;limit;
 </code></pre><ul>
 <li>상수 포인터에 대한 역참조는 단지 정수의 값을 읽기만 한다면 문제가 없다.</li>
 </ul>
-<pre tabindex="0"><code>printf(&quot;%d\n&quot;, *pci);
+<pre tabindex="0"><code>printf(&#34;%d\n&#34;, *pci);
 </code></pre><ul>
 <li>
 <p>포인터가 참조하는 값을 변경하기 위해서 상수 포인터를 역참조할 수는 없다. 그러나 포인터 값 자체는 상수가 아니므로 포인터 자체의 값은 변경할 수 있다.</p>
@@ -519,5 +520,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

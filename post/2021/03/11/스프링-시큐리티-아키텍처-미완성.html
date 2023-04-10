@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -199,8 +200,8 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
   @Autowired
   public void initialize(AuthenticationManagerBuilder builder, DataSource dataSource) {
-    builder.jdbcAuthentication().dataSource(dataSource).withUser(&quot;dave&quot;)
-      .password(&quot;secret&quot;).roles(&quot;USER&quot;);
+    builder.jdbcAuthentication().dataSource(dataSource).withUser(&#34;dave&#34;)
+      .password(&#34;secret&#34;).roles(&#34;USER&#34;);
   }
 
 }
@@ -271,5 +272,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

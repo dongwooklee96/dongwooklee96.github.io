@@ -217,7 +217,7 @@ def is_valid_sku(sku, batches):
 def allocate(line: OrderLine, repo: AbstractRepository, session) -&amp;gt; str:
     batches = repo.list()
     if not is_valid_sku(line.sku, batches):
-        raise InvalidSku(f&#39;Invalid sku {line.sku}&#39;)
+        raise InvalidSku(f&amp;#39;Invalid sku {line.sku}&amp;#39;)
     batchref = model.allocate(line, batches)
     session.commit()
     return batchref
@@ -229,15 +229,15 @@ def allocate_endpoint():
     session = get_session()
     repo = repository.SqlAlchemyRepository(session)
     line = model.OrderLine(
-        request.json[&#39;orderid&#39;],
-        request.json[&#39;sku&#39;],
-        request.json[&#39;qty&#39;],
+        request.json[&amp;#39;orderid&amp;#39;],
+        request.json[&amp;#39;sku&amp;#39;],
+        request.json[&amp;#39;qty&amp;#39;],
     )
     try:
         batchref = services.allocate(line, repo, session)
     except (model.OutOfStock, services.InvalidSku) as e:
-        return jsonify({&#39;message&#39;: str(e)}), 400
-    return jsonify({&#39;batchref&#39;: batchref}), 201
+        return jsonify({&amp;#39;message&amp;#39;: str(e)}), 400
+    return jsonify({&amp;#39;batchref&amp;#39;: batchref}), 201
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;엔드 포인트에서 좀 더 간단해진 것을 확인할 수 있다.&lt;/p&gt;
@@ -372,7 +372,6 @@ class SqlAlchemyRepository(AbstractRepository):
 
     def list(self):
         return list(self._batches)
-
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;이 클래스가 &lt;code&gt;set()&lt;/code&gt;을 감싸는 간단한 래퍼이므로 모든 메서드는 한줄로 끝난다.&lt;/p&gt;
@@ -440,16 +439,16 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;파이썬에서는 아래와 같이 표현할 수 있다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@dataclass&lt;/span&gt;(fronzen&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
-&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Money&lt;/span&gt;:
-    currency: str
-    value: str
-
-
-&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Money&lt;/span&gt;(NamedTuple):
-    currency: str
-    value: int
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@dataclass&lt;/span&gt;(fronzen&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;True&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Money&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    currency: str
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    value: str
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Money&lt;/span&gt;(NamedTuple):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    currency: str
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    value: int
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;그와 반대로, 오래동안 정체성이 존재하는 도메인 객체를 설명할 때는 엔티티라는 용어를 사용한다.&lt;/p&gt;
 &lt;/li&gt;
@@ -460,16 +459,16 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;p&gt;사람은 이름과 다르게 영속적인 정체성이 있다. 따라서 엔티티에는 정체성 동등성이라는 특징이 있다. 이는 엔티티의 값을 바꾸더라도, 바뀐 엔티티는 이전과 같은 엔티티로 인식된다는 것이다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Batch&lt;/span&gt;:
-    &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __eq__(self, other):
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; isinstance(other, Batch):
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; other&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reference &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reference
-
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __hash__(self):
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; hash(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reference)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Batch&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __eq__(self, other):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;not&lt;/span&gt; isinstance(other, Batch):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; other&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reference &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reference
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; __hash__(self):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; hash(self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;reference)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;값 객체의 경우에는, 모든 값 속성을 사용하여 해시를 정의하고 객체를 반드시 불변 객체로 만들어야 한다.&lt;/p&gt;
 &lt;/li&gt;

@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -151,15 +152,15 @@ public class Main {
 
         Callable&lt;String&gt; hello = () -&gt; {
             Thread.sleep(2000L);
-            return &quot;Hello&quot;;
+            return &#34;Hello&#34;;
         };
 
         Future&lt;String&gt; helloFuture = executorService.submit(hello);
-        System.out.println(&quot;Started!&quot;);
+        System.out.println(&#34;Started!&#34;);
 
         helloFuture.get(); // blocking call
 
-        System.out.println(&quot;End!!&quot;);
+        System.out.println(&#34;End!!&#34;);
         executorService.shutdown();
     }
 }
@@ -212,17 +213,17 @@ public class Main {
 
         Callable&lt;String&gt; hello = () -&gt; {
             Thread.sleep(2000L);
-            return &quot;Hello&quot;;
+            return &#34;Hello&#34;;
         };
 
         Callable&lt;String&gt; java = () -&gt; {
             Thread.sleep(4000L);
-            return &quot;Java&quot;;
+            return &#34;Java&#34;;
         };
 
         Callable&lt;String&gt; dongwook = () -&gt; {
             Thread.sleep(100L);
-            return &quot;Dong Wook&quot;;
+            return &#34;Dong Wook&#34;;
         };
 
         List&lt;Future&lt;String&gt;&gt; futures = executorService.invokeAll(Arrays.asList(hello, java, dongwook));
@@ -233,7 +234,6 @@ public class Main {
         executorService.shutdown();
     }
 }
-
 </code></pre><h4 id="invokeany">invokeAny</h4>
 <p><img src="https://user-images.githubusercontent.com/14002238/110199641-adc07000-7e9c-11eb-8c91-a79c559268e2.png" alt="invokeAny"></p>
 <ul>
@@ -248,17 +248,17 @@ public class Main {
 
         Callable&lt;String&gt; hello = () -&gt; {
             Thread.sleep(2000L);
-            return &quot;Hello&quot;;
+            return &#34;Hello&#34;;
         };
 
         Callable&lt;String&gt; java = () -&gt; {
             Thread.sleep(4000L);
-            return &quot;Java&quot;;
+            return &#34;Java&#34;;
         };
 
         Callable&lt;String&gt; dongwook = () -&gt; {
             Thread.sleep(100L);
-            return &quot;Dong Wook&quot;;
+            return &#34;Dong Wook&#34;;
         };
 
         String futures = executorService.invokeAny(Arrays.asList(hello, java, dongwook));
@@ -330,5 +330,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

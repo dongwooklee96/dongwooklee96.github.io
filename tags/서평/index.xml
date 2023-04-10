@@ -6,7 +6,130 @@
     <description>Recent content in 서평 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Wed, 08 Dec 2021 10:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%84%9C%ED%8F%89/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Apr 2023 20:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%84%9C%ED%8F%89/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>코딩 더 매트릭스 - 챕터 4 (선형공간)</title>
+      <link>https://dongwooklee96.github.io/post/2023/04/10/%EC%BD%94%EB%94%A9-%EB%8D%94-%EB%A7%A4%ED%8A%B8%EB%A6%AD%EC%8A%A4-%EC%B1%95%ED%84%B0-4-%EC%84%A0%ED%98%95%EA%B3%B5%EA%B0%84.html</link>
+      <pubDate>Mon, 10 Apr 2023 20:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2023/04/10/%EC%BD%94%EB%94%A9-%EB%8D%94-%EB%A7%A4%ED%8A%B8%EB%A6%AD%EC%8A%A4-%EC%B1%95%ED%84%B0-4-%EC%84%A0%ED%98%95%EA%B3%B5%EA%B0%84.html</guid>
+      <description>&lt;h2 id=&#34;백터-공간&#34;&gt;백터 공간&lt;/h2&gt;
+&lt;h3 id=&#34;선형-결합-일차결합&#34;&gt;선형 결합 (일차결합)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;v1, v2 ... vn&lt;/code&gt; 각각을 백터라고 할 때 선형 결합을 아래와 같은 합으로 정의한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$
+a_1v_1 + &amp;hellip; + a_nv_n
+$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;여기서, &lt;code&gt;a1, ..., an&lt;/code&gt; 은 스칼라이다. 이 선형결합에서 &lt;code&gt;a1, ..., an&lt;/code&gt; 각각은 계수라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;a1&lt;/code&gt;은 &lt;code&gt;v1&lt;/code&gt;의 계수이고, &lt;code&gt;a2&lt;/code&gt;는 &lt;code&gt;v2&lt;/code&gt;의 계수이며, &lt;code&gt;an&lt;/code&gt; 은 &lt;code&gt;vn&lt;/code&gt;의 계수이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 선형 결합에서 모든 계수가 영이면, 자명한(&lt;code&gt;trivial&lt;/code&gt;) 선형결합이라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;선형-결합의-사용&#34;&gt;선형 결합의 사용&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;주식-포트폴리오-예제&#34;&gt;주식 포트폴리오 예제&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;주식 포트폴리오 &lt;code&gt;D&lt;/code&gt;를 주식들의 집합이라고 할 때 &lt;code&gt;R&lt;/code&gt; 상의 &lt;code&gt;D&lt;/code&gt; 벡터는 포트폴리오를 나타낸다. 이를 각 주식을 소유하고 있는 주식의 수에 맵핑한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;뮤츄얼 펀드의 각 소유 주식 수는 어떤 특정 분량에 대한 소유권을 나태내며, 그러므로 &lt;code&gt;D&lt;/code&gt; 벡터에 의해서 표현될 수 있다. 그러면 주식의 소유권은 아래의 선형 결합에 의해서 나타내진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$
+a_1v_1 + &amp;hellip; + a_nv_n
+$$&lt;/p&gt;
+&lt;h4 id=&#34;공장-제품&#34;&gt;공장 제품&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;공장에서 5가지 리소스 금속, 콘크리트, 플라스틱, 물, 그리고 전기를 사용해서 물건을 만든다고 가정할 때 이 공장은 다섯 종류의 다른 제품을 만들 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;금속&lt;/th&gt;
+&lt;th&gt;콘크리트&lt;/th&gt;
+&lt;th&gt;플라스틱&lt;/th&gt;
+&lt;th&gt;물&lt;/th&gt;
+&lt;th&gt;전기&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;garden gnome&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1.3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.2&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.8&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.4&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;hula hoop&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;1.5&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.4&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.3&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;slinky&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0.25&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.2&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.7&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;silly putty&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.3&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.7&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.5&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;salad shooter&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.15&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.5&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.4&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;.8&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;i&lt;/code&gt; 번째 제품의 리소스 사용량은 벡터에 저장되면 예를 들어서 &lt;code&gt;gnome&lt;/code&gt; 제품은 다음과 같이 표현된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$
+v_gnome = Vec(D, {&amp;lsquo;콘크리트&amp;rsquo;: 1.3, &amp;lsquo;플라스틱&amp;rsquo;:.2, &amp;lsquo;물&amp;rsquo;:.8, &amp;lsquo;전기&amp;rsquo;:.4})
+$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;예를 들어서 공장에서 240 개의 &lt;code&gt;gnomes&lt;/code&gt;, 55개의 &lt;code&gt;hoops&lt;/code&gt;, 150 개의 &lt;code&gt;slinkies&lt;/code&gt;, 133개의 &lt;code&gt;putties&lt;/code&gt;, 그리고 90 개의 &lt;code&gt;shooters&lt;/code&gt;를 만들기로 결졍한다고 하면 파이썬 코드로 아래와 같이 나타낼 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; D &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;metal&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;concrete&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;plastic&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;water&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;electricity&amp;#39;&lt;/span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; v_gnome &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Vec(D, {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;concrete&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1.3&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;plastic&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.2&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;water&amp;#39;&lt;/span&gt;:&lt;span style=&#34;color:#ae81ff&#34;&gt;.8&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;electricity&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.4&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; v_hoop &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Vec(D, {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;plastic&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;1.5&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;water&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.4&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;electricity&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.3&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; v_slinky &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Vec(D, {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;metal&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.25&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;water&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.2&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;electricity&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.7&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; v_putty &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Vec(D, {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;plastic&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.3&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;water&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.7&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;electricity&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.5&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; v_shooter &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Vec(D, {&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;metal&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.15&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;plastic&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.5&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;water&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.4&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;electricity&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.8&lt;/span&gt;})
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;print(&lt;span style=&#34;color:#ae81ff&#34;&gt;240&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; v_gnome &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;55&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; v_hoop &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;150&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; v_slinky &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;133&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; v_putty &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;90&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; v_shooter)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=59668511&#34;&gt;코딩 더 매트릭스&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>러스트로 유닉스 명령 도구를 만들어 보는 책</title>
       <link>https://dongwooklee96.github.io/post/2021/12/08/%EB%9F%AC%EC%8A%A4%ED%8A%B8%EB%A1%9C-%EC%9C%A0%EB%8B%89%EC%8A%A4-%EB%AA%85%EB%A0%B9-%EB%8F%84%EA%B5%AC%EB%A5%BC-%EB%A7%8C%EB%93%A4%EC%96%B4-%EB%B3%B4%EB%8A%94-%EC%B1%85.html</link>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>코딩 더 매트릭스 - 챕터 4 (선형공간) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="https://dongwooklee96.github.io/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="https://dongwooklee96.github.io/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+                                                                                                                                                                                      onload="renderMathInElement(document.body);"></script>
+
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <br/>
+
+<div class="article-meta">
+<h1><span class="title">코딩 더 매트릭스 - 챕터 4 (선형공간)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2023/04/10</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EC%B1%85">책</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%84%9C%ED%8F%89">서평</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h2 id="백터-공간">백터 공간</h2>
+<h3 id="선형-결합-일차결합">선형 결합 (일차결합)</h3>
+<hr>
+<ul>
+<li><code>v1, v2 ... vn</code> 각각을 백터라고 할 때 선형 결합을 아래와 같은 합으로 정의한다.</li>
+</ul>
+<p>$$
+a_1v_1 + &hellip; + a_nv_n
+$$</p>
+<ul>
+<li>
+<p>여기서, <code>a1, ..., an</code> 은 스칼라이다. 이 선형결합에서 <code>a1, ..., an</code> 각각은 계수라고 한다.</p>
+</li>
+<li>
+<p><code>a1</code>은 <code>v1</code>의 계수이고, <code>a2</code>는 <code>v2</code>의 계수이며, <code>an</code> 은 <code>vn</code>의 계수이다.</p>
+</li>
+<li>
+<p>만약 선형 결합에서 모든 계수가 영이면, 자명한(<code>trivial</code>) 선형결합이라고 한다.</p>
+</li>
+</ul>
+<h3 id="선형-결합의-사용">선형 결합의 사용</h3>
+<hr>
+<h4 id="주식-포트폴리오-예제">주식 포트폴리오 예제</h4>
+<ul>
+<li>
+<p>주식 포트폴리오 <code>D</code>를 주식들의 집합이라고 할 때 <code>R</code> 상의 <code>D</code> 벡터는 포트폴리오를 나타낸다. 이를 각 주식을 소유하고 있는 주식의 수에 맵핑한다.</p>
+</li>
+<li>
+<p>뮤츄얼 펀드의 각 소유 주식 수는 어떤 특정 분량에 대한 소유권을 나태내며, 그러므로 <code>D</code> 벡터에 의해서 표현될 수 있다. 그러면 주식의 소유권은 아래의 선형 결합에 의해서 나타내진다.</p>
+</li>
+</ul>
+<p>$$
+a_1v_1 + &hellip; + a_nv_n
+$$</p>
+<h4 id="공장-제품">공장 제품</h4>
+<ul>
+<li>공장에서 5가지 리소스 금속, 콘크리트, 플라스틱, 물, 그리고 전기를 사용해서 물건을 만든다고 가정할 때 이 공장은 다섯 종류의 다른 제품을 만들 수 있다.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>금속</th>
+<th>콘크리트</th>
+<th>플라스틱</th>
+<th>물</th>
+<th>전기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>garden gnome</code></td>
+<td><code>0</code></td>
+<td><code>1.3</code></td>
+<td><code>.2</code></td>
+<td><code>.8</code></td>
+<td><code>.4</code></td>
+</tr>
+<tr>
+<td><code>hula hoop</code></td>
+<td><code>0</code></td>
+<td><code>0</code></td>
+<td><code>1.5</code></td>
+<td><code>.4</code></td>
+<td><code>.3</code></td>
+</tr>
+<tr>
+<td><code>slinky</code></td>
+<td><code>0.25</code></td>
+<td><code>0</code></td>
+<td><code>0</code></td>
+<td><code>.2</code></td>
+<td><code>.7</code></td>
+</tr>
+<tr>
+<td><code>silly putty</code></td>
+<td><code>0</code></td>
+<td><code>0</code></td>
+<td><code>.3</code></td>
+<td><code>.7</code></td>
+<td><code>.5</code></td>
+</tr>
+<tr>
+<td><code>salad shooter</code></td>
+<td><code>.15</code></td>
+<td><code>0</code></td>
+<td><code>.5</code></td>
+<td><code>.4</code></td>
+<td><code>.8</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>i</code> 번째 제품의 리소스 사용량은 벡터에 저장되면 예를 들어서 <code>gnome</code> 제품은 다음과 같이 표현된다.</li>
+</ul>
+<p>$$
+v_gnome = Vec(D, {&lsquo;콘크리트&rsquo;: 1.3, &lsquo;플라스틱&rsquo;:.2, &lsquo;물&rsquo;:.8, &lsquo;전기&rsquo;:.4})
+$$</p>
+<ul>
+<li>예를 들어서 공장에서 240 개의 <code>gnomes</code>, 55개의 <code>hoops</code>, 150 개의 <code>slinkies</code>, 133개의 <code>putties</code>, 그리고 90 개의 <code>shooters</code>를 만들기로 결졍한다고 하면 파이썬 코드로 아래와 같이 나타낼 수 있다.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> D <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;metal&#39;</span>, <span style="color:#e6db74">&#39;concrete&#39;</span>, <span style="color:#e6db74">&#39;plastic&#39;</span>, <span style="color:#e6db74">&#39;water&#39;</span>, <span style="color:#e6db74">&#39;electricity&#39;</span>}
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> v_gnome <span style="color:#f92672">=</span> Vec(D, {<span style="color:#e6db74">&#39;concrete&#39;</span>: <span style="color:#ae81ff">1.3</span>, <span style="color:#e6db74">&#39;plastic&#39;</span>: <span style="color:#ae81ff">.2</span>, <span style="color:#e6db74">&#39;water&#39;</span>:<span style="color:#ae81ff">.8</span>, <span style="color:#e6db74">&#39;electricity&#39;</span>: <span style="color:#ae81ff">.4</span>})
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> v_hoop <span style="color:#f92672">=</span> Vec(D, {<span style="color:#e6db74">&#39;plastic&#39;</span>: <span style="color:#ae81ff">1.5</span>, <span style="color:#e6db74">&#39;water&#39;</span>: <span style="color:#ae81ff">.4</span>, <span style="color:#e6db74">&#39;electricity&#39;</span>: <span style="color:#ae81ff">.3</span>})
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> v_slinky <span style="color:#f92672">=</span> Vec(D, {<span style="color:#e6db74">&#39;metal&#39;</span>: <span style="color:#ae81ff">.25</span>, <span style="color:#e6db74">&#39;water&#39;</span>: <span style="color:#ae81ff">.2</span>, <span style="color:#e6db74">&#39;electricity&#39;</span>: <span style="color:#ae81ff">.7</span>})
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> v_putty <span style="color:#f92672">=</span> Vec(D, {<span style="color:#e6db74">&#39;plastic&#39;</span>: <span style="color:#ae81ff">.3</span>, <span style="color:#e6db74">&#39;water&#39;</span>: <span style="color:#ae81ff">.7</span>, <span style="color:#e6db74">&#39;electricity&#39;</span>: <span style="color:#ae81ff">.5</span>})
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;&gt;&gt;</span> v_shooter <span style="color:#f92672">=</span> Vec(D, {<span style="color:#e6db74">&#39;metal&#39;</span>: <span style="color:#ae81ff">.15</span>, <span style="color:#e6db74">&#39;plastic&#39;</span>: <span style="color:#ae81ff">.5</span>, <span style="color:#e6db74">&#39;water&#39;</span>: <span style="color:#ae81ff">.4</span>, <span style="color:#e6db74">&#39;electricity&#39;</span>: <span style="color:#ae81ff">.8</span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(<span style="color:#ae81ff">240</span> <span style="color:#f92672">*</span> v_gnome <span style="color:#f92672">+</span> <span style="color:#ae81ff">55</span> <span style="color:#f92672">*</span> v_hoop <span style="color:#f92672">+</span> <span style="color:#ae81ff">150</span> <span style="color:#f92672">*</span> v_slinky <span style="color:#f92672">+</span> <span style="color:#ae81ff">133</span> <span style="color:#f92672">*</span> v_putty <span style="color:#f92672">+</span> <span style="color:#ae81ff">90</span> <span style="color:#f92672">*</span> v_shooter)
+</span></span></code></pre></div><h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=59668511">코딩 더 매트릭스</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" integrity="sha384-g7c+Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI+sEnkvrMWph2EDg4" crossorigin="anonymous"></script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js" integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC+Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa" crossorigin="anonymous"
+                                                                                                                                                                                      onload="renderMathInElement(document.body);"></script>
+
+</html>
+

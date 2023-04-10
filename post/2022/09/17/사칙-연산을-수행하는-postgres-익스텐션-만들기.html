@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -132,9 +133,9 @@
 </li>
 </ul>
 <pre tabindex="0"><code># basic_oper extension
-comment = 'basic oper class'
-default_version = '0.0.1'
-module_pathname = '$libdir/basic_oper'
+comment = &#39;basic oper class&#39;
+default_version = &#39;0.0.1&#39;
+module_pathname = &#39;$libdir/basic_oper&#39;
 </code></pre><ul>
 <li>
 <p><code>commnet</code> 는 익스텐션에 대한 간단한 설명을 나타냅니다.</p>
@@ -152,10 +153,10 @@ module_pathname = '$libdir/basic_oper'
 <li>SQL 스크립트 파일은 {익스텐션이름}&ndash;version.sql 형식으로 작성되어야 합니다.</li>
 </ul>
 <pre tabindex="0"><code>--complain if script is sourced in psql, rather than via CREATE EXTENSION
-\echo Use &quot;CREATE EXTENSION basic_oper&quot; to load this file. \quit
+\echo Use &#34;CREATE EXTENSION basic_oper&#34; to load this file. \quit
 
 CREATE FUNCTION get_sum(int, int) RETURNS int
-AS '$libdir/basic_oper', 'get_sum'
+AS &#39;$libdir/basic_oper&#39;, &#39;get_sum&#39;
 LANGUAGE C IMMUTABLE STRICT;
 </code></pre><ul>
 <li>
@@ -233,5 +234,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

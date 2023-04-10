@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -239,7 +240,7 @@ int main(int argc, char *argv[]) {
   char buff[BUFSIZ];
   int read_len, n_write;
   if (argc != 2) {
-    printf(&quot;usage: %s filename \n&quot;, argv[0]);
+    printf(&#34;usage: %s filename \n&#34;, argv[0]);
     return -1;
   }
 
@@ -250,22 +251,22 @@ int main(int argc, char *argv[]) {
   fgets(buff, BUFSIZ - 1, stdin);
 
   read_len = strlen(buff);
-  n_write = write(fd1, &quot;abc&quot;, 3);
+  n_write = write(fd1, &#34;abc&#34;, 3);
   n_write += write(fd1, buff, read_len + 1);
-  if (n_write == -1) printf(&quot;error&quot;);
+  if (n_write == -1) printf(&#34;error&#34;);
 
-  printf(&quot;offset (fd1): %d\n&quot;, (int) lseek(fd1, 0, SEEK_CUR));
-  printf(&quot;offset (fd2): %d\n&quot;, (int) lseek(fd2, 0, SEEK_CUR));
-  printf(&quot;offset (fd3): %d\n&quot;, (int) lseek(fd3, 0, SEEK_CUR));
+  printf(&#34;offset (fd1): %d\n&#34;, (int) lseek(fd1, 0, SEEK_CUR));
+  printf(&#34;offset (fd2): %d\n&#34;, (int) lseek(fd2, 0, SEEK_CUR));
+  printf(&#34;offset (fd3): %d\n&#34;, (int) lseek(fd3, 0, SEEK_CUR));
 
   read(fd2, buff, 4);
   write(1, buff, 4);
 
-  printf(&quot;-----\n&quot;);
+  printf(&#34;-----\n&#34;);
 
-  printf(&quot;offset (fd1): %d\n&quot;, (int) lseek(fd1, 0, SEEK_CUR));
-  printf(&quot;offset (fd2): %d\n&quot;, (int) lseek(fd2, 0, SEEK_CUR));
-  printf(&quot;offset (fd3): %d\n&quot;, (int) lseek(fd3, 0, SEEK_CUR));
+  printf(&#34;offset (fd1): %d\n&#34;, (int) lseek(fd1, 0, SEEK_CUR));
+  printf(&#34;offset (fd2): %d\n&#34;, (int) lseek(fd2, 0, SEEK_CUR));
+  printf(&#34;offset (fd3): %d\n&#34;, (int) lseek(fd3, 0, SEEK_CUR));
 
   close(fd1);
   fgets(buff, BUFSIZ - 1, stdin);
@@ -416,13 +417,13 @@ int main(int argc, char *argv[]) {
   char write_buffer[BUFSIZ];
 
   if (argc != 3) {
-    printf(&quot;usage: %s &lt;IP Address&gt; &lt;Port Number&gt;\n&quot;, argv[0]);
+    printf(&#34;usage: %s &lt;IP Address&gt; &lt;Port Number&gt;\n&#34;, argv[0]);
     return -1;
   }
 
   connect_sd = socket(PF_INET, SOCK_STREAM, 0);
 
-  printf(&quot;=== client program ===\n&quot;);
+  printf(&#34;=== client program ===\n&#34;);
 
   memset(&amp;client_addr, 0, sizeof(client_addr));
   client_addr.sin_family = AF_INET;
@@ -431,10 +432,10 @@ int main(int argc, char *argv[]) {
 
   connect(connect_sd, (struct sockaddr *) &amp;client_addr, sizeof(client_addr));
 
-  send(connect_sd, &quot;normal_msg1&quot;, strlen(&quot;normal_msg1&quot;), 0);
-  send(connect_sd, &quot;normal_msg2&quot;, strlen(&quot;normal_msg2&quot;), 0);
-  send(connect_sd, &quot;urgent_msg&quot;, strlen(&quot;urgent msg&quot;), MSG_OOB);
-  send(connect_sd, &quot;normal_msg3&quot;, strlen(&quot;normal_msg3&quot;), 0);
+  send(connect_sd, &#34;normal_msg1&#34;, strlen(&#34;normal_msg1&#34;), 0);
+  send(connect_sd, &#34;normal_msg2&#34;, strlen(&#34;normal_msg2&#34;), 0);
+  send(connect_sd, &#34;urgent_msg&#34;, strlen(&#34;urgent msg&#34;), MSG_OOB);
+  send(connect_sd, &#34;normal_msg3&#34;, strlen(&#34;normal_msg3&#34;), 0);
   close(connect_sd);
 
   return 0;
@@ -463,7 +464,7 @@ int main(int argc, char *argv[]) {
   struct sigaction act;
 
   if (argc != 2) {
-    printf(&quot;usage: %s [port number]\n&quot;, argv[0]);
+    printf(&#34;usage: %s [port number]\n&#34;, argv[0]);
     return -1;
   }
 
@@ -471,7 +472,7 @@ int main(int argc, char *argv[]) {
   sigemptyset(&amp;act.sa_mask);
   act.sa_flags = 0;
 
-  printf(&quot;server start...\n&quot;);
+  printf(&#34;server start...\n&#34;);
   listen_sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
   memset(&amp;server_addr, 0, sizeof(server_addr));
@@ -484,21 +485,21 @@ int main(int argc, char *argv[]) {
 
   client_addr_len = sizeof(client_addr);
   connect_sd = accept(listen_sd, (struct sockaddr *) &amp;client_addr, &amp;client_addr_len);
-  fprintf(stderr, &quot;a client is connected...\n&quot;);
+  fprintf(stderr, &#34;a client is connected...\n&#34;);
 
   fcntl(connect_sd, F_SETOWN, getpid());
   state = sigaction(SIGURG, &amp;act, 0);
 
   while (1) {
     read_len = recv(connect_sd, read_buffer, sizeof(read_buffer), 0);
-    read_buffer[read_len] = '\0';
-    printf(&quot;client: %s\n&quot;, read_buffer);
+    read_buffer[read_len] = &#39;\0&#39;;
+    printf(&#34;client: %s\n&#34;, read_buffer);
     if (read_len == 0) {
       close(connect_sd);
       break;
     }
   }
-  fprintf(stderr, &quot;the client is disconnected.\n&quot;);
+  fprintf(stderr, &#34;the client is disconnected.\n&#34;);
   close(listen_sd);
   return 0;
 }
@@ -508,10 +509,9 @@ void urgent_handler(int sig) {
   char read_buffer[BUFSIZ];
 
   read_len = recv(connect_sd, read_buffer, sizeof(read_buffer), MSG_OOB);
-  read_buffer[read_len] = '\0';
-  printf(&quot;client(urgent): %s\n&quot;, read_buffer);
+  read_buffer[read_len] = &#39;\0&#39;;
+  printf(&#34;client(urgent): %s\n&#34;, read_buffer);
 }
-
 </code></pre><ul>
 <li>
 <p><code>OOB</code> 전송에 대해서 정리하자면 긴급 데이터 처리를 위해서 <code>OOB</code> 전송을 하더라도 데이터가 빨리 전송되는 것은 아니며 데이터 중에 한 바이트만 긴급 데이터로 취급된다는 것을 알 수 있다.</p>
@@ -559,9 +559,9 @@ void urgent_handler(int sig) {
 </ul>
 <pre tabindex="0"><code>FILE *fp;
 
-fp = fopen(&quot;filename.txt&quot;, &quot;r&quot;);
+fp = fopen(&#34;filename.txt&#34;, &#34;r&#34;);
 ...
-fprintffp, &quot;....&quot;);
+fprintffp, &#34;....&#34;);
 ....
 fclose(fp);
 </code></pre><ul>
@@ -612,12 +612,12 @@ int main(int argc, char *argv[]) {
   FILE *wfp;
 
   if (argc != 3) {
-    printf(&quot;usage: %s &lt;IP Address&gt; &lt;Port Number&gt;\n&quot;, argv[0]);
+    printf(&#34;usage: %s &lt;IP Address&gt; &lt;Port Number&gt;\n&#34;, argv[0]);
     return -1;
   }
 
   connect_sd = socket(PF_INET, SOCK_STREAM, 0);
-  printf(&quot;=== client program ===\n&quot;);
+  printf(&#34;=== client program ===\n&#34;);
 
   memset(&amp;client_addr, 0, sizeof(client_addr));
   client_addr.sin_family = AF_INET;
@@ -625,18 +625,17 @@ int main(int argc, char *argv[]) {
   client_addr.sin_port = htons(atoi(argv[2]));
 
   connect(connect_sd, (struct sockaddr *)&amp;client_addr, sizeof(client_addr));
-  wfp = fdopen(connect_sd, &quot;w&quot;);
+  wfp = fdopen(connect_sd, &#34;w&#34;);
   while (1) {
-    printf(&quot;send msg: &quot;);
+    printf(&#34;send msg: &#34;);
     fgets(write_buffer, BUFSIZ, stdin);
     fputs(write_buffer, wfp);
     fflush(wfp);
-    if (!strcmp(write_buffer, &quot;END\n&quot;)) break;
+    if (!strcmp(write_buffer, &#34;END\n&#34;)) break;
   }
   fclose(wfp);
   return 0;
 }
-
 </code></pre><p><strong>서버</strong></p>
 <pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -654,11 +653,11 @@ int main(int argc, char *argv[]) {
   FILE *rfp;
 
   if (argc != 2) {
-    printf(&quot;usage %s [port number]\n&quot;, argv[0]);
+    printf(&#34;usage %s [port number]\n&#34;, argv[0]);
     return -1;
   }
 
-  printf(&quot;server start...\n&quot;);
+  printf(&#34;server start...\n&#34;);
   listen_sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
   memset(&amp;server_addr, 0, sizeof(server_addr));
@@ -673,19 +672,18 @@ int main(int argc, char *argv[]) {
   client_addr_len = sizeof(client_addr);
 
   connect_sd = accept(listen_sd, (struct sockaddr*)&amp;client_addr, &amp;client_addr_len);
-  fprintf(stderr, &quot;a client is connected...\n&quot;);
+  fprintf(stderr, &#34;a client is connected...\n&#34;);
 
-  rfp = fdopen(connect_sd, &quot;r&quot;);
+  rfp = fdopen(connect_sd, &#34;r&#34;);
 
   while (!feof(rfp)) {
     fgets(read_buffer, BUFSIZ, rfp);
-    printf(&quot;%s&quot;, read_buffer);
+    printf(&#34;%s&#34;, read_buffer);
   }
-  fprintf(stderr, &quot;the client is disconnected. \n&quot;);
+  fprintf(stderr, &#34;the client is disconnected. \n&#34;);
   fclose(rfp);
   return 0;
 }
-
 </code></pre><p><img src="https://dl.dropbox.com/s/q3lp1q6nxe1d91s/Screen%20Shot%202021-08-17%20at%203.43.38%20AM.png" alt=""></p>
 <p><img src="https://dl.dropbox.com/s/r63x0947s1x2kp0/Screen%20Shot%202021-08-17%20at%203.44.34%20AM.png" alt=""></p>
 <h3 id="참고-문헌">참고 문헌</h3>
@@ -751,5 +749,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

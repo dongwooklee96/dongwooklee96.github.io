@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -165,23 +166,23 @@ int main ()
   child_pid = fork ();
   if (child_pid &gt; 0) {
     // parent process will sleep for 30 seconds and exit, without a call to wait()
-    fprintf(stderr,&quot;parent process - %d\n&quot;, getpid());
+    fprintf(stderr,&#34;parent process - %d\n&#34;, getpid());
     sleep(30);
     exit(0);
   }
   else if (child_pid == 0) {
     // child process will exit immediately
-    fprintf(stderr,&quot;child process - %d\n&quot;, getpid());
+    fprintf(stderr,&#34;child process - %d\n&#34;, getpid());
     exit(0);
   }
   else if (child_pid == -1) {
     // fork() error
-    perror(&quot;fork() call failed&quot;);
+    perror(&#34;fork() call failed&#34;);
     exit (-1);
   }
   else {
     // this should not happen
-    fprintf(stderr, &quot;unknown return value of %d from fork() call&quot;, child_pid);
+    fprintf(stderr, &#34;unknown return value of %d from fork() call&#34;, child_pid);
     exit (-2);
   }
   return 0;
@@ -257,5 +258,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

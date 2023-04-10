@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -315,26 +316,26 @@ int main(int argc, char *argv[]) {
   int res, i;
 
   if (argc != 2) {
-    printf(&quot;usage: %s [port number]\n&quot;, argv[0]);
+    printf(&#34;usage: %s [port number]\n&#34;, argv[0]);
     return -1;
   }
 
-  printf(&quot;server start...\n&quot;);
+  printf(&#34;server start...\n&#34;);
   listen_sd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
-  if (listen_sd == -1) error_proc(&quot;socket&quot;);
+  if (listen_sd == -1) error_proc(&#34;socket&#34;);
   memset(&amp;server_addr, 0, sizeof(server_addr));
 
                                                                                         31,0-1        10%
         } else { // 듣기 소켓 외의 다른 소켓이 읽기 준비 상태가 되면 IO를 수정
           read_len = read(i, read_buffer, sizeof(read_buffer) -1);
           if (read_len == 0) {
-            fprintf(stderr, &quot;a client is disconnected... \n&quot;);
+            fprintf(stderr, &#34;a client is disconnected... \n&#34;);
             FD_CLR(i, &amp;default_fds);
             close(i);
             continue;
           }
-          read_buffer[read_len] = '\0';
-          printf(&quot;client (%d): %s\n&quot;, i - 3, read_buffer);
+          read_buffer[read_len] = &#39;\0&#39;;
+          printf(&#34;client (%d): %s\n&#34;, i - 3, read_buffer);
           write(i, read_buffer, strlen(read_buffer));
         }
       }
@@ -345,10 +346,9 @@ int main(int argc, char *argv[]) {
 }
 
 void error_proc(const char *str) {
-  fprintf(stderr, &quot;error: %s\n&quot;, str);
+  fprintf(stderr, &#34;error: %s\n&#34;, str);
   exit(1);
 }
-
 </code></pre><ul>
 <li>
 <p><code>select()</code> 함수는 소켓 프로래밍에만 특화되어 있는 함수가 아니라 파일 디스크립터를 관리하는 방법을 제공하는 함수로 볼 수 있다.</p>
@@ -420,5 +420,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

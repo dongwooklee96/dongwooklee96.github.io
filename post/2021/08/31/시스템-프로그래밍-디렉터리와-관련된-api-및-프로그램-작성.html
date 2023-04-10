@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -195,7 +196,7 @@ int main(int argc, char *argv[]) {
   int i;
 
   if (argc &lt; 2) {
-    fprintf(stderr, &quot;%s: no argument\n&quot;, argv[0]);
+    fprintf(stderr, &#34;%s: no argument\n&#34;, argv[0]);
     exit(1);
   }
 
@@ -216,11 +217,10 @@ static void do_ls(char *path) {
     exit(1);
   }
   while (ent = readdir(d)) {
-    printf(&quot;%s\n&quot;, ent-&gt;d_name); // 더 읽어 들일 엔트리가 없을 때까지 (즉, NULL이 반환될 때까지) 이름을 출력한다.
+    printf(&#34;%s\n&#34;, ent-&gt;d_name); // 더 읽어 들일 엔트리가 없을 때까지 (즉, NULL이 반환될 때까지) 이름을 출력한다.
   }
   closedir(d);
 }
-
 </code></pre><p><img src="https://dl.dropbox.com/s/0lqtqhtpi797aln/Screen%20Shot%202021-08-31%20at%207.02.41%20PM.png" alt=""></p>
 <ul>
 <li>실행 결과는 위와 같다.</li>
@@ -328,7 +328,7 @@ int main(int argc, char *argv[]) {
   int i;
 
   if (argc &lt; 2) {
-    fprintf(stderr, &quot;%s: no arguments\n&quot;, argv[0]);
+    fprintf(stderr, &#34;%s: no arguments\n&#34;, argv[0]);
     exit(1);
   }
 
@@ -340,7 +340,6 @@ int main(int argc, char *argv[]) {
   }
   exit(0);
 }
-
 </code></pre><p><img src="https://dl.dropbox.com/s/5xe4zj3wrn5z3t5/Screen%20Shot%202021-08-31%20at%207.26.23%20PM.png" alt=""></p>
 <h3 id="디렉터리-삭제하기">디렉터리 삭제하기</h3>
 <hr>
@@ -359,7 +358,7 @@ int rmdir(const char *path);
 int main(int argc, char *argv[]) {
   int i;
   if (argc &lt; 2) {
-    fprintf(stderr, &quot;%s: no arguments\n&quot;, argv[0]);
+    fprintf(stderr, &#34;%s: no arguments\n&#34;, argv[0]);
     exit(1);
   }
 
@@ -370,7 +369,6 @@ int main(int argc, char *argv[]) {
     }
   }
 }
-
 </code></pre><p><img src="https://dl.dropbox.com/s/ldi7fgq7pca2qbs/Screen%20Shot%202021-08-31%20at%207.54.59%20PM.png" alt=""></p>
 <h3 id="참고-문헌">참고 문헌</h3>
 <ul>
@@ -434,5 +432,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

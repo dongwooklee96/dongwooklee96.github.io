@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -165,7 +166,7 @@
 <p>얼핏봐서는 차이점을 크게 못느껴서 인터넷을 찾아본 결과 좋은 글을 볼 수 있었다. <sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
 <p><code>@classmethod</code>와 <code>@staticmethod</code>는 상속에서 차이가 난다.</p>
 <pre tabindex="0"><code>class Person:
-    default= &quot;아빠&quot;
+    default= &#34;아빠&#34;
 
      def __init__(self):
         self.data = self.default
@@ -179,7 +180,7 @@
         return Person()
 
 class WhatPerson(Person):
-    default = &quot;엄마&quot;
+    default = &#34;엄마&#34;
 person1 = WhatPerson.class_person()    # return 엄마
 person2 = WhatPerson.static_person()   # return 아빠
 </code></pre><p>위와 같이 <code>@staticmethod</code>인 경우에는 부모 클래스의 속성 값을 가져오지만, <code>@classmethod</code>의 경우 cls 인자를 활용하여 클래스의 클래스 속성을 가져온다.</p>
@@ -187,20 +188,20 @@ person2 = WhatPerson.static_person()   # return 아빠
 <ul>
 <li><a href="https://julien.danjou.info/guide-python-static-class-abstract-methods/">The definitive guide on how to use static, class or abstract methods in Python</a></li>
 </ul>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p><a href="https://docs.python.org/3/library/functions.html#classmethod">https://docs.python.org/3/library/functions.html#classmethod</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p><a href="https://docs.python.org/3/library/functions.html#staticmethod">https://docs.python.org/3/library/functions.html#staticmethod</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p><a href="https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372">https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372</a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
     <a href="../../../../"> >> Home</a>
   </main>
@@ -259,5 +260,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

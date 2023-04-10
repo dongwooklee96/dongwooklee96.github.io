@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -141,8 +142,8 @@ import java.util.concurrent.ExecutionException;
 public class Main {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         CompletableFuture&lt;String&gt; future = CompletableFuture.supplyAsync(() -&gt; {
-            System.out.println(&quot;hello &quot; + Thread.currentThread().getName());
-            return &quot;Hello&quot;;
+            System.out.println(&#34;hello &#34; + Thread.currentThread().getName());
+            return &#34;Hello&#34;;
         });
         System.out.println(future.get());
     }
@@ -164,8 +165,8 @@ public class Main {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         ExecutorService executorService = Executors.newFixedThreadPool(4);
         CompletableFuture&lt;Void&gt; future = CompletableFuture.supplyAsync(() -&gt; {
-            System.out.println(&quot;hello &quot; + Thread.currentThread().getName());
-            return &quot;Hello&quot;;
+            System.out.println(&#34;hello &#34; + Thread.currentThread().getName());
+            return &#34;Hello&#34;;
         }, executorService).thenRunAsync(() -&gt; {
             System.out.println(Thread.currentThread().getName());
         }, executorService);
@@ -191,8 +192,8 @@ import java.util.concurrent.ExecutionException;
 public class Main {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         CompletableFuture&lt;String&gt; hello = CompletableFuture.supplyAsync(() -&gt; {
-            System.out.println(&quot;Hello &quot; + Thread.currentThread().getName());
-            return &quot;Hello&quot;;
+            System.out.println(&#34;Hello &#34; + Thread.currentThread().getName());
+            return &#34;Hello&#34;;
         });
 
         CompletableFuture&lt;String&gt; future = hello.thenCompose(Main::getWorld);
@@ -202,8 +203,8 @@ public class Main {
 
     private static CompletableFuture&lt;String&gt; getWorld(String message) {
         return CompletableFuture.supplyAsync(() -&gt; {
-            System.out.println(&quot;World &quot; + Thread.currentThread().getName());
-            return message + &quot; World&quot;;
+            System.out.println(&#34;World &#34; + Thread.currentThread().getName());
+            return message + &#34; World&#34;;
         });
     }
 }
@@ -218,16 +219,16 @@ import java.util.concurrent.Executors;
 public class Main {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         CompletableFuture&lt;String&gt; hello = CompletableFuture.supplyAsync(() -&gt; {
-            System.out.println(&quot;Hello &quot; + Thread.currentThread().getName());
-            return &quot;Hello&quot;;
+            System.out.println(&#34;Hello &#34; + Thread.currentThread().getName());
+            return &#34;Hello&#34;;
         });
 
         CompletableFuture&lt;String&gt; world = CompletableFuture.supplyAsync(() -&gt; {
-            System.out.println(&quot;World &quot; + Thread.currentThread().getName());
-            return &quot;World&quot;;
+            System.out.println(&#34;World &#34; + Thread.currentThread().getName());
+            return &#34;World&#34;;
         });
 
-        CompletableFuture&lt;String&gt; future = hello.thenCombine(world, (h, w) -&gt; h + &quot; &quot; + w);
+        CompletableFuture&lt;String&gt; future = hello.thenCombine(world, (h, w) -&gt; h + &#34; &#34; + w);
         System.out.println(future.get());
     }
 }
@@ -252,11 +253,11 @@ public class Main {
                 throw new IllegalArgumentException();
             }
 
-            System.out.println(&quot;Hello &quot; + Thread.currentThread().getName());
-            return &quot;Hello&quot;;
+            System.out.println(&#34;Hello &#34; + Thread.currentThread().getName());
+            return &#34;Hello&#34;;
         }).exceptionally(ex -&gt; {
             System.out.println(ex);
-            return &quot;Error&quot;;
+            return &#34;Error&#34;;
         });
 
         System.out.println(hello.get());
@@ -276,12 +277,12 @@ public class Main {
                 throw new IllegalArgumentException();
             }
 
-            System.out.println(&quot;Hello &quot; + Thread.currentThread().getName());
-            return &quot;Hello&quot;;
+            System.out.println(&#34;Hello &#34; + Thread.currentThread().getName());
+            return &#34;Hello&#34;;
         }).handle((result, ex) -&gt; {
             if (ex != null) {
                 System.out.println(ex);
-                return &quot;ERROR!&quot;;
+                return &#34;ERROR!&#34;;
             }
             return result;
         });
@@ -352,5 +353,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -134,19 +135,19 @@
 <p>아래는 <code>groupby</code>를 사용한 예제이다.</p>
 <pre tabindex="0"><code>from itertools import groupby
 
-things = [(&quot;animal&quot;, &quot;bear&quot;), (&quot;animal&quot;, &quot;duck&quot;), (&quot;plant&quot;, &quot;cactus&quot;), (&quot;vehicle&quot;, &quot;speed boat&quot;), (&quot;vehicle&quot;, &quot;school bus&quot;)]
+things = [(&#34;animal&#34;, &#34;bear&#34;), (&#34;animal&#34;, &#34;duck&#34;), (&#34;plant&#34;, &#34;cactus&#34;), (&#34;vehicle&#34;, &#34;speed boat&#34;), (&#34;vehicle&#34;, &#34;school bus&#34;)]
 
 for key, group in groupby(things, lambda x: x[0]):
     for thing in group:
-        print(&quot;A %s is a %s.&quot; % (thing[1], key))
-    print(&quot;&quot;)
+        print(&#34;A %s is a %s.&#34; % (thing[1], key))
+    print(&#34;&#34;)
 </code></pre><p>키 값으로 튜플의 첫 번째 값을 사용하여 정렬 하였고, 키 값에 따른 그룹이 생성될 때마다 이를 출력한 것이다.</p>
 <h4 id="주의할-점">주의할 점</h4>
 <ul>
 <li>앞에서 말했듯이 사용하기 전에, 키 값을 기준으로 정렬이 된 리스트인지, 그리고 보장을 하지 못한다면 정렬을 해줘야하는 것을 알 수 있다.</li>
 </ul>
-<pre tabindex="0"><code># [k for k, g in groupby('AAAABBBCCDAABBB')] --&gt; A B C D A B
-# [list(g) for k, g in groupby('AAAABBBCCD')] --&gt; AAAA BBB CC D
+<pre tabindex="0"><code># [k for k, g in groupby(&#39;AAAABBBCCDAABBB&#39;)] --&gt; A B C D A B
+# [list(g) for k, g in groupby(&#39;AAAABBBCCD&#39;)] --&gt; AAAA BBB CC D
 </code></pre><p>정렬을 해주지 않으면 위와 같은 형태로 만들어 지게 된다.</p>
 <h3 id="참고-문헌">참고 문헌</h3>
 <ul>
@@ -211,5 +212,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

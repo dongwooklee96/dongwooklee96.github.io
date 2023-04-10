@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -128,14 +129,14 @@
 </ul>
 <h3 id="사용-예제">사용 예제</h3>
 <hr>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python3" data-lang="python3"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestMathUnitTest</span>(unittest<span style="color:#f92672">.</span>TestCase):
-    <span style="color:#a6e22e">@parameterized</span><span style="color:#f92672">.</span>expand([
-            (<span style="color:#e6db74">&#34;negative&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>),
-                    (<span style="color:#e6db74">&#34;integer&#34;</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>),
-                        ])
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_add</span>(self, name, a, b, expected):
-            assert_equal(a <span style="color:#f92672">+</span> b, expected)
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestMathUnitTest</span>(unittest<span style="color:#f92672">.</span>TestCase):
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">@parameterized</span><span style="color:#f92672">.</span>expand([
+</span></span><span style="display:flex;"><span>            (<span style="color:#e6db74">&#34;negative&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>),
+</span></span><span style="display:flex;"><span>                    (<span style="color:#e6db74">&#34;integer&#34;</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">5</span>),
+</span></span><span style="display:flex;"><span>                        ])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_add</span>(self, name, a, b, expected):
+</span></span><span style="display:flex;"><span>            assert_equal(a <span style="color:#f92672">+</span> b, expected)
+</span></span></code></pre></div><ul>
 <li>
 <p>간단하게 <code>@parameterized.expand</code> 라는 데코레이터를 사용하고, 리스트안에 튜플 형태로 케이스를 추가하면 된다.</p>
 </li>
@@ -205,5 +206,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 

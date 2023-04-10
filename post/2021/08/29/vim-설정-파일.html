@@ -47,6 +47,7 @@
 
     </ul>
   </nav>
+  
 </header>
 
     <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
@@ -122,8 +123,8 @@ set shiftwidth=8
 
 set nu
 
-&quot; 불필요한 공백이나 들여쓰기에 빨간색으로 보여준다.
-if has(&quot;autocmd&quot;)
+&#34; 불필요한 공백이나 들여쓰기에 빨간색으로 보여준다.
+if has(&#34;autocmd&#34;)
   highlight ExtraWhitespace ctermbg=red guibg=red
   match ExtraWhitespace /\s\+$\|\t/
   autocmd BufWinEnter * match ExtraWhitespace /\s\+$\|\t/
@@ -132,20 +133,20 @@ if has(&quot;autocmd&quot;)
   autocmd BufWinLeave * call clearmatches()
 endif
 
-&quot; 파일을 열었을 때 이전의 위치를 기억하고 다시 그 위치에서 열어주는 기능
-if has(&quot;autocmd&quot;)
-  au bufreadpost * if line(&quot;'\&quot;&quot;) &gt; 0 &amp;&amp; line(&quot;'\&quot;&quot;) &lt;= line(&quot;$&quot;)
-    \| exe &quot;normal g '\&quot;&quot; |
+&#34; 파일을 열었을 때 이전의 위치를 기억하고 다시 그 위치에서 열어주는 기능
+if has(&#34;autocmd&#34;)
+  au bufreadpost * if line(&#34;&#39;\&#34;&#34;) &gt; 0 &amp;&amp; line(&#34;&#39;\&#34;&#34;) &lt;= line(&#34;$&#34;)
+    \| exe &#34;normal g &#39;\&#34;&#34; |
 endif
 
-&quot; CTRL + 이동키로 파일간 이동 가능하게 하는 핫키
+&#34; CTRL + 이동키로 파일간 이동 가능하게 하는 핫키
 
 nmap &lt;C-H&gt; &lt;C-W&gt;h
 nmap &lt;C-J&gt; &lt;C-W&gt;j
 nmap &lt;C-K&gt; &lt;C-W&gt;k
 nmap &lt;C-L&gt; &lt;C-W&gt;l
 
-&quot; CTAGS / CSCOPE
+&#34; CTAGS / CSCOPE
 set tags=/home/reallinux/git/linux/tags
 set csprg=/usr/local/bin/cscope
 cs add /home/reallinux/git/linux/cscope.out
@@ -212,5 +213,6 @@ fathom('trackPageview');
 </script>
 
   </body>
+  
 </html>
 
