@@ -6,7 +6,85 @@
     <description>Recent content in Posts on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 10 Apr 2023 20:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 27 Jun 2023 22:44:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>알(egg)</title>
+      <link>https://dongwooklee96.github.io/post/2023/06/27/%EC%95%8Cegg.html</link>
+      <pubDate>Tue, 27 Jun 2023 22:44:33 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2023/06/27/%EC%95%8Cegg.html</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/fcv6ceacr9zmdz0/images.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/nly9zpp84tiag2a/1.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/qcgbc34ew2is0t2/download.jpg&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/7mvkg053794vdfy/ZRZX7LE44NHWBIMER56PMGADKE.avif&#34; alt=&#34;&#34;&gt;
+&lt;img src=&#34;https://dl.dropbox.com/s/jiwpajoxhnb5ig4/5LZHMJZ3QVHYXLVJBLIMOIOVDA.avif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>선형대수학 공부 - 필드</title>
+      <link>https://dongwooklee96.github.io/post/2023/04/15/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80-%ED%95%84%EB%93%9C.html</link>
+      <pubDate>Sat, 15 Apr 2023 16:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2023/04/15/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80-%ED%95%84%EB%93%9C.html</guid>
+      <description>&lt;h3 id=&#34;필드&#34;&gt;필드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;선형 대수학에서 말하는 필드는 수학적 체계를 나타내는 용어로 아래와 같은 조건을 만족하는 비어있지 않는 집합 F 와 두가지 연산 즉, 덧셈하고 곱셈으로 구성된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 덧셈에 대한 결합 법칙: a + (b + c) = (a + b) + c
+2. 덧셈에 대한 항등원 : a + 0 = a
+3. 덧셈에 대한 역원 : a + (-a) = 0
+4. 덧셈에 대한 교환 법칙 : a + b = b + a
+5. 곱셈에 대한 결합 법칙 : a * (b * c) = (a * b) * c
+6. 곱셈에 대한 항등원 : a * 1 = a
+7. 곱셈에 대한 역원 : a * a^(-1) = 1 (단, a ≠ 0)
+8. 곱셈에 대한 교환 법칙 : a * b = b * a
+9. 분배 법칙 : a * (b + c) = a * b + a * c
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;선형대학에서-필드가-중요한-이유&#34;&gt;선형대학에서 필드가 중요한 이유&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;선형대수학에서 필드가 중요한 이유는 여러가지가 있는데, 필드는 벡터 공간과 선형 변환, 그리고 선형 방정식에 연관된 여러 개념들의 기초를 제공하며, 이러한 개념들은 선형 대수학의 핵심적인 부분이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;백터 공간의 기초 : 백터 공간의 필드 위에 정의된다. 즉, 벡터들의 성분은 해당 필드의 원소로 구성되어있다. 필드가 주어지면 벡터 공간의 구조와 성질이 결정되며, 벡터 공간에서의 연산 (덧셈, 스칼라 곱) 은 체의 연산에 의존한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;선형 방정식과 연립 선형 방정식은은 필드 위에서 정의되며, 연립 선형 방정식의 해를 구하는 과정에서 가우스 소거법, 가우스-조르당 소거법 등의 방법을 사용하며, 이러한 방법들은 필드의 연산을 기반으로 한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;선형 변환은 필드 위의 백터 공간의 사이의 함수로 정의되며, 행렬은 선형 변환을 나타내는 표현이다. 행렬의 연산 (덧셈, 곱셈, 역행렬)은 필드의 연산에 의존하며, 행렬의 성질과 행렬식의 계산도 필드와 관련되어 있다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;고유값, 고유벡터 및 대각화 : 필드 위의 백터공간에서 선형 변환의 고유값과 고유 벡터를 찾을 수 있으며, 이를 통해 대각화 가능한 경우 행렬을 대각화 할 수 있다. 이러한 과정에서도 필드의 연산이 사용된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;다양한 수학 및 공학분야의 응용 : 필드는 선형 대수학 뿐만 아니라 다양한 수학 및 공학 분야에서 중요한 역할을 한다. 예를 들어서 &lt;code&gt;finite field&lt;/code&gt;는 암호학, 에러 검출 및 수정 코드, 다항식 보간 등에서 사용되며, 복소수 필드는 공학에서의 신호처리, 제어 이론 등에 활용된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;정수의 집합인 &lt;code&gt;Z = {... , -2, -1, 0, 1, 2, ...}&lt;/code&gt; 는 실수 집합 &lt;code&gt;R&lt;/code&gt;의 부분 집합이며, 이는 두 정수 &lt;code&gt;m&lt;/code&gt;, &lt;code&gt;n&lt;/code&gt;이 &lt;code&gt;Z&lt;/code&gt;에 속하면 해당 정소의 합 &lt;code&gt;m + n&lt;/code&gt; 과 곱 &lt;code&gt;m * n&lt;/code&gt; 역시 &lt;code&gt;Z&lt;/code&gt;에 속하게 되어, 연산을 통해서 다시 &lt;code&gt;Z&lt;/code&gt;의 원소가 되는 것을 말한다. 이때 합과 곱의 연산은 항상 상위 집합인 &lt;code&gt;R&lt;/code&gt; 에서 정의된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;부분-집합&#34;&gt;부분 집합&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;F&lt;/code&gt;의 부분 집합 &lt;code&gt;F_0&lt;/code&gt; 은 &lt;code&gt;F&lt;/code&gt; 의 연산에 대해서 닫혀있다. 따라서 해당 부분 집합은 &lt;code&gt;F&lt;/code&gt; 필드에서 성립할 수 있는 연산 조건이 모두 만족한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$ \text{if} \ a,b \in F_0, \text{then} \ a + b \in F_0 \ and \ ab \in F_0 $$&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
+    </item>
+    
     <item>
       <title>코딩 더 매트릭스 - 챕터 4 (선형공간)</title>
       <link>https://dongwooklee96.github.io/post/2023/04/10/%EC%BD%94%EB%94%A9-%EB%8D%94-%EB%A7%A4%ED%8A%B8%EB%A6%AD%EC%8A%A4-%EC%B1%95%ED%84%B0-4-%EC%84%A0%ED%98%95%EA%B3%B5%EA%B0%84.html</link>
@@ -648,7 +726,7 @@ $$&lt;/p&gt;
 &lt;h3 id=&#34;사용-예제&#34;&gt;사용 예제&lt;/h3&gt;
 &lt;hr&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TestMathUnitTest&lt;/span&gt;(unittest&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;TestCase):
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@parameterized&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;expand([
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@parameterized.expand&lt;/span&gt;([
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;negative&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;),
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;integer&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;),
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        ])
@@ -7954,10 +8032,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>스프링에서 @RequestMapping의 params 속성을 플라스크에서도 사용할 수 있을까?</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/02/%EC%8A%A4%ED%94%84%EB%A7%81%EC%97%90%EC%84%9C-requestmapping%EC%9D%98-params-%EC%86%8D%EC%84%B1%EC%9D%84-%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC%EC%97%90%EC%84%9C%EB%8F%84-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C.html</link>
+      <link>https://dongwooklee96.github.io/post/2021/12/02/%EC%8A%A4%ED%94%84%EB%A7%81%EC%97%90%EC%84%9C-@requestmapping%EC%9D%98-params-%EC%86%8D%EC%84%B1%EC%9D%84-%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC%EC%97%90%EC%84%9C%EB%8F%84-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C.html</link>
       <pubDate>Thu, 02 Dec 2021 15:02:39 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/12/02/%EC%8A%A4%ED%94%84%EB%A7%81%EC%97%90%EC%84%9C-requestmapping%EC%9D%98-params-%EC%86%8D%EC%84%B1%EC%9D%84-%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC%EC%97%90%EC%84%9C%EB%8F%84-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C.html</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/12/02/%EC%8A%A4%ED%94%84%EB%A7%81%EC%97%90%EC%84%9C-@requestmapping%EC%9D%98-params-%EC%86%8D%EC%84%B1%EC%9D%84-%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC%EC%97%90%EC%84%9C%EB%8F%84-%EC%82%AC%EC%9A%A9%ED%95%A0-%EC%88%98-%EC%9E%88%EC%9D%84%EA%B9%8C.html</guid>
       <description>&lt;h3 id=&#34;스프링에서는-url-분기를-params를-통해서-가능하다&#34;&gt;스프링에서는 URL 분기를 params를 통해서 가능하다.&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -20560,7 +20638,7 @@ void error_proc(const char *str) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nums &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; list(random&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;randint(&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#f92672&#34;&gt;in&lt;/span&gt; range(&lt;span style=&#34;color:#ae81ff&#34;&gt;100&lt;/span&gt;))
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mark&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;benchmark(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.mark.benchmark&lt;/span&gt;(
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    group&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;group-name&amp;#34;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    min_rounds&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    timer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time,
@@ -20572,7 +20650,7 @@ void error_proc(const char *str) {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;func1&lt;/span&gt;():
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        list(dict&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;fromkeys(nums))
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;mark&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;benchmark(
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;@pytest.mark.benchmark&lt;/span&gt;(
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    group&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;group-name&amp;#34;&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    min_rounds&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;10000&lt;/span&gt;,
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    timer&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;time,
@@ -25793,7 +25871,7 @@ const int * const * pcpci;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;voltage&lt;/span&gt;(self):
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_voltage
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;@voltage&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;setter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;@voltage.setter&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;voltage&lt;/span&gt;(self, voltage):
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_voltage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; voltage
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;current &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_voltage &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;ohms
@@ -25813,7 +25891,7 @@ const int * const * pcpci;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ohms&lt;/span&gt;(self):
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_ohms
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@ohms&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;setter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@ohms.setter&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ohms&lt;/span&gt;(self, ohms):
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; ohms &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;:
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;raise&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ValueError&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;{&lt;/span&gt;ohms&lt;span style=&#34;color:#e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt; ohms must be &amp;gt; 0&amp;#34;&lt;/span&gt;)
@@ -25834,7 +25912,7 @@ const int * const * pcpci;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ohms&lt;/span&gt;(self):
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; self&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;_ohms
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@ohms&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;setter
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;@ohms.setter&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ohms&lt;/span&gt;(self, ohms):
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; hasattr(self, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;_ohms&amp;#39;&lt;/span&gt;):
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;raise&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ValueError&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Can&amp;#39;t set attribute&amp;#34;&lt;/span&gt;)
@@ -37241,6 +37319,9 @@ for key, group in groupby(things, lambda x: x[0]):
 &lt;p&gt;DRY 원칙은 모든 곳에 적용할 수 있을 것이다. (코드, 테스트, 문서화) 그리고 내가 DRY 원칙을 잘 지키고 있는지 생각하면 그렇지 못한 것 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;실용주의 프로그래머에서는 중복을 4가지로 분리한다.&lt;/p&gt;
 &lt;ul&gt;
@@ -37297,6 +37378,9 @@ for key, group in groupby(things, lambda x: x[0]):
 &lt;h3 id=&#34;good-잘한점&#34;&gt;Good (잘한점)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;여태까지 주석을 코드의 목적을 위해서 적기 보다는 과정을 설명하기 위해서 적었던 것 같다.&lt;/li&gt;
 &lt;li&gt;코드에서 중복된 부분이 많음에도 불구하고, 그냥 무심코 지나간 적이 많았던 것 같다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -37767,10 +37851,10 @@ for key, group in groupby(things, lambda x: x[0]):
     
     <item>
       <title>파이썬 @classmethod와 @staticmethod 차이</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4.html</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-@classmethod%EC%99%80-@staticmethod-%EC%B0%A8%EC%9D%B4.html</link>
       <pubDate>Wed, 03 Mar 2021 08:45:13 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4.html</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-@classmethod%EC%99%80-@staticmethod-%EC%B0%A8%EC%9D%B4.html</guid>
       <description>&lt;p&gt;파이썬을 코딩을 하다가 &lt;code&gt;@classmethod&lt;/code&gt; 데코레이터가 붙어 있는 메서드를 볼 수 있었다. 정확히 어떤 역할을 하는지 몰라서 문서에서 찾아보았다.&lt;/p&gt;
 &lt;h4 id=&#34;classmethod&#34;&gt;@classmethod&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109730703-420ca780-7bfd-11eb-9a41-47561874c29e.png&#34; alt=&#34;Screen Shot 2021-03-03 at 8 48 29 AM&#34;&gt;&lt;/p&gt;
@@ -38340,7 +38424,13 @@ public class Main {
 &lt;h3 id=&#34;good-잘한점&#34;&gt;Good (잘한점)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;코딩을 할 때, 내가 작성한 코드보다 더 나은 방법은 없는지 끊임없이 고민을 할 것이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
@@ -39159,6 +39249,7 @@ def assertMoney(money, count):
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Facts(사실, 객관) 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
 &lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
@@ -39262,6 +39353,9 @@ def assertMoney(money, count):
 &lt;li&gt;자신이 어떤 것을 알거나 배웠다고 어필하는 것보다 학습하는데 어떤 어려움이  있었는데, 극복을 한 내용을 적는 것이 더 공감을 받을 수 있다.&lt;/li&gt;
 &lt;li&gt;자기소개서에서 얻고 싶은 가장 큰 부분은, 생각에만 그치지 않고 얼마나 행동으로 이를 실천했는지, 또 얼마만큼의 성취를 만들었는지 어필하는 것이 더 중요한 것 같다.&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;나는 사소한 일에도 집중 및 최선을 다하면서 모든 일에 몰입을 할 것이다.&lt;/li&gt;
 &lt;li&gt;일을 하면서 배울 수 있는 것을 최대한 끌어내면서 내가 어떤 것을 배울 수 있는지, 고민을 해봐야하는지 생각을 하며 고민을 하는 내용을 기록할 것이다.&lt;/li&gt;
 &lt;li&gt;내가 작성한 코드, 그리고 옵션값 하나하나 이유를 가지고 코딩을 할 것이다. 따라서 내가 작성한 코드를 커밋할 때는 이렇게 작성한 이유, 그리고 이렇게 옵션을 준 이유를 무조건 적기로 하자!&lt;/li&gt;
@@ -39312,7 +39406,13 @@ def assertMoney(money, count):
 &lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
@@ -39615,18 +39715,18 @@ def assertMoney(money, count):
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * s_lock(lock) - platform-independent portion of waiting for a spinlock.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; */&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;s_lock&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;volatile&lt;/span&gt; slock_t &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;lock, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;file, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; line, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;func)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;s_lock&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;volatile&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;slock_t&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;lock, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;file, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; line, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;char&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;func)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    SpinDelayStatus delayStatus;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    init_spin_delay(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;delayStatus, file, line, func);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;init_spin_delay&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;delayStatus, file, line, func);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (TAS_SPIN(lock))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#a6e22e&#34;&gt;TAS_SPIN&lt;/span&gt;(lock))
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        perform_spin_delay(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;delayStatus);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#a6e22e&#34;&gt;perform_spin_delay&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;delayStatus);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    finish_spin_delay(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;delayStatus);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;finish_spin_delay&lt;/span&gt;(&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;delayStatus);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; delayStatus.delays;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
@@ -39646,14 +39746,14 @@ def assertMoney(money, count):
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; *
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; * Side effect: cancel/die interrupts are held off until lock release.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt; */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LWLockAcquire(LWLock &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;lock, LWLockMode mode)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;LWLockAcquire&lt;/span&gt;(LWLock &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;lock, LWLockMode mode)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LOOP
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	LWLockAttemptLock() &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;함수를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;호출해서&lt;/span&gt; LW &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;시도한다&lt;/span&gt;.
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하면&lt;/span&gt; LOOP를 &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;탈출한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#a6e22e&#34;&gt;LWLockAttemptLock&lt;/span&gt;() &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;함수를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;호출해서&lt;/span&gt; LW &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;시도한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하면&lt;/span&gt; LOOP&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;탈출한다&lt;/span&gt;.
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;만일&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하지&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;못하면&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;대기&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;큐에&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;등록한다&lt;/span&gt;.
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;한&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;번&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;더&lt;/span&gt; LwLockAttemptLock() &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;함수를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;호출한다&lt;/span&gt;.
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;만일&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하면&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;대기&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;큐에&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;등록된&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;항목을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;삭제한&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;후&lt;/span&gt; LOOP를 &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;탈출한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;한&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;번&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;더&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LwLockAttemptLock&lt;/span&gt;() &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;함수를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;호출한다&lt;/span&gt;.
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;만일&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하면&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;대기&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;큐에&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;등록된&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;항목을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;삭제한&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;후&lt;/span&gt; LOOP&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;탈출한다&lt;/span&gt;.
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;만일&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;락을&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;획득하지&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;ㅁ소하면&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;대기&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;상태를&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;시작한다&lt;/span&gt;.
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	(&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;다른&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;프로세스가&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;깨워줄&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;때까지&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;대기&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;상태가&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;유지&lt;/span&gt; &lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;된다&lt;/span&gt;.)

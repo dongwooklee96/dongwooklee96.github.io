@@ -9,10 +9,10 @@
     <lastBuildDate>Wed, 03 Mar 2021 08:45:13 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%ED%94%8C%EB%9D%BC%EC%8A%A4%ED%81%AC/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>파이썬 @classmethod와 @staticmethod 차이</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4.html</link>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-@classmethod%EC%99%80-@staticmethod-%EC%B0%A8%EC%9D%B4.html</link>
       <pubDate>Wed, 03 Mar 2021 08:45:13 +0900</pubDate>
       
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-classmethod%EC%99%80-staticmethod-%EC%B0%A8%EC%9D%B4.html</guid>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-@classmethod%EC%99%80-@staticmethod-%EC%B0%A8%EC%9D%B4.html</guid>
       <description>&lt;p&gt;파이썬을 코딩을 하다가 &lt;code&gt;@classmethod&lt;/code&gt; 데코레이터가 붙어 있는 메서드를 볼 수 있었다. 정확히 어떤 역할을 하는지 몰라서 문서에서 찾아보았다.&lt;/p&gt;
 &lt;h4 id=&#34;classmethod&#34;&gt;@classmethod&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109730703-420ca780-7bfd-11eb-9a41-47561874c29e.png&#34; alt=&#34;Screen Shot 2021-03-03 at 8 48 29 AM&#34;&gt;&lt;/p&gt;

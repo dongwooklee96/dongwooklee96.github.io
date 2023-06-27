@@ -6,7 +6,71 @@
     <description>Recent content in 서평 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 10 Apr 2023 20:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%84%9C%ED%8F%89/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 15 Apr 2023 16:20:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%84%9C%ED%8F%89/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>선형대수학 공부 - 필드</title>
+      <link>https://dongwooklee96.github.io/post/2023/04/15/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80-%ED%95%84%EB%93%9C.html</link>
+      <pubDate>Sat, 15 Apr 2023 16:20:39 +0900</pubDate>
+      
+      <guid>https://dongwooklee96.github.io/post/2023/04/15/%EC%84%A0%ED%98%95%EB%8C%80%EC%88%98%ED%95%99-%EA%B3%B5%EB%B6%80-%ED%95%84%EB%93%9C.html</guid>
+      <description>&lt;h3 id=&#34;필드&#34;&gt;필드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;선형 대수학에서 말하는 필드는 수학적 체계를 나타내는 용어로 아래와 같은 조건을 만족하는 비어있지 않는 집합 F 와 두가지 연산 즉, 덧셈하고 곱셈으로 구성된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 덧셈에 대한 결합 법칙: a + (b + c) = (a + b) + c
+2. 덧셈에 대한 항등원 : a + 0 = a
+3. 덧셈에 대한 역원 : a + (-a) = 0
+4. 덧셈에 대한 교환 법칙 : a + b = b + a
+5. 곱셈에 대한 결합 법칙 : a * (b * c) = (a * b) * c
+6. 곱셈에 대한 항등원 : a * 1 = a
+7. 곱셈에 대한 역원 : a * a^(-1) = 1 (단, a ≠ 0)
+8. 곱셈에 대한 교환 법칙 : a * b = b * a
+9. 분배 법칙 : a * (b + c) = a * b + a * c
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;선형대학에서-필드가-중요한-이유&#34;&gt;선형대학에서 필드가 중요한 이유&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;선형대수학에서 필드가 중요한 이유는 여러가지가 있는데, 필드는 벡터 공간과 선형 변환, 그리고 선형 방정식에 연관된 여러 개념들의 기초를 제공하며, 이러한 개념들은 선형 대수학의 핵심적인 부분이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;백터 공간의 기초 : 백터 공간의 필드 위에 정의된다. 즉, 벡터들의 성분은 해당 필드의 원소로 구성되어있다. 필드가 주어지면 벡터 공간의 구조와 성질이 결정되며, 벡터 공간에서의 연산 (덧셈, 스칼라 곱) 은 체의 연산에 의존한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;선형 방정식과 연립 선형 방정식은은 필드 위에서 정의되며, 연립 선형 방정식의 해를 구하는 과정에서 가우스 소거법, 가우스-조르당 소거법 등의 방법을 사용하며, 이러한 방법들은 필드의 연산을 기반으로 한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;선형 변환은 필드 위의 백터 공간의 사이의 함수로 정의되며, 행렬은 선형 변환을 나타내는 표현이다. 행렬의 연산 (덧셈, 곱셈, 역행렬)은 필드의 연산에 의존하며, 행렬의 성질과 행렬식의 계산도 필드와 관련되어 있다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;고유값, 고유벡터 및 대각화 : 필드 위의 백터공간에서 선형 변환의 고유값과 고유 벡터를 찾을 수 있으며, 이를 통해 대각화 가능한 경우 행렬을 대각화 할 수 있다. 이러한 과정에서도 필드의 연산이 사용된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;다양한 수학 및 공학분야의 응용 : 필드는 선형 대수학 뿐만 아니라 다양한 수학 및 공학 분야에서 중요한 역할을 한다. 예를 들어서 &lt;code&gt;finite field&lt;/code&gt;는 암호학, 에러 검출 및 수정 코드, 다항식 보간 등에서 사용되며, 복소수 필드는 공학에서의 신호처리, 제어 이론 등에 활용된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;정수의 집합인 &lt;code&gt;Z = {... , -2, -1, 0, 1, 2, ...}&lt;/code&gt; 는 실수 집합 &lt;code&gt;R&lt;/code&gt;의 부분 집합이며, 이는 두 정수 &lt;code&gt;m&lt;/code&gt;, &lt;code&gt;n&lt;/code&gt;이 &lt;code&gt;Z&lt;/code&gt;에 속하면 해당 정소의 합 &lt;code&gt;m + n&lt;/code&gt; 과 곱 &lt;code&gt;m * n&lt;/code&gt; 역시 &lt;code&gt;Z&lt;/code&gt;에 속하게 되어, 연산을 통해서 다시 &lt;code&gt;Z&lt;/code&gt;의 원소가 되는 것을 말한다. 이때 합과 곱의 연산은 항상 상위 집합인 &lt;code&gt;R&lt;/code&gt; 에서 정의된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;부분-집합&#34;&gt;부분 집합&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;F&lt;/code&gt;의 부분 집합 &lt;code&gt;F_0&lt;/code&gt; 은 &lt;code&gt;F&lt;/code&gt; 의 연산에 대해서 닫혀있다. 따라서 해당 부분 집합은 &lt;code&gt;F&lt;/code&gt; 필드에서 성립할 수 있는 연산 조건이 모두 만족한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$ \text{if} \ a,b \in F_0, \text{then} \ a + b \in F_0 \ and \ ab \in F_0 $$&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
+    </item>
+    
     <item>
       <title>코딩 더 매트릭스 - 챕터 4 (선형공간)</title>
       <link>https://dongwooklee96.github.io/post/2023/04/10/%EC%BD%94%EB%94%A9-%EB%8D%94-%EB%A7%A4%ED%8A%B8%EB%A6%AD%EC%8A%A4-%EC%B1%95%ED%84%B0-4-%EC%84%A0%ED%98%95%EA%B3%B5%EA%B0%84.html</link>

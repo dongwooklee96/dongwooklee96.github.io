@@ -11098,6 +11098,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;p&gt;DRY 원칙은 모든 곳에 적용할 수 있을 것이다. (코드, 테스트, 문서화) 그리고 내가 DRY 원칙을 잘 지키고 있는지 생각하면 그렇지 못한 것 같다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;실용주의 프로그래머에서는 중복을 4가지로 분리한다.&lt;/p&gt;
 &lt;ul&gt;
@@ -11154,6 +11157,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;h3 id=&#34;good-잘한점&#34;&gt;Good (잘한점)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;여태까지 주석을 코드의 목적을 위해서 적기 보다는 과정을 설명하기 위해서 적었던 것 같다.&lt;/li&gt;
 &lt;li&gt;코드에서 중복된 부분이 많음에도 불구하고, 그냥 무심코 지나간 적이 많았던 것 같다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -11374,7 +11380,13 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;h3 id=&#34;good-잘한점&#34;&gt;Good (잘한점)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;bad-개선할-점&#34;&gt;Bad (개선할 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;코딩을 할 때, 내가 작성한 코드보다 더 나은 방법은 없는지 끊임없이 고민을 할 것이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
@@ -11781,6 +11793,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;Facts(사실, 객관) 실제로 내가 했던 일이나 겪었던 일의 사실을 적는다.&lt;/li&gt;
 &lt;li&gt;Feelings(느낌, 주관) 내가 했던 일을 하면서 느꼈던 감정이나 느낌을 적는다.&lt;/li&gt;
@@ -11884,6 +11897,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;li&gt;자신이 어떤 것을 알거나 배웠다고 어필하는 것보다 학습하는데 어떤 어려움이  있었는데, 극복을 한 내용을 적는 것이 더 공감을 받을 수 있다.&lt;/li&gt;
 &lt;li&gt;자기소개서에서 얻고 싶은 가장 큰 부분은, 생각에만 그치지 않고 얼마나 행동으로 이를 실천했는지, 또 얼마만큼의 성취를 만들었는지 어필하는 것이 더 중요한 것 같다.&lt;/li&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;나는 사소한 일에도 집중 및 최선을 다하면서 모든 일에 몰입을 할 것이다.&lt;/li&gt;
 &lt;li&gt;일을 하면서 배울 수 있는 것을 최대한 끌어내면서 내가 어떤 것을 배울 수 있는지, 고민을 해봐야하는지 생각을 하며 고민을 하는 내용을 기록할 것이다.&lt;/li&gt;
 &lt;li&gt;내가 작성한 코드, 그리고 옵션값 하나하나 이유를 가지고 코딩을 할 것이다. 따라서 내가 작성한 코드를 커밋할 때는 이렇게 작성한 이유, 그리고 이렇게 옵션을 준 이유를 무조건 적기로 하자!&lt;/li&gt;
@@ -11934,7 +11950,13 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;affimation-자기-선언&#34;&gt;Affimation (자기 선언)&lt;/h3&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;
