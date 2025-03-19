@@ -199,30 +199,30 @@
 </li>
 </ul>
 <table>
-<thead>
-<tr>
-<th>매크로</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>FD_ZERO(fd_set *fdset)</td>
-<td>fdset 변수의 모든 비트를 0으로 설정</td>
-</tr>
-<tr>
-<td>FD_SET(int fd, fd_set *fdset)</td>
-<td>fdset 변수 중 fd에 해당하는 비트를 1로 설정</td>
-</tr>
-<tr>
-<td>FD_CLR(int fd, fd_set *fdset)</td>
-<td>fdset 변수 중 fd에 해당하는 비트를 0으로 설정</td>
-</tr>
-<tr>
-<td>FD_ISSET(int fd, fd_set *fdset)</td>
-<td>fdset 변수 중 fd에 해당하는 비트가 1이면 양수를 반환한다.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>매크로</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>FD_ZERO(fd_set *fdset)</td>
+          <td>fdset 변수의 모든 비트를 0으로 설정</td>
+      </tr>
+      <tr>
+          <td>FD_SET(int fd, fd_set *fdset)</td>
+          <td>fdset 변수 중 fd에 해당하는 비트를 1로 설정</td>
+      </tr>
+      <tr>
+          <td>FD_CLR(int fd, fd_set *fdset)</td>
+          <td>fdset 변수 중 fd에 해당하는 비트를 0으로 설정</td>
+      </tr>
+      <tr>
+          <td>FD_ISSET(int fd, fd_set *fdset)</td>
+          <td>fdset 변수 중 fd에 해당하는 비트가 1이면 양수를 반환한다.</td>
+      </tr>
+  </tbody>
 </table>
 <ul>
 <li>
@@ -277,8 +277,7 @@
 <li>accept 호출로 전송 소켓 디스킙터를 관찰 대상에 등록한다.</li>
 <li>전송 소켓을 관찰하여 읽을 데이터가 있을 경우 입출력을 한다.</li>
 <li>루프 끝</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <h4 id="예제">예제</h4>
 <ul>
 <li>

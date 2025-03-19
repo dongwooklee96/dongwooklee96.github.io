@@ -428,35 +428,35 @@ int *const cpi = &amp;num;
 <pre tabindex="0"><code>const int * const cpci = &amp;limit;
 const int * const * pcpci;
 </code></pre><table>
-<thead>
-<tr>
-<th>포인터의 종류</th>
-<th>포인터 데이터 변경</th>
-<th>포인터 대상 데이터 변경</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>비상수를 가리키는 포인터</td>
-<td>O</td>
-<td>O</td>
-</tr>
-<tr>
-<td>상수를 가리키는 포인터</td>
-<td>O</td>
-<td>X</td>
-</tr>
-<tr>
-<td>비상수를 가리키는 상수 포인터</td>
-<td>X</td>
-<td>O</td>
-</tr>
-<tr>
-<td>상수를 가리키는 상수 포인터</td>
-<td>X</td>
-<td>X</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>포인터의 종류</th>
+          <th>포인터 데이터 변경</th>
+          <th>포인터 대상 데이터 변경</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>비상수를 가리키는 포인터</td>
+          <td>O</td>
+          <td>O</td>
+      </tr>
+      <tr>
+          <td>상수를 가리키는 포인터</td>
+          <td>O</td>
+          <td>X</td>
+      </tr>
+      <tr>
+          <td>비상수를 가리키는 상수 포인터</td>
+          <td>X</td>
+          <td>O</td>
+      </tr>
+      <tr>
+          <td>상수를 가리키는 상수 포인터</td>
+          <td>X</td>
+          <td>X</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="참고-문헌">참고 문헌</h3>
 <ul>

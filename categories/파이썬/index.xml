@@ -353,8 +353,7 @@ def debug_logging(level):
 &lt;li&gt;루프에서 실행할 태스크 작성하기&lt;/li&gt;
 &lt;li&gt;여러 개의 태스크가 완료되길 기다리기&lt;/li&gt;
 &lt;li&gt;모든 병행 태스크 종료 후 루프 종료하기&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;전체 &lt;code&gt;asyncio&lt;/code&gt; API 중 일부는 위와 같이 요약할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;

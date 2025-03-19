@@ -132,38 +132,38 @@
 </ul>
 <p>아래는 주소를 변환할 수 있는 API 이다.</p>
 <table>
-<thead>
-<tr>
-<th>함수</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>int inet_addr(const char *cp)</code></td>
-<td>cp 문자열 IP 주소를 네트워크 바이트 순서 <code>in_addr_t</code>로 반환</td>
-</tr>
-<tr>
-<td><code>int inet_network(const char *cp)</code></td>
-<td>cp 문자열 IP 주소를 호스트 바이트 순서 <code>in_addr_t</code>로 반환</td>
-</tr>
-<tr>
-<td><code>int inet_aton(const char *cp, strcut in_addr *inp)</code></td>
-<td>cp 문자열 IP 네트워크 바이트 순서 <code>inp</code>로 변환</td>
-</tr>
-<tr>
-<td><code>char *inet_ntoa(struct in_addr in);</code></td>
-<td>네트워크 바이트 순서로 된 <code>in_addr</code>구조체 주소에서 IP 주소 문자열 반환</td>
-</tr>
-<tr>
-<td><code>int inet_pton(int af, const char *src, void *dst);</code></td>
-<td><code>af</code> 인자로 3계층 프로토콜 선택 가능, <code>src</code> 문자열 주소를 <code>dst</code>로 변환</td>
-</tr>
-<tr>
-<td><code>const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);</code></td>
-<td><code>af</code> 인자로 3계층 프로토콜을 선택 가능, <code>src</code> 주소 구조체를 문자열 주소로 변환</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>함수</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>int inet_addr(const char *cp)</code></td>
+          <td>cp 문자열 IP 주소를 네트워크 바이트 순서 <code>in_addr_t</code>로 반환</td>
+      </tr>
+      <tr>
+          <td><code>int inet_network(const char *cp)</code></td>
+          <td>cp 문자열 IP 주소를 호스트 바이트 순서 <code>in_addr_t</code>로 반환</td>
+      </tr>
+      <tr>
+          <td><code>int inet_aton(const char *cp, strcut in_addr *inp)</code></td>
+          <td>cp 문자열 IP 네트워크 바이트 순서 <code>inp</code>로 변환</td>
+      </tr>
+      <tr>
+          <td><code>char *inet_ntoa(struct in_addr in);</code></td>
+          <td>네트워크 바이트 순서로 된 <code>in_addr</code>구조체 주소에서 IP 주소 문자열 반환</td>
+      </tr>
+      <tr>
+          <td><code>int inet_pton(int af, const char *src, void *dst);</code></td>
+          <td><code>af</code> 인자로 3계층 프로토콜 선택 가능, <code>src</code> 문자열 주소를 <code>dst</code>로 변환</td>
+      </tr>
+      <tr>
+          <td><code>const char *inet_ntop(int af, const void *src, char *dst, socklen_t size);</code></td>
+          <td><code>af</code> 인자로 3계층 프로토콜을 선택 가능, <code>src</code> 주소 구조체를 문자열 주소로 변환</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="ip-주소를-정수로-변환하여-출력하는-예제">IP 주소를 정수로 변환하여 출력하는 예제</h3>
 <hr>

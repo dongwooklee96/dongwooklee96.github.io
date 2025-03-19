@@ -147,8 +147,7 @@
 <li>이전에는 버퍼 파티션의 개수는 16개 밖에 되지 않았으며, 이로 인해서 동시성이 높은 환경에서는 버퍼 파티션 액세스 시에 <code>LW</code> 락 경합이 발생한 가능성이 컸고, 실제로 이로 인한 성능 문제가 발생하기도 하였다. 이러한 문제를 해결하기 위해서 버퍼 파티션의 개수가 늘어났다.</li>
 </ul>
 <blockquote>
-<p>LW 락은 <code>Light Weight</code> 의 줄인말인데, 매우 가벼운 락을 의미하여 메모리에 액세스 할 때 사용하는 방식이다. LW 락은 테이블 내의 데이터를 보호하는 락과는 다른 개념이며, 참고로 오라클은 LW 락을 <code>Latch</code> 라고 표현한다.</p>
-</blockquote>
+<p>LW 락은 <code>Light Weight</code> 의 줄인말인데, 매우 가벼운 락을 의미하여 메모리에 액세스 할 때 사용하는 방식이다. LW 락은 테이블 내의 데이터를 보호하는 락과는 다른 개념이며, 참고로 오라클은 LW 락을 <code>Latch</code> 라고 표현한다.</p></blockquote>
 <h3 id="2-해시-엘리먼트">2. 해시 엘리먼트</h3>
 <ul>
 <li>해시 엘리먼트는 엘리먼트와 엘리먼트 키로 구성된다.</li>
@@ -254,40 +253,40 @@
 <li>따라서 가능하다면 <code>Spin</code> 락을 사용하는 것이 성능상 유리하다.</li>
 </ul>
 <table>
-<thead>
-<tr>
-<th>항목</th>
-<th><code>Spin</code> 락</th>
-<th><code>LW</code> 락</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>사용부하</td>
-<td>매우 매우 적음</td>
-<td>매우 적음</td>
-</tr>
-<tr>
-<td>콘텍스트 스위칭</td>
-<td>발생하지 않음</td>
-<td>발생할 수 있음</td>
-</tr>
-<tr>
-<td>동작 방식</td>
-<td><code>Spin</code> 방식</td>
-<td>큐 &amp; 포스팅 방식</td>
-</tr>
-<tr>
-<td>사용 용도</td>
-<td>구조체 내 변수를 액세스 할 대 사용</td>
-<td>구조체를 액세스 할 대 사용</td>
-</tr>
-<tr>
-<td>사용모드</td>
-<td><code>EXCLUSIVE</code></td>
-<td><code>SHARE &amp; EXCLUSIVE</code></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>항목</th>
+          <th><code>Spin</code> 락</th>
+          <th><code>LW</code> 락</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>사용부하</td>
+          <td>매우 매우 적음</td>
+          <td>매우 적음</td>
+      </tr>
+      <tr>
+          <td>콘텍스트 스위칭</td>
+          <td>발생하지 않음</td>
+          <td>발생할 수 있음</td>
+      </tr>
+      <tr>
+          <td>동작 방식</td>
+          <td><code>Spin</code> 방식</td>
+          <td>큐 &amp; 포스팅 방식</td>
+      </tr>
+      <tr>
+          <td>사용 용도</td>
+          <td>구조체 내 변수를 액세스 할 대 사용</td>
+          <td>구조체를 액세스 할 대 사용</td>
+      </tr>
+      <tr>
+          <td>사용모드</td>
+          <td><code>EXCLUSIVE</code></td>
+          <td><code>SHARE &amp; EXCLUSIVE</code></td>
+      </tr>
+  </tbody>
 </table>
 <h4 id="spin-락"><code>Spin</code> 락</h4>
 <ul>
@@ -339,11 +338,11 @@
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">LWLockAcquire</span>(LWLock <span style="color:#f92672">*</span>lock, LWLockMode mode)
 </span></span><span style="display:flex;"><span>LOOP
 </span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">LWLockAttemptLock</span>() <span style="color:#960050;background-color:#1e0010">함수를</span> <span style="color:#960050;background-color:#1e0010">호출해서</span> LW <span style="color:#960050;background-color:#1e0010">락</span> <span style="color:#960050;background-color:#1e0010">획득을</span> <span style="color:#960050;background-color:#1e0010">시도한다</span>.
-</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하면</span> LOOP<span style="color:#960050;background-color:#1e0010">를</span> <span style="color:#960050;background-color:#1e0010">탈출한다</span>.
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하면</span> LOOP를 <span style="color:#960050;background-color:#1e0010">탈출한다</span>.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하지</span> <span style="color:#960050;background-color:#1e0010">못하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">큐에</span> <span style="color:#960050;background-color:#1e0010">등록한다</span>.
 </span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">한</span> <span style="color:#960050;background-color:#1e0010">번</span> <span style="color:#960050;background-color:#1e0010">더</span> <span style="color:#a6e22e">LwLockAttemptLock</span>() <span style="color:#960050;background-color:#1e0010">함수를</span> <span style="color:#960050;background-color:#1e0010">호출한다</span>.
-</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">큐에</span> <span style="color:#960050;background-color:#1e0010">등록된</span> <span style="color:#960050;background-color:#1e0010">항목을</span> <span style="color:#960050;background-color:#1e0010">삭제한</span> <span style="color:#960050;background-color:#1e0010">후</span> LOOP<span style="color:#960050;background-color:#1e0010">를</span> <span style="color:#960050;background-color:#1e0010">탈출한다</span>.
+</span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">큐에</span> <span style="color:#960050;background-color:#1e0010">등록된</span> <span style="color:#960050;background-color:#1e0010">항목을</span> <span style="color:#960050;background-color:#1e0010">삭제한</span> <span style="color:#960050;background-color:#1e0010">후</span> LOOP를 <span style="color:#960050;background-color:#1e0010">탈출한다</span>.
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#960050;background-color:#1e0010">만일</span> <span style="color:#960050;background-color:#1e0010">락을</span> <span style="color:#960050;background-color:#1e0010">획득하지</span> <span style="color:#960050;background-color:#1e0010">ㅁ소하면</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">상태를</span> <span style="color:#960050;background-color:#1e0010">시작한다</span>.
 </span></span><span style="display:flex;"><span>	(<span style="color:#960050;background-color:#1e0010">다른</span> <span style="color:#960050;background-color:#1e0010">프로세스가</span> <span style="color:#960050;background-color:#1e0010">깨워줄</span> <span style="color:#960050;background-color:#1e0010">때까지</span> <span style="color:#960050;background-color:#1e0010">대기</span> <span style="color:#960050;background-color:#1e0010">상태가</span> <span style="color:#960050;background-color:#1e0010">유지</span> <span style="color:#960050;background-color:#1e0010">된다</span>.)

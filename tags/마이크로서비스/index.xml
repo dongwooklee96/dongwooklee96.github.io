@@ -107,8 +107,7 @@
 &lt;li&gt;기술적인 부분과 비즈니스 적인 부분을 나누어서 생각을 했다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;이 부분에는 나도 공감하는데, 기술적으로 풀려고 시도했을 경우 많은 생각을 해야하지만 사실 비즈니스적으로 변경하여 문제가 쉽게 풀리는 경우가 많았다.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;이 부분에는 나도 공감하는데, 기술적으로 풀려고 시도했을 경우 많은 생각을 해야하지만 사실 비즈니스적으로 변경하여 문제가 쉽게 풀리는 경우가 많았다.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;렉 모니터링에 대한 세분화된 알람이 필요할 것으로 보임&lt;/li&gt;
 &lt;li&gt;앞 모듈에 컨트롤 할 수 있는 부분을 두어서 랙이 기준치 이상 도달 할 경우, 우선순위가 중요한 메시지는 특정 큐에 집어 넣고 특정 큐에 대한 오퍼레이션을 별도로 수행하는 구조를&lt;/li&gt;
@@ -158,8 +157,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;마이크로서비스 아키텍처 및 이벤트 드리븐 아키텍처에 대해서 대략적으로만 알고 있어서 이 기회에 정리를 해보았다.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;마이크로서비스 아키텍처 및 이벤트 드리븐 아키텍처에 대해서 대략적으로만 알고 있어서 이 기회에 정리를 해보았다.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;마이크로 서비스 아키텍처&lt;/strong&gt;
 &lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112706776-e5459980-8ee9-11eb-85d0-29316803cc43.png&#34; alt=&#34;Screen Shot 2021-03-27 at 10 47 46 AM&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112706932-e5926480-8eea-11eb-8161-373b02c6dd56.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
@@ -240,8 +238,7 @@
 &lt;/ul&gt;
 &lt;p&gt;이러한 플랫폼을 활용해서 서비스를 개발하고 있고, 공통화가 필요한 부분은 플랫폼에 적용하거나 라이브러리화 하고 있다.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;인상 깊었던 부분은 &lt;code&gt;Spring Data JDBC&lt;/code&gt;에서 제공하지 않는 추가 기능들은 직접 개발해서 사용한다는 것이다. 기술에 이해도가 높지 않으면 절대로 쉽지 않다는 것을 알기 때문이다.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;인상 깊었던 부분은 &lt;code&gt;Spring Data JDBC&lt;/code&gt;에서 제공하지 않는 추가 기능들은 직접 개발해서 사용한다는 것이다. 기술에 이해도가 높지 않으면 절대로 쉽지 않다는 것을 알기 때문이다.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;인프라-운영&#34;&gt;인프라 운영&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;

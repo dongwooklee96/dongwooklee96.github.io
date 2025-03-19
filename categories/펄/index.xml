@@ -335,7 +335,7 @@ print &amp;#34;I hvae &amp;#34;, scalar @rocks, &amp;#34; rocks!\n&amp;#34;;
 How many rocks do you have?
 I have talcquartzjadeobsidian rocks!
 I hvae 4 rocks!
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;stdin&#34;&gt;&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;h3&gt;&lt;!-- raw HTML omitted --&gt;&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;

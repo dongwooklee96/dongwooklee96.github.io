@@ -188,26 +188,26 @@ off_t lseek(int fd, off_t offset, int whence);
 <li><code>lseek()</code>는 파일 디스크립터 내부의 파일 오프셋을 지정한 위치로 이동한다. 옮겨갈 위치를 지정하는 방식은 아래와 같고, 그것을 <code>whence</code>라는 인자에 저장한다.</li>
 </ul>
 <table>
-<thead>
-<tr>
-<th>제목</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SEEK_SET</td>
-<td>파일의 처음을 기준으로 오프셋 계산 및 이동</td>
-</tr>
-<tr>
-<td>SEEK_CUR</td>
-<td>현재 위치 기준으로 오프셋 계산 및 이동</td>
-</tr>
-<tr>
-<td>SEEK_END</td>
-<td>파일의 마지막을 기준으로 오프셋 계산 및 이동</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>제목</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>SEEK_SET</td>
+          <td>파일의 처음을 기준으로 오프셋 계산 및 이동</td>
+      </tr>
+      <tr>
+          <td>SEEK_CUR</td>
+          <td>현재 위치 기준으로 오프셋 계산 및 이동</td>
+      </tr>
+      <tr>
+          <td>SEEK_END</td>
+          <td>파일의 마지막을 기준으로 오프셋 계산 및 이동</td>
+      </tr>
+  </tbody>
 </table>
 <ul>
 <li>스트림의 반대편에 있는 실체에 따라서 <code>lseek()</code>를 사용할 수 없는 경우도 있다. 예를 들어서 단말이나 프로세스에 연결된 스트림에 대해서는 <code>lseek()</code>를 실행하면 에러가 발생한다.</li>

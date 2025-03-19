@@ -189,13 +189,11 @@ int link(const char *src, const char *dest);
 <blockquote>
 <ul>
 <li><code>src</code>와 <code>dest</code>에는 동일한 파일 시스템에 있어야 한다. 양쪽 모두가 하나의 파일 시스템에 존재해야 한다.</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <blockquote>
 <ul>
 <li><code>src</code>와 <code>dest</code>에 디렉터리는 사용할 수 없다. 즉, 디렉터리에 하드 링크를 붙일 수 없다. 이 제한은 나중에 언급할 심볼릭 링크를 사용하여 해결할 수 있다.</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <h4 id="ln-명령어-작성하기">ln 명령어 작성하기</h4>
 <pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
@@ -241,8 +239,7 @@ int main(int argc, char *argv[]) {
 하드 링크는 하나의 파일 시스템 내에서만 만들 수 있다는 제약이 있었다. 그러나 심볼릭 링크는 파일 시스템의 경계와 관계없이 만들 수 있다.</li>
 <li>디렉터리에도 별명을 붙일 수 있다.
 디렉터리에 대해서는 하드 링크는 만들 수 없지만 심볼릭 링크는 만들 수 있따.</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <ul>
 <li>현재는 하드 링크를 거의 사용하지 않고 파일에 별명을 붙이고 싶을 때는 심볼릭 링크를 사용하는 것 이 좋다.</li>
 </ul>

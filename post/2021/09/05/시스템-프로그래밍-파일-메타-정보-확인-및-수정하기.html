@@ -226,26 +226,26 @@ static char *filetype(mode_t mode) {
 <li>메타 정보를 획득하는 시스템 콜은 <code>stat(2)</code> 한 개지만, 변경하는 시스템 콜은 여러개가 있다.</li>
 </ul>
 <table>
-<thead>
-<tr>
-<th>변경 대상</th>
-<th>사용하는 시스템 콜</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>권한</td>
-<td>chmod(2)</td>
-</tr>
-<tr>
-<td>오너와 그룹</td>
-<td>chown (2)</td>
-</tr>
-<tr>
-<td>최종 액세스 시간과 최종 갱신 시각</td>
-<td>utime(2)</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>변경 대상</th>
+          <th>사용하는 시스템 콜</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>권한</td>
+          <td>chmod(2)</td>
+      </tr>
+      <tr>
+          <td>오너와 그룹</td>
+          <td>chown (2)</td>
+      </tr>
+      <tr>
+          <td>최종 액세스 시간과 최종 갱신 시각</td>
+          <td>utime(2)</td>
+      </tr>
+  </tbody>
 </table>
 <h4 id="chmod2"><code>chmod(2)</code></h4>
 <pre tabindex="0"><code>#include &lt;sys/stat.h&gt;

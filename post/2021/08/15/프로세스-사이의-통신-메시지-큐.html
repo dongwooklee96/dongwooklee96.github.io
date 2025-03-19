@@ -221,8 +221,7 @@ mqd_t mq_open(const char *name, int oflag);
 <li>프로그램은 자식 프로세스를 하나 생성한다.</li>
 <li>자식 프로세스는 사용자에게 문자열을 입력 받은 후에 메시지 큐를 이용하여 부모 프로세스에게 전송한다.</li>
 <li>부모 프로세스는 화면에 전송받은 문자열을 출력한다.</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;mqueue.h&gt;
 #include &lt;errno.h&gt;

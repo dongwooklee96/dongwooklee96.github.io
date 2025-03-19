@@ -186,34 +186,34 @@ stdio 스트림에 데이터를 쓰면 버퍼링 없이 즉시 write()가 수행
 <li>시스템 콜을 사용할 때, 표준 입출력 스트림을 지정하기 위해 예약된 정수가 있었는데, <code>stdio</code>에도 이에 대응하여, <code>FILE*</code> 타입의 변수가 있다.</li>
 </ul>
 <table>
-<thead>
-<tr>
-<th>파일 디스크립터</th>
-<th>정식 명칭</th>
-<th>stdio 변수명</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>STDIN_FILENO</td>
-<td>stdin</td>
-<td>표준 입력</td>
-</tr>
-<tr>
-<td>1</td>
-<td>STDOUT_FILENO</td>
-<td>stdout</td>
-<td>표준 출력</td>
-</tr>
-<tr>
-<td>2</td>
-<td>STDERR_FILENO</td>
-<td>stderr</td>
-<td>표준 에러 출력</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>파일 디스크립터</th>
+          <th>정식 명칭</th>
+          <th>stdio 변수명</th>
+          <th>의미</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td>STDIN_FILENO</td>
+          <td>stdin</td>
+          <td>표준 입력</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>STDOUT_FILENO</td>
+          <td>stdout</td>
+          <td>표준 출력</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>STDERR_FILENO</td>
+          <td>stderr</td>
+          <td>표준 에러 출력</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="fopen3"><code>fopen(3)</code></h3>
 <hr>

@@ -2912,13 +2912,11 @@
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://brunch.co.kr/@beusable/222&#34;&gt;추천 기능 이용하기 1&lt;/a&gt;
 &lt;a href=&#34;https://brunch.co.kr/@beusable/223&#34;&gt;추천 기능 이용하기 2&lt;/a&gt;
-&lt;a href=&#34;https://brunch.co.kr/@beusable/224&#34;&gt;추천 기능 이용하기 3&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;a href=&#34;https://brunch.co.kr/@beusable/224&#34;&gt;추천 기능 이용하기 3&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&#34;https://brunch.co.kr/@beusable/176&#34;&gt;데이터 기반 개인화 추천 (1/3) 트렌드와 기술편&lt;/a&gt;
 &lt;a href=&#34;https://brunch.co.kr/@beusable/177&#34;&gt;데이터 기반 개인화 추천 (2/3): 마케팅편&lt;/a&gt;
-&lt;a href=&#34;https://brunch.co.kr/@beusable/178&#34;&gt;데이터 기반 개인화 추천 (3/3): UX편&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;a href=&#34;https://brunch.co.kr/@beusable/178&#34;&gt;데이터 기반 개인화 추천 (3/3): UX편&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://brunch.co.kr/@beusable&#34;&gt;뷰저블&lt;/a&gt; 이라는 좋은 블로그를 찾았다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -3274,10 +3272,9 @@
 &lt;h3 id=&#34;affimation-자기-확언&#34;&gt;Affimation (자기 확언)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/pPpR3FYXfyQ&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/pPpR3FYXfyQ?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 
 &lt;/li&gt;
 &lt;li&gt;
@@ -3554,8 +3551,7 @@
 &lt;/ul&gt;
 &lt;ol start=&#34;6&#34;&gt;
 &lt;li&gt;호환성을 깨는 변경을 피하기&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
+&lt;/ol&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;설계-프로세스&#34;&gt;설계 프로세스&lt;/h3&gt;
 &lt;h4 id=&#34;1-api-스펙-작성&#34;&gt;1. API 스펙 작성&lt;/h4&gt;
 &lt;ul&gt;
@@ -5221,10 +5217,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;li&gt;마음에 드는 설정을 참조하여 설정하면 많은 도움이 될 것이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;findings-배운-점&#34;&gt;Findings (배운 점)&lt;/h3&gt;
-
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/epXqrRJQnko&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/epXqrRJQnko?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 
 &lt;ul&gt;
 &lt;li&gt;
@@ -7974,10 +7969,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
       
       <guid>https://dongwooklee96.github.io/post/2021/05/15/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
       <description>&lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
-
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/svrRov-SDNI&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/svrRov-SDNI?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 
 &lt;ul&gt;
 &lt;li&gt;
@@ -8489,10 +8483,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
       <guid>https://dongwooklee96.github.io/post/2021/05/06/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
       <description>&lt;h1 id=&#34;til-양식&#34;&gt;TIL 양식&lt;/h1&gt;
 &lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
-
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/PJGsPohDuoA&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/PJGsPohDuoA?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 
 &lt;ul&gt;
 &lt;li&gt;포트폴리오를 작성할 때, 중점적으로 생각할 점에 대한 영상을 보았다.&lt;/li&gt;
@@ -8928,10 +8921,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
       <guid>https://dongwooklee96.github.io/post/2021/04/27/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
       <description>&lt;h1 id=&#34;til-양식&#34;&gt;TIL 양식&lt;/h1&gt;
 &lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
-
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/UUG0h7torbs&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/UUG0h7torbs?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 
 &lt;ul&gt;
 &lt;li&gt;출근길에, 소프트웨어 엔지니어를 평가하는 4가지 항목이라는 영상을 보았다.&lt;/li&gt;
@@ -9104,10 +9096,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
       <guid>https://dongwooklee96.github.io/post/2021/04/22/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
       <description>&lt;h1 id=&#34;til-양식&#34;&gt;TIL 양식&lt;/h1&gt;
 &lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
-
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/MIYwej-VodE&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/MIYwej-VodE?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
 
 &lt;ul&gt;
 &lt;li&gt;오늘 출근을 할 때, 프로그래밍 왕초식 시리즈중에 하나인 왕파라미터를 사용하지 말자라는 영상을 보았다.&lt;/li&gt;
@@ -9218,10 +9209,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
       <guid>https://dongwooklee96.github.io/post/2021/04/19/%EC%9D%BC%EC%9D%BC-%ED%9A%8C%EA%B3%A0.html</guid>
       <description>&lt;h1 id=&#34;til-양식&#34;&gt;TIL 양식&lt;/h1&gt;
 &lt;h3 id=&#34;facts-사실-객관&#34;&gt;Facts (사실, 객관)&lt;/h3&gt;
-&lt;p&gt;
-&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-  &lt;iframe src=&#34;https://www.youtube.com/embed/4xg4OeGzGIw&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/4xg4OeGzGIw?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+    &lt;/div&gt;
  출근 시간에 위의 영상을 시청하였다.&lt;/p&gt;
 &lt;h3 id=&#34;feelings-느낌-주관&#34;&gt;Feelings (느낌, 주관)&lt;/h3&gt;
 &lt;ul&gt;
@@ -10837,8 +10827,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;li&gt;현실적으로 설계가 완벽하게 되기는 힘들다는 의견이 있었고, 미쳐 생각하지 못하는 부분은 필연적으로 나타나게 된다. 따라서 피드백 주기를 짧게 하고, 공유를 자주하는 문화가 필요하다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;피드백 주기를 짧게 하고, 공유를 어떻게 하면 잘 할 수 있을지 고민을 해봐야겠다.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;피드백 주기를 짧게 하고, 공유를 어떻게 하면 잘 할 수 있을지 고민을 해봐야겠다.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;따라서 실험을 자주하되, 실험은 비용을 동반하기에 유연한 설계를 통해서 변경이 쉽도록 만드는 것이 최선이다.&lt;/p&gt;
@@ -11115,11 +11104,9 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;코드에는 주석이 있어야하지만, 너무 많은 것은 너무 적은 것만큼이나 좋지 않다. &lt;strong&gt;일반적으로 주석은 왜 이렇게 되어 있는지 목적을 논해야한다.&lt;/strong&gt; 코드가 이미 어떻게 되어 있는지 보여주기 때문에 이에 대해 주석을 다는 것은 사족이다.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;코드에는 주석이 있어야하지만, 너무 많은 것은 너무 적은 것만큼이나 좋지 않다. &lt;strong&gt;일반적으로 주석은 왜 이렇게 되어 있는지 목적을 논해야한다.&lt;/strong&gt; 코드가 이미 어떻게 되어 있는지 보여주기 때문에 이에 대해 주석을 다는 것은 사족이다.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;코드에서 중복을 발견할 때마다 추상화할 기회로 간주하라. 중복된 코드를 하위 루틴이나 다른 클래스로 분리하라. 이렇듯 추상화로 중복을 정리하면 설계 언어의 어휘가 늘어난다. 다른 프로그래머들이 그만큼 어휘를 사용하기 쉬워진다. &lt;strong&gt;추상화 수준을 높였으므로, 구현이 빨라지고 오류가 적어진다.&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;코드에서 중복을 발견할 때마다 추상화할 기회로 간주하라. 중복된 코드를 하위 루틴이나 다른 클래스로 분리하라. 이렇듯 추상화로 중복을 정리하면 설계 언어의 어휘가 늘어난다. 다른 프로그래머들이 그만큼 어휘를 사용하기 쉬워진다. &lt;strong&gt;추상화 수준을 높였으므로, 구현이 빨라지고 오류가 적어진다.&lt;/strong&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -11136,8 +11123,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;li&gt;this의 속성&lt;/li&gt;
 &lt;li&gt;this 속성인 컬렉션의 요소&lt;/li&gt;
 &lt;li&gt;메서드 내에서 생성된 객체&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
+&lt;/ol&gt;&lt;/blockquote&gt;
 &lt;h4 id=&#34;중복의-유형과-제거-방법&#34;&gt;중복의 유형과 제거 방법&lt;/h4&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -11169,8 +11155,7 @@ DEPRECATED: 제공되고 있는 기능이 중단된 경우
 &lt;li&gt;회사에서 일을 하면서 중복된 코드가 보인다면 제거하려고 시도하겠다.&lt;/li&gt;
 &lt;li&gt;
 &lt;blockquote&gt;
-&lt;p&gt;이는 중복을 줄이면 저절로 소프트웨어가 좋은 설계대로 구현이 될 것 같다. 나는 처음에는 좋은 설계로 소프트웨어를 작성해야지라고 생각을 했지만 사실, 좋은 설계를 한다는 것 자체가 추상적이다. 구체적인 방법은 코드에 중복을 줄여야지, 테스트 코드를 작성해야지 같은 구체적인 행동을 통해서 좋은 설계가 나온다는 생각을 했다.&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;이는 중복을 줄이면 저절로 소프트웨어가 좋은 설계대로 구현이 될 것 같다. 나는 처음에는 좋은 설계로 소프트웨어를 작성해야지라고 생각을 했지만 사실, 좋은 설계를 한다는 것 자체가 추상적이다. 구체적인 방법은 코드에 중복을 줄여야지, 테스트 코드를 작성해야지 같은 구체적인 행동을 통해서 좋은 설계가 나온다는 생각을 했다.&lt;/p&gt;&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;회고-작성법&#34;&gt;회고 작성법&lt;/h1&gt;

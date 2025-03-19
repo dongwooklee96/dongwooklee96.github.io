@@ -248,8 +248,7 @@ graph[2].append((0, 5))
 &lt;li&gt;탐색 시작 노드를 스택에 삽입하고 방문 처리를 한다.&lt;/li&gt;
 &lt;li&gt;스택의 최상단 노드에 방문하지 않은 인접 노드가 있으면 그 인접 노드를 스택에 넣고 방문 처리를 한다.&lt;/li&gt;
 &lt;li&gt;3번과 2번의 과정을 더 이상 수행할 수 없을 때까지 반복한다.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
+&lt;/ol&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;깊이 우선 탐색 알고리즘인 DFS는 스택 자료구조에 기초한다는 점에서 구현이 간단하다. 실제로는 스택을 사용하지 않아도 되며 탐색을 수행함에 있어서 데이터의 개수가 N개인 경우 O(N)의 시간이 소요된다는 특징이 있다.&lt;/p&gt;
@@ -308,8 +307,7 @@ dfs(graph, 1, visited)
 &lt;li&gt;탐색 시작 노드를 큐에 넣고 방문 처리를 한다.&lt;/li&gt;
 &lt;li&gt;큐에서 노드를 꺼내 해당 노드의 인접 노드 중에서 방문하지 않은 노드를 모두 큐에 삽입하고 방문 처리를 한다.&lt;/li&gt;
 &lt;li&gt;3, 2번의 과정을 더 이상 수행할 수 없을 떄까지 반복한다.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
+&lt;/ol&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;너비 우선 탐색 알고리즘은 BFS는 큐 자료구조에 기초한다는 점에서 구현이 간단하다.&lt;/li&gt;
 &lt;li&gt;실제로 구현함에 있어 앞서 언급한 대로 &lt;code&gt;deque&lt;/code&gt; 라이브러리를 사용하는 것이 좋으며 수행함에 있어 O(N)의 시간이 소요된다.&lt;/li&gt;
@@ -380,8 +378,7 @@ bfs(graph, 1, visited)
 &lt;ol&gt;
 &lt;li&gt;수평으로 두 칸 이동한 뒤에 수직으로 한 칸 이동하기.&lt;/li&gt;
 &lt;li&gt;수직으로 두 칸 이동한 뒤에 수평으로 한 칸 이동하기.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/blockquote&gt;
+&lt;/ol&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;8 X 8 좌표 평면상에 나이트의 위치가 주어졌을 때 나이트가 이동할 수 있는 경우의 수를 출력하는 프로그램을 작성하라.&lt;/li&gt;
 &lt;/ul&gt;
@@ -552,8 +549,7 @@ if __name__ == &amp;#39;__main__&amp;#39;:
 &lt;li&gt;R: 오른쪽으로 한 칸 이동&lt;/li&gt;
 &lt;li&gt;U: 위로 한 칸 이동&lt;/li&gt;
 &lt;li&gt;D: 아래로 한 칸 이동&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;이때 여행가 A가 N X N 크기의 정사각형 공간을 벗어나는 움직임은 무시된다.&lt;/p&gt;

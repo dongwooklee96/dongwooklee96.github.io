@@ -526,8 +526,7 @@ class SqlAlchemyRepository(AbstractRepository):
 &lt;hr&gt;
 &lt;p&gt;아키텍처에 대한 정의는 다음과 같다.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;&amp;ldquo;아키텍처는 비즈니스 요구사항을 만족하는 시스템을 구축하기 위해서 전체 시스템에 대한 구조를 정의한 문서로, 시스템을 구성하는 컴포넌트와 그 컴포넌트 간의 관계, 그리고 컴포넌트가 다루는 정보(데이터)를 정의한다&amp;rdquo;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;&amp;ldquo;아키텍처는 비즈니스 요구사항을 만족하는 시스템을 구축하기 위해서 전체 시스템에 대한 구조를 정의한 문서로, 시스템을 구성하는 컴포넌트와 그 컴포넌트 간의 관계, 그리고 컴포넌트가 다루는 정보(데이터)를 정의한다&amp;rdquo;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h3 id=&#34;아키텍처-설계-프로세스&#34;&gt;아키텍처 설계 프로세스&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;

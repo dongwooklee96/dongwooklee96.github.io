@@ -167,59 +167,58 @@
 </li>
 </ul>
 <table>
-<thead>
-<tr>
-<th>번호</th>
-<th>매크로이름</th>
-<th>설명</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>2</td>
-<td>SIGINT</td>
-<td>사용자가 발생시키는 인터럽트 (CTRL + C)</td>
-</tr>
-<tr>
-<td>3</td>
-<td>SIGQUIT</td>
-<td>프로그램 종료와 코어 파일 작성</td>
-</tr>
-<tr>
-<td>8</td>
-<td>SIGFPE</td>
-<td>부동소수점에러가 발생했을 때 발생하는 시스널</td>
-</tr>
-<tr>
-<td>9</td>
-<td>SIGKILL</td>
-<td>즉각적인 프로그램 종료를 위해 사용</td>
-</tr>
-<tr>
-<td>14</td>
-<td>SIGALRM</td>
-<td>지정된 타이머의 경과</td>
-</tr>
-<tr>
-<td>15</td>
-<td>SIGTERM</td>
-<td>프로그램 종료를 위한 시그널 (kill 명령어의 DEFAULT 시그널)</td>
-</tr>
-<tr>
-<td>17</td>
-<td>SIGHLD</td>
-<td>자식 프로세스의 종료 시에 발생하는 시그널</td>
-</tr>
-<tr>
-<td>19</td>
-<td>SIGSTOP</td>
-<td>프로세스를 정지시키는 시그널</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>번호</th>
+          <th>매크로이름</th>
+          <th>설명</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2</td>
+          <td>SIGINT</td>
+          <td>사용자가 발생시키는 인터럽트 (CTRL + C)</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>SIGQUIT</td>
+          <td>프로그램 종료와 코어 파일 작성</td>
+      </tr>
+      <tr>
+          <td>8</td>
+          <td>SIGFPE</td>
+          <td>부동소수점에러가 발생했을 때 발생하는 시스널</td>
+      </tr>
+      <tr>
+          <td>9</td>
+          <td>SIGKILL</td>
+          <td>즉각적인 프로그램 종료를 위해 사용</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>SIGALRM</td>
+          <td>지정된 타이머의 경과</td>
+      </tr>
+      <tr>
+          <td>15</td>
+          <td>SIGTERM</td>
+          <td>프로그램 종료를 위한 시그널 (kill 명령어의 DEFAULT 시그널)</td>
+      </tr>
+      <tr>
+          <td>17</td>
+          <td>SIGHLD</td>
+          <td>자식 프로세스의 종료 시에 발생하는 시그널</td>
+      </tr>
+      <tr>
+          <td>19</td>
+          <td>SIGSTOP</td>
+          <td>프로세스를 정지시키는 시그널</td>
+      </tr>
+  </tbody>
 </table>
 <blockquote>
-<p>&ldquo;만약 우리가 시그널로 정의 되어 있는 특정 사건의 발생 여부에 관심이 있고 그 사건이 발생할 때 마다 무언가를 하고 싶다면 어떻게 해야할까?&rdquo;</p>
-</blockquote>
+<p>&ldquo;만약 우리가 시그널로 정의 되어 있는 특정 사건의 발생 여부에 관심이 있고 그 사건이 발생할 때 마다 무언가를 하고 싶다면 어떻게 해야할까?&rdquo;</p></blockquote>
 <ul>
 <li>다음과 같은 경우에는 시그널이 발생했을 때 처리를 담당하는 핸들러 함수를 정의하고 운영체제에게 해당 사건이 발생 했을 때, 정의한 핸들러 함수를 호출해달라고 부탁하면 된다.</li>
 </ul>
@@ -275,8 +274,7 @@ int main(int argc, char *argv[]) {
 <li>sig : 시그널 dml 종류를 지칭하는 시그널 번호</li>
 <li>act: 시그널 발생시 호출되는 시그널 핸들러의 포인터</li>
 <li>oldact: 이전에 등록되었던 시그널 핸들러의 포인터</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <pre tabindex="0"><code>struct sigaction {
   void (*sa_handler)(int);
   sigset_t sa_mask;
@@ -334,8 +332,7 @@ int kill (pid_t pid, int sig);
 <li>음수로 입력한 경우에는 pid의 절대값이 지칭하는 프로세스가 속해있는 프로세스 그룹 전체로 시그널이 전달된다.</li>
 <li>0을 입력받는 경우 <code>kill</code> 함수를 호출한 프로세스가 속해있는 프로세스 그룹 전체로 시그널이 전달된다.</li>
 <li>-1을 입력 받는 경우 <code>kill</code> 함수를 호출한 프로세스가 시그널을 전송할 수 있는 권한을 가지고 있는 모든 프로세스에게 시그널이 전달된다.</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <h3 id="참고-문헌">참고 문헌</h3>
 <hr>
 <ul>

@@ -377,8 +377,7 @@ int main(int argc, char *argv[]) {
 <li>TCP 기능중에서는 전송하는 데이터 중에 긴급한 메시지가 있음을 알리는 기능이 있다.</li>
 </ul>
 <blockquote>
-<p>&ldquo;전송하는 데이터 중에서 긴급한 메시지가 있으니, 이 부분을 확인하시오.&rdquo;</p>
-</blockquote>
+<p>&ldquo;전송하는 데이터 중에서 긴급한 메시지가 있으니, 이 부분을 확인하시오.&rdquo;</p></blockquote>
 <ul>
 <li>
 <p>이러한 긴급한 데이터의 전송은 주목적이 아니라 특수한 목적이기 때문에 <code>In Band</code>의 반대말인 <strong>Out of Band(OOB)</strong> 전송으로 불린다.</p>
@@ -529,8 +528,7 @@ void urgent_handler(int sig) {
 <ul>
 <li>사용자 A는 100 바이트를 작성하는 <code>write()</code> 함수를 한 번 호출하여 100 바이트를 작성한다.</li>
 <li>사용자 B는 10 바이트를 작성하는 <code>write()</code> 함수를 10번 호출하여 100 바이트를 작성한다.</li>
-</ul>
-</blockquote>
+</ul></blockquote>
 <ul>
 <li>
 <p>파일을 입력할 때마다 <code>write()</code> 함수를 호출하는 대신에 누군가가 입력할 데이터를 모아서 데이터가 충분히 많아졌을 때 <code>write()</code> 함수를 호출하면 시스템 콜을 호출하는 횟수를 줄일 수 있을 것이다.</p>

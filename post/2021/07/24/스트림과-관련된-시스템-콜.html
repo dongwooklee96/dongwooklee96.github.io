@@ -183,30 +183,30 @@
 </li>
 </ul>
 <table>
-<thead>
-<tr>
-<th>파일 디스크립터</th>
-<th>매크로</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td><code>STDIN_FILENO</code></td>
-<td>표준입력, 기본 입력 스트림</td>
-</tr>
-<tr>
-<td>1</td>
-<td><code>STDOUT_FILENO</code></td>
-<td>표준 출력, 기본 출력 스트림</td>
-</tr>
-<tr>
-<td>2</td>
-<td><code>STDERR_FILENO</code></td>
-<td>표준 에러 출력, 별도 메시지 출력용</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>파일 디스크립터</th>
+          <th>매크로</th>
+          <th>의미</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>0</td>
+          <td><code>STDIN_FILENO</code></td>
+          <td>표준입력, 기본 입력 스트림</td>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td><code>STDOUT_FILENO</code></td>
+          <td>표준 출력, 기본 출력 스트림</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td><code>STDERR_FILENO</code></td>
+          <td>표준 에러 출력, 별도 메시지 출력용</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="스트림-읽기-및-쓰기">스트림 읽기 및 쓰기</h3>
 <hr>
@@ -302,26 +302,26 @@ int open(const char *path, int flags, mode_t mode);
 </ul>
 <p><strong>파일을 열 때 사용할 수 있는 <code>flag(1)</code></strong></p>
 <table>
-<thead>
-<tr>
-<th>flag</th>
-<th>의미</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>O_RDONLY</code></td>
-<td>읽기 전용</td>
-</tr>
-<tr>
-<td><code>O_WRONLY</code></td>
-<td>쓰기 전용</td>
-</tr>
-<tr>
-<td><code>O_RDWR</code></td>
-<td>읽고 쓰기</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th>flag</th>
+          <th>의미</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>O_RDONLY</code></td>
+          <td>읽기 전용</td>
+      </tr>
+      <tr>
+          <td><code>O_WRONLY</code></td>
+          <td>쓰기 전용</td>
+      </tr>
+      <tr>
+          <td><code>O_RDWR</code></td>
+          <td>읽고 쓰기</td>
+      </tr>
+  </tbody>
 </table>
 <h3 id="close2"><code>close(2)</code></h3>
 <hr>
