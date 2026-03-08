@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>개발-파이썬 on 개발자 이동욱</title>
+    <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</link>
+    <description>Recent content in 개발-파이썬 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
+    <lastBuildDate>Thu, 05 Jan 2023 09:15:40 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%ED%8C%8C%EC%9D%B4%EC%8D%AC/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬 테스트코드의 케이스를 쉽게 추가할 수 있는 도구 parameterized</title>
+      <link>https://dongwooklee96.github.io/post/2023/01/05/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%BD%94%EB%93%9C%EC%9D%98-%EC%BC%80%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EC%89%BD%EA%B2%8C-%EC%B6%94%EA%B0%80%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%8F%84%EA%B5%AC-parameterized.html</link>
+      <pubDate>Thu, 05 Jan 2023 09:15:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2023/01/05/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%BD%94%EB%93%9C%EC%9D%98-%EC%BC%80%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EC%89%BD%EA%B2%8C-%EC%B6%94%EA%B0%80%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%EB%8F%84%EA%B5%AC-parameterized.html</guid>
+      <description>&lt;h3 id=&#34;parameterized&#34;&gt;parameterized&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;특정 함수에 대한 테스트 코드를 작성할 때, 파라미터로 어떤 인풋이 들어오면 결과가 어떻게 된다는 형식의 테스트 코드를 작성할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 경우, 다양한 경우에 대해서 테스트를 해서 안전한지 테스트를 해봐야하는데 다음과 같이 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;사용-예제&#34;&gt;사용 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;TestMathUnitTest&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;unittest&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;TestCase&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#0550ae&#34;&gt;@parameterized.expand&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;([&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;negative&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;integer&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                        &lt;span style=&#34;color:#1f2328&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;test_add&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; name&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; expected&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            assert_equal&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;a &lt;span style=&#34;color:#0550ae&#34;&gt;+&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; expected&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;간단하게 &lt;code&gt;@parameterized.expand&lt;/code&gt; 라는 데코레이터를 사용하고, 리스트안에 튜플 형태로 케이스를 추가하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 순서대로, 테스트 코드 함수의 매개변수로 들어가게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pypi.org/project/parameterized/&#34;&gt;parameterized&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PBT 테스트 프레임워크 Hypothesis 간단한 예제</title>
+      <link>https://dongwooklee96.github.io/post/2023/01/04/pbt-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC-hypothesis-%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%98%88%EC%A0%9C.html</link>
+      <pubDate>Wed, 04 Jan 2023 19:15:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2023/01/04/pbt-%ED%85%8C%EC%8A%A4%ED%8A%B8-%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC-hypothesis-%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%98%88%EC%A0%9C.html</guid>
+      <description>&lt;h3 id=&#34;hypothesis&#34;&gt;Hypothesis&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬 기반의 속성 기반 테스트 프레임워크이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;속성 기반의 테스트란, 간단하게 예를 들어서 입력값이 정수라고 하면 무작위의 정수값을 테스트 프레임워크에서 대입하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일반적인 단위 테스트는 입력값에 따른 결과값을 정해놓고 테스트를 하지만, 속성 기반 테스트는 테스트 작성자가 놓치고 있는 입력값에 대해서 테스트를 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;사용-예제&#34;&gt;사용 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;get_min_count_with_two_and_three&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;num&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#0550ae&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;or&lt;/span&gt; num &lt;span style=&#34;color:#0550ae&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#0550ae&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#57606a&#34;&gt;# 3으로 나눌 수 있는 경우 몫을 반환한다.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; num &lt;span style=&#34;color:#0550ae&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; num &lt;span style=&#34;color:#0550ae&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#57606a&#34;&gt;# 만약 3으로 나눌 수 없는 경우&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        a &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; num &lt;span style=&#34;color:#0550ae&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt;  &lt;span style=&#34;color:#57606a&#34;&gt;# 몫을 구한다.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#cf222e&#34;&gt;while&lt;/span&gt; a &lt;span style=&#34;color:#0550ae&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                    _num &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; num &lt;span style=&#34;color:#0550ae&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt; a&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#57606a&#34;&gt;# 2로 나눌 수 있는지 확인한다.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; _num &lt;span style=&#34;color:#0550ae&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            b &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; _num &lt;span style=&#34;color:#0550ae&#34;&gt;//&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; a &lt;span style=&#34;color:#0550ae&#34;&gt;+&lt;/span&gt; b
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        a &lt;span style=&#34;color:#0550ae&#34;&gt;-=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;예를 들어서 임의의 숫자 &lt;code&gt;num&lt;/code&gt; 이 입력값으로 들어왔을 때 &lt;code&gt;2x + 3y = num&lt;/code&gt; 을 만족하는 최소 x, y를 구하는 함수가 위에 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;unittest&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; TestCase
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;hypothesis&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; given
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;hypothesis.strategies&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; integers
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;main&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; get_min_count_with_two_and_three
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;Test&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;TestCase&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#0550ae&#34;&gt;@given&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;num&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;integers&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;min_value&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; max_value&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1000&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;test_get_min_count_with_two_and_three&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; num&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;num&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;result: &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;get_min_count_with_two_and_three&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;num&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같이 테스트하고자 하는 함수 위에 &lt;code&gt;@given&lt;/code&gt; 데코레이터를 사용하여 입력값의 범위와 타입을 지정하면 랜덤으로 범위에 있는 타입과 값이 들어가게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나는 주로 코딩 테스트의 입력값을 넣어봐서 내가 고려하지 못한 부분이 있는지를 확인한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://hypothesis.readthedocs.io/en/latest/index.html&#34;&gt;hypothesis&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SQL 다대다 관계 및 유용한 기능</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/04/sql-%EB%8B%A4%EB%8C%80%EB%8B%A4-%EA%B4%80%EA%B3%84-%EB%B0%8F-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EA%B8%B0%EB%8A%A5.html</link>
+      <pubDate>Thu, 04 Nov 2021 14:20:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/11/04/sql-%EB%8B%A4%EB%8C%80%EB%8B%A4-%EA%B4%80%EA%B3%84-%EB%B0%8F-%EC%9C%A0%EC%9A%A9%ED%95%9C-%EA%B8%B0%EB%8A%A5.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 &lt;code&gt;SQLALCHEMY&lt;/code&gt;를 이용하여, 테이블 간의 다대다 관계를 맺어줄 일이 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그런던 중에 객체의 관계를 어떻게 맺어주면 되는지에 대한 것과 연산을 어떻게 해야하는지에 대한 유용한 블로그 글을 읽게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;나중에 정리하면 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.tutorialspoint.com/sqlalchemy/sqlalchemy_orm_many_to_many_relationships.htm&#34;&gt;TutorialsPoint - Many to Many Relationships&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://programmer.help/blogs/sqlalchemy-many-to-many-relationship.html&#34;&gt;Programmer Help&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://ljs93kr.tistory.com/60?category=714932&#34;&gt;건강한 프로그래머 - Python 으로 ORM 완벽사용 (2)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://weicomes.tistory.com/261?category=670729&#34;&gt;SQLAlchemy 시작하기 - Part 1&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://weicomes.tistory.com/262?category=670729&#34;&gt;SQLAlchemy 시작하기 - Part 2&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>GUNICORN</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/02/gunicorn.html</link>
+      <pubDate>Tue, 02 Nov 2021 09:39:13 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/11/02/gunicorn.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 서버에서 타임아웃 에러가 발생하여서, 관련 옵션들을 살펴보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gunicorn&lt;/code&gt;에 대해서 몰랐던 것들을 많이 알게 되었다. 그리고 기존의 설정들이 비효율적이게 잡혀있다는 것도 알게 되었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://blog.hwahae.co.kr/all/tech/tech-tech/5567/&#34;&gt;gunicorn 설정의 A to Z&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/benoitc/gunicorn/blob/master/examples/example_config.py&#34;&gt;example_config.py&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://leekchan.com/gevent-tutorial-ko/?fbclid=IwAR3Ns4jc5XIDtrFwiPXzfDncQmhXuN8C1z1Q75luV931qwkY3gIHyLJFnDU&#34;&gt;Python 개발자를 위한 gevent&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/save-the-day-with-gevent/&#34;&gt;gevent와 함께 하루를 저장하세요&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://iximiuz.com/en/posts/flask-gevent-tutorial/&#34;&gt;gevent와 함께 Flask를 사용하는 방법(uWSGI 및 Gunicorn 에디션)&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>SQL ALCHEMY 새롭게 배운 기능</title>
+      <link>https://dongwooklee96.github.io/post/2021/10/31/sql-alchemy-%EC%83%88%EB%A1%AD%EA%B2%8C-%EB%B0%B0%EC%9A%B4-%EA%B8%B0%EB%8A%A5.html</link>
+      <pubDate>Sun, 31 Oct 2021 14:20:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/10/31/sql-alchemy-%EC%83%88%EB%A1%AD%EA%B2%8C-%EB%B0%B0%EC%9A%B4-%EA%B8%B0%EB%8A%A5.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;최근에 SQLAlchemy 로 프로젝트를 진행하고 있는데 그동안 몰랐던 것을 많이 배웠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서 객체관의 관계를 맺는 법 및 객체가 관계를 맺는 객체의 속성을 가져올 때의 기본 모드가 어떻게 동작하는지 등등에 대한 것들을 배웠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 컬럼 속성을 통해서 데이터베이스에는 저장되지 않지만, 객체가 가지는 속성을 지정할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;has(), any()&lt;/code&gt;를 통해서 객체가 가지고 있는 속성을 필터링할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현재 영어로 되어있는데 이를 종합하여 한국어로 정리해보는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/sqlalchemy/sqlalchemy/discussions/7132&#34;&gt;Filtering Nested Relationship Attributes using has/any&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://martinheinz.dev/blog/28&#34;&gt;Advanced SQLAlchemy Features You Need To Start Using&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://blog.theodo.com/2020/03/sqlalchemy-relationship-performance/&#34;&gt;Master SQLAlchemy Relationships in a Performance Friendly Way&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬 - 재사용 가능한 TRY, CATCH 동작을 원한다면 contextlib과 with 문을 사용하라</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%9E%AC%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-try-catch-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%9B%90%ED%95%9C%EB%8B%A4%EB%A9%B4-contextlib%EA%B3%BC-with-%EB%AC%B8%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EB%9D%BC.html</link>
+      <pubDate>Fri, 24 Sep 2021 13:29:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/09/24/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EC%9E%AC%EC%82%AC%EC%9A%A9-%EA%B0%80%EB%8A%A5%ED%95%9C-try-catch-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%9B%90%ED%95%9C%EB%8B%A4%EB%A9%B4-contextlib%EA%B3%BC-with-%EB%AC%B8%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EB%9D%BC.html</guid>
+      <description>&lt;h2 id=&#34;batter-way-18-재사용-가능한-tryfinally-동작을-원한다면-contextlib과-with-문을-사용하라&#34;&gt;BATTER WAY 18. 재사용 가능한 try/finally 동작을 원한다면 contextlib과 with 문을 사용하라&lt;/h2&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬의 &lt;code&gt;with&lt;/code&gt; 문은 코드가 특별한 컨텍스트 안에서 실행되는 경우를 표현한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어, 상호 배제 락(뮤텍스)를 &lt;code&gt;with&lt;/code&gt; 문 안에서 사용하면 락을 소유 했을 때만, 코드 블록이 실행된다는 것을 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from threading import Lock
+
+Lock = Lock()
+with lock:
+  # 어떤 불변 조건을 유지하면서 작업을 수행한다.
+  ...
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Lock&lt;/code&gt; 클래스가 &lt;code&gt;with&lt;/code&gt; 문을 적절히 활성화해주므로 위의 예제는 아래의 코드와 동등하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lock.acquire()
+try:
+  # 어떤 불변 조건을 유지하면서 작업을 수행한다.
+  ...
+finally:
+  lock.release()
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위와 같은 경우엔느  &lt;code&gt;with&lt;/code&gt; 문을 사용하는 것이 훨씬 더 낫다. 이유는 try/finally 구조를 반복적으로 사용할 필요가 없고, &lt;code&gt;acquire&lt;/code&gt;에 대응하는 &lt;code&gt;release&lt;/code&gt; 를 실수로 빠뜨리는 경우를 방지할 수 있기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;contextlib&lt;/code&gt; 내장 모듈을 사용하면 만든 객체나 함수를 &lt;code&gt;with&lt;/code&gt; 문에서 쉽게 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;contextlib&lt;/code&gt; 모듈은 &lt;code&gt;with&lt;/code&gt; 문에 쓸 수 있는 함수를 간단히 만들 수 있는 &lt;code&gt;contextmanager&lt;/code&gt; 데코레이터를 제공한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 데코레이터를 사용하는 방법이 &lt;code&gt;__enter__&lt;/code&gt;, &lt;code&gt;__exit__&lt;/code&gt; 특별 메서드를 사용해서 새롭게 클래스를 정의하는 방법보다 훨씬 쉽다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;사용-예제&#34;&gt;사용 예제&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;예를 들어서, 어떤 코드 영역에서 디버깅 관련 로그를 더 많이 남기고 싶다고 가정을 할 때, 아래 코드는 디버깅 로그를 남기는 함수이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;def my_function():
+   logging.debug(&amp;#39;debug data&amp;#39;)
+   logging.error(&amp;#39;error log&amp;#39;)
+   logging.debug(&amp;#39;additional debug data&amp;#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/hpaxrrh45y2556w/Screen%20Shot%202021-09-24%20at%202.40.57%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;프로그램의 기본 로그 수준은 &lt;code&gt;WARNING&lt;/code&gt; 이므로, 이 함수를 실행하면 오류 메시지만 화면에 출력된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 컨텍스트 매니저를 정의하여 이 함수의 로그 수준을 일시적으로 높혀보겠다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 헬퍼 함수는 &lt;code&gt;with&lt;/code&gt; 블록을 실행하기 직전에 로그 수준을 높이고, 블록을 실행한 후에 로그 수준을 이전 수준으로 복구 시키는 코드이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@contextmanager
+def debug_logging(level):
+    logger = logging.getLogger()
+    old_level = logger.getEffectiveLevel()
+    logger.setLevel(level)
+    try:
+        yield
+    finally:
+        logger.setLevel(old_level)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;yield&lt;/code&gt; 식은 &lt;code&gt;with&lt;/code&gt; 블록의 내용이 실행되는 부분을 지정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;with&lt;/code&gt; 블록 안에서 발생한 예외는 어떤 것이든 &lt;code&gt;yield&lt;/code&gt; 식에 의해서ㄷ 다시 발생되기 때문에 이 예외를 헬퍼 함수 안에서 잡아 낼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8as3xj5zv05jxwq/Screen%20Shot%202021-09-24%20at%202.52.31%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;with debug_logging(logging.DEBUG):
+    my_function()
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위의 사진과 같이 모든 로그가 출력된 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;with와-대상-변수-함께-사용하기&#34;&gt;with와 대상 변수 함께 사용하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;with&lt;/code&gt; 문에 전달된 컨텍스트 매니저가 객체를 반환할 수 도 있다. 이렇게 반환된 객체는 &lt;code&gt;with&lt;/code&gt; 복합문의 일부로 지정된 지역 변수에 대입된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 통해서 &lt;code&gt;with&lt;/code&gt; 블록 안에서 실행되는 코드가 직접 컨텍스트 객체와 상화 작용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서 파일을 작성하고 이 파일이 제대로 닫혔는지 확인하고 싶다고 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;with&lt;/code&gt; 문에 &lt;code&gt;open&lt;/code&gt;을 전달하면 이렇게 할 수 있다. &lt;code&gt;open&lt;/code&gt;은 &lt;code&gt;with&lt;/code&gt; 문에서 &lt;code&gt;as&lt;/code&gt;를 통해 대상으로 지정된 변수에게 파일 핸들을 제공하고, &lt;code&gt;with&lt;/code&gt; 블록에서 나갈 때 이 핸들을 닫는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;with open(&amp;#39;my_output.txt&amp;#39;, &amp;#39;w&amp;#39;) as handle:
+  handle.write(&amp;#39;data&amp;#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 접근 방법은 파일 핸들을 매번 수동으로 열고 닫는 것보다 파이썬 다운 방식이며, 이 방식을 사용하면 코드 실행이 &lt;code&gt;with&lt;/code&gt; 문을 벗어날 때 결국에는 파일이 닫힌다고 확신할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 코드에서 문제가 될 수 있는 부분을 강조함으로써 파일 핸들이 열린 채로 실행되는 코드의 양을 줄이도록 한다. 일반적으로 파일 핸들이 열려 있는 부분을 줄이면 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정리&#34;&gt;정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;with&lt;/code&gt; 문을 사용하면 try/finally 블록을 통해서 사용해야하는 로직을 재활용하면서, 가독성을 높힐 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;contextlib&lt;/code&gt; 내장 모듈이 제공하는 &lt;code&gt;contextmanager&lt;/code&gt; 데코레이터를 사용하면 여러분이 만든 함수를 &lt;code&gt;with&lt;/code&gt; 문에 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;컨텍스트 매니저가 &lt;code&gt;yield&lt;/code&gt; 하는 값은 &lt;code&gt;with&lt;/code&gt; 문의 &lt;code&gt;as&lt;/code&gt; 부분에 전달된다. 이를 특별한 컨텍스트 내부에서 실행되는 코드 안에서 직접 그 컨텍스트에 접근할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728&#34;&gt;파이썬 코딩의 기술&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>[파이썬] ASYNCIO 사용법 및 예제</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/05/%ED%8C%8C%EC%9D%B4%EC%8D%AC-asyncio-%EC%82%AC%EC%9A%A9%EB%B2%95-%EB%B0%8F-%EC%98%88%EC%A0%9C.html</link>
+      <pubDate>Sun, 05 Sep 2021 19:15:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/09/05/%ED%8C%8C%EC%9D%B4%EC%8D%AC-asyncio-%EC%82%AC%EC%9A%A9%EB%B2%95-%EB%B0%8F-%EC%98%88%EC%A0%9C.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Asyncio는 파이썬의 병행 프로그래밍 도구로 스레드나 멀티 프로세싱 대비 가벼운 편이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;구조에 대해서 간단히 설명하지면, 이벤트 루프를 통해서 태스크를 실행하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다른 방식들과 가장 큰 차이점은 각 태스크에서 이벤트 루프로 제어권을 다시 넘겨줄 시점을 지정한다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;asyncio-기능&#34;&gt;ASYNCIO 기능&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;asyncio 이벤트 루프 사용하기&lt;/li&gt;
+&lt;li&gt;async/await 함수 호출하기&lt;/li&gt;
+&lt;li&gt;루프에서 실행할 태스크 작성하기&lt;/li&gt;
+&lt;li&gt;여러 개의 태스크가 완료되길 기다리기&lt;/li&gt;
+&lt;li&gt;모든 병행 태스크 종료 후 루프 종료하기&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;전체 &lt;code&gt;asyncio&lt;/code&gt; API 중 일부는 위와 같이 요약할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import asyncio
+import time
+
+
+async def main():
+    print(f&amp;#39;{time.ctime()} Hello!&amp;#39;)
+    await asyncio.sleep(1.0)
+    print(f&amp;#39;{time.ctime()} GoodBye!&amp;#39;)
+
+
+asyncio.run(main())
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;위는 간단한 파이썬의 Asyncio를 사용한 예제이다.&lt;/li&gt;
+&lt;li&gt;실행결과는 아래와 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/c3ma0wq6h2cbwe7/2021-09-05%2019.28.41.gif&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;눈치채지 어려울 수 도 있지만, &lt;code&gt;Hello!&lt;/code&gt; 라는 문자열이 출력되고 나서 1초 후에 &lt;code&gt;GoodBye!&lt;/code&gt; 라는 문자열이 출려된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import asyncio
+import time
+
+
+async def main():
+    print(f&amp;#39;{time.ctime()} Hello!&amp;#39;)
+    await asyncio.sleep(1.0)
+    print(f&amp;#39;{time.ctime()} GoodBye!&amp;#39;)
+
+loop = asyncio.get_event_loop() # 코루틴을 실행하기 위한 루프 인스턴스를 얻는 방법이다.
+task = loop.create_task(main()) # create_task()를 호출해서 루프에 코루틴을 스케줄링 한다.
+loop.run_until_complete(task) # 호출을 통해 현재 스레드를 블로킹 할 수 있다. 루프가 실행되는 동안 다른 작업들도 같이 실행된다. 
+                              # asyncio.run() 도 내부에서 run_until_complete()를 호출하여 메인 스레드를 블로킹한다.
+pending = asyncio.all_tasks(loop=loop)
+for task in pending:
+    task.cancel()
+group = asyncio.gather(*pending, return_exceptions=True) # 루프 중지 증으로 블로킹 상태가 풀린 후에 아직 실행중인 태스크를 취합하고  
+                                                         # 모든 태스크에게 취소 요청을 한 후에 loop.run_until_complete()를 호출하여 태스크들이 모두 종료 상태가 될 때까지 기다린다.
+                                                         # asyncio.run()의 내부에서 위의 절차를 모두 포함한다.
+loop.run_until_complete(group)
+loop.close() # 보통 최종 동작이다. 모든 루프의 대기열을 비우고 익스큐터를 종료시킨다. asyncio.run() 내부에서는 호출될 때마다 신규 이벤트 루프를 생성하고 반환하기 전에 루프를 닫는다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;asyncio의-계층&#34;&gt;Asyncio의 계층&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;계층 9: 네트워크: 스트림&lt;/li&gt;
+&lt;li&gt;계층 8: 네트워크: TCP &amp;amp; UDP&lt;/li&gt;
+&lt;li&gt;계층 7: 네트워크: 트랜스포트&lt;/li&gt;
+&lt;li&gt;계층 6: 도구&lt;/li&gt;
+&lt;li&gt;계층 5: 별개의 스레드와 프로세스&lt;/li&gt;
+&lt;li&gt;계층 4: Task&lt;/li&gt;
+&lt;li&gt;계층 3: Future&lt;/li&gt;
+&lt;li&gt;계층 2: 이벤트 루프&lt;/li&gt;
+&lt;li&gt;계층 1: 코루틴&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;코루틴&#34;&gt;코루틴&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/3gk2z30sqecf5mf/Screen%20Shot%202021-09-06%20at%2012.42.33%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;async def f():
+  return 123
+
+&amp;gt;&amp;gt;&amp;gt; type(f)
+&amp;gt;&amp;gt;&amp;gt; import inspect
+&amp;gt;&amp;gt;&amp;gt; inspect.iscoroutinefunction(f)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 함수는 가장 간단한 형태의 코루틴 선언이다. 일반적인 함수와 유사해보이지만, &lt;code&gt;async def&lt;/code&gt; 키워드로 시작한다는 점이 다르다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;함수 &lt;code&gt;f()&lt;/code&gt;의 정확한 타입은 &amp;lsquo;코루틴&amp;rsquo;이 아니라 코루틴 함수이다. 파이썬에서 제네레이터 함수의 형태와 동일하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/o0jbsojpc2s4bc6/Screen%20Shot%202021-09-06%20at%2012.45.45%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;함수 &lt;code&gt;g&lt;/code&gt;가 제네레이터로 불리는 경우가 있는데 위에서 보듯이 &lt;code&gt;g&lt;/code&gt; 자체는 함수일 뿐이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;제네레이터는 호출하여 값으로 반환받아야 하며, 코루틴 함수도 이와 동일하다. &lt;code&gt;async def&lt;/code&gt; 함수를 호출하여 코루틴 객체를 반환받아야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/72hcv3hmf3cq3bx/Screen%20Shot%202021-09-06%20at%2012.48.28%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그렇다면 코루틴은 무엇인가? &lt;strong&gt;코루틴&lt;/strong&gt;은 완료되지 않은 채 일시 정지 했던 함수를 재개 할 수 있는 기능을 가진 객체이다. 이는 제네레이터와 매우 흡사하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬 3.5에서 &lt;code&gt;async def&lt;/code&gt;와 &lt;code&gt;await&lt;/code&gt;를 키워드를 이용하여 네이티브 코루티을 도입하기 전, 파이썬에 3.4에서는 제네레이터와 데코레이터를 통해서 &lt;code&gt;asyncio&lt;/code&gt; 라이브러리를 사용할 수 있었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬에서 코루틴 객체들이 어떻게 사용되는지 좀 더 확인을 해보겠다. 가장 중요한 것은 파이썬의 코루틴 사이에서 실행을 &amp;lsquo;전환&amp;rsquo; 하는 방식이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코루틴이 반환할 때 실제로는 &lt;code&gt;StopIteration&lt;/code&gt; 예외가 발생한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/tln5w86tzhlnttp/Screen%20Shot%202021-09-06%20at%2012.52.36%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;코루틴에 &lt;code&gt;None&lt;/code&gt;을 전달하여 초기화를 한다. 이벤트 루프는 내부적으로 동일한 방식을 통해서 코루틴에 대해 초기화를 진행하므로 직접 실행할 필요는 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;생성한 모든 코루틴을 &lt;code&gt;loop.create_task(coro)&lt;/code&gt; 혹은 &lt;code&gt;await coro&lt;/code&gt;를 통해서 실행하면 &lt;code&gt;loop&lt;/code&gt; 가 알아서 &lt;code&gt;.send(None)&lt;/code&gt;를 내부적으로 실행할 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;await-키워드&#34;&gt;await 키워드&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;새로운 키워드 &lt;code&gt;await&lt;/code&gt;는 항상 매개변수를 하나 필요로 한다. 허용되는 형은 &lt;code&gt;awaitable&lt;/code&gt;로 불리며 다음 중 하나여야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코루틴 (즉, async def 함수의 반환값)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;__await__()&lt;/code&gt; 라는 특별 매서드를 구현한 모든 객체, 이 메서드는 반드시 이터레이터를 반환해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import asyncio
+
+
+async def f():
+    await asyncio.sleep(0)
+    return 123
+
+
+async def main():
+    result = await f()
+    return result
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;함수 &lt;code&gt;f()&lt;/code&gt;를 호출하면 코루틴을 반환하고 이는 &lt;code&gt;f()&lt;/code&gt;에 대해서 &lt;code&gt;await()&lt;/code&gt; 할 수 있다는 뜻이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;f()&lt;/code&gt;가 완료되면 &lt;code&gt;result&lt;/code&gt;의 변수 값은 123이 될 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=269805857&#34;&gt;파이썬 비동기 라이브러리 Asyncio&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.pythonsheets.com/notes/python-asyncio.html&#34;&gt;Asyncio Cheat Sheet&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>[파이썬] ASYNCIO 및 비동기 프로그래밍과 쓰레드 프로그래밍에 대한 비교</title>
+      <link>https://dongwooklee96.github.io/post/2021/09/05/%ED%8C%8C%EC%9D%B4%EC%8D%AC-asyncio-%EB%B0%8F-%EB%B9%84%EB%8F%99%EA%B8%B0-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EA%B3%BC-%EC%93%B0%EB%A0%88%EB%93%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%97%90-%EB%8C%80%ED%95%9C-%EB%B9%84%EA%B5%90.html</link>
+      <pubDate>Sun, 05 Sep 2021 14:50:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/09/05/%ED%8C%8C%EC%9D%B4%EC%8D%AC-asyncio-%EB%B0%8F-%EB%B9%84%EB%8F%99%EA%B8%B0-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EA%B3%BC-%EC%93%B0%EB%A0%88%EB%93%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%EC%97%90-%EB%8C%80%ED%95%9C-%EB%B9%84%EA%B5%90.html</guid>
+      <description>&lt;h3 id=&#34;aysncio-란&#34;&gt;Aysncio 란&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Asynio로 무엇을 할 수 있는가에 대한 질문으로는 간단하게 단일 프로그램에서 동시에 여러개의 HTTP 요청을 병행하여 실행할 수 있다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;결론부터 이야기하지면 Asyncio의 목표는 대기를 필요로 하는 여러 개의 작업을 동시에 잘 수행하는 것이다. 따라서 이 작업이 완료되기를 기대라는 동안 다른 작업을 수행할 수 있도록 하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;asyncio로-해결할-수-있는-것&#34;&gt;Asyncio로 해결할 수 있는 것&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I/O 위주 작업에 스레드 기반 병행 처리보다 비동기 기반 병행 처리를 적용하는 것이 낫다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Asyncio는 스레드를 사용하는 선점형 멀티 태스킹보다 안전한 대안이 될 수 있다. 단순하지 않은 스레드 기반 애플리케이션에서 때때로 발생하는 오류, 경합 조건, 혹은 비결정론적 위험 요소가 발생하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Asyncio를 통해서 동시에 수천개의 소켓 연결을 간단히 처리할 수 있다. 또한 웹 소켓이나 사물 인터넷을 위한 MQTT 같은 신기술에서 지원하는 수명이 긴 연결도 처리할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로그래밍 모델 관점에서 보면, 스레딩의 여러 CPU와 공유 메모리 (스레드 간 효율적인 통신의 수단)을 사용하는 방식이 계산 위주의 작업을 가장 잘 수행할 수 있어서 계산 위주의 작업이 많은 분야에 적합하지만 다른 문제점을 발생시킬 수도 있어서 필요악이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반면에 네트워크 프로그래밍은 &amp;lsquo;어떤 일들이 일어나기를 기다림&amp;rsquo;이라는 많은 작업들로 구성되어있다. 따라서 여러 CPU에 작업을 효율적으로 분배하기 위한 운영체제와의 연계작업이 필요없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;또한 공유 메모리 접근 시 발생할 수 있는 경합 조건과 같은 리스크를 불러오는 선점형 멀티 태스킹도 필요없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;스레딩의-장점&#34;&gt;스레딩의 장점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;공유 메모리를 통한 병렬 처리&lt;/li&gt;
+&lt;li&gt;노하우 및 기존 코드 활용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;스레딩의-단점&#34;&gt;스레딩의 단점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;스레드 관련 오류나 경합 조건을 고치기 어렵다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스레드는 자원을 많이 소모한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스레드는 유연하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;선점형 멀티 태스킹의 문제는 단계를 실행중인 스레드가 언제든지 중단된 후에 다른 스레드에서 해당 단계를 실행할 수 있다는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;락을 걸어서, 해결할 수 있지만, 이 방법을 적용하기 위해서는 스레드 간에 공유되는 상태 값이 쓰이는 모든 위치를 파악해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 소스 코드를 통제하는 경우라면 가능할지 모르겠으나 서드파티 라이브러리를 사용하는 경우에는 매우 적용하기 어렵다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;소스 코드만 확인해서는 경합 조건을 찾아내기 힘들고 OS는 거의 모든 곳에서 스레드 간의 콘텍스트 전환을 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 비동기 프로그램에서는 여러 병행 코루틴 간에 콘텍스트 전환이 정확히 언제 발생하는지 학인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=269805857&#34;&gt;파이썬 비동기 라이브러리 Asyncio&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬 리스트에서 중복된 요소를 제거하는 방법들 및 성능 비교 </title>
+      <link>https://dongwooklee96.github.io/post/2021/08/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EC%97%90%EC%84%9C-%EC%A4%91%EB%B3%B5%EB%90%9C-%EC%9A%94%EC%86%8C%EB%A5%BC-%EC%A0%9C%EA%B1%B0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EB%93%A4-%EB%B0%8F-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90.html</link>
+      <pubDate>Tue, 03 Aug 2021 20:00:13 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/08/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EB%A6%AC%EC%8A%A4%ED%8A%B8%EC%97%90%EC%84%9C-%EC%A4%91%EB%B3%B5%EB%90%9C-%EC%9A%94%EC%86%8C%EB%A5%BC-%EC%A0%9C%EA%B1%B0%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95%EB%93%A4-%EB%B0%8F-%EC%84%B1%EB%8A%A5-%EB%B9%84%EA%B5%90.html</guid>
+      <description>&lt;h3 id=&#34;리스트에서-중복된-요소를-제거하는-방법&#34;&gt;리스트에서 중복된 요소를 제거하는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;리스트에서 중복된 요소를 제거하는 방법에는 크게 두 가지가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 자료구조 SET을 이용하는 방법
+2. 딕셔너리를 이용하는 방법
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;첫-번째-방법---set-자료구조-이용&#34;&gt;첫 번째 방법 - SET() 자료구조 이용&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;파이썬에서는 중복된 요소를 허용하지 않는 &lt;a href=&#34;https://docs.python.org/3/tutorial/datastructures.html#sets&#34;&gt;SET&lt;/a&gt; 이라는 자료구조가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nums &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sets &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;nums&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 결과: {1, 2, 3, 4, 5, 7, 8,  9}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;list&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;sets&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 결과: [1, 2, 3, 4, 5, 7, 8, 9]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;중복이 제거된 집합을 생성하고나서, 이를 다시 리스트로 변환하면 중복이 제거된 리스트가 반환된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ydzu7eos858oslr/Screen%20Shot%202021-08-03%20at%209.23.47%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;공식 문서를 살펴보면, &lt;code&gt;set()&lt;/code&gt;은 순서를 보장하지 않는 컬렉션이며, 중복을 허용하지 않는다고 되어있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;두-번째-방법---딕셔너리를-이용하는-방법&#34;&gt;두 번째 방법 - 딕셔너리를 이용하는 방법&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;두 번째 방법은 딕셔너리의 키가 고유하다는 특성을 이용하여 중복을 제거하는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nums &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;list&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;dict&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;fromkeys&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;nums&lt;span style=&#34;color:#1f2328&#34;&gt;)))&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 결과: [1, 3, 5, 7, 9, 2, 4, 6]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;SET&lt;/code&gt;을 이용한 방법과 차이점은 중복된 요소를 제거하더라도, 순서를 유지한다는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;딕셔너리 자료구조는 중복된 키 값이 입력되었을 때 값만 덮어쓰여지고 키 값은 유지하는 특성을 이용한 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8h17mdl4w4xx9tt/Screen%20Shot%202021-08-03%20at%209.46.47%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.python.org/3/library/stdtypes.html#dict.fromkeys&#34;&gt;&lt;code&gt;fromkeys()&lt;/code&gt;&lt;/a&gt; 는 반복 가능한 값을 인자로 받아, 키로 사용한다 그리고 그 키 값으로 새로운 딕셔너리 타입을 만드는 것을 확인할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; nums1 &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;dict&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;fromkeys&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;nums1&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;9&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;6&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;사용가능한 버전에는 키만 인자로 받는 버전과, 키와 값을 둘다 받는 버전이 있는데 인자로 키만 주어질 경우 키 값만 생성되고 키에 대한 값들은 모두 &lt;code&gt;None&lt;/code&gt;으로 설정된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/uje9m9lacxpkvi3/Screen%20Shot%202021-08-03%20at%209.40.13%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;딕셔너리에서 &lt;code&gt;list(d)&lt;/code&gt;를 수행하였을 때 딕셔너리에 존재하는 모든 키들이 삽입 순서대로 반환된다고 되어 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;따라서 리스트의 순서를 유지하고 싶으면, 딕셔너리를 이용하여 중복 요소를 제거하는 것이 좋다.&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;성능-비교&#34;&gt;성능 비교&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그렇다면 순서를 보장하지 않아도 되는 리스트에서 중복을 제거할 때 어떤 것이 더 좋을까?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이를 알아보기 위해서 성능을 비교해보았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;pip install pytest-benchmark
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;우선 성능 비교를 위해서 &lt;code&gt;pytest-benchmark&lt;/code&gt; 모듈을 설치한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;time&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;random&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;pytest&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;nums &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;list&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;random&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;randint&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;for&lt;/span&gt; _ &lt;span style=&#34;color:#0550ae&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;range&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;@pytest.mark.benchmark&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    group&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;group-name&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    min_rounds&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;10000&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    timer&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;time&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    disable_gc&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    warmup&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;test_use_dict&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;benchmark&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#0550ae&#34;&gt;@benchmark&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;func1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6639ba&#34;&gt;list&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;dict&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;fromkeys&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;nums&lt;span style=&#34;color:#1f2328&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;@pytest.mark.benchmark&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    group&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;group-name&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    min_rounds&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;10000&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    timer&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;time&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;time&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    disable_gc&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    warmup&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;test_use_set&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;benchmark&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#0550ae&#34;&gt;@benchmark&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;func2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6639ba&#34;&gt;list&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;set&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;nums&lt;span style=&#34;color:#1f2328&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;맨 위에서 랜덤으로 1 ~ 100 사이의 정수 리스트를 만들어 준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;위의 코드는 &lt;code&gt;SET()&lt;/code&gt;과 딕셔너리를 이용하여, 리스트에서 중복된 요소를 제거하는 함수를 벤치마크 한 결과이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;각각 10,000,000 번씩 돌린 결과의 수치들을 뽑아내었다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/k8bl4heg0d9vab6/Screen%20Shot%202021-08-03%20at%2011.37.18%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;랜덤으로 생성된 리스트의 특성에 따라서 차이가 심할 수 있으므로 평균, 표준 편차, 중앙값이 의미가 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;딕셔너리를 이용하는 것보다 &lt;code&gt;SET&lt;/code&gt;을 사용하는 것이 중복된 원소를 훨씬 빠르게 제거할 수 있다는 것을 확인할 수 있다. 다만 리스트의 순서를 유지할 필요가 없는 경우에 사용할 수 있을 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.pytest.org/en/6.2.x/contents.html&#34;&gt;pytest - doc&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/7961363/removing-duplicates-in-lists/24554087&#34;&gt;stackoverflow&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬 - 게터와 세터 메서드 대신에 일반 속성을 사용하자.</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/14/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B2%8C%ED%84%B0%EC%99%80-%EC%84%B8%ED%84%B0-%EB%A9%94%EC%84%9C%EB%93%9C-%EB%8C%80%EC%8B%A0%EC%97%90-%EC%9D%BC%EB%B0%98-%EC%86%8D%EC%84%B1%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%9E%90..html</link>
+      <pubDate>Mon, 14 Jun 2021 14:50:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/06/14/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B2%8C%ED%84%B0%EC%99%80-%EC%84%B8%ED%84%B0-%EB%A9%94%EC%84%9C%EB%93%9C-%EB%8C%80%EC%8B%A0%EC%97%90-%EC%9D%BC%EB%B0%98-%EC%86%8D%EC%84%B1%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%9E%90..html</guid>
+      <description>&lt;h2 id=&#34;batter-way-29-게터와-세터-메서드-대신에-일반-속성을-사용하자&#34;&gt;BATTER WAY 29. 게터와 세터 메서드 대신에, 일반 속성을 사용하자.&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;다른 언어를 사용하다가, 파이썬으로 넘어온 프로그래머들은 자연스럽게 클래스에 게터(&lt;code&gt;getter&lt;/code&gt;)와 세터(&lt;code&gt;setter&lt;/code&gt;) 메서드를 명시적으로 구현하려고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;OldResistor&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;object&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ohms&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_ohms &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ohms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;get_ohms&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_ohms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;set_ohms&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ohms&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_ohms &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ohms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r0 &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; OldResistor&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;50e3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;Before: &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;r0&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;get_ohms&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# Before: 50000.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r0&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;set_ohms&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;10e3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;Before: &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;r0&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;get_ohms&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# After: 10000.0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r0&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;set_ohms&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;r0&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;get_ohms&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5e3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;사용하는 법은 간단하지만, 파이썬 스럽지 않은 코딩 방법이다.&lt;/li&gt;
+&lt;li&gt;겟터와 셋터는 값을 증가시키고 그 값을 바로 반영하기 불편하다.&lt;/li&gt;
+&lt;li&gt;파이썬은 명시적인 게터와 세터를 구현할 일이 거의 없다. 대신 공개 속성부터 구현하기 시작해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;Register&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;object&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ohms&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ohms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;voltage &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;current &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r1 &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; Register&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;50e3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r1&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;10e3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r1&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#34;color:#0550ae&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;5e3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;만약 속성을 설정할 때, 특별한 동작이 일어나야 한다면 &lt;code&gt;@property&lt;/code&gt; 데코레이터와 이에 대응하는 &lt;code&gt;setter&lt;/code&gt; 속성을 사용하는 방법으로 바꿀 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여기서는 &lt;code&gt;Registor&lt;/code&gt;의 새 서브 클래스를 정의하여, &lt;code&gt;voltage&lt;/code&gt; 프로퍼티를 할당하면, &lt;code&gt;current&lt;/code&gt; 값이 바뀌도록 해본다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;제대로 동작하려면, 세터와 게터의 이름이 의도한 프로퍼티의 이름과 같아야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;VoltageResistance&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;Register&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ohms&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;ohms&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_voltage &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0550ae&#34;&gt;@property&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;voltage&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_voltage
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#0550ae&#34;&gt;@voltage.setter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;voltage&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; voltage&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_voltage &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; voltage
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;current &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_voltage &lt;span style=&#34;color:#0550ae&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;ohms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r2 &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; VoltageResistance&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1e3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;Before: &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;r2&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;current&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r2&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;voltage &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;After: &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;r2&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;current&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;)&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 0.01&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;프로퍼티에 &lt;code&gt;setter&lt;/code&gt;를 설정하면, 클래스에 전달된 값들의 타입을 체크하고 값을 검증할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;BoundedResistence&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;Register&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ohms&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;ohms&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#0550ae&#34;&gt;@property&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;ohms&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_ohms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#0550ae&#34;&gt;@ohms.setter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;ohms&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ohms&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; ohms &lt;span style=&#34;color:#0550ae&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;raise&lt;/span&gt; ValueError&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;ohms&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt; ohms must be &amp;gt; 0&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r3 &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; BoundedResistence&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1e3&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;r3&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;ohms &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;프로퍼티에 &lt;code&gt;setter&lt;/code&gt;를 설정하면, 클래스에 전달된 값들의 타입을 체크하고 값을 검증할 수 있다.&lt;/li&gt;
+&lt;li&gt;다음은 모든 저항값이 0옴보다 큼을 보장하는 클래스를 정의한 것이다.&lt;/li&gt;
+&lt;li&gt;만약 &lt;code&gt;ohms&lt;/code&gt; 속성값이 0이거나, 0보다 작으면 예외가 발생하게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;FixedResistence&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;Register&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ohms&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;super&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;ohms&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#0550ae&#34;&gt;@property&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;ohms&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_ohms
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#0550ae&#34;&gt;@ohms.setter&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;ohms&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ohms&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;hasattr&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;_ohms&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;raise&lt;/span&gt; ValueError&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;Can&amp;#39;t set attribute&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;_ohms &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ohms
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;부모 클래스의 속성을 불변(Immutable)로 만드는데도 @property를 사용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;핵심-정리&#34;&gt;핵심 정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;간단한 공개 속성을 사용하여 새 클래스 인터페이스를 정의하고, 세터와 게터 메서드는 사용하지 말자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;객체의 속성에 접근할 때 특별한 동작을 정의하려면 &lt;code&gt;@property&lt;/code&gt;를 사용하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;@property&lt;/code&gt; 메서드에서 최소 놀람 규칙을 따르고 이상한 부작용을 피하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;@property&lt;/code&gt; 메서드가 빠르게 동작하도록 만들자. 느리거나 복잡한 작업은 일반 메서드로 하자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728&#34;&gt;파이썬 코딩의 기술&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬 - 키워드 인수로 선택적인 동작을 제어하자</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%9D%B8%EC%88%98%EB%A1%9C-%EC%84%A0%ED%83%9D%EC%A0%81%EC%9D%B8-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%A0%9C%EC%96%B4%ED%95%98%EC%9E%90.html</link>
+      <pubDate>Tue, 01 Jun 2021 16:17:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%9D%B8%EC%88%98%EB%A1%9C-%EC%84%A0%ED%83%9D%EC%A0%81%EC%9D%B8-%EB%8F%99%EC%9E%91%EC%9D%84-%EC%A0%9C%EC%96%B4%ED%95%98%EC%9E%90.html</guid>
+      <description>&lt;h2 id=&#34;better-way-19-키워드-인수로-선택적인-동작을-제공하자&#34;&gt;BETTER WAY 19. 키워드 인수로 선택적인 동작을 제공하자&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬은 대부분의 다른 언어와 같이 함수를 호출할 때, 인수를 위치로 전달 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬에서는 위치 인수를 모두 키워드로 전달하는 것도 지원한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;reminder&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;number&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; divisor&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; number &lt;span style=&#34;color:#0550ae&#34;&gt;%&lt;/span&gt; divisor
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reminder&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;20&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reminder&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;20&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; divisor&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reminder&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;number&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;20&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; divisor&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;reminder&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;divisor&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;20&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; number&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;7&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;키워드 인수는 코드를 처음보는 사람이 함수 호출을 더 명확하게 이해할 수 있도록 도와준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;키워드 인수는 함수를 정의할 때, 기본값을 설정할 수 있다. 이렇게 하면 반복적인 코드가 줄어들고, 코드가 깔끔해진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;flow_rate&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;weight_diff&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; time_diff&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; period&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;weight_diff &lt;span style=&#34;color:#0550ae&#34;&gt;/&lt;/span&gt; time_diff&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt; period
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;flow_per_second &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; flow_rate&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;weight_diff&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; time_diff&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;flow_per_hour &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; flow_rate&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;weight_diff&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; period&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;3600&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;키워드 인수는 기존의 코드와 호환성을 유지하면서 함수의 파라미터를 확장할 수 있는 강력한 수단이 된다. 코드의 수정 없이 추가적인 기능을 제공할 수 있으며, 버그가 생길 가능성을 줄여준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;핵심-정리&#34;&gt;핵심 정리&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;함수의 인수를 위치나 키워드로 저장할 수 있다.&lt;/li&gt;
+&lt;li&gt;위치 인수만으로는 이해하기 어려울 때, 키워드 인수를 사용하면, 각 인수를 사용하는 목적이 명확해진다.&lt;/li&gt;
+&lt;li&gt;키워드 인수에, 기본값을 지정하면, 함수에 새로운 동작을 쉽게 추가할 수 있다.&lt;/li&gt;
+&lt;li&gt;선택적인 키워드 인수는 항상 위치가 아닌 키워드로 넘겨야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728&#34;&gt;파이썬 코딩의 기술&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬 - 가변 위치 인수로 깔끔하게 보이게 하자</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B0%80%EB%B3%80-%EC%9C%84%EC%B9%98-%EC%9D%B8%EC%88%98%EB%A1%9C-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-%EB%B3%B4%EC%9D%B4%EA%B2%8C-%ED%95%98%EC%9E%90.html</link>
+      <pubDate>Tue, 01 Jun 2021 14:50:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%EA%B0%80%EB%B3%80-%EC%9C%84%EC%B9%98-%EC%9D%B8%EC%88%98%EB%A1%9C-%EA%B9%94%EB%81%94%ED%95%98%EA%B2%8C-%EB%B3%B4%EC%9D%B4%EA%B2%8C-%ED%95%98%EC%9E%90.html</guid>
+      <description>&lt;h2 id=&#34;batter-way-18-가변-위치-인수로-깔끔하게-보이게-하자&#34;&gt;BATTER WAY 18. 가변 위치 인수로 깔끔하게 보이게 하자&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;파이썬으로 코딩하다가, 가변적으로 인수를 받을 때가 있다.&lt;/li&gt;
+&lt;li&gt;이러한 경우에 사용하면 좋을 것 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;예제&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;message&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; values&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;not&lt;/span&gt; values&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;message&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    values_str &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;join&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;x&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#0550ae&#34;&gt;in&lt;/span&gt; values&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt; : &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;message&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; values_str&lt;span style=&#34;color:#1f2328&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;log&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;My number are&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;log&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;[])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;위의 코드에서는 로그로 남길 값이 없을 때, 빈 리스트로 넘겨주고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬에서는 &lt;code&gt;*&lt;/code&gt; 기호를 마지막 위치의 파라미터 이름 앞에 붙이면, 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;맨 앞에 나오는 인수는 필수적이지만, &lt;code&gt;*&lt;/code&gt; 가 붙은 인수는 가변적이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;함수 본문은 수정할 필요가 없고, 단지 호출하는 쪽만 수정하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;message&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;values&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;not&lt;/span&gt; values&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;message&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    values_str &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;, &amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;join&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;str&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;x&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#0550ae&#34;&gt;in&lt;/span&gt; values&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt; : &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;%s&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;message&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; values_str&lt;span style=&#34;color:#1f2328&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;log&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;My number are&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;log&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;Hi there&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;인자가 필요하지 않을 때에는, 사용하지 않아도 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;가변-개수의-인수를-받는-방법의-문제점&#34;&gt;가변 개수의 인수를 받는 방법의 문제점&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 가변 인수가 함수에 전달되기에 앞서, 항상 튜플로 변환된다는 점이다.
+
+-&amp;gt; 함수를 호출하는 쪽에서 제네레이터를 사용하면, 결과로 만들어 지는 튜플의 개수가 많은 경우, 메모리를 많이 차지하여 프로그램이 죽을 수 있다.
+
+2. 추후에 호출 코드를 변경하지 않고서는 새로운 위치에 인수를 추가할 수 없다는 점이다.
+
+-&amp;gt; 새로운 위치에 인수를 추가할 경우, 호출하는 코드를 변경해줘야한다. 그렇지 않으면 버그가 발생한다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;핵심-정리&#34;&gt;핵심 정리&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;def&lt;/code&gt; 문에서 &lt;code&gt;*args&lt;/code&gt;를 사용하면, 함수에서 가변 개수의 위치 인수를 받을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;*&lt;/code&gt; 연산자를 사용하면, 시퀀스에 들어 있는 아이템을 함수의 위치 인수로 사용할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;제네레이터와 &lt;code&gt;*&lt;/code&gt; 연산자를 함께 사용하면, 프로그램이 메모리 부족으로 망가질 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;*args&lt;/code&gt;를 받는 함수에 새 위치 파라미터를 추가하면 정말 찾기 어려운 버그가 생길 수 도 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728&#34;&gt;파이썬 코딩의 기술&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬 - 키워드 전용 인수로 명료성을 강요하자</title>
+      <link>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%A0%84%EC%9A%A9-%EC%9D%B8%EC%88%98%EB%A1%9C-%EB%AA%85%EB%A3%8C%EC%84%B1%EC%9D%84-%EA%B0%95%EC%9A%94%ED%95%98%EC%9E%90.html</link>
+      <pubDate>Tue, 01 Jun 2021 14:50:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/06/01/%ED%8C%8C%EC%9D%B4%EC%8D%AC-%ED%82%A4%EC%9B%8C%EB%93%9C-%EC%A0%84%EC%9A%A9-%EC%9D%B8%EC%88%98%EB%A1%9C-%EB%AA%85%EB%A3%8C%EC%84%B1%EC%9D%84-%EA%B0%95%EC%9A%94%ED%95%98%EC%9E%90.html</guid>
+      <description>&lt;h2 id=&#34;batter-way-21-키워드-전용-인수로-명료성을-강요하자&#34;&gt;BATTER WAY 21. 키워드 전용 인수로 명료성을 강요하자.&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;safe_division&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;number&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; divisor&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ignore_overflow&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;False&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ignore_zero_division&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;False&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;try&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; number &lt;span style=&#34;color:#0550ae&#34;&gt;/&lt;/span&gt; divisor
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt; OverflowError&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; ignore_overflow&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;raise&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt; ZeroDivisionError&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; ignore_zero_division&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;float&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;inf&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;raise&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;함수는 아래와 같은 방법으로 사용될 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;result &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; safe_division&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;500&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;False&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;result&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;result &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; safe_division&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;False&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;result&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;문제는 두 인수의 위치를 혼동하기 쉽기 때문에 찾기 어려운 버그가 발생할 수 있다.&lt;/li&gt;
+&lt;li&gt;따라서, 키워드 인수를 이용하여 매우 주의 깊고 항상 예외를 발생하도록 만들어 줄 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ult &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; safe_division&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;500&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ignore_overflow&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;result&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;result &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; safe_division&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ignore_zero_division&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;result&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;호출하는 쪽에서, 특정 키워드 인수로 특정 연산에는 기본 값을 덮어쓰고 무시할 플래그를 지정할 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;하지만 이러한 키워드 인수는 선택적인 동작이라서 함수를 호출하는 쪽에 키워드 인수로 의도를 명확하게 드러내라고 강요할 방법이 없다는 점이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 복잡한 함수를 작성할 때에는 호출하는 쪽에서 의도를 명확히 드러내도록 요구하는 것이 낫다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬3 에서는 키워드 전용 인수로 함수를 정의해서 의도를 명확히 드러내도록 요구할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;safe_division&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;number&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; divisor&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ignore_overflow&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;False&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ignore_zero_division&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;False&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;try&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; number &lt;span style=&#34;color:#0550ae&#34;&gt;/&lt;/span&gt; divisor
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt; OverflowError&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; ignore_overflow&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;raise&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt; ZeroDivisionError&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; ignore_zero_division&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;float&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;inf&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#cf222e&#34;&gt;raise&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;키워드 인수가 아닌, 위치 인수를 사용하는 함수 호출은 더 이상 동작하지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;result &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; safe_division&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;10&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;500&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;False&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 에러 발생&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;키워드 인수와 그 기본 값은 의도한 대로 동작한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;safe_devision&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; ignore_zero_division&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 정상 동작&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;핵심-정리&#34;&gt;핵심 정리&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;키워드 인수는 함수 호출의 의도를 더 명확하게 해준다.&lt;/li&gt;
+&lt;li&gt;특히 불 플래그를 여러 개 받는 함수처럼 헷갈리기 쉬운 함수를 호출할 때, 키워드 인수를 넘기게 하려면 키워드 전용 인수를 사용하자.&lt;/li&gt;
+&lt;li&gt;파이썬 3는 함수의 키워드 전용 인수를 명시적으로 지원한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=254321728&#34;&gt;파이썬 코딩의 기술&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬 itertools 모듈의 group by 함수</title>
+      <link>https://dongwooklee96.github.io/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC-itertools-%EB%AA%A8%EB%93%88%EC%9D%98-group-by-%ED%95%A8%EC%88%98.html</link>
+      <pubDate>Sat, 06 Mar 2021 13:15:35 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/03/06/%ED%8C%8C%EC%9D%B4%EC%8D%AC-itertools-%EB%AA%A8%EB%93%88%EC%9D%98-group-by-%ED%95%A8%EC%88%98.html</guid>
+      <description>&lt;h2 id=&#34;배경&#34;&gt;배경&lt;/h2&gt;
+&lt;hr&gt;
+&lt;p&gt;회사에서 이슈를 처리 하다가, 키 값을 기준으로 하위 리스트를 처리할 일이 있었다.
+자바였으면  &lt;code&gt;groupingBy()&lt;/code&gt;를 이용하여 쉽게 처리를 할 수 있다는 생각을 하고 있었던 참에 파이썬도 이와같은 함수를 지원하지 않을까라는 생각이 들어서 검색을 해보니 비슷한 함수가 있었다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110194923-8d81b880-7e7e-11eb-818d-fc66c7f4a6a0.png&#34; alt=&#34;Screen Shot 2021-03-06 at 1 18 19 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;연속된 키와 그룹을 반환하는 이터레이터를 만든다.&lt;/li&gt;
+&lt;li&gt;인자중에, 키는 각 요소의 키 값을 계산하는 함수이다.&lt;/li&gt;
+&lt;li&gt;일반적으로 해당 항목은 동일한 키 함수에 대해서 이미 정렬되어야 한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;키 함수의 값이 변경될 때마다 중단하거나 새 그룹을 생성하기 때문에 동일한 키 함수를 이용하여 데이터를 정렬해줘야한다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;그렇기 때문에 입력 순서에 관계없이 공통 요소를 집계하는 SQL의 GROUP BY와는 다르다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;이터레이터가 진행될 때마다, 이전 그룹은 사라지므로 만약 필요하다면 리스트로 저장해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;아래는 &lt;code&gt;groupby&lt;/code&gt;를 사용한 예제이다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from itertools import groupby
+
+things = [(&amp;#34;animal&amp;#34;, &amp;#34;bear&amp;#34;), (&amp;#34;animal&amp;#34;, &amp;#34;duck&amp;#34;), (&amp;#34;plant&amp;#34;, &amp;#34;cactus&amp;#34;), (&amp;#34;vehicle&amp;#34;, &amp;#34;speed boat&amp;#34;), (&amp;#34;vehicle&amp;#34;, &amp;#34;school bus&amp;#34;)]
+
+for key, group in groupby(things, lambda x: x[0]):
+    for thing in group:
+        print(&amp;#34;A %s is a %s.&amp;#34; % (thing[1], key))
+    print(&amp;#34;&amp;#34;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;키 값으로 튜플의 첫 번째 값을 사용하여 정렬 하였고, 키 값에 따른 그룹이 생성될 때마다 이를 출력한 것이다.&lt;/p&gt;
+&lt;h4 id=&#34;주의할-점&#34;&gt;주의할 점&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;앞에서 말했듯이 사용하기 전에, 키 값을 기준으로 정렬이 된 리스트인지, 그리고 보장을 하지 못한다면 정렬을 해줘야하는 것을 알 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# [k for k, g in groupby(&amp;#39;AAAABBBCCDAABBB&amp;#39;)] --&amp;gt; A B C D A B
+# [list(g) for k, g in groupby(&amp;#39;AAAABBBCCD&amp;#39;)] --&amp;gt; AAAA BBB CC D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;정렬을 해주지 않으면 위와 같은 형태로 만들어 지게 된다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.python.org/3/library/itertools.html#itertools.groupby&#34;&gt;itertools - groupby 파이썬 공식 문서&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/773/how-do-i-use-itertools-groupby&#34;&gt;group by 예제&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬 @classmethod와 @staticmethod 차이</title>
+      <link>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-@classmethod%EC%99%80-@staticmethod-%EC%B0%A8%EC%9D%B4.html</link>
+      <pubDate>Wed, 03 Mar 2021 08:45:13 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/03/03/%ED%8C%8C%EC%9D%B4%EC%8D%AC-@classmethod%EC%99%80-@staticmethod-%EC%B0%A8%EC%9D%B4.html</guid>
+      <description>&lt;p&gt;파이썬을 코딩을 하다가 &lt;code&gt;@classmethod&lt;/code&gt; 데코레이터가 붙어 있는 메서드를 볼 수 있었다. 정확히 어떤 역할을 하는지 몰라서 문서에서 찾아보았다.&lt;/p&gt;
+&lt;h4 id=&#34;classmethod&#34;&gt;@classmethod&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109730703-420ca780-7bfd-11eb-9a41-47561874c29e.png&#34; alt=&#34;Screen Shot 2021-03-03 at 8 48 29 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;메서드를 클래스 메서드로 변환합니다.&lt;/li&gt;
+&lt;li&gt;클래스 메서드는 인스턴스 메서드가 인스턴스를 받는 것 처럼 클래스를 암시적인 첫 번째 인수로 수신한다.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;클래스 메서드는 다음과 같이 사용한다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class C:
+    @classmethod
+    def f(cls, arg1, arg2, ...): ...
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;클래스 메서드는 다음과 같이 호출 될 수 있다.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;C.f()&lt;/code&gt;, &lt;code&gt;C().f()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;앞의 경우에는 클래스에서 호출 된 것이고, 뒤의 경우에는 인스턴스에서 호출 된 것이다.&lt;/li&gt;
+&lt;li&gt;클래스 메서드가 상속 받은 클래스에서 호출되면 상속 받은 클래스가 첫 번째 인수로 전달된다.&lt;/li&gt;
+&lt;li&gt;클래스 메서드는 &lt;code&gt;C++&lt;/code&gt;, &lt;code&gt;Java&lt;/code&gt;의 스태틱 메서드와는 다르다, 만약 앞의 경우로 스태틱 메서드를 사용하고 싶다면, &lt;code&gt;@staticmethod&lt;/code&gt; 를 사용하라.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;여기까지만 봐서는 정적 메서드랑 무슨 차이인지 알기 힘들었다. 따라서 정적 메서드 관련된 문서를 확인해봤다.&lt;/p&gt;
+&lt;h4 id=&#34;staticmethod&#34;&gt;@staticmethod&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109732266-3a9acd80-7c00-11eb-98b4-bd34b94a81fb.png&#34; alt=&#34;Screen Shot 2021-03-03 at 9 09 51 AM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;메서드를 정적 메서드로 변환시켜 줍니다.&lt;/li&gt;
+&lt;li&gt;정적 메서드는 암시적으로 첫 번째 인수를 받지 않습니다.&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;사용하는 방법은 다음과 같다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class C:
+    @staticmethod
+    def f(arg1, arg2, ...): ...
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;정적 메서드는 다음과 같이 호출 될 수 있습니다.
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;C.f()&lt;/code&gt;, &lt;code&gt;C().f()&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;데코레이터와 마찬가지로, 정적 메서드를 &lt;code&gt;regular&lt;/code&gt; 함수 처럼 호출 할 수 있다.&lt;/li&gt;
+&lt;li&gt;클래스 바디에 함수에 대한 참조가 필요하고 인스턴스 메서드로 자동 변환하지 않으려는 경우에 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class C:
+    builtin_open = staticmethod(open)
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;차이점&#34;&gt;차이점&lt;/h4&gt;
+&lt;p&gt;얼핏봐서는 차이점을 크게 못느껴서 인터넷을 찾아본 결과 좋은 글을 볼 수 있었다. &lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;@classmethod&lt;/code&gt;와 &lt;code&gt;@staticmethod&lt;/code&gt;는 상속에서 차이가 난다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class Person:
+    default= &amp;#34;아빠&amp;#34;
+
+     def __init__(self):
+        self.data = self.default
+
+    @classmethod
+    def class_person(cls):
+        return cls()
+
+    @staticmethod
+    def static_person():
+        return Person()
+
+class WhatPerson(Person):
+    default = &amp;#34;엄마&amp;#34;
+person1 = WhatPerson.class_person()    # return 엄마
+person2 = WhatPerson.static_person()   # return 아빠
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;위와 같이 &lt;code&gt;@staticmethod&lt;/code&gt;인 경우에는 부모 클래스의 속성 값을 가져오지만, &lt;code&gt;@classmethod&lt;/code&gt;의 경우 cls 인자를 활용하여 클래스의 클래스 속성을 가져온다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://julien.danjou.info/guide-python-static-class-abstract-methods/&#34;&gt;The definitive guide on how to use static, class or abstract methods in Python&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.python.org/3/library/functions.html#classmethod&#34;&gt;https://docs.python.org/3/library/functions.html#classmethod&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.python.org/3/library/functions.html#staticmethod&#34;&gt;https://docs.python.org/3/library/functions.html#staticmethod&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372&#34;&gt;https://medium.com/@hckcksrl/python-%EC%A0%95%EC%A0%81%EB%A9%94%EC%86%8C%EB%93%9C-staticmethod-%EC%99%80-classmethod-6721b0977372&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>WSGI</title>
+      <link>https://dongwooklee96.github.io/post/2021/03/02/wsgi.html</link>
+      <pubDate>Tue, 02 Mar 2021 14:39:13 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/03/02/wsgi.html</guid>
+      <description>&lt;h1 id=&#34;플라스크와-wsgi&#34;&gt;플라스크와 WSGI&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109603667-7896e380-7b65-11eb-8e62-961951e0c969.png&#34; alt=&#34;Screen Shot 2021-03-02 at 2 42 04 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;플라스크 문서를 살펴보다가 다음과 같은 문장을 보았다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;플라스크는 &lt;code&gt;Jinja&lt;/code&gt; 템플릿 엔진과 &lt;code&gt;Werkzeug WSGI&lt;/code&gt; 툴킷에 의존하고 있다. &lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109604060-37530380-7b66-11eb-8217-e8c8a95ae4ec.png&#34; alt=&#34;Screen Shot 2021-03-02 at 2 47 21 PM&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Werkzeug&lt;/code&gt;가 무엇을 하는 툴인지 몰라서 검색을 해본 결과 다음과 같았다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Werkzeug&lt;/code&gt;는 포괄적인 &lt;code&gt;WSGI&lt;/code&gt; 웹 애플리케이션 라이브러리이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;WSGI&lt;/code&gt; 응용 프로그램을 위한 단순한 유틸리티에서 시작하였지만, 현재는 가장 진보한 &lt;code&gt;WSGI&lt;/code&gt; 유틸리티 라이브러가 되었다.&lt;/li&gt;
+&lt;li&gt;플라스크는 &lt;code&gt;Werkzeug&lt;/code&gt;를 감싸 &lt;code&gt;WSGI&lt;/code&gt;의 세부사항을 처리하는 동시에 강력한 애플리케이션을 위한 더 많은 구조와 패턴을 제공한다. &lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;Werkzeug&lt;/code&gt;는 다음을 포함하고 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;브라우저에 있는 스택 트레이스와 코드를 검사할 수 있는 디버거를 포함한다.&lt;/li&gt;
+&lt;li&gt;헤더, 쿼리 인자, 폼 데이터, 파일 및 쿠키와 상호 작용할 수 있는 요청 객체이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;플라스크는 내부적으로 &lt;code&gt;Werkzeug&lt;/code&gt;로 구현되어 있고, &lt;code&gt;Werkzeug&lt;/code&gt;는 &lt;code&gt;WSGI&lt;/code&gt;를 구현하는 라이브러리이다.
+그렇다면 자연스럽게 &lt;code&gt;WSGI&lt;/code&gt;가 무엇인지 궁금하였다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109774010-38a62e00-7c43-11eb-9a90-3e95c3090c30.png&#34; alt=&#34;Screen Shot 2021-03-03 at 5 09 08 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;WSGI&lt;/code&gt;는 웹 서버 게이트웨이 인터페이스이다.&lt;/li&gt;
+&lt;li&gt;웹 서버가 웹 애플리케이션과 통신하는 방법과 웹 애플리케이션을 연결하여 하나의 요청을 처리하는 방법을 설명하는 규격 입니다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;WSGI&lt;/code&gt;는 &lt;a href=&#34;https://www.python.org/dev/peps/pep-3333/&#34;&gt;PEP 3333&lt;/a&gt;에 설명되어 있는 파이썬 표준이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;문서의 양이 방대하므로 지금 모두 설명하는 것보다는 따로 나중에 관련된 페이지를 만들어서 공부를 해야겠다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109775165-81aab200-7c44-11eb-8455-d5db0d39f127.png&#34; alt=&#34;Screen Shot 2021-03-03 at 5 18 38 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬은 다양한 웹 애플리케이션 프레임워크가 있고 웹 프레임 워크의 선택이 사용가능한 웹 서버 선택을 제한할 수 있고 그 반대의 경우도 마찬가지이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이와 대조적으로, 자바의 서블릿 API를 지원하는 웹 서버에서 자바 웹 애플리케이션 프레임워크로 작성된 애플리케이션을 실행할 수 있게 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프레임워크 선택과 웹 서버 선택을 분리함으로써, 사용자는 자신에게 맞는 조합을 선택할 수 있고, 프레임워크와 서버 개발자는 원하는 분야에 집중할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 이 &lt;code&gt;PEP&lt;/code&gt; 문서는 웹 서버와 웹 애플리케이션 또는 프레임워크 사이의 단순하고 보편적인 인터페이스인 파이썬 웹 서버 게이트웨이 인터페이스를 제안하는 문서이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;WSGI&lt;/code&gt;의 목표는 새로운 웹 프레임워크를 만드는 것이 아니라 기존 서버, 애플리케이션 또는 프레임워크의 쉬운 상호 연결을 촉진하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;wsgi-개요&#34;&gt;WSGI 개요&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109776796-52954000-7c46-11eb-93eb-f622fd14dccf.png&#34; alt=&#34;Screen Shot 2021-03-03 at 5 31 36 PM&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;WSGI 인터페이스는 서버, 게이트웨이 측면과 애플리케이션, 프레임워크 측면이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버 측에서 응용 프로그램이 제공하는 &lt;code&gt;Callable&lt;/code&gt; 객체를 호출한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 객체의 제공 방법은 서버 또는 게이트웨이에 따라서 다르다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;순수한 서버/게이트웨이 및 애플리케이션/프레임워크 외에도, 이 규격 양쪽을 모두 구현하는 &amp;ldquo;중간 소프트웨어&amp;rdquo; 컴포넌트를 만들 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 규격에서 &lt;code&gt;Callable&lt;/code&gt; 이라는 용어는 &lt;code&gt;__call__&lt;/code&gt; 메서드를 가지는 함수, 메서드, 클래스, 그리고 인스턴스를 말한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;필요에 따라 적절한 구현 기술을 선택하는 것은 &lt;code&gt;Callable&lt;/code&gt;을 구현하는 서버, 게이트웨이 또는 애플리케이션에 달려 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반대로 &lt;code&gt;Callable&lt;/code&gt;을 호출하는 서버, 게이트웨이 또는 응용 프로그램은 &lt;code&gt;Callable&lt;/code&gt; 타입에 종속되지 않아야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;결론&#34;&gt;결론&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;웹 서버와 프레임워크를 분리하기 위해서 생겨났다.&lt;/li&gt;
+&lt;li&gt;WSGI는 웹 서버와 애플리케이션이 통신하는 방법과 요청을 처리하는 방법을 설명한 규약이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://flask.palletsprojects.com/en/1.1.x/&#34;&gt;https://flask.palletsprojects.com/en/1.1.x/&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;&lt;a href=&#34;https://palletsprojects.com/p/werkzeug/&#34;&gt;https://palletsprojects.com/p/werkzeug/&lt;/a&gt;&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

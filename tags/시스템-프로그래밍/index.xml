@@ -6,12 +6,14 @@
     <description>Recent content in 시스템 프로그래밍 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
     <lastBuildDate>Sun, 05 Sep 2021 12:00:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>[시스템 프로그래밍] 파일 메타 정보 확인 및 수정하기</title>
       <link>https://dongwooklee96.github.io/post/2021/09/05/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%BC-%EB%A9%94%ED%83%80-%EC%A0%95%EB%B3%B4-%ED%99%95%EC%9D%B8-%EB%B0%8F-%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B0.html</link>
       <pubDate>Sun, 05 Sep 2021 12:00:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/09/05/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%8C%8C%EC%9D%BC-%EB%A9%94%ED%83%80-%EC%A0%95%EB%B3%B4-%ED%99%95%EC%9D%B8-%EB%B0%8F-%EC%88%98%EC%A0%95%ED%95%98%EA%B8%B0.html</guid>
       <description>&lt;h3 id=&#34;메타-정보-획득하기&#34;&gt;메타 정보 획득하기&lt;/h3&gt;
 &lt;hr&gt;
@@ -232,7 +234,7 @@ int main(int argc, char *argv[]) {
       <title>[시스템 프로그래밍] 하드 링크 및 심볼릭 링크</title>
       <link>https://dongwooklee96.github.io/post/2021/09/03/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%95%98%EB%93%9C-%EB%A7%81%ED%81%AC-%EB%B0%8F-%EC%8B%AC%EB%B3%BC%EB%A6%AD-%EB%A7%81%ED%81%AC.html</link>
       <pubDate>Fri, 03 Sep 2021 22:00:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/09/03/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%ED%95%98%EB%93%9C-%EB%A7%81%ED%81%AC-%EB%B0%8F-%EC%8B%AC%EB%B3%BC%EB%A6%AD-%EB%A7%81%ED%81%AC.html</guid>
       <description>&lt;h3 id=&#34;하드-링크&#34;&gt;하드 링크&lt;/h3&gt;
 &lt;hr&gt;
@@ -304,11 +306,13 @@ int link(const char *src, const char *dest);
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;src&lt;/code&gt;와 &lt;code&gt;dest&lt;/code&gt;에는 동일한 파일 시스템에 있어야 한다. 양쪽 모두가 하나의 파일 시스템에 존재해야 한다.&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;src&lt;/code&gt;와 &lt;code&gt;dest&lt;/code&gt;에 디렉터리는 사용할 수 없다. 즉, 디렉터리에 하드 링크를 붙일 수 없다. 이 제한은 나중에 언급할 심볼릭 링크를 사용하여 해결할 수 있다.&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;ln-명령어-작성하기&#34;&gt;ln 명령어 작성하기&lt;/h4&gt;
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
@@ -354,7 +358,8 @@ int main(int argc, char *argv[]) {
 하드 링크는 하나의 파일 시스템 내에서만 만들 수 있다는 제약이 있었다. 그러나 심볼릭 링크는 파일 시스템의 경계와 관계없이 만들 수 있다.&lt;/li&gt;
 &lt;li&gt;디렉터리에도 별명을 붙일 수 있다.
 디렉터리에 대해서는 하드 링크는 만들 수 없지만 심볼릭 링크는 만들 수 있따.&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;현재는 하드 링크를 거의 사용하지 않고 파일에 별명을 붙이고 싶을 때는 심볼릭 링크를 사용하는 것 이 좋다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -418,7 +423,7 @@ int main(int argc, char *argv[]) {
       <title>[시스템 프로그래밍] 디렉터리와 관련된 API 및 프로그램 작성</title>
       <link>https://dongwooklee96.github.io/post/2021/08/31/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC%EC%99%80-%EA%B4%80%EB%A0%A8%EB%90%9C-api-%EB%B0%8F-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%9E%91%EC%84%B1.html</link>
       <pubDate>Tue, 31 Aug 2021 16:09:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/08/31/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC%EC%99%80-%EA%B4%80%EB%A0%A8%EB%90%9C-api-%EB%B0%8F-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8-%EC%9E%91%EC%84%B1.html</guid>
       <description>&lt;h3 id=&#34;디렉터리-내용-읽어-들이기&#34;&gt;디렉터리 내용 읽어 들이기&lt;/h3&gt;
 &lt;hr&gt;
@@ -596,7 +601,8 @@ path로 지정한 상위 디렉터리가 디렉터리가 아니다.&lt;/li&gt;
 path로 지정한 경로에 이미 파일이나 디렉터리가 존재한다.&lt;/li&gt;
 &lt;li&gt;EPERM
 상위 디렉터리에 대한 변경 권한이 없다.&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;umask&#34;&gt;umask&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -681,7 +687,7 @@ int main(int argc, char *argv[]) {
       <title>GREP 명령어 만들기 및 정규표현식</title>
       <link>https://dongwooklee96.github.io/post/2021/08/01/grep-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D.html</link>
       <pubDate>Sun, 01 Aug 2021 21:46:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/08/01/grep-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D.html</guid>
       <description>&lt;h3 id=&#34;grep-명령어-만들기-및-정규-표현식&#34;&gt;GREP 명령어 만들기 및 정규 표현식&lt;/h3&gt;
 &lt;hr&gt;
@@ -791,7 +797,8 @@ static void do_grep(regex_t *pat, FILE *src) {
 &lt;ol&gt;
 &lt;li&gt;부호화 문자집합&lt;/li&gt;
 &lt;li&gt;인코딩&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;부호화-문자-집합&#34;&gt;부호화 문자 집합&lt;/h4&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -829,7 +836,8 @@ static void do_grep(regex_t *pat, FILE *src) {
 &lt;li&gt;프로그램에서 사용할 문자 코드를 미리 정한다 (혹은 사용자가 정하도록 한다)&lt;/li&gt;
 &lt;li&gt;문자 코드를 추출한다.&lt;/li&gt;
 &lt;li&gt;문자열을 주고 받을 때, 문자 코드의 이름도 넘기도록 한다.&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;첫 번째 방법은 정해진 문자 코드를 사용하기로 사용자와 합의하는 것이다.&lt;/p&gt;
@@ -888,7 +896,7 @@ static void do_grep(regex_t *pat, FILE *src) {
       <title>HEAD 명령어 만들기</title>
       <link>https://dongwooklee96.github.io/post/2021/07/27/head-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
       <pubDate>Tue, 27 Jul 2021 00:05:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/07/27/head-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -978,7 +986,7 @@ static void die(const char *s)
       <title>스트림과 관련 라이브러리 함수</title>
       <link>https://dongwooklee96.github.io/post/2021/07/24/%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EA%B4%80%EB%A0%A8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%ED%95%A8%EC%88%98.html</link>
       <pubDate>Sat, 24 Jul 2021 16:09:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/07/24/%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EA%B4%80%EB%A0%A8-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%ED%95%A8%EC%88%98.html</guid>
       <description>&lt;h1 id=&#34;스트림-관련-라이브러리-함수&#34;&gt;스트림 관련 라이브러리 함수&lt;/h1&gt;
 &lt;h3 id=&#34;stdio&#34;&gt;&lt;code&gt;stdio&lt;/code&gt;&lt;/h3&gt;
@@ -1122,7 +1130,7 @@ int fclose(FILE *stream);
       <title>CAT 명령어 만들기 및 기타 시스템 콜</title>
       <link>https://dongwooklee96.github.io/post/2021/07/24/cat-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EA%B8%B0%ED%83%80-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</link>
       <pubDate>Sat, 24 Jul 2021 05:05:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/07/24/cat-%EB%AA%85%EB%A0%B9%EC%96%B4-%EB%A7%8C%EB%93%A4%EA%B8%B0-%EB%B0%8F-%EA%B8%B0%ED%83%80-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</guid>
       <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;stdio.h&amp;gt;
 #include &amp;lt;stdlib.h&amp;gt;
@@ -1263,7 +1271,7 @@ int fcntl(int fd, int cmd, ...);
       <title>스트림과 관련된 시스템 콜</title>
       <link>https://dongwooklee96.github.io/post/2021/07/24/%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EA%B4%80%EB%A0%A8%EB%90%9C-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</link>
       <pubDate>Sat, 24 Jul 2021 01:09:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/07/24/%EC%8A%A4%ED%8A%B8%EB%A6%BC%EA%B3%BC-%EA%B4%80%EB%A0%A8%EB%90%9C-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C.html</guid>
       <description>&lt;h3 id=&#34;스트림과-관련된-시스템-콜&#34;&gt;스트림과 관련된 시스템 콜&lt;/h3&gt;
 &lt;hr&gt;
@@ -1507,7 +1515,7 @@ int close(int fd);
       <title>리눅스 시스템 네트워크 프로그래밍 (2) - 프로세스 (2)</title>
       <link>https://dongwooklee96.github.io/post/2021/07/04/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-2-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-2.html</link>
       <pubDate>Sun, 04 Jul 2021 01:12:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/07/04/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-2-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-2.html</guid>
       <description>&lt;h3 id=&#34;posix_spawn-계열-함수&#34;&gt;posix_spawn 계열 함수&lt;/h3&gt;
 &lt;hr&gt;
@@ -1618,7 +1626,7 @@ int posix_spawnattr_setflags(posix_spawnattr_t *attr, short flags);
       <title>리눅스 시스템 네트워크 프로그래밍 (1) - 프로세스 (1)</title>
       <link>https://dongwooklee96.github.io/post/2021/07/03/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-1.html</link>
       <pubDate>Sat, 03 Jul 2021 11:12:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/07/03/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-1-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-1.html</guid>
       <description>&lt;h3 id=&#34;프로세스&#34;&gt;프로세스&lt;/h3&gt;
 &lt;hr&gt;
@@ -1900,7 +1908,7 @@ Child[5936]: fd(3): Test fd.
       <title>리눅스 시스템 네트워크 프로그래밍 (0) - 서문</title>
       <link>https://dongwooklee96.github.io/post/2021/07/03/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-0-%EC%84%9C%EB%AC%B8.html</link>
       <pubDate>Sat, 03 Jul 2021 11:09:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/07/03/%EB%A6%AC%EB%88%85%EC%8A%A4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-0-%EC%84%9C%EB%AC%B8.html</guid>
       <description>&lt;h3 id=&#34;서문&#34;&gt;서문&lt;/h3&gt;
 &lt;hr&gt;

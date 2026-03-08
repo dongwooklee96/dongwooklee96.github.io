@@ -97,7 +97,9 @@
   </head>
 
   <body>
-    <br/>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
 
 <div class="article-meta">
 <h1><span class="title">간단한 소켓 프로그램</span></h1>
@@ -106,7 +108,7 @@
 <p class="terms">
   
   
-  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> <a href="../../../../categories/%EA%B0%9C%EB%B0%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">개발-네트워크</a> 
   
   
   
@@ -184,7 +186,8 @@ int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
 </ul>
 <blockquote>
 <p>클라이언트쪽으로부터 &ldquo;How old are you?&rdquo; 라는 문자열을 전송받은 후에 이것을 전송한다.
-클라이언트쪽으로 &ldquo;I am 20 years old&rdquo; 라는 문자열을 전송한 후에 화면에 출력한다.</p></blockquote>
+클라이언트쪽으로 &ldquo;I am 20 years old&rdquo; 라는 문자열을 전송한 후에 화면에 출력한다.</p>
+</blockquote>
 <pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;string.h&gt;
 #include &lt;netinet/in.h&gt;
@@ -252,7 +255,8 @@ int main() {
 <blockquote>
 <p>같은 호스트 안에 위치한 서버 프로그램에 <code>TCP 9001번 포트로 연결을 시도한다.</code>
 연결 후 서버 프로그램으로 &lsquo;How old are you?&rsquo; 라는 문자열을 전송한 후에 화면에 출력한다.
-서버로부터 &lsquo;I am 20 years old.&rsquo; 라는 문자열을 전송 받은 후에 화면에 출력한다.</p></blockquote>
+서버로부터 &lsquo;I am 20 years old.&rsquo; 라는 문자열을 전송 받은 후에 화면에 출력한다.</p>
+</blockquote>
 <pre tabindex="0"><code>#include &lt;stdio.h&gt;
 #include &lt;netinet/in.h&gt;
 #include &lt;sys/socket.h&gt;
@@ -363,6 +367,8 @@ int foo(int domain, int type, int protocol) {
     <a href="../../../../"> >> Home</a>
   </main>
 </div>
+      </div> 
+    </div> 
   <script src="https://utteranc.es/client.js"
       repo="dongwooklee96/dongwooklee96.github.io"
       issue-term="pathname"
@@ -419,4 +425,3 @@ fathom('trackPageview');
   </body>
   
 </html>
-

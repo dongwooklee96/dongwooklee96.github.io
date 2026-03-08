@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>개발-유틸 on 개발자 이동욱</title>
+    <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%9C%A0%ED%8B%B8.html</link>
+    <description>Recent content in 개발-유틸 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
+    <lastBuildDate>Sat, 27 Mar 2021 17:29:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%9C%A0%ED%8B%B8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>인코딩과 캐릭터 셋의 차이</title>
+      <link>https://dongwooklee96.github.io/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4.html</link>
+      <pubDate>Sat, 27 Mar 2021 17:29:39 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EC%9D%B8%EC%BD%94%EB%94%A9%EA%B3%BC-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%85%8B%EC%9D%98-%EC%B0%A8%EC%9D%B4.html</guid>
+      <description>&lt;p&gt;최근에 인코딩과 캐릭터 셋의 차이를 아는지에 대한 질문을 받았고, 제대로 답변하지 못한 기억이 난다. 따라서 이 두개의 차이점 및 추가적인 궁금증에 대해서 조사를 해보았다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112772028-8c9d0a80-9069-11eb-85a4-adb185619b6b.png&#34; alt=&#34;Screen Shot 2021-03-29 at 8 33 54 AM&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;유니코드와-utf-8-utf-16은-무엇이-다른가&#34;&gt;유니코드와 &lt;code&gt;UTF-8&lt;/code&gt;, &lt;code&gt;UTF-16&lt;/code&gt;은 무엇이 다른가&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;유니코드는 문자 집합으로, 문자 집합만 의미하며, 실제로 저장되는 방식(바이트로 맵핑)에 대해서는 아무런 설명을 하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;UTF-8, UTF-16 은 문자열 또는 바이트 배열에서 바이트로 문자를 맵핑하는 방법을 정의하는 인코딩이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;UTF-8, UTF-16, UTF-32는 기본적으로 일부 문자를 인코딩하는데, 사용되는 바이트의 양이 다르다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;UTF-8은 ASCII에 정의된 문자에 대해서 1바이트를 사용하고, 다른 문자에 대해서는 2~4 사이의 바이트를 사용합니다. UTF-32는 각 문자에 대해서 4바이트를 지속적으로 사용하므로 문자열의 문자에 대한 반복은 사소한 것이지만 공통 문자열의 경우에는 더 많은 공간을 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;캐릭터-셋과-인코딩의-차이점&#34;&gt;캐릭터 셋과 인코딩의 차이점&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;캐릭터 셋은 단순히 특정 인코딩으로 나타낼 수 있는, 문자의 집합을 의미한다.&lt;/li&gt;
+&lt;li&gt;예를 들면, &amp;lsquo;☯&amp;rsquo; 같은 문자는 유니코드 문자 집합과 다른 문자 집합에도 사용할 수 있다. 하지만 이 문자에 대한 인코딩을 서로 다를 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Unicode character: ☯
+UTF-8 encoded: 0xE2 0x98 0xAF
+UTF-16 encoded: 0x26 0x2F
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://kore-nordmann.de/blog/php_charset_encoding_FAQ.html#what-is-the-difference-between-a-charset-and-an-encoding&#34;&gt;what is the difference between a charset and an encoding&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

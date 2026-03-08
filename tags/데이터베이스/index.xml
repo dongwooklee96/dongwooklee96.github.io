@@ -6,14 +6,19 @@
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
     <lastBuildDate>Sat, 17 Sep 2022 15:05:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>사칙 연산을 수행하는 POSTGRES 익스텐션 만들기</title>
       <link>https://dongwooklee96.github.io/post/2022/09/17/%EC%82%AC%EC%B9%99-%EC%97%B0%EC%82%B0%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
       <pubDate>Sat, 17 Sep 2022 15:05:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/09/17/%EC%82%AC%EC%B9%99-%EC%97%B0%EC%82%B0%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
-      <description>&lt;h3 id=&#34;확장-프로그램을-만드는-방법&#34;&gt;확장 프로그램을 만드는 방법&lt;/h3&gt;
+      <description>&lt;!--### 발표할 내용--&gt;
+&lt;!--- 간단한 POSTGRES 익스텐션을 C 언어로 만드는 방법--&gt;
+&lt;!--- POSTGRES 익스텐션을 통해서 사칙 연산을 하는 방법에 대해서 알려줄 것이다.--&gt;
+&lt;h3 id=&#34;확장-프로그램을-만드는-방법&#34;&gt;확장 프로그램을 만드는 방법&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -74,7 +79,7 @@ LANGUAGE C IMMUTABLE STRICT;
       <title>Riak 과 맵 리듀스</title>
       <link>https://dongwooklee96.github.io/post/2022/04/07/riak-%EA%B3%BC-%EB%A7%B5-%EB%A6%AC%EB%93%80%EC%8A%A4.html</link>
       <pubDate>Thu, 07 Apr 2022 17:00:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/04/07/riak-%EA%B3%BC-%EB%A7%B5-%EB%A6%AC%EB%93%80%EC%8A%A4.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -216,7 +221,7 @@ http: //localhost:10018/mapred --data @-
       <title>데이터베이스 락킹과 래치의 차이점</title>
       <link>https://dongwooklee96.github.io/post/2022/03/23/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%9D%BD%ED%82%B9%EA%B3%BC-%EB%9E%98%EC%B9%98%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90.html</link>
       <pubDate>Wed, 23 Mar 2022 23:32:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/03/23/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%9D%BD%ED%82%B9%EA%B3%BC-%EB%9E%98%EC%B9%98%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/rv4u4kvromaeqcf/Screen%20Shot%202022-03-23%20at%208.54.00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -261,7 +266,7 @@ http: //localhost:10018/mapred --data @-
       <title>프로그램을 동적 프로파일링 하자</title>
       <link>https://dongwooklee96.github.io/post/2022/02/25/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%A7%81-%ED%95%98%EC%9E%90.html</link>
       <pubDate>Fri, 25 Feb 2022 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/02/25/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%A7%81-%ED%95%98%EC%9E%90.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -294,7 +299,7 @@ http: //localhost:10018/mapred --data @-
       <title>POSTGRES 익스텐션 만들기</title>
       <link>https://dongwooklee96.github.io/post/2022/02/20/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
       <pubDate>Sun, 20 Feb 2022 08:00:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/02/20/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;다음 &lt;a href=&#34;http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/&#34;&gt;블로그 포스팅&lt;/a&gt;을 참고하여 &lt;code&gt;POSTGRES&lt;/code&gt; 익스텐션을 만드는 과정을 실습해볼 것이다, 우선 소스코드를 다운로드 받고 디렉터리를 확인해보면 다음과 같다.&lt;/li&gt;
@@ -462,7 +467,7 @@ endif
       <title>마리아 DB 락 조회 및 해제</title>
       <link>https://dongwooklee96.github.io/post/2022/01/27/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EB%9D%BD-%EC%A1%B0%ED%9A%8C-%EB%B0%8F-%ED%95%B4%EC%A0%9C.html</link>
       <pubDate>Thu, 27 Jan 2022 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/01/27/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EB%9D%BD-%EC%A1%B0%ED%9A%8C-%EB%B0%8F-%ED%95%B4%EC%A0%9C.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -519,7 +524,7 @@ SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;
       <title>마리아 DB 이벤트 등록하는 법</title>
       <link>https://dongwooklee96.github.io/post/2022/01/19/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</link>
       <pubDate>Wed, 19 Jan 2022 13:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/01/19/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -568,7 +573,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>데이터베이스 소팅과 해싱에 대해서 정리</title>
       <link>https://dongwooklee96.github.io/post/2022/01/05/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%86%8C%ED%8C%85%EA%B3%BC-%ED%95%B4%EC%8B%B1%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC.html</link>
       <pubDate>Wed, 05 Jan 2022 19:00:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/01/05/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%86%8C%ED%8C%85%EA%B3%BC-%ED%95%B4%EC%8B%B1%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC.html</guid>
       <description>&lt;h3 id=&#34;데이터베이스에서-정렬이-중요한-이유&#34;&gt;데이터베이스에서 정렬이 중요한 이유&lt;/h3&gt;
 &lt;hr&gt;
@@ -679,7 +684,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>데이터베이스 버퍼매니저(BUFFER MANAGER)란 무엇인가?</title>
       <link>https://dongwooklee96.github.io/post/2021/12/29/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%B2%84%ED%8D%BC%EB%A7%A4%EB%8B%88%EC%A0%80buffer-manager%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.html</link>
       <pubDate>Wed, 29 Dec 2021 21:40:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/29/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%B2%84%ED%8D%BC%EB%A7%A4%EB%8B%88%EC%A0%80buffer-manager%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.html</guid>
       <description>&lt;h3 id=&#34;버퍼-매니저&#34;&gt;버퍼 매니저&lt;/h3&gt;
 &lt;hr&gt;
@@ -840,7 +845,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>인덱스 (INDEX) 정리 2</title>
       <link>https://dongwooklee96.github.io/post/2021/12/25/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-2.html</link>
       <pubDate>Sat, 25 Dec 2021 16:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/25/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-2.html</guid>
       <description>&lt;h3 id=&#34;인덱스가-지원하는-연산&#34;&gt;인덱스가 지원하는 연산&lt;/h3&gt;
 &lt;hr&gt;
@@ -993,7 +998,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>인덱스 (INDEX) 정리 1</title>
       <link>https://dongwooklee96.github.io/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-1.html</link>
       <pubDate>Wed, 22 Dec 2021 11:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-1.html</guid>
       <description>&lt;h3 id=&#34;데이터에-접근하는-두-가지-방법&#34;&gt;데이터에 접근하는 두 가지 방법&lt;/h3&gt;
 &lt;hr&gt;
@@ -1126,7 +1131,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>MYSQL 클라이언트로 RDS 접속하는 법</title>
       <link>https://dongwooklee96.github.io/post/2021/12/20/mysql-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%A1%9C-rds-%EC%A0%91%EC%86%8D%ED%95%98%EB%8A%94-%EB%B2%95.html</link>
       <pubDate>Mon, 20 Dec 2021 15:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/20/mysql-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%A1%9C-rds-%EC%A0%91%EC%86%8D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
       <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u root -p
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
@@ -1144,7 +1149,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>데이터베이스 페이지 및 레코드 구조</title>
       <link>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%8F-%EB%A0%88%EC%BD%94%EB%93%9C-%EA%B5%AC%EC%A1%B0.html</link>
       <pubDate>Thu, 16 Dec 2021 15:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%8F-%EB%A0%88%EC%BD%94%EB%93%9C-%EA%B5%AC%EC%A1%B0.html</guid>
       <description>&lt;h3 id=&#34;페이지-구조&#34;&gt;페이지 구조&lt;/h3&gt;
 &lt;hr&gt;
@@ -1262,7 +1267,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>데이터베이스 파일 구조 방식</title>
       <link>https://dongwooklee96.github.io/post/2021/12/15/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0-%EB%B0%A9%EC%8B%9D.html</link>
       <pubDate>Wed, 15 Dec 2021 10:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/15/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0-%EB%B0%A9%EC%8B%9D.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;파일은 페이지의 집합으로 구성이 되는데 페이지를 구성하는 많은 방식이 있다. 그 중에서 정렬되지 않은 힙 파일 구조에 대해서 자세히 살펴볼 것이다.&lt;/li&gt;
@@ -1353,7 +1358,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>버클리 대학의 데이터베이스 강의를 수강신청하였다</title>
       <link>https://dongwooklee96.github.io/post/2021/12/09/%EB%B2%84%ED%81%B4%EB%A6%AC-%EB%8C%80%ED%95%99%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B0%95%EC%9D%98%EB%A5%BC-%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD%ED%95%98%EC%98%80%EB%8B%A4.html</link>
       <pubDate>Thu, 09 Dec 2021 11:23:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/09/%EB%B2%84%ED%81%B4%EB%A6%AC-%EB%8C%80%ED%95%99%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B0%95%EC%9D%98%EB%A5%BC-%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD%ED%95%98%EC%98%80%EB%8B%A4.html</guid>
       <description>&lt;h3 id=&#34;cs186-barkeyley&#34;&gt;CS186 Barkeyley&lt;/h3&gt;
 &lt;hr&gt;
@@ -1430,7 +1435,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>DBMS 랭킹 사이트</title>
       <link>https://dongwooklee96.github.io/post/2021/12/09/dbms-%EB%9E%AD%ED%82%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</link>
       <pubDate>Thu, 09 Dec 2021 10:19:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/09/dbms-%EB%9E%AD%ED%82%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/hjfkvkme0fxlt4v/Screen%20Shot%202021-12-09%20at%2010.18.58%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -1455,7 +1460,7 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
       <title>데이터베이스 테스트를 위한 더미 데이터 생성 방법</title>
       <link>https://dongwooklee96.github.io/post/2021/12/08/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%8D%94%EB%AF%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%83%9D%EC%84%B1-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Wed, 08 Dec 2021 10:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/08/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%8D%94%EB%AF%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%83%9D%EC%84%B1-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -1514,7 +1519,7 @@ from mysql.innodb_index_stats
       <title>데이터베이스를 공부할 때 TRACING을 하는 법을 먼저 배우자</title>
       <link>https://dongwooklee96.github.io/post/2021/11/25/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-tracing%EC%9D%84-%ED%95%98%EB%8A%94-%EB%B2%95%EC%9D%84-%EB%A8%BC%EC%A0%80-%EB%B0%B0%EC%9A%B0%EC%9E%90.html</link>
       <pubDate>Thu, 25 Nov 2021 18:00:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/11/25/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-tracing%EC%9D%84-%ED%95%98%EB%8A%94-%EB%B2%95%EC%9D%84-%EB%A8%BC%EC%A0%80-%EB%B0%B0%EC%9A%B0%EC%9E%90.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -1544,7 +1549,7 @@ from mysql.innodb_index_stats
       <title>POSTGRES 소스코드로부터 빌드하는 방법</title>
       <link>https://dongwooklee96.github.io/post/2021/11/22/postgres-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EB%B9%8C%EB%93%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Mon, 22 Nov 2021 08:00:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/11/22/postgres-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EB%B9%8C%EB%93%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
@@ -1557,7 +1562,7 @@ from mysql.innodb_index_stats
       <title>[MOBILE] 플러터에서 위젯이란?</title>
       <link>https://dongwooklee96.github.io/post/2021/11/14/mobile-%ED%94%8C%EB%9F%AC%ED%84%B0%EC%97%90%EC%84%9C-%EC%9C%84%EC%A0%AF%EC%9D%B4%EB%9E%80.html</link>
       <pubDate>Sun, 14 Nov 2021 12:00:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/11/14/mobile-%ED%94%8C%EB%9F%AC%ED%84%B0%EC%97%90%EC%84%9C-%EC%9C%84%EC%A0%AF%EC%9D%B4%EB%9E%80.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -1584,7 +1589,7 @@ from mysql.innodb_index_stats
       <title>POSTGRES 익스텐션 설치 방법</title>
       <link>https://dongwooklee96.github.io/post/2021/11/12/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Fri, 12 Nov 2021 10:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/11/12/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -1609,7 +1614,7 @@ from mysql.innodb_index_stats
       <title>Write-Scale Out MariaDB Xpand (10 node cluster) 세미나를 듣고 기록한 내용</title>
       <link>https://dongwooklee96.github.io/post/2021/09/08/write-scale-out-mariadb-xpand-10-node-cluster-%EC%84%B8%EB%AF%B8%EB%82%98%EB%A5%BC-%EB%93%A3%EA%B3%A0-%EA%B8%B0%EB%A1%9D%ED%95%9C-%EB%82%B4%EC%9A%A9.html</link>
       <pubDate>Wed, 08 Sep 2021 14:10:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/09/08/write-scale-out-mariadb-xpand-10-node-cluster-%EC%84%B8%EB%AF%B8%EB%82%98%EB%A5%BC-%EB%93%A3%EA%B3%A0-%EA%B8%B0%EB%A1%9D%ED%95%9C-%EB%82%B4%EC%9A%A9.html</guid>
       <description>&lt;h3 id=&#34;세미나&#34;&gt;세미나&lt;/h3&gt;
 &lt;hr&gt;
@@ -1648,7 +1653,8 @@ from mysql.innodb_index_stats
 &lt;blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;초당 처리할 수 있는 쿼리 수를 말한다.&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;배운-점&#34;&gt;배운 점&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -1662,7 +1668,7 @@ from mysql.innodb_index_stats
       <title>데드락이란? (DeadLock) (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft.html</link>
       <pubDate>Thu, 24 Jun 2021 11:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft.html</guid>
       <description>&lt;h2 id=&#34;배경&#34;&gt;배경&lt;/h2&gt;
 &lt;hr&gt;
@@ -1733,7 +1739,7 @@ from mysql.innodb_index_stats
       <title>쿼리 캐시란? (MARIADB)</title>
       <link>https://dongwooklee96.github.io/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb.html</link>
       <pubDate>Fri, 04 Jun 2021 15:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb.html</guid>
       <description>&lt;h3 id=&#34;쿼리-캐시&#34;&gt;쿼리 캐시&lt;/h3&gt;
 &lt;hr&gt;
@@ -1758,52 +1764,52 @@ from mysql.innodb_index_stats
 &lt;p&gt;설정이 되어있는지 확인하고 싶다면, 아래와 같은 쿼리 문을 입력한다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;HAVE_QUERY_CACHE&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;SHOW&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;VARIABLES&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;LIKE&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;HAVE_QUERY_CACHE&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;조회 결과 &lt;code&gt;YES&lt;/code&gt;로 나온다면, 쿼리 캐시 기능을 사용할 수 있다는 뜻이다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SHOW&lt;/span&gt; VARIABLES &lt;span style=&#34;color:#66d9ef&#34;&gt;LIKE&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;QUERY_CACHE_TYPE&amp;#39;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;SHOW&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;VARIABLES&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;LIKE&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;QUERY_CACHE_TYPE&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;그 다음에는 현재 시스템에서 쿼리 캐시 기능을 사용하고 있는지를 조회해 볼 것이다. 위의 쿼리 결과가 &lt;code&gt;ON&lt;/code&gt;으로 나온다면 이미 쿼리 캐시 기능을 적용하고 있다는 뜻이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;쿼리-캐시가-되지-않는-경우&#34;&gt;쿼리 캐시가 되지 않는 경우&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;아래와 같은 함수를 사용하면, 기본적으로 쿼리가 캐싱되지 않는다.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BENCHMARK()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CONNECTION_ID()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CONVERT_TZ()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CURDATE()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_DATE&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_TIME&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;CURRENT_TIMESTAMP&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CURTIME()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;DATABASE&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ENCRYPT() (one &lt;span style=&#34;color:#66d9ef&#34;&gt;parameter&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FOUND_ROWS()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GET_LOCK()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LAST_INSERT_ID()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LOAD_FILE()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MASTER_POS_WAIT()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NOW()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RAND()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RELEASE_LOCK()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SLEEP()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SYSDATE()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UNIX_TIMESTAMP()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;no&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;parameters&lt;/span&gt;)
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;USER&lt;/span&gt;()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UUID()
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UUID_SHORT()
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BENCHMARK&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CONNECTION_ID&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CONVERT_TZ&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CURDATE&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;CURRENT_DATE&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;CURRENT_TIME&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;CURRENT_TIMESTAMP&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CURTIME&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;DATABASE&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ENCRYPT&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;one&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;parameter&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;FOUND_ROWS&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GET_LOCK&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LAST_INSERT_ID&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;LOAD_FILE&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MASTER_POS_WAIT&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;NOW&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RAND&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;RELEASE_LOCK&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SLEEP&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;SYSDATE&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UNIX_TIMESTAMP&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;no&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;parameters&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;USER&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UUID&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UUID_SHORT&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;또한 쿼리에 아래와 같은 구문이 있을 경우 쿼리가 캐싱되지 않는다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; SQL_NO_CACHE ...
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; OUTFILE ...
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;INTO&lt;/span&gt; DUMPFILE ...
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;FOR&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;UPDATE&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;FROM&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;WHERE&lt;/span&gt; autoincrement_column &lt;span style=&#34;color:#66d9ef&#34;&gt;IS&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;NULL&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;SELECT&lt;/span&gt; ... &lt;span style=&#34;color:#66d9ef&#34;&gt;LOCK&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;IN&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;SHARE&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;MODE&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;쿼리-캐시-크기를-제한하기&#34;&gt;쿼리 캐시 크기를 제한하기&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;SQL_NO_CACHE&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;INTO&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;OUTFILE&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;INTO&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;DUMPFILE&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;FOR&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;UPDATE&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;FROM&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;WHERE&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;autoincrement_column&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;IS&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;SELECT&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;LOCK&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;IN&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;SHARE&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;MODE&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;쿼리-캐시-크기를-제한하기&#34;&gt;쿼리 캐시 크기를 제한하기&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/120759865-6f475980-c54e-11eb-8b81-ad5975fa0449.png&#34; alt=&#34;Screen Shot 2021-06-04 at 4 03 22 PM&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -1877,7 +1883,7 @@ from mysql.innodb_index_stats
       <title>오라클 성능 고도화 강의 (1)</title>
       <link>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1.html</link>
       <pubDate>Sat, 08 May 2021 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1.html</guid>
       <description>&lt;h3 id=&#34;오라클-성능-고도화-강의&#34;&gt;오라클 성능 고도화 강의&lt;/h3&gt;
 &lt;hr&gt;
@@ -1957,7 +1963,7 @@ from mysql.innodb_index_stats
       <title>윈도우 함수에서 WHERE 절을 사용하지 못하는 이유(draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft.html</link>
       <pubDate>Tue, 13 Apr 2021 15:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
@@ -1970,7 +1976,7 @@ from mysql.innodb_index_stats
       <title>TWO-PHASE-LOCK(2PL)이란 (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Wed, 07 Apr 2021 18:05:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;two-phase-lock&#34;&gt;TWO PHASE LOCK&lt;/h3&gt;
 &lt;hr&gt;
@@ -2027,7 +2033,7 @@ from mysql.innodb_index_stats
       <title>ARIES란 (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft.html</link>
       <pubDate>Wed, 31 Mar 2021 22:56:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
@@ -2040,7 +2046,7 @@ from mysql.innodb_index_stats
       <title>POSTGRESQL 익스텐션을 만드는데 참고할 만한 좋은글 목록</title>
       <link>https://dongwooklee96.github.io/post/2021/03/31/postgresql-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%B0%B8%EA%B3%A0%ED%95%A0-%EB%A7%8C%ED%95%9C-%EC%A2%8B%EC%9D%80%EA%B8%80-%EB%AA%A9%EB%A1%9D.html</link>
       <pubDate>Wed, 31 Mar 2021 22:56:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/31/postgresql-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%B0%B8%EA%B3%A0%ED%95%A0-%EB%A7%8C%ED%95%9C-%EC%A2%8B%EC%9D%80%EA%B8%80-%EB%AA%A9%EB%A1%9D.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
@@ -2067,11 +2073,11 @@ from mysql.innodb_index_stats
       <title>데이터베이스에 대해서 배울 수 있는 좋은 강의 (CS186Berkeley)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley.html</link>
       <pubDate>Wed, 31 Mar 2021 20:40:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley.html</guid>
       <description>&lt;p&gt;우연히 유튜브에서 데이터베이스에 대해서 체계적이고 좋은 영상이 있는 것을 발견하였다.&lt;/p&gt;
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/ZLtwOp8pz_Q?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/ZLtwOp8pz_Q?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
     &lt;/div&gt;
 
 &lt;p&gt;커리큘럼을 보면, 초반에는 디스크, 버퍼, 파일 및 인덱스 B+Tree 부터 시작해서 간단한 &lt;code&gt;SQL&lt;/code&gt; 및 간단하 쿼리 튜닝까지 배운다.&lt;/p&gt;
@@ -2102,7 +2108,7 @@ from mysql.innodb_index_stats
       <title>슬로우 쿼리란? (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft.html</link>
       <pubDate>Mon, 29 Mar 2021 20:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;슬로우-쿼리란&#34;&gt;슬로우 쿼리란&lt;/h3&gt;
 &lt;hr&gt;
@@ -2117,7 +2123,7 @@ from mysql.innodb_index_stats
       <title>리플리케이션이란 (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Sun, 28 Mar 2021 17:43:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;gelera-리플리케이션&#34;&gt;Gelera 리플리케이션&lt;/h3&gt;
 &lt;hr&gt;
@@ -2169,7 +2175,7 @@ from mysql.innodb_index_stats
       <title>쿼리 오프 로딩이란 (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Sun, 28 Mar 2021 17:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 </description>
@@ -2179,7 +2185,7 @@ from mysql.innodb_index_stats
       <title>데이터베이스 스토리지 티어링이란 (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Sat, 27 Mar 2021 23:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;스토리지-티어링이란&#34;&gt;스토리지 티어링이란&lt;/h3&gt;
 &lt;hr&gt;
@@ -2191,7 +2197,7 @@ from mysql.innodb_index_stats
       <title>샤딩이란(draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft.html</link>
       <pubDate>Sat, 27 Mar 2021 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft.html</guid>
       <description>&lt;h3 id=&#34;샤딩&#34;&gt;샤딩&lt;/h3&gt;
 &lt;hr&gt;
@@ -2206,7 +2212,7 @@ from mysql.innodb_index_stats
       <title>클러스터링이란?(draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft.html</link>
       <pubDate>Sat, 27 Mar 2021 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft.html</guid>
       <description>&lt;h3 id=&#34;클러스터링&#34;&gt;클러스터링&lt;/h3&gt;
 &lt;hr&gt;
@@ -2232,7 +2238,7 @@ from mysql.innodb_index_stats
       <title>CONCURRENCY(동시성)와 PARALLELISM(병행성) (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft.html</link>
       <pubDate>Sat, 27 Mar 2021 01:09:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft.html</guid>
       <description>&lt;h3 id=&#34;concurrency동시성와-parallelism병행성&#34;&gt;CONCURRENCY(동시성)와 PARALLELISM(병행성)&lt;/h3&gt;
 &lt;hr&gt;
@@ -2278,7 +2284,7 @@ from mysql.innodb_index_stats
       <title>트랜잭션과 ACID</title>
       <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid.html</link>
       <pubDate>Fri, 26 Mar 2021 23:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid.html</guid>
       <description>&lt;p&gt;누군가 트랜잭션에 대해서 물어보았을 때, 분명히 알고 있다고 생각한 것인데도 제대로 답변하지 못했다. 이건 평소에 생각이 정리되지 않아서 그런 것 같다. 따라서 이참에 이에 대해서 정리를 해보도록 했다.&lt;/p&gt;
 &lt;h3 id=&#34;트랜잭션이란&#34;&gt;트랜잭션이란&lt;/h3&gt;
@@ -2334,7 +2340,7 @@ from mysql.innodb_index_stats
       <title>CAP 이론이란?</title>
       <link>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80.html</guid>
       <description>&lt;h3 id=&#34;cap-정리&#34;&gt;CAP 정리&lt;/h3&gt;
 &lt;hr&gt;
@@ -2366,9 +2372,11 @@ from mysql.innodb_index_stats
 &lt;p&gt;&lt;strong&gt;관계형 데이터베이스는 CA 시스템이다. 일관성(C)와 가용성(A)를 보장하되, 분단 허용성(P)는 보장하지 않는다&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;관계형 데이터베이스가 동시에 다량의 서버를 운용하는 클러스터링에 적합하지 않는 이유가 여기에 있다.
-만약 10대의 서버중에서 한 서버의 접속이 끊어졌다고 가정을 하면, 분단 허용성을 지원하지 않으므로 이는 수용할 수 있지만 끊어진 서버 때문에 일관성과 가용성이 훼손되므로 아예 1번 부터 10번까지 모든 서버를 중단시켜서 어떤 클라이언트도 서버와 접속할 수 없어야한다. 일반적으로 불가능한 방법이다.&lt;/p&gt;&lt;/blockquote&gt;
+만약 10대의 서버중에서 한 서버의 접속이 끊어졌다고 가정을 하면, 분단 허용성을 지원하지 않으므로 이는 수용할 수 있지만 끊어진 서버 때문에 일관성과 가용성이 훼손되므로 아예 1번 부터 10번까지 모든 서버를 중단시켜서 어떤 클라이언트도 서버와 접속할 수 없어야한다. 일반적으로 불가능한 방법이다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;blockquote&gt;
-&lt;p&gt;해결책은 간단한데, CA를 포기하면 된다. CA를 포기한다는 뜻이 극단적으로 일관성과 가용성을 포기하는 것이 아닌 1 ~ 100까지의 수치가 있을 때 일관성과 가용성을 100% 지원하던 것에서 수치를 60%로 낮춘다고 생각을 하면 된다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;해결책은 간단한데, CA를 포기하면 된다. CA를 포기한다는 뜻이 극단적으로 일관성과 가용성을 포기하는 것이 아닌 1 ~ 100까지의 수치가 있을 때 일관성과 가용성을 100% 지원하던 것에서 수치를 60%로 낮춘다고 생각을 하면 된다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;대부분의 NoSQL 데이터베이스는 CA가 아닌 CP나 AP 시스템이다. 대용량의 분산 시스템을 구축하는데에는 CP보다도 AP가 알맞다. C가 들어가서 강력한 일관성 즉, ACID 트랜잭션을 지원한다고 가정하면 예를 들어 하나의 쓰기 작업을 수행한다고 가정할 때 2대가 정상 응답할 때까지 LOCK이 걸리겠지만 100대라면 너무 긴 시간동안 LOCK이 걸리게 된다.&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
@@ -2381,7 +2389,7 @@ from mysql.innodb_index_stats
       <title>MVCC(다중 버전 동시성 제어)란 (draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 </description>
@@ -2391,7 +2399,7 @@ from mysql.innodb_index_stats
       <title>TWO-PHASE COMMIT 이란?</title>
       <link>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80.html</guid>
       <description>&lt;h3 id=&#34;two-phase-커밋이란&#34;&gt;TWO-PHASE 커밋이란?&lt;/h3&gt;
 &lt;hr&gt;
@@ -2449,7 +2457,7 @@ from mysql.innodb_index_stats
       <title>합의(Consensus) 알고리즘이란(draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
@@ -2476,7 +2484,7 @@ from mysql.innodb_index_stats
       <title>SQLAlchemy 세션(draft)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft.html</link>
       <pubDate>Fri, 19 Mar 2021 16:40:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
@@ -2489,7 +2497,7 @@ from mysql.innodb_index_stats
       <title>SQLAlchemy에서 트랜잭션 사용법</title>
       <link>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95.html</link>
       <pubDate>Thu, 18 Mar 2021 13:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95.html</guid>
       <description>&lt;p&gt;회사에서 이슈 진행을 하다가, 트랜잭션를 이용하여 처리해야하는 부분을 발견하였다.
 따라서 &lt;code&gt;SQLAlchemy&lt;/code&gt;에서는 트랜잭션을 어떻게 사용하는지 정리해보도록 하겟다.&lt;/p&gt;
@@ -2642,7 +2650,7 @@ with sess.begin():
       <title>mariadb 유니크 인덱스</title>
       <link>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4.html</link>
       <pubDate>Tue, 09 Mar 2021 09:20:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4.html</guid>
       <description>&lt;h2 id=&#34;유니크-인덱스&#34;&gt;유니크 인덱스&lt;/h2&gt;
 &lt;hr&gt;
@@ -2664,12 +2672,12 @@ with sess.begin():
       <title>DBMS를 분석하는 방법</title>
       <link>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Wed, 03 Mar 2021 23:32:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;h3 id=&#34;kcd-2020&#34;&gt;KCD 2020&lt;/h3&gt;
 &lt;hr&gt;
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
-      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; allowfullscreen=&#34;allowfullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/CgxiNF6xigY?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
+      &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/CgxiNF6xigY?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
     &lt;/div&gt;
 
 &lt;p&gt;막 오픈소스 컨트리뷰톤을 끝마치고, 오픈소스 개발에 재미를 붙였을 때, KDC 2020이라는 세미나가 열렸다. 오픈소스 데이터베이스 큐브리드에 기여하기라는 제목의 세션을 보았을 때, 오픈소스 DBMS를 개발한다는 부분이 신기했고, 궁금한 점이 있어서 메일을 보내게 되었는데, 친절하게도 아주 장문의 답장을 해주셨다.&lt;/p&gt;
@@ -2688,7 +2696,8 @@ with sess.begin():
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;예를 들어, &amp;ldquo;SQL 파서 모듈은 SQL을 읽어서 파싱 트리라는 구조를 만든다&amp;quot;와 같은 개념들은 DBMS 마다 같지만 코드상으로는 다르게 구현되어 있다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;예를 들어, &amp;ldquo;SQL 파서 모듈은 SQL을 읽어서 파싱 트리라는 구조를 만든다&amp;quot;와 같은 개념들은 DBMS 마다 같지만 코드상으로는 다르게 구현되어 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;SQL 파서 모듈과 같이, 각 모듈을 처음부터 코드를 읽어가면서 맨땅부터 이해하는 것은 쉽지 않다.&lt;/p&gt;
@@ -2701,7 +2710,8 @@ with sess.begin():
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;이는 현업에서 일을 할 때 도 마찬가지라는 것을 명심해야겠다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;이는 현업에서 일을 할 때 도 마찬가지라는 것을 명심해야겠다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;모듈을-분석하는-법&#34;&gt;모듈을 분석하는 법&lt;/h4&gt;
 &lt;hr&gt;
 &lt;pre&gt;&lt;code&gt;1. 개략적인 모듈의 모양을 파악하기 위해서, 모듈의 인터페이스 또는 API나 시작점을 먼저 찾아본다.
@@ -2729,7 +2739,7 @@ with sess.begin():
       <title>데이터베이스 스키마를 관리하는 도구, Flyway</title>
       <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway.html</link>
       <pubDate>Wed, 03 Mar 2021 20:09:39 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway.html</guid>
       <description>&lt;h1 id=&#34;데이터베이스-스키마-관리의-필요성&#34;&gt;데이터베이스 스키마 관리의 필요성&lt;/h1&gt;
 &lt;hr&gt;

@@ -97,7 +97,9 @@
   </head>
 
   <body>
-    <br/>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
 
 <div class="article-meta">
 <h1><span class="title">[알고리즘] 탐색 알고리즘 DFS / BFS 개념</span></h1>
@@ -106,7 +108,7 @@
 <p class="terms">
   
   
-  Categories: <a href="../../../../../categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">알고리즘</a> 
+  Categories: <a href="../../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> <a href="../../../../../categories/%EA%B0%9C%EB%B0%9C-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98">개발-알고리즘</a> 
   
   
   
@@ -184,7 +186,8 @@ graph[2].append((0, 5))
 <li>탐색 시작 노드를 스택에 삽입하고 방문 처리를 한다.</li>
 <li>스택의 최상단 노드에 방문하지 않은 인접 노드가 있으면 그 인접 노드를 스택에 넣고 방문 처리를 한다.</li>
 <li>3번과 2번의 과정을 더 이상 수행할 수 없을 때까지 반복한다.</li>
-</ol></blockquote>
+</ol>
+</blockquote>
 <ul>
 <li>
 <p>깊이 우선 탐색 알고리즘인 DFS는 스택 자료구조에 기초한다는 점에서 구현이 간단하다. 실제로는 스택을 사용하지 않아도 되며 탐색을 수행함에 있어서 데이터의 개수가 N개인 경우 O(N)의 시간이 소요된다는 특징이 있다.</p>
@@ -243,7 +246,8 @@ dfs(graph, 1, visited)
 <li>탐색 시작 노드를 큐에 넣고 방문 처리를 한다.</li>
 <li>큐에서 노드를 꺼내 해당 노드의 인접 노드 중에서 방문하지 않은 노드를 모두 큐에 삽입하고 방문 처리를 한다.</li>
 <li>3, 2번의 과정을 더 이상 수행할 수 없을 떄까지 반복한다.</li>
-</ol></blockquote>
+</ol>
+</blockquote>
 <ul>
 <li>너비 우선 탐색 알고리즘은 BFS는 큐 자료구조에 기초한다는 점에서 구현이 간단하다.</li>
 <li>실제로 구현함에 있어 앞서 언급한 대로 <code>deque</code> 라이브러리를 사용하는 것이 좋으며 수행함에 있어 O(N)의 시간이 소요된다.</li>
@@ -292,6 +296,8 @@ bfs(graph, 1, visited)
     <a href="../../../../../"> >> Home</a>
   </main>
 </div>
+      </div> 
+    </div> 
   <script src="https://utteranc.es/client.js"
       repo="dongwooklee96/dongwooklee96.github.io"
       issue-term="pathname"
@@ -348,4 +354,3 @@ fathom('trackPageview');
   </body>
   
 </html>
-

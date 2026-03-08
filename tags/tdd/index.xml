@@ -6,12 +6,14 @@
     <description>Recent content in TDD on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
     <lastBuildDate>Thu, 04 Mar 2021 18:29:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/tdd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>테크니컬 라이팅 4대 원칙이라는 글을 읽고 느낀점</title>
       <link>https://dongwooklee96.github.io/post/2021/03/04/%ED%85%8C%ED%81%AC%EB%8B%88%EC%BB%AC-%EB%9D%BC%EC%9D%B4%ED%8C%85-4%EB%8C%80-%EC%9B%90%EC%B9%99%EC%9D%B4%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</link>
       <pubDate>Thu, 04 Mar 2021 18:29:39 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/04/%ED%85%8C%ED%81%AC%EB%8B%88%EC%BB%AC-%EB%9D%BC%EC%9D%B4%ED%8C%85-4%EB%8C%80-%EC%9B%90%EC%B9%99%EC%9D%B4%EB%9D%BC%EB%8A%94-%EA%B8%80%EC%9D%84-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</guid>
       <description>&lt;h3 id=&#34;테스트-코드-및-메서드-주석에-대한-고민&#34;&gt;테스트 코드 및 메서드 주석에 대한 고민&lt;/h3&gt;
 &lt;p&gt;코드를 작성하면서 테스트 코드에 어떤 테스트라는 것을 어떻게 명확하게 표현할까, 그리고 모듈 및 클래스, 메서드 주석을 달면서 어떻게 작성해야 좋은 문서가 될까? 라는 고민을 하고 작성하였지만 여전히 어렵기만 했다. 그런던 중에서 카카오 기술 블로그에서 도움이 될 만한 글을 발견하였다.&lt;/p&gt;
@@ -22,7 +24,8 @@
 &lt;li&gt;테크니컬 라이팅의 첫 번째 원칙은 명확성이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;명확성이란 핵심어나 핵심 문장이 모호하게 사용되지 않고, 대상 독자가 기술 문서를 읽을 때, 내용의 모호함이나 혼란 없이 한번에 이해하도록 하는 글이다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;명확성이란 핵심어나 핵심 문장이 모호하게 사용되지 않고, 대상 독자가 기술 문서를 읽을 때, 내용의 모호함이나 혼란 없이 한번에 이해하도록 하는 글이다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;어떤 문서를 읽을 때, 독자 입장에서 이해가 가지 않아 특정 부분을 몇 번이고 다시 읽게 된다면, 이는 명확성이 떨어지는 글이다.&lt;/p&gt;
@@ -97,7 +100,7 @@
       <title>테스트 코드를 작성하는 순서</title>
       <link>https://dongwooklee96.github.io/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C.html</link>
       <pubDate>Sat, 27 Feb 2021 12:29:39 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/02/27/%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%BD%94%EB%93%9C%EB%A5%BC-%EC%9E%91%EC%84%B1%ED%95%98%EB%8A%94-%EC%88%9C%EC%84%9C.html</guid>
       <description>&lt;h3 id=&#34;테스트-코드를-작성하는-순서&#34;&gt;테스트 코드를 작성하는 순서&lt;/h3&gt;
 &lt;p&gt;테스트 코드를 작성하는 것도 무작성 작성하는 것보다는 순서를 지켜가면서 작성하는 것이 훨씬 좋다.&lt;/p&gt;
@@ -111,7 +114,8 @@
 &lt;p&gt;한번에 완벽한 코드를 만들면 좋겠지만, 모두가 슈퍼 개발자인 것은 아니다. 보통의 개발자는 한 번에 많은 코드를 만들다 보면 나도 모르게 버그를 만들고
 나중에 버그를 잡기 위해 많은 시간을 허비하게 된다. 당연히 테스트 통과 시간도 길어진다.&lt;br&gt;
 그 뿐만 아니라, 코드 작성 시간이 길어지면 집중력도 떨어져서 흐름도 자주 끊기게 된다.&lt;br&gt;
-중간에 화장실도 다녀오고 커피도 마시게 된다. 자리에 돌아오면 이전까지 했던 흐름을 이어가 기 위한 시간도 필요하다.&lt;/p&gt;&lt;/blockquote&gt;
+중간에 화장실도 다녀오고 커피도 마시게 된다. 자리에 돌아오면 이전까지 했던 흐름을 이어가 기 위한 시간도 필요하다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;따라서 테스트를 코드를 작성할 때, 순서에 유의해서 작성 해야 한다 가장 구현하기 쉬운 경우부터 시작하고, 보통 수 분에서 십여 분 이내에 구현을 완료해서 테스트를 통과시킬 수 있을 만큼 쉬운 것을 선택한다. 그래야만 점진적으로 구현을 완성해갈 수 있다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;한번에 구현하는 시간이 짧아지면 디버깅 할 때에 유리하다.&lt;/li&gt;
@@ -136,7 +140,8 @@
 &lt;li&gt;정해진 값을 리턴&lt;/li&gt;
 &lt;li&gt;값 비교를 이용해서 정해진 값을 리턴&lt;/li&gt;
 &lt;li&gt;다양한 테스트를 추가하면서 구현을 일반화 시킨다.&lt;/li&gt;
-&lt;/ol&gt;&lt;/blockquote&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
 &lt;/li&gt;
 &lt;li&gt;뻔한 구현이라도 위 단계를 거쳐서 연습하는 것과 바로 구현하는 것과는 차이가 있다.&lt;/li&gt;
 &lt;li&gt;테스트를 만들고 통과시키는 과정에서 구현이 막힐 때가 있다. 이럴 때 위 단계를 이용해서 TDD를 연습한 개발자는 조금씩 기능을 구현해 나갈 수 있는 반면에 그렇지 못한 개발자는 구현에 실패하게 된다.&lt;/li&gt;

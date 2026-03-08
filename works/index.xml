@@ -2,9 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Works on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/works.html</link>
+    <link>https://dongwooklee96.github.io/works/index.html</link>
     <description>Recent content in Works on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>ko-KR</language><atom:link href="https://dongwooklee96.github.io/works/index.xml" rel="self" type="application/rss+xml" />
+    <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster><atom:link href="https://dongwooklee96.github.io/works/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

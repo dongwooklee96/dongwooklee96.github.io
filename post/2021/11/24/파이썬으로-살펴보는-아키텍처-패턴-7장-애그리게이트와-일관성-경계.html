@@ -97,7 +97,9 @@
   </head>
 
   <body>
-    <br/>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
 
 <div class="article-meta">
 <h1><span class="title">파이썬으로 살펴보는 아키텍처 패턴 - 7장 (애그리게이트와 일관성 경계)</span></h1>
@@ -218,7 +220,8 @@
 </li>
 </ul>
 <blockquote>
-<p>NOTE: 저장소가 애그리게이트만 반환해야 한다는 규칙은 애그리게이트가 도메인 모델에 접근할 수 있는 유일한 통로여야 한다는 관계를 강제로 지키게 하는 핵심 규칙이다. 이 규칙을 어기지 않도록 주의해야 한다.</p></blockquote>
+<p>NOTE: 저장소가 애그리게이트만 반환해야 한다는 규칙은 애그리게이트가 도메인 모델에 접근할 수 있는 유일한 통로여야 한다는 관계를 강제로 지키게 하는 핵심 규칙이다. 이 규칙을 어기지 않도록 주의해야 한다.</p>
+</blockquote>
 <pre tabindex="0"><code>def add_batch(
     ref: str, sku: str, qty: int, eta: Optional[date],
     uow: unit_of_work.AbstractUnitOfWork,
@@ -270,6 +273,8 @@ def allocate(
     <a href="../../../../"> >> Home</a>
   </main>
 </div>
+      </div> 
+    </div> 
   <script src="https://utteranc.es/client.js"
       repo="dongwooklee96/dongwooklee96.github.io"
       issue-term="pathname"
@@ -326,4 +331,3 @@ fathom('trackPageview');
   </body>
   
 </html>
-

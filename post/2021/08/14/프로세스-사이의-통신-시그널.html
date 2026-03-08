@@ -97,7 +97,9 @@
   </head>
 
   <body>
-    <br/>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
 
 <div class="article-meta">
 <h1><span class="title">프로세스 사이의 통신 - 시그널</span></h1>
@@ -106,7 +108,7 @@
 <p class="terms">
   
   
-  Categories: <a href="../../../../categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">네트워크</a> 
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> <a href="../../../../categories/%EA%B0%9C%EB%B0%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC">개발-네트워크</a> 
   
   
   
@@ -218,7 +220,8 @@
   </tbody>
 </table>
 <blockquote>
-<p>&ldquo;만약 우리가 시그널로 정의 되어 있는 특정 사건의 발생 여부에 관심이 있고 그 사건이 발생할 때 마다 무언가를 하고 싶다면 어떻게 해야할까?&rdquo;</p></blockquote>
+<p>&ldquo;만약 우리가 시그널로 정의 되어 있는 특정 사건의 발생 여부에 관심이 있고 그 사건이 발생할 때 마다 무언가를 하고 싶다면 어떻게 해야할까?&rdquo;</p>
+</blockquote>
 <ul>
 <li>다음과 같은 경우에는 시그널이 발생했을 때 처리를 담당하는 핸들러 함수를 정의하고 운영체제에게 해당 사건이 발생 했을 때, 정의한 핸들러 함수를 호출해달라고 부탁하면 된다.</li>
 </ul>
@@ -274,7 +277,8 @@ int main(int argc, char *argv[]) {
 <li>sig : 시그널 dml 종류를 지칭하는 시그널 번호</li>
 <li>act: 시그널 발생시 호출되는 시그널 핸들러의 포인터</li>
 <li>oldact: 이전에 등록되었던 시그널 핸들러의 포인터</li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <pre tabindex="0"><code>struct sigaction {
   void (*sa_handler)(int);
   sigset_t sa_mask;
@@ -332,7 +336,8 @@ int kill (pid_t pid, int sig);
 <li>음수로 입력한 경우에는 pid의 절대값이 지칭하는 프로세스가 속해있는 프로세스 그룹 전체로 시그널이 전달된다.</li>
 <li>0을 입력받는 경우 <code>kill</code> 함수를 호출한 프로세스가 속해있는 프로세스 그룹 전체로 시그널이 전달된다.</li>
 <li>-1을 입력 받는 경우 <code>kill</code> 함수를 호출한 프로세스가 시그널을 전송할 수 있는 권한을 가지고 있는 모든 프로세스에게 시그널이 전달된다.</li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <h3 id="참고-문헌">참고 문헌</h3>
 <hr>
 <ul>
@@ -342,6 +347,8 @@ int kill (pid_t pid, int sig);
     <a href="../../../../"> >> Home</a>
   </main>
 </div>
+      </div> 
+    </div> 
   <script src="https://utteranc.es/client.js"
       repo="dongwooklee96/dongwooklee96.github.io"
       issue-term="pathname"
@@ -398,4 +405,3 @@ fathom('trackPageview');
   </body>
   
 </html>
-

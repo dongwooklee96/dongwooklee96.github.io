@@ -6,12 +6,14 @@
     <description>Recent content in 취업 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
     <lastBuildDate>Wed, 03 Mar 2021 21:49:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%B7%A8%EC%97%85/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>라인 개발자 입사기를 읽고 느낀점</title>
       <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</link>
       <pubDate>Wed, 03 Mar 2021 21:49:39 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</guid>
       <description>&lt;h1 id=&#34;지원서-작성할-때-참고할-부분&#34;&gt;지원서 작성할 때, 참고할 부분&lt;/h1&gt;
 &lt;hr&gt;
@@ -61,7 +63,8 @@
 &lt;li&gt;포트폴리오를 작성할 때는, &lt;code&gt;문제 발생 - 문제 원인 파악 - 해결책 적용 - 결과&lt;/code&gt; 와 같은 순서로 프로젝트 문제 해결 과정을 서술 하였다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;이 부분에 공감을 하는데, 포트폴리오에서 내가 보여줘야할 것은 내가 얼마만큼 알고 할 수 있는 능력이 있는지 보다는, 내가 어떤 분야를 얼마만큼 고민했다는 사실을 어필하는 것이 더 효과적일 것이다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;이 부분에 공감을 하는데, 포트폴리오에서 내가 보여줘야할 것은 내가 얼마만큼 알고 할 수 있는 능력이 있는지 보다는, 내가 어떤 분야를 얼마만큼 고민했다는 사실을 어필하는 것이 더 효과적일 것이다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;포트폴리오에서는 자신의 개발 역량이나 팀으로 활동할 때의 자신의 모습을 보여줄 수 있는 것 등 자기소개서에서 드러내지 못한 부분을 보여주면 좋을 것이다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -72,12 +75,14 @@
 &lt;li&gt;운영체제, 데이터베이스, 자료구조/알고리즘, 네트워크에 대해서 정리를 하였다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;되도록 공식 개발 문서를 레퍼런스로 하여, CS 지식들을 틈틈히 정리하도록 해야겠다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;되도록 공식 개발 문서를 레퍼런스로 하여, CS 지식들을 틈틈히 정리하도록 해야겠다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;프로젝트에서 사용한 기술은 왜 그 기술을 사용했고, 어떤 장/단점을 가지고 있으며, 어떤한 원리로 동작하는지를 중점으로 준비하였다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;나의 포트폴리오에서 보완해야할 점이다. 왜 그 기술을 사용했는지, 그리고 어떤 장/단점을 가지고 있는지, 어떠한 원리로 동작하는지 고민을 많이하지 않았다.따라서 이러한 부분을 개선하자.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;나의 포트폴리오에서 보완해야할 점이다. 왜 그 기술을 사용했는지, 그리고 어떤 장/단점을 가지고 있는지, 어떠한 원리로 동작하는지 고민을 많이하지 않았다.따라서 이러한 부분을 개선하자.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;다른 사람들에게 자신의 포트폴리오를 보여주고 피드백을 얻는 것도 좋은 방법이 될 것이다.&lt;/p&gt;

@@ -97,7 +97,9 @@
   </head>
 
   <body>
-    <br/>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
 
 <div class="article-meta">
 <h1><span class="title">파이썬 - 가변 위치 인수로 깔끔하게 보이게 하자</span></h1>
@@ -106,7 +108,7 @@
 <p class="terms">
   
   
-  Categories: <a href="../../../../categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC">파이썬</a> 
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> <a href="../../../../categories/%EA%B0%9C%EB%B0%9C-%ED%8C%8C%EC%9D%B4%EC%8D%AC">개발-파이썬</a> 
   
   
   
@@ -123,15 +125,15 @@
 <li>이러한 경우에 사용하면 좋을 것 같다.</li>
 </ul>
 <p><strong>예제</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(message, values):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> values:
-</span></span><span style="display:flex;"><span>  print(message)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>    values_str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;, &#39;</span><span style="color:#f92672">.</span>join(str(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> values)
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (message, values_str))
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">log</span><span style="color:#1f2328">(</span>message<span style="color:#1f2328">,</span> values<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">if</span> <span style="color:#0550ae">not</span> values<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span>message<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>    values_str <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;, &#39;</span><span style="color:#0550ae">.</span>join<span style="color:#1f2328">(</span><span style="color:#6639ba">str</span><span style="color:#1f2328">(</span>x<span style="color:#1f2328">)</span> <span style="color:#cf222e">for</span> x <span style="color:#0550ae">in</span> values<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;</span><span style="color:#0a3069">%s</span><span style="color:#0a3069"> : </span><span style="color:#0a3069">%s</span><span style="color:#0a3069">&#39;</span> <span style="color:#0550ae">%</span> <span style="color:#1f2328">(</span>message<span style="color:#1f2328">,</span> values_str<span style="color:#1f2328">))</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>log(<span style="color:#e6db74">&#39;My number are&#39;</span>, [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>])
-</span></span><span style="display:flex;"><span>log(<span style="color:#e6db74">&#39;Hi there&#39;</span>, [])
+</span></span><span style="display:flex;"><span>log<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;My number are&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">])</span>
+</span></span><span style="display:flex;"><span>log<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;Hi there&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">[])</span>
 </span></span></code></pre></div><ul>
 <li>
 <p>위의 코드에서는 로그로 남길 값이 없을 때, 빈 리스트로 넘겨주고 있다.</p>
@@ -146,15 +148,15 @@
 <p>함수 본문은 수정할 필요가 없고, 단지 호출하는 쪽만 수정하면 된다.</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">log</span>(message, <span style="color:#f92672">*</span>values):
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> values:
-</span></span><span style="display:flex;"><span>  print(message)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>    values_str <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;, &#39;</span><span style="color:#f92672">.</span>join(str(x) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> values)
-</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> : </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (message, values_str))
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">log</span><span style="color:#1f2328">(</span>message<span style="color:#1f2328">,</span> <span style="color:#0550ae">*</span>values<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">if</span> <span style="color:#0550ae">not</span> values<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span>message<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>    values_str <span style="color:#0550ae">=</span> <span style="color:#0a3069">&#39;, &#39;</span><span style="color:#0550ae">.</span>join<span style="color:#1f2328">(</span><span style="color:#6639ba">str</span><span style="color:#1f2328">(</span>x<span style="color:#1f2328">)</span> <span style="color:#cf222e">for</span> x <span style="color:#0550ae">in</span> values<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;</span><span style="color:#0a3069">%s</span><span style="color:#0a3069"> : </span><span style="color:#0a3069">%s</span><span style="color:#0a3069">&#39;</span> <span style="color:#0550ae">%</span> <span style="color:#1f2328">(</span>message<span style="color:#1f2328">,</span> values_str<span style="color:#1f2328">))</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>log(<span style="color:#e6db74">&#39;My number are&#39;</span>, [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>])
-</span></span><span style="display:flex;"><span>log(<span style="color:#e6db74">&#39;Hi there&#39;</span>)
+</span></span><span style="display:flex;"><span>log<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;My number are&#39;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">2</span><span style="color:#1f2328">])</span>
+</span></span><span style="display:flex;"><span>log<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;Hi there&#39;</span><span style="color:#1f2328">)</span>
 </span></span></code></pre></div><ul>
 <li>인자가 필요하지 않을 때에는, 사용하지 않아도 된다.</li>
 </ul>
@@ -189,6 +191,8 @@
     <a href="../../../../"> >> Home</a>
   </main>
 </div>
+      </div> 
+    </div> 
   <script src="https://utteranc.es/client.js"
       repo="dongwooklee96/dongwooklee96.github.io"
       issue-term="pathname"
@@ -245,4 +249,3 @@ fathom('trackPageview');
   </body>
   
 </html>
-

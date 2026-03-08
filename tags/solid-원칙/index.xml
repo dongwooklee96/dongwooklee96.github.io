@@ -6,12 +6,14 @@
     <description>Recent content in SOLID 원칙 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
     <lastBuildDate>Sat, 13 Mar 2021 13:40:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/solid-%EC%9B%90%EC%B9%99/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>객체지향 5원칙 (SOLID)</title>
       <link>https://dongwooklee96.github.io/post/2021/03/13/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-5%EC%9B%90%EC%B9%99-solid.html</link>
       <pubDate>Sat, 13 Mar 2021 13:40:33 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/13/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-5%EC%9B%90%EC%B9%99-solid.html</guid>
       <description>&lt;p&gt;회사에서 객체지향 및 SOLID 원칙에 대해서 설명하는 세미나를 진행하였다.&lt;/p&gt;
 &lt;ul&gt;

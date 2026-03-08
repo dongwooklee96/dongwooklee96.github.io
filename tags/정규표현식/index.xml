@@ -6,12 +6,14 @@
     <description>Recent content in 정규표현식 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
     <lastBuildDate>Wed, 14 Jul 2021 21:00:39 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>정규표현식</title>
       <link>https://dongwooklee96.github.io/post/2021/07/14/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D.html</link>
       <pubDate>Wed, 14 Jul 2021 21:00:39 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/07/14/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;기본적인 정규 표현식 문법을 익히고 나서, 나중에 사용하거나 이와 관련된 코드를 볼 일이 있을 때 기억이 나도록 하자.&lt;/li&gt;

@@ -6,12 +6,14 @@
     <description>Recent content in 오픈소스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
     <lastBuildDate>Wed, 01 Jun 2022 21:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PostgresSQL 기여 프로세스 및 Commitfest</title>
       <link>https://dongwooklee96.github.io/post/2022/06/01/postgressql-%EA%B8%B0%EC%97%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B0%8F-commitfest.html</link>
       <pubDate>Wed, 01 Jun 2022 21:04:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/06/01/postgressql-%EA%B8%B0%EC%97%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B0%8F-commitfest.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;우선 여태까지 이것을 몰랐다는 것이 조금은 부끄럽지만 적어보도록 하겠다.&lt;/li&gt;
@@ -64,7 +66,7 @@
       <title>펄 Test::More 모듈 도큐먼트 </title>
       <link>https://dongwooklee96.github.io/post/2022/06/01/%ED%8E%84-testmore-%EB%AA%A8%EB%93%88-%EB%8F%84%ED%81%90%EB%A8%BC%ED%8A%B8.html</link>
       <pubDate>Wed, 01 Jun 2022 21:04:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2022/06/01/%ED%8E%84-testmore-%EB%AA%A8%EB%93%88-%EB%8F%84%ED%81%90%EB%A8%BC%ED%8A%B8.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/orgrd8l01vekuek/Screen%20Shot%202022-06-01%20at%2022.15.16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -82,7 +84,7 @@
       <title>PostgresSQL 번역으로 기여하는 방법</title>
       <link>https://dongwooklee96.github.io/post/2021/12/09/postgressql-%EB%B2%88%EC%97%AD%EC%9C%BC%EB%A1%9C-%EA%B8%B0%EC%97%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Thu, 09 Dec 2021 15:04:24 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/12/09/postgressql-%EB%B2%88%EC%97%AD%EC%9C%BC%EB%A1%9C-%EA%B8%B0%EC%97%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;h3 id=&#34;postgressql에-번역으로-기여하기&#34;&gt;PostgresSQL에 번역으로 기여하기&lt;/h3&gt;
 &lt;hr&gt;

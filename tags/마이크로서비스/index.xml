@@ -6,12 +6,14 @@
     <description>Recent content in 마이크로서비스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
     <lastBuildDate>Sat, 27 Mar 2021 10:31:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%A7%88%EC%9D%B4%ED%81%AC%EB%A1%9C%EC%84%9C%EB%B9%84%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>네이버 페이 배송 모듈 아키텍처 및 사용기술 분석</title>
       <link>https://dongwooklee96.github.io/post/2021/03/27/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%8E%98%EC%9D%B4-%EB%B0%B0%EC%86%A1-%EB%AA%A8%EB%93%88-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%B0%8F-%EC%82%AC%EC%9A%A9%EA%B8%B0%EC%88%A0-%EB%B6%84%EC%84%9D.html</link>
       <pubDate>Sat, 27 Mar 2021 10:31:33 +0900</pubDate>
-      
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/post/2021/03/27/%EB%84%A4%EC%9D%B4%EB%B2%84-%ED%8E%98%EC%9D%B4-%EB%B0%B0%EC%86%A1-%EB%AA%A8%EB%93%88-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%B0%8F-%EC%82%AC%EC%9A%A9%EA%B8%B0%EC%88%A0-%EB%B6%84%EC%84%9D.html</guid>
       <description>&lt;p&gt;많은 양의 트래픽을 감당하고 어떻게 고가용성의 시스템을 구축하는지 알아보기 위해서 네이버 기술 블로그 및 세미나를 보면서 사용하는 기술을 분석하고 어떤 고민을 하고 있는지 살펴보았다.&lt;/p&gt;
 &lt;h3 id=&#34;네이버-페이가-고민했던-문제점&#34;&gt;네이버 페이가 고민했던 문제점&lt;/h3&gt;
@@ -107,7 +109,8 @@
 &lt;li&gt;기술적인 부분과 비즈니스 적인 부분을 나누어서 생각을 했다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;이 부분에는 나도 공감하는데, 기술적으로 풀려고 시도했을 경우 많은 생각을 해야하지만 사실 비즈니스적으로 변경하여 문제가 쉽게 풀리는 경우가 많았다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;이 부분에는 나도 공감하는데, 기술적으로 풀려고 시도했을 경우 많은 생각을 해야하지만 사실 비즈니스적으로 변경하여 문제가 쉽게 풀리는 경우가 많았다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;렉 모니터링에 대한 세분화된 알람이 필요할 것으로 보임&lt;/li&gt;
 &lt;li&gt;앞 모듈에 컨트롤 할 수 있는 부분을 두어서 랙이 기준치 이상 도달 할 경우, 우선순위가 중요한 메시지는 특정 큐에 집어 넣고 특정 큐에 대한 오퍼레이션을 별도로 수행하는 구조를&lt;/li&gt;
@@ -157,7 +160,8 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;마이크로서비스 아키텍처 및 이벤트 드리븐 아키텍처에 대해서 대략적으로만 알고 있어서 이 기회에 정리를 해보았다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;마이크로서비스 아키텍처 및 이벤트 드리븐 아키텍처에 대해서 대략적으로만 알고 있어서 이 기회에 정리를 해보았다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;마이크로 서비스 아키텍처&lt;/strong&gt;
 &lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112706776-e5459980-8ee9-11eb-85d0-29316803cc43.png&#34; alt=&#34;Screen Shot 2021-03-27 at 10 47 46 AM&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112706932-e5926480-8eea-11eb-8161-373b02c6dd56.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
@@ -238,7 +242,8 @@
 &lt;/ul&gt;
 &lt;p&gt;이러한 플랫폼을 활용해서 서비스를 개발하고 있고, 공통화가 필요한 부분은 플랫폼에 적용하거나 라이브러리화 하고 있다.&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;인상 깊었던 부분은 &lt;code&gt;Spring Data JDBC&lt;/code&gt;에서 제공하지 않는 추가 기능들은 직접 개발해서 사용한다는 것이다. 기술에 이해도가 높지 않으면 절대로 쉽지 않다는 것을 알기 때문이다.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;인상 깊었던 부분은 &lt;code&gt;Spring Data JDBC&lt;/code&gt;에서 제공하지 않는 추가 기능들은 직접 개발해서 사용한다는 것이다. 기술에 이해도가 높지 않으면 절대로 쉽지 않다는 것을 알기 때문이다.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;인프라-운영&#34;&gt;인프라 운영&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;

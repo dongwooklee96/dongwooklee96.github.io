@@ -2,323 +2,109 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/categories.html</link>
+    <link>https://dongwooklee96.github.io/categories/index.html</link>
     <description>Recent content in Categories on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
     <lastBuildDate>Mon, 26 Jun 2023 22:44:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>잡념</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%9E%A1%EB%85%90.html</link>
-      <pubDate>Mon, 26 Jun 2023 22:44:33 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%9E%A1%EB%85%90.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>책</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%B1%85.html</link>
-      <pubDate>Sat, 15 Apr 2023 16:20:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%B1%85.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>세미나</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%84%B8%EB%AF%B8%EB%82%98.html</link>
-      <pubDate>Fri, 31 Mar 2023 10:28:35 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%84%B8%EB%AF%B8%EB%82%98.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>스타트업</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85.html</link>
-      <pubDate>Sat, 04 Mar 2023 10:45:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%8A%A4%ED%83%80%ED%8A%B8%EC%97%85.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>기획</title>
-      <link>https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%9A%8D.html</link>
-      <pubDate>Sat, 11 Feb 2023 17:02:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%9A%8D.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>파이썬</title>
-      <link>https://dongwooklee96.github.io/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</link>
-      <pubDate>Thu, 05 Jan 2023 09:15:40 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>오픈소스</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4.html</link>
-      <pubDate>Mon, 19 Dec 2022 20:04:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>데이터베이스</title>
-      <link>https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4.html</link>
-      <pubDate>Sat, 17 Sep 2022 15:05:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>자기계발</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%9E%90%EA%B8%B0%EA%B3%84%EB%B0%9C.html</link>
-      <pubDate>Mon, 12 Sep 2022 17:09:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%9E%90%EA%B8%B0%EA%B3%84%EB%B0%9C.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>프로그래밍</title>
-      <link>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</link>
-      <pubDate>Sat, 03 Sep 2022 17:09:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>OpenSource</title>
-      <link>https://dongwooklee96.github.io/categories/opensource.html</link>
-      <pubDate>Sat, 03 Sep 2022 11:04:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/opensource.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>유틸</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%9C%A0%ED%8B%B8.html</link>
-      <pubDate>Wed, 03 Aug 2022 09:29:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%9C%A0%ED%8B%B8.html</guid>
-      <description></description>
-    </item>
-    
     <item>
       <title>기타</title>
       <link>https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%83%80.html</link>
-      <pubDate>Tue, 28 Jun 2022 17:00:39 +0900</pubDate>
-      
+      <pubDate>Mon, 26 Jun 2023 22:44:33 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/categories/%EA%B8%B0%ED%83%80.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>디자인</title>
-      <link>https://dongwooklee96.github.io/categories/%EB%94%94%EC%9E%90%EC%9D%B8.html</link>
-      <pubDate>Sun, 19 Jun 2022 15:40:33 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EB%94%94%EC%9E%90%EC%9D%B8.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>리액트</title>
-      <link>https://dongwooklee96.github.io/categories/%EB%A6%AC%EC%95%A1%ED%8A%B8.html</link>
-      <pubDate>Sat, 16 Apr 2022 13:20:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EB%A6%AC%EC%95%A1%ED%8A%B8.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>회고</title>
       <link>https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0.html</link>
-      <pubDate>Thu, 20 Jan 2022 08:00:36 +0900</pubDate>
-      
+      <pubDate>Fri, 31 Mar 2023 10:28:35 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/categories/%ED%9A%8C%EA%B3%A0.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>펄</title>
-      <link>https://dongwooklee96.github.io/categories/%ED%8E%84.html</link>
+      <title>개발</title>
+      <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C.html</link>
+      <pubDate>Thu, 05 Jan 2023 09:15:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>개발-파이썬</title>
+      <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</link>
+      <pubDate>Thu, 05 Jan 2023 09:15:40 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>개발-펄</title>
+      <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%ED%8E%84.html</link>
       <pubDate>Tue, 14 Dec 2021 21:20:40 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%ED%8E%84.html</guid>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%ED%8E%84.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>프로그래밍 - 파이썬</title>
-      <link>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D---%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</link>
-      <pubDate>Tue, 02 Nov 2021 09:39:13 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D---%ED%8C%8C%EC%9D%B4%EC%8D%AC.html</guid>
+      <title>개발-디자인</title>
+      <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EB%94%94%EC%9E%90%EC%9D%B8.html</link>
+      <pubDate>Wed, 10 Nov 2021 21:06:33 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EB%94%94%EC%9E%90%EC%9D%B8.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>알고리즘</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.html</link>
+      <title>개발-알고리즘</title>
+      <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.html</link>
       <pubDate>Wed, 15 Sep 2021 23:02:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.html</guid>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>시스템 프로그래밍</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</link>
-      <pubDate>Sun, 05 Sep 2021 12:00:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>네트워크</title>
-      <link>https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC.html</link>
+      <title>개발-네트워크</title>
+      <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC.html</link>
       <pubDate>Sat, 21 Aug 2021 01:00:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC.html</guid>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>프로그래밍 문제</title>
-      <link>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%AC%B8%EC%A0%9C.html</link>
-      <pubDate>Tue, 10 Aug 2021 19:15:14 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%AC%B8%EC%A0%9C.html</guid>
+      <title>개발-운영체제</title>
+      <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C.html</link>
+      <pubDate>Thu, 22 Jul 2021 00:09:24 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>글쓰기</title>
-      <link>https://dongwooklee96.github.io/categories/%EA%B8%80%EC%93%B0%EA%B8%B0.html</link>
-      <pubDate>Sun, 18 Jul 2021 22:44:33 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EA%B8%80%EC%93%B0%EA%B8%B0.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>정규표현식</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D.html</link>
-      <pubDate>Wed, 14 Jul 2021 21:00:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%A0%95%EA%B7%9C%ED%91%9C%ED%98%84%EC%8B%9D.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>오픈 소스</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4.html</link>
-      <pubDate>Wed, 05 May 2021 17:30:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%98%A4%ED%94%88-%EC%86%8C%EC%8A%A4.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>운영체제</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C.html</link>
-      <pubDate>Wed, 28 Apr 2021 00:09:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%9A%B4%EC%98%81%EC%B2%B4%EC%A0%9C.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>애플리케이션</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98.html</link>
-      <pubDate>Thu, 08 Apr 2021 08:53:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>프로그래밍 - 자바</title>
-      <link>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D---%EC%9E%90%EB%B0%94.html</link>
+      <title>개발-자바</title>
+      <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%9E%90%EB%B0%94.html</link>
       <pubDate>Sun, 04 Apr 2021 20:30:23 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D---%EC%9E%90%EB%B0%94.html</guid>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%9E%90%EB%B0%94.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>애프리케이션</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%95%A0%ED%94%84%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98.html</link>
-      <pubDate>Mon, 29 Mar 2021 22:19:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%95%A0%ED%94%84%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>주간 회고</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0.html</link>
-      <pubDate>Sun, 28 Mar 2021 18:15:49 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%A3%BC%EA%B0%84-%ED%9A%8C%EA%B3%A0.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>보안</title>
-      <link>https://dongwooklee96.github.io/categories/%EB%B3%B4%EC%95%88.html</link>
-      <pubDate>Sun, 28 Mar 2021 16:17:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EB%B3%B4%EC%95%88.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>GIS</title>
-      <link>https://dongwooklee96.github.io/categories/gis.html</link>
-      <pubDate>Sun, 28 Mar 2021 10:45:24 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/gis.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>서버</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%84%9C%EB%B2%84.html</link>
-      <pubDate>Sat, 27 Mar 2021 14:47:39 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%84%9C%EB%B2%84.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>커리어</title>
-      <link>https://dongwooklee96.github.io/categories/%EC%BB%A4%EB%A6%AC%EC%96%B4.html</link>
-      <pubDate>Sat, 27 Mar 2021 10:31:33 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EC%BB%A4%EB%A6%AC%EC%96%B4.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>디자인 - 객체지향</title>
-      <link>https://dongwooklee96.github.io/categories/%EB%94%94%EC%9E%90%EC%9D%B8---%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5.html</link>
-      <pubDate>Sat, 13 Mar 2021 13:40:33 +0900</pubDate>
-      
-      <guid>https://dongwooklee96.github.io/categories/%EB%94%94%EC%9E%90%EC%9D%B8---%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5.html</guid>
+      <title>개발-유틸</title>
+      <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%9C%A0%ED%8B%B8.html</link>
+      <pubDate>Sat, 27 Mar 2021 17:29:39 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EC%9C%A0%ED%8B%B8.html</guid>
       <description></description>
     </item>
     

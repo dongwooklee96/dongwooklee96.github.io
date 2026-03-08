@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>개발-디자인 on 개발자 이동욱</title>
+    <link>https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EB%94%94%EC%9E%90%EC%9D%B8.html</link>
+    <description>Recent content in 개발-디자인 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
+    <lastBuildDate>Wed, 10 Nov 2021 21:06:33 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/categories/%EA%B0%9C%EB%B0%9C-%EB%94%94%EC%9E%90%EC%9D%B8/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>파이썬으로 살펴보는 아키텍처 패턴 - 4장</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/10/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-4%EC%9E%A5.html</link>
+      <pubDate>Wed, 10 Nov 2021 21:06:33 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/11/10/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-4%EC%9E%A5.html</guid>
+      <description>&lt;h3 id=&#34;서비스-계층-소개&#34;&gt;서비스 계층 소개&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;플라스크 앱이 하는 일을 살펴보면, 오케스트레이션이라고 부르는 요소가 상당 부분을 차지한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;오케이스트레이션은 저장소에서 여러 가지를 가져오고, 데이터베이스 상태에 따라서 입력을 검증하여 오류를 처리하고, 성공적인 경우에는 데이터베이스에 커밋하는 작업을 포함한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import model
+from model import OrderLine
+from repository import AbstractRepository
+
+
+class InvalidSku(Exception):
+    pass
+
+
+def is_valid_sku(sku, batches):
+    return sku in {b.sku for b in batches}
+
+def allocate(line: OrderLine, repo: AbstractRepository, session) -&amp;gt; str:
+    batches = repo.list()
+    if not is_valid_sku(line.sku, batches):
+        raise InvalidSku(f&amp;#39;Invalid sku {line.sku}&amp;#39;)
+    batchref = model.allocate(line, batches)
+    session.commit()
+    return batchref
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;서비스 계층에서는 다음과 같이, 예외처리를 하거나 커밋을 데이터베이스 커밋을 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;@flask.route.gubbins
+def allocate_endpoint():
+    session = get_session()
+    repo = repository.SqlAlchemyRepository(session)
+    line = model.OrderLine(
+        request.json[&amp;#39;orderid&amp;#39;],
+        request.json[&amp;#39;sku&amp;#39;],
+        request.json[&amp;#39;qty&amp;#39;],
+    )
+    try:
+        batchref = services.allocate(line, repo, session)
+    except (model.OutOfStock, services.InvalidSku) as e:
+        return jsonify({&amp;#39;message&amp;#39;: str(e)}), 400
+    return jsonify({&amp;#39;batchref&amp;#39;: batchref}), 201
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;엔드 포인트에서 좀 더 간단해진 것을 확인할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;엔드포인트에서는 요청전 상태를 관리하고 파라미터로부터 정보를 파싱하여 상태코드를 응답하고 JSON을 처리하는 역할을 하면 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 오케이스트레이션 로직은 유지 케이스 / 서비스 계층에 들어가고, 도메인 로직은 도메인에 그대로 남는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;도메인-서비스와-서비스-계층의-차이&#34;&gt;도메인 서비스와 서비스 계층의 차이&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;서비스-계층&#34;&gt;서비스 계층&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서비스는 외부 세계에서 오는 요청을 처리해서 연산을 오케스트레이션한다. 즉 서비스 계층은 데이터베이스에서 데이터를 얻거나, 도메인 모델을 업데이트 하거나, 변경된 내용을 영속화 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 시스템에서 어떤 연산이 일어날 때마다 해야하는 지루한 작업이며 비즈니스 로직과 분리하면 프로그램을 깔끔하게 유지하는데 도움이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;도메인-서비스&#34;&gt;도메인 서비스&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 서비스는 도메인 모델에 속하지만 근본적으로 상태가 있는 엔티티나 값 객체에 속하지 않는 로직을 부르는 이름이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를들어서 쇼핑 카트 애플리케이션을 만든다면 도메인 서비스로 세금 관련 규칙을 구현한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;세금을 계산하는 작업은 쇼핑 카트를 업데이트하는 작업과는 별개이다. 모델에서 중요한 부분이지만, 세금만을 위한 영속적인 엔티티를 사용하는 것은 바람직하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정리&#34;&gt;정리&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;서비스 계층을 추가하면 다음과 같은 장점이 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;플라크스 API 엔드포인트가 아주 얇아지고 작성하기 쉬워진다. 플라스크 API 엔드 포인트는 오직 JSON 파싱이나 정상 경로나 비정상 경로에 따른 올바른 HTTP 코드 반환등의 &amp;lsquo;웹 기능&amp;rsquo;만 수행한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인에 대한 명확한 API를 정의하였다. 이런 API는 자신이 API인지 CLI인지 심지어 테스트인지에 관계없이 어댑터가 도메인 모델 클래스를 몰라도 사용할 수 있는 유스케이스나 진입점 집합이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서비스 계층을 사용하면 테스트를 &amp;lsquo;높은 기어비&amp;rsquo;로 작성할 수 있고 도메인 모델을 적합한 형태로 마음껏 리팩터링할 수 있다. 서비스 계층을 활용하면 같은 유스케이스를 제공할 수 있는 한 이미 존재하는 수 많은 테스트를 재작성하지 않고도 새로운 설계를 테스트할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;작성한 테스트의 피라미드 구조도 좋아보인다. 테스트 상당 부분은 빠른 단위 테스트이며 E2E나 통합 테스트는 최소화 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;amp;start=slayer&#34;&gt;파이썬으로 살펴보는 아키텍처 패턴&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬으로 살펴보는 아키텍처 패턴 - 2장</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/09/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-2%EC%9E%A5.html</link>
+      <pubDate>Tue, 09 Nov 2021 21:06:33 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/11/09/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-2%EC%9E%A5.html</guid>
+      <description>&lt;h3 id=&#34;저장소-패턴-소개&#34;&gt;저장소 패턴 소개&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;저장소 패턴은 영속성 저장소를 추상화 한 것이다. 저장소 패턴은 모든 데이터가 메모리상에 존재하는 것 처럼 가정하여 데이터 접근과 관련된 지루한 세부 사항을 감춘다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가장 간단한 저장소에는 메서드가 두 가지 밖에 없다. &lt;code&gt;add()&lt;/code&gt;는 새 원소를 저장소에 추가하고, &lt;code&gt;get()&lt;/code&gt;은 이전에 추가한 원소를 저장소에서 가져온다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도메인 서비스 계층에서 데이터에 접근할 때는 엄격하게 이 두가지 메서드만 사용할 수 있다. 이렇게 단순성을 강제로 유지하면 도메인 모델과 데이터베이스 사이의 결합을 끊을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from collections import abc
+
+import model
+
+
+class AbstractRepository(abc.ABC):
+
+    @abc.abstractmethod
+    def add(self, batch: model.Batch):
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get(self, reference) -&amp;gt; model.Batch:
+        raise NotImplementedError
+
+class SqlAlchemyRepository(AbstractRepository):
+    def __init__(self, session):
+        self.session = session
+
+    def add(self, batch):
+        self.session.add(batch)
+
+    def get(self, reference):
+        return self.session.query(model.Batch).filter_by(reference=reference).one()
+
+    def list(self):
+        return self.session.query(model.Batch).all()
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;따라서 이런 형태의 코드가 나올 것이다. 스프링에서 &lt;code&gt;JPA&lt;/code&gt;를 사용할 때 &lt;code&gt;repository&lt;/code&gt; 코드와 매우 닮아 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;트레이드오프&#34;&gt;트레이드오프&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;DDD와 의존성 역전이라는 경로를 택한 이상 저장소 패턴은 이 책에서 나열한 패턴 중에서도 가장 채택하기 쉬운 패턴이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드만 고려한다면 저장소 패턴은 단지 &lt;code&gt;SQLAlchemy&lt;/code&gt; 추상화 (&lt;code&gt;session.query(Batch)&lt;/code&gt;)를 우리가 직접 설계한 다른 추상화 (&lt;code&gt;batches_repo.get&lt;/code&gt;)로 바꿔치기 한 것 밖에 되지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;테스트에-사용하는-가짜-저장소를-쉽게-만드는-방법&#34;&gt;테스트에 사용하는 가짜 저장소를 쉽게 만드는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;class FakeRepository(AbstractRepository):
+
+    def __init__(self, batches):
+        self._batches = set(batches)
+
+    def add(self, batch):
+        self._batches.add(batch)
+
+    def get(self, reference):
+        return next(b for b in self._batches if b.reference == reference)
+
+    def list(self):
+        return list(self._batches)
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이 클래스가 &lt;code&gt;set()&lt;/code&gt;을 감싸는 간단한 래퍼이므로 모든 메서드는 한줄로 끝난다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;fake_repo = FakeRepository([batch1, batch2, batch3])&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;추상화를 대신하는 가짜 객체를 만드는 것은 설계에 대한 피드백을 얻는 아주 좋은 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가짜 객체를 만들기 어렵다면 추상화를 너무 복잡하게 설계했기 때문일 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;저장소-패턴-정리&#34;&gt;저장소 패턴 정리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ORM에 의존성 역전을 적용하자, 도메인 모델은 인프라에 대해서 걱정할 필요가 없어야 한다. ORM은 모델을 임포트해야 하며 모델이 ORM을 임포트해서는 안된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;저장소 패턴은 영속성 저장소에 대한 단순한 추상화다. 저장소는 컬렉션이 메모리 상에 있는 개체라는 환상을 제공한다. 저장소를 사용하면 핵심 애플리케이션에는 영향을 미치지 않으면서 인프라를 이루는 세부 구조를 변경하거나 목 저장소를 쉽게 작성할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;amp;start=slayer&#34;&gt;파이썬으로 살펴보는 아키텍처 패턴&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>파이썬으로 살펴보는 아키텍처 패턴 - 1장</title>
+      <link>https://dongwooklee96.github.io/post/2021/11/09/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-1%EC%9E%A5.html</link>
+      <pubDate>Tue, 09 Nov 2021 13:40:33 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/11/09/%ED%8C%8C%EC%9D%B4%EC%8D%AC%EC%9C%BC%EB%A1%9C-%EC%82%B4%ED%8E%B4%EB%B3%B4%EB%8A%94-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%ED%8C%A8%ED%84%B4-1%EC%9E%A5.html</guid>
+      <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;- 대부분의 개발자가 새로운 시스템을 설계하라는 요청을 받으면, 즉시 데이터베이스 스키마를 그리기 시작하고, 그 다음에 객체 모델을 생각한다. 여기서부터 모든 것이 잘못되기 시작한다...
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이에 매우 공감한다. 그 이유는 대학교 졸업 작품을 이런식으로 설계해봤기 때문에 얼마나 비효율적이고 수정이 많이 발생하는지 느꼈기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물론 아닌 경우도 있지만 대부분 객체를 만들고 저장에 대한 요구사항은 행동에 맞춰서 정의하는 편이 더 나았다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 책에서는 아래 4가지의 핵심 설계 패턴을 소개한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1. 저장소 패턴은 영속적인 저장소에 대한 추상화를 한다.
+2. 서비스 계층 패턴은 유스케이스의 시작과 끝을 명확하게 정의하기 위한 패턴이다.
+3. 작업 단위 패턴은 원자적 연산을 제공한다.
+4. 애그리게이트 패턴은 데이터 정합성을 강화하기 위한 패턴이다.
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;값-객체와-엔티티&#34;&gt;값 객체와 엔티티&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;값 객체는 값들이 실제로 어떤 역할을 하는지에 대해서 실세계에서 갖는 직관과 부합한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들어서 10 파운드를 말할 때 10 파운드라는 값(가치)가 중요하지 어떤 지폐인지는 중요하지 않다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬에서는 아래와 같이 표현할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;@dataclass&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;fronzen&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;Money&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    currency&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;str&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    value&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;str&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;Money&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;NamedTuple&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    currency&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;str&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    value&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그와 반대로, 오래동안 정체성이 존재하는 도메인 객체를 설명할 때는 엔티티라는 용어를 사용한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사람인 경우에는 자신의 이름이나 결혼 상태를 바꿀 수 있으며 심지어는 성별도 바꿀 수 있다. 하지만 이러한 변경에도 불구하고 모두 같은 사람으로 계속 인식 할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사람은 이름과 다르게 영속적인 정체성이 있다. 따라서 엔티티에는 정체성 동등성이라는 특징이 있다. 이는 엔티티의 값을 바꾸더라도, 바뀐 엔티티는 이전과 같은 엔티티로 인식된다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python3&#34; data-lang=&#34;python3&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;Batch&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#0550ae&#34;&gt;...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;__eq__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; other&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;isinstance&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;other&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; Batch&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; other&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;reference &lt;span style=&#34;color:#0550ae&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;reference
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;__hash__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;hash&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#6a737d&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;reference&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;값 객체의 경우에는, 모든 값 속성을 사용하여 해시를 정의하고 객체를 반드시 불변 객체로 만들어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터 클래스에 대해서 &lt;code&gt;@frozen=True&lt;/code&gt;를 지정하면 공짜로 이런 동작을 얻을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;엔티티의 경우, 가장 단순한 선택은 해시를 &lt;code&gt;None&lt;/code&gt;으로 지정하는 것이다. 이 객체에 대해서 해시를 계산할 수 없고 따라서 그에 따라서 집합 등에서 사용할 수 없다는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;특정한 이유로 엔티티를 집합(&lt;code&gt;SET&lt;/code&gt;)에 넣거나 딕셔너리(&lt;code&gt;DICT&lt;/code&gt;)의 키로 사용해야 한다면 시간과 무관하게 엔티티의 정체성을 식별해주는 속성을 사용하여 해시를 정의해야 한다. 그리고 어떻게 든 이 정체성을 식별해주는 속성을 읽기 전용으로 만들어야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;도메인-모델링&#34;&gt;도메인 모델링&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;도메인 모델링&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;도메인 모델링은 여러분의 코드에서 비즈니스와 가장 가까운 부분이다. 변화가 생길 가능성이 가장 높은 부분이고, 비즈니스에서 가장 큰 가치를 제공하는 부분이다. 도메인 모델링을 이해하고 변경하기 쉽게 만들어보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;엔티티와 값 객체 구분&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;값 객체는 그 내부의 속성들에 의해서 정의된다. 불변 타입을 사용해서 값 객체를 구현하는 것이 가장 좋다. 반대로 엔티티에는 시간에 따라서 변하는 속성이 포함될 수 있고, 이런 속성은 바뀌더라도 여전히 똑같은 엔티티로 남는다. 어떤 요소가 엔티티를 유일하게 식별하는지 정의하는 것이 중요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;모든 것을 객체로 만들 필요가 없다&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;파이썬은 다중 패러다임 언어이다. 따라서 여러분의 코드에서 동사에 해당하는 부분을 표현하려면 함수를 사용하는 것이 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 자바를 하다가 파이썬으로 변경하였을 떄 가장 헷갈리는 것중에 하나이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;모든 &lt;code&gt;FooManager(관리 객체)&lt;/code&gt;, &lt;code&gt;BarBuilder(빌더 객체)&lt;/code&gt;, &lt;code&gt;BazFactory(펙토리 객체)&lt;/code&gt; 대신에 함수를 사용하는 것이 가독성이 좋고, 표현력이 더 좋다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;가장 좋은 설계 원칙을 적용할 때다&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SOLID 원칙이나 &lt;code&gt;has-a&lt;/code&gt;와 &lt;code&gt;is-a&lt;/code&gt;의 관계 상속 보다는 합성을 사용하라와 같은 좋은 설계법을 살펴보고 이를 사용하는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=271944317&amp;amp;start=slayer&#34;&gt;파이썬으로 살펴보는 아키텍처 패턴&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>객체지향 5원칙 (SOLID)</title>
+      <link>https://dongwooklee96.github.io/post/2021/03/13/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-5%EC%9B%90%EC%B9%99-solid.html</link>
+      <pubDate>Sat, 13 Mar 2021 13:40:33 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2021/03/13/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-5%EC%9B%90%EC%B9%99-solid.html</guid>
+      <description>&lt;p&gt;회사에서 객체지향 및 SOLID 원칙에 대해서 설명하는 세미나를 진행하였다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/dongwooklee96/java-chap02-assignment&#34;&gt;사내 세미나 과제&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;객체지향-5원칙-solid-원칙&#34;&gt;객체지향 5원칙 (SOLID) 원칙&lt;/h2&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;srp-single-responsiblity-principle---단일-책임-원칙&#34;&gt;SRP (Single Responsiblity Principle) - 단일 책임 원칙&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;하나의 클래스는 하나의 책임만 가져야 한다.&lt;/li&gt;
+&lt;li&gt;어떤 변화 (요구 사항등의 변화)에 의해서 클래스를 변경해야하는 이유는 오직 하나여야 한다.&lt;/li&gt;
+&lt;li&gt;나머지 4원칙의 기초가 되는 원칙으로 SRP만 잘 지키면 다른 책임의 변경으로 인한 연쇄 작용을 방지할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;ocp-open-closed-principle---개방-폐쇄-원칙&#34;&gt;OCP (Open-Closed Principle) - 개방, 폐쇄 원칙&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;SW의 구성 요소 (모듈, 컴포넌트, 클래스, 메서드)는 확장에는 열려있고 변경에는 닫쳐있어야 한다.
+&lt;ul&gt;
+&lt;li&gt;변경을 위한 비용은 가능한 줄이고, 확장을 위한 비용은 극대화 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;OCP를 가능하게 하는 중요 매커니즘은 추상화와 다형성이다.&lt;/li&gt;
+&lt;li&gt;새로운 기능이 추가되는 경우, 기존에 제공하던 클래스 (또는 메서드)를 수정하는 것이 아니라 새로운 클래스 (또는 메서드)를 추가해서 기능을 확장한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;lsp-the-liskov-subsitution-principle---리스코프-치환-원칙&#34;&gt;LSP (The Liskov Subsitution Principle) - 리스코프 치환 원칙&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;서브 클래스는 언제나 슈퍼 클래스를 대체할 수 있어야 한다.
+&lt;ul&gt;
+&lt;li&gt;슈퍼 클래스가 들어갈 자리에 서브 클래스를 넣어도, 원래대로 잘 작동해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;상속의 오용을 방지하게 하는 원칙&lt;/li&gt;
+&lt;li&gt;슈퍼 클래스와 서브 클래스의 동작이 일관성 있게 동작해야함.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;isp-interface-segregation-principle---인터페이스-분리-원칙&#34;&gt;ISP (Interface Segregation Principle) - 인터페이스 분리 원칙&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;한 클래스는 자신이 사용하지 않는 인터페이스의 메서드에 의존하지 않아야 한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;하나의 일반적인 인터페이스 보다는, 여러 개의 구체적인 인터페이스가 낫다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SRP가 클래스의 단일 책임을 강조한다면, ISP는 인터페이스의 단일 책임을 강조함.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;UserService&lt;/code&gt;, &lt;code&gt;BoardService&lt;/code&gt; (X)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;UserCreateService&lt;/code&gt;, &lt;code&gt;BoardCreateService&lt;/code&gt; (O)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;dip-dependency-inversion-principle---의존성-역전의-원칙&#34;&gt;DIP (Dependency Inversion Principle) - 의존성 역전의 원칙&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;변화하기 쉬운 것, 자주 변화하는 것 보다 변화하기 어려운 것, 거의 변화가 없는 것에 의존하라.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;고차원 모듈은 주로 변화하지 않음, 저 차원 모듈에 주로 자주 변화함&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;구체적인 구현 클래스 보다 추상화된 인터페이스에 의존하라, 구체적이며 변동성이 크다면 절대로 이름을 언급하지 마라.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
