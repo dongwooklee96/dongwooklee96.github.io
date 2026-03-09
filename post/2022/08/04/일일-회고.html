@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>[일일 회고] | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="http://localhost:1313/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="http://localhost:1313/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">[일일 회고]</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/08/04</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%ED%9A%8C%EA%B3%A0">회고</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%ED%9A%8C%EA%B3%A0">회고</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="0-상황-리뷰">0. 상황 리뷰</h3>
+<hr>
+<ul>
+<li>
+<p>어제 저녁에는 <code>uftrace</code> 이슈만 확인했던 것 같다.</p>
+</li>
+<li>
+<p>오늘 아침에는 <code>postgres</code>도 어느정도는 확인해야할 것 같다.</p>
+</li>
+<li>
+<p>우선 새로운 모듈에 대해서 테스트 커버리지를 증진시키려는 노력을 해야할 것 같다.</p>
+</li>
+<li>
+<p>그리고 오늘 아침에 생각을 해봤는데, 테스트 커버리지를 증진시키면서 기여할 거리들이 보이는데 이를 활용하지 못하는게 너무 아까운 것 같다.</p>
+</li>
+<li>
+<p>따라서 지금 당장은 아니더라도, 나중에 이슈로 만들어서 이를 해결하는 것이 좋을 것이라고 생각을 한다.</p>
+</li>
+<li>
+<p>앞으로 테스트할 모듈을 좀 살펴본 결과 다음과 같은 모듈을 테스트 하면 좋을 것이다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>1. contrib/oid2name (will deprecated)
+2. contrib/vaccumlo
+3. contrib/adminpack
+4. contrib/xml2
+5. bin/pg_upgrade
+6. contrib/amcheck
+7. contrib/pg_stat_statements
+8. bin/pg_rewind
+</code></pre><h3 id="1-목표-설정">1. 목표 설정</h3>
+<hr>
+<ul>
+<li>
+<p>오늘은 우선 이전에 이슈로 만들어야겠다고 생각만 하고, 만들지 않은 부분을 찾아서 이슈화 시킬 것이다. (로컬타임존 경로 하드코딩화, 문서화 등등..)</p>
+</li>
+<li>
+<p>오늘은 <code>old_snapshot</code> 에 대해서 작업하는 것이 좋을 것 같다. 이전에 테스트 결과를 일정하게 만들 수 있는 방법이 부족했어서 진행하지 않았던 것으로 기억하는데 이제는 방법을 알게 되었으니 진행을 하면 될 것 같다.</p>
+</li>
+</ul>
+<h3 id="2-전략--전술-수립">2. 전략 / 전술 수립</h3>
+<hr>
+<ul>
+<li>
+<p>오늘 <code>old_snapshot</code>에 대한 테스트를 끝내지는 못하였고, 다른 테스트가 어떻게 구성되어있는지에 대해서 살펴보았다.</p>
+</li>
+<li>
+<p><code>pg_waldump</code>, <code>pg_basebackup</code>에 대한 테스트도 빠르게 마무리 짓는것이 좋을 것 같다.</p>
+</li>
+<li>
+<p>그리고 틈틈히 위의 모듈들에 대해서 가성비가 좋은 모듈을 찾는 노력을 해야할 것이다.</p>
+</li>
+</ul>
+<h3 id="3-가성비-측정">3. 가성비 측정</h3>
+<hr>
+<h3 id="4-실행-여부-판단">4. 실행 여부 판단</h3>
+<hr>
+<h3 id="5-자원-할당">5. 자원 할당</h3>
+<hr>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

@@ -446,6 +446,80 @@ article li {
   text-decoration: underline;
 }
 
+/* Details/Summary 스타일 */
+details {
+  background: #f9f9f9;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 20px 0;
+  transition: all 0.3s ease;
+}
+
+details:hover {
+  border-color: #613dc1;
+  box-shadow: 0 2px 8px rgba(97, 61, 193, 0.1);
+}
+
+details[open] {
+  background: white;
+  border-color: #613dc1;
+  box-shadow: 0 4px 12px rgba(97, 61, 193, 0.15);
+}
+
+summary {
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  padding: 10px;
+  margin: -15px -15px 0 -15px;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.2s ease;
+  user-select: none;
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::before {
+  content: '▶';
+  display: inline-block;
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+  color: #613dc1;
+}
+
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+summary:hover {
+  background: #f0f0f0;
+  color: #613dc1;
+}
+
+details[open] summary {
+  background: #613dc1;
+  color: white;
+  margin-bottom: 15px;
+}
+
+details[open] summary::before {
+  color: white;
+}
+
+details[open] summary:hover {
+  background: #4a2d99;
+}
+
+/* Details 내부 컨텐츠 */
+details > *:not(summary) {
+  margin-top: 15px;
+}
+
 /* 모바일에서는 사이드바 완전히 숨김 */
 @media (max-width: 768px) {
   .page-container {
@@ -459,5 +533,16 @@ article li {
   /* 모바일에서 사이드바 완전히 숨김 */
   .sidebar {
     display: none !important;
+  }
+
+  /* 모바일에서 details 스타일 조정 */
+  details {
+    padding: 12px;
+  }
+
+  summary {
+    font-size: 16px;
+    padding: 8px;
+    margin: -12px -12px 0 -12px;
   }
 }

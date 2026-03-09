@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>더 개발자 인터뷰 가이드 - 코딩 테스트 (4) | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="http://localhost:1313/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="http://localhost:1313/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">더 개발자 인터뷰 가이드 - 코딩 테스트 (4)</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/03/14</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B8%B0%ED%83%80">기타</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%BB%A4%EB%A6%AC%EC%96%B4">커리어</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="코딩-인터뷰-파트-소개">코딩 인터뷰 파트 소개</h3>
+<hr>
+<p><strong>코딩 인터뷰 주요 목적</strong></p>
+<ul>
+<li>
+<p>지원자가 선택한 프로그래밍 언어를 얼마나 잘 사용하는가?</p>
+</li>
+<li>
+<p>업무에 필요한 학습 능력 및 적응력을 갖추고 있는가?</p>
+</li>
+<li>
+<p>문제 분석 및 해결 능력을 가지고 있는가?</p>
+</li>
+<li>
+<p>논리적으로 생각하고 그것을 코드로 옮길 수 있는가?</p>
+</li>
+<li>
+<p>협업에 필요한 의사소통 능력을 갖추고 있는가?</p>
+</li>
+</ul>
+<blockquote>
+<p>코딩 테스트는 문제를 푸는 과정 전반을 보는 것이다. 지원자가 문제가 주어졌을 때 문제를 바로 푸는 것은 안좋은 신호이다. 문제를 먼저 정의하고 제약사항이 없는지 먼제 확인하는 절차를 거쳐야 한다.</p>
+</blockquote>
+<ul>
+<li>
+<p>타당한 절차를 거치는지.</p>
+</li>
+<li>
+<p>실제 업무를 주어질 때도, 바로 코딩을 하는 것이 아니라, 문맥 및 상황 그리고 제약조건은 없는지를 고려 해야 한다.</p>
+</li>
+<li>
+<p>코딩테스트 하나의 작은 업무라고 생각을 하면서 접근해야한다.</p>
+</li>
+<li>
+<p>면접관과 지원자가 코딩 테스트 문제를 같이 푼다고 생각을 하고 또한 회사일을 한다고 생각하고 협업을 하고 있다고 생각을 하면서 풀어야한다.</p>
+</li>
+<li>
+<p>면접관이 힌트를 주었을 때는 반응을 해야한다. 내가 풀고 있는 문제와 어떠한 연관이 있는지..</p>
+</li>
+<li>
+<p>만약 면접관의 힌트를 무시한다면 안좋은 신호이다, 문제를 풀도고 떨어질 수 있다. 협업이라는 자세가 중요한데, 피드백을 받지 않는 것은 협업을 할 때 좋지 않은 자세이다.</p>
+</li>
+</ul>
+<h3 id="코딩-인터뷰-프레임워크">코딩 인터뷰 프레임워크</h3>
+<hr>
+<blockquote>
+<p>문제를 푸는 것 만이 목적이 아니라, 문제를 동료와 같이 해결하는 과정이 중요하다.</p>
+</blockquote>
+<ul>
+<li>
+<p>다만, 여기서 문제를 풀어나가는 주체가 &ldquo;지원자&rdquo;.</p>
+</li>
+<li>
+<p>&ldquo;면접관&quot;을 동료로 생각하고 같이 문제를 풀어나가야 한다.</p>
+</li>
+</ul>
+<p><strong>문제 풀이 프레임워크</strong></p>
+<ol>
+<li>
+<p>문제를 명확히 이해했는지 확인한다.</p>
+</li>
+<li>
+<p>가정하고 있거나, 가정할 수 있는 것들을 확인한다.</p>
+</li>
+<li>
+<p>실제 예를 들어가며 다시 확인한다. (나중에 테스트 케이스로 활용할 수 있다.)</p>
+</li>
+<li>
+<p>문제 해결책을 고민한다.</p>
+</li>
+<li>
+<p>해결책을 설명하고 해당 시간과 공간 알고리즘 복잡도를 설명한다.</p>
+</li>
+<li>
+<p>코드를 작성한다.</p>
+</li>
+<li>
+<p>앞서 예시로 사용했던 입력값을 케이스로 삼아 코드를 테스트한다.</p>
+</li>
+</ol>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.inflearn.com/course/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0/dashboard">더 개발자, 인터뷰 가이드</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

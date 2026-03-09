@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>데이터베이스 이터레이터, 관계형 연산 그리고 조인 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="http://localhost:1313/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="http://localhost:1313/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">데이터베이스 이터레이터, 관계형 연산 그리고 조인</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/01/19</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">데이터베이스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="이터레이터-관계형-연산-그리고-조인">이터레이터, 관계형 연산, 그리고 조인</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/27h3lgp5evi0a3n/Screen%20Shot%202022-01-19%20at%2020.59.45.png" alt=""></p>
+<ul>
+<li>
+<p>쿼리는 내부적으로 관계형 연산으로 변하게 되며 이것은 논리적 쿼리 실행 계획으로 나타나고, 옵티마이저에 의해서 물리적 쿼리 실행 계획으로 변해서 쿼리가 실제로 실행되게 된다.</p>
+</li>
+<li>
+<p>옵티마이저가 쿼리 실행자를 선택해서 실제 쿼리를 실행하게 된다. 쿼리 실행자는 이터레이터 인터페이스를 구현하여 실제 인스턴스로 존재한다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/2ykmebpg75zyt9t/Screen%20Shot%202022-01-19%20at%2021.04.49.png" alt=""></p>
+<ul>
+<li>
+<p>이터레이터 인터페이스는 위와 같이 구성된다. <code>setup()</code> 메서드는 데이터 그래프를 그릴때 사용되며, 자식 그래프 노드를 포함해서 그린다.</p>
+</li>
+<li>
+<p><code>init()</code>은 이터레이터를 실행하기 위해서 필요한 것을 생성하는 단계다.  <code>next()</code>는 이터레이터로부터 하나의 튜플을 반환한다. <code>close()</code>는 이터레이터를 종료하는데 사용된다.</p>
+</li>
+<li>
+<p>이터레이터는 캡슐화 되어 있어서 실제 구현이 무엇인지 상관없이 동작할 수 있다.</p>
+</li>
+<li>
+<p>이터레이터는 내부적으로 상태를 가지고 유지할 수 도 있다. 예를 들어서, 해시 테이블이나, 실행중인 양, 그리고 큰 정렬된 파일과 같은</p>
+</li>
+</ul>
+<h3 id="select-쿼리">SELECT 쿼리</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/t3z4bdzumf07ekf/Screen%20Shot%202022-01-19%20at%2021.13.17.png" alt=""></p>
+<ul>
+<li>처음에 초기화를 하여, 자식 그래프를 불러온 다음에, <code>next()</code>를 통해서 모두 순회함을 알 수 있다.</li>
+</ul>
+<h3 id="힙-스캔">힙 스캔</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/ayt1af2mwz6c8xt/Screen%20Shot%202022-01-19%20at%2021.17.26.png" alt=""></p>
+<ul>
+<li>
+<p>우선 초기화 단계에서 첫 번째 페이지로부터 첫 번째 슬롯을 읽는다. 그리고 순회하는 단계에서, 현재 페이지가 NULL 이면 바로 종료하고 NULL이 아니라면 현재 슬롯을 페이지의 다음으로 얻어온다.</p>
+</li>
+<li>
+<p>현재 슬롯이 NULL 이면 다음 페이지로 넘어가고 다음 페이지가 NULL이 아니라면 슬롯을 현재 페이지의 첫 번째 슬롯으로 변경한다.</p>
+</li>
+<li>
+<p>그리고 마지막으로 힙 스캔과 관련된 할당된 자원들을 반환한다.</p>
+</li>
+<li>
+<p>힙 스캔은 자식들이 없기 때문에 초기화 하거나, 다음을 찾는 연산을 재귀적으로 하지 않는다.</p>
+</li>
+</ul>
+<h3 id="정렬-2-패스">정렬 (2 패스)</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/r7a6bmqz1u075md/Screen%20Shot%202022-01-19%20at%2021.24.06.png" alt=""></p>
+<ul>
+<li>
+<p><code>init()</code>으로 자식들을 모두 <code>init()</code> 한다. 그리고 반복적으로 <code>child.next()</code>를 순회하여 디스크에서 정렬을 시도한다.</p>
+</li>
+<li>
+<p>정렬된 파일이 버퍼에 로드된다. 이것이 1 패쓰이다. 그리고 나서, 버퍼들 중에 가장 적은 튜플을 선택해서 병합한다.</p>
+</li>
+</ul>
+<h3 id="정렬된-값이-들어올-때-그룹바이-연산">정렬된 값이 들어올 때 그룹바이 연산</h3>
+<hr>
+<p><img src="https://dl.dropbox.com/s/8s84prns8wbxdrz/Screen%20Shot%202022-01-19%20at%2021.33.20.png" alt=""></p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<ul>
+<li><a href="https://www.youtube.com/playlist?list=PLzzVuDSjP25RQb_VhEBFWFiB7oS9APM7h">Iterators and Joins (Lecture 11)</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

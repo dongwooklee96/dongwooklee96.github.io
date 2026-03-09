@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>ITERATIVE 서버 모델 예제 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="http://localhost:1313/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="http://localhost:1313/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">ITERATIVE 서버 모델 예제</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/08/05</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="iterative-서버-모델">Iterative 서버 모델</h3>
+<hr>
+<ul>
+<li>
+<p>우리가 흔이 아는 게임 서버와 파일 서버와 같은 서버 프로그램은 동시에 여러 클라이언트에게 서비스를 제공한다. 이러한 서버 모델을 <code>Concurrent(동시)</code> 서버 모델이라고 한다.</p>
+</li>
+<li>
+<p>동시 서버 모델은 나중에 다루기로 하고, 여기서는 <code>Concurrent</code> 서버 모델처럼 여러 클라이언트를 처리하지는 못하지만 순차적으로 여러 클라이언트에게 서비스를 제공할 수 있는 <code>Iterative(반복)</code> 서버 모델을 작성할 것이다.</p>
+</li>
+</ul>
+<p><img src="https://dl.dropbox.com/s/tif844xawop3pnv/download.png" alt=""></p>
+<ul>
+<li>그림에서 보이는 상태 다이어그램에서, <code>accept()</code> ~ <code>close()</code>를 반복하여 클라이언트의 요청을 처리하는 것이다.</li>
+</ul>
+<p><strong>TCP 서버 프로그램</strong></p>
+<ul>
+<li>
+<p>가장 기본이 되는 에코 클라이언트 / 에코 서버 프로그램을 작성해볼 예정이다.</p>
+</li>
+<li>
+<p>에코 서버는 에코 클라이언트가 전송한 문자열을 그대로 클라이언트에게 전송하는 프로그램이다. 에코 클라이언트는 사용자에게 입력받은 문자열을 에코 서버에게 전달하는 프로그램이다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;string.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;unistd.h&gt;
+
+void error_proc();
+
+int main(int argc, char *argv[]) {
+  int server_sd, client_sd;
+  struct sockaddr_in server_addr, client_addr;
+  int client_addr_len, read_len, str_len;
+  char read_buff[BUFSIZ];
+
+  if (argc != 2) {
+    printf(&#34;Usage: %s [port] \n&#34;, argv[0]);
+    exit(1);
+  }
+  printf(&#34;server start...\n&#34;);
+  // 듣기 소켓으로 사용할 소켓을 생성한다.
+  server_sd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+  if (server_sd == -1) error_proc();
+
+  // 소켓에 설정할 주소 정보를 작성한다.
+  memset(&amp;server_addr, 0, sizeof(server_addr));
+  server_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+  server_addr.sin_family = AF_INET;
+  server_addr.sin_port = htons(atoi(argv[1]));
+
+  // 작성한 주소 정보를 소켓에 생성한다.
+  if (bind(server_sd, (struct sockaddr *) &amp;server_addr, sizeof(server_addr)) == -1) error_proc();
+  // 소켓을 듣기 소켓으로 만들어서, 클라이언트의 요청을 받을 준비를 한다.
+  if (listen(server_sd, 2) &lt; 0) error_proc();
+
+  client_addr_len = sizeof(client_addr);
+
+  while (1) {
+    // 대기열에서 ESTABLISHED 상태인 TCP 연결을 가져온다.
+    client_sd = accept(server_sd, (struct sockaddr*) &amp;client_addr, &amp;client_addr_len);
+    if (client_sd == -1) error_proc();
+    printf(&#34;client %s: %d is connected...\n&#34;, inet_ntoa(client_addr.sin_addr), ntohs(client_addr.sin_port));
+
+    while(1) {
+      // 클라이언트에서 전송한 문자열을 가져온다.
+      read_len = read(client_sd, read_buff, sizeof(read_buff) - 1);
+      if (read_len == 0) break;
+      read_buff[read_len] = &#39;\0&#39;;
+      printf(&#34;client (%d): %s\n&#34;, ntohs(client_addr.sin_port), read_buff);
+      // 클라이언트에서 전송한 문자열을 다시 클라이언트에게 전송한다.
+      write(client_sd, read_buff, strlen(read_buff));
+    }
+  }
+  close(server_sd);
+  return 0;
+}
+
+void error_proc() {
+  fprintf(stderr, &#34;error: %s\n&#34;, strerror(errno));
+  exit(1);
+}
+</code></pre><p><strong>클라이언트 프로그램</strong></p>
+<ul>
+<li>시작 인자로 서버의 IP 주소 및 포트 번호를 입력 받는다.</li>
+<li>사용자에게 입력 받은 문자열을 서버 프로그램으로 전송한다.</li>
+<li>서버의 응답을 화면에 출력한다.</li>
+<li>사용자에게 <code>END</code> 문자열을 입력 받으면 그 문자열 전송을 마지막으로 소켓을 종료한다.</li>
+<li><code>END</code> 문자열 전송 이후 프로그램을 종료한다.</li>
+</ul>
+<pre tabindex="0"><code>#include &lt;arpa/inet.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;unistd.h&gt;
+
+int main(int argc, char *argv[]) {
+  int client_sd;
+  // 서버의 주소 정보를 struct sockaddr_in 구조체에 저장한다.
+  struct sockaddr_in client_addr;
+  int client_addr_len, read_len, receive_byte, max_buff;
+  char write_buff[BUFSIZ];
+  char read_buff[BUFSIZ];
+
+  if (argc != 3) {
+    printf(&#34;usage: %s [IP Address] [Port]\n&#34;, argv[0]);
+  }
+  // 접속을 시도할 소켓을 생성한다.
+  client_sd = socket(AF_INET, SOCK_STREAM, 0);
+  if (client_sd == -1) error_proc();
+  printf(&#34;==== client program ====\n&#34;);
+
+  memset(&amp;client_addr, 0, sizeof(client_addr));
+  client_addr.sin_family = AF_INET;
+  client_addr.sin_addr.s_addr = inet_addr(argv[1]);
+  client_addr.sin_port = htons(atoi(argv[2]));
+
+  // 서버에 연결을 시도한다.
+  if (connect(client_sd, (struct sockaddr *)&amp;client_addr, sizeof(client_addr)) == -1) {
+    close(client_sd);
+    error_proc();
+  }
+
+  // 연결된 이후 입출력 작업을 시도한다.
+  while(1) {
+    fgets(write_buff, BUFSIZ - 1, stdin);
+    read_len = strlen(write_buff);
+    if (read_len &lt; 2) continue;
+    receive_byte = 0;
+    max_buff = BUFSIZ - 1;
+    // 서버로부터 데이터를 받을 때 이미 받을 데이터의 크기를 알고 있기 때문에, &gt;그 만큼의 데이터를 받을 때까지 루프를 실행한다.
+    do {
+      receive_byte += read(client_sd, read_buff, max_buff);
+      max_buff -= receive_byte;
+    } while (receive_byte &lt; (read_len -1));
+
+  read_buff[receive_byte] = &#39;\0&#39;;
+    printf(&#34;server: %s\n&#34;, read_buff);
+    write_buff[read_len -1] = &#39;\0&#39;;
+    if (!strcmp(write_buff, &#34;END&#34;)) break;
+  }
+
+  printf(&#34;END^^\n&#34;);
+  close(client_sd);
+  return 0;
+}
+
+void error_proc() {
+  fprintf(stderr, &#34;error: %s\n&#34;, strerror(errno));
+  exit(errno);
+}
+</code></pre><h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=47823267">네트워크 프로그래밍</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>GSOC 2022 1주차 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="http://localhost:1313/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="http://localhost:1313/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">GSOC 2022 1주차</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/05/23</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B8%B0%ED%83%80">기타</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <ul>
+<li>
+<p>구글 GSOC 발표가 나고 나서, 여영부영 시간을 보낸지 벌써 <code>3</code>일이나 지났다. 커뮤니티 본딩 기간이라서 그런지는 몰라도, 아직까지는 멘토로부터 어떤 것을 하자는 연락이 없다.</p>
+</li>
+<li>
+<p>그래도 멘토로부터 어떤 것을 하라는 연락을 받지 못했더라도 지금부터 천천히 준비를 해야지 본격적으로 코딩을 시작했을 때 당황하지도 않고 시간을 낭비하지 않은채 시작을 할 수 있을 것 같다. 항상 경험했듯이 계획대로 일이 진행되지 않는다.</p>
+</li>
+<li>
+<p>하지만 시간을 효율적으로 사용하려면, 어떻게 분석을 하고 정리를 할지 미리 생각을 해놔야 할 것 같다.</p>
+</li>
+<li>
+<p>어떻게 분석할지에 대해서 미리 계획을 세우고 계획대로, 천천히 진행을 해야할 것 같다. 그리고 2주차가 끝남과 동시에, 다음 모듈을 테스트 하기 전에 그 전주부터 테스트 코드를 작성하면서, 문서도 읽어봐야 할 것 같다.</p>
+</li>
+<li>
+<p>그래야 다음 모듈에 대한 테스트를 작성할 때 빠르게 작성할 수 있을 것이다. 그리고 문서를 작성할 때 구글 독스에 적어야 할지 아니면, 내 기술 블로그에 적어야할지 고민인데, 일단은 기술 블로그에 적기로 했다. 아무래도 접근성이 훨씬 용이하기 때문이다.</p>
+</li>
+</ul>
+<h3 id="계획">계획</h3>
+<hr>
+<ul>
+<li>
+<p>내가 계획한 대로라면 1주차에 <code>pg_dump</code> 모듈과 <code>psql</code> 모듈에 대해서 테스트 코드를 추가해야한다.</p>
+</li>
+<li>
+<p>따라서 아래 테스트 모듈에 나온대로, 테스트 코드를 작성하기 위한 노력을 시작해야겠다.</p>
+</li>
+</ul>
+<h3 id="테스트-프로세스">테스트 프로세스</h3>
+<pre tabindex="0"><code>1. 테스트할 모듈의 문서를 읽는다.
+2. 문서에 나온 기능들을 한번 사용해본다.
+3. 테스트 코드를 확인하고, 빠진 기능이 없는지 확인을 한다.
+    3.1 빠진 기능이 있다면 빠진 기능에 대한 테스트를 작성한다.
+4. 테스트 커버리지를 확인하고 테스트 커버리지를 만족할 수 있는 테스트를 작성한다.
+5. 문서에 보충할 부분이 있으면 추가를 한다. (예제)
+6. `pgsql-bugs`에 해당 모듈과 관련된 버그가 있는지를 확인하고 해당 부분을 테스트 하는 테스트 코드를 작성한다.
+</code></pre><h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

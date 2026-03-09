@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>GSOC 2022 2주차 회의때 논의 할 것 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="http://localhost:1313/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="http://localhost:1313/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">GSOC 2022 2주차 회의때 논의 할 것</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2022/06/06</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4">오픈소스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <ul>
+<li>
+<p><code>GSOC 2022</code> 이 정식적으로 시작되는 날은 아니지만, 일단 테스트 코드를 작성하는 작업을 하고 있다.</p>
+</li>
+<li>
+<p>매주 멘토들과 같이 회의를 하는데, 처음 회의때는 준비 없이 들어가서 당황하기도 했고 말만 더듬다가 들어갔다. 따라서 다음 회의때는 궁금한 점이나 물어볼 것들을 미리 준비를 해야겠다는 생각을 했다.</p>
+</li>
+</ul>
+<h3 id="지난주에-작업-한-것">지난주에 작업 한 것</h3>
+<hr>
+<ul>
+<li>지난주에 테스트 코드를 작성한 모듈은 다음과 같다. <code>contrib/auth_delay, contrib/pg_buffercache</code></li>
+</ul>
+<h3 id="이번주에-작업-할-것">이번주에 작업 할 것</h3>
+<hr>
+<ul>
+<li>
+<p><code>commitfest</code> 및 메일링 리스트에 내가 작업한 코드를 올리기.</p>
+</li>
+<li>
+<p>테스크 코드가 전혀 없는  <code>contrib/old_snapshot, contrib/tcn, contrib/pg_rowlocks</code> 모듈에 대해서 테스트를 작성하기</p>
+</li>
+</ul>
+<h3 id="궁금한-점">궁금한 점</h3>
+<hr>
+<ul>
+<li>
+<ol>
+<li>테스트를 작성할 떄 예를 들어서 상황에 따라서 결과가 달라지는 경우 어떤 코드를 작성하는게 좋을까요.</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>현재는 익스텐션과 데이터베이스를 사용하는데 필요한 도구 (<code>psql, pg_dump, ... ect</code>)에 대해서 테스트를 작성하는 방법에 대해서 배웠다. 하지만 만약에 <code>POSTGRES</code> 코어에 대해서 테스트 코드를 작성하고 싶으면 어떻게 해야하는지 궁금하다.</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>테스트 코드의 파일명을 작성하는데 규칙이 있는지 궁금하다. 또는 <code>TAP</code> 테스트를 작성하는데 노드의 이름을 정할때가 궁금하다.</li>
+</ol>
+</li>
+<li>
+<ol start="4">
+<li>현재 작성한 테스트 코드에서 보완할 점이 있나요?</li>
+</ol>
+</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

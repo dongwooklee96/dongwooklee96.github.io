@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>리눅스 시스템 네트워크 프로그래밍 (2) - 파일 처리 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="http://localhost:1313/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="http://localhost:1313/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">리눅스 시스템 네트워크 프로그래밍 (2) - 파일 처리</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/07/20</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템 프로그래밍</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="파일-처리">파일 처리</h3>
+<hr>
+<p>유닉스 계열에서는 보통 두 가지의 파일 처리 방식을 제공한다.</p>
+<pre tabindex="0"><code>1. 저수준 파일 처리
+2. 고수준 파일 처리
+</code></pre><ul>
+<li>가장 큰 차이점으로 저수준 파일 처리는 유닉스 계열에서만 지원되고, 고수준 파일 처리는 C언어 표준이므로 C언어가 포팅된 모든 플랫폼에서 지원이 된다는 사실이다.</li>
+</ul>
+<h3 id="11-저수준-및-고수준-파일-처리">1.1 저수준 및 고수준 파일 처리</h3>
+<hr>
+<ul>
+<li>
+<p>저수준 파일 처리는 <code>파일 기술자</code> 라는 번호를 이용하여 입출력하는 방식으로 소켓이나 디바이스들은 핸들링 할 때 사용하는 인터페이스는 모두 저수준 파일 처리와 같은 방식을 이용한다.</p>
+</li>
+<li>
+<p>저수준 파일 처리 처럼 기술자를 사용하는 방식은 비직관적이고, 원시적인 형태를 지니고 있지만 유닉스 계열에서는 보편적으로 사용하므로 꼭 알아두어야 한다.</p>
+</li>
+</ul>
+<pre tabindex="0"><code>int fd; /* 파일 기술자 */
+// 저수준 파일 처리의 파일 열기 (없는 경우에 생성)
+fd = open(&#34;lsp.txt&#34;, O_CREAT | O_RDWR | O_EXCL, 0644);
+
+int sem_fd; /* 세마포어 기술자 */
+// POSIX 공유 메모리 열기 (없는 경우에 생성)
+shm_fd = shm_fd(&#34;pshm_lsp&#34;, O_CREAT | O_RDWR | O_EXCL, 0644);
+</code></pre><ul>
+<li>이에 비해서 고수준 파일 처리는 <code>FILE</code> 구조체를 사용하여 입력하는 방식이다.</li>
+<li>C언어의 표준이며, 추상화된 <code>FILE</code> 구조체를 사용하기 때문에, 유닉스, 리눅스가 아닌 다른 운영체제에도 모두 포팅이 되어 있다.</li>
+</ul>
+<p>아래는 저수준 파일 처리와 고수준 파일 처리의 차이점이다.</p>
+<p><strong>저수준 파일 처리와 고수준 파일 처리의 차이점</strong></p>
+<pre tabindex="0"><code>저수준 파일 처리 : 
+- 비직관적인 함수 형태
+- 유닉스 및 호환 계열에서만 사용가능
+- pread, pwrite를 통해 원자적 실행을 보장한다.
+고수준 파일 처리 :
+- 직관적이고 사용이 편리한 함수 형태이다.
+- C 언어를 지원하는 모든 플랫폼에서 사용이 가능하다.
+- 라이브러리 레벨의 버퍼링이 있음
+</code></pre><ul>
+<li>먼저 저수준 파일 처리의 특징에서 원자적 실행 부분을 눈여겨 보자.</li>
+<li>원자란 특징 (기능)을 잃지 않으면서, 더는 나눌 수 없는 작은 크기란 의미이다.</li>
+<li>같은 의미로 프로그래밍에서 원자적 실행이란 작동을 보장하면서, 더 나눌 수 없이 한번에 실행되는 코드를 의미한다.</li>
+<li>이는 스레드와 비동기 프로세싱과 연관되어 있다.</li>
+</ul>
+<p><strong>멀티스레드가 연결된 하나의 파일에 출력하는 경우</strong></p>
+<p><img src="https://user-images.githubusercontent.com/14002238/126190376-7d5c80db-26ee-4425-9c0b-8caace7ee9a4.png" alt="img"></p>
+<ul>
+<li>
+<p>다음은 메인 스레드에서 3개의 스레드를 생성하여 하나의 파일에 동시에 쓰기를 실행하는 경우이다.</p>
+</li>
+<li>
+<p>메인스레드에서는 &lsquo;M&rsquo; 각 스레드에서는 순서대로 하나씩 맡아서 &lsquo;A&rsquo;, &lsquo;B&rsquo;, &lsquo;C&rsquo;를 기록한다고 가정하면, 실제 파일에는 <code>M..MA...AB...BC...C</code>나 <code>M...MC..CA..AB..B</code> 처럼 기록될 것이라고 생각할 것이다.</p>
+</li>
+<li>
+<p>즉 M, A, B, C의 각각의 순서는 조금씩 바뀌겠지만 섞이지 않으리라고 상상하는 것이 일반적이지만, 완벽하게 섞이지 않는다고 보장할 수 없다.</p>
+</li>
+<li>
+<p>현대의 운영체제는 시분할 기법을 이용해서 여러 작업을 거의 동시에 실행되는 것 처럼 작동하기 때문에 실제 기록을 하는 부분이 아주 짧은 시간에 거의 동시에 실행되고 스케줄링에 의해서 <code>MAABMCCCCAABBBMM</code> 처럼 섞여버리는 경우가 아주 가끔 생길 수 있다는 점이다.</p>
+</li>
+<li>
+<p>더군다나 확률적으로 함수가 실행되는 시간이 길어지고 동시에 작업하는 스레드의 개수가 많아질 수록 중간에 다른 코드의 실행이 끼어들 가능성은 더욱 커지므로 대형 시스템이거나, 과부하일 때 더욱 큰 문제가 된다.</p>
+</li>
+<li>
+<p>그렇다면 파일 출력에 원자적 실행이 가능하게 하려면 어떻게 해야할까? 파일에 입출력을 하는 경우라면 <code>pread</code>, <code>pwrite</code>를 사용해야 한다. 이들은 파일의 커서 위치를 사용하지 않고 절대적인 오프셋 주소를 사용하기 때문에 스레드에서 사용해도 안전해진다.</p>
+</li>
+<li>
+<p>만일 파일이 아닌 파이프에 입출력을 할 때는 <code>read</code>, <code>write</code>를 <code>PIPE_BUF</code> 이내의 길이로 입출력하는 경우에 원자성을 보장해준다.</p>
+</li>
+</ul>
+<p><strong>파일 출력이 섞이지 않게 하려면 어떻게 해야할까?</strong></p>
+<p>복잡한 멀티 스레드를 적용한 네트워크 서버에서 로그 파일을 기록하는데 있어서 로그 메시지가 서로 섞이지 않게 하려면 어떻게 해야하는가?</p>
+<ul>
+<li>
+<p>출력 함수의 원자적 실행을 보장하는 기능을 사용하는 방식이다. 이 방법은 성능을 해치지도 않고 매우 편리하다는 장점이 있다. 다만, 저수준의 파일 처리를 사용해야 한다는 단점이 생긴다.</p>
+</li>
+<li>
+<p>두 번째는 락을 이용해서 출력 과정을 보호하는 방법이다. 이 방법은 간단하지만, 성능을 해칠 수 있기 때문에 빈번한 출력에서는 사용되지 않는다.</p>
+</li>
+<li>
+<p>세 번째는 직렬화를 이용하여 전문적으로 출력을 도맡아서 하는 프로세스나 스레드를 두는 방법이다. 이 방법은 설계 과정이 복잡하고 무거워질 수 있지만, 신뢰성이 높고 응답이 좋은 장점이 있다.</p>
+</li>
+<li>
+<p>이외에 메모리 맵 파일을 이용하여 메모리에 쓰고 파일로 동기화 하는 방법도 있다.</p>
+</li>
+</ul>
+<h3 id="저수준-파일-처리의-사용">저수준 파일 처리의 사용</h3>
+<hr>
+<p>다음은 예제 코드를 작성하면서, 저수준 파일 처리에 대해서 알아볼 것이다.</p>
+<pre tabindex="0"><code>#include &lt;unistd.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;errno.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+  int fd;
+  char buf_msg[64];
+  printf(&#34;low level file handle\n&#34;);
+  if ((fd = open(&#34;fd_test.log&#34;, O_CREAT | O_WRONLY, 0644)) == -1) {
+    fprintf(stderr, &#34;Fail: open: %d(%s)\n&#34;, errno, strerror(errno));
+    exit(EXIT_FAILURE);
+  }
+  dprintf(fd, &#34;PID[%d] low level file handle\n&#34;, getpid());
+  strcpy(buf_msg, &#34;write: test message\n&#34;);
+  write(fd, buf_msg, strlen(buf_msg));
+  close(fd);
+  return EXIT_SUCCESS;
+}
+</code></pre><ul>
+<li><code>open</code> 함수는 저수준 파일의 핵심인 파일 기술자를 얻는 함수이다.</li>
+<li>여기서, <code>open</code> 함수는 <code>O_CREAT</code>와, <code>OWRONLY</code> 옵션 플래그를 사용했기 때문에, 파일이 없다면, 생성할 것이며, 쓰기 전용으로 열릴 것이다.</li>
+<li><code>O_APPEND</code>를 사용하지 않았기 때문에 파일이 존재하는 경우라면 첫 부분부터 덮어쓰기 된다.</li>
+<li>만약 예제의 <code>fd_test.log</code> 파일에 이미 100 바이트의 데이터가 들어있게 된다면, 앞부분의 53바이트만 덮어 쓰이고, 뒤의 47 바이트는 그대로 남게 된다.</li>
+<li>그러나 원래 파일의 내용을 모두 지우고, 빈 파일로 열고자 한다면 <code>O_TRUNC</code> 플래그를 더해서 호출하거나 <code>truncate</code>나 <code>ftruncate</code>를 사용한다.</li>
+</ul>
+<h3 id="동기화된-io로-열기">동기화된 IO로 열기</h3>
+<hr>
+<ul>
+<li>저수준 파일 처리에서는 동기화된 I/O를 설정할 수 있다.</li>
+<li>이 기능을 알기 위해서는 운영체제에서 I/O 처리와 레이턴시에 대한 개념을 알아야 한다.</li>
+</ul>
+<p><strong>레이턴시란&hellip;</strong></p>
+<pre tabindex="0"><code>현대의 운영체제는 상대적으로 느린 디바이스들(디스크, 네트워크)에 대해서는
+좀 더 빠른 디바이스 (메모리)에 캐시하고 나중에 좀 더 한가할 때 실제적인 기록을
+하여 동기화를 하게 된다. 이렇게 하면 느린 디바이스에 접근하는 작업보다 빠르고,
+우선 순위가 높은 작업부터 처리할 수 있게 되므로 응답성이 좋아진다.
+그러나 몇몇 경우는 실제 디바이스에 즉각적으로 기록된 내용이 반영되어야만 하는 경우가 있는데, 이를 위해서 동기화 기능이 필요한 것이다.
+</code></pre><ul>
+<li>동기화된 I/O를 사용하면 운영체제는 캐시된 데이터와 느린 디바이스를 최대한
+동일하게 유지하려고 노력하게 된다. 하지만, 응답성이 떨어지고 시스템 성능은 떨어질 가능성이 높아지는 단점이 있다.</li>
+</ul>
+<h3 id="넌블로킹과-비동기적-io">넌블로킹과 비동기적 I/O</h3>
+<hr>
+<ul>
+<li>저수준 입출력을 사용하는 경우에는 넌블록킹과 비동기적 입출력을 사용할 수 있다.</li>
+<li>이 중에서 넌블록킹은 오히려 소켓 네트워킹에서 광범위하게 사용되므로 여기서 다루지 않고 추후에 소켓 프로그래밍에서 다룰 것이다.</li>
+<li>넌블록킹의 관련 기법은 소켓에 입출력하는 것과 일반 파일에 입출력하는 것이 크게 다르지 않다.</li>
+<li>비동기적 I/O는 리얼타임 확장 표준에 포함되는 내용으로서 AIO(Asynchronous I/O)라고 부른다.</li>
+</ul>
+<h3 id="close-on-exec로-열기"><code>close-on-exec</code>로 열기</h3>
+<hr>
+<ul>
+<li><code>open</code>을 호출할 때, <code>O_CLOEXEC</code> 플래그를 설정하면, <code>close-on-exec</code>을 설정하게 된다.</li>
+<li><code>exec</code> 계열의 함수 때문에 다른 프로세스 이미지로 교체되면, 자동으로 해당 파일 기술자를 닫도록 할 수 있다.</li>
+</ul>
+<h3 id="파일-닫기">파일 닫기</h3>
+<hr>
+<ul>
+<li>파일을 쓰고 나면 항상 닫는 것을 잊지 말아야한다.</li>
+<li>힙 메모리를 사용하고 나면 <code>free</code> 해주는 것처럼 파일도 닫지 않으면 자원 누수가 발생한다.</li>
+<li>물론 특정 파일에 계속해서 입출력이 발생할 때 열고(<code>open</code>), 닫는(<code>close</code>) 오버헤드도 무시할 수 없으므로, 열어두고 쓰는 것이 더 효율적이다. 왜냐하면 파일을 열고 닫는 작업은 파일에 관련된 정보를 얻어오고, 버퍼를 할당하는 과정이 숨겨져 있기 때문이다.</li>
+<li>하지만 한 두번 쓰는 파일이라면 쓰고 난 뒤에 닫아주는 것이 좋다. 왜냐하면, 특별한 경우를 제외하고 모든 프로세스에는 최대 열 수 있는 파일의 개수에 제한이 존재하기 때문에 파일을 닫지 않으면 나중에 더는 파일을 열 수 없는 상황이 발생할 수 있다.</li>
+<li>여기서 열 수 있는 파일의 제한에는 소켓이나 파이프 같은 통신용 디바이스도 포함되므로 주의를 기울여야 한다.</li>
+<li>참고로 최대 파일 오픈 수(<code>max open files</code>)에 대한 설정은 <code>ulimit -n</code> 명령으로 확인할 수 있다.</li>
+</ul>
+<h3 id="파일-사용-패턴-조언">파일 사용 패턴 조언</h3>
+<hr>
+<p><code>POSIX</code>에서는 파일 사용 패턴 조언을 추가하였다. 이 기능은 열린 파일 기술자를 앞으로 순차적으로 읽을 것인지 아니면 랜덤하게 접근할 것인지 혹은 한번만 쓰고 다시는 쓰지 않을지를 알려주는 기능이다.</p>
+<pre tabindex="0"><code>int posix_fadvise(int fd, off_t offset, off_t len, int advice);
+</code></pre><ul>
+<li>
+<p>예를 들어 순차적으로 접근하겠다고 해두면 시스템은 현재 읽은 데이터의 다음 데이터를 프리패칭해서 미리 가져오도록 한다. 이를 통해서 최대한 레이턴시를 줄여주기 때문에 대용량 파일을 읽어들일 때 성능이 좋아진다.</p>
+</li>
+<li>
+<p>그러나 한 번만 읽고 사용하지 않는 파일이라고 시스템에 조언해둔다면 시스템은 해당 파일을 읽을 때, 사용한 메모리를 퇴출하도록 캐시 정책에 반영할 수 있다. 이는 좀 더 메모리를 효율적으로 사용가능하게 한다.</p>
+</li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

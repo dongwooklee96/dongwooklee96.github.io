@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>[알고리즘 문제 풀이] 게임 개발 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="http://localhost:1313/css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="http://localhost:1313/">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">[알고리즘 문제 풀이] 게임 개발</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2021/09/03</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="게임-개발">게임 개발</h3>
+<hr>
+<ul>
+<li>
+<p>현민이는 게임 캐릭터가 맵 안에서 움직이는 시스템을 개발 중이다. 캐틱터가 있는 장소는 1 X 1 크기의 정사각형으로 이루어진 N x M 크기의 직사각형으로, 각각의 칸은 육지 또는 바다이다.</p>
+</li>
+<li>
+<p>케릭터는 동서남북 중에 한 곳을 바라본다.</p>
+</li>
+<li>
+<p>맵의 각 칸은 (A, B)로 나타낼 수 있고, A는 북쪽으로부터 떨어진 칸의 개수이고, B는 서쪽으로부터 떨어진 칸의 개수이다.</p>
+</li>
+<li>
+<p>캐릭터는 상하 좌우로 움직일 수 있고, 바다로 되어 있는 공간에는 갈 수 없다. 캐릭터의 움직임을 설정하기 위해 정해 놓은 메뉴얼은 아래와 같다.</p>
+</li>
+</ul>
+<blockquote>
+<ol>
+<li>현재 위치에서 현재 방향을 기준으로 왼쪽 방향 (반 시계 방향으로 90도 회전한) 방향 부터 차례대로 갈 곳을 정한다.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>케릭터의 바로 왼쪽 방향에 아직 가보지 않은 칸이 존재한다면, 왼쪽 방향으로 회전한 다음 왼쪽으로 한 칸을 전진한다. 왼쪽 방향에 가보지 않은 칸이 없다면, 왼쪽 방향으로 회전만 수행하고 1단계로 돌아간다.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>만약 네 방향 모두 이미 가본 칸이거나 바다로 있는 칸인 경우에는, 바라보는 방향을 유지한 채로 한 칸 뒤로 가고 1단계로 돌아간다. 단 이때 바다의 칸이라 뒤로 갈 수 없는 경우에는 움직임을 멈춘다.</li>
+</ol>
+</blockquote>
+<ul>
+<li>
+<p>위의 과정을 반복적으로 수행하면서 캐릭터의 움직임에 이상이 있는지 테스트하려고 한다. 메뉴얼에 따라서 케릭터를 이동한 다음에 캐릭터가 방문한 칸의 수를 출력하는 프로그램을 만들어라.</p>
+</li>
+<li>
+<p>입력 조건 :</p>
+<ul>
+<li>첫째 줄의 맵의 새로 크기 N과 가로 크기 M을 공백으로 구분하여 입력한다. (N &gt;= 3, M &lt;= 50)</li>
+<li>둘째 줄에 게임 케릭터가 있는 칸의 좌표 (A, B)와 바라보는 방향 d가 각각 서로 공백으로 구분하여 주어진다. 방향 d의 값은 다음과 같다.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<ul>
+<li>0: 북쪽</li>
+<li>1: 동쪽</li>
+<li>2: 남쪽</li>
+<li>3: 서쪽</li>
+</ul>
+</blockquote>
+<ul>
+<li>셋째 줄부터 맵이 육지인지 바다인지 입력한다. N개의 줄에 맵의 상태가 북쪽부터 남쪽 순서대로, 각 줄의 데이터는 서쪽 부터 동쪽 순서대로 주어진다. 맵의 외곽은 항상 바다로 되어 있다.</li>
+</ul>
+<blockquote>
+<ul>
+<li>0: 육지</li>
+<li>1: 바다</li>
+</ul>
+</blockquote>
+<ul>
+<li>처음에 게임 캐릭터가 위치한 칸의 상태는 항상 육지이다.</li>
+</ul>
+<h4 id="입력-예시">입력 예시</h4>
+<pre tabindex="0"><code>4 4 # 4 x 4 맵 생성
+1 1 0 # (1, 1)에 북쪽(0)을 바라보고 서 있는 캐릭터
+1 1 1 1 # 첫 줄은 모두 바다
+1 0 0 1 # 둘째 줄은 바다/육지/육지/바다.
+1 1 0 1 # 셋째 줄은 바다/바다/육지/바다.
+1 1 1 1 # 넷째 줄은 모두 바다.
+</code></pre><h3 id="코드">코드</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python3" data-lang="python3"><span style="display:flex;"><span><span style="color:#cf222e">from</span> <span style="color:#24292e">typing</span> <span style="color:#cf222e">import</span> List
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">solution</span><span style="color:#1f2328">(</span>n<span style="color:#1f2328">:</span> <span style="color:#6639ba">int</span><span style="color:#1f2328">,</span> m<span style="color:#1f2328">:</span> <span style="color:#6639ba">int</span><span style="color:#1f2328">,</span> d<span style="color:#1f2328">:</span> List<span style="color:#1f2328">[</span>List<span style="color:#1f2328">[</span><span style="color:#6639ba">int</span><span style="color:#1f2328">]],</span> x<span style="color:#1f2328">:</span> <span style="color:#6639ba">int</span><span style="color:#1f2328">,</span> y<span style="color:#1f2328">:</span> <span style="color:#6639ba">int</span><span style="color:#1f2328">,</span> direction<span style="color:#1f2328">:</span> <span style="color:#6639ba">int</span><span style="color:#1f2328">,</span> maps<span style="color:#1f2328">:</span> List<span style="color:#1f2328">[</span>List<span style="color:#1f2328">[</span><span style="color:#6639ba">int</span><span style="color:#1f2328">]]):</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">def</span> <span style="color:#6639ba">turn_left</span><span style="color:#1f2328">():</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">nonlocal</span> direction
+</span></span><span style="display:flex;"><span>        direction <span style="color:#0550ae">-=</span> <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span> direction <span style="color:#0550ae">==</span> <span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            direction <span style="color:#0550ae">=</span> <span style="color:#0550ae">3</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    dx <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>    dy <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">-</span><span style="color:#0550ae">1</span><span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    count <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>    turn_time <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">while</span> <span style="color:#cf222e">True</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>        turn_left<span style="color:#1f2328">()</span>
+</span></span><span style="display:flex;"><span>        nx <span style="color:#0550ae">=</span> x <span style="color:#0550ae">+</span> dx<span style="color:#1f2328">[</span>direction<span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>        ny <span style="color:#0550ae">=</span> y <span style="color:#0550ae">+</span> dy<span style="color:#1f2328">[</span>direction<span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span> d<span style="color:#1f2328">[</span>nx<span style="color:#1f2328">][</span>ny<span style="color:#1f2328">]</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span> <span style="color:#0550ae">and</span> maps<span style="color:#1f2328">[</span>nx<span style="color:#1f2328">][</span>ny<span style="color:#1f2328">]</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            d<span style="color:#1f2328">[</span>nx<span style="color:#1f2328">][</span>ny<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>            x <span style="color:#0550ae">=</span> nx
+</span></span><span style="display:flex;"><span>            y <span style="color:#0550ae">=</span> ny
+</span></span><span style="display:flex;"><span>            count <span style="color:#0550ae">+=</span> <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>            turn_time <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">continue</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            turn_time <span style="color:#0550ae">+=</span> <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#cf222e">if</span> turn_time <span style="color:#0550ae">==</span> <span style="color:#0550ae">4</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>            nx <span style="color:#0550ae">=</span> x <span style="color:#0550ae">-</span> dx<span style="color:#1f2328">[</span>direction<span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>            ny <span style="color:#0550ae">=</span> y <span style="color:#0550ae">-</span> dy<span style="color:#1f2328">[</span>direction<span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">if</span> maps<span style="color:#1f2328">[</span>nx<span style="color:#1f2328">][</span>ny<span style="color:#1f2328">]</span> <span style="color:#0550ae">==</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                x<span style="color:#1f2328">,</span> y <span style="color:#0550ae">=</span> nx<span style="color:#1f2328">,</span> ny
+</span></span><span style="display:flex;"><span>            <span style="color:#cf222e">else</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#cf222e">break</span>
+</span></span><span style="display:flex;"><span>            turn_time <span style="color:#0550ae">=</span> <span style="color:#0550ae">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> count
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">if</span> <span style="color:#953800">__name__</span> <span style="color:#0550ae">==</span> <span style="color:#0a3069">&#34;__main__&#34;</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>    n<span style="color:#1f2328">,</span> m <span style="color:#0550ae">=</span> <span style="color:#6639ba">map</span><span style="color:#1f2328">(</span><span style="color:#6639ba">int</span><span style="color:#1f2328">,</span> <span style="color:#6639ba">input</span><span style="color:#1f2328">()</span><span style="color:#0550ae">.</span>split<span style="color:#1f2328">())</span>
+</span></span><span style="display:flex;"><span>    d <span style="color:#0550ae">=</span> <span style="color:#1f2328">[[</span><span style="color:#0550ae">0</span><span style="color:#1f2328">]</span> <span style="color:#0550ae">*</span> m <span style="color:#cf222e">for</span> _ <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span>n<span style="color:#1f2328">)]</span>
+</span></span><span style="display:flex;"><span>    x<span style="color:#1f2328">,</span> y<span style="color:#1f2328">,</span> direction <span style="color:#0550ae">=</span> <span style="color:#6639ba">map</span><span style="color:#1f2328">(</span><span style="color:#6639ba">int</span><span style="color:#1f2328">,</span> <span style="color:#6639ba">input</span><span style="color:#1f2328">()</span><span style="color:#0550ae">.</span>split<span style="color:#1f2328">())</span>
+</span></span><span style="display:flex;"><span>    d<span style="color:#1f2328">[</span>x<span style="color:#1f2328">][</span>y<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    maps <span style="color:#0550ae">=</span> <span style="color:#1f2328">[]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> _ <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span>n<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>        maps<span style="color:#0550ae">.</span>append<span style="color:#1f2328">(</span><span style="color:#6639ba">list</span><span style="color:#1f2328">(</span><span style="color:#6639ba">map</span><span style="color:#1f2328">(</span><span style="color:#6639ba">int</span><span style="color:#1f2328">,</span> <span style="color:#6639ba">input</span><span style="color:#1f2328">()</span><span style="color:#0550ae">.</span>split<span style="color:#1f2328">())))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span>solution<span style="color:#1f2328">(</span>n<span style="color:#1f2328">,</span> m<span style="color:#1f2328">,</span> d<span style="color:#1f2328">,</span> x<span style="color:#1f2328">,</span> y<span style="color:#1f2328">,</span> direction<span style="color:#1f2328">,</span> maps<span style="color:#1f2328">))</span>
+</span></span></code></pre></div><h3 id="개선할-점">개선할 점</h3>
+<hr>
+<ul>
+<li>이 문제는 풀다가 정답을 살짝 보았다. 이미 다녀갔던 좌표를 어떻게 구해야할지 감이 오지 않아서 풀지 못했는데 다음에 비슷한 문제를 만나면 내 힘으로 풀 수 있도록 해야겠다.</li>
+</ul>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li><a href="https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=247882118">이것이 취업을 위한 코딩테스트다, 나동빈, 한빛미디어</a></li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <a href="mailto:sh95119@gmail.com">Mail</a> | <a href="https://github.com/dongwooklee96">Github</a> | <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a> | <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>
