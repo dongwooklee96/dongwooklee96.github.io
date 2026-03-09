@@ -446,38 +446,28 @@ article li {
   text-decoration: underline;
 }
 
-/* Details/Summary 스타일 */
+/* Details/Summary 스타일 - 단순화 */
 details {
-  background: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 15px;
-  margin: 20px 0;
-  transition: all 0.3s ease;
-}
-
-details:hover {
-  border-color: #613dc1;
-  box-shadow: 0 2px 8px rgba(97, 61, 193, 0.1);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin: 15px 0;
+  background: #fafafa;
 }
 
 details[open] {
   background: white;
-  border-color: #613dc1;
-  box-shadow: 0 4px 12px rgba(97, 61, 193, 0.15);
 }
 
 summary {
   cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-  padding: 10px;
-  margin: -15px -15px 0 -15px;
-  border-radius: 8px 8px 0 0;
-  transition: all 0.2s ease;
+  font-size: 16px;
+  font-weight: 600;
+  color: #613dc1;
+  padding: 5px 0;
   user-select: none;
   list-style: none;
+  outline: none;
 }
 
 summary::-webkit-details-marker {
@@ -485,11 +475,9 @@ summary::-webkit-details-marker {
 }
 
 summary::before {
-  content: '▶';
+  content: '▸ ';
   display: inline-block;
-  margin-right: 10px;
-  transition: transform 0.3s ease;
-  color: #613dc1;
+  transition: transform 0.2s ease;
 }
 
 details[open] summary::before {
@@ -497,27 +485,42 @@ details[open] summary::before {
 }
 
 summary:hover {
-  background: #f0f0f0;
-  color: #613dc1;
-}
-
-details[open] summary {
-  background: #613dc1;
-  color: white;
-  margin-bottom: 15px;
-}
-
-details[open] summary::before {
-  color: white;
-}
-
-details[open] summary:hover {
-  background: #4a2d99;
+  color: #4a2d99;
 }
 
 /* Details 내부 컨텐츠 */
 details > *:not(summary) {
-  margin-top: 15px;
+  margin-top: 10px;
+}
+
+/* 푸터 링크 아이콘 스타일 */
+footer .footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+footer .footer-link svg {
+  width: 14px;
+  height: 14px;
+  color: #613dc1;
+  vertical-align: middle;
+}
+
+footer .footer-link a {
+  color: #613dc1;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+footer .footer-link a:hover {
+  color: #4a2d99;
+  text-decoration: underline;
+}
+
+/* 기술 스택 이미지 정렬 */
+details p {
+  text-align: left !important;
 }
 
 /* 모바일에서는 사이드바 완전히 숨김 */
