@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>임베디드 정복 스터디 커리큘럼 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="../../../../css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">임베디드 정복 스터디 커리큘럼</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2026/03/15</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C">임베디드</a> <a href="../../../../tags/iot">IoT</a> <a href="../../../../tags/stm32">STM32</a> <a href="../../../../tags/esp32">ESP32</a> <a href="../../../../tags/%EB%93%9C%EB%A1%A0">드론</a> <a href="../../../../tags/%EB%AA%A8%ED%84%B0%EC%A0%9C%EC%96%B4">모터제어</a> <a href="../../../../tags/%EC%BB%A4%EB%A6%AC%ED%81%98%EB%9F%BC">커리큘럼</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="시작하며-진짜-하드웨어를-제어해보고-싶다">시작하며: 진짜 하드웨어를 제어해보고 싶다</h3>
+<p>소프트웨어 개발을 하다 보면 화면 속 세상이 아닌, 현실 세계의 물리적인 움직임을 직접 제어해보고 싶다는 갈증이 생길 때가 있다. 웹이나 앱을 넘어 모터가 돌아가고, 센서로 주변 환경을 인식하며, 최종적으로는 하늘을 나는 드론까지 내 손으로 만들어보고 싶어졌다.</p>
+<p>그래서 이번 기회에 임베디드 시스템의 기초부터 심화까지 제대로 파고들기 위한 나만의 스터디 커리큘럼을 짜보았다. 특정 보드에 종속되기보다는 업계 표준으로 많이 쓰이는 MCU들을 다루며 범용적인 하드웨어 제어 능력을 기르는 것이 목표다.</p>
+<p>내가 배우고 싶은 것을 나열하고, 클로드한테 커리큘럼을 작성해달라고 했더니 다음과 같이 작성을 해주었다.</p>
+<p><img src="https://mike-home.com/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-03-15%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.29.52.png" alt=""></p>
+<hr>
+<h3 id="앞으로의-다짐">앞으로의 다짐</h3>
+<p>이 커리큘럼은 하루아침에 끝날 분량이 결코 아니다. 수많은 데이터시트(Datasheet)를 읽어야 하고, 오실로스코프로 파형을 찍어보며 알 수 없는 하드웨어 버그와 싸워야 할 것이다.</p>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> <a href="mailto:sh95119@gmail.com">Mail</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> <a href="https://github.com/dongwooklee96">Github</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10.5 2C8.015 2 6 4.015 6 6.5v7c0 2.485 2.015 4.5 4.5 4.5s4.5-2.015 4.5-4.5v-7C15 4.015 12.985 2 10.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7zm3.5-11C14.015 2 12 4.015 12 6.5v7c0 2.485 2.015 4.5 4.5 4.5S21 15.985 21 13.5v-7C21 4.015 18.985 2 16.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7z"/></svg> <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a></span>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

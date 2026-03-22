@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: http://dongwooklee96.github.io/sitemap.xml

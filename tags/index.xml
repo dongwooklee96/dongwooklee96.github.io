@@ -8,13 +8,67 @@
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Tue, 10 Mar 2026 00:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Mar 2026 22:45:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ESP32</title>
+      <link>https://dongwooklee96.github.io/tags/esp32.html</link>
+      <pubDate>Sun, 15 Mar 2026 22:45:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/esp32.html</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>IoT</title>
       <link>https://dongwooklee96.github.io/tags/iot.html</link>
-      <pubDate>Tue, 10 Mar 2026 00:00:00 +0900</pubDate>
+      <pubDate>Sun, 15 Mar 2026 22:45:00 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/tags/iot.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>STM32</title>
+      <link>https://dongwooklee96.github.io/tags/stm32.html</link>
+      <pubDate>Sun, 15 Mar 2026 22:45:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/stm32.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>드론</title>
+      <link>https://dongwooklee96.github.io/tags/%EB%93%9C%EB%A1%A0.html</link>
+      <pubDate>Sun, 15 Mar 2026 22:45:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/%EB%93%9C%EB%A1%A0.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>모터제어</title>
+      <link>https://dongwooklee96.github.io/tags/%EB%AA%A8%ED%84%B0%EC%A0%9C%EC%96%B4.html</link>
+      <pubDate>Sun, 15 Mar 2026 22:45:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/%EB%AA%A8%ED%84%B0%EC%A0%9C%EC%96%B4.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>임베디드</title>
+      <link>https://dongwooklee96.github.io/tags/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C.html</link>
+      <pubDate>Sun, 15 Mar 2026 22:45:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>커리큘럼</title>
+      <link>https://dongwooklee96.github.io/tags/%EC%BB%A4%EB%A6%AC%ED%81%98%EB%9F%BC.html</link>
+      <pubDate>Sun, 15 Mar 2026 22:45:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/%EC%BB%A4%EB%A6%AC%ED%81%98%EB%9F%BC.html</guid>
       <description></description>
     </item>
     
@@ -42,15 +96,6 @@
       <pubDate>Tue, 10 Mar 2026 00:00:00 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/tags/%EB%88%84%EC%BD%94%EB%93%9C.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>임베디드</title>
-      <link>https://dongwooklee96.github.io/tags/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C.html</link>
-      <pubDate>Tue, 10 Mar 2026 00:00:00 +0900</pubDate>
-      <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/tags/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C.html</guid>
       <description></description>
     </item>
     

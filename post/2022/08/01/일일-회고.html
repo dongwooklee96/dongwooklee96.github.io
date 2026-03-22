@@ -18,7 +18,7 @@
     <title>[일일 회고] | 개발자 이동욱</title>
     <link rel="stylesheet" href="../../../../css/style.css" />
     <link rel="stylesheet" href="../../../../css/fonts.css" />
-    <link rel="stylesheet" href="http://localhost:1313/css/theme-override.css">
+    <link rel="stylesheet" href="../../../../css/theme-override.css">
     <header>
 
   <nav>
@@ -26,7 +26,7 @@
       
       
       <li class="pull-left ">
-        <a href="http://localhost:1313/">개발자 이동욱</a>
+        <a href="../../../../">개발자 이동욱</a>
       </li>
       
       
@@ -121,53 +121,27 @@
 
 <div class="content-wrapper">
   <main>
-    <ul>
-<li>
-<p>오늘의 목표는 우선 이전에 보낸 패치들을 확인하고나서, 수정하는 것이다.</p>
-</li>
-<li>
-<p>우선적으로는 모든 메일 리스트의 내용을 파악하는 것을 목표로 해야겠다.</p>
-</li>
-<li>
-<p>전체 일정을 잡기 좋기 때문이다. 그리고 나서, 시간이 남는다면 이전에 작업하던 쿼리를 수정하는 방향으로 가야겠다.</p>
-</li>
-<li>
-<p>내가 확인해야하는 부분은 (<code>pg_rowlocks</code>, <code>auth_delay</code>) 이다.</p>
-</li>
-<li>
-<p>그리고 내가 작업한 <code>pg_stattuple</code>에 대한 패치를 제출해야겠다. 그 이유는 내가 나중에 작업하려고 했던 <code>tcn</code> 모듈이 이미 다른 사람에 의해서 제출이 되었기 때문이다.</p>
-</li>
-</ul>
-<h3 id="1-목표-설정">1. 목표 설정</h3>
+    <h3 id="1-목표-설정">1. 목표 설정</h3>
 <hr>
 <ul>
 <li>
-<p><code>pg_rowlocks</code> 모듈에 대한 피드백을 받고 이를 수정하는 것이 목표이다.</p>
+<p>오늘의 목표는 일단 메일링 리스트에서 보내준 메일을 확인하고 그에 따른 응답을 하는 것이다.</p>
 </li>
 <li>
-<ol>
-<li>SQL TEST 와 SPEC 테스트 두개를 유지할 필요가 없을 것 같다. SPEC 테스트만 유지를 하면 될 것이다.</li>
-</ol>
+<p><code>pg_basebackup</code> 모듈의 테스트 코드의 뒷 부분을 마무리 정리할 것이다.</p>
 </li>
-</ul>
-<blockquote>
-<p>나도 해당 부분에 동의를 하며, SPEC 테스트를 통해서 최대한 커버리지를 만족하기로 하였다.</p>
-</blockquote>
-<ul>
 <li>
-<ol start="2">
-<li>권한과 관련된 테스트에 대한 부분이 필요가 없다고 했다. 왜냐하면 권한 테스트는 해당 테스트 모듈의 기능이 아니며, 다른 곳에서 이미 테스트를 하고 있다.</li>
-</ol>
+<p>일단 윈도우 환경에서 실행되지 않는 부분부터 수정을 할 것이다</p>
 </li>
 </ul>
 <h3 id="2-전략--전술-수립">2. 전략 / 전술 수립</h3>
 <hr>
 <ul>
 <li>
-<p>우선 작성한지 좀 된 테스트기 때문에, 다시 한번 테스트를 작성할 필요가 있을 것 같다.</p>
+<p>확인을 해본 결과 윈도우 환경에서 실행되지 않는 문제는 아니였고, #define 플래그 유뮤에 띠라서, 발생하는 것이였다.</p>
 </li>
 <li>
-<p>사실 테스트 커버리지만 채우면 되는 것이기 때문에, 어떤 목적을 가지고 테스트 하지 않는 것이 중요할 것 같다.</p>
+<p>또한 테스트 커버리지가 만족스럽게 동작하는 상태가 아니라, 약간의 수정을 하였다.</p>
 </li>
 </ul>
 <h3 id="3-가성비-측정">3. 가성비 측정</h3>
