@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>NU40 &#43; Zephyr로 BLE 페어링하기 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="../../../../css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">NU40 + Zephyr로 BLE 페어링하기</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2026/03/16</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C">임베디드</a> <a href="../../../../tags/nu40">NU40</a> <a href="../../../../tags/zephyr">Zephyr</a> <a href="../../../../tags/ble">BLE</a> <a href="../../../../tags/%EB%B8%94%EB%A3%A8%ED%88%AC%EC%8A%A4">블루투스</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="시작하며">시작하며</h3>
+<p>NU40 보드와 Zephyr RTOS로 프로젝틀르 구성하였고, 블루투스(BLE)를 통해 보드에서 1, 2, 3, 4 버튼으로 바이브 코딩에서 선택하는 기능이 필요해졌다.</p>
+<p>따라서 해당 기능에 대해서 정리하는 글을 작성해보았다.</p>
+<h3 id="페어링pairing과-본딩bonding의-차이">페어링(Pairing)과 본딩(Bonding)의 차이</h3>
+<p>들어가기에 앞서 두 가지 개념을 확실히 짚고 넘어갈 필요가 있다.</p>
+<ul>
+<li><strong>페어링 (Pairing):</strong> 두 기기가 서로 통신하기 위해 일시적으로 보안 키를 교환하고 암호화된 연결을 설정하는 과정이다. 연결이 끊어지면 키 정보가 사라진다.</li>
+<li><strong>본딩 (Bonding):</strong> 페어링 과정에서 생성된 보안 키를 비휘발성 메모리(플래시)에 저장해 두는 것이다. 다음번에 다시 연결될 때는 번거로운 페어링 과정 없이 저장된 키를 이용해 즉시 암호화된 통신을 재개할 수 있다.</li>
+</ul>
+<p>스마트폰에 블루투스 이어폰을 등록해두고 쓰는 것이 바로 &lsquo;본딩&rsquo;된 상태라고 보면 된다.</p>
+<h3 id="zephyr-프로젝트-설정-prjconf">Zephyr 프로젝트 설정 (prj.conf)</h3>
+<p>Zephyr에서 BLE 보안 기능을 사용하려면 먼저 <code>prj.conf</code> 파일에 관련 설정(Kconfig)을 추가해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#57606a"># BLE 기본 설정</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_BT</span><span style="color:#0550ae">=</span><span style="color:#0a3069">y</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_BT_PERIPHERAL</span><span style="color:#0550ae">=</span><span style="color:#0a3069">y</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_BT_DEVICE_NAME</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;My_NU40&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># BLE 보안 및 페어링 활성화 (SMP - Security Manager Protocol)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_BT_SMP</span><span style="color:#0550ae">=</span><span style="color:#0a3069">y</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># 본딩(키 저장)을 위한 설정</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_BT_SETTINGS</span><span style="color:#0550ae">=</span><span style="color:#0a3069">y</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_FLASH</span><span style="color:#0550ae">=</span><span style="color:#0a3069">y</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_FLASH_PAGE_LAYOUT</span><span style="color:#0550ae">=</span><span style="color:#0a3069">y</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_FLASH_MAP</span><span style="color:#0550ae">=</span><span style="color:#0a3069">y</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_NVS</span><span style="color:#0550ae">=</span><span style="color:#0a3069">y</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">CONFIG_SETTINGS</span><span style="color:#0550ae">=</span><span style="color:#0a3069">y</span>
+</span></span></code></pre></div><p><code>CONFIG_BT_SMP=y</code>가 보안 관리자(Security Manager)를 켜는 핵심 설정이다. 또한 본딩 정보를 저장하기 위해 플래시 메모리와 NVS(Non-Volatile Storage), Settings 서브시스템을 활성화해 주어야 한다.</p>
+<h3 id="보안-레벨-및-인증-콜백-구현">보안 레벨 및 인증 콜백 구현</h3>
+<p>페어링 과정에서 화면에 핀 코드(Passkey)를 띄울 것인지, 아니면 그냥 수락(Just Works)할 것인지는 기기의 입출력(IO) 능력에 따라 결정된다. 화면이 없는 NU40 보드의 특성상 가장 간단한 <strong>Just Works</strong> 방식이나, 고정된 핀 코드를 사용하는 방식을 많이 쓴다.</p>
+<p>Zephyr에서는 <code>bt_conn_auth_cb</code> 구조체를 통해 인증 콜백을 등록하여 페어링 이벤트를 처리한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">#include</span> <span style="color:#57606a">&lt;zephyr/bluetooth/bluetooth.h&gt;</span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a">#include</span> <span style="color:#57606a">&lt;zephyr/bluetooth/conn.h&gt;</span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">/* 페어링 취소 시 호출되는 콜백 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">void</span> <span style="color:#6639ba">auth_cancel</span><span style="color:#1f2328">(</span><span style="color:#cf222e">struct</span> bt_conn <span style="color:#0550ae">*</span>conn<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">char</span> addr<span style="color:#1f2328">[</span>BT_ADDR_LE_STR_LEN<span style="color:#1f2328">];</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">bt_addr_le_to_str</span><span style="color:#1f2328">(</span><span style="color:#6639ba">bt_conn_get_dst</span><span style="color:#1f2328">(</span>conn<span style="color:#1f2328">),</span> addr<span style="color:#1f2328">,</span> <span style="color:#cf222e">sizeof</span><span style="color:#1f2328">(</span>addr<span style="color:#1f2328">));</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">printk</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Pairing cancelled: %s</span><span style="color:#0a3069">\n</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span> addr<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">/* 페어링 완료/실패 시 호출되는 콜백 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">void</span> <span style="color:#6639ba">pairing_complete</span><span style="color:#1f2328">(</span><span style="color:#cf222e">struct</span> bt_conn <span style="color:#0550ae">*</span>conn<span style="color:#1f2328">,</span> <span style="color:#cf222e">bool</span> bonded<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">printk</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Pairing Complete (Bonded: %d)</span><span style="color:#0a3069">\n</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span> bonded<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">void</span> <span style="color:#6639ba">pairing_failed</span><span style="color:#1f2328">(</span><span style="color:#cf222e">struct</span> bt_conn <span style="color:#0550ae">*</span>conn<span style="color:#1f2328">,</span> <span style="color:#cf222e">enum</span> bt_security_err reason<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">printk</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Pairing Failed: %d</span><span style="color:#0a3069">\n</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span> reason<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">/* 인증 콜백 구조체 등록 */</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">struct</span> bt_conn_auth_cb auth_cb_display <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">.</span>cancel <span style="color:#0550ae">=</span> auth_cancel<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">static</span> <span style="color:#cf222e">struct</span> bt_conn_auth_info_cb auth_cb_info <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">.</span>pairing_complete <span style="color:#0550ae">=</span> pairing_complete<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">.</span>pairing_failed <span style="color:#0550ae">=</span> pairing_failed<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">void</span> <span style="color:#6639ba">main</span><span style="color:#1f2328">(</span><span style="color:#cf222e">void</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">int</span> err<span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#57606a">/* 설정 로드 (본딩 데이터 복원) */</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">settings_load</span><span style="color:#1f2328">();</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#57606a">/* 블루투스 초기화 */</span>
+</span></span><span style="display:flex;"><span>	err <span style="color:#0550ae">=</span> <span style="color:#6639ba">bt_enable</span><span style="color:#1f2328">(</span><span style="color:#6639ba">NULL</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#cf222e">if</span> <span style="color:#1f2328">(</span>err<span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#6639ba">printk</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Bluetooth init failed (err %d)</span><span style="color:#0a3069">\n</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">,</span> err<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#cf222e">return</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#57606a">/* 인증 콜백 등록 */</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">bt_conn_auth_cb_register</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>auth_cb_display<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">bt_conn_auth_info_cb_register</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>auth_cb_info<span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">printk</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;Bluetooth initialized</span><span style="color:#0a3069">\n</span><span style="color:#0a3069">&#34;</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#57606a">/* Advertising 시작 로직 생략... */</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><h3 id="특성characteristic에-보안-요구사항-추가">특성(Characteristic)에 보안 요구사항 추가</h3>
+<p>페어링이 실제로 일어나게 하려면, 특정 데이터를 읽거나 쓸 때 &lsquo;보안 연결&rsquo;을 요구하도록 설정해야 한다. GATT 테이블을 정의할 때 권한(Permission) 플래그를 수정하면 된다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6639ba">BT_GATT_SERVICE_DEFINE</span><span style="color:#1f2328">(</span>my_service<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">BT_GATT_PRIMARY_SERVICE</span><span style="color:#1f2328">(</span><span style="color:#6639ba">BT_UUID_DECLARE_16</span><span style="color:#1f2328">(</span><span style="color:#0550ae">0x1234</span><span style="color:#1f2328">)),</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#57606a">/* 읽거나 쓰려면 암호화된 연결(페어링)이 필요함 */</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#6639ba">BT_GATT_CHARACTERISTIC</span><span style="color:#1f2328">(</span><span style="color:#6639ba">BT_UUID_DECLARE_16</span><span style="color:#1f2328">(</span><span style="color:#0550ae">0x5678</span><span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>			       BT_GATT_CHRC_READ <span style="color:#0550ae">|</span> BT_GATT_CHRC_WRITE<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			       BT_GATT_PERM_READ_ENCRYPT <span style="color:#0550ae">|</span> BT_GATT_PERM_WRITE_ENCRYPT<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>			       read_callback<span style="color:#1f2328">,</span> write_callback<span style="color:#1f2328">,</span> <span style="color:#6639ba">NULL</span><span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">);</span>
+</span></span></code></pre></div><p><code>BT_GATT_PERM_READ</code> 대신 <code>BT_GATT_PERM_READ_ENCRYPT</code>를 사용했다. 이제 스마트폰이 이 특성에 접근하려고 시도하면, NU40은 에러(Insufficient Authentication)를 응답하고, 스마트폰은 이를 감지하여 자동으로 페어링 절차를 시작한다.</p>
+<h3 id="테스트-해보기">테스트 해보기</h3>
+<p>펌웨어를 빌드하고 NU40에 플래시한 뒤, 스마트폰에서 <strong>nRF Connect for Mobile</strong> 앱을 실행한다.</p>
+<ol>
+<li>기기를 스캔하고 &lsquo;blinky_ble&rsquo;에 연결(Connect)한다.</li>
+<li>연결은 성공하지만, 아직 암호화되지는 않은 상태다.</li>
+<li>우리가 만든 <code>0x5678</code> 특성(Characteristic)의 읽기(Read) 화살표를 누른다.</li>
+<li>순간적으로 스마트폰 하단에 <strong>&ldquo;Bluetooth Pairing Request&rdquo;</strong> 팝업이 뜬다.</li>
+<li>&lsquo;Pair(페어링)&rsquo; 버튼을 누르면, 이전에 등록한 콜백 함수가 실행되며 콘솔에 <code>Pairing Complete (Bonded: 1)</code> 메시지가 출력된다.</li>
+<li>이후부터는 해당 특성의 값을 정상적으로 읽고 쓸 수 있다.</li>
+</ol>
+<p>보드를 재부팅하더라도 본딩 정보가 플래시에 저장되어 있기 때문에, 스마트폰의 블루투스 설정에서 기기 등록을 해제하지 않는 이상 다시 페어링 팝업이 뜨지 않고 바로 보안 통신이 가능하다.</p>
+<p>페어링과 본딩이 완료 되었다면 이제 버튼을 누를 떄마다 1씩 증가하는 코드를 보내진다.</p>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/OvhFdk8kId8?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"></iframe>
+    </div>
+
+<h3 id="마무리">마무리</h3>
+<p>Zephyr 환경에서 BLE 보안을 적용하는 것은 처음엔 Kconfig 설정과 콜백 등록 때문에 복잡해 보일 수 있다. 하지만 Zephyr의 뛰어난 추상화 덕분에 몇 가지 설정과 권한 플래그만 변경해주면 손쉽게 페어링과 본딩 기능을 구현할 수 있었다.</p>
+<p>다음 단계로는 우선 해당 보드에 디스플레이 및 스피커를 입력할 수 있는 방법을 연구해봐야겠다. 다행이도 블로그 글을 작성하는 모음에 이와
+관련하여 진행을 하신분이 있어 많은 도움을 받을 수 있을 것 같다.</p>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> <a href="mailto:sh95119@gmail.com">Mail</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> <a href="https://github.com/dongwooklee96">Github</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10.5 2C8.015 2 6 4.015 6 6.5v7c0 2.485 2.015 4.5 4.5 4.5s4.5-2.015 4.5-4.5v-7C15 4.015 12.985 2 10.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7zm3.5-11C14.015 2 12 4.015 12 6.5v7c0 2.485 2.015 4.5 4.5 4.5S21 15.985 21 13.5v-7C21 4.015 18.985 2 16.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7z"/></svg> <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a></span>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>
