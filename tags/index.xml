@@ -8,7 +8,43 @@
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Mon, 16 Mar 2026 10:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Jul 2026 10:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>EBPF</title>
+      <link>https://dongwooklee96.github.io/tags/ebpf.html</link>
+      <pubDate>Sat, 11 Jul 2026 10:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/ebpf.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>리눅스</title>
+      <link>https://dongwooklee96.github.io/tags/%EB%A6%AC%EB%88%85%EC%8A%A4.html</link>
+      <pubDate>Sat, 11 Jul 2026 10:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/%EB%A6%AC%EB%88%85%EC%8A%A4.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>시스템 프로그래밍</title>
+      <link>https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</link>
+      <pubDate>Sat, 11 Jul 2026 10:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>커널</title>
+      <link>https://dongwooklee96.github.io/tags/%EC%BB%A4%EB%84%90.html</link>
+      <pubDate>Sat, 11 Jul 2026 10:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/%EC%BB%A4%EB%84%90.html</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>BLE</title>
       <link>https://dongwooklee96.github.io/tags/ble.html</link>
@@ -258,15 +294,6 @@
       <pubDate>Fri, 10 Sep 2021 22:04:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/tags/%EC%95%84%EC%BB%A4%EC%8A%A4.html</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>시스템 프로그래밍</title>
-      <link>https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</link>
-      <pubDate>Sun, 05 Sep 2021 12:00:24 +0900</pubDate>
-      <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D.html</guid>
       <description></description>
     </item>
     
