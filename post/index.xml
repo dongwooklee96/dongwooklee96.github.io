@@ -35,9 +35,9 @@
   &lt;figcaption&gt;예전 쿠버네티스 학습을 위해 구축해 두었다가 이번 eBPF 실습의 든든한 구원투수가 된 라즈베리파이 장비들&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;실은 이 실습 코드를 실행하기 전, 나름 바보 같은 해프닝이 있었다. 사용하고 있는 메인 개발 장비가 macOS(맥북)이다 보니, 처음에 아무 생각 없이 로컬 맥 환경에서 BCC 패키지를 실행해 보려 시도했던 것이다.&lt;/p&gt;
-&lt;p&gt;물론 결과는 처참한 오류였다. 당연하게도 eBPF는 리눅스(Linux) 커널에 극도로 종속적인 최첨단 커널 전용 기술이기 때문에 맥 환경에서는 동작 자체가 불가능했다.&lt;/p&gt;
+&lt;p&gt;당연하게도 eBPF는 리눅스(Linux) 커널에 극도로 종속적인 최첨단 커널 전용 기술이기 때문에 맥 환경에서는 동작 자체가 불가능했다.&lt;/p&gt;
 &lt;p&gt;그렇다고 맥 위에 가상 머신(VM)을 띄우자니 하이퍼바이저를 올리고 우분투 이미지 구워서 환경 세팅과 빌드 툴체인을 처음부터 일일이 구성하려니 생각만 해도 너무 번거롭고 귀찮아졌다.&lt;/p&gt;
-&lt;p&gt;그 순간 번뜩 머릿속을 스쳐 지나간 녀석이 바로 예전에 **쿠버네티스(Kubernetes)를 한참 공부할 때 직접 자작 클러스터로 하드웨어를 한 땀 한 땀 구축해 놓았던 라즈베리파이(Raspberry Pi)**였다. 오랜만에 먼지를 털어내고 전원을 인가했더니, 아주 훌륭한 Ubuntu 리눅스 환경이 이미 잡혀있어 곧바로 실습 베이스캠프로 요긴하게 활용할 수 있었다. 역시 예전에 사서 고생하며 장비를 구축해 둔 경험은 언젠가 피와 살이 되는 듯하다.&lt;/p&gt;
+&lt;p&gt;그 순간 번뜩 머릿속을 스쳐 지나간 녀석이 바로 예전에 *쿠버네티스(Kubernetes)를 한참 공부할 때 직접 자작 클러스터로 하드웨어를 한 땀 한 땀 구축해 놓았던 라즈베리파이(Raspberry Pi)*였다.&lt;/p&gt;
 &lt;p&gt;BCC(BPF Compiler Collection)는 eBPF를 가장 손쉽게 작성할 수 있게 돕는 프레임워크다. BCC를 사용하면 파이썬(Python) 드라이버 코드 내부에 커널용 C 코드를 인라인 문자열 형식으로 삽입하여 간편하게 실행할 수 있다.&lt;/p&gt;
 &lt;p&gt;아래는 새로운 프로세스가 생성(&lt;code&gt;execve&lt;/code&gt; 시스템 콜 호출)될 때마다 디버그 메시지를 출력하는 Hello World 프로그램 예시다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;bcc&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; BPF
@@ -58,7 +58,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;attach_kprobe&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;event&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;syscall&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; fn_name&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 4. trace_pipe 출력 읽기&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;Tracing execve()... Press Ctrl+C to stop.&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;trace_print&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;동작-흐름-분석&#34;&gt;동작 흐름 분석&lt;/h4&gt;
 &lt;ol&gt;
@@ -67,13 +66,14 @@
 &lt;li&gt;&lt;strong&gt;이벤트 부착 (kprobe):&lt;/strong&gt; 검증을 통과하면 &lt;code&gt;attach_kprobe&lt;/code&gt;에 의해 지정된 시스템 콜(&lt;code&gt;execve&lt;/code&gt;) 훅 포인트에 동적으로 기계어 번역(JIT) 후 적재된다.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;트레이스 수집:&lt;/strong&gt; 커널 내부 헬퍼 함수인 &lt;code&gt;bpf_trace_printk()&lt;/code&gt;는 커널 디버그 파이프(&lt;code&gt;/sys/kernel/debug/tracing/trace_pipe&lt;/code&gt;)에 로그를 기록하고, 파이썬 드라이버의 &lt;code&gt;trace_print()&lt;/code&gt;가 이를 폴링하여 출력한다.&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260711/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-07-19%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.19.51.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;주의:&lt;/strong&gt; &lt;code&gt;bpf_trace_printk()&lt;/code&gt;는 가볍고 디버깅하기에 매우 직관적이지만, 전역 추적 채널을 공유하기 때문에 오버헤드가 크고 운영 환경(Production)에는 사용을 강력히 금한다.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;ebpf-map-사용자-공간과-커널-공간의-통신-채널&#34;&gt;eBPF Map: 사용자 공간과 커널 공간의 통신 채널&lt;/h3&gt;
 &lt;hr&gt;
-&lt;p&gt;커널 공간에서 단순 프린트만 찍는 것은 한계가 명확하다. 수집된 데이터를 가공하거나, 통계를 내거나, 설정 정보를 커널에 동적으로 주입하기 위해서는 두 영역이 고속으로 통신할 수 있는 안전한 메모리 공간이 필요하다. 이를 **eBPF Map(맵)**이라고 부른다.&lt;/p&gt;
-&lt;p&gt;eBPF Map은 커널이 관리하는 특수한 Key-Value 형태의 공유 데이터 구조체다. 2장에서는 이를 전달하는 대표적인 방식으로 &lt;strong&gt;Hash Table Map&lt;/strong&gt;과 &lt;strong&gt;Perf / Ring Buffer Map&lt;/strong&gt;을 소개한다.&lt;/p&gt;
+&lt;p&gt;커널 공간에서 단순 프린트만 찍는 것은 한계가 명확하다. 수집된 데이터를 가공하거나, 통계를 내거나, 설정 정보를 커널에 동적으로 주입하기 위해서는 두 영역이 고속으로 통신할 수 있는 안전한 메모리 공간이 필요하다. 이를 eBPF Map(맵)이라고 부른다.&lt;/p&gt;
+&lt;p&gt;eBPF Map은 커널이 관리하는 특수한 Key-Value 형태의 공유 데이터 구조체다. 2장에서는 이를 전달하는 대표적인 방식으로 &lt;em&gt;Hash Table Map&lt;/em&gt;과 &lt;em&gt;Perf / Ring Buffer Map&lt;/em&gt;을 소개한다.&lt;/p&gt;
 &lt;h4 id=&#34;1-hash-table-map&#34;&gt;1. Hash Table Map&lt;/h4&gt;
 &lt;p&gt;해시 테이블 맵은 키-값 쌍 형태로 데이터 상태를 안전하게 누적/관리할 수 있는 공간이다. 다음은 &lt;code&gt;execve&lt;/code&gt; 시스템 콜이 일어날 때마다 호출을 유발한 사용자의 UID(User ID)별로 호출 누적 횟수를 카운팅하고, 이를 사용자 영역에서 주기적으로 읽어 출력하는 예제다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;bcc&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; BPF
@@ -111,13 +111,11 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 사용자 영역에서 주기적으로 eBPF Map을 폴링하여 데이터를 정밀 조회&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;try&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        sleep&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;--- UID Call Counts ---&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;for&lt;/span&gt; key&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; val &lt;span style=&#34;color:#0550ae&#34;&gt;in&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;counter_table&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;items&lt;span style=&#34;color:#1f2328&#34;&gt;():&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;User ID &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;key&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;value&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;: &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;val&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;value&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt; calls&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt; KeyboardInterrupt&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  sleep&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  s &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;for&lt;/span&gt; key&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; val &lt;span style=&#34;color:#0550ae&#34;&gt;in&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;counter_table&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;items&lt;span style=&#34;color:#1f2328&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      s &lt;span style=&#34;color:#0550ae&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;User ID &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;key&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;value&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;: &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;val&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;value&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;\t&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;-bcc의-마법-이건-표준-c-코드가-아니다&#34;&gt;💡 BCC의 마법: &amp;ldquo;이건 표준 C 코드가 아니다!&amp;rdquo;&lt;/h5&gt;
 &lt;p&gt;위 커널 코드 중에서 맵을 조작하는 아래의 구조를 유심히 살펴보자.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; counter_table&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;lookup&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;uid&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
@@ -137,7 +135,7 @@
 &lt;h5 id=&#34;링-버퍼ring-buffer의-기본-동작-메커니즘&#34;&gt;링 버퍼(Ring Buffer)의 기본 동작 메커니즘&lt;/h5&gt;
 &lt;p&gt;링 버퍼는 메모리 상에 논리적인 원형 링(Ring) 형태로 구성된 일종의 FIFO 버퍼다.&lt;/p&gt;
 &lt;figure&gt;
-  &lt;img src=&#34;https://raw.githubusercontent.com/iovisor/bcc/master/docs/images/ring_buffer_architecture.png&#34; alt=&#34;Ring Buffer Architecture Example&#34; style=&#34;max-width:80%;&#34;&gt;
+  &lt;img src=&#34;https://mike-home.com/20260711/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-07-19%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.24.26.png&#34;&gt;
   &lt;figcaption&gt;별도의 Write Pointer와 Read Pointer를 두고 순환하며 데이터를 소모하는 링 버퍼 메커니즘&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;ul&gt;
@@ -209,10 +207,11 @@
 &lt;hr&gt;
 &lt;h3 id=&#34;함수-호출function-calls과-컴파일러-인라이닝&#34;&gt;함수 호출(Function Calls)과 컴파일러 인라이닝&lt;/h3&gt;
 &lt;hr&gt;
-&lt;p&gt;코드의 유지보수와 중복 제거를 위해 함수를 분리하는 것은 프로그래밍의 기초 상식(DRY 원칙)이다. 하지만 아주 오랫동안 eBPF 프로그램 안에서는 &lt;strong&gt;사용자 정의 함수 호출이 불가능&lt;/strong&gt;했다. 오직 커널이 정의한 공식 Helper Function만 호출할 수 있었다.&lt;/p&gt;
-&lt;p&gt;이 제약을 우회하기 위해 전통적으로 사용된 기법이 바로 **인라이닝(Inlining)**이다.&lt;/p&gt;
+&lt;p&gt;코드의 유지보수와 중복 제거를 위해 함수를 분리하는 것은 프로그래밍의 기초 상식(DRY 원칙)이다. 하지만 아주 오랫동안 eBPF 프로그램 안에서는 &lt;em&gt;사용자 정의 함수 호출이 불가능&lt;/em&gt;했다. 오직 커널이 정의한 공식 Helper Function만 호출할 수 있었다.&lt;/p&gt;
+&lt;p&gt;이 제약을 우회하기 위해 전통적으로 사용된 기법이 바로 인라이닝(Inlining)이다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;static&lt;/span&gt; __always_inline &lt;span style=&#34;color:#cf222e&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;my_function&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;ctx&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; val&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;함수-인라이닝의-작동-원리와-장단점&#34;&gt;함수 인라이닝의 작동 원리와 장단점&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260711/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-07-19%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.30.50.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;작동 원리:&lt;/strong&gt; 컴파일러가 바이트코드를 빌드할 때, 호출부에서 점프(&lt;code&gt;JUMP&lt;/code&gt;) 명령어를 통해 실제 함수 메모리 위치로 이동하게 만드는 대신, &lt;strong&gt;해당 함수의 실제 인스트럭션 코드 뭉치를 호출한 자리에 통째로 복사해서 붙여넣는다&lt;/strong&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;장점:&lt;/strong&gt; 스택 프레임을 무식하게 증가시키지 않고 점프 오버헤드가 없으므로, 검증기(Verifier)가 실행 안전 흐름을 단선적으로 분석하기에 아주 안전하다.&lt;/li&gt;
@@ -225,14 +224,10 @@
 &lt;h3 id=&#34;테일-콜tail-calls-커널-공간-내부의-무중단-프로그램-체이닝&#34;&gt;테일 콜(Tail Calls): 커널 공간 내부의 무중단 프로그램 체이닝&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;eBPF 커널 실행 환경에는 매우 까다로운 제약 조건이 존재하는데, 바로 &lt;strong&gt;스택 메모리 크기가 최대 512바이트로 제한&lt;/strong&gt;된다는 점이다. 512바이트는 복잡한 파싱 로직이나 중첩 루프를 돌리기에는 턱없이 부족한 공간이다.&lt;/p&gt;
-&lt;p&gt;이를 우회하고, 복잡한 로직을 모듈화하여 순차적으로 이어 달릴 수 있도록 지원하는 핵심 기술이 바로 **테일 콜(Tail Calls)**이다.&lt;/p&gt;
+&lt;p&gt;이를 우회하고, 복잡한 로직을 모듈화하여 순차적으로 이어 달릴 수 있도록 지원하는 핵심 기술이 바로 테일 콜(Tail Calls)이다.&lt;/p&gt;
 &lt;h4 id=&#34;테일-콜tail-call의-개념&#34;&gt;테일 콜(Tail Call)의 개념&lt;/h4&gt;
 &lt;p&gt;테일 콜은 마치 리눅스 프로세스 생태계의 &lt;code&gt;execve&lt;/code&gt; 시스템 콜과 유사하게 동작한다.
 현재 실행 중인 eBPF 프로그램의 컨텍스트를 유지한 채, &lt;strong&gt;다음에 실행할 eBPF 프로그램으로 제어권을 완전히 넘겨버리며, 호출한 부모 프로그램으로 다시 리턴(&lt;code&gt;Return&lt;/code&gt;)하지 않는다.&lt;/strong&gt; 즉, 스택 프레임을 한 층도 더 쌓지 않고 완전히 동일한 깊이에서 새 프로그램을 실행하므로, 스택 오버플로우가 원천적으로 불가능하다.&lt;/p&gt;
-&lt;figure&gt;
-  &lt;img src=&#34;https://ebpf.io/static/bf8b6a15714cb263ba79bcfa8959f635/tailcall.png&#34; alt=&#34;eBPF Tail Calls Architecture&#34; style=&#34;max-width:80%;&#34;&gt;
-  &lt;figcaption&gt;스택 오버헤드 없이 제어 흐름을 다른 eBPF 프로그램으로 완전히 치환하는 테일 콜 흐름&lt;/figcaption&gt;
-&lt;/figure&gt;
 &lt;p&gt;테일 콜은 다음과 같은 &lt;code&gt;bpf_tail_call()&lt;/code&gt; 시스템 도구를 활용한다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;bpf_tail_call&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;ctx&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; bpf_map &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;prog_array_map&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; u32 index&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
@@ -310,16 +305,15 @@
 &lt;hr&gt;
 &lt;h3 id=&#34;느낀점--결론&#34;&gt;느낀점 / 결론&lt;/h3&gt;
 &lt;hr&gt;
-&lt;p&gt;눈으로 직접 확인하고 동작하는 두 번째 실습 단계를 마주하면서, eBPF가 가진 설계적 디테일과 한계 돌파를 위한 우아한 고안들에 큰 매력을 느꼈다.&lt;/p&gt;
-&lt;p&gt;특히, &lt;strong&gt;eBPF Map의 엄격한 경계선 정의&lt;/strong&gt;와 &lt;strong&gt;BCC 프리프로세서의 Rewrite 기능&lt;/strong&gt;에 깊은 인상을 받았다. 얼핏 보기에는 매우 편리한 객체 지향형 구조체 접근 코드인 것 같지만, 실은 커널 패닉을 유발하지 않도록 검증기가 사전에 철저히 정적 분석을 진행하기 전, BCC가 영리하게 중간에서 코드를 재구성하고 있었던 것이다. 이러한 내부적인 &amp;lsquo;마법&amp;rsquo; 같은 컴파일 도구 체인의 기여 덕분에 개발자는 커널 로우 레벨 코딩에 대한 피로도 없이 복잡한 아키텍처 구현에 집중할 수 있었다.&lt;/p&gt;
-&lt;p&gt;또한, &lt;strong&gt;512바이트 스택 메모리 한계&lt;/strong&gt;를 극복하기 위해 제안된 &lt;strong&gt;인라이닝&lt;/strong&gt;과 &lt;strong&gt;테일 콜(Tail Call)&lt;/strong&gt; 구조는 시스템 디자인 관점에서 대단히 훌륭한 타협점이자 엔지니어링적 지혜라고 느껴진다. 리턴 경로를 원천 차단하고 메모리 상에서 제어 컨텍스트를 통째로 치환해버림으로써 메모리 소모를 극도로 억제한 점은 저수준 시스템 프로그래밍에서만 느낄 수 있는 아키텍처적 희열이었다.&lt;/p&gt;
-&lt;p&gt;앞으로 이어질 3장에서는 이 모든 BCC의 자동화 장막을 한 단계 더 걷어내어, 파이썬이 아닌 어셈블리와 완전한 원초적 형태의 C, 그리고 내부의 진짜 컴파일러 파이프라인 및 바이트코드 흐름을 살펴본다고 하니 무척 설렌다. 겉에 씌워진 도구의 한계를 이해할 수 있을 때 비로소 진정한 파워 유저로 거듭날 수 있는 만큼, 다음 챕터가 매우 기대된다.&lt;/p&gt;
+&lt;p&gt;눈으로 직접 확인하고 동작하는 2장의 실습 단계를 마주하며, eBPF가 가진 설계적 매력과 한계 돌파를 위한 로우 레벨 엔지니어링의 지혜를 온몸으로 느낄 수 있었다.&lt;/p&gt;
+&lt;p&gt;특히, 우여곡절 끝에 먼지를 털어 가동한 &lt;strong&gt;라즈베리파이(Raspberry Pi) 클러스터 환경&lt;/strong&gt;에서 실제로 시스템 콜이 호출될 때마다 데이터가 실시간으로 집계되고 스트리밍되는 장면을 목격했을 때의 쾌감은 이루 말할 수 없었다. 단순 가상머신(VM) 에뮬레이션 안에서 가상 로그를 보는 것을 넘어, 실제 가동 중인 물리 기기의 OS 커널 레이어에서 발생하는 패킷과 시스템 콜 이벤트를 내가 짠 eBPF 코드가 직접 가로채 가공하고 있다는 감각은 시스템 프로그래밍의 원초적인 즐거움을 다시금 일깨워 주었다. 과거 쿠버네티스 자작 클러스터를 만들며 했던 사서 고생이 이렇게 든든한 학습 인프라가 되어 돌아오니 감회가 한층 더 새로웠다.&lt;/p&gt;
+&lt;p&gt;기술적으로는 &lt;strong&gt;eBPF Map의 엄격한 경계선 정의&lt;/strong&gt;와 &lt;strong&gt;BCC 프리프로세서의 Rewrite 기능&lt;/strong&gt;이 가장 신선하게 다가왔다. 얼핏 보기에는 매우 편리한 객체 지향형 구조체 접근 코드(&lt;code&gt;counter_table.lookup()&lt;/code&gt;)인 줄 알았으나, 실은 컴파일러로 넘어가기 전 BCC가 중간에서 C 표준 규격의 헬퍼 함수 호출로 소스코드를 완전히 재구성하고 있다는 비밀을 알게 되었다. 커널 메모리 안정성을 타협 없이 지키면서도 개발자 경험(DX)을 극대화하려는 도구 체인의 기발한 타협에 탄탄한 아키텍처적 인상을 받았다.&lt;/p&gt;
+&lt;p&gt;또한, &lt;strong&gt;512바이트 스택 메모리 한계&lt;/strong&gt;를 극복하기 위해 도입된 &lt;strong&gt;인라이닝&lt;/strong&gt;과 &lt;strong&gt;테일 콜(Tail Call)&lt;/strong&gt; 아키텍처는 가히 예술적이었다. 호출 깊이를 늘려 스택을 낭비하는 대신, 메모리 상에서 실행 흐름(Context)을 통째로 갈아 끼워 무중단 점프로 이어달리는 테일 콜 설계는 저수준 메모리 제약에 시달려 본 임베디드나 시스템 개발자들의 눈물겨운 지혜와 아키텍처적 우아함이 고스란히 담겨 있었다.&lt;/p&gt;
+&lt;p&gt;앞으로 이어질 3장에서는 이 편리했던 BCC 프레임워크의 자동화 장막을 과감하게 한 단계 걷어낸다. 파이썬이 아닌 어셈블리어와 완전한 원초적 형태의 C, 그리고 내부의 진짜 컴파일러 파이프라인 및 바이트코드 흐름을 직접 마주하게 된다고 하니 무척 설렌다. 겉에 씌워진 도구의 한계를 해체해 볼 때 비로소 기술의 진면목을 지배할 수 있는 만큼, 다음 챕터가 매우 기대된다.&lt;/p&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;Liz Rice, &lt;em&gt;Learning eBPF&lt;/em&gt;, O&amp;rsquo;Reilly Media.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/iovisor/bcc&#34;&gt;IO Visor BCC GitHub Repository&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Andrii Nakryiko&amp;rsquo;s Blog, &lt;em&gt;BPF Ring Buffer&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
