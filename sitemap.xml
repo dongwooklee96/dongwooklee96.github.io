@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
+    <loc>https://dongwooklee96.github.io/post/2026/07/12/learning-ebpf-2%EC%9E%A5-ebpf%EC%9D%98-hello-world-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%ED%86%B5%ED%95%B4-%EA%B5%AC%EC%A1%B0-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0.html</loc>
+    <lastmod>2026-07-12T10:00:00+09:00</lastmod>
+  </url>
+
+  <url>
     <loc>https://dongwooklee96.github.io/post/2026/07/11/learning-ebpf-1%EC%9E%A5-ebpf%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B4%EB%A9%B0-%EC%99%9C-%EC%A4%91%EC%9A%94%ED%95%9C%EA%B0%80.html</loc>
     <lastmod>2026-07-11T10:00:00+09:00</lastmod>
   </url>
