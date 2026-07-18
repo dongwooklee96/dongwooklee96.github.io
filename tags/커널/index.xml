@@ -18,7 +18,7 @@
       <description>&lt;h3 id=&#34;시작하며&#34;&gt;시작하며&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;1장에서 eBPF가 무엇이며 왜 중요한지에 대한 이론적 배경을 학습했다면, 2장에서는 실질적으로 eBPF 프로그램을 어떻게 작성하고 실행하는지 다룬다.&lt;/p&gt;
-&lt;p&gt;Liz Rice의 저서 &lt;em&gt;Learning eBPF&lt;/em&gt; 2장에서는 eBPF의 가장 기본적인 개발 도구인 **BCC(BPF Compiler Collection)**를 사용하여 아주 심플한 &amp;ldquo;Hello World&amp;rdquo; 프로그램을 만들고, 더 나아가 &lt;strong&gt;eBPF Map&lt;/strong&gt;을 사용해 데이터를 저장하고 사용자 공간과 통신하는 핵심 흐름을 살펴본다.&lt;/p&gt;
+&lt;p&gt;Liz Rice의 저서 &lt;em&gt;Learning eBPF&lt;/em&gt; 2장에서는 eBPF의 가장 기본적인 개발 도구인 **BCC(BPF Compiler Collection)**를 사용하여 아주 심플한 &amp;ldquo;Hello World&amp;rdquo; 프로그램을 만들고, 더 나아가 **eBPF Map(해시 테이블, Perf/Ring Buffer)**을 사용해 데이터를 저장하고 사용자 공간과 동적으로 통신하는 법을 배운다. 또한, 커널 내에서의 제한적인 리소스를 극복하기 위한 **함수 인라이닝(Function Inlining)**과 &lt;strong&gt;테일 콜(Tail Calls)&lt;/strong&gt; 아키텍처까지 깊이 있게 파헤친다.&lt;/p&gt;
 &lt;h3 id=&#34;ebpf-프로그램의-기본-아키텍처&#34;&gt;eBPF 프로그램의 기본 아키텍처&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;eBPF 애플리케이션은 기본적으로 &lt;strong&gt;두 개의 영역&lt;/strong&gt;으로 나뉘어 설계된다.&lt;/p&gt;
@@ -64,8 +64,9 @@
 &lt;h3 id=&#34;ebpf-map-사용자-공간과-커널-공간의-통신-채널&#34;&gt;eBPF Map: 사용자 공간과 커널 공간의 통신 채널&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;커널 공간에서 단순 프린트만 찍는 것은 한계가 명확하다. 수집된 데이터를 가공하거나, 통계를 내거나, 설정 정보를 커널에 동적으로 주입하기 위해서는 두 영역이 고속으로 통신할 수 있는 안전한 메모리 공간이 필요하다. 이를 **eBPF Map(맵)**이라고 부른다.&lt;/p&gt;
-&lt;p&gt;eBPF Map은 커널이 관리하는 특수한 Key-Value 형태의 공유 데이터 구조체다. 대표적으로 해시 테이블(&lt;code&gt;BPF_MAP_TYPE_HASH&lt;/code&gt;), 배열(&lt;code&gt;BPF_MAP_TYPE_ARRAY&lt;/code&gt;), Perf 이벤트 버퍼 등이 있다.&lt;/p&gt;
-&lt;p&gt;다음은 &lt;code&gt;execve&lt;/code&gt; 시스템 콜이 일어날 때마다 호출을 유발한 사용자의 UID(User ID)별로 호출 누적 횟수를 카운팅하고, 이를 사용자 영역에서 주기적으로 읽어 출력하는 맵 기반 예제다.&lt;/p&gt;
+&lt;p&gt;eBPF Map은 커널이 관리하는 특수한 Key-Value 형태의 공유 데이터 구조체다. 2장에서는 이를 전달하는 대표적인 방식으로 &lt;strong&gt;Hash Table Map&lt;/strong&gt;과 &lt;strong&gt;Perf / Ring Buffer Map&lt;/strong&gt;을 소개한다.&lt;/p&gt;
+&lt;h4 id=&#34;1-hash-table-map&#34;&gt;1. Hash Table Map&lt;/h4&gt;
+&lt;p&gt;해시 테이블 맵은 키-값 쌍 형태로 데이터 상태를 안전하게 누적/관리할 수 있는 공간이다. 다음은 &lt;code&gt;execve&lt;/code&gt; 시스템 콜이 일어날 때마다 호출을 유발한 사용자의 UID(User ID)별로 호출 누적 횟수를 카운팅하고, 이를 사용자 영역에서 주기적으로 읽어 출력하는 예제다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;bcc&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; BPF
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;time&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; sleep
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
@@ -77,16 +78,16 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   u64 counter = 0;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   u64 *p;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   // 1. 현재 이벤트를 트리거한 프로세스의 UID 정보 획득
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   // 현재 이벤트를 트리거한 프로세스의 UID 정보 획득
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   uid = bpf_get_current_uid_gid() &amp;amp; 0xFFFFFFFF;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   // 2. 맵(counter_table)에서 해당 UID 키로 저장된 기존 값 조회
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   // 맵(counter_table)에서 해당 UID 키로 저장된 기존 값 조회
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   p = counter_table.lookup(&amp;amp;uid);
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   if (p != 0) {
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;      counter = *p;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   }
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   // 3. 값 증가 및 맵 업데이트
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   // 값 증가 및 맵 업데이트
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   counter++;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   counter_table.update(&amp;amp;uid, &amp;amp;counter);
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;   return 0;
@@ -108,38 +109,208 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;User ID &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;key&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;value&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;: &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;val&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;value&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt; calls&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt; KeyboardInterrupt&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;break&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;코드-속-핵심-ebpf-api-및-헬퍼-함수&#34;&gt;코드 속 핵심 eBPF API 및 헬퍼 함수&lt;/h4&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;-bcc의-마법-이건-표준-c-코드가-아니다&#34;&gt;💡 BCC의 마법: &amp;ldquo;이건 표준 C 코드가 아니다!&amp;rdquo;&lt;/h5&gt;
+&lt;p&gt;위 커널 코드 중에서 맵을 조작하는 아래의 구조를 유심히 살펴보자.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;p &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; counter_table&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;lookup&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;uid&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;counter_table&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;update&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;uid&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;counter&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;구조체 내부에 메서드를 정의하여 호출하는 방식은 &lt;strong&gt;표준 C언어에서는 지원하지 않는 문법&lt;/strong&gt;이다. (C++에서는 가능하지만 C에서는 불가능하다.)&lt;/p&gt;
+&lt;p&gt;이 코드가 정상적으로 컴파일되는 이유는 &lt;strong&gt;BCC의 프리프로세서 기능&lt;/strong&gt; 덕분이다. BCC는 컴파일러로 넘기기 전에 이와 같은 편리한 매크로 형태의 &amp;lsquo;C-like&amp;rsquo; 문법을 파싱하여, 커널이 완벽하게 이해할 수 있는 &amp;ldquo;진짜 C 표준 규격&amp;quot;의 eBPF 헬퍼 함수 호출 코드로 자동 재작성(Rewrite)해 준다.&lt;/p&gt;
+&lt;h5 id=&#34;실행-결과의-해석-terminal-1--2&#34;&gt;실행 결과의 해석 (Terminal 1 &amp;amp; 2)&lt;/h5&gt;
+&lt;p&gt;두 개의 터미널을 열고 테스트를 해보면 재미있는 통계를 볼 수 있다.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;BPF_HASH(counter_table)&lt;/code&gt;:&lt;/strong&gt; BCC 매크로로, 커널 내부에 eBPF 해시 맵을 손쉽게 선언한다.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;bpf_get_current_uid_gid()&lt;/code&gt;:&lt;/strong&gt; 커널 공간의 eBPF 프로그램이 현재 이벤트를 호출한 프로세스의 상위 32비트에 GID, 하위 32비트에 UID를 담아 반환해 주는 안전한 커널 헬퍼 함수다.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;code&gt;lookup()&lt;/code&gt; &amp;amp; &lt;code&gt;update()&lt;/code&gt;:&lt;/strong&gt; 맵에서 특정 키의 포인터를 조회하고, 값을 갱신하기 위해 커널 레벨에서 원자적으로 작동하는 맵 조작 함수들이다.&lt;/li&gt;
+&lt;li&gt;UID가 &lt;code&gt;501&lt;/code&gt;인 사용자가 일반 &lt;code&gt;ls&lt;/code&gt;를 치면 &lt;code&gt;UID 501&lt;/code&gt; 카운트가 1씩 올라간다.&lt;/li&gt;
+&lt;li&gt;만약 &lt;code&gt;sudo ls&lt;/code&gt;를 실행하면, &lt;code&gt;sudo&lt;/code&gt; 명령어 자체가 &lt;code&gt;UID 501&lt;/code&gt; 하에서 실행되고, 그 내부에서 실제 &lt;code&gt;ls&lt;/code&gt;는 root 권한(&lt;code&gt;UID 0&lt;/code&gt;)으로 실행되므로 &lt;code&gt;UID 501: +1&lt;/code&gt;, &lt;code&gt;UID 0: +1&lt;/code&gt;이 동시에 집계되는 아키텍처적 인과관계를 정밀하게 관측할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;커널-상태-검사-도구-bpftool&#34;&gt;커널 상태 검사 도구: bpftool&lt;/h3&gt;
 &lt;hr&gt;
-&lt;p&gt;2장에서는 우리가 올린 eBPF 프로그램이 실제로 커널에 어떻게 적재되어 있는지 확인하고 인스펙션할 수 있는 강력한 유틸리티인 **&lt;code&gt;bpftool&lt;/code&gt;**의 기초 활용법도 소개한다.&lt;/p&gt;
+&lt;h4 id=&#34;2-perf-buffer와-ring-buffer-map&#34;&gt;2. Perf Buffer와 Ring Buffer Map&lt;/h4&gt;
+&lt;p&gt;해시 테이블 맵은 키-값 단위의 상태 축적에는 훌륭하지만, 이벤트가 발생할 때마다 실시간으로 대량의 복잡한 이벤트를 통보받기 위해서는 매번 사용자 공간에서 전체 테이블을 무식하게 폴링(Polling)해야 하므로 성능 손실이 크다.&lt;/p&gt;
+&lt;p&gt;이러한 문제를 우아하게 해결하기 위해 리눅스 커널이 제공하는 순환 큐 형태의 자료구조인 &lt;strong&gt;링 버퍼(Ring Buffer)&lt;/strong&gt; 개념을 활용한다.&lt;/p&gt;
+&lt;h5 id=&#34;링-버퍼ring-buffer의-기본-동작-메커니즘&#34;&gt;링 버퍼(Ring Buffer)의 기본 동작 메커니즘&lt;/h5&gt;
+&lt;p&gt;링 버퍼는 메모리 상에 논리적인 원형 링(Ring) 형태로 구성된 일종의 FIFO 버퍼다.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;https://raw.githubusercontent.com/iovisor/bcc/master/docs/images/ring_buffer_architecture.png&#34; alt=&#34;Ring Buffer Architecture Example&#34; style=&#34;max-width:80%;&#34;&gt;
+  &lt;figcaption&gt;별도의 Write Pointer와 Read Pointer를 두고 순환하며 데이터를 소모하는 링 버퍼 메커니즘&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;적재된 eBPF 프로그램 목록 보기:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ bpftool prog list
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;출력 결과로 프로그램 ID, 타입(kprobe 등), 컴파일된 JIT 번역 여부, 메모리 점유 상태 등을 상세히 열람할 수 있다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;컴파일된 바이트코드 덤프 뜨기:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$ bpftool prog dump xlated id &amp;lt;프로그램_ID&amp;gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;커널 내부 검증기를 거쳐 JIT 컴파일되기 직전의 완전한 eBPF 인스트럭션 명령어 집합(가상 CPU 기계어) 구조를 역어셈블(Disassemble) 형식으로 확인할 수 있다.&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;독립된 포인터:&lt;/strong&gt; 데이터를 기록하는 &lt;code&gt;Write Pointer&lt;/code&gt;와 데이터를 읽어가는 &lt;code&gt;Read Pointer&lt;/code&gt;가 독립적으로 움직인다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;데이터 흐름:&lt;/strong&gt; 커널이 Write Pointer 위치에 메시지를 기록하고 포인터를 전진시키면, 사용자 공간 드라이버가 Read Pointer를 전진시키며 이벤트를 소비한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;오버플로우 처리:&lt;/strong&gt; 만약 읽기 속도가 쓰기 속도를 따라잡지 못해 Write Pointer가 Read Pointer를 추월하려고 하면, 커널은 이벤트를 기록하지 않고 드롭(Drop)시킨 뒤 드롭 카운터를 올려 데이터 소실을 방지하고 상태를 경고한다.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;이 방식을 사용하면 동기적 컨텍스트 스위칭(Synchronous Context Switching) 없이, 커널 레벨에서 비동기적으로 대량의 버퍼를 고속 스트리밍하여 오버헤드를 극도로 낮출 수 있다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;참고:&lt;/strong&gt; 전통적으로 사용되던 &lt;strong&gt;Perf Buffer&lt;/strong&gt; 외에도, 커널 5.8 이상부터는 메모리 오버헤드가 더 낮고 공유 효율이 높은 &lt;strong&gt;BPF Ring Buffer&lt;/strong&gt;(&lt;code&gt;BPF_RINGBUF_OUTPUT&lt;/code&gt;) 방식이 권장된다. (BCC의 Ring Buffer 예제는 4장에서 상세히 다뤄진다.)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h5 id=&#34;perf-buffer를-활용한-이벤트-스트리밍-예제&#34;&gt;Perf Buffer를 활용한 이벤트 스트리밍 예제&lt;/h5&gt;
+&lt;p&gt;다음은 프로세스 ID(PID), 사용자 ID(UID), 실행된 명령어 이름(Command), 메시지를 하나의 C 구조체에 담아 &lt;code&gt;BPF_PERF_OUTPUT&lt;/code&gt; 버퍼 맵을 통해 비동기로 스트리밍하는 예제다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;bcc&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; BPF
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;program &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;BPF_PERF_OUTPUT(output); // perf_output 버퍼 맵 정의
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;// 사용자 영역과 주고받을 정교한 이벤트 데이터 구조체 정의
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;struct data_t {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    int pid;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    int uid;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    char command[16];
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    char message[12];
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;int hello(void *ctx) {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    struct data_t data = &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    char message[12] = &amp;#34;Hello World&amp;#34;;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    // 커널 헬퍼 함수들을 사용해 컨텍스트 정보 수집
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    data.pid = bpf_get_current_pid_tgid() &amp;gt;&amp;gt; 32; // 상위 32비트가 실제 PID
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    data.uid = bpf_get_current_uid_gid() &amp;amp; 0xFFFFFFFF;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    bpf_get_current_comm(&amp;amp;data.command, sizeof(data.command));
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    // 안전한 커널 메모리 복사를 보장하는 헬퍼 함수
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    bpf_probe_read_kernel(&amp;amp;data.message, sizeof(data.message), message);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    // 수집된 대용량 구조체 데이터를 맵 버퍼로 실시간 제출(Submit)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    output.perf_submit(ctx, &amp;amp;data, sizeof(data));
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    return 0;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; BPF&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;text&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;program&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;syscall &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;get_syscall_fnname&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;execve&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;attach_kprobe&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;event&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;syscall&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; fn_name&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 사용자 영역 파이썬 콜백 함수 정의&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;print_event&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;cpu&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; data&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; size&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#57606a&#34;&gt;# BCC가 원시 바이트 데이터를 Python 객체 구조체로 변환해 줌&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    event &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;output&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;event&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;data&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;[&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;event&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;pid&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;] UID:&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;event&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;uid&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt; | Cmd:&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;event&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;command&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;decode&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt; | Msg:&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;{&lt;/span&gt;event&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;message&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;decode&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 콜백 등록 및 폴링 루프 실행&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;output&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;open_perf_buffer&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;print_event&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;Streaming events through Perf Buffer... Press Ctrl+C&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;try&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;perf_buffer_poll&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 무한 폴링 루프&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt; KeyboardInterrupt&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#cf222e&#34;&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h5 id=&#34;-사용된-핵심-커널-헬퍼-함수-정리&#34;&gt;🛠 사용된 핵심 커널 헬퍼 함수 정리&lt;/h5&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bpf_get_current_pid_tgid()&lt;/code&gt;: 현재 실행 흐름의 PID와 TGID(Thread Group ID)를 64비트 값으로 돌려준다. eBPF 내부에서 실제 우리가 아는 프로세스 ID(PID)는 상위 32비트에 저장되어 있으므로 비트 시프트 연산(&lt;code&gt;&amp;gt;&amp;gt; 32&lt;/code&gt;)을 통해 올바른 값을 추출해야 한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bpf_get_current_comm()&lt;/code&gt;: 현재 호출을 트리거한 실행 파일 명칭(문자열)을 안전하게 읽어온다. C언어 특성상 단순 대입(&lt;code&gt;=&lt;/code&gt;)이 불가능하므로, 목적지 주소(&lt;code&gt;&amp;amp;data.command&lt;/code&gt;)를 인자로 넘겨 직접 쓰도록 안전하게 설계되어 있다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bpf_probe_read_kernel()&lt;/code&gt;: 안전하게 격리된 메모리 영역에서 다른 커널 공간 메모리를 복사해 온다. 커널 공간의 임의 주소에 잘못 접근해 커널 패닉이 나는 것을 원천 차단하는 대표적인 보안 보호 헬퍼다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;함수-호출function-calls과-컴파일러-인라이닝&#34;&gt;함수 호출(Function Calls)과 컴파일러 인라이닝&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;코드의 유지보수와 중복 제거를 위해 함수를 분리하는 것은 프로그래밍의 기초 상식(DRY 원칙)이다. 하지만 아주 오랫동안 eBPF 프로그램 안에서는 &lt;strong&gt;사용자 정의 함수 호출이 불가능&lt;/strong&gt;했다. 오직 커널이 정의한 공식 Helper Function만 호출할 수 있었다.&lt;/p&gt;
+&lt;p&gt;이 제약을 우회하기 위해 전통적으로 사용된 기법이 바로 **인라이닝(Inlining)**이다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;static&lt;/span&gt; __always_inline &lt;span style=&#34;color:#cf222e&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;my_function&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;ctx&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; val&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;함수-인라이닝의-작동-원리와-장단점&#34;&gt;함수 인라이닝의 작동 원리와 장단점&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;작동 원리:&lt;/strong&gt; 컴파일러가 바이트코드를 빌드할 때, 호출부에서 점프(&lt;code&gt;JUMP&lt;/code&gt;) 명령어를 통해 실제 함수 메모리 위치로 이동하게 만드는 대신, &lt;strong&gt;해당 함수의 실제 인스트럭션 코드 뭉치를 호출한 자리에 통째로 복사해서 붙여넣는다&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;장점:&lt;/strong&gt; 스택 프레임을 무식하게 증가시키지 않고 점프 오버헤드가 없으므로, 검증기(Verifier)가 실행 안전 흐름을 단선적으로 분석하기에 아주 안전하다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;단점:&lt;/strong&gt; 함수가 여러 군데서 호출될 경우 컴파일된 바이너리/바이트코드의 물리적 크기가 기하급수적으로 커지는 벌룬 오버헤드(Balloon Overhead)가 발생한다. 특히 eBPF 프로그램은 엄격한 명령어 개수 한계가 있으므로 치명적일 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;참고:&lt;/strong&gt; 리눅스 커널 4.16 및 LLVM 6.0부터 제약이 풀려 네이티브 함수 호출(BPF-to-BPF Function Calls)이 기술적으로 가능해졌지만, 현재 BCC 프레임워크 수준에서는 이를 완벽히 동적으로 핸들링하기 어려워 여전히 BCC 개발 시에는 &lt;code&gt;__always_inline&lt;/code&gt; 지시어의 사용이 권장된다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;테일-콜tail-calls-커널-공간-내부의-무중단-프로그램-체이닝&#34;&gt;테일 콜(Tail Calls): 커널 공간 내부의 무중단 프로그램 체이닝&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;eBPF 커널 실행 환경에는 매우 까다로운 제약 조건이 존재하는데, 바로 &lt;strong&gt;스택 메모리 크기가 최대 512바이트로 제한&lt;/strong&gt;된다는 점이다. 512바이트는 복잡한 파싱 로직이나 중첩 루프를 돌리기에는 턱없이 부족한 공간이다.&lt;/p&gt;
+&lt;p&gt;이를 우회하고, 복잡한 로직을 모듈화하여 순차적으로 이어 달릴 수 있도록 지원하는 핵심 기술이 바로 **테일 콜(Tail Calls)**이다.&lt;/p&gt;
+&lt;h4 id=&#34;테일-콜tail-call의-개념&#34;&gt;테일 콜(Tail Call)의 개념&lt;/h4&gt;
+&lt;p&gt;테일 콜은 마치 리눅스 프로세스 생태계의 &lt;code&gt;execve&lt;/code&gt; 시스템 콜과 유사하게 동작한다.
+현재 실행 중인 eBPF 프로그램의 컨텍스트를 유지한 채, &lt;strong&gt;다음에 실행할 eBPF 프로그램으로 제어권을 완전히 넘겨버리며, 호출한 부모 프로그램으로 다시 리턴(&lt;code&gt;Return&lt;/code&gt;)하지 않는다.&lt;/strong&gt; 즉, 스택 프레임을 한 층도 더 쌓지 않고 완전히 동일한 깊이에서 새 프로그램을 실행하므로, 스택 오버플로우가 원천적으로 불가능하다.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;https://ebpf.io/static/bf8b6a15714cb263ba79bcfa8959f635/tailcall.png&#34; alt=&#34;eBPF Tail Calls Architecture&#34; style=&#34;max-width:80%;&#34;&gt;
+  &lt;figcaption&gt;스택 오버헤드 없이 제어 흐름을 다른 eBPF 프로그램으로 완전히 치환하는 테일 콜 흐름&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;테일 콜은 다음과 같은 &lt;code&gt;bpf_tail_call()&lt;/code&gt; 시스템 도구를 활용한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;long&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;bpf_tail_call&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;ctx&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; bpf_map &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;prog_array_map&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; u32 index&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;prog_array_map&lt;/code&gt;: 다음에 실행될 수 있는 eBPF 프로그램들의 파일 디스크립터(FD) 주소 리스트를 담은 특수 맵인 &lt;code&gt;BPF_MAP_TYPE_PROG_ARRAY&lt;/code&gt;다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;index&lt;/code&gt;: 해당 맵에서 몇 번째(Index) 등록된 프로그램을 가져와 즉시 실행할 것인지 지정한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;bcc-테일-콜-예제-hello-tailpy&#34;&gt;BCC 테일 콜 예제: &lt;code&gt;hello-tail.py&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;다음은 전체 시스템 콜 진입점(&lt;code&gt;sys_enter&lt;/code&gt; raw tracepoint)에 부착하여 작동하되, 특정 시스템 콜 번호(Opcode)에 매칭되는 독립된 프로그램들이 존재할 경우 테일 콜 방식으로 점프하여 특화된 로직을 실행하고, 매칭되는 맵이 없을 경우 기본 로직을 실행하는 정교한 설계 예제다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;bcc&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; BPF
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;ctypes&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;ct&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;program &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;r&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;// 최대 300개의 eBPF 프로그램을 적재할 수 있는 PROG_ARRAY 맵 선언
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;BPF_PROG_ARRAY(syscall, 300);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;// 전체 시스템 콜 훅에 걸릴 메인 프로그램
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;int hello(struct bpf_raw_tracepoint_args *ctx) {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    int opcode = ctx-&amp;gt;args[1]; // 시스템 콜 번호(Opcode) 획득
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    // 테일 콜 실행 (BCC는 이를 내부적으로 bpf_tail_call로 치환)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    syscall.call(ctx, opcode);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    // 만약 테일 콜에 성공하면 이 아래 코드는 실행되지 않고 제어권이 완전히 넘어감!
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    // 테일 콜 실패 시(프로그램 미등록 등)에만 폴백으로 이 로직이 작동하게 됨
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    bpf_trace_printk(&amp;#34;Another syscall: &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;%d&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;\\n&amp;#34;, opcode);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    return 0;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;// execve 시스템 콜 전용 테일 콜 프로그램
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;int hello_execve(void *ctx) {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    bpf_trace_printk(&amp;#34;Executing a program\\n&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    return 0;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;// 타이머 관련 시스템 콜 전용 테일 콜 프로그램
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;int hello_timer(struct bpf_raw_tracepoint_args *ctx) {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    if (ctx-&amp;gt;args[1] == 222) {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;        bpf_trace_printk(&amp;#34;Creating a timer\\n&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    } else {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;        bpf_trace_printk(&amp;#34;Other timer operation\\n&amp;#34;);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    return 0;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;// 원치 않는 자주 발생하는 시스템 콜 트래픽을 필터링하기 위한 빈 테일 콜
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;int ignore_opcode(void *ctx) {
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    return 0;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; BPF&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;text&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;program&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# Raw Tracepoint의 sys_enter 진입점에 메인 hello 부착&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;attach_raw_tracepoint&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;tp&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;sys_enter&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; fn_name&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;hello&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 개별 서브 eBPF 프로그램들을 독자적으로 빌드하고 파일 디스크립터(FD) 추출&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ignore_fn &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;load_func&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;ignore_opcode&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; BPF&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;RAW_TRACEPOINT&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;exec_fn &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;load_func&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;hello_execve&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; BPF&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;RAW_TRACEPOINT&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;timer_fn &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;load_func&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;hello_timer&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; BPF&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;RAW_TRACEPOINT&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# PROG_ARRAY 맵 가져오기&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;prog_array &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;get_table&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;syscall&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 특정 시스템 콜 번호(Opcode) 키값에 매핑되는 FD 등록&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;prog_array&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;59&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;exec_fn&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;fd&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;   &lt;span style=&#34;color:#57606a&#34;&gt;# 59번: execve (x86 기준)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;prog_array&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;222&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;timer_fn&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;fd&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 222번: timer_create&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;prog_array&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;226&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;timer_fn&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;fd&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;# 226번: timer_delete&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 너무 과하게 호출되는 무의미한 시스템 콜(예: read/write 등)은 무음 필터 테일 콜로 연결&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;prog_array&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;21&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;ignore_fn&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;fd&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;prog_array&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;22&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;ignore_fn&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;fd&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;Tracing system-wide syscalls with Tail Calls... Press Ctrl+C&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;trace_print&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;테일 콜 기법을 활용하면 &lt;strong&gt;최대 33개까지 프로그램 체이닝이 가능&lt;/strong&gt;하다. eBPF 프로그램 1개당 최대 인스트럭션 복잡도 제한이 100만 라인인 점을 고려하면, 33개의 프로그램을 체이닝하여 거의 극단적인 수준의 대형 커널 로직도 안전하게 스택 제한 없이 구현해 낼 수 있음을 의미한다.&lt;/p&gt;
+&lt;hr&gt;
 &lt;h3 id=&#34;느낀점--결론&#34;&gt;느낀점 / 결론&lt;/h3&gt;
 &lt;hr&gt;
-&lt;p&gt;드디어 눈으로 보고 돌아가는 첫 eBPF 프로그램을 마주하니 이 기술의 폭발적인 힘이 손끝으로 체감되었다.&lt;/p&gt;
-&lt;p&gt;무엇보다 놀라웠던 것은 &lt;strong&gt;BCC의 극단적인 편리함&lt;/strong&gt;과 &lt;strong&gt;eBPF Map의 존재 의의&lt;/strong&gt;였다. 복잡한 커널 드라이버 헤더를 직접 링크하고 메이크파일(Makefile)을 작성해 한 땀 한 땀 로드하지 않고도, 단 몇 줄의 파index형 코드와 인라인 C 문자열만으로 커널 시스템 콜 전역에 동적 훅을 뚫고 데이터를 실시간 집계할 수 있다는 사실은 개발자 경험(DX) 관점에서 완전히 새로운 충격이었다.&lt;/p&gt;
-&lt;p&gt;또한, 1장에서 다룬 &amp;lsquo;안전성&amp;rsquo;을 담보하기 위해 커널 영역 내에서는 함부로 직접적인 메모리 포인터 접근이나 전역 변수 공유가 원천 차단되며, 오직 &lt;code&gt;bpf_get_current_uid_gid()&lt;/code&gt; 같은 안전한 빌트인 헬퍼 함수와 원자적 조작을 보장하는 &lt;code&gt;eBPF Map&lt;/code&gt;이라는 제한적 관문을 통해서만 사용자 영역과의 데이터 전송이 가능하다는 엄격한 보안적 강제 메커니즘을 실제 구현 코드를 통해 직관적으로 배울 수 있어 매우 뜻깊었다.&lt;/p&gt;
-&lt;p&gt;앞으로 3장에서는 BCC의 마법에 숨겨져 있던 커널 내부의 실제 동작 매커니즘, 즉 eBPF 시스템 콜(&lt;code&gt;sys_bpf&lt;/code&gt;)과 바이트코드가 로드되는 보다 원초적인 어셈블리 레이어 및 검증기(Verifier)의 까다로운 동작 조건들을 파헤치게 되는데, 얼른 이를 확인하여 이 마법 같은 프레임워크 뒤에 숨겨진 로우 레벨 실체를 정복하고 싶다.&lt;/p&gt;
+&lt;p&gt;눈으로 직접 확인하고 동작하는 두 번째 실습 단계를 마주하면서, eBPF가 가진 설계적 디테일과 한계 돌파를 위한 우아한 고안들에 큰 매력을 느꼈다.&lt;/p&gt;
+&lt;p&gt;특히, &lt;strong&gt;eBPF Map의 엄격한 경계선 정의&lt;/strong&gt;와 &lt;strong&gt;BCC 프리프로세서의 Rewrite 기능&lt;/strong&gt;에 깊은 인상을 받았다. 얼핏 보기에는 매우 편리한 객체 지향형 구조체 접근 코드인 것 같지만, 실은 커널 패닉을 유발하지 않도록 검증기가 사전에 철저히 정적 분석을 진행하기 전, BCC가 영리하게 중간에서 코드를 재구성하고 있었던 것이다. 이러한 내부적인 &amp;lsquo;마법&amp;rsquo; 같은 컴파일 도구 체인의 기여 덕분에 개발자는 커널 로우 레벨 코딩에 대한 피로도 없이 복잡한 아키텍처 구현에 집중할 수 있었다.&lt;/p&gt;
+&lt;p&gt;또한, &lt;strong&gt;512바이트 스택 메모리 한계&lt;/strong&gt;를 극복하기 위해 제안된 &lt;strong&gt;인라이닝&lt;/strong&gt;과 &lt;strong&gt;테일 콜(Tail Call)&lt;/strong&gt; 구조는 시스템 디자인 관점에서 대단히 훌륭한 타협점이자 엔지니어링적 지혜라고 느껴진다. 리턴 경로를 원천 차단하고 메모리 상에서 제어 컨텍스트를 통째로 치환해버림으로써 메모리 소모를 극도로 억제한 점은 저수준 시스템 프로그래밍에서만 느낄 수 있는 아키텍처적 희열이었다.&lt;/p&gt;
+&lt;p&gt;앞으로 이어질 3장에서는 이 모든 BCC의 자동화 장막을 한 단계 더 걷어내어, 파이썬이 아닌 어셈블리와 완전한 원초적 형태의 C, 그리고 내부의 진짜 컴파일러 파이프라인 및 바이트코드 흐름을 살펴본다고 하니 무척 설렌다. 겉에 씌워진 도구의 한계를 이해할 수 있을 때 비로소 진정한 파워 유저로 거듭날 수 있는 만큼, 다음 챕터가 매우 기대된다.&lt;/p&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
 &lt;li&gt;Liz Rice, &lt;em&gt;Learning eBPF&lt;/em&gt;, O&amp;rsquo;Reilly Media.&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/iovisor/bcc&#34;&gt;IO Visor BCC GitHub Repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Andrii Nakryiko&amp;rsquo;s Blog, &lt;em&gt;BPF Ring Buffer&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
