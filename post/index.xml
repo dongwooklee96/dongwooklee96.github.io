@@ -18,9 +18,10 @@
       <description>&lt;h3 id=&#34;시작하며&#34;&gt;시작하며&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;1장에서 eBPF가 무엇이며 왜 중요한지에 대한 이론적 배경을 학습했다면, 2장에서는 실질적으로 eBPF 프로그램을 어떻게 작성하고 실행하는지 다룬다.&lt;/p&gt;
-&lt;p&gt;Liz Rice의 저서 &lt;em&gt;Learning eBPF&lt;/em&gt; 2장에서는 eBPF의 가장 기본적인 개발 도구인 **BCC(BPF Compiler Collection)**를 사용하여 아주 심플한 &amp;ldquo;Hello World&amp;rdquo; 프로그램을 만들고, 더 나아가 **eBPF Map(해시 테이블, Perf/Ring Buffer)**을 사용해 데이터를 저장하고 사용자 공간과 동적으로 통신하는 법을 배운다. 또한, 커널 내에서의 제한적인 리소스를 극복하기 위한 **함수 인라이닝(Function Inlining)**과 &lt;strong&gt;테일 콜(Tail Calls)&lt;/strong&gt; 아키텍처까지 깊이 있게 파헤친다.&lt;/p&gt;
+&lt;p&gt;2장에서는 eBPF의 가장 기본적인 개발 도구인 BCC(BPF Compiler Collection)를 사용하여 아주 심플한 &amp;ldquo;Hello World&amp;rdquo; 프로그램을 만들고, 더 나아가 eBPF Map(해시 테이블, Perf/Ring Buffer)을 사용해 데이터를 저장하고 사용자 공간과 동적으로 통신하는 법을 배운다. 또한, 커널 내에서의 제한적인 리소스를 극복하기 위한 함수 인라이닝(Function Inlining)과 &lt;em&gt;테일 콜(Tail Calls)&lt;/em&gt; 까지 깊이 있게 파헤친다.&lt;/p&gt;
 &lt;h3 id=&#34;ebpf-프로그램의-기본-아키텍처&#34;&gt;eBPF 프로그램의 기본 아키텍처&lt;/h3&gt;
 &lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260711/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-07-19%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.12.42.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;eBPF 애플리케이션은 기본적으로 &lt;strong&gt;두 개의 영역&lt;/strong&gt;으로 나뉘어 설계된다.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;커널 공간(Kernel Space) 프로그램:&lt;/strong&gt; 훅(Hook) 포인트에 부착(Attach)되어 실제로 이벤트를 감지하고 필터링 또는 수집을 수행하는 핵심 C 소스코드.&lt;/li&gt;
@@ -29,6 +30,14 @@
 &lt;p&gt;이러한 분리 구조 덕분에 무겁고 위험한 비즈니스 로직은 안전한 사용자 공간에서 돌리고, 커널 공간에서는 극도로 가볍고 안전한 가로채기 연산만 효율적으로 수행할 수 있다.&lt;/p&gt;
 &lt;h3 id=&#34;bcc를-활용한-hello-world-프로그램&#34;&gt;BCC를 활용한 Hello World 프로그램&lt;/h3&gt;
 &lt;hr&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;https://mike-home.com/20260711/IMG_5179.jpeg&#34; alt=&#34;eBPF 실습용 라즈베리파이 클러스터 구성 모습&#34;&gt;
+  &lt;figcaption&gt;예전 쿠버네티스 학습을 위해 구축해 두었다가 이번 eBPF 실습의 든든한 구원투수가 된 라즈베리파이 장비들&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;실은 이 실습 코드를 실행하기 전, 나름 바보 같은 해프닝이 있었다. 사용하고 있는 메인 개발 장비가 macOS(맥북)이다 보니, 처음에 아무 생각 없이 로컬 맥 환경에서 BCC 패키지를 실행해 보려 시도했던 것이다.&lt;/p&gt;
+&lt;p&gt;물론 결과는 처참한 오류였다. 당연하게도 eBPF는 리눅스(Linux) 커널에 극도로 종속적인 최첨단 커널 전용 기술이기 때문에 맥 환경에서는 동작 자체가 불가능했다.&lt;/p&gt;
+&lt;p&gt;그렇다고 맥 위에 가상 머신(VM)을 띄우자니 하이퍼바이저를 올리고 우분투 이미지 구워서 환경 세팅과 빌드 툴체인을 처음부터 일일이 구성하려니 생각만 해도 너무 번거롭고 귀찮아졌다.&lt;/p&gt;
+&lt;p&gt;그 순간 번뜩 머릿속을 스쳐 지나간 녀석이 바로 예전에 **쿠버네티스(Kubernetes)를 한참 공부할 때 직접 자작 클러스터로 하드웨어를 한 땀 한 땀 구축해 놓았던 라즈베리파이(Raspberry Pi)**였다. 오랜만에 먼지를 털어내고 전원을 인가했더니, 아주 훌륭한 Ubuntu 리눅스 환경이 이미 잡혀있어 곧바로 실습 베이스캠프로 요긴하게 활용할 수 있었다. 역시 예전에 사서 고생하며 장비를 구축해 둔 경험은 언젠가 피와 살이 되는 듯하다.&lt;/p&gt;
 &lt;p&gt;BCC(BPF Compiler Collection)는 eBPF를 가장 손쉽게 작성할 수 있게 돕는 프레임워크다. BCC를 사용하면 파이썬(Python) 드라이버 코드 내부에 커널용 C 코드를 인라인 문자열 형식으로 삽입하여 간편하게 실행할 수 있다.&lt;/p&gt;
 &lt;p&gt;아래는 새로운 프로세스가 생성(&lt;code&gt;execve&lt;/code&gt; 시스템 콜 호출)될 때마다 디버그 메시지를 출력하는 Hello World 프로그램 예시다.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;bcc&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; BPF
