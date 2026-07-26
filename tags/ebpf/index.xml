@@ -8,7 +8,367 @@
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Sun, 12 Jul 2026 10:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/ebpf/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 26 Jul 2026 10:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/ebpf/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning eBPF 3장: eBPF 프로그램의 내부 구조와 실행 과정</title>
+      <link>https://dongwooklee96.github.io/post/2026/07/26/learning-ebpf-3%EC%9E%A5-ebpf-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%98-%EB%82%B4%EB%B6%80-%EA%B5%AC%EC%A1%B0%EC%99%80-%EC%8B%A4%ED%96%89-%EA%B3%BC%EC%A0%95.html</link>
+      <pubDate>Sun, 26 Jul 2026 10:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2026/07/26/learning-ebpf-3%EC%9E%A5-ebpf-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%98-%EB%82%B4%EB%B6%80-%EA%B5%AC%EC%A1%B0%EC%99%80-%EC%8B%A4%ED%96%89-%EA%B3%BC%EC%A0%95.html</guid>
+      <description>&lt;h3 id=&#34;시작하며&#34;&gt;시작하며&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;2장에서는 BCC(BPF Compiler Collection)를 이용해 파이썬 코드 안에서 eBPF 프로그램을 컴파일하고 커널에 로드했다. 몇 줄의 코드만으로 결과를 확인할 수 있었지만, 그 이면에서 어떤 파일이 만들어지고 커널이 무엇을 실행하는지는 BCC가 대부분 감춰주었다.&lt;/p&gt;
+&lt;p&gt;3장에서는 이 추상화를 한 겹 걷어낸다. C로 작성한 프로그램이 &lt;strong&gt;eBPF 바이트코드가 담긴 ELF 오브젝트 파일&lt;/strong&gt;로 컴파일되고, 커널의 검증기(Verifier)와 JIT 컴파일러를 거쳐 실제 CPU에서 실행되기까지의 전 과정을 살펴본다. 또한 &lt;code&gt;bpftool&lt;/code&gt;을 사용해 커널에 올라간 프로그램과 맵을 직접 관찰하고, XDP 훅에 프로그램을 부착하고 제거하는 방법을 배운다.&lt;/p&gt;
+&lt;p&gt;이번 장의 전체 흐름을 먼저 정리하면 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hello.bpf.c
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  clang -target bpf
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hello.bpf.o (ELF + eBPF 바이트코드)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  bpftool prog load
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Verifier 검증 → translated bytecode → JIT 기계어(JIT 활성화 시)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  bpftool net attach
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;네트워크 인터페이스의 XDP 훅에서 실행
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;3장의 핵심은 eBPF 프로그램을 단순한 C 소스코드가 아니라, &lt;strong&gt;컴파일·검증·로드·부착이라는 생명주기를 거쳐 커널에서 실행되는 바이트코드&lt;/strong&gt;로 이해하는 것이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;ebpf-가상-머신과-레지스터&#34;&gt;eBPF 가상 머신과 레지스터&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;eBPF 프로그램의 실체는 eBPF 명령어 집합(Instruction Set)으로 구성된 바이트코드다. 커널은 이를 위한 소프트웨어 실행 모델을 제공하며, 프로그램이 로드되면 바이트코드를 해석하거나 JIT 컴파일하여 현재 CPU 아키텍처의 기계어로 변환한다.&lt;/p&gt;
+&lt;p&gt;eBPF 명령어와 레지스터 구조는 x86-64, ARM64 같은 일반적인 CPU 아키텍처에 효율적으로 대응할 수 있도록 설계되어 있다. 덕분에 바이트코드를 네이티브 기계어로 비교적 단순하게 변환할 수 있다.&lt;/p&gt;
+&lt;p&gt;eBPF는 64비트 레지스터 11개를 사용한다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;레지스터&lt;/th&gt;
+          &lt;th&gt;역할&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;R0&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;함수 반환값과 eBPF 프로그램의 최종 반환값&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;R1&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;프로그램 시작 시 컨텍스트(Context) 포인터, 함수 호출 시 첫 번째 인자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;R2&lt;/code&gt; ~ &lt;code&gt;R5&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;함수 호출 시 두 번째부터 다섯 번째 인자&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;R6&lt;/code&gt; ~ &lt;code&gt;R9&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;함수 호출 이후에도 값이 보존되는 레지스터&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;R10&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;읽기 전용 프레임 포인터(Frame Pointer)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;함수 호출 규약에서 특히 중요한 부분은 &lt;code&gt;R1&lt;/code&gt;과 &lt;code&gt;R0&lt;/code&gt;이다. 커널이 eBPF 프로그램을 실행할 때 이벤트의 컨텍스트 포인터를 &lt;code&gt;R1&lt;/code&gt;에 넣어주며, 프로그램은 실행을 마치기 전에 반환 코드를 &lt;code&gt;R0&lt;/code&gt;에 저장한다.&lt;/p&gt;
+&lt;p&gt;예를 들어 XDP 프로그램의 &lt;code&gt;return XDP_PASS;&lt;/code&gt;는 최종적으로 &lt;code&gt;R0&lt;/code&gt;에 &lt;code&gt;XDP_PASS&lt;/code&gt;의 값인 &lt;code&gt;2&lt;/code&gt;를 기록한 뒤 &lt;code&gt;exit&lt;/code&gt; 명령을 실행하는 바이트코드로 변환된다.&lt;/p&gt;
+&lt;h3 id=&#34;ebpf-명령어의-구조&#34;&gt;eBPF 명령어의 구조&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;리눅스 커널의 &lt;code&gt;struct bpf_insn&lt;/code&gt;은 일반적인 eBPF 명령어 하나를 다음과 같이 표현한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; bpf_insn &lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    __u8  code&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;       &lt;span style=&#34;color:#57606a&#34;&gt;/* opcode */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    __u8  &lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;dst_reg&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;  &lt;span style=&#34;color:#57606a&#34;&gt;/* destination register */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    __u8  &lt;span style=&#34;color:#900;font-weight:bold&#34;&gt;src_reg&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;4&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;  &lt;span style=&#34;color:#57606a&#34;&gt;/* source register */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    __s16 off&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;        &lt;span style=&#34;color:#57606a&#34;&gt;/* signed offset */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    __s32 imm&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;        &lt;span style=&#34;color:#57606a&#34;&gt;/* signed immediate value */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;일반 명령어 하나의 크기는 64비트, 즉 8바이트다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;필드&lt;/th&gt;
+          &lt;th style=&#34;text-align: right&#34;&gt;크기&lt;/th&gt;
+          &lt;th&gt;의미&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;code&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;8비트&lt;/td&gt;
+          &lt;td&gt;로드, 저장, 산술, 점프, 호출 등의 연산 종류&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;dst_reg&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;4비트&lt;/td&gt;
+          &lt;td&gt;결과가 저장될 대상 레지스터&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;src_reg&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;4비트&lt;/td&gt;
+          &lt;td&gt;입력값을 제공하는 소스 레지스터&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;off&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;16비트&lt;/td&gt;
+          &lt;td&gt;메모리 접근이나 분기에 사용하는 오프셋&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;imm&lt;/code&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: right&#34;&gt;32비트&lt;/td&gt;
+          &lt;td&gt;명령어 안에 직접 포함되는 상수값&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;대부분의 명령어는 8바이트로 표현되지만, 64비트 상수를 레지스터에 적재하는 명령어처럼 공간이 더 필요한 경우에는 두 개의 명령어 슬롯을 사용하는 16바이트 와이드 인코딩(Wide Instruction Encoding)이 사용된다.&lt;/p&gt;
+&lt;p&gt;주요 명령어는 다음 범주로 나눌 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;레지스터나 메모리에서 값을 읽는 로드(Load)&lt;/li&gt;
+&lt;li&gt;레지스터의 값을 메모리에 기록하는 스토어(Store)&lt;/li&gt;
+&lt;li&gt;덧셈, 비트 연산 등의 산술 연산&lt;/li&gt;
+&lt;li&gt;조건에 따라 실행 위치를 바꾸는 점프(Jump)&lt;/li&gt;
+&lt;li&gt;헬퍼 함수나 다른 BPF 함수를 실행하는 호출(Call)&lt;/li&gt;
+&lt;li&gt;프로그램 실행을 끝내는 종료(Exit)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;바이트코드를 직접 작성할 필요는 거의 없다. 하지만 이 구조를 알고 있으면 &lt;code&gt;llvm-objdump&lt;/code&gt;나 &lt;code&gt;bpftool&lt;/code&gt;이 보여주는 결과를 읽고, C 코드 한 줄이 커널에서 어떤 명령어로 실행되는지 추적할 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;xdp-기반-hello-world-프로그램&#34;&gt;XDP 기반 Hello World 프로그램&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;2장의 예제는 시스템 콜의 kprobe 이벤트에 프로그램을 부착했다. 3장에서는 네트워크 인터페이스로 패킷이 들어오는 순간 실행되는 XDP(eXpress Data Path) 프로그램을 사용한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;&amp;lt;linux/bpf.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;&amp;lt;bpf/bpf_helpers.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; counter &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;SEC&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;xdp&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;hello&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; xdp_md &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;ctx&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;bpf_printk&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;Hello World %d&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; counter&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    counter&lt;span style=&#34;color:#0550ae&#34;&gt;++&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; XDP_PASS&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;char&lt;/span&gt; LICENSE&lt;span style=&#34;color:#1f2328&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;SEC&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;license&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;Dual BSD/GPL&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;코드는 짧지만 eBPF 프로그램의 중요한 구성 요소가 모두 들어 있다.&lt;/p&gt;
+&lt;h4 id=&#34;secxdp&#34;&gt;&lt;code&gt;SEC(&amp;quot;xdp&amp;quot;)&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;SEC()&lt;/code&gt; 매크로는 함수나 변수를 ELF 오브젝트 파일의 특정 섹션에 배치한다. &lt;code&gt;xdp&lt;/code&gt; 섹션은 로더에게 이 함수가 XDP 타입의 eBPF 프로그램임을 알려준다.&lt;/p&gt;
+&lt;p&gt;eBPF 프로그램의 이름은 함수 이름을 따라가므로, 이 프로그램의 이름은 &lt;code&gt;hello&lt;/code&gt;가 된다.&lt;/p&gt;
+&lt;h4 id=&#34;bpf_printk&#34;&gt;&lt;code&gt;bpf_printk()&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;bpf_printk()&lt;/code&gt;는 디버깅 문자열을 커널 트레이스 버퍼에 기록하기 위한 libbpf의 편의 매크로다. 최종적으로는 커널이 제공하는 BPF 헬퍼 함수를 호출하며, 결과는 &lt;code&gt;trace_pipe&lt;/code&gt; 또는 &lt;code&gt;bpftool prog tracelog&lt;/code&gt;로 확인할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bpf_printk()&lt;/code&gt;는 디버깅에는 편리하지만 성능 비용과 전역 버퍼 공유 문제 때문에 운영 환경의 이벤트 전달 수단으로 사용해서는 안 된다. 실제 프로그램에서는 링 버퍼나 맵을 사용하는 편이 적절하다.&lt;/p&gt;
+&lt;h4 id=&#34;return-xdp_pass&#34;&gt;&lt;code&gt;return XDP_PASS&lt;/code&gt;&lt;/h4&gt;
+&lt;p&gt;XDP 프로그램의 반환값은 해당 패킷을 어떻게 처리할지 결정하는 판정값(Verdict)이다. &lt;code&gt;XDP_PASS&lt;/code&gt;는 패킷을 일반적인 커널 네트워크 스택으로 계속 전달하라는 의미다.&lt;/p&gt;
+&lt;h4 id=&#34;라이선스-섹션&#34;&gt;라이선스 섹션&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;license&lt;/code&gt; 섹션은 프로그램이 선언하는 라이선스 정보를 커널에 전달한다. 일부 BPF 헬퍼 함수와 프로그램 타입은 GPL 호환 라이선스를 선언한 프로그램에서만 사용할 수 있으므로, 이 정보는 단순한 주석이 아니라 로드 과정에 영향을 주는 메타데이터다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;이 예제의 &lt;code&gt;counter++&lt;/code&gt;는 학습을 위한 단순한 코드다. XDP 프로그램은 여러 CPU에서 동시에 실행될 수 있으므로 정확한 패킷 수를 집계하려면 원자적 연산이나 Per-CPU Map을 사용해야 한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;c-소스코드를-ebpf-오브젝트로-컴파일하기&#34;&gt;C 소스코드를 eBPF 오브젝트로 컴파일하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Clang/LLVM은 &lt;code&gt;-target bpf&lt;/code&gt; 옵션을 통해 C 코드를 eBPF 바이트코드로 컴파일할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;clang &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -target bpf &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -I/usr/include/&lt;span style=&#34;color:#cf222e&#34;&gt;$(&lt;/span&gt;uname -m&lt;span style=&#34;color:#cf222e&#34;&gt;)&lt;/span&gt;-linux-gnu &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -g &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -O2 &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -c hello.bpf.c &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -o hello.bpf.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;각 옵션의 의미는 다음과 같다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-target bpf&lt;/code&gt;: 현재 CPU용 기계어 대신 eBPF 명령어를 생성한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-g&lt;/code&gt;: 디버그 정보와 BTF 정보를 생성하여 소스 코드, 타입, 변수 이름을 관찰할 수 있게 한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-O2&lt;/code&gt;: eBPF에 적합하게 코드를 최적화한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-c&lt;/code&gt;: 링크하지 않고 재배치 가능한 오브젝트 파일을 만든다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;생성된 파일의 형식을 &lt;code&gt;file&lt;/code&gt; 명령어로 확인할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;file hello.bpf.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hello.bpf.o: ELF 64-bit LSB relocatable, eBPF, version 1 (SYSV),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;with debug_info, not stripped
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;hello.bpf.o&lt;/code&gt;는 일반 애플리케이션처럼 직접 실행하는 파일이 아니다. eBPF 바이트코드와 프로그램 섹션, 라이선스, 맵, BTF 같은 메타데이터를 담고 있는 &lt;strong&gt;ELF 컨테이너&lt;/strong&gt;다. 사용자 공간의 로더는 이 ELF 파일을 해석하여 필요한 프로그램과 맵을 커널에 생성한다.&lt;/p&gt;
+&lt;h3 id=&#34;오브젝트-파일의-바이트코드-관찰하기&#34;&gt;오브젝트 파일의 바이트코드 관찰하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;llvm-objdump&lt;/code&gt;를 사용하면 ELF 오브젝트 안의 eBPF 명령어를 역어셈블할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;llvm-objdump -S hello.bpf.o
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260711/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-07-26%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%202.02.03.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-S&lt;/code&gt; 옵션은 디버그 정보를 이용해 C 소스코드와 해당 바이트코드를 함께 보여준다. 출력 중 &lt;code&gt;return XDP_PASS;&lt;/code&gt;에 대응하는 부분은 다음과 같은 형태다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;; return XDP_PASS;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;10: b7 00 00 00 02 00 00 00  r0 = 2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;11: 95 00 00 00 00 00 00 00  exit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;첫 번째 명령의 &lt;code&gt;0xb7&lt;/code&gt;은 대상 레지스터에 즉시값을 넣는 연산이다. 대상이 &lt;code&gt;R0&lt;/code&gt;, 즉시값이 &lt;code&gt;2&lt;/code&gt;이므로 &lt;code&gt;R0 = 2&lt;/code&gt;가 된다. 이어지는 &lt;code&gt;0x95&lt;/code&gt;는 프로그램을 종료하는 &lt;code&gt;exit&lt;/code&gt; 명령이다.&lt;/p&gt;
+&lt;p&gt;C 코드의 &lt;code&gt;return XDP_PASS;&lt;/code&gt;가 eBPF 호출 규약에 맞춰 &lt;strong&gt;반환 레지스터에 값을 기록하고 종료하는 두 개의 명령어&lt;/strong&gt;로 바뀐 것이다.&lt;/p&gt;
+&lt;p&gt;이처럼 바이트코드를 읽는 목적은 모든 opcode를 암기하는 데 있지 않다. 컴파일러가 생성한 결과와 커널이 실행할 동작 사이의 연결 관계를 이해하는 것이 중요하다.&lt;/p&gt;
+&lt;h3 id=&#34;프로그램을-커널에-로드하고-관찰하기&#34;&gt;프로그램을 커널에 로드하고 관찰하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;컴파일된 오브젝트는 &lt;code&gt;bpftool&lt;/code&gt;로 커널에 로드할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool prog load hello.bpf.o /sys/fs/bpf/hello
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 명령은 &lt;code&gt;hello.bpf.o&lt;/code&gt; 안의 프로그램을 커널에 로드하고 &lt;code&gt;/sys/fs/bpf/hello&lt;/code&gt; 경로에 핀(Pin)한다. 핀은 BPF 파일 시스템에 프로그램을 참조하는 경로를 만들어, 로더 프로세스가 종료된 뒤에도 커널 객체가 유지되도록 한다.&lt;/p&gt;
+&lt;p&gt;로드된 프로그램의 정보는 다음과 같이 확인한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool prog show pinned /sys/fs/bpf/hello
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;출력에는 다음 정보가 포함된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ID:&lt;/strong&gt; 프로그램이 로드될 때 커널이 부여하는 식별자&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;type:&lt;/strong&gt; &lt;code&gt;xdp&lt;/code&gt;, &lt;code&gt;kprobe&lt;/code&gt;, &lt;code&gt;raw_tracepoint&lt;/code&gt; 같은 프로그램 타입&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;name:&lt;/strong&gt; C 소스코드의 함수 이름&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;tag:&lt;/strong&gt; 프로그램 명령어를 기반으로 계산한 해시 식별자&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;xlated:&lt;/strong&gt; 검증을 마친 translated 바이트코드 크기&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;jited:&lt;/strong&gt; JIT가 활성화된 경우 현재 CPU용으로 컴파일된 기계어 크기&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;map_ids:&lt;/strong&gt; 프로그램이 참조하는 BPF Map의 ID&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;btf_id:&lt;/strong&gt; 프로그램과 연결된 BTF 정보의 ID&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;프로그램 ID는 다시 로드하면 달라질 수 있지만, 명령어가 같다면 태그는 동일하게 유지된다. 다만 이름과 태그는 중복될 수 있으므로 특정 객체를 유일하게 가리켜야 할 때는 ID나 핀 경로를 사용하는 편이 명확하다.&lt;/p&gt;
+&lt;h4 id=&#34;세-가지-코드-표현-비교&#34;&gt;세 가지 코드 표현 비교&lt;/h4&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;단계&lt;/th&gt;
+          &lt;th&gt;확인 명령&lt;/th&gt;
+          &lt;th&gt;의미&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;오브젝트 바이트코드&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;llvm-objdump -S hello.bpf.o&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Clang이 ELF 파일에 생성한 로드 전 명령어&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Translated 바이트코드&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;bpftool prog dump xlated pinned /sys/fs/bpf/hello&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;검증을 통과하고 커널의 재작성까지 반영된 명령어&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;JIT 기계어&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;bpftool prog dump jited pinned /sys/fs/bpf/hello&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;현재 CPU가 직접 실행할 네이티브 명령어&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;translated&lt;/code&gt; 결과는 오브젝트 파일의 역어셈블 결과와 대부분 비슷하지만, 맵 참조나 헬퍼 함수 호출처럼 로드 시점에 결정되는 정보가 실제 커널 객체를 가리키도록 변환되어 있다.&lt;/p&gt;
+&lt;p&gt;JIT 결과는 실행 중인 장비의 CPU 아키텍처에 따라 달라진다. 같은 eBPF 바이트코드라도 x86-64에서는 x86-64 기계어로, 라즈베리파이 같은 ARM64 장비에서는 ARM64 기계어로 변환된다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;bpftool prog dump jited&lt;/code&gt;는 커널의 JIT 설정과 &lt;code&gt;bpftool&lt;/code&gt; 빌드 옵션에 따라 사용할 수 없을 수 있다. &lt;code&gt;No libbfd support&lt;/code&gt; 오류가 나온다면 libbfd 지원을 포함해 &lt;code&gt;bpftool&lt;/code&gt;을 빌드했는지 확인해야 한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;로드와-부착은-서로-다른-단계다&#34;&gt;로드와 부착은 서로 다른 단계다&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;프로그램을 커널에 로드했다고 해서 곧바로 실행되는 것은 아니다. 로드는 검증된 프로그램을 커널 객체로 만드는 과정이며, 부착(Attach)은 그 프로그램을 실제 이벤트가 발생하는 훅에 연결하는 과정이다.&lt;/p&gt;
+&lt;p&gt;XDP 프로그램을 &lt;code&gt;eth0&lt;/code&gt; 인터페이스에 부착하려면 다음 명령을 사용한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool net attach xdp pinned /sys/fs/bpf/hello dev eth0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;부착 상태는 &lt;code&gt;bpftool net list&lt;/code&gt; 또는 &lt;code&gt;ip link&lt;/code&gt;로 확인할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool net list
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ip link show dev eth0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260711/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-07-26%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%202.03.51.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;이제 &lt;code&gt;eth0&lt;/code&gt;으로 패킷이 들어올 때마다 &lt;code&gt;hello&lt;/code&gt; 프로그램이 실행된다. 트레이스 로그는 다음 명령으로 확인한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool prog tracelog
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;2장의 시스템 콜 예제에서는 이벤트를 발생시킨 프로세스의 PID와 명령 이름이 컨텍스트에 존재했다. 하지만 XDP 프로그램은 네트워크 패킷이 커널에 들어오는 매우 이른 시점에 실행된다. 아직 패킷을 소비할 사용자 공간 프로세스가 결정되지 않았으므로, 출력에 &lt;code&gt;&amp;lt;idle&amp;gt;-0&lt;/code&gt;과 같이 프로세스 정보가 없는 형태가 나타날 수 있다.&lt;/p&gt;
+&lt;p&gt;이는 &lt;strong&gt;프로그램이 부착된 이벤트의 종류에 따라 전달받는 컨텍스트가 달라진다&lt;/strong&gt;는 점을 잘 보여준다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;주의:&lt;/strong&gt; XDP에서 &lt;code&gt;return 0;&lt;/code&gt;은 일반 C 프로그램의 성공 반환이 아니다. 값 &lt;code&gt;0&lt;/code&gt;은 &lt;code&gt;XDP_ABORTED&lt;/code&gt;를 의미하며 패킷 처리가 중단된다. SSH로 접속한 장비의 실제 네트워크 인터페이스에서 잘못된 반환값을 사용하면 원격 연결을 잃을 수 있으므로, 네트워크 네임스페이스나 컨테이너 같은 격리된 환경에서 먼저 실습하는 편이 안전하다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;전역-변수도-내부적으로는-map이다&#34;&gt;전역 변수도 내부적으로는 Map이다&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;소스코드에는 단순한 전역 변수로 &lt;code&gt;int counter = 0;&lt;/code&gt;을 선언했지만, 커널에 로드된 프로그램을 조회하면 프로그램이 여러 개의 맵을 참조하고 있음을 확인할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;대표적으로 다음과 같은 맵이 만들어진다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;hello.bss&lt;/code&gt;: 0으로 초기화되는 쓰기 가능한 전역 변수인 &lt;code&gt;counter&lt;/code&gt; 저장&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hello.rodata&lt;/code&gt;: &lt;code&gt;&amp;quot;Hello World %d&amp;quot;&lt;/code&gt;와 같은 읽기 전용 데이터 저장&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;각 맵의 내용은 다음과 같이 확인할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map dump name hello.bss
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map dump name hello.rodata
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;eBPF Map은 프로그램이 여러 번 실행되더라도 유지되는 커널 객체다. 따라서 libbpf는 맵의 성질을 활용해 C의 &lt;code&gt;.data&lt;/code&gt;, &lt;code&gt;.bss&lt;/code&gt;, &lt;code&gt;.rodata&lt;/code&gt; 섹션을 단일 항목 Array Map 형태로 구현한다.&lt;/p&gt;
+&lt;p&gt;즉, C 코드에서 보이는 전역 변수는 완전히 별개의 저장 장치가 아니라 &lt;strong&gt;Map을 사용하기 편하도록 제공되는 문법적 추상화&lt;/strong&gt;라고 볼 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;-g&lt;/code&gt; 옵션으로 BTF 정보가 포함되어 있으면 &lt;code&gt;bpftool&lt;/code&gt;은 &lt;code&gt;counter&lt;/code&gt; 같은 변수 이름과 타입을 해석해 보기 좋은 형태로 출력한다. BTF가 없다면 동일한 데이터가 이름 없는 16진수 바이트 배열로 보이기 때문에 직접 타입과 엔디언을 해석해야 한다.&lt;/p&gt;
+&lt;h3 id=&#34;프로그램-분리-detach와-unload&#34;&gt;프로그램 분리: Detach와 Unload&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;부착을 해제하는 것과 프로그램을 커널에서 제거하는 것도 서로 다른 단계다.&lt;/p&gt;
+&lt;p&gt;먼저 XDP 훅에서 프로그램을 분리한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool net detach xdp dev eth0
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 시점에는 더 이상 패킷이 프로그램을 실행시키지 않지만, &lt;code&gt;/sys/fs/bpf/hello&lt;/code&gt;의 핀 참조가 남아 있으므로 프로그램 자체는 여전히 커널에 존재한다.&lt;/p&gt;
+&lt;p&gt;핀 경로를 제거하면 해당 참조가 해제된다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo rm /sys/fs/bpf/hello
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;다른 파일 디스크립터나 링크가 프로그램을 참조하고 있지 않다면 커널은 프로그램과 관련 리소스를 정리한다.&lt;/p&gt;
+&lt;p&gt;정리하면 eBPF 프로그램의 생명주기는 다음처럼 구분된다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Compile:&lt;/strong&gt; C 소스코드를 eBPF ELF 오브젝트로 만든다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Load:&lt;/strong&gt; 검증을 거쳐 프로그램과 맵을 커널 객체로 생성한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pin:&lt;/strong&gt; BPF 파일 시스템에 참조를 만들어 객체의 수명을 유지한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Attach:&lt;/strong&gt; 프로그램을 XDP 같은 이벤트 훅에 연결한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Detach:&lt;/strong&gt; 이벤트 훅과 프로그램의 연결을 끊는다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Unload:&lt;/strong&gt; 남은 참조를 제거하여 커널 객체가 해제되도록 한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;bpf-to-bpf-함수-호출&#34;&gt;BPF-to-BPF 함수 호출&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;2장에서 살펴본 테일 콜은 한 eBPF 프로그램이 다른 프로그램으로 실행 흐름을 완전히 넘기는 방식이었다. 반면 BPF-to-BPF 호출은 일반적인 함수 호출처럼 같은 프로그램 안의 로컬 함수를 실행한 뒤 원래 위치로 돌아온다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;__attribute__&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;((&lt;/span&gt;noinline&lt;span style=&#34;color:#1f2328&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;get_opcode&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; bpf_raw_tracepoint_args &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;ctx&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; ctx&lt;span style=&#34;color:#0550ae&#34;&gt;-&amp;gt;&lt;/span&gt;args&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;SEC&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;raw_tp&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;hello&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; bpf_raw_tracepoint_args &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;ctx&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; opcode &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;get_opcode&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;ctx&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;bpf_printk&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;Syscall: %d&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; opcode&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;noinline&lt;/code&gt; 속성은 컴파일러가 &lt;code&gt;get_opcode()&lt;/code&gt;의 내용을 호출 위치에 펼치지 못하게 한다. 따라서 &lt;code&gt;bpftool prog dump xlated&lt;/code&gt; 결과에서 실제 함수 호출 명령을 관찰할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;0: (85) call pc+7
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8: (79) r0 = *(u64 *)(r1 +8)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;9: (95) exit
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;call pc+7&lt;/code&gt;은 다음 명령으로 바로 진행하지 않고 프로그램 카운터를 상대 위치만큼 이동시켜 &lt;code&gt;get_opcode()&lt;/code&gt;를 실행한다. 함수가 &lt;code&gt;exit&lt;/code&gt;하면 호출 지점으로 돌아오며, 함수의 반환값은 &lt;code&gt;R0&lt;/code&gt;을 통해 전달된다.&lt;/p&gt;
+&lt;p&gt;일반 함수 호출은 복귀 주소와 현재 상태를 스택에 보존해야 한다. eBPF 스택은 512바이트로 제한되므로 BPF-to-BPF 호출을 깊게 중첩할 수는 없다.&lt;/p&gt;
+&lt;h4 id=&#34;bpf-to-bpf-호출과-테일-콜-비교&#34;&gt;BPF-to-BPF 호출과 테일 콜 비교&lt;/h4&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;구분&lt;/th&gt;
+          &lt;th&gt;BPF-to-BPF 호출&lt;/th&gt;
+          &lt;th&gt;테일 콜&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;호출 대상&lt;/td&gt;
+          &lt;td&gt;같은 eBPF 프로그램의 로컬 함수&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;PROG_ARRAY&lt;/code&gt; Map에 등록된 다른 eBPF 프로그램&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;호출 후 복귀&lt;/td&gt;
+          &lt;td&gt;원래 호출 위치로 돌아옴&lt;/td&gt;
+          &lt;td&gt;호출한 프로그램으로 돌아오지 않음&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;대상 결정&lt;/td&gt;
+          &lt;td&gt;컴파일 시 상대 오프셋으로 결정&lt;/td&gt;
+          &lt;td&gt;실행 시 Map의 키로 결정&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;스택&lt;/td&gt;
+          &lt;td&gt;새 함수 프레임 사용&lt;/td&gt;
+          &lt;td&gt;호출자의 스택을 이어받지 않음&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;주요 목적&lt;/td&gt;
+          &lt;td&gt;코드 재사용과 함수 분리&lt;/td&gt;
+          &lt;td&gt;프로그램 체이닝과 동적 디스패치&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;두 방식은 이름에 모두 &amp;ldquo;호출&amp;quot;이 들어가지만 실행 모델과 사용 목적이 전혀 다르다.&lt;/p&gt;
+&lt;h3 id=&#34;느낀점--결론&#34;&gt;느낀점 / 결론&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;2장에서는 BCC가 제공하는 추상화 덕분에 eBPF 프로그램을 빠르게 실행해 볼 수 있었다. 3장에서는 그 편리함 뒤에서 Clang/LLVM, ELF, 검증기, JIT 컴파일러, BPF Map이 어떻게 연결되는지 한 단계씩 확인할 수 있었다.&lt;/p&gt;
+&lt;p&gt;가장 인상 깊었던 부분은 &lt;strong&gt;로드와 부착이 분리되어 있다는 점&lt;/strong&gt;이다. 처음에는 eBPF 프로그램을 로드하면 곧바로 실행될 것이라고 막연히 생각하기 쉽다. 하지만 실제로는 검증된 커널 객체를 만드는 일과, 그 객체를 특정 이벤트에 연결하는 일이 명확히 분리되어 있다. 이 구조 덕분에 하나의 프로그램을 관찰하고 수명을 관리하며 필요한 시점에 원하는 훅에 연결할 수 있다.&lt;/p&gt;
+&lt;p&gt;또한 C의 평범한 전역 변수가 내부에서는 &lt;code&gt;.bss&lt;/code&gt;와 &lt;code&gt;.rodata&lt;/code&gt; Map으로 구현된다는 점도 흥미로웠다. 2장에서 사용자 공간과 커널 공간의 공유 자료구조로 배웠던 Map이 이번에는 프로그래밍 언어의 전역 변수 추상화를 떠받치는 기반으로 다시 등장했다.&lt;/p&gt;
+&lt;p&gt;1장에서 흥미를 느꼈던 LLVM과 eBPF의 관계도 이번 장에서 훨씬 구체적으로 다가왔다. 동일한 C 코드가 먼저 CPU 아키텍처와 분리된 eBPF 바이트코드로 변환되고, JIT가 활성화된 커널에 올라간 뒤에는 장비의 아키텍처에 맞는 기계어로 다시 컴파일된다. 특히 라즈베리파이의 ARM64 환경에서 JIT 결과를 직접 확인하면, eBPF가 커널 내부의 범용 실행 플랫폼처럼 동작한다는 의미를 더욱 선명하게 이해할 수 있을 것 같다.&lt;/p&gt;
+&lt;p&gt;결국 3장은 eBPF 프로그램을 &amp;ldquo;C로 작성한 커널 코드&amp;quot;라고만 이해하던 시각에서 벗어나, &lt;strong&gt;잘 정의된 명령어 집합과 생명주기 위에서 안전하게 실행되는 커널 프로그램&lt;/strong&gt;으로 바라보게 해주는 장이었다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;Liz Rice, &lt;a href=&#34;https://www.oreilly.com/library/view/learning-ebpf/9781098135119/&#34;&gt;&lt;em&gt;Learning eBPF&lt;/em&gt;&lt;/a&gt;, O&amp;rsquo;Reilly Media.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>Learning eBPF 2장: eBPF의 Hello World 프로그램을 통해 구조 이해하기</title>
       <link>https://dongwooklee96.github.io/post/2026/07/12/learning-ebpf-2%EC%9E%A5-ebpf%EC%9D%98-hello-world-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%ED%86%B5%ED%95%B4-%EA%B5%AC%EC%A1%B0-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0.html</link>
