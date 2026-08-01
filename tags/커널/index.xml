@@ -8,7 +8,602 @@
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Sun, 26 Jul 2026 10:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%BB%A4%EB%84%90/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 Aug 2026 09:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%BB%A4%EB%84%90/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Learning eBPF 4장: bpf() 시스템 콜과 사용자 공간의 상호작용</title>
+      <link>https://dongwooklee96.github.io/post/2026/08/01/learning-ebpf-4%EC%9E%A5-bpf-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C%EA%B3%BC-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B3%B5%EA%B0%84%EC%9D%98-%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9.html</link>
+      <pubDate>Sat, 01 Aug 2026 09:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2026/08/01/learning-ebpf-4%EC%9E%A5-bpf-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C%EA%B3%BC-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B3%B5%EA%B0%84%EC%9D%98-%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9.html</guid>
+      <description>&lt;h3 id=&#34;시작하며&#34;&gt;시작하며&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;3장에서는 C로 작성한 코드가 eBPF 바이트코드로 컴파일되고, 검증기를 통과해 커널에 로드된 뒤 이벤트 훅에 부착되는 과정을 살펴보았다. &lt;code&gt;bpftool&lt;/code&gt;로 프로그램과 맵을 직접 관찰하면서 &lt;strong&gt;로드와 부착은 서로 다른 단계&lt;/strong&gt;라는 점도 확인했다.&lt;/p&gt;
+&lt;p&gt;그렇다면 BCC, libbpf, &lt;code&gt;bpftool&lt;/code&gt; 같은 사용자 공간 도구는 실제로 어떤 방법으로 커널에 프로그램을 로드하고 맵을 생성할까?&lt;/p&gt;
+&lt;p&gt;그 중심에는 &lt;strong&gt;&lt;code&gt;bpf()&lt;/code&gt; 시스템 콜&lt;/strong&gt;이 있다. 사용자 공간 애플리케이션은 이 시스템 콜을 통해 BTF 정보를 전달하고, 맵과 프로그램을 생성하며, 맵의 데이터를 읽고 수정한다. 다만 eBPF 애플리케이션의 모든 작업이 &lt;code&gt;bpf()&lt;/code&gt; 하나만으로 끝나는 것은 아니다. Kprobe에 프로그램을 연결하거나 Perf Buffer의 이벤트를 읽을 때는 &lt;code&gt;perf_event_open()&lt;/code&gt;, &lt;code&gt;ioctl()&lt;/code&gt;, &lt;code&gt;mmap()&lt;/code&gt;, &lt;code&gt;poll()&lt;/code&gt; 같은 다른 시스템 콜도 함께 사용된다.&lt;/p&gt;
+&lt;p&gt;이번 장의 전체 흐름을 먼저 정리하면 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;사용자 공간의 eBPF 애플리케이션
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ bpf(BPF_BTF_LOAD)          → BTF 객체 생성
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ bpf(BPF_MAP_CREATE)        → Map 객체 생성
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ bpf(BPF_PROG_LOAD)         → 프로그램 검증 및 로드
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ bpf(BPF_MAP_UPDATE_ELEM)   → Map 설정값 변경
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ perf_event_open()          → Kprobe/CPU별 Perf Event 준비
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ ioctl()                    → 프로그램 부착 및 이벤트 활성화
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ mmap()                     → 이벤트 버퍼를 사용자 공간에 매핑
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └─ poll()                     → 새 이벤트가 올 때까지 대기
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;4장의 핵심은 BCC가 제공하던 편리한 API를 &lt;strong&gt;커널과 통신하는 시스템 콜의 관점&lt;/strong&gt;에서 다시 해석하는 것이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;ebpf의-관문-bpf-시스템-콜&#34;&gt;eBPF의 관문, &lt;code&gt;bpf()&lt;/code&gt; 시스템 콜&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;bpf()&lt;/code&gt;는 여러 eBPF 작업을 하나의 진입점으로 제공하는 멀티플렉서(Multiplexer) 형태의 시스템 콜이다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#57606a&#34;&gt;&amp;lt;linux/bpf.h&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;bpf&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; cmd&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;union&lt;/span&gt; bpf_attr &lt;span style=&#34;color:#0550ae&#34;&gt;*&lt;/span&gt;attr&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;unsigned&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; size&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;각 인자의 역할은 다음과 같다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;인자&lt;/th&gt;
+          &lt;th&gt;의미&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;cmd&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;생성, 조회, 수정, 로드처럼 수행할 BPF 명령&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;attr&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;해당 명령에 필요한 인자를 담은 &lt;code&gt;union bpf_attr&lt;/code&gt;의 주소&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;size&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;attr&lt;/code&gt;이 가리키는 데이터의 크기&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;대표적인 명령은 다음과 같다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;명령&lt;/th&gt;
+          &lt;th&gt;역할&lt;/th&gt;
+          &lt;th&gt;성공 시 결과&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_BTF_LOAD&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;BTF 데이터를 커널에 로드&lt;/td&gt;
+          &lt;td&gt;BTF FD&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_MAP_CREATE&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;새로운 BPF Map 생성&lt;/td&gt;
+          &lt;td&gt;Map FD&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_PROG_LOAD&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;프로그램 검증 및 로드&lt;/td&gt;
+          &lt;td&gt;Program FD&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_MAP_LOOKUP_ELEM&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;키에 해당하는 값 조회&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_MAP_UPDATE_ELEM&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;키와 값 추가 또는 갱신&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_MAP_DELETE_ELEM&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;키와 값 삭제&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_OBJ_PIN&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;BPF 객체를 BPF 파일 시스템에 핀&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_OBJ_GET&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;핀 경로로 BPF 객체 열기&lt;/td&gt;
+          &lt;td&gt;Object FD&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_OBJ_GET_INFO_BY_FD&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;FD가 가리키는 객체의 메타데이터 조회&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_LINK_CREATE&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;프로그램과 훅 사이의 BPF Link 생성&lt;/td&gt;
+          &lt;td&gt;Link FD&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;명령마다 필요한 인자는 다르지만 모두 같은 &lt;code&gt;union bpf_attr&lt;/code&gt;을 공유한다. 예를 들어 맵을 생성할 때는 맵 타입과 키·값 크기가 필요하고, 프로그램을 로드할 때는 바이트코드와 라이선스, 프로그램 타입이 필요하다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;union&lt;/span&gt; bpf_attr attr &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;map_type    &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; BPF_MAP_TYPE_HASH&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;key_size    &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;__u32&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;value_size  &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;user_msg_t&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;max_entries &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;1024&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;int&lt;/span&gt; map_fd &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;syscall&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;__NR_bpf&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; BPF_MAP_CREATE&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                     &lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;attr&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;attr&lt;span style=&#34;color:#1f2328&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;사용하지 않는 &lt;code&gt;bpf_attr&lt;/code&gt; 필드와 패딩은 반드시 0으로 초기화해야 한다. 커널은 자신이 이해하지 못하는 필드에 값이 들어 있으면 잘못된 요청으로 판단해 &lt;code&gt;EINVAL&lt;/code&gt;을 반환할 수 있다. 위 코드처럼 지정 초기화를 사용하거나 호출 전 구조체 전체를 0으로 초기화하는 습관이 중요하다.&lt;/p&gt;
+&lt;h3 id=&#34;strace로-추상화-걷어내기&#34;&gt;&lt;code&gt;strace&lt;/code&gt;로 추상화 걷어내기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;4장에서는 2장에서 사용했던 BCC 예제를 확장한다. &lt;code&gt;execve()&lt;/code&gt;를 호출한 프로세스의 PID, UID, 명령 이름을 수집하고, UID별 인사말을 &lt;code&gt;config&lt;/code&gt; 맵에서 찾아 Perf Buffer로 사용자 공간에 전달한다.&lt;/p&gt;
+&lt;p&gt;파이썬 코드만 보면 맵에 값을 넣는 작업은 평범한 딕셔너리 조작처럼 보인다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;config&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;][&lt;/span&gt;ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;create_string_buffer&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;Hey root!&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;하지만 &lt;code&gt;strace&lt;/code&gt;로 프로그램을 실행하면 그 아래에서 일어나는 시스템 콜을 볼 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo strace &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -f &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  -e &lt;span style=&#34;color:#953800&#34;&gt;trace&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;bpf,perf_event_open,ioctl,mmap,poll &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ./hello-buffer-config.py
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;커널 버전과 BCC 버전에 따라 세부 필드와 호출 횟수는 달라질 수 있지만, 출력의 핵심 흐름을 단순화하면 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bpf(BPF_BTF_LOAD, ...)                         = 3
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bpf(BPF_MAP_CREATE, {map_type=HASH, ...}, ...) = 4
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bpf(BPF_MAP_CREATE, {map_type=PERF_EVENT_ARRAY, ...}, ...) = 5
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bpf(BPF_PROG_LOAD, {prog_type=KPROBE, ...}, ...) = 6
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bpf(BPF_MAP_UPDATE_ELEM, {map_fd=4, ...}, ...) = 0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;perf_event_open(...)                            = 7
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ioctl(7, PERF_EVENT_IOC_SET_BPF, 6)             = 0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ioctl(7, PERF_EVENT_IOC_ENABLE, 0)              = 0
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mmap(...)                                       = ...
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;poll(...)                                       = ...
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 출력은 BCC가 하나의 마법 같은 작업을 수행하는 것이 아니라, 여러 커널 API를 올바른 순서로 조합하고 있음을 보여준다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;strace&lt;/code&gt;에 보이는 것은 &lt;strong&gt;사용자 공간에서 호출한 시스템 콜&lt;/strong&gt;이다. eBPF 프로그램 안의 &lt;code&gt;bpf_map_lookup_elem()&lt;/code&gt;이나 &lt;code&gt;bpf_perf_event_output()&lt;/code&gt;은 커널에서 실행되는 BPF 헬퍼 함수이므로 &lt;code&gt;strace&lt;/code&gt;에 나타나지 않는다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;btf-데이터-로드&#34;&gt;BTF 데이터 로드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;BTF(BPF Type Format)는 eBPF 객체가 사용하는 타입, 함수, 소스 라인 정보를 압축된 형태로 표현한다. 5장에서 CO-RE와 함께 더 자세히 다루지만, 4장에서는 BTF 역시 커널 객체이며 &lt;code&gt;bpf()&lt;/code&gt; 시스템 콜을 통해 로드된다는 사실에 집중한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;컴파일러가 생성한 BTF 데이터
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ bpf(BPF_BTF_LOAD, ...)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;커널의 BTF 객체
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └─ BTF FD를 Map/Program 로드 요청에서 참조
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;BPF_BTF_LOAD&lt;/code&gt;가 성공하면 커널은 BTF 객체를 가리키는 파일 디스크립터를 반환한다. 이후 맵을 생성할 때 &lt;code&gt;btf_key_type_id&lt;/code&gt;와 &lt;code&gt;btf_value_type_id&lt;/code&gt;를 지정하거나, 프로그램을 로드할 때 함수 및 라인 정보와 연결할 수 있다.&lt;/p&gt;
+&lt;p&gt;BTF가 있으면 커널과 &lt;code&gt;bpftool&lt;/code&gt;은 단순한 바이트 배열을 넘어 다음 정보를 이해할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;맵의 키와 값이 어떤 타입인지&lt;/li&gt;
+&lt;li&gt;프로그램에 어떤 함수가 포함되어 있는지&lt;/li&gt;
+&lt;li&gt;eBPF 명령어가 원본 소스의 어느 줄에서 만들어졌는지&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;즉, BTF는 단순한 디버그 부가 정보가 아니라 커널과 도구가 eBPF 객체의 구조를 이해하도록 돕는 메타데이터다.&lt;/p&gt;
+&lt;h3 id=&#34;map-생성&#34;&gt;Map 생성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;예제에는 역할이 다른 두 개의 맵이 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;BPF_HASH&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;config&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; u32&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;user_msg_t&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;BPF_PERF_OUTPUT&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;output&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;BCC의 매크로는 각각 별도의 &lt;code&gt;BPF_MAP_CREATE&lt;/code&gt; 요청으로 이어진다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;맵&lt;/th&gt;
+          &lt;th&gt;실제 타입&lt;/th&gt;
+          &lt;th&gt;역할&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;config&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;BPF_MAP_TYPE_HASH&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;UID를 키로, 사용자별 메시지를 값으로 저장&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;output&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;BPF_MAP_TYPE_PERF_EVENT_ARRAY&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;CPU별 Perf Event FD를 연결하여 이벤트 전달&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Hash Map 생성 요청에는 대략 다음 정보가 담긴다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;union&lt;/span&gt; bpf_attr attr &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;map_type    &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; BPF_MAP_TYPE_HASH&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;key_size    &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;__u32&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;value_size  &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;user_msg_t&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;max_entries &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;10240&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;성공하면 반환되는 값은 맵 데이터가 아니라 &lt;strong&gt;맵을 가리키는 FD&lt;/strong&gt;다. 사용자 공간 프로그램은 이 FD를 이용해 원소를 읽고 수정하며, eBPF 프로그램을 로드할 때도 해당 맵을 참조한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Map FD 4 ──→ 커널의 config Map 객체
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Map FD 5 ──→ 커널의 output Map 객체
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;리눅스가 파일, 소켓, 파이프뿐 아니라 eBPF 객체까지 FD로 표현한다는 점이 흥미롭다. 덕분에 &lt;code&gt;close()&lt;/code&gt;, 프로세스 간 FD 전달, 핀과 같은 기존의 리눅스 자원 관리 방식이 eBPF에도 자연스럽게 적용된다.&lt;/p&gt;
+&lt;h3 id=&#34;프로그램-검증과-로드&#34;&gt;프로그램 검증과 로드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;맵을 만든 다음에는 &lt;code&gt;BPF_PROG_LOAD&lt;/code&gt; 명령으로 eBPF 프로그램을 커널에 로드한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;union&lt;/span&gt; bpf_attr attr &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;prog_type &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; BPF_PROG_TYPE_KPROBE&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;insn_cnt  &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; instruction_count&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;insns     &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;ptr_to_u64&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;instructions&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;license   &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;ptr_to_u64&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;GPL&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;log_buf   &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;ptr_to_u64&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;verifier_log&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;log_size  &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;verifier_log&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;log_level &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;주요 필드는 다음과 같다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;필드&lt;/th&gt;
+          &lt;th&gt;의미&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;prog_type&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Kprobe, XDP, Tracepoint 같은 프로그램 타입&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;insns&lt;/code&gt;, &lt;code&gt;insn_cnt&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;eBPF 명령어 배열의 주소와 개수&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;license&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;프로그램의 라이선스 문자열&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;log_*&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;검증기 로그를 받을 버퍼와 설정&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;prog_btf_fd&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;프로그램 타입 정보와 연결된 BTF FD&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;프로그램이 맵을 사용한다면 사용자 공간 로더는 오브젝트 파일의 맵 참조를 앞에서 얻은 Map FD와 연결한 뒤 로드를 요청한다. 커널은 검증 과정에서 이 참조를 실제 맵 객체에 대한 참조로 바꾸고, 프로그램이 해당 맵을 안전하게 사용하는지도 검사한다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;BPF_PROG_LOAD&lt;/code&gt;가 성공하면 Program FD가 반환된다. 실패하면 &lt;code&gt;-1&lt;/code&gt;과 함께 &lt;code&gt;errno&lt;/code&gt;가 설정되며, 안전성 검증에 실패한 경우 &lt;code&gt;log_buf&lt;/code&gt;에 기록된 검증기 로그가 가장 중요한 단서가 된다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;ELF의 eBPF 바이트코드
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  Map FD 연결
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;bpf(BPF_PROG_LOAD)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ 명령어와 제어 흐름 검증
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ 메모리 및 헬퍼 호출 검증
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ Map 참조 획득
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └─ JIT 컴파일(JIT 활성화 시)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Program FD
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;사용자-공간에서-map-수정하기&#34;&gt;사용자 공간에서 Map 수정하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;파이썬의 다음 한 줄은 내부적으로 &lt;code&gt;BPF_MAP_UPDATE_ELEM&lt;/code&gt; 명령을 호출한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;config&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;][&lt;/span&gt;ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;c_int&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; ct&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;create_string_buffer&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;Hey root!&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;시스템 콜 관점에서 필요한 정보는 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;union&lt;/span&gt; bpf_attr attr &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;map_fd &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; config_map_fd&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;key    &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;ptr_to_u64&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;uid&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;value  &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;ptr_to_u64&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;message&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;flags  &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; BPF_ANY&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;syscall&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;__NR_bpf&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; BPF_MAP_UPDATE_ELEM&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;attr&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;attr&lt;span style=&#34;color:#1f2328&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;여기서 &lt;code&gt;key&lt;/code&gt;와 &lt;code&gt;value&lt;/code&gt;에는 실제 데이터가 아니라 &lt;strong&gt;사용자 공간 메모리의 주소&lt;/strong&gt;가 들어간다. 커널은 Map을 생성할 때 정해진 키와 값의 크기만큼 데이터를 복사한다.&lt;/p&gt;
+&lt;p&gt;업데이트 방식은 &lt;code&gt;flags&lt;/code&gt;로 제어한다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;플래그&lt;/th&gt;
+          &lt;th&gt;동작&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_ANY&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;키가 없으면 추가하고, 있으면 갱신&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_NOEXIST&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;키가 없을 때만 추가&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;BPF_EXIST&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;이미 존재하는 키만 갱신&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;시스템-콜과-헬퍼-함수는-다르다&#34;&gt;시스템 콜과 헬퍼 함수는 다르다&lt;/h4&gt;
+&lt;p&gt;이 지점에서 이름이 비슷한 두 API를 구분해야 한다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;실행 위치&lt;/th&gt;
+          &lt;th&gt;API&lt;/th&gt;
+          &lt;th&gt;특징&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;사용자 공간&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;bpf(BPF_MAP_LOOKUP_ELEM, ...)&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;시스템 콜을 통해 값이 사용자 공간으로 복사됨&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;eBPF 프로그램&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;bpf_map_lookup_elem()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;커널의 BPF 헬퍼를 호출하고 값에 대한 포인터를 받음&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;두 API는 같은 Map을 다루지만 실행되는 위치와 호출 방식이 완전히 다르다. eBPF 헬퍼 호출을 시스템 콜로 오해하면 커널 내부 실행 흐름을 이해하기 어려워진다.&lt;/p&gt;
+&lt;h3 id=&#34;fd-참조-그리고-bpf-객체의-수명&#34;&gt;FD, 참조, 그리고 BPF 객체의 수명&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Map, Program, BTF, Link는 커널이 관리하는 객체다. 사용자 공간은 FD를 통해 객체를 참조하며, 커널은 객체를 가리키는 참조가 모두 사라졌을 때 리소스를 해제한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;사용자 공간 FD ───────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;로드된 Program ──→ Map ├─→ 커널의 BPF 객체
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Attachment ─────→ Prog │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BPFFS Pin ─────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;예를 들어 Program FD를 닫더라도 프로그램이 훅에 부착되어 있으면 Attachment가 프로그램을 계속 참조하므로 즉시 제거되지 않는다. 프로그램이 Map을 사용하고 있다면 프로그램 역시 Map의 참조를 유지한다.&lt;/p&gt;
+&lt;p&gt;반대로 다음 조건이 모두 충족되면 객체는 해제된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해당 객체를 가리키는 FD가 모두 닫힘&lt;/li&gt;
+&lt;li&gt;BPF 파일 시스템에 핀된 경로가 없음&lt;/li&gt;
+&lt;li&gt;다른 Program, Map, Link 또는 Attachment가 참조하지 않음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;3장에서 핀 경로를 삭제해야 프로그램이 완전히 언로드될 수 있었던 이유가 바로 이 참조 기반의 수명 관리 때문이다.&lt;/p&gt;
+&lt;h3 id=&#34;bpf-파일-시스템에-핀하기&#34;&gt;BPF 파일 시스템에 핀하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;프로세스가 종료되면 그 프로세스가 열어 둔 FD도 닫힌다. 프로그램이 종료된 이후에도 Map이나 Program을 유지하고 다른 프로세스가 다시 열게 하려면 객체를 BPFFS(BPF File System)에 핀할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map pin id &lt;span style=&#34;color:#0550ae&#34;&gt;42&lt;/span&gt; /sys/fs/bpf/config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map show pinned /sys/fs/bpf/config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;내부에서는 다음 명령이 사용된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;BPF_OBJ_PIN&lt;/code&gt;: FD가 가리키는 객체를 BPFFS 경로에 연결&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BPF_OBJ_GET&lt;/code&gt;: 핀 경로로 객체를 열어 새로운 FD 획득&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;핀은 일반 파일로 객체 내용을 복사하는 작업이 아니다. &lt;strong&gt;커널 객체에 이름 있는 참조를 하나 더 추가하는 것&lt;/strong&gt;에 가깝다. 따라서 핀 경로를 삭제하면 참조 하나가 해제되지만, 다른 참조가 남아 있다면 객체는 계속 존재한다.&lt;/p&gt;
+&lt;p&gt;또한 핀은 프로세스 수명을 넘어 객체를 유지할 뿐, 재부팅 후에도 커널 객체를 영구 보존하는 저장 기능은 아니다. 부팅 후 프로그램과 맵을 다시 로드해야 한다.&lt;/p&gt;
+&lt;h3 id=&#34;부착을-객체로-표현하는-bpf-link&#34;&gt;부착을 객체로 표현하는 BPF Link&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;초기의 eBPF API에서는 프로그램을 부착하는 방법이 훅마다 달랐다. 어떤 타입은 &lt;code&gt;ioctl()&lt;/code&gt;을 사용했고, 어떤 타입은 Netlink나 별도의 BPF 명령을 사용했다. 이 방식에서는 &amp;ldquo;프로그램이 존재하는가&amp;quot;와 &amp;ldquo;어디에 부착되어 있는가&amp;quot;를 일관된 방법으로 관리하기 어려웠다.&lt;/p&gt;
+&lt;p&gt;BPF Link는 &lt;strong&gt;프로그램과 부착 지점 사이의 연결 자체를 FD 기반 커널 객체로 표현&lt;/strong&gt;한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Program FD ── bpf(BPF_LINK_CREATE) ──→ Link FD ──→ Attachment Point
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Link FD를 닫으면 일반적으로 연결이 해제된다. 연결을 로더 프로세스보다 오래 유지해야 한다면 Link를 BPFFS에 핀할 수 있다. Program만 핀하면 프로그램 객체의 수명은 유지되지만 부착 상태까지 반드시 유지되는 것은 아니므로, 둘의 차이를 이해해야 한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool link show
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool link pin id &lt;span style=&#34;color:#0550ae&#34;&gt;7&lt;/span&gt; /sys/fs/bpf/exec-link
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;BPF Link를 사용하면 다음과 같은 장점이 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;부착 상태를 FD와 핀으로 일관되게 관리할 수 있다.&lt;/li&gt;
+&lt;li&gt;연결 정보를 &lt;code&gt;bpftool link show&lt;/code&gt;로 관찰할 수 있다.&lt;/li&gt;
+&lt;li&gt;지원되는 Link 타입에서는 프로그램을 원자적으로 교체할 수 있다.&lt;/li&gt;
+&lt;li&gt;소유 프로세스가 비정상 종료되었을 때 수명 규칙을 예측하기 쉽다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;다만 4장의 BCC Kprobe 예제는 기존 Perf Event 기반 방식을 사용하므로, 부착 과정에서 &lt;code&gt;BPF_LINK_CREATE&lt;/code&gt; 대신 &lt;code&gt;perf_event_open()&lt;/code&gt;과 &lt;code&gt;ioctl()&lt;/code&gt;이 관찰될 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;kprobe-부착에는-왜-다른-시스템-콜이-필요할까&#34;&gt;Kprobe 부착에는 왜 다른 시스템 콜이 필요할까?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;BPF_PROG_LOAD&lt;/code&gt;는 검증된 프로그램 객체를 만들 뿐, 그 프로그램을 &lt;code&gt;execve()&lt;/code&gt; 같은 커널 함수에 연결하지 않는다. BCC의 전통적인 Kprobe 부착 흐름은 대략 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1. Kprobe 이벤트 등록
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └─ tracefs의 kprobe_events 사용
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2. perf_event_open()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └─ 해당 Kprobe를 나타내는 Perf Event FD 생성
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3. ioctl(PERF_EVENT_IOC_SET_BPF)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └─ Perf Event에 Program FD 연결
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4. ioctl(PERF_EVENT_IOC_ENABLE)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   └─ 이벤트 활성화
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;여기서 Program FD를 닫는 것과 Perf Event FD를 닫는 것은 의미가 다르다. Perf Event FD는 부착 상태를 유지하는 참조이므로 이 FD가 닫히면 해당 연결도 해제될 수 있다.&lt;/p&gt;
+&lt;p&gt;최신 libbpf에서는 지원되는 환경과 프로그램 타입에 대해 BPF Link 기반의 Kprobe 부착을 사용할 수 있다. 그러나 커널 버전과 라이브러리, 선택한 API에 따라 실제 시스템 콜의 모양이 달라질 수 있으므로 &lt;code&gt;strace&lt;/code&gt; 결과를 기계적으로 외우기보다 &lt;strong&gt;로드와 부착이 별도 단계라는 구조&lt;/strong&gt;를 이해하는 것이 중요하다.&lt;/p&gt;
+&lt;h3 id=&#34;perf-buffer-초기화와-이벤트-읽기&#34;&gt;Perf Buffer 초기화와 이벤트 읽기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;BPF_PERF_OUTPUT(output)&lt;/code&gt;은 &lt;code&gt;BPF_MAP_TYPE_PERF_EVENT_ARRAY&lt;/code&gt; 맵을 만든다. 하지만 빈 맵만 만들어서는 이벤트를 전달할 수 없다. 사용자 공간 로더는 온라인 CPU마다 Perf Event를 만들고, 각 FD를 맵의 CPU 인덱스에 등록해야 한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CPU 0 ─ perf_event_open() ─ FD 10 ─┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CPU 1 ─ perf_event_open() ─ FD 11 ─┼─→ output[CPU] Map
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CPU 2 ─ perf_event_open() ─ FD 12 ─┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CPU 3 ─ perf_event_open() ─ FD 13 ─┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;전체 데이터 흐름은 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;eBPF 프로그램
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ bpf_perf_event_output() 헬퍼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;현재 CPU의 Perf Event Ring Buffer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ mmap()으로 공유
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;사용자 공간
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ poll()로 새 데이터 대기
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └ 레코드 해석 → 콜백 실행
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;각 단계에서 사용되는 주요 API는 다음과 같다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;perf_event_open()&lt;/code&gt;으로 CPU별 &lt;code&gt;PERF_COUNT_SW_BPF_OUTPUT&lt;/code&gt; 이벤트를 만든다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;mmap()&lt;/code&gt;으로 각 Perf Event의 링 버퍼를 사용자 공간에 매핑한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BPF_MAP_UPDATE_ELEM&lt;/code&gt;으로 CPU 번호와 Perf Event FD를 &lt;code&gt;output&lt;/code&gt; 맵에 저장한다.&lt;/li&gt;
+&lt;li&gt;eBPF 프로그램은 &lt;code&gt;bpf_perf_event_output()&lt;/code&gt; 헬퍼로 현재 CPU의 버퍼에 데이터를 기록한다.&lt;/li&gt;
+&lt;li&gt;사용자 공간은 &lt;code&gt;poll()&lt;/code&gt;로 이벤트를 기다린 뒤 매핑된 메모리에서 레코드를 읽는다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Perf Buffer는 CPU별로 독립된 버퍼를 사용하므로 경합을 줄이는 데 유리하다. 반면 전체 CPU에서 발생한 이벤트의 전역 순서를 보장하기 어렵고, CPU 수에 비례해 버퍼 메모리가 늘어난다. 소비자가 충분히 빠르게 읽지 못하면 레코드가 유실될 수 있으므로 Lost Event 처리도 필요하다.&lt;/p&gt;
+&lt;h3 id=&#34;ring-buffer에서는-무엇이-달라질까&#34;&gt;Ring Buffer에서는 무엇이 달라질까?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;4장에서는 동일한 예제를 &lt;code&gt;BPF_RINGBUF_OUTPUT&lt;/code&gt;으로 바꾸어 두 방식의 시스템 콜 차이도 비교한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;BPF_RINGBUF_OUTPUT&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;output&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;// eBPF 프로그램 안에서
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;output&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;ringbuf_output&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;data&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;data&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Ring Buffer는 &lt;code&gt;BPF_MAP_TYPE_RINGBUF&lt;/code&gt; 타입의 맵 하나를 모든 CPU가 공유한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CPU 0 ─┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CPU 1 ─┼─→ 하나의 BPF Ring Buffer → 사용자 공간
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CPU 2 ─┤
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CPU 3 ─┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Perf Buffer와 비교하면 다음과 같다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;구분&lt;/th&gt;
+          &lt;th&gt;Perf Buffer&lt;/th&gt;
+          &lt;th&gt;BPF Ring Buffer&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;커널 객체&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;PERF_EVENT_ARRAY&lt;/code&gt; Map + CPU별 Perf Event&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;RINGBUF&lt;/code&gt; Map&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;버퍼 구조&lt;/td&gt;
+          &lt;td&gt;CPU별 버퍼&lt;/td&gt;
+          &lt;td&gt;여러 CPU가 공유하는 하나의 버퍼&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;이벤트 순서&lt;/td&gt;
+          &lt;td&gt;CPU를 넘나드는 전역 순서 보장 어려움&lt;/td&gt;
+          &lt;td&gt;예약 순서를 기준으로 CPU 간 순서 보존&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;초기화&lt;/td&gt;
+          &lt;td&gt;CPU마다 &lt;code&gt;perf_event_open()&lt;/code&gt; 및 Map 갱신&lt;/td&gt;
+          &lt;td&gt;Map 생성 후 &lt;code&gt;mmap()&lt;/code&gt; 중심으로 설정&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;메모리 사용&lt;/td&gt;
+          &lt;td&gt;CPU 수에 비례&lt;/td&gt;
+          &lt;td&gt;공유 버퍼이므로 상대적으로 효율적&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;커널 측 출력&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;bpf_perf_event_output()&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;bpf_ringbuf_output()&lt;/code&gt; 또는 reserve/submit&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Ring Buffer는 별도의 CPU별 Perf Event를 만들 필요가 없으므로 &lt;code&gt;perf_event_open()&lt;/code&gt;과 Perf Event FD를 맵에 등록하는 호출이 사라진다. 사용자 공간은 Ring Buffer Map의 메모리를 &lt;code&gt;mmap()&lt;/code&gt;하고 &lt;code&gt;poll()&lt;/code&gt; 또는 &lt;code&gt;epoll()&lt;/code&gt;로 새 데이터 알림을 기다린다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;bpf_ringbuf_reserve()&lt;/code&gt;와 &lt;code&gt;bpf_ringbuf_submit()&lt;/code&gt;을 사용하면 버퍼 내부 공간에 직접 데이터를 작성하여 추가 복사를 피할 수도 있다. 단, 예약에 성공한 레코드는 모든 실행 경로에서 반드시 제출하거나 폐기해야 하며 검증기가 이를 추적한다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Perf Buffer와 Ring Buffer는 이름은 비슷하지만 초기화 방식과 커널 객체 구성이 다르다. &lt;code&gt;strace&lt;/code&gt;에서 &lt;code&gt;perf_event_open()&lt;/code&gt;의 유무를 비교하면 이 차이가 선명하게 드러난다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;bpftool은-map을-어떻게-찾고-읽을까&#34;&gt;&lt;code&gt;bpftool&lt;/code&gt;은 Map을 어떻게 찾고 읽을까?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;bpftool&lt;/code&gt;로 맵 목록을 조회하는 명령은 매우 단순하다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;그러나 내부에서는 여러 &lt;code&gt;bpf()&lt;/code&gt; 명령이 조합된다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BPF_MAP_GET_NEXT_ID
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ 다음 Map ID
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BPF_MAP_GET_FD_BY_ID
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │ Map FD
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BPF_OBJ_GET_INFO_BY_FD
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └ 타입, 이름, 키/값 크기, 최대 엔트리 등 출력
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;특정 맵을 찾을 때는 ID, 이름, 핀 경로를 사용할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map show id &lt;span style=&#34;color:#0550ae&#34;&gt;42&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map show name config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map show pinned /sys/fs/bpf/config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;맵 이름은 여러 객체에서 중복될 수 있다. 정확한 객체를 지정해야 하는 자동화나 운영 환경에서는 ID 또는 핀 경로를 사용하는 편이 안전하다.&lt;/p&gt;
+&lt;p&gt;Hash Map의 모든 원소를 읽을 때는 다음 두 명령을 반복한다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;BPF_MAP_GET_NEXT_KEY&lt;/code&gt;로 다음 키를 얻는다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BPF_MAP_LOOKUP_ELEM&lt;/code&gt;로 해당 키의 값을 읽는다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;bpftool&lt;/code&gt;에서는 이를 한 번에 수행할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map dump name config
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;특정 UID의 메시지를 조회하거나 수정하는 것도 가능하다. UID가 32비트 리틀 엔디언으로 저장되는 환경에서 UID 0의 키는 네 개의 0바이트로 표현된다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map lookup name config &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  key hex &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo bpftool map update name config &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  key hex &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  value hex &lt;span style=&#34;color:#0550ae&#34;&gt;48&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;65&lt;/span&gt; 6c 6c 6f &lt;span style=&#34;color:#0550ae&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;72&lt;/span&gt; 6f 6f &lt;span style=&#34;color:#0550ae&#34;&gt;74&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;00&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;두 번째 명령은 실행 중인 eBPF 프로그램을 다시 컴파일하거나 로드하지 않고도 UID 0의 설정을 &lt;code&gt;Hello root&lt;/code&gt;로 바꾼다. &lt;strong&gt;코드와 설정을 Map으로 분리하면 프로그램을 중단하지 않고 동작을 변경할 수 있다&lt;/strong&gt;는 장점이 잘 드러나는 부분이다.&lt;/p&gt;
+&lt;p&gt;다만 키와 값은 Map이 선언한 정확한 바이트 크기에 맞아야 한다. 구조체 패딩, 문자열의 널 종료 문자, 엔디언을 잘못 계산하면 명령이 실패하거나 의도하지 않은 값이 저장될 수 있다. BTF가 포함된 맵에서는 &lt;code&gt;bpftool&lt;/code&gt;의 BTF 기반 표현을 활용하면 원시 바이트를 직접 다룰 때의 실수를 줄일 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;자주-만나는-오류와-확인-포인트&#34;&gt;자주 만나는 오류와 확인 포인트&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;bpf()&lt;/code&gt;가 실패하면 &lt;code&gt;-1&lt;/code&gt;을 반환하고 &lt;code&gt;errno&lt;/code&gt;에 원인이 기록된다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;오류&lt;/th&gt;
+          &lt;th&gt;주로 확인할 내용&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;EPERM&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;필요한 권한 또는 Capability가 있는지&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;EACCES&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;검증기가 프로그램을 안전하지 않다고 판단했는지&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;EINVAL&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;명령, 프로그램/맵 타입, &lt;code&gt;bpf_attr&lt;/code&gt; 필드가 올바른지&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;E2BIG&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;프로그램 또는 맵 크기 제한을 넘었는지&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ENOENT&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;조회한 키, 객체 ID, 핀 경로가 존재하는지&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ENOMEM&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;커널이 필요한 메모리를 할당할 수 있는지&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;특히 다음 항목을 먼저 확인하면 문제를 좁히는 데 도움이 된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;bpf_attr&lt;/code&gt; 전체를 0으로 초기화했는가?&lt;/li&gt;
+&lt;li&gt;Map의 키와 값 크기가 선언과 일치하는가?&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BPF_PROG_LOAD&lt;/code&gt;의 검증기 로그를 활성화했는가?&lt;/li&gt;
+&lt;li&gt;프로그램 타입과 부착 지점의 타입이 서로 호환되는가?&lt;/li&gt;
+&lt;li&gt;FD가 너무 일찍 닫혀 객체나 Attachment가 사라지지 않았는가?&lt;/li&gt;
+&lt;li&gt;BPFFS가 마운트되어 있고 핀 경로가 올바른가?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;최신 커널에서는 작업의 종류에 따라 &lt;code&gt;CAP_BPF&lt;/code&gt;와 함께 &lt;code&gt;CAP_PERFMON&lt;/code&gt; 또는 &lt;code&gt;CAP_NET_ADMIN&lt;/code&gt; 같은 권한이 필요할 수 있다. 요구 조건은 커널 버전, 프로그램 타입, 시스템 설정에 따라 달라지므로 학습 환경에서는 우선 &lt;code&gt;sudo&lt;/code&gt;로 동작을 확인하되, 운영 환경에서는 필요한 Capability만 최소한으로 부여해야 한다.&lt;/p&gt;
+&lt;h3 id=&#34;전체-흐름-다시-보기&#34;&gt;전체 흐름 다시 보기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;4장에서 살펴본 BCC 애플리케이션의 생명주기를 하나로 연결하면 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1. Compile
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   BCC가 C 코드를 eBPF 바이트코드와 BTF로 컴파일
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2. Create kernel objects
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   BPF_BTF_LOAD → BPF_MAP_CREATE → BPF_PROG_LOAD
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3. Configure
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   BPF_MAP_UPDATE_ELEM으로 UID별 메시지 저장
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4. Attach
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   perf_event_open + ioctl 또는 BPF_LINK_CREATE
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5. Set up event delivery
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Perf Buffer: CPU별 perf_event_open + mmap + Map 갱신
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Ring Buffer: Ring Buffer Map + mmap
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;6. Run
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   execve() 발생 → Kprobe → eBPF 프로그램 실행
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;7. Communicate
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   Map 조회 + Buffer 출력 → poll 중인 사용자 공간이 이벤트 처리
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;8. Clean up
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   FD 종료, Link 분리, Pin 제거 후 참조가 없으면 객체 해제
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 흐름을 이해하면 BCC뿐 아니라 libbpf, Go의 &lt;code&gt;cilium/ebpf&lt;/code&gt;, Rust의 Aya 같은 다른 라이브러리를 접할 때도 공통 기반을 찾을 수 있다. API의 모양과 언어는 달라도 결국 커널과 통신하는 핵심 메커니즘은 &lt;code&gt;bpf()&lt;/code&gt;와 관련 시스템 콜 위에 세워져 있기 때문이다.&lt;/p&gt;
+&lt;h3 id=&#34;느낀점--결론&#34;&gt;느낀점 / 결론&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;2장에서는 파이썬 딕셔너리처럼 보였던 Map 조작과 간단한 콜백 등록만으로도 eBPF 프로그램을 실행할 수 있었다. 4장에서는 그 편리한 코드 아래에서 BTF, Map, Program이 각각 커널 객체로 생성되고 FD를 통해 연결되는 과정을 확인했다.&lt;/p&gt;
+&lt;p&gt;가장 인상 깊었던 부분은 eBPF가 리눅스의 기존 설계 언어를 그대로 활용한다는 점이다. Map과 Program뿐 아니라 부착 관계까지 FD와 참조 카운팅으로 관리하고, 필요하면 BPFFS에 핀해 프로세스의 수명과 분리한다. 완전히 새로운 자원 관리 체계를 만드는 대신 파일 디스크립터라는 리눅스의 익숙한 추상화를 확장한 설계가 무척 일관적이라고 느꼈다.&lt;/p&gt;
+&lt;p&gt;또 하나 중요하게 다가온 점은 eBPF 애플리케이션이 eBPF 바이트코드만으로 완성되지 않는다는 사실이다. 커널 안에서 실행되는 프로그램만큼이나 이를 컴파일하고 로드하며, 맵을 초기화하고, 훅에 부착하고, 버퍼를 소비하는 &lt;strong&gt;사용자 공간의 제어 프로그램&lt;/strong&gt;도 중요하다. &lt;code&gt;bpf()&lt;/code&gt;는 두 공간을 연결하는 중심 관문이지만, 실제 애플리케이션은 &lt;code&gt;perf_event_open()&lt;/code&gt;, &lt;code&gt;ioctl()&lt;/code&gt;, &lt;code&gt;mmap()&lt;/code&gt;, &lt;code&gt;poll()&lt;/code&gt; 같은 리눅스 API의 협업으로 완성된다.&lt;/p&gt;
+&lt;p&gt;Perf Buffer와 Ring Buffer의 차이도 단순히 신형 API와 구형 API의 비교가 아니었다. CPU별 버퍼를 둘 것인지, 모든 CPU가 공유하는 버퍼를 둘 것인지라는 구조적 선택이 메모리 사용량과 이벤트 순서, 초기화에 필요한 시스템 콜까지 바꾼다. 추상화 아래의 시스템 콜을 관찰하니 두 방식의 차이가 훨씬 구체적으로 이해되었다.&lt;/p&gt;
+&lt;p&gt;결국 4장은 eBPF를 &amp;ldquo;커널에서 실행되는 작은 프로그램&amp;quot;으로만 보던 시각에서 벗어나, &lt;strong&gt;사용자 공간 로더와 커널 객체, 시스템 콜, FD 수명 관리가 함께 구성하는 하나의 애플리케이션 플랫폼&lt;/strong&gt;으로 바라보게 해주는 장이었다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;Liz Rice, &lt;a href=&#34;https://www.oreilly.com/library/view/learning-ebpf/9781098135119/&#34;&gt;&lt;em&gt;Learning eBPF&lt;/em&gt;&lt;/a&gt;, O&amp;rsquo;Reilly Media.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>Learning eBPF 3장: eBPF 프로그램의 내부 구조와 실행 과정</title>
       <link>https://dongwooklee96.github.io/post/2026/07/26/learning-ebpf-3%EC%9E%A5-ebpf-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%98-%EB%82%B4%EB%B6%80-%EA%B5%AC%EC%A1%B0%EC%99%80-%EC%8B%A4%ED%96%89-%EA%B3%BC%EC%A0%95.html</link>

@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>Learning eBPF 4장: bpf() 시스템 콜과 사용자 공간의 상호작용 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="../../../../css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">Learning eBPF 4장: bpf() 시스템 콜과 사용자 공간의 상호작용</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2026/08/01</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/ebpf">eBPF</a> <a href="../../../../tags/%EB%A6%AC%EB%88%85%EC%8A%A4">리눅스</a> <a href="../../../../tags/%EC%BB%A4%EB%84%90">커널</a> <a href="../../../../tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템-프로그래밍</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="시작하며">시작하며</h3>
+<hr>
+<p>3장에서는 C로 작성한 코드가 eBPF 바이트코드로 컴파일되고, 검증기를 통과해 커널에 로드된 뒤 이벤트 훅에 부착되는 과정을 살펴보았다. <code>bpftool</code>로 프로그램과 맵을 직접 관찰하면서 <strong>로드와 부착은 서로 다른 단계</strong>라는 점도 확인했다.</p>
+<p>그렇다면 BCC, libbpf, <code>bpftool</code> 같은 사용자 공간 도구는 실제로 어떤 방법으로 커널에 프로그램을 로드하고 맵을 생성할까?</p>
+<p>그 중심에는 <strong><code>bpf()</code> 시스템 콜</strong>이 있다. 사용자 공간 애플리케이션은 이 시스템 콜을 통해 BTF 정보를 전달하고, 맵과 프로그램을 생성하며, 맵의 데이터를 읽고 수정한다. 다만 eBPF 애플리케이션의 모든 작업이 <code>bpf()</code> 하나만으로 끝나는 것은 아니다. Kprobe에 프로그램을 연결하거나 Perf Buffer의 이벤트를 읽을 때는 <code>perf_event_open()</code>, <code>ioctl()</code>, <code>mmap()</code>, <code>poll()</code> 같은 다른 시스템 콜도 함께 사용된다.</p>
+<p>이번 장의 전체 흐름을 먼저 정리하면 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>사용자 공간의 eBPF 애플리케이션
+</span></span><span style="display:flex;"><span>    │
+</span></span><span style="display:flex;"><span>    ├─ bpf(BPF_BTF_LOAD)          → BTF 객체 생성
+</span></span><span style="display:flex;"><span>    ├─ bpf(BPF_MAP_CREATE)        → Map 객체 생성
+</span></span><span style="display:flex;"><span>    ├─ bpf(BPF_PROG_LOAD)         → 프로그램 검증 및 로드
+</span></span><span style="display:flex;"><span>    ├─ bpf(BPF_MAP_UPDATE_ELEM)   → Map 설정값 변경
+</span></span><span style="display:flex;"><span>    │
+</span></span><span style="display:flex;"><span>    ├─ perf_event_open()          → Kprobe/CPU별 Perf Event 준비
+</span></span><span style="display:flex;"><span>    ├─ ioctl()                    → 프로그램 부착 및 이벤트 활성화
+</span></span><span style="display:flex;"><span>    ├─ mmap()                     → 이벤트 버퍼를 사용자 공간에 매핑
+</span></span><span style="display:flex;"><span>    └─ poll()                     → 새 이벤트가 올 때까지 대기
+</span></span></code></pre></div><blockquote>
+<p>4장의 핵심은 BCC가 제공하던 편리한 API를 <strong>커널과 통신하는 시스템 콜의 관점</strong>에서 다시 해석하는 것이다.</p>
+</blockquote>
+<h3 id="ebpf의-관문-bpf-시스템-콜">eBPF의 관문, <code>bpf()</code> 시스템 콜</h3>
+<hr>
+<p><code>bpf()</code>는 여러 eBPF 작업을 하나의 진입점으로 제공하는 멀티플렉서(Multiplexer) 형태의 시스템 콜이다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#57606a">#include</span> <span style="color:#57606a">&lt;linux/bpf.h&gt;</span><span style="color:#57606a">
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">int</span> <span style="color:#6639ba">bpf</span><span style="color:#1f2328">(</span><span style="color:#cf222e">int</span> cmd<span style="color:#1f2328">,</span> <span style="color:#cf222e">union</span> bpf_attr <span style="color:#0550ae">*</span>attr<span style="color:#1f2328">,</span> <span style="color:#cf222e">unsigned</span> <span style="color:#cf222e">int</span> size<span style="color:#1f2328">);</span>
+</span></span></code></pre></div><p>각 인자의 역할은 다음과 같다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>인자</th>
+          <th>의미</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>cmd</code></td>
+          <td>생성, 조회, 수정, 로드처럼 수행할 BPF 명령</td>
+      </tr>
+      <tr>
+          <td><code>attr</code></td>
+          <td>해당 명령에 필요한 인자를 담은 <code>union bpf_attr</code>의 주소</td>
+      </tr>
+      <tr>
+          <td><code>size</code></td>
+          <td><code>attr</code>이 가리키는 데이터의 크기</td>
+      </tr>
+  </tbody>
+</table>
+<p>대표적인 명령은 다음과 같다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>명령</th>
+          <th>역할</th>
+          <th>성공 시 결과</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>BPF_BTF_LOAD</code></td>
+          <td>BTF 데이터를 커널에 로드</td>
+          <td>BTF FD</td>
+      </tr>
+      <tr>
+          <td><code>BPF_MAP_CREATE</code></td>
+          <td>새로운 BPF Map 생성</td>
+          <td>Map FD</td>
+      </tr>
+      <tr>
+          <td><code>BPF_PROG_LOAD</code></td>
+          <td>프로그램 검증 및 로드</td>
+          <td>Program FD</td>
+      </tr>
+      <tr>
+          <td><code>BPF_MAP_LOOKUP_ELEM</code></td>
+          <td>키에 해당하는 값 조회</td>
+          <td><code>0</code></td>
+      </tr>
+      <tr>
+          <td><code>BPF_MAP_UPDATE_ELEM</code></td>
+          <td>키와 값 추가 또는 갱신</td>
+          <td><code>0</code></td>
+      </tr>
+      <tr>
+          <td><code>BPF_MAP_DELETE_ELEM</code></td>
+          <td>키와 값 삭제</td>
+          <td><code>0</code></td>
+      </tr>
+      <tr>
+          <td><code>BPF_OBJ_PIN</code></td>
+          <td>BPF 객체를 BPF 파일 시스템에 핀</td>
+          <td><code>0</code></td>
+      </tr>
+      <tr>
+          <td><code>BPF_OBJ_GET</code></td>
+          <td>핀 경로로 BPF 객체 열기</td>
+          <td>Object FD</td>
+      </tr>
+      <tr>
+          <td><code>BPF_OBJ_GET_INFO_BY_FD</code></td>
+          <td>FD가 가리키는 객체의 메타데이터 조회</td>
+          <td><code>0</code></td>
+      </tr>
+      <tr>
+          <td><code>BPF_LINK_CREATE</code></td>
+          <td>프로그램과 훅 사이의 BPF Link 생성</td>
+          <td>Link FD</td>
+      </tr>
+  </tbody>
+</table>
+<p>명령마다 필요한 인자는 다르지만 모두 같은 <code>union bpf_attr</code>을 공유한다. 예를 들어 맵을 생성할 때는 맵 타입과 키·값 크기가 필요하고, 프로그램을 로드할 때는 바이트코드와 라이선스, 프로그램 타입이 필요하다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">union</span> bpf_attr attr <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>map_type    <span style="color:#0550ae">=</span> BPF_MAP_TYPE_HASH<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>key_size    <span style="color:#0550ae">=</span> <span style="color:#cf222e">sizeof</span><span style="color:#1f2328">(</span>__u32<span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>value_size  <span style="color:#0550ae">=</span> <span style="color:#cf222e">sizeof</span><span style="color:#1f2328">(</span><span style="color:#cf222e">struct</span> <span style="color:#cf222e">user_msg_t</span><span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>max_entries <span style="color:#0550ae">=</span> <span style="color:#0550ae">1024</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">int</span> map_fd <span style="color:#0550ae">=</span> <span style="color:#6639ba">syscall</span><span style="color:#1f2328">(</span>__NR_bpf<span style="color:#1f2328">,</span> BPF_MAP_CREATE<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>                     <span style="color:#0550ae">&amp;</span>attr<span style="color:#1f2328">,</span> <span style="color:#cf222e">sizeof</span><span style="color:#1f2328">(</span>attr<span style="color:#1f2328">));</span>
+</span></span></code></pre></div><p>사용하지 않는 <code>bpf_attr</code> 필드와 패딩은 반드시 0으로 초기화해야 한다. 커널은 자신이 이해하지 못하는 필드에 값이 들어 있으면 잘못된 요청으로 판단해 <code>EINVAL</code>을 반환할 수 있다. 위 코드처럼 지정 초기화를 사용하거나 호출 전 구조체 전체를 0으로 초기화하는 습관이 중요하다.</p>
+<h3 id="strace로-추상화-걷어내기"><code>strace</code>로 추상화 걷어내기</h3>
+<hr>
+<p>4장에서는 2장에서 사용했던 BCC 예제를 확장한다. <code>execve()</code>를 호출한 프로세스의 PID, UID, 명령 이름을 수집하고, UID별 인사말을 <code>config</code> 맵에서 찾아 Perf Buffer로 사용자 공간에 전달한다.</p>
+<p>파이썬 코드만 보면 맵에 값을 넣는 작업은 평범한 딕셔너리 조작처럼 보인다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>b<span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;config&#34;</span><span style="color:#1f2328">][</span>ct<span style="color:#0550ae">.</span>c_int<span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">)]</span> <span style="color:#0550ae">=</span> ct<span style="color:#0550ae">.</span>create_string_buffer<span style="color:#1f2328">(</span><span style="color:#0a3069">b</span><span style="color:#0a3069">&#34;Hey root!&#34;</span><span style="color:#1f2328">)</span>
+</span></span></code></pre></div><p>하지만 <code>strace</code>로 프로그램을 실행하면 그 아래에서 일어나는 시스템 콜을 볼 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo strace <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -f <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  -e <span style="color:#953800">trace</span><span style="color:#0550ae">=</span>bpf,perf_event_open,ioctl,mmap,poll <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  ./hello-buffer-config.py
+</span></span></code></pre></div><p>커널 버전과 BCC 버전에 따라 세부 필드와 호출 횟수는 달라질 수 있지만, 출력의 핵심 흐름을 단순화하면 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>bpf(BPF_BTF_LOAD, ...)                         = 3
+</span></span><span style="display:flex;"><span>bpf(BPF_MAP_CREATE, {map_type=HASH, ...}, ...) = 4
+</span></span><span style="display:flex;"><span>bpf(BPF_MAP_CREATE, {map_type=PERF_EVENT_ARRAY, ...}, ...) = 5
+</span></span><span style="display:flex;"><span>bpf(BPF_PROG_LOAD, {prog_type=KPROBE, ...}, ...) = 6
+</span></span><span style="display:flex;"><span>bpf(BPF_MAP_UPDATE_ELEM, {map_fd=4, ...}, ...) = 0
+</span></span><span style="display:flex;"><span>perf_event_open(...)                            = 7
+</span></span><span style="display:flex;"><span>ioctl(7, PERF_EVENT_IOC_SET_BPF, 6)             = 0
+</span></span><span style="display:flex;"><span>ioctl(7, PERF_EVENT_IOC_ENABLE, 0)              = 0
+</span></span><span style="display:flex;"><span>mmap(...)                                       = ...
+</span></span><span style="display:flex;"><span>poll(...)                                       = ...
+</span></span></code></pre></div><p>이 출력은 BCC가 하나의 마법 같은 작업을 수행하는 것이 아니라, 여러 커널 API를 올바른 순서로 조합하고 있음을 보여준다.</p>
+<blockquote>
+<p><code>strace</code>에 보이는 것은 <strong>사용자 공간에서 호출한 시스템 콜</strong>이다. eBPF 프로그램 안의 <code>bpf_map_lookup_elem()</code>이나 <code>bpf_perf_event_output()</code>은 커널에서 실행되는 BPF 헬퍼 함수이므로 <code>strace</code>에 나타나지 않는다.</p>
+</blockquote>
+<h3 id="btf-데이터-로드">BTF 데이터 로드</h3>
+<hr>
+<p>BTF(BPF Type Format)는 eBPF 객체가 사용하는 타입, 함수, 소스 라인 정보를 압축된 형태로 표현한다. 5장에서 CO-RE와 함께 더 자세히 다루지만, 4장에서는 BTF 역시 커널 객체이며 <code>bpf()</code> 시스템 콜을 통해 로드된다는 사실에 집중한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>컴파일러가 생성한 BTF 데이터
+</span></span><span style="display:flex;"><span>    │
+</span></span><span style="display:flex;"><span>    │ bpf(BPF_BTF_LOAD, ...)
+</span></span><span style="display:flex;"><span>    ▼
+</span></span><span style="display:flex;"><span>커널의 BTF 객체
+</span></span><span style="display:flex;"><span>    │
+</span></span><span style="display:flex;"><span>    └─ BTF FD를 Map/Program 로드 요청에서 참조
+</span></span></code></pre></div><p><code>BPF_BTF_LOAD</code>가 성공하면 커널은 BTF 객체를 가리키는 파일 디스크립터를 반환한다. 이후 맵을 생성할 때 <code>btf_key_type_id</code>와 <code>btf_value_type_id</code>를 지정하거나, 프로그램을 로드할 때 함수 및 라인 정보와 연결할 수 있다.</p>
+<p>BTF가 있으면 커널과 <code>bpftool</code>은 단순한 바이트 배열을 넘어 다음 정보를 이해할 수 있다.</p>
+<ul>
+<li>맵의 키와 값이 어떤 타입인지</li>
+<li>프로그램에 어떤 함수가 포함되어 있는지</li>
+<li>eBPF 명령어가 원본 소스의 어느 줄에서 만들어졌는지</li>
+</ul>
+<p>즉, BTF는 단순한 디버그 부가 정보가 아니라 커널과 도구가 eBPF 객체의 구조를 이해하도록 돕는 메타데이터다.</p>
+<h3 id="map-생성">Map 생성</h3>
+<hr>
+<p>예제에는 역할이 다른 두 개의 맵이 있다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6639ba">BPF_HASH</span><span style="color:#1f2328">(</span>config<span style="color:#1f2328">,</span> u32<span style="color:#1f2328">,</span> <span style="color:#cf222e">struct</span> <span style="color:#cf222e">user_msg_t</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">BPF_PERF_OUTPUT</span><span style="color:#1f2328">(</span>output<span style="color:#1f2328">);</span>
+</span></span></code></pre></div><p>BCC의 매크로는 각각 별도의 <code>BPF_MAP_CREATE</code> 요청으로 이어진다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>맵</th>
+          <th>실제 타입</th>
+          <th>역할</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>config</code></td>
+          <td><code>BPF_MAP_TYPE_HASH</code></td>
+          <td>UID를 키로, 사용자별 메시지를 값으로 저장</td>
+      </tr>
+      <tr>
+          <td><code>output</code></td>
+          <td><code>BPF_MAP_TYPE_PERF_EVENT_ARRAY</code></td>
+          <td>CPU별 Perf Event FD를 연결하여 이벤트 전달</td>
+      </tr>
+  </tbody>
+</table>
+<p>Hash Map 생성 요청에는 대략 다음 정보가 담긴다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">union</span> bpf_attr attr <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>map_type    <span style="color:#0550ae">=</span> BPF_MAP_TYPE_HASH<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>key_size    <span style="color:#0550ae">=</span> <span style="color:#cf222e">sizeof</span><span style="color:#1f2328">(</span>__u32<span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>value_size  <span style="color:#0550ae">=</span> <span style="color:#cf222e">sizeof</span><span style="color:#1f2328">(</span><span style="color:#cf222e">struct</span> <span style="color:#cf222e">user_msg_t</span><span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>max_entries <span style="color:#0550ae">=</span> <span style="color:#0550ae">10240</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">};</span>
+</span></span></code></pre></div><p>성공하면 반환되는 값은 맵 데이터가 아니라 <strong>맵을 가리키는 FD</strong>다. 사용자 공간 프로그램은 이 FD를 이용해 원소를 읽고 수정하며, eBPF 프로그램을 로드할 때도 해당 맵을 참조한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Map FD 4 ──→ 커널의 config Map 객체
+</span></span><span style="display:flex;"><span>Map FD 5 ──→ 커널의 output Map 객체
+</span></span></code></pre></div><p>리눅스가 파일, 소켓, 파이프뿐 아니라 eBPF 객체까지 FD로 표현한다는 점이 흥미롭다. 덕분에 <code>close()</code>, 프로세스 간 FD 전달, 핀과 같은 기존의 리눅스 자원 관리 방식이 eBPF에도 자연스럽게 적용된다.</p>
+<h3 id="프로그램-검증과-로드">프로그램 검증과 로드</h3>
+<hr>
+<p>맵을 만든 다음에는 <code>BPF_PROG_LOAD</code> 명령으로 eBPF 프로그램을 커널에 로드한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">union</span> bpf_attr attr <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>prog_type <span style="color:#0550ae">=</span> BPF_PROG_TYPE_KPROBE<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>insn_cnt  <span style="color:#0550ae">=</span> instruction_count<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>insns     <span style="color:#0550ae">=</span> <span style="color:#6639ba">ptr_to_u64</span><span style="color:#1f2328">(</span>instructions<span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>license   <span style="color:#0550ae">=</span> <span style="color:#6639ba">ptr_to_u64</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;GPL&#34;</span><span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>log_buf   <span style="color:#0550ae">=</span> <span style="color:#6639ba">ptr_to_u64</span><span style="color:#1f2328">(</span>verifier_log<span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>log_size  <span style="color:#0550ae">=</span> <span style="color:#cf222e">sizeof</span><span style="color:#1f2328">(</span>verifier_log<span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>log_level <span style="color:#0550ae">=</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">};</span>
+</span></span></code></pre></div><p>주요 필드는 다음과 같다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>필드</th>
+          <th>의미</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>prog_type</code></td>
+          <td>Kprobe, XDP, Tracepoint 같은 프로그램 타입</td>
+      </tr>
+      <tr>
+          <td><code>insns</code>, <code>insn_cnt</code></td>
+          <td>eBPF 명령어 배열의 주소와 개수</td>
+      </tr>
+      <tr>
+          <td><code>license</code></td>
+          <td>프로그램의 라이선스 문자열</td>
+      </tr>
+      <tr>
+          <td><code>log_*</code></td>
+          <td>검증기 로그를 받을 버퍼와 설정</td>
+      </tr>
+      <tr>
+          <td><code>prog_btf_fd</code></td>
+          <td>프로그램 타입 정보와 연결된 BTF FD</td>
+      </tr>
+  </tbody>
+</table>
+<p>프로그램이 맵을 사용한다면 사용자 공간 로더는 오브젝트 파일의 맵 참조를 앞에서 얻은 Map FD와 연결한 뒤 로드를 요청한다. 커널은 검증 과정에서 이 참조를 실제 맵 객체에 대한 참조로 바꾸고, 프로그램이 해당 맵을 안전하게 사용하는지도 검사한다.</p>
+<p><code>BPF_PROG_LOAD</code>가 성공하면 Program FD가 반환된다. 실패하면 <code>-1</code>과 함께 <code>errno</code>가 설정되며, 안전성 검증에 실패한 경우 <code>log_buf</code>에 기록된 검증기 로그가 가장 중요한 단서가 된다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>ELF의 eBPF 바이트코드
+</span></span><span style="display:flex;"><span>    │  Map FD 연결
+</span></span><span style="display:flex;"><span>    ▼
+</span></span><span style="display:flex;"><span>bpf(BPF_PROG_LOAD)
+</span></span><span style="display:flex;"><span>    │
+</span></span><span style="display:flex;"><span>    ├─ 명령어와 제어 흐름 검증
+</span></span><span style="display:flex;"><span>    ├─ 메모리 및 헬퍼 호출 검증
+</span></span><span style="display:flex;"><span>    ├─ Map 참조 획득
+</span></span><span style="display:flex;"><span>    └─ JIT 컴파일(JIT 활성화 시)
+</span></span><span style="display:flex;"><span>         ▼
+</span></span><span style="display:flex;"><span>      Program FD
+</span></span></code></pre></div><h3 id="사용자-공간에서-map-수정하기">사용자 공간에서 Map 수정하기</h3>
+<hr>
+<p>파이썬의 다음 한 줄은 내부적으로 <code>BPF_MAP_UPDATE_ELEM</code> 명령을 호출한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>b<span style="color:#1f2328">[</span><span style="color:#0a3069">&#34;config&#34;</span><span style="color:#1f2328">][</span>ct<span style="color:#0550ae">.</span>c_int<span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">)]</span> <span style="color:#0550ae">=</span> ct<span style="color:#0550ae">.</span>create_string_buffer<span style="color:#1f2328">(</span><span style="color:#0a3069">b</span><span style="color:#0a3069">&#34;Hey root!&#34;</span><span style="color:#1f2328">)</span>
+</span></span></code></pre></div><p>시스템 콜 관점에서 필요한 정보는 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#cf222e">union</span> bpf_attr attr <span style="color:#0550ae">=</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>map_fd <span style="color:#0550ae">=</span> config_map_fd<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>key    <span style="color:#0550ae">=</span> <span style="color:#6639ba">ptr_to_u64</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>uid<span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>value  <span style="color:#0550ae">=</span> <span style="color:#6639ba">ptr_to_u64</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>message<span style="color:#1f2328">),</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">.</span>flags  <span style="color:#0550ae">=</span> BPF_ANY<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">};</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">syscall</span><span style="color:#1f2328">(</span>__NR_bpf<span style="color:#1f2328">,</span> BPF_MAP_UPDATE_ELEM<span style="color:#1f2328">,</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0550ae">&amp;</span>attr<span style="color:#1f2328">,</span> <span style="color:#cf222e">sizeof</span><span style="color:#1f2328">(</span>attr<span style="color:#1f2328">));</span>
+</span></span></code></pre></div><p>여기서 <code>key</code>와 <code>value</code>에는 실제 데이터가 아니라 <strong>사용자 공간 메모리의 주소</strong>가 들어간다. 커널은 Map을 생성할 때 정해진 키와 값의 크기만큼 데이터를 복사한다.</p>
+<p>업데이트 방식은 <code>flags</code>로 제어한다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>플래그</th>
+          <th>동작</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>BPF_ANY</code></td>
+          <td>키가 없으면 추가하고, 있으면 갱신</td>
+      </tr>
+      <tr>
+          <td><code>BPF_NOEXIST</code></td>
+          <td>키가 없을 때만 추가</td>
+      </tr>
+      <tr>
+          <td><code>BPF_EXIST</code></td>
+          <td>이미 존재하는 키만 갱신</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="시스템-콜과-헬퍼-함수는-다르다">시스템 콜과 헬퍼 함수는 다르다</h4>
+<p>이 지점에서 이름이 비슷한 두 API를 구분해야 한다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>실행 위치</th>
+          <th>API</th>
+          <th>특징</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>사용자 공간</td>
+          <td><code>bpf(BPF_MAP_LOOKUP_ELEM, ...)</code></td>
+          <td>시스템 콜을 통해 값이 사용자 공간으로 복사됨</td>
+      </tr>
+      <tr>
+          <td>eBPF 프로그램</td>
+          <td><code>bpf_map_lookup_elem()</code></td>
+          <td>커널의 BPF 헬퍼를 호출하고 값에 대한 포인터를 받음</td>
+      </tr>
+  </tbody>
+</table>
+<p>두 API는 같은 Map을 다루지만 실행되는 위치와 호출 방식이 완전히 다르다. eBPF 헬퍼 호출을 시스템 콜로 오해하면 커널 내부 실행 흐름을 이해하기 어려워진다.</p>
+<h3 id="fd-참조-그리고-bpf-객체의-수명">FD, 참조, 그리고 BPF 객체의 수명</h3>
+<hr>
+<p>Map, Program, BTF, Link는 커널이 관리하는 객체다. 사용자 공간은 FD를 통해 객체를 참조하며, 커널은 객체를 가리키는 참조가 모두 사라졌을 때 리소스를 해제한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>사용자 공간 FD ───────┐
+</span></span><span style="display:flex;"><span>로드된 Program ──→ Map ├─→ 커널의 BPF 객체
+</span></span><span style="display:flex;"><span>Attachment ─────→ Prog │
+</span></span><span style="display:flex;"><span>BPFFS Pin ─────────────┘
+</span></span></code></pre></div><p>예를 들어 Program FD를 닫더라도 프로그램이 훅에 부착되어 있으면 Attachment가 프로그램을 계속 참조하므로 즉시 제거되지 않는다. 프로그램이 Map을 사용하고 있다면 프로그램 역시 Map의 참조를 유지한다.</p>
+<p>반대로 다음 조건이 모두 충족되면 객체는 해제된다.</p>
+<ul>
+<li>해당 객체를 가리키는 FD가 모두 닫힘</li>
+<li>BPF 파일 시스템에 핀된 경로가 없음</li>
+<li>다른 Program, Map, Link 또는 Attachment가 참조하지 않음</li>
+</ul>
+<p>3장에서 핀 경로를 삭제해야 프로그램이 완전히 언로드될 수 있었던 이유가 바로 이 참조 기반의 수명 관리 때문이다.</p>
+<h3 id="bpf-파일-시스템에-핀하기">BPF 파일 시스템에 핀하기</h3>
+<hr>
+<p>프로세스가 종료되면 그 프로세스가 열어 둔 FD도 닫힌다. 프로그램이 종료된 이후에도 Map이나 Program을 유지하고 다른 프로세스가 다시 열게 하려면 객체를 BPFFS(BPF File System)에 핀할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo bpftool map pin id <span style="color:#0550ae">42</span> /sys/fs/bpf/config
+</span></span><span style="display:flex;"><span>sudo bpftool map show pinned /sys/fs/bpf/config
+</span></span></code></pre></div><p>내부에서는 다음 명령이 사용된다.</p>
+<ul>
+<li><code>BPF_OBJ_PIN</code>: FD가 가리키는 객체를 BPFFS 경로에 연결</li>
+<li><code>BPF_OBJ_GET</code>: 핀 경로로 객체를 열어 새로운 FD 획득</li>
+</ul>
+<p>핀은 일반 파일로 객체 내용을 복사하는 작업이 아니다. <strong>커널 객체에 이름 있는 참조를 하나 더 추가하는 것</strong>에 가깝다. 따라서 핀 경로를 삭제하면 참조 하나가 해제되지만, 다른 참조가 남아 있다면 객체는 계속 존재한다.</p>
+<p>또한 핀은 프로세스 수명을 넘어 객체를 유지할 뿐, 재부팅 후에도 커널 객체를 영구 보존하는 저장 기능은 아니다. 부팅 후 프로그램과 맵을 다시 로드해야 한다.</p>
+<h3 id="부착을-객체로-표현하는-bpf-link">부착을 객체로 표현하는 BPF Link</h3>
+<hr>
+<p>초기의 eBPF API에서는 프로그램을 부착하는 방법이 훅마다 달랐다. 어떤 타입은 <code>ioctl()</code>을 사용했고, 어떤 타입은 Netlink나 별도의 BPF 명령을 사용했다. 이 방식에서는 &ldquo;프로그램이 존재하는가&quot;와 &ldquo;어디에 부착되어 있는가&quot;를 일관된 방법으로 관리하기 어려웠다.</p>
+<p>BPF Link는 <strong>프로그램과 부착 지점 사이의 연결 자체를 FD 기반 커널 객체로 표현</strong>한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Program FD ── bpf(BPF_LINK_CREATE) ──→ Link FD ──→ Attachment Point
+</span></span></code></pre></div><p>Link FD를 닫으면 일반적으로 연결이 해제된다. 연결을 로더 프로세스보다 오래 유지해야 한다면 Link를 BPFFS에 핀할 수 있다. Program만 핀하면 프로그램 객체의 수명은 유지되지만 부착 상태까지 반드시 유지되는 것은 아니므로, 둘의 차이를 이해해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo bpftool link show
+</span></span><span style="display:flex;"><span>sudo bpftool link pin id <span style="color:#0550ae">7</span> /sys/fs/bpf/exec-link
+</span></span></code></pre></div><p>BPF Link를 사용하면 다음과 같은 장점이 있다.</p>
+<ul>
+<li>부착 상태를 FD와 핀으로 일관되게 관리할 수 있다.</li>
+<li>연결 정보를 <code>bpftool link show</code>로 관찰할 수 있다.</li>
+<li>지원되는 Link 타입에서는 프로그램을 원자적으로 교체할 수 있다.</li>
+<li>소유 프로세스가 비정상 종료되었을 때 수명 규칙을 예측하기 쉽다.</li>
+</ul>
+<p>다만 4장의 BCC Kprobe 예제는 기존 Perf Event 기반 방식을 사용하므로, 부착 과정에서 <code>BPF_LINK_CREATE</code> 대신 <code>perf_event_open()</code>과 <code>ioctl()</code>이 관찰될 수 있다.</p>
+<h3 id="kprobe-부착에는-왜-다른-시스템-콜이-필요할까">Kprobe 부착에는 왜 다른 시스템 콜이 필요할까?</h3>
+<hr>
+<p><code>BPF_PROG_LOAD</code>는 검증된 프로그램 객체를 만들 뿐, 그 프로그램을 <code>execve()</code> 같은 커널 함수에 연결하지 않는다. BCC의 전통적인 Kprobe 부착 흐름은 대략 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1. Kprobe 이벤트 등록
+</span></span><span style="display:flex;"><span>   └─ tracefs의 kprobe_events 사용
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>2. perf_event_open()
+</span></span><span style="display:flex;"><span>   └─ 해당 Kprobe를 나타내는 Perf Event FD 생성
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>3. ioctl(PERF_EVENT_IOC_SET_BPF)
+</span></span><span style="display:flex;"><span>   └─ Perf Event에 Program FD 연결
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>4. ioctl(PERF_EVENT_IOC_ENABLE)
+</span></span><span style="display:flex;"><span>   └─ 이벤트 활성화
+</span></span></code></pre></div><p>여기서 Program FD를 닫는 것과 Perf Event FD를 닫는 것은 의미가 다르다. Perf Event FD는 부착 상태를 유지하는 참조이므로 이 FD가 닫히면 해당 연결도 해제될 수 있다.</p>
+<p>최신 libbpf에서는 지원되는 환경과 프로그램 타입에 대해 BPF Link 기반의 Kprobe 부착을 사용할 수 있다. 그러나 커널 버전과 라이브러리, 선택한 API에 따라 실제 시스템 콜의 모양이 달라질 수 있으므로 <code>strace</code> 결과를 기계적으로 외우기보다 <strong>로드와 부착이 별도 단계라는 구조</strong>를 이해하는 것이 중요하다.</p>
+<h3 id="perf-buffer-초기화와-이벤트-읽기">Perf Buffer 초기화와 이벤트 읽기</h3>
+<hr>
+<p><code>BPF_PERF_OUTPUT(output)</code>은 <code>BPF_MAP_TYPE_PERF_EVENT_ARRAY</code> 맵을 만든다. 하지만 빈 맵만 만들어서는 이벤트를 전달할 수 없다. 사용자 공간 로더는 온라인 CPU마다 Perf Event를 만들고, 각 FD를 맵의 CPU 인덱스에 등록해야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>CPU 0 ─ perf_event_open() ─ FD 10 ─┐
+</span></span><span style="display:flex;"><span>CPU 1 ─ perf_event_open() ─ FD 11 ─┼─→ output[CPU] Map
+</span></span><span style="display:flex;"><span>CPU 2 ─ perf_event_open() ─ FD 12 ─┤
+</span></span><span style="display:flex;"><span>CPU 3 ─ perf_event_open() ─ FD 13 ─┘
+</span></span></code></pre></div><p>전체 데이터 흐름은 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>eBPF 프로그램
+</span></span><span style="display:flex;"><span>    │ bpf_perf_event_output() 헬퍼
+</span></span><span style="display:flex;"><span>    ▼
+</span></span><span style="display:flex;"><span>현재 CPU의 Perf Event Ring Buffer
+</span></span><span style="display:flex;"><span>    │ mmap()으로 공유
+</span></span><span style="display:flex;"><span>    ▼
+</span></span><span style="display:flex;"><span>사용자 공간
+</span></span><span style="display:flex;"><span>    │ poll()로 새 데이터 대기
+</span></span><span style="display:flex;"><span>    └ 레코드 해석 → 콜백 실행
+</span></span></code></pre></div><p>각 단계에서 사용되는 주요 API는 다음과 같다.</p>
+<ol>
+<li><code>perf_event_open()</code>으로 CPU별 <code>PERF_COUNT_SW_BPF_OUTPUT</code> 이벤트를 만든다.</li>
+<li><code>mmap()</code>으로 각 Perf Event의 링 버퍼를 사용자 공간에 매핑한다.</li>
+<li><code>BPF_MAP_UPDATE_ELEM</code>으로 CPU 번호와 Perf Event FD를 <code>output</code> 맵에 저장한다.</li>
+<li>eBPF 프로그램은 <code>bpf_perf_event_output()</code> 헬퍼로 현재 CPU의 버퍼에 데이터를 기록한다.</li>
+<li>사용자 공간은 <code>poll()</code>로 이벤트를 기다린 뒤 매핑된 메모리에서 레코드를 읽는다.</li>
+</ol>
+<p>Perf Buffer는 CPU별로 독립된 버퍼를 사용하므로 경합을 줄이는 데 유리하다. 반면 전체 CPU에서 발생한 이벤트의 전역 순서를 보장하기 어렵고, CPU 수에 비례해 버퍼 메모리가 늘어난다. 소비자가 충분히 빠르게 읽지 못하면 레코드가 유실될 수 있으므로 Lost Event 처리도 필요하다.</p>
+<h3 id="ring-buffer에서는-무엇이-달라질까">Ring Buffer에서는 무엇이 달라질까?</h3>
+<hr>
+<p>4장에서는 동일한 예제를 <code>BPF_RINGBUF_OUTPUT</code>으로 바꾸어 두 방식의 시스템 콜 차이도 비교한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#6639ba">BPF_RINGBUF_OUTPUT</span><span style="color:#1f2328">(</span>output<span style="color:#1f2328">,</span> <span style="color:#0550ae">1</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">// eBPF 프로그램 안에서
+</span></span></span><span style="display:flex;"><span>output<span style="color:#1f2328">.</span><span style="color:#6639ba">ringbuf_output</span><span style="color:#1f2328">(</span><span style="color:#0550ae">&amp;</span>data<span style="color:#1f2328">,</span> <span style="color:#cf222e">sizeof</span><span style="color:#1f2328">(</span>data<span style="color:#1f2328">),</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">);</span>
+</span></span></code></pre></div><p>Ring Buffer는 <code>BPF_MAP_TYPE_RINGBUF</code> 타입의 맵 하나를 모든 CPU가 공유한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>CPU 0 ─┐
+</span></span><span style="display:flex;"><span>CPU 1 ─┼─→ 하나의 BPF Ring Buffer → 사용자 공간
+</span></span><span style="display:flex;"><span>CPU 2 ─┤
+</span></span><span style="display:flex;"><span>CPU 3 ─┘
+</span></span></code></pre></div><p>Perf Buffer와 비교하면 다음과 같다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>구분</th>
+          <th>Perf Buffer</th>
+          <th>BPF Ring Buffer</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>커널 객체</td>
+          <td><code>PERF_EVENT_ARRAY</code> Map + CPU별 Perf Event</td>
+          <td><code>RINGBUF</code> Map</td>
+      </tr>
+      <tr>
+          <td>버퍼 구조</td>
+          <td>CPU별 버퍼</td>
+          <td>여러 CPU가 공유하는 하나의 버퍼</td>
+      </tr>
+      <tr>
+          <td>이벤트 순서</td>
+          <td>CPU를 넘나드는 전역 순서 보장 어려움</td>
+          <td>예약 순서를 기준으로 CPU 간 순서 보존</td>
+      </tr>
+      <tr>
+          <td>초기화</td>
+          <td>CPU마다 <code>perf_event_open()</code> 및 Map 갱신</td>
+          <td>Map 생성 후 <code>mmap()</code> 중심으로 설정</td>
+      </tr>
+      <tr>
+          <td>메모리 사용</td>
+          <td>CPU 수에 비례</td>
+          <td>공유 버퍼이므로 상대적으로 효율적</td>
+      </tr>
+      <tr>
+          <td>커널 측 출력</td>
+          <td><code>bpf_perf_event_output()</code></td>
+          <td><code>bpf_ringbuf_output()</code> 또는 reserve/submit</td>
+      </tr>
+  </tbody>
+</table>
+<p>Ring Buffer는 별도의 CPU별 Perf Event를 만들 필요가 없으므로 <code>perf_event_open()</code>과 Perf Event FD를 맵에 등록하는 호출이 사라진다. 사용자 공간은 Ring Buffer Map의 메모리를 <code>mmap()</code>하고 <code>poll()</code> 또는 <code>epoll()</code>로 새 데이터 알림을 기다린다.</p>
+<p><code>bpf_ringbuf_reserve()</code>와 <code>bpf_ringbuf_submit()</code>을 사용하면 버퍼 내부 공간에 직접 데이터를 작성하여 추가 복사를 피할 수도 있다. 단, 예약에 성공한 레코드는 모든 실행 경로에서 반드시 제출하거나 폐기해야 하며 검증기가 이를 추적한다.</p>
+<blockquote>
+<p>Perf Buffer와 Ring Buffer는 이름은 비슷하지만 초기화 방식과 커널 객체 구성이 다르다. <code>strace</code>에서 <code>perf_event_open()</code>의 유무를 비교하면 이 차이가 선명하게 드러난다.</p>
+</blockquote>
+<h3 id="bpftool은-map을-어떻게-찾고-읽을까"><code>bpftool</code>은 Map을 어떻게 찾고 읽을까?</h3>
+<hr>
+<p><code>bpftool</code>로 맵 목록을 조회하는 명령은 매우 단순하다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo bpftool map list
+</span></span></code></pre></div><p>그러나 내부에서는 여러 <code>bpf()</code> 명령이 조합된다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>BPF_MAP_GET_NEXT_ID
+</span></span><span style="display:flex;"><span>    │ 다음 Map ID
+</span></span><span style="display:flex;"><span>    ▼
+</span></span><span style="display:flex;"><span>BPF_MAP_GET_FD_BY_ID
+</span></span><span style="display:flex;"><span>    │ Map FD
+</span></span><span style="display:flex;"><span>    ▼
+</span></span><span style="display:flex;"><span>BPF_OBJ_GET_INFO_BY_FD
+</span></span><span style="display:flex;"><span>    └ 타입, 이름, 키/값 크기, 최대 엔트리 등 출력
+</span></span></code></pre></div><p>특정 맵을 찾을 때는 ID, 이름, 핀 경로를 사용할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo bpftool map show id <span style="color:#0550ae">42</span>
+</span></span><span style="display:flex;"><span>sudo bpftool map show name config
+</span></span><span style="display:flex;"><span>sudo bpftool map show pinned /sys/fs/bpf/config
+</span></span></code></pre></div><p>맵 이름은 여러 객체에서 중복될 수 있다. 정확한 객체를 지정해야 하는 자동화나 운영 환경에서는 ID 또는 핀 경로를 사용하는 편이 안전하다.</p>
+<p>Hash Map의 모든 원소를 읽을 때는 다음 두 명령을 반복한다.</p>
+<ol>
+<li><code>BPF_MAP_GET_NEXT_KEY</code>로 다음 키를 얻는다.</li>
+<li><code>BPF_MAP_LOOKUP_ELEM</code>로 해당 키의 값을 읽는다.</li>
+</ol>
+<p><code>bpftool</code>에서는 이를 한 번에 수행할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo bpftool map dump name config
+</span></span></code></pre></div><p>특정 UID의 메시지를 조회하거나 수정하는 것도 가능하다. UID가 32비트 리틀 엔디언으로 저장되는 환경에서 UID 0의 키는 네 개의 0바이트로 표현된다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo bpftool map lookup name config <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  key hex <span style="color:#0550ae">00</span> <span style="color:#0550ae">00</span> <span style="color:#0550ae">00</span> <span style="color:#0550ae">00</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo bpftool map update name config <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  key hex <span style="color:#0550ae">00</span> <span style="color:#0550ae">00</span> <span style="color:#0550ae">00</span> <span style="color:#0550ae">00</span> <span style="color:#0a3069">\
+</span></span></span><span style="display:flex;"><span>  value hex <span style="color:#0550ae">48</span> <span style="color:#0550ae">65</span> 6c 6c 6f <span style="color:#0550ae">20</span> <span style="color:#0550ae">72</span> 6f 6f <span style="color:#0550ae">74</span> <span style="color:#0550ae">00</span> <span style="color:#0550ae">00</span> <span style="color:#0550ae">00</span>
+</span></span></code></pre></div><p>두 번째 명령은 실행 중인 eBPF 프로그램을 다시 컴파일하거나 로드하지 않고도 UID 0의 설정을 <code>Hello root</code>로 바꾼다. <strong>코드와 설정을 Map으로 분리하면 프로그램을 중단하지 않고 동작을 변경할 수 있다</strong>는 장점이 잘 드러나는 부분이다.</p>
+<p>다만 키와 값은 Map이 선언한 정확한 바이트 크기에 맞아야 한다. 구조체 패딩, 문자열의 널 종료 문자, 엔디언을 잘못 계산하면 명령이 실패하거나 의도하지 않은 값이 저장될 수 있다. BTF가 포함된 맵에서는 <code>bpftool</code>의 BTF 기반 표현을 활용하면 원시 바이트를 직접 다룰 때의 실수를 줄일 수 있다.</p>
+<h3 id="자주-만나는-오류와-확인-포인트">자주 만나는 오류와 확인 포인트</h3>
+<hr>
+<p><code>bpf()</code>가 실패하면 <code>-1</code>을 반환하고 <code>errno</code>에 원인이 기록된다.</p>
+<table>
+  <thead>
+      <tr>
+          <th>오류</th>
+          <th>주로 확인할 내용</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>EPERM</code></td>
+          <td>필요한 권한 또는 Capability가 있는지</td>
+      </tr>
+      <tr>
+          <td><code>EACCES</code></td>
+          <td>검증기가 프로그램을 안전하지 않다고 판단했는지</td>
+      </tr>
+      <tr>
+          <td><code>EINVAL</code></td>
+          <td>명령, 프로그램/맵 타입, <code>bpf_attr</code> 필드가 올바른지</td>
+      </tr>
+      <tr>
+          <td><code>E2BIG</code></td>
+          <td>프로그램 또는 맵 크기 제한을 넘었는지</td>
+      </tr>
+      <tr>
+          <td><code>ENOENT</code></td>
+          <td>조회한 키, 객체 ID, 핀 경로가 존재하는지</td>
+      </tr>
+      <tr>
+          <td><code>ENOMEM</code></td>
+          <td>커널이 필요한 메모리를 할당할 수 있는지</td>
+      </tr>
+  </tbody>
+</table>
+<p>특히 다음 항목을 먼저 확인하면 문제를 좁히는 데 도움이 된다.</p>
+<ul>
+<li><code>bpf_attr</code> 전체를 0으로 초기화했는가?</li>
+<li>Map의 키와 값 크기가 선언과 일치하는가?</li>
+<li><code>BPF_PROG_LOAD</code>의 검증기 로그를 활성화했는가?</li>
+<li>프로그램 타입과 부착 지점의 타입이 서로 호환되는가?</li>
+<li>FD가 너무 일찍 닫혀 객체나 Attachment가 사라지지 않았는가?</li>
+<li>BPFFS가 마운트되어 있고 핀 경로가 올바른가?</li>
+</ul>
+<p>최신 커널에서는 작업의 종류에 따라 <code>CAP_BPF</code>와 함께 <code>CAP_PERFMON</code> 또는 <code>CAP_NET_ADMIN</code> 같은 권한이 필요할 수 있다. 요구 조건은 커널 버전, 프로그램 타입, 시스템 설정에 따라 달라지므로 학습 환경에서는 우선 <code>sudo</code>로 동작을 확인하되, 운영 환경에서는 필요한 Capability만 최소한으로 부여해야 한다.</p>
+<h3 id="전체-흐름-다시-보기">전체 흐름 다시 보기</h3>
+<hr>
+<p>4장에서 살펴본 BCC 애플리케이션의 생명주기를 하나로 연결하면 다음과 같다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>1. Compile
+</span></span><span style="display:flex;"><span>   BCC가 C 코드를 eBPF 바이트코드와 BTF로 컴파일
+</span></span><span style="display:flex;"><span>        │
+</span></span><span style="display:flex;"><span>2. Create kernel objects
+</span></span><span style="display:flex;"><span>   BPF_BTF_LOAD → BPF_MAP_CREATE → BPF_PROG_LOAD
+</span></span><span style="display:flex;"><span>        │
+</span></span><span style="display:flex;"><span>3. Configure
+</span></span><span style="display:flex;"><span>   BPF_MAP_UPDATE_ELEM으로 UID별 메시지 저장
+</span></span><span style="display:flex;"><span>        │
+</span></span><span style="display:flex;"><span>4. Attach
+</span></span><span style="display:flex;"><span>   perf_event_open + ioctl 또는 BPF_LINK_CREATE
+</span></span><span style="display:flex;"><span>        │
+</span></span><span style="display:flex;"><span>5. Set up event delivery
+</span></span><span style="display:flex;"><span>   Perf Buffer: CPU별 perf_event_open + mmap + Map 갱신
+</span></span><span style="display:flex;"><span>   Ring Buffer: Ring Buffer Map + mmap
+</span></span><span style="display:flex;"><span>        │
+</span></span><span style="display:flex;"><span>6. Run
+</span></span><span style="display:flex;"><span>   execve() 발생 → Kprobe → eBPF 프로그램 실행
+</span></span><span style="display:flex;"><span>        │
+</span></span><span style="display:flex;"><span>7. Communicate
+</span></span><span style="display:flex;"><span>   Map 조회 + Buffer 출력 → poll 중인 사용자 공간이 이벤트 처리
+</span></span><span style="display:flex;"><span>        │
+</span></span><span style="display:flex;"><span>8. Clean up
+</span></span><span style="display:flex;"><span>   FD 종료, Link 분리, Pin 제거 후 참조가 없으면 객체 해제
+</span></span></code></pre></div><p>이 흐름을 이해하면 BCC뿐 아니라 libbpf, Go의 <code>cilium/ebpf</code>, Rust의 Aya 같은 다른 라이브러리를 접할 때도 공통 기반을 찾을 수 있다. API의 모양과 언어는 달라도 결국 커널과 통신하는 핵심 메커니즘은 <code>bpf()</code>와 관련 시스템 콜 위에 세워져 있기 때문이다.</p>
+<h3 id="느낀점--결론">느낀점 / 결론</h3>
+<hr>
+<p>2장에서는 파이썬 딕셔너리처럼 보였던 Map 조작과 간단한 콜백 등록만으로도 eBPF 프로그램을 실행할 수 있었다. 4장에서는 그 편리한 코드 아래에서 BTF, Map, Program이 각각 커널 객체로 생성되고 FD를 통해 연결되는 과정을 확인했다.</p>
+<p>가장 인상 깊었던 부분은 eBPF가 리눅스의 기존 설계 언어를 그대로 활용한다는 점이다. Map과 Program뿐 아니라 부착 관계까지 FD와 참조 카운팅으로 관리하고, 필요하면 BPFFS에 핀해 프로세스의 수명과 분리한다. 완전히 새로운 자원 관리 체계를 만드는 대신 파일 디스크립터라는 리눅스의 익숙한 추상화를 확장한 설계가 무척 일관적이라고 느꼈다.</p>
+<p>또 하나 중요하게 다가온 점은 eBPF 애플리케이션이 eBPF 바이트코드만으로 완성되지 않는다는 사실이다. 커널 안에서 실행되는 프로그램만큼이나 이를 컴파일하고 로드하며, 맵을 초기화하고, 훅에 부착하고, 버퍼를 소비하는 <strong>사용자 공간의 제어 프로그램</strong>도 중요하다. <code>bpf()</code>는 두 공간을 연결하는 중심 관문이지만, 실제 애플리케이션은 <code>perf_event_open()</code>, <code>ioctl()</code>, <code>mmap()</code>, <code>poll()</code> 같은 리눅스 API의 협업으로 완성된다.</p>
+<p>Perf Buffer와 Ring Buffer의 차이도 단순히 신형 API와 구형 API의 비교가 아니었다. CPU별 버퍼를 둘 것인지, 모든 CPU가 공유하는 버퍼를 둘 것인지라는 구조적 선택이 메모리 사용량과 이벤트 순서, 초기화에 필요한 시스템 콜까지 바꾼다. 추상화 아래의 시스템 콜을 관찰하니 두 방식의 차이가 훨씬 구체적으로 이해되었다.</p>
+<p>결국 4장은 eBPF를 &ldquo;커널에서 실행되는 작은 프로그램&quot;으로만 보던 시각에서 벗어나, <strong>사용자 공간 로더와 커널 객체, 시스템 콜, FD 수명 관리가 함께 구성하는 하나의 애플리케이션 플랫폼</strong>으로 바라보게 해주는 장이었다.</p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li>Liz Rice, <a href="https://www.oreilly.com/library/view/learning-ebpf/9781098135119/"><em>Learning eBPF</em></a>, O&rsquo;Reilly Media.</li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> <a href="mailto:sh95119@gmail.com">Mail</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> <a href="https://github.com/dongwooklee96">Github</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10.5 2C8.015 2 6 4.015 6 6.5v7c0 2.485 2.015 4.5 4.5 4.5s4.5-2.015 4.5-4.5v-7C15 4.015 12.985 2 10.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7zm3.5-11C14.015 2 12 4.015 12 6.5v7c0 2.485 2.015 4.5 4.5 4.5S21 15.985 21 13.5v-7C21 4.015 18.985 2 16.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7z"/></svg> <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a></span>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>
