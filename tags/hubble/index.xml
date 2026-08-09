@@ -610,6 +610,15 @@
 &lt;li&gt;&lt;a href=&#34;https://docs.cilium.io/en/stable/internals/hubble/&#34;&gt;Hubble Internals 공식 문서&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://docs.cilium.io/en/stable/observability/hubble/&#34;&gt;Network Observability with Hubble&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://docs.cilium.io/en/stable/overview/component-overview/&#34;&gt;Cilium Component Overview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.cilium.io/en/stable/observability/visibility/&#34;&gt;Layer 7 Protocol Visibility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cilium/hubble/blob/75d3a68c727dac1e4aa4a5097cf9f747da9cc935/main.go&#34;&gt;Hubble CLI 진입점&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cilium/cilium/blob/8c0423e970e62706bcd5dd3a57e1ffaee697439c/bpf/lib/events.h&#34;&gt;&lt;code&gt;cilium_events&lt;/code&gt; 맵 정의&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cilium/cilium/blob/8c0423e970e62706bcd5dd3a57e1ffaee697439c/pkg/monitor/agent/agent.go&#34;&gt;Cilium Monitor Agent의 Perf Reader&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cilium/cilium/blob/8c0423e970e62706bcd5dd3a57e1ffaee697439c/pkg/hubble/monitor/consumer.go&#34;&gt;Hubble Monitor Consumer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cilium/cilium/blob/8c0423e970e62706bcd5dd3a57e1ffaee697439c/pkg/hubble/parser/parser.go&#34;&gt;Hubble Parser&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cilium/cilium/blob/8c0423e970e62706bcd5dd3a57e1ffaee697439c/pkg/hubble/container/ring.go&#34;&gt;Hubble 사용자 공간 Ring&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cilium/cilium/blob/8c0423e970e62706bcd5dd3a57e1ffaee697439c/pkg/hubble/observer/local_observer.go&#34;&gt;Hubble Local Observer&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cilium/cilium/blob/8c0423e970e62706bcd5dd3a57e1ffaee697439c/pkg/hubble/relay/observer/server.go&#34;&gt;Hubble Relay Observer&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
