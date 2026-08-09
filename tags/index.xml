@@ -8,13 +8,49 @@
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Sat, 01 Aug 2026 09:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Aug 2026 13:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Cilium</title>
+      <link>https://dongwooklee96.github.io/tags/cilium.html</link>
+      <pubDate>Sun, 09 Aug 2026 13:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/cilium.html</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>EBPF</title>
       <link>https://dongwooklee96.github.io/tags/ebpf.html</link>
-      <pubDate>Sat, 01 Aug 2026 09:00:00 +0900</pubDate>
+      <pubDate>Sun, 09 Aug 2026 13:00:00 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
       <guid>https://dongwooklee96.github.io/tags/ebpf.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hubble</title>
+      <link>https://dongwooklee96.github.io/tags/hubble.html</link>
+      <pubDate>Sun, 09 Aug 2026 13:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/hubble.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>https://dongwooklee96.github.io/tags/kubernetes.html</link>
+      <pubDate>Sun, 09 Aug 2026 13:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/kubernetes.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>네트워크-관측성</title>
+      <link>https://dongwooklee96.github.io/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B4%80%EC%B8%A1%EC%84%B1.html</link>
+      <pubDate>Sun, 09 Aug 2026 13:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/tags/%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B4%80%EC%B8%A1%EC%84%B1.html</guid>
       <description></description>
     </item>
     

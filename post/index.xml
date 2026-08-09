@@ -8,7 +8,612 @@
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Sat, 01 Aug 2026 09:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Aug 2026 13:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>eBPF를 활용한 오픈소스 분석</title>
+      <link>https://dongwooklee96.github.io/post/2026/08/09/ebpf%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D.html</link>
+      <pubDate>Sun, 09 Aug 2026 13:00:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>https://dongwooklee96.github.io/post/2026/08/09/ebpf%EB%A5%BC-%ED%99%9C%EC%9A%A9%ED%95%9C-%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4-%EB%B6%84%EC%84%9D.html</guid>
+      <description>&lt;h3 id=&#34;시작하며&#34;&gt;시작하며&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;지금까지는 작은 예제를 직접 만들면서 eBPF 프로그램, 맵, &lt;code&gt;bpf()&lt;/code&gt; 시스템 콜, Perf Buffer가 어떻게 동작하는지 살펴보았다. 5주차에는 책의 다음 장으로 넘어가는 대신, 실제 오픈 소스 프로젝트가 이 기술을 어떻게 조합하는지 분석해 보기로 했다.&lt;/p&gt;
+&lt;p&gt;이번에 선택한 프로젝트는 &lt;a href=&#34;https://github.com/cilium/hubble&#34;&gt;Cilium Hubble&lt;/a&gt;이다. Hubble은 Kubernetes 네트워크에서 다음과 같은 질문에 답해 주는 관측 도구다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;어떤 Pod와 서비스가 서로 통신하는가?&lt;/li&gt;
+&lt;li&gt;연결이 전달되었는가, 네트워크 정책 때문에 차단되었는가?&lt;/li&gt;
+&lt;li&gt;패킷이 버려졌다면 그 이유는 무엇인가?&lt;/li&gt;
+&lt;li&gt;어떤 DNS 질의와 HTTP 요청이 발생했는가?&lt;/li&gt;
+&lt;li&gt;여러 노드의 흐름을 클러스터 단위로 어떻게 모아 볼 수 있는가?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;처음에는 Hubble 저장소 안에 eBPF C 코드와 로더가 모두 있을 것이라 예상했다. 그러나 코드를 따라가 보니 Hubble을 이해하려면 &lt;code&gt;cilium/hubble&lt;/code&gt;과 &lt;code&gt;cilium/cilium&lt;/code&gt; 두 저장소를 함께 읽어야 했다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hubble은 독립적인 eBPF 데이터패스를 새로 만드는 프로젝트가 아니다. &lt;strong&gt;Cilium의 eBPF 데이터패스가 만든 관측 이벤트를 수집하고, Kubernetes 문맥을 더해 사람이 조회할 수 있는 Flow로 만드는 시스템&lt;/strong&gt;이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이 글은 2026년 8월 9일을 기준으로 다음 소스 트리를 분석했다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;저장소&lt;/th&gt;
+          &lt;th&gt;분석 기준&lt;/th&gt;
+          &lt;th&gt;역할&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;cilium/hubble&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;75d3a68&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Hubble CLI 진입점, 배포 문서와 릴리스&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;cilium/cilium&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;8c0423e&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;eBPF 데이터패스, 이벤트 수집, Hubble Server·Relay·CLI 실제 구현&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;세부 파일과 구조는 이후 버전에서 달라질 수 있지만, 커널 이벤트가 Hubble Flow가 되는 큰 흐름은 동일하다.&lt;/p&gt;
+&lt;h3 id=&#34;hubble은-무엇인가&#34;&gt;Hubble은 무엇인가&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Hubble은 Cilium 위에 만들어진 네트워크·서비스·보안 관측 플랫폼이다. 애플리케이션에 별도 계측 코드를 추가하거나 모든 Pod에 사이드카를 넣지 않아도 Cilium이 관리하는 트래픽을 관찰할 수 있다.&lt;/p&gt;
+&lt;p&gt;공식 아키텍처 그림은 Hubble을 세 가지 출력 관점으로 보여 준다.&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img src=&#34;https://raw.githubusercontent.com/cilium/hubble/75d3a68c727dac1e4aa4a5097cf9f747da9cc935/Documentation/images/hubble_arch.png&#34; alt=&#34;Cilium Hubble 공식 아키텍처&#34; width=&#34;100%&#34;&gt;
+  &lt;figcaption&gt;Cilium의 eBPF 이벤트는 노드별 Hubble을 거쳐 CLI, UI, Prometheus 같은 소비자에게 전달된다.&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;구성 요소&lt;/th&gt;
+          &lt;th&gt;역할&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble Server&lt;/td&gt;
+          &lt;td&gt;각 노드의 &lt;code&gt;cilium-agent&lt;/code&gt; 안에서 이벤트를 파싱하고 저장하며 gRPC API 제공&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble Relay&lt;/td&gt;
+          &lt;td&gt;여러 노드의 Hubble Server에 연결해 클러스터 전체 Flow를 하나의 API로 제공&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble CLI&lt;/td&gt;
+          &lt;td&gt;gRPC API에 질의하고 Flow를 터미널에 출력&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble UI&lt;/td&gt;
+          &lt;td&gt;서비스 맵과 네트워크 흐름을 웹 화면으로 시각화&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble Metrics&lt;/td&gt;
+          &lt;td&gt;Flow를 Prometheus 지표로 변환&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble Exporter&lt;/td&gt;
+          &lt;td&gt;Flow를 파일이나 로그 파이프라인에서 사용할 수 있는 형태로 내보냄&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;여기서 가장 중요한 사실은 &lt;strong&gt;Hubble Server가 별도의 노드 데몬이 아니라 &lt;code&gt;cilium-agent&lt;/code&gt; 프로세스에 내장되어 있다&lt;/strong&gt;는 점이다. 이미 eBPF 이벤트를 읽고 있는 Cilium 내부 경로에 소비자를 등록하므로, 별도의 커널 이벤트 수집 계층을 중복해서 만들지 않는다.&lt;/p&gt;
+&lt;h3 id=&#34;두-저장소를-함께-읽어야-하는-이유&#34;&gt;두 저장소를 함께 읽어야 하는 이유&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;cilium/hubble&lt;/code&gt; 저장소의 &lt;code&gt;main.go&lt;/code&gt;는 생각보다 매우 짧다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;github.com/cilium/cilium/hubble/cmd&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;func&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;err&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;:=&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;cmd&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;Execute&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;();&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;err&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;!=&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;nil&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;// 에러 출력 후 종료&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;go.mod&lt;/code&gt;도 &lt;code&gt;github.com/cilium/cilium&lt;/code&gt; 모듈을 의존성으로 가져온다. 즉, 현재 &lt;code&gt;cilium/hubble&lt;/code&gt; 저장소는 Hubble CLI를 빌드하고 배포하는 얇은 진입점에 가깝다. 실제 &lt;code&gt;observe&lt;/code&gt; 명령과 서버, 파서, Relay 코드는 Cilium 저장소에 있다.&lt;/p&gt;
+&lt;p&gt;처음 코드를 읽을 때는 다음과 같이 역할을 나누면 길을 잃지 않는다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cilium/hubble
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─ main.go                         Hubble CLI 실행 진입점
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cilium/cilium
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ bpf/                            커널에서 실행되는 eBPF 데이터패스
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ pkg/monitor/agent/              Perf Event를 읽는 Cilium Monitor
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ pkg/hubble/monitor/             Monitor 이벤트를 Hubble로 전달
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ pkg/hubble/parser/              바이너리 이벤트 파싱과 메타데이터 보강
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ pkg/hubble/container/           사용자 공간 Flow 링 버퍼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ pkg/hubble/observer/            노드 단위 Observer gRPC API
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ pkg/hubble/relay/               여러 노드의 Flow 집계
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ api/v1/flow/                    Flow Protobuf 정의
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;├─ api/v1/observer/                Observer gRPC API 정의
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;└─ hubble/cmd/                     Hubble CLI 실제 구현
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 구조를 모르고 &lt;code&gt;cilium/hubble&lt;/code&gt; 저장소에서 &lt;code&gt;SEC(&amp;quot;tc&amp;quot;)&lt;/code&gt;나 BPF 맵을 계속 찾으면 Hubble이 eBPF를 사용하지 않는 것처럼 보일 수 있다. 실제 eBPF 코드는 Cilium 데이터패스에 있고, Hubble은 그 데이터패스의 관측 결과를 소비한다.&lt;/p&gt;
+&lt;h3 id=&#34;전체-데이터-흐름&#34;&gt;전체 데이터 흐름&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;L3/L4 Flow 하나가 터미널에 나타나기까지의 경로를 단순화하면 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Pod의 패킷
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[커널 공간]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cilium eBPF 데이터패스
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  bpf_lxc.c / bpf_host.c / bpf_overlay.c / bpf_xdp.c
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ trace_notify          관측 지점과 전달 경로
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ drop_notify           드롭 원인
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └─ policy_verdict_notify 정책 판정
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cilium_events
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;BPF_MAP_TYPE_PERF_EVENT_ARRAY
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  CPU별 Perf Event
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[사용자 공간: cilium-agent]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cilium Monitor의 perf.Reader
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Hubble Monitor Consumer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  비동기 Go 채널
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Hubble Parser + Cilium의 메타데이터
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  IP/포트 → Pod/Namespace/Identity/Service
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Hubble 사용자 공간 Ring
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;노드별 Hubble Observer gRPC API
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  Unix Socket 또는 TCP 4244
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Hubble Relay
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │  클러스터 API, 기본 포트 4245
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ Hubble CLI
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ Hubble UI
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └─ 기타 gRPC 클라이언트
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 흐름은 앞에서 공부한 Perf Buffer 예제를 실제 프로덕션 시스템으로 확장한 형태다. 다만 예제와 달리 이벤트 종류가 다양하고, 여러 단계의 버퍼와 파서, 클러스터 집계 계층이 추가되어 있다.&lt;/p&gt;
+&lt;h3 id=&#34;ebpf-프로그램은-어디에-붙어-있는가&#34;&gt;eBPF 프로그램은 어디에 붙어 있는가&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Cilium은 Pod의 가상 이더넷 장치, 호스트 네트워크, 터널 장치 등 패킷이 지나는 여러 지점에 eBPF 프로그램을 부착한다. 대표적인 파일은 다음과 같다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;파일&lt;/th&gt;
+          &lt;th&gt;관찰하는 대표 경로&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;bpf/bpf_lxc.c&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Cilium이 관리하는 Endpoint, 주로 Pod의 ingress·egress&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;bpf/bpf_host.c&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;호스트 네트워크로 들어오고 나가는 트래픽&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;bpf/bpf_overlay.c&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;VXLAN·Geneve 같은 오버레이 터널 경로&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;bpf/bpf_xdp.c&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;네트워크 드라이버에 가까운 이른 ingress 경로&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;실제 프로그램은 TC, XDP 등 경로에 따라 서로 다른 컨텍스트에서 실행되지만, 공통 라이브러리의 알림 함수를 사용해 관측 이벤트를 만든다.&lt;/p&gt;
+&lt;p&gt;중요한 설계는 &lt;strong&gt;전달과 정책 집행을 수행한 바로 그 eBPF 프로그램이 관측 이벤트도 만든다&lt;/strong&gt;는 것이다. 외부에서 패킷만 캡처하면 “패킷이 사라졌다”는 사실은 알 수 있어도 Cilium 정책의 어느 판단 때문에 버려졌는지 정확히 알기 어렵다. 반면 정책을 집행하는 지점에서 이벤트를 만들면 verdict와 drop reason을 함께 기록할 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;ebpf가-만드는-세-가지-핵심-이벤트&#34;&gt;eBPF가 만드는 세 가지 핵심 이벤트&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Hubble의 L3/L4 Flow를 이해할 때는 Trace, Drop, Policy Verdict 알림부터 보면 좋다.&lt;/p&gt;
+&lt;h4 id=&#34;trace-알림&#34;&gt;Trace 알림&lt;/h4&gt;
+&lt;p&gt;Trace 알림은 패킷이 데이터패스의 어느 관측 지점을 통과했는지 나타낸다. 이벤트에는 다음과 같은 정보가 포함된다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;출발지와 목적지 Security Identity&lt;/li&gt;
+&lt;li&gt;목적지 Endpoint ID&lt;/li&gt;
+&lt;li&gt;ingress·egress 인터페이스 인덱스&lt;/li&gt;
+&lt;li&gt;관측 지점을 나타내는 reason과 flags&lt;/li&gt;
+&lt;li&gt;원본 IP와 IP trace ID&lt;/li&gt;
+&lt;li&gt;설정에 따라 캡처한 패킷 헤더 일부&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;따라서 Hubble 출력의 &lt;code&gt;to-endpoint&lt;/code&gt;, &lt;code&gt;from-endpoint&lt;/code&gt;, &lt;code&gt;to-stack&lt;/code&gt;, &lt;code&gt;to-overlay&lt;/code&gt; 같은 observation point를 구성할 수 있다.&lt;/p&gt;
+&lt;h4 id=&#34;drop-알림&#34;&gt;Drop 알림&lt;/h4&gt;
+&lt;p&gt;Drop 알림은 패킷이 버려진 위치에서 생성된다. 출발지·목적지 Identity뿐 아니라 drop reason, 확장 오류 코드, 인터페이스, 소스 파일과 라인 정보 등을 담을 수 있다.&lt;/p&gt;
+&lt;p&gt;Hubble이 단순히 &lt;code&gt;DROPPED&lt;/code&gt;만 보여 주지 않고 &lt;code&gt;Policy denied&lt;/code&gt;, &lt;code&gt;Invalid packet&lt;/code&gt;, &lt;code&gt;No route&lt;/code&gt;처럼 원인을 설명할 수 있는 이유다.&lt;/p&gt;
+&lt;h4 id=&#34;policy-verdict-알림&#34;&gt;Policy Verdict 알림&lt;/h4&gt;
+&lt;p&gt;Policy Verdict 알림은 정책 조회 결과를 표현한다. 원격 Security Identity, ingress·egress 방향, L4 프로토콜과 목적지 포트, 허용·거부 verdict, 어떤 종류의 정책 항목과 일치했는지 등의 정보를 담는다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;패킷 헤더 + Endpoint의 Security Identity
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         eBPF 정책 조회
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ┌───────┴────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │                │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      허용             거부
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │                │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Policy Verdict      Policy Verdict
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Trace Notify        Drop Notify
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;여기서 Security Identity는 IP 주소만으로는 얻기 어려운 Cilium의 핵심 문맥이다. Pod가 다시 생성되어 IP가 달라져도 Kubernetes label 기반 Identity를 사용하면 “어떤 워크로드가 어떤 워크로드와 통신했는가”라는 질문으로 Flow를 해석할 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;cilium_events-커널과-사용자-공간-사이의-다리&#34;&gt;&lt;code&gt;cilium_events&lt;/code&gt;: 커널과 사용자 공간 사이의 다리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;이벤트는 &lt;code&gt;bpf/lib/events.h&lt;/code&gt;에 정의된 &lt;code&gt;cilium_events&lt;/code&gt; 맵으로 전달된다. 핵심 정의를 줄이면 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;struct&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;__uint&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;type&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; BPF_MAP_TYPE_PERF_EVENT_ARRAY&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;__uint&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;key_size&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;__u32&lt;span style=&#34;color:#1f2328&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;__uint&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;value_size&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;__u32&lt;span style=&#34;color:#1f2328&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#6639ba&#34;&gt;__uint&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;pinning&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; LIBBPF_PIN_BY_NAME&lt;span style=&#34;color:#1f2328&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt; cilium_events __section_maps_btf&lt;span style=&#34;color:#1f2328&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Trace, Drop, Policy Verdict 알림 함수는 최종적으로 다음과 같은 형태로 이 맵에 이벤트를 출력한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;ctx_event_output&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;ctx&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;cilium_events&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;capture_len &lt;span style=&#34;color:#0550ae&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;32&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;|&lt;/span&gt; BPF_F_CURRENT_CPU&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                 &lt;span style=&#34;color:#0550ae&#34;&gt;&amp;amp;&lt;/span&gt;message&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;sizeof&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;message&lt;span style=&#34;color:#1f2328&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 코드는 4장에서 살펴본 Perf Buffer 구조와 연결된다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;BPF_MAP_TYPE_PERF_EVENT_ARRAY&lt;/code&gt; 맵은 CPU별 Perf Event와 연결된다.&lt;/li&gt;
+&lt;li&gt;eBPF 프로그램은 현재 CPU의 버퍼에 작은 바이너리 이벤트를 기록한다.&lt;/li&gt;
+&lt;li&gt;사용자 공간은 CPU별 링 버퍼를 &lt;code&gt;mmap()&lt;/code&gt;하고 새 레코드를 읽는다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;capture_len&lt;/code&gt;이 있다면 고정 메타데이터 뒤에 패킷의 일부도 함께 전달된다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;커널의 eBPF 프로그램이 gRPC를 호출하거나 JSON을 만드는 것은 아니다. 커널에서는 검증기, 스택 크기, 실행 시간의 제약을 받으므로 꼭 필요한 사실만 빠르게 기록하고, 해석이 비싼 작업은 사용자 공간으로 넘긴다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Cilium의 이 경로는 &lt;code&gt;BPF_MAP_TYPE_RINGBUF&lt;/code&gt;가 아니라 &lt;strong&gt;Perf Event Array&lt;/strong&gt;를 사용한다. “eBPF에서 사용자 공간으로 이벤트를 보낸다”는 목적은 같지만 맵 타입과 읽는 API는 다르다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;cilium-monitor가-perf-event를-읽는다&#34;&gt;Cilium Monitor가 Perf Event를 읽는다&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;사용자 공간에서는 &lt;code&gt;pkg/monitor/agent/agent.go&lt;/code&gt;의 Monitor Agent가 BPFFS에 핀된 &lt;code&gt;cilium_events&lt;/code&gt; 맵을 연다. 내부적으로 &lt;code&gt;cilium/ebpf&lt;/code&gt; 라이브러리의 &lt;code&gt;perf.NewReader()&lt;/code&gt;를 만들고 레코드를 계속 읽는다.&lt;/p&gt;
+&lt;p&gt;흐름을 의사 코드로 표현하면 다음과 같다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;eventsMap&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;:=&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;ebpf&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;LoadPinnedMap&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;cilium_events&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;nil&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;reader&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;:=&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;perf&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;NewReader&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;eventsMap&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;bufferSize&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;for&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;record&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;:=&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;reader&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;Read&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;record&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;LostSamples&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;notifyLostEvents&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;record&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;LostSamples&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;        &lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;continue&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#fff&#34;&gt;    &lt;/span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;notifyConsumers&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;record&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;RawSample&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt; &lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;record&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;CPU&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color:#fff&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;실제 코드는 오류 처리와 생명주기 관리가 더 복잡하지만 핵심은 같다. Cilium Monitor는 하나의 커널 이벤트 스트림을 읽고, 등록된 내부 Consumer들에게 원시 바이트와 CPU 번호를 전달한다.&lt;/p&gt;
+&lt;p&gt;Hubble은 여기서 별도의 BPF 맵을 다시 여는 대신 &lt;code&gt;MonitorConsumer&lt;/code&gt;로 등록된다. &lt;code&gt;pkg/hubble/cell/hubbleintegration.go&lt;/code&gt;를 보면 Hubble Observer를 시작한 후 대략 다음 관계를 만든다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cilium Monitor Agent
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │ RegisterNewConsumer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Hubble Monitor Consumer
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Local Observer Server
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 구조 덕분에 Cilium의 기존 Monitor 출력과 Hubble이 같은 데이터 소스를 공유할 수 있다.&lt;/p&gt;
+&lt;h3 id=&#34;원시-이벤트를-hubble-flow로-바꾸기&#34;&gt;원시 이벤트를 Hubble Flow로 바꾸기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;커널에서 올라온 데이터는 아직 사람이 읽을 수 있는 Flow가 아니다. 첫 바이트는 이벤트 타입을 나타내고, 그 뒤에는 Trace·Drop·Policy Verdict 구조체와 선택적으로 캡처된 패킷 바이트가 이어진다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pkg/hubble/parser/parser.go&lt;/code&gt;의 &lt;code&gt;Decode()&lt;/code&gt;는 이벤트 종류를 확인하고 알맞은 하위 파서로 분기한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;MonitorEvent
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ PerfEvent  ──→ L3/L4 Parser
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                  ├─ Drop
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                  ├─ Trace
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                  ├─ Policy Verdict
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │                  └─ Packet Capture
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ├─ AgentEvent ──→ L7 Parser 또는 Agent Event Parser
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    └─ DebugEvent ──→ Debug Parser
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;L3/L4 파서는 알림 구조체를 해석하고, 함께 전달된 패킷 바이트를 Ethernet, IPv4·IPv6, TCP, UDP, SCTP, ICMP, VXLAN, Geneve 등으로 디코딩한다. 그 후 Cilium Agent가 이미 유지하고 있는 Resolver와 캐시를 이용해 정보를 보강한다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;커널에서 얻은 값&lt;/th&gt;
+          &lt;th&gt;사용자 공간에서 보강되는 값&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;출발지·목적지 IP&lt;/td&gt;
+          &lt;td&gt;Pod 이름과 Namespace&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Security Identity&lt;/td&gt;
+          &lt;td&gt;Kubernetes label과 워크로드 정보&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;IP·포트&lt;/td&gt;
+          &lt;td&gt;Kubernetes Service 이름&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;L4 프로토콜&lt;/td&gt;
+          &lt;td&gt;TCP flags, 서비스 포트 문맥&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;verdict와 reason&lt;/td&gt;
+          &lt;td&gt;읽을 수 있는 Verdict·Drop Reason 문자열&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;IP·Identity&lt;/td&gt;
+          &lt;td&gt;관찰된 DNS 이름&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;최종 결과는 &lt;code&gt;api/v1/flow/flow.proto&lt;/code&gt;에 정의된 &lt;code&gt;Flow&lt;/code&gt; Protobuf 메시지가 된다. 이 메시지에는 IP와 L4 헤더뿐 아니라 Endpoint, Identity, Pod, Namespace, Service, DNS, L7, Verdict, Traffic Direction, Observation Point 등이 함께 들어간다.&lt;/p&gt;
+&lt;p&gt;이것이 Hubble의 핵심 가치다. &lt;strong&gt;eBPF가 정확한 커널 관측 지점과 정책 결과를 제공하고, 사용자 공간이 이를 Kubernetes의 언어로 번역한다.&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;같은-이름처럼-보이는-두-개의-링-버퍼&#34;&gt;같은 이름처럼 보이는 두 개의 링 버퍼&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;코드를 읽을 때 가장 헷갈렸던 부분은 “ring”이라는 단어가 서로 다른 계층에 등장한다는 점이었다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;계층&lt;/th&gt;
+          &lt;th&gt;구현&lt;/th&gt;
+          &lt;th&gt;저장하는 것&lt;/th&gt;
+          &lt;th&gt;가득 찼을 때&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;커널 → 사용자 공간&lt;/td&gt;
+          &lt;td&gt;Perf Event의 CPU별 링 버퍼&lt;/td&gt;
+          &lt;td&gt;eBPF가 만든 바이너리 알림&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;LostSamples&lt;/code&gt;가 발생할 수 있음&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble 내부 전달&lt;/td&gt;
+          &lt;td&gt;Go 채널 Event Queue&lt;/td&gt;
+          &lt;td&gt;타임스탬프가 붙은 Monitor Event&lt;/td&gt;
+          &lt;td&gt;비차단 전송이 실패하면 lost event 기록&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble 조회 저장소&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;pkg/hubble/container.Ring&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;파싱된 &lt;code&gt;Flow&lt;/code&gt;와 상태 이벤트&lt;/td&gt;
+          &lt;td&gt;가장 오래된 이벤트를 덮어씀&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;code&gt;pkg/hubble/container/ring.go&lt;/code&gt;의 Ring은 &lt;strong&gt;BPF 맵도 아니고 &lt;code&gt;BPF_MAP_TYPE_RINGBUF&lt;/code&gt;도 아니다.&lt;/strong&gt; Go로 구현한 고정 크기 사용자 공간 순환 버퍼다. Hubble은 최근 Flow를 이 메모리에 보관하고, &lt;code&gt;hubble observe&lt;/code&gt; 요청이 오면 여기서 과거 이벤트를 읽거나 새 이벤트를 계속 따라간다.&lt;/p&gt;
+&lt;p&gt;따라서 &lt;code&gt;hubble status&lt;/code&gt;의 &lt;code&gt;Current/Max Flows&lt;/code&gt;는 커널 BPF 맵의 원소 개수가 아니라 Hubble 사용자 공간 Ring의 사용량을 의미한다.&lt;/p&gt;
+&lt;h3 id=&#34;hubble-observer-api&#34;&gt;Hubble Observer API&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;노드별 Hubble Server는 Observer gRPC 서비스를 제공한다. 주요 RPC는 다음과 같다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;RPC&lt;/th&gt;
+          &lt;th&gt;역할&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;GetFlows&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;조건에 맞는 Flow를 스트리밍&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;GetAgentEvents&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Cilium Agent 상태·정책 변경 이벤트 스트리밍&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;GetDebugEvents&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;데이터패스 디버그 이벤트 스트리밍&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;GetNodes&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Hubble 인스턴스와 노드 상태 조회&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;GetNamespaces&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;최근 Flow에서 관찰한 Namespace 조회&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;ServerStatus&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;Flow 수, 초당 Flow, 노드 상태 요약&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;노드 내부에서는 기본적으로 &lt;code&gt;/var/run/cilium/hubble.sock&lt;/code&gt; Unix Domain Socket을 사용한다. Relay가 접근할 때는 노드별 TCP API를 사용하며 기본 포트는 &lt;code&gt;4244&lt;/code&gt;다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;GetFlowsRequest&lt;/code&gt;에는 최근 몇 개를 읽을지, 계속 따라갈지, 시작·종료 시간, 포함·제외할 Flow Filter 등을 담을 수 있다. Local Observer는 요청을 받으면 사용자 공간 Ring Reader를 만들고 서버 스트리밍으로 결과를 보낸다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hubble observe --verdict DROPPED --follow
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CLI가 GetFlowsRequest 생성
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Observer가 Ring에서 조건에 맞는 Flow 선택
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;GetFlowsResponse 스트림
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;CLI가 compact/json/table 형식으로 출력
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;여기서 필터는 Observer의 사용자 공간 Flow에 적용된다. 예를 들어 &lt;code&gt;--verdict DROPPED&lt;/code&gt;를 실행한다고 해서 새로운 eBPF 프로그램을 로드하거나 커널의 관측 조건을 다시 작성하는 것은 아니다.&lt;/p&gt;
+&lt;h3 id=&#34;hubble-relay가-클러스터-전체를-보는-방법&#34;&gt;Hubble Relay가 클러스터 전체를 보는 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;각 Hubble Server는 기본적으로 자기 노드에서 발생한 Flow만 알고 있다. Kubernetes 클러스터 전체를 조회하려면 Hubble Relay가 필요하다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Node A: cilium-agent + Hubble Server ─┐
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Node B: cilium-agent + Hubble Server ─┼─→ Hubble Relay ─→ CLI / UI
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Node C: cilium-agent + Hubble Server ─┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Relay는 Peer 서비스를 통해 Hubble 인스턴스의 추가·변경·삭제를 감지하고 각 노드의 API에 연결을 유지한다. 기본 구성에서는 노드의 TCP API가 mTLS로 보호되어 Relay만 안전하게 접근할 수 있다.&lt;/p&gt;
+&lt;p&gt;클라이언트가 Relay의 &lt;code&gt;GetFlows&lt;/code&gt;를 호출하면 Relay는 요청을 여러 노드에 전달하고 응답을 하나의 스트림으로 합친다. 이때 priority queue를 사용해 타임스탬프 기준으로 오래된 Flow부터 내보낸다.&lt;/p&gt;
+&lt;p&gt;다만 여러 노드의 시계와 네트워크 지연이 있으므로 이것을 완벽한 전역 순서라고 생각해서는 안 된다. Relay는 분산된 스트림을 시간 기준으로 합리적으로 병합하는 계층이다.&lt;/p&gt;
+&lt;p&gt;Hubble CLI가 로컬에서 기본적으로 접속하는 Relay 주소는 &lt;code&gt;localhost:4245&lt;/code&gt;다. 보통 &lt;code&gt;-P&lt;/code&gt; 옵션으로 Kubernetes의 &lt;code&gt;hubble-relay&lt;/code&gt; 서비스에 port-forward한 후 사용한다.&lt;/p&gt;
+&lt;h3 id=&#34;l7-정보도-모두-ebpf가-파싱할까&#34;&gt;L7 정보도 모두 eBPF가 파싱할까&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Hubble 출력에는 HTTP method, URL, response code, DNS query 같은 L7 정보도 나타난다. 이를 보고 eBPF 프로그램이 커널에서 HTTP 전체를 파싱한다고 오해하기 쉽다.&lt;/p&gt;
+&lt;p&gt;실제 L7 경로는 L3/L4 Perf Event 경로와 다르다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;L7 visibility 또는 L7 policy가 적용된 트래픽
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cilium eBPF 데이터패스가 프록시로 리다이렉트
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Node-local Envoy / Cilium L7 Proxy
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │  HTTP·DNS·Kafka 등을 해석
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Access Log (AgentEvent: MessageTypeAccessLog)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Hubble L7 Parser
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        │
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;동일한 Hubble Flow 모델과 Ring으로 합류
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;즉, 역할은 다음과 같이 나뉜다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;eBPF는 패킷을 빠르게 전달·차단하고, 필요한 경우 L7 프록시로 리다이렉트한다.&lt;/li&gt;
+&lt;li&gt;Envoy 같은 사용자 공간 프록시는 가변 길이 애플리케이션 프로토콜을 해석하고 Access Log를 만든다.&lt;/li&gt;
+&lt;li&gt;Hubble은 L3/L4 eBPF 이벤트와 L7 Access Log를 같은 Flow 모델로 보여 준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;이 분리는 합리적이다. HTTP 헤더처럼 복잡하고 길이가 가변적인 데이터를 커널 eBPF에서 모두 처리하면 검증기와 메모리 제약이 커진다. 빠른 패킷 경로는 eBPF가 맡고, 복잡한 프로토콜 해석은 사용자 공간 프록시가 맡는다.&lt;/p&gt;
+&lt;p&gt;또한 L7 Flow에는 URL query, user info, HTTP header 같은 민감한 정보가 포함될 수 있다. 운영 환경에서는 Hubble의 redaction 설정도 함께 검토해야 한다.&lt;/p&gt;
+&lt;h3 id=&#34;차단된-요청-하나를-끝까지-따라가-보기&#34;&gt;차단된 요청 하나를 끝까지 따라가 보기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;code&gt;client&lt;/code&gt; Pod가 네트워크 정책상 허용되지 않은 &lt;code&gt;server:8080&lt;/code&gt;으로 TCP 연결을 시도한다고 가정해 보자.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;패킷이 &lt;code&gt;client&lt;/code&gt; Endpoint의 TC eBPF 프로그램에 도착한다.&lt;/li&gt;
+&lt;li&gt;eBPF 프로그램은 목적지 Identity, 포트, 프로토콜을 이용해 정책 맵을 조회한다.&lt;/li&gt;
+&lt;li&gt;정책이 거부되면 실제 패킷을 버리고 Policy Verdict와 Drop 알림을 만든다.&lt;/li&gt;
+&lt;li&gt;알림은 현재 CPU의 &lt;code&gt;cilium_events&lt;/code&gt; Perf Buffer에 기록된다.&lt;/li&gt;
+&lt;li&gt;Cilium Monitor의 &lt;code&gt;perf.Reader&lt;/code&gt;가 원시 레코드를 읽어 Hubble Consumer에 전달한다.&lt;/li&gt;
+&lt;li&gt;Hubble Parser가 IP/TCP 헤더, verdict, drop reason을 해석한다.&lt;/li&gt;
+&lt;li&gt;Cilium의 Endpoint·Identity·Service Resolver가 IP를 &lt;code&gt;default/client&lt;/code&gt;, &lt;code&gt;default/server&lt;/code&gt; 같은 Kubernetes 문맥으로 바꾼다.&lt;/li&gt;
+&lt;li&gt;완성된 Flow가 노드의 Hubble Ring에 저장된다.&lt;/li&gt;
+&lt;li&gt;Relay가 노드 Hubble Server의 스트림을 받아 클라이언트에 전달한다.&lt;/li&gt;
+&lt;li&gt;CLI가 다음과 비슷한 한 줄을 출력한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;default/client:43618 -&amp;gt; default/server:8080
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Policy denied (L3/L4) DROPPED (TCP Flags: SYN)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이 한 줄 뒤에는 커널의 정책 집행, CPU별 Perf Buffer, 사용자 공간 파싱, Kubernetes 메타데이터 보강, gRPC 스트리밍이라는 긴 경로가 숨어 있다.&lt;/p&gt;
+&lt;h3 id=&#34;모든-패킷이-반드시-하나의-flow가-되는-것은-아니다&#34;&gt;모든 패킷이 반드시 하나의 Flow가 되는 것은 아니다&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Hubble을 패킷 캡처 도구와 완전히 같다고 생각해서는 안 된다.&lt;/p&gt;
+&lt;p&gt;Cilium 데이터패스는 모니터 aggregation 설정에 따라 동일한 흐름의 모든 패킷 대신 대표 이벤트만 만들 수 있다. 이벤트 출력에는 rate limit도 적용할 수 있다. 이후에도 커널 Perf Buffer, Hubble Event Queue, 사용자 공간 Ring은 모두 크기가 유한하다.&lt;/p&gt;
+&lt;p&gt;손실 가능 지점은 다음과 같다.&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;지점&lt;/th&gt;
+          &lt;th&gt;원인&lt;/th&gt;
+          &lt;th&gt;Hubble의 대응&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;eBPF 이벤트 출력 전&lt;/td&gt;
+          &lt;td&gt;aggregation·rate limit 설정&lt;/td&gt;
+          &lt;td&gt;필요한 수준으로 관측 설정 조정&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Perf Buffer&lt;/td&gt;
+          &lt;td&gt;사용자가 읽는 속도보다 이벤트 생성이 빠름&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;LostSamples&lt;/code&gt;를 lost event로 보고&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble Event Queue&lt;/td&gt;
+          &lt;td&gt;Go 채널이 가득 참&lt;/td&gt;
+          &lt;td&gt;non-blocking drop 수를 집계해 보고&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;사용자 공간 Ring&lt;/td&gt;
+          &lt;td&gt;보관 용량 초과&lt;/td&gt;
+          &lt;td&gt;오래된 Flow를 덮어쓰고 ring-buffer lost event 제공&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;이는 결함이라기보다 데이터패스를 보호하기 위한 설계 선택이다. 관측 때문에 실제 네트워크 패킷 처리가 멈추어서는 안 되므로, 생산자 경로를 block하지 않고 손실 자체를 관측 가능하게 만든다.&lt;/p&gt;
+&lt;p&gt;따라서 중요한 장애를 분석할 때는 Flow 내용뿐 아니라 &lt;code&gt;hubble status&lt;/code&gt;의 Flow 사용량, lost event, 노드 연결 상태도 함께 봐야 한다.&lt;/p&gt;
+&lt;h3 id=&#34;직접-확인해-볼-명령&#34;&gt;직접 확인해 볼 명령&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Hubble Relay에 port-forward할 수 있는 환경이라면 다음 명령으로 각 계층의 결과를 확인할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# Relay와 노드 연결 상태&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hubble status -P
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hubble list nodes -P
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 최근 Flow와 이후 Flow를 계속 관찰&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hubble observe -P --follow
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 정책이나 데이터패스에서 드롭된 Flow만 조회&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hubble observe -P --verdict DROPPED --follow
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# 두 Pod 사이의 Flow만 조회&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hubble observe -P &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  --from-pod default/client &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  --to-pod default/server &lt;span style=&#34;color:#0a3069&#34;&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  --follow
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# L7 visibility가 설정된 트래픽의 L7 이벤트 조회&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hubble observe -P --type l7 --follow
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;같은 Flow를 JSON으로 보면 터미널의 한 줄 출력에서 생략된 필드를 확인할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hubble observe -P --verdict DROPPED -o json &lt;span style=&#34;color:#1f2328&#34;&gt;|&lt;/span&gt; jq
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;node_name&lt;/code&gt;, &lt;code&gt;source&lt;/code&gt;, &lt;code&gt;destination&lt;/code&gt;, &lt;code&gt;IP&lt;/code&gt;, &lt;code&gt;l4&lt;/code&gt;, &lt;code&gt;verdict&lt;/code&gt;, &lt;code&gt;drop_reason_desc&lt;/code&gt;, &lt;code&gt;traffic_direction&lt;/code&gt;, &lt;code&gt;event_type&lt;/code&gt;을 찾아보면 &lt;code&gt;Flow&lt;/code&gt; Protobuf의 구조와 실제 출력이 연결된다.&lt;/p&gt;
+&lt;h3 id=&#34;소스-코드를-읽은-순서&#34;&gt;소스 코드를 읽은 순서&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Hubble처럼 큰 프로젝트는 처음부터 파일을 순서대로 읽기보다, 이벤트 하나의 이동 경로를 따라가는 편이 이해하기 쉬웠다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;cilium/hubble/main.go&lt;/code&gt;에서 실제 CLI 구현이 어디에 있는지 확인한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bpf/lib/events.h&lt;/code&gt;에서 이벤트 맵 타입을 확인한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bpf/lib/trace.h&lt;/code&gt;, &lt;code&gt;drop.h&lt;/code&gt;, &lt;code&gt;policy_log.h&lt;/code&gt;에서 어떤 데이터를 보내는지 본다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pkg/monitor/agent/agent.go&lt;/code&gt;에서 Perf Event를 누가 읽는지 찾는다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pkg/hubble/monitor/consumer.go&lt;/code&gt;에서 Hubble로 넘어가는 경계를 찾는다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pkg/hubble/parser/parser.go&lt;/code&gt;와 &lt;code&gt;threefour/parser.go&lt;/code&gt;에서 Flow 변환 과정을 본다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pkg/hubble/observer/local_observer.go&lt;/code&gt;에서 Ring 저장과 &lt;code&gt;GetFlows&lt;/code&gt;를 연결한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;pkg/hubble/relay/observer/server.go&lt;/code&gt;에서 여러 노드의 스트림을 어떻게 합치는지 본다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hubble/cmd/observe/flows.go&lt;/code&gt;에서 CLI 요청과 출력까지 닫힌 고리를 완성한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;검색할 때는 함수 이름보다 이벤트가 통과하는 자료형과 맵 이름이 좋은 이정표가 되었다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rg &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;cilium_events&amp;#34;&lt;/span&gt; bpf pkg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rg &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;NotifyPerfEvent&amp;#34;&lt;/span&gt; pkg
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rg &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;MessageTypeAccessLog&amp;#34;&lt;/span&gt; pkg/hubble
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;rg &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;GetFlows&amp;#34;&lt;/span&gt; pkg/hubble hubble/cmd api/v1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;분석하며-바로잡은-오해&#34;&gt;분석하며 바로잡은 오해&lt;/h3&gt;
+&lt;hr&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;처음의 생각&lt;/th&gt;
+          &lt;th&gt;코드를 읽고 확인한 내용&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble 저장소 안에 자체 eBPF 프로그램이 있다&lt;/td&gt;
+          &lt;td&gt;eBPF 데이터패스는 Cilium 저장소에 있고 Hubble은 그 이벤트를 소비한다&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;hubble&lt;/code&gt; CLI가 BPF 맵을 직접 읽는다&lt;/td&gt;
+          &lt;td&gt;CLI는 Observer gRPC API에 &lt;code&gt;GetFlowsRequest&lt;/code&gt;를 보낸다&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hubble의 Ring은 BPF Ring Buffer다&lt;/td&gt;
+          &lt;td&gt;최근 Flow를 저장하는 Go 사용자 공간 순환 버퍼다&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;HTTP를 eBPF 프로그램이 모두 파싱한다&lt;/td&gt;
+          &lt;td&gt;eBPF가 프록시 경로를 만들고 Envoy Access Log가 Hubble L7 Parser로 들어온다&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;모든 패킷이 빠짐없이 Flow 하나가 된다&lt;/td&gt;
+          &lt;td&gt;aggregation, rate limit, 유한한 버퍼 때문에 패킷 캡처와 의미가 다르다&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Relay가 Flow를 생성한다&lt;/td&gt;
+          &lt;td&gt;Flow는 각 노드에서 만들어지고 Relay는 분산 스트림을 발견·병합한다&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;hubble이-ebpf를-잘-활용하는-방식&#34;&gt;Hubble이 eBPF를 잘 활용하는 방식&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;소스 코드를 따라가며 Hubble이 eBPF를 사용하는 방식을 네 가지로 정리할 수 있었다.&lt;/p&gt;
+&lt;p&gt;첫째, &lt;strong&gt;정책 집행 지점에서 관측한다.&lt;/strong&gt; 별도의 센서가 결과를 추측하지 않고, 패킷을 전달하거나 버린 eBPF 프로그램이 verdict와 reason을 직접 남긴다.&lt;/p&gt;
+&lt;p&gt;둘째, &lt;strong&gt;커널에서는 최소한의 사실만 수집한다.&lt;/strong&gt; 이벤트 구조체와 패킷 헤더 일부만 Perf Buffer로 보내고, Protobuf 생성과 Kubernetes 메타데이터 결합은 사용자 공간에서 수행한다.&lt;/p&gt;
+&lt;p&gt;셋째, &lt;strong&gt;노드 단위로 분산 처리한다.&lt;/strong&gt; 각 &lt;code&gt;cilium-agent&lt;/code&gt;가 자기 노드의 이벤트를 파싱하고 보관하므로 중앙 수집기가 모든 원시 이벤트를 처음부터 처리하지 않아도 된다. Relay는 필요할 때 여러 노드의 API를 하나로 합친다.&lt;/p&gt;
+&lt;p&gt;넷째, &lt;strong&gt;L3/L4와 L7에 맞는 도구를 나눈다.&lt;/strong&gt; 빠른 네트워크 경로와 정책은 eBPF가 맡고, 복잡한 애플리케이션 프로토콜은 Envoy가 해석한다. Hubble은 두 결과를 공통 Flow 모델로 통합한다.&lt;/p&gt;
+&lt;h3 id=&#34;마치며&#34;&gt;마치며&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;Hubble을 분석하기 전에는 “eBPF 기반 관측 도구”라는 말을 하나의 거대한 eBPF 프로그램으로 상상했다. 실제 구조는 훨씬 계층적이었다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;eBPF는 커널에서 사실을 기록하고,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Cilium Monitor는 그 사실을 안전하게 꺼내며,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Hubble은 Kubernetes 문맥을 더해 Flow로 만들고,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Relay는 여러 노드의 Flow를 하나의 관점으로 합친다.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;특히 4장에서 공부한 Perf Event Array가 실제 대규모 프로젝트에서도 커널과 사용자 공간 사이의 경계로 사용된다는 점이 인상적이었다. 동시에 프로덕션 시스템에서는 Perf Buffer 하나로 끝나지 않고, 손실 처리, 사용자 공간 Queue와 Ring, 파서, gRPC, 분산 집계까지 함께 설계해야 한다는 것도 확인했다.&lt;/p&gt;
+&lt;p&gt;Hubble의 핵심은 eBPF 자체를 보여 주는 데 있지 않다. eBPF가 남긴 낮은 수준의 이벤트를 &lt;code&gt;default/client가 default/server로 보낸 요청이 정책 때문에 차단되었다&lt;/code&gt;는 운영자의 언어로 바꾸는 데 있다. 이것이 작은 eBPF 예제와 실제 관측 제품 사이의 가장 큰 차이였다.&lt;/p&gt;
+&lt;h3 id=&#34;참고-자료&#34;&gt;참고 자료&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/cilium/hubble&#34;&gt;Hubble GitHub 저장소&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.cilium.io/en/stable/internals/hubble/&#34;&gt;Hubble Internals 공식 문서&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.cilium.io/en/stable/observability/hubble/&#34;&gt;Network Observability with Hubble&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.cilium.io/en/stable/overview/component-overview/&#34;&gt;Cilium Component Overview&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
     <item>
       <title>Learning eBPF 4장: bpf() 시스템 콜과 사용자 공간의 상호작용</title>
       <link>https://dongwooklee96.github.io/post/2026/08/01/learning-ebpf-4%EC%9E%A5-bpf-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%BD%9C%EA%B3%BC-%EC%82%AC%EC%9A%A9%EC%9E%90-%EA%B3%B5%EA%B0%84%EC%9D%98-%EC%83%81%ED%98%B8%EC%9E%91%EC%9A%A9.html</link>
