@@ -2,19 +2,77 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>오픈소스 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4.html</link>
+    <link>http://localhost:1313/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4.html</link>
     <description>Recent content in 오픈소스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Wed, 01 Jun 2022 21:04:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Jun 2022 20:04:24 +0900</lastBuildDate><atom:link href="http://localhost:1313/tags/%EC%98%A4%ED%94%88%EC%86%8C%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GSOC 2022 2주차 회의때 논의 할 것</title>
+      <link>http://localhost:1313/post/2022/06/06/gsoc-2022-2%EC%A3%BC%EC%B0%A8-%ED%9A%8C%EC%9D%98%EB%95%8C-%EB%85%BC%EC%9D%98-%ED%95%A0-%EA%B2%83.html</link>
+      <pubDate>Mon, 06 Jun 2022 20:04:24 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2022/06/06/gsoc-2022-2%EC%A3%BC%EC%B0%A8-%ED%9A%8C%EC%9D%98%EB%95%8C-%EB%85%BC%EC%9D%98-%ED%95%A0-%EA%B2%83.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;GSOC 2022&lt;/code&gt; 이 정식적으로 시작되는 날은 아니지만, 일단 테스트 코드를 작성하는 작업을 하고 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;매주 멘토들과 같이 회의를 하는데, 처음 회의때는 준비 없이 들어가서 당황하기도 했고 말만 더듬다가 들어갔다. 따라서 다음 회의때는 궁금한 점이나 물어볼 것들을 미리 준비를 해야겠다는 생각을 했다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;지난주에-작업-한-것&#34;&gt;지난주에 작업 한 것&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;지난주에 테스트 코드를 작성한 모듈은 다음과 같다. &lt;code&gt;contrib/auth_delay, contrib/pg_buffercache&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;이번주에-작업-할-것&#34;&gt;이번주에 작업 할 것&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;commitfest&lt;/code&gt; 및 메일링 리스트에 내가 작업한 코드를 올리기.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;테스크 코드가 전혀 없는  &lt;code&gt;contrib/old_snapshot, contrib/tcn, contrib/pg_rowlocks&lt;/code&gt; 모듈에 대해서 테스트를 작성하기&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;궁금한-점&#34;&gt;궁금한 점&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;테스트를 작성할 떄 예를 들어서 상황에 따라서 결과가 달라지는 경우 어떤 코드를 작성하는게 좋을까요.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;현재는 익스텐션과 데이터베이스를 사용하는데 필요한 도구 (&lt;code&gt;psql, pg_dump, ... ect&lt;/code&gt;)에 대해서 테스트를 작성하는 방법에 대해서 배웠다. 하지만 만약에 &lt;code&gt;POSTGRES&lt;/code&gt; 코어에 대해서 테스트 코드를 작성하고 싶으면 어떻게 해야하는지 궁금하다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;테스트 코드의 파일명을 작성하는데 규칙이 있는지 궁금하다. 또는 &lt;code&gt;TAP&lt;/code&gt; 테스트를 작성하는데 노드의 이름을 정할때가 궁금하다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;현재 작성한 테스트 코드에서 보완할 점이 있나요?&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+</description>
+    </item>
+    
     <item>
       <title>PostgresSQL 기여 프로세스 및 Commitfest</title>
-      <link>https://dongwooklee96.github.io/post/2022/06/01/postgressql-%EA%B8%B0%EC%97%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B0%8F-commitfest.html</link>
+      <link>http://localhost:1313/post/2022/06/01/postgressql-%EA%B8%B0%EC%97%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B0%8F-commitfest.html</link>
       <pubDate>Wed, 01 Jun 2022 21:04:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/06/01/postgressql-%EA%B8%B0%EC%97%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B0%8F-commitfest.html</guid>
+      <guid>http://localhost:1313/post/2022/06/01/postgressql-%EA%B8%B0%EC%97%AC-%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4-%EB%B0%8F-commitfest.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;우선 여태까지 이것을 몰랐다는 것이 조금은 부끄럽지만 적어보도록 하겠다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -64,10 +122,10 @@
     
     <item>
       <title>펄 Test::More 모듈 도큐먼트 </title>
-      <link>https://dongwooklee96.github.io/post/2022/06/01/%ED%8E%84-testmore-%EB%AA%A8%EB%93%88-%EB%8F%84%ED%81%90%EB%A8%BC%ED%8A%B8.html</link>
+      <link>http://localhost:1313/post/2022/06/01/%ED%8E%84-testmore-%EB%AA%A8%EB%93%88-%EB%8F%84%ED%81%90%EB%A8%BC%ED%8A%B8.html</link>
       <pubDate>Wed, 01 Jun 2022 21:04:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/06/01/%ED%8E%84-testmore-%EB%AA%A8%EB%93%88-%EB%8F%84%ED%81%90%EB%A8%BC%ED%8A%B8.html</guid>
+      <guid>http://localhost:1313/post/2022/06/01/%ED%8E%84-testmore-%EB%AA%A8%EB%93%88-%EB%8F%84%ED%81%90%EB%A8%BC%ED%8A%B8.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/orgrd8l01vekuek/Screen%20Shot%202022-06-01%20at%2022.15.16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;앞으로 테스트를 작성할 때 많이 읽어야할 API 문서이다.&lt;/li&gt;
@@ -82,10 +140,10 @@
     
     <item>
       <title>PostgresSQL 번역으로 기여하는 방법</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/09/postgressql-%EB%B2%88%EC%97%AD%EC%9C%BC%EB%A1%9C-%EA%B8%B0%EC%97%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
+      <link>http://localhost:1313/post/2021/12/09/postgressql-%EB%B2%88%EC%97%AD%EC%9C%BC%EB%A1%9C-%EA%B8%B0%EC%97%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Thu, 09 Dec 2021 15:04:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/09/postgressql-%EB%B2%88%EC%97%AD%EC%9C%BC%EB%A1%9C-%EA%B8%B0%EC%97%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
+      <guid>http://localhost:1313/post/2021/12/09/postgressql-%EB%B2%88%EC%97%AD%EC%9C%BC%EB%A1%9C-%EA%B8%B0%EC%97%AC%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;h3 id=&#34;postgressql에-번역으로-기여하기&#34;&gt;PostgresSQL에 번역으로 기여하기&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/4pyc184bly5p3qi/Screen%20Shot%202021-12-09%20at%203.38.16%20PM%20copy.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;

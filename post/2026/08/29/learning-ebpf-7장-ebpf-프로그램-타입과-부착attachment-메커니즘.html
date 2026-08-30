@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>Learning eBPF 7장: eBPF 프로그램 타입과 부착(Attachment) 메커니즘 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="../../../../css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">Learning eBPF 7장: eBPF 프로그램 타입과 부착(Attachment) 메커니즘</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2026/08/29</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/ebpf">eBPF</a> <a href="../../../../tags/%EB%A6%AC%EB%88%85%EC%8A%A4">리눅스</a> <a href="../../../../tags/%EC%BB%A4%EB%84%90">커널</a> <a href="../../../../tags/%EC%8B%9C%EC%8A%A4%ED%85%9C-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D">시스템-프로그래밍</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="시작하며">시작하며</h3>
+<hr>
+<p>지난 6장에서는 주입된 eBPF 프로그램이 커널을 망가뜨리지 않고 안전하게 동작함을 수학적/정적으로 증명하는 **eBPF 검증기(Verifier)**의 원리를 깊이 탐구했다.</p>
+<p>검증기라는 강력한 안전벨트 덕분에, 우리는 커널 소스 코드를 한 줄도 수정하지 않고, 시스템을 재부팅할 필요도 없이 리눅스 커널의 핵심 서브시스템에 원하는 로직을 동적으로 탑재할 수 있게 되었다.</p>
+<p>그렇다면 이렇게 로드된 eBPF 프로그램은 커널 내부의 어떤 이벤트에, 어떤 방식으로 결합되어 작동할까? 그리고 eBPF 프로그램이 부착되는 위치에 따라 다루는 데이터 구조와 활용법은 어떻게 달라질까?</p>
+<p>리눅스 커널은 eBPF를 특정 목적의 도구로 한정하지 않고, 다양한 서브시스템을 확장할 수 있는 <strong>범용 가상 머신</strong>으로 설계했다. 그리고 그 핵심 접점을 제공하는 것이 바로 **프로그램 타입(<code>prog_type</code>)**과 **부착 타입(<code>attach_type</code>)**이다.</p>
+<p>이번 7장에서는 eBPF 프로그램의 성격을 결정하는 프로그램 타입들의 지도와, 이들을 적재적소에 매끄럽게 바인딩하는 부착 메커니즘 및 현대적 관리 도구인 <strong>BPF Link</strong>를 살펴보겠다.</p>
+<h3 id="프로그램-타입을-결정하는-3대-요소-context-helpers-return-codes">프로그램 타입을 결정하는 3대 요소 (Context, Helpers, Return Codes)</h3>
+<hr>
+<p>모든 eBPF 프로그램은 커널에 등록될 때 자신이 어떤 용도로 사용될지 <code>bpf_prog_type</code>Enum 값을 통해 명시해야 한다. 이 타입에 따라 해당 eBPF 프로그램의 3대 구동 환경이 엄격하게 규정된다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>┌────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│               eBPF 프로그램 구동 환경                    │
+</span></span><span style="display:flex;"><span>├───────────────────┬───────────────────┬────────────────┤
+</span></span><span style="display:flex;"><span>│ 1. Context (컨텍스트)│ 2. 허용 Helper 함수│ 3. Return Code │
+</span></span><span style="display:flex;"><span>│ - 입력 Argument   │ - 호출 가능한 API │ - 반환값의 의미│
+</span></span><span style="display:flex;"><span>│ - (예: struct md) │ - (예: 맵 업데이트)│ - (예: Drop/Pass)│
+</span></span><span style="display:flex;"><span>└───────────────────┴───────────────────┴────────────────┘
+</span></span></code></pre></div><h4 id="1-컨텍스트-context">1. 컨텍스트 (Context)</h4>
+<hr>
+<p>eBPF 프로그램의 시작점(Entry Point)인 <code>main</code> 함수는 오직 **단 하나의 인자(Argument)**인 컨텍스트 포인터(<code>ctx</code>)만 전달받는다.</p>
+<p>이 컨텍스트 포인터가 가리키는 실제 메모리 구조는 프로그램 타입에 따라 완전히 달라진다.</p>
+<ul>
+<li><strong>트레이싱 프로그램</strong>: 현재 CPU의 레지스터 상태를 담은 <code>struct pt_regs</code>를 바라본다.</li>
+<li><strong>XDP 네트워킹 프로그램</strong>: 패킷 데이터의 시작과 끝 주소만 담고 있는 아주 원시적이고 가벼운 <code>struct xdp_md</code>를 바라본다.</li>
+<li><strong>TC 네트워킹 프로그램</strong>: 리눅스 네트워크 스택이 관리하는 메타데이터와 소켓 버퍼 정보를 풍부하게 품은 <code>struct __sk_buff</code>를 바라본다.</li>
+</ul>
+<h4 id="2-허용-헬퍼-함수-allowed-helper-functions">2. 허용 헬퍼 함수 (Allowed Helper Functions)</h4>
+<hr>
+<p>검증기는 프로그램 타입에 따라 호출할 수 있는 커널 헬퍼 함수 목록을 다르게 제한한다.</p>
+<ul>
+<li>시스템 성능 분석용인 kprobe 프로그램은 패킷을 다른 네트워크 카드로 전송하는 <code>bpf_redirect()</code> 함수를 호출할 수 없다.</li>
+<li>반대로 성능 최적화가 극도로 요구되는 XDP 프로그램은 시스템 호출 중인 프로세스의 PID나 이름을 읽는 <code>bpf_get_current_pid_tgid()</code> 함수를 원칙적으로 호출할 수 없다 (컨텍스트가 프로세스가 아닌 패킷 수신 인터럽트 컨텍스트이기 때문).</li>
+</ul>
+<h4 id="3-반환값의-의미-return-codes">3. 반환값의 의미 (Return Codes)</h4>
+<hr>
+<p>eBPF 프로그램이 실행을 마치고 <code>R0</code> 레지스터를 통해 반환하는 정수값의 해석 또한 타입별로 정해져 있다.</p>
+<ul>
+<li><strong>XDP</strong>: 패킷을 통과시킬지(<code>XDP_PASS</code>), 폐기할지(<code>XDP_DROP</code>), 혹은 들어온 곳으로 돌려보낼지(<code>XDP_TX</code>)를 제어한다.</li>
+<li><strong>소켓 필터</strong>: 사용자 공간 애플리케이션으로 패킷의 복사본을 몇 바이트까지 전달할 것인지를 정수로 지정한다.</li>
+<li><strong>트레이싱(Kprobe)</strong>: 반환값을 커널이 무시하는 경우가 많아 대개 <code>0</code>을 반환한다.</li>
+</ul>
+<h3 id="핵심-ebpf-프로그램-타입-분류">핵심 eBPF 프로그램 타입 분류</h3>
+<hr>
+<p>책 <em>Learning eBPF</em> 7장에서는 커널의 다양한 영역을 통제하는 대표적인 프로그램 타입들을 세 가지 주류 카테고리로 나누어 설명한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>┌────────────────────────────────────────────────────────────────────────┐
+</span></span><span style="display:flex;"><span>│                        eBPF 프로그램 타입 분류                         │
+</span></span><span style="display:flex;"><span>├──────────────────────────┬──────────────────────────┬──────────────────┤
+</span></span><span style="display:flex;"><span>│ 트레이싱 및 관측성       │ 네트워킹                 │ 보안 및 LSM      │
+</span></span><span style="display:flex;"><span>├──────────────────────────┼──────────────────────────┼──────────────────┤
+</span></span><span style="display:flex;"><span>│ - Kprobe / Kretprobe     │ - XDP                    │ - BPF LSM        │
+</span></span><span style="display:flex;"><span>│ - Uprobe / Uretprobe     │ - TC (Traffic Control)   │                  │
+</span></span><span style="display:flex;"><span>│ - Tracepoint             │ - Socket Filter          │                  │
+</span></span><span style="display:flex;"><span>│ - Fentry / Fexit (BTF)   │ - Cgroup Socket          │                  │
+</span></span><span style="display:flex;"><span>└──────────────────────────┴──────────────────────────┴──────────────────┘
+</span></span></code></pre></div><h3 id="1-트레이싱-및-관측성-tracing--observability">1. 트레이싱 및 관측성 (Tracing &amp; Observability)</h3>
+<hr>
+<p>커널과 사용자 공간 애플리케이션의 행위를 동적으로 모니터링하기 위한 프로그램 타입들이다.</p>
+<h4 id="kprobes--kretprobes">Kprobes &amp; Kretprobes</h4>
+<hr>
+<ul>
+<li><strong>용도</strong>: 커널 내부 거의 대부분의 함수 진입점(Kprobe)과 반환점(Kretprobe)에 동적으로 훅을 건다.</li>
+<li><strong>특징</strong>: 커널 코드를 변경하지 않고도 디버깅 지표를 뽑아낼 수 있어 매우 강력하지만, 커널의 내부 API(함수 이름 및 인자 구조)에 의존하므로 커널 버전이 바뀌면 프로그램이 정상 동작하지 않거나 컴파일이 깨질 수 있다.</li>
+</ul>
+<h4 id="uprobes--uretprobes">Uprobes &amp; Uretprobes</h4>
+<hr>
+<ul>
+<li><strong>용도</strong>: 커널이 아닌, 사용자 공간의 실행 바이너리(ELF)나 공유 라이브러리(예: <code>libc.so</code>) 내부 함수의 진입/반환점에 훅을 설치한다.</li>
+<li><strong>특징</strong>: Go 언어의 가비지 컬렉터(<code>runtime.gcStart</code>), OpenSSL의 암호화 함수(<code>SSL_write</code>) 등을 추적하여 유저 공간 애플리케이션의 내부 작동 상태나 암호화되기 전의 평문 패킷을 들여다볼 수 있다.</li>
+</ul>
+<h4 id="tracepoints-트레이스포인트">Tracepoints (트레이스포인트)</h4>
+<hr>
+<ul>
+<li><strong>용도</strong>: 커널 개발자들이 소스 코드 내에 명시적으로 심어 놓은 정적 이벤트 훅(<code>TRACE_EVENT</code>)에 부착된다.</li>
+<li><strong>특징</strong>: 커널 내부 구현이 리팩토링되어 함수 이름이 바뀌더라도 트레이스포인트는 안정적인 인터페이스(안정화된 명세)를 제공하므로, 상용 모니터링 도구를 빌드할 때 매우 선호된다.</li>
+</ul>
+<h4 id="fentry--fexit-btf-기반-트레이싱">Fentry &amp; Fexit (BTF 기반 트레이싱)</h4>
+<hr>
+<ul>
+<li><strong>용도</strong>: Kprobe/Kretprobe의 현대적인 대체제다.</li>
+<li><strong>특징</strong>: BTF(BPF Type Format) 메타데이터를 백하우스로 활용한다. 덕분에 구식 Kprobe처럼 CPU 레지스터(<code>struct pt_regs</code>)에서 수동으로 비트 시프트를 해가며 인자값을 꺼낼 필요 없이, <strong>커널 함수의 실제 인자 이름과 타입을 소스 코드 그대로 직관적으로 참조</strong>할 수 있다. 성능 오버헤드 또한 kprobe에 비해 훨씬 적다.</li>
+</ul>
+<hr>
+<h3 id="2-네트워킹-networking">2. 네트워킹 (Networking)</h3>
+<hr>
+<p>패킷을 검사, 수정, 라우팅, 통제하기 위한 강력한 네트워킹 프로그램 타입들이다.</p>
+<h4 id="xdp-express-data-path">XDP (eXpress Data Path)</h4>
+<hr>
+<ul>
+<li><strong>용도</strong>: 네트워크 카드(NIC)의 장치 드라이버 레이어, 즉 <strong>리눅스 커널이 패킷 메모리(<code>sk_buff</code>)를 할당하기도 전의 극초기 단계</strong>에서 작동한다.</li>
+<li><strong>특징</strong>: 패킷당 소요되는 CPU 사이클을 극적으로 줄여 준다. 초당 수천만 개의 패킷이 쏟아지는 환경에서 DDoS 공격 패킷을 초고속으로 걸러 내거나(<code>XDP_DROP</code>), 초경량 로드 밸런싱을 수행하기에 최적의 위치다.</li>
+</ul>
+<h4 id="tc-traffic-control-sched_cls--sched_act">TC (Traffic Control, <code>SCHED_CLS</code> &amp; <code>SCHED_ACT</code>)</h4>
+<hr>
+<ul>
+<li><strong>용도</strong>: 네트워크 카드 드라이버의 ingress(수신) 및 egress(송신) 큐 스케줄러 계층에 결합한다.</li>
+<li><strong>특징</strong>: XDP보다 한 단계 후속 레이어지만, 커널이 정성스럽게 파싱해 놓은 소켓 버퍼 구조체(<code>__sk_buff</code>)를 사용하므로 IP 옵션, 프로토콜 헤더, 소켓 정보에 쉽게 접근할 수 있으며, 송신(egress) 패킷 제어도 가능하다는 강력한 이점을 지닌다.</li>
+</ul>
+<h4 id="socket-filters--cgroup-socket-programs">Socket Filters &amp; Cgroup Socket Programs</h4>
+<hr>
+<ul>
+<li><strong>용도</strong>: 특정 네트워크 소켓에 부착되거나, 특정 Cgroup(컨테이너 그룹) 내부에서 기동하는 모든 프로세스의 네트워크 연결 요청에 필터를 건다.</li>
+<li><strong>특징</strong>: 쿠버네티스(Kubernetes) 환경에서 특정 파드(Pod) 집합 간의 트래픽을 격리하거나 모니터링할 때 핵심 인프라 기술로 사용된다.</li>
+</ul>
+<hr>
+<h3 id="3-보안-및-정책-통제-security--lsm">3. 보안 및 정책 통제 (Security &amp; LSM)</h3>
+<hr>
+<h4 id="bpf-lsm-linux-security-modules">BPF LSM (Linux Security Modules)</h4>
+<hr>
+<ul>
+<li><strong>용도</strong>: 기존의 SELinux, AppArmor와 같은 보안 모듈이 사용하는 커널 내부의 보안 감사 훅(LSM hooks)에 eBPF 프로그램을 결합한다.</li>
+<li><strong>특징</strong>: 파일 열기(<code>file_open</code>), 프로세스 생성(<code>task_alloc</code>), 네트워크 바인딩 등의 특권 동작이 일어나기 직전에 검사하여, 동적으로 승인하거나 거부(<code>-EPERM</code>)할 수 있다. 단순한 &ldquo;사후 탐지 및 로깅&quot;을 넘어, 실시간으로 해커의 악의적 커널 침투 동작을 차단(Enforce/Mitigate)할 수 있는 보안 혁신 기술로 주목받고 있다.</li>
+</ul>
+<h3 id="프로그램-타입-vs-부착-타입-program-type-vs-attachment-type">프로그램 타입 vs 부착 타입 (Program Type vs Attachment Type)</h3>
+<hr>
+<p>초보 eBPF 개발자들이 혼동하기 쉬운 두 개념의 차이는 다음과 같다.</p>
+<ul>
+<li><strong>프로그램 타입 (<code>prog_type</code>)</strong>: &ldquo;이 프로그램의 인터페이스 규격은 무엇인가?&ldquo;를 결정한다. (예: <code>BPF_PROG_TYPE_CGROUP_SOCK_ADDR</code>은 Cgroup 내부의 소켓 주소 조작용 프로그램임을 나타냄)</li>
+<li><strong>부착 타입 (<code>attach_type</code>)</strong>: &ldquo;이 프로그램을 정확히 어느 시점에 결합할 것인가?&ldquo;를 결정한다.</li>
+</ul>
+<p>일부 프로그램 타입은 결합할 수 있는 곳이 단 하나뿐이어서 부착 타입을 명시하지 않아도 되지만, 많은 네트워킹 및 Cgroup 프로그램들은 한 타입이 여러 군데에 붙을 수 있기 때문에 부착 타입을 상세히 지정해야 한다.</p>
+<p>예를 들어, 동일한 Cgroup 소켓 프로그램 타입이라도:</p>
+<ul>
+<li><code>BPF_CGROUP_INET_INGRESS</code>: 패킷이 들어올 때 실행</li>
+<li><code>BPF_CGROUP_INET_EGRESS</code>: 패킷이 나갈 때 실행</li>
+</ul>
+<p>과 같이 바인딩 시점에 부착 타입을 구분하여 로드해 주어야 한다.</p>
+<h3 id="혁신적인-부착-관리자-bpf-link의-등장">혁신적인 부착 관리자: BPF Link의 등장</h3>
+<hr>
+<p>초기 eBPF 아키텍처에서는 프로그램을 특정 훅에 부착하기 위해 로우레벨 파일 기술자(FD)나 원시 커널 이벤트를 직접 관리해야 했다. 이 방식은 프로그램을 업그레이드할 때 부착점이 잠깐 유실되거나, 로더 프로세스가 강제 종료되었을 때 커널 훅이 엉뚱하게 살아남아 좀비처럼 남는 등 리소스 누수와 안전성 문제를 안고 있었다.</p>
+<p>이 문제를 극복하기 위해 최신 커널은 **BPF Link (<code>struct bpf_link</code>)**라는 강력한 추상화 개체를 도입했다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>┌──────────────────────────────┐
+</span></span><span style="display:flex;"><span>│          BPF Link            │ (원자적 생명주기 관리)
+</span></span><span style="display:flex;"><span>├──────────────────────────────┤
+</span></span><span style="display:flex;"><span>│  ┌────────────────────────┐  │
+</span></span><span style="display:flex;"><span>│  │   eBPF Program (.o)    │  │ ── (동적 업데이트 가능)
+</span></span><span style="display:flex;"><span>│  └────────────────────────┘  │
+</span></span><span style="display:flex;"><span>│              │ (안전한 결합)  │
+</span></span><span style="display:flex;"><span>│              ▼                │
+</span></span><span style="display:flex;"><span>│  ┌────────────────────────┐  │
+</span></span><span style="display:flex;"><span>│  │   Kernel Hook Point    │  │ ── (XDP, Kprobe, LSM 등)
+</span></span><span style="display:flex;"><span>│  └────────────────────────┘  │
+</span></span><span style="display:flex;"><span>└──────────────────────────────┘
+</span></span></code></pre></div><p>BPF Link의 핵심 가치는 다음과 같다.</p>
+<ol>
+<li><strong>원자적 교체 (Atomic Swap)</strong>: 서비스 중단 없이 실행 중인 eBPF 프로그램을 새로운 버전의 프로그램으로 안전하게 교체할 수 있다. 두 프로그램 간의 바인딩 교체가 원자적으로 이루어지므로 패킷 유실이나 트레이싱 공백이 발생하지 않는다.</li>
+<li><strong>자동 정리 (Auto-Cleanup)</strong>: BPF Link를 소유하고 있는 사용자 공간 로더의 파일 기술자가 닫히면(프로세스가 종료되면), 커널은 해당 Link에 매핑된 커널 훅과 eBPF 프로그램의 연결을 자동으로 해제하고 리소스를 깨끗이 청소해 준다.</li>
+<li><strong>고정(Pinning) 지원</strong>: 반대로 사용자 프로그램이 종료되더라도 eBPF 기능을 백그라운드에서 영구히 유지하고 싶다면, BPF Link를 <code>/sys/fs/bpf</code> 가상 파일 시스템에 파일 형태로 고정(Pin)해 두어 파일 생명주기로 기능을 통제할 수 있다.</li>
+</ol>
+<h3 id="느낀점--결론">느낀점 / 결론</h3>
+<hr>
+<p>이번 7장을 정리하며 eBPF가 리눅스 운영체제 생태계 전체를 뒤흔들 수 있었던 진정한 원동력이 어디서 나오는지 실감할 수 있었다.</p>
+<p>eBPF의 진정한 파워는 단순히 &ldquo;가볍고 빠른 어셈블리 인터프리터가 커널에서 돈다&quot;는 기계적 사실에만 있는 것이 아니다. 커널 구석구석에 뻗어 있는 다양한 서브시스템(트레이싱, 네트워킹, 보안 모듈)들의 게이트웨이가 <strong><code>prog_type</code>과 <code>attach_type</code>이라는 정형화된 약속</strong>을 통해 가상 머신과 아름답게 조화를 이루도록 설계되어 있기 때문이다.</p>
+<p>특히 현대적인 <strong>BPF Link</strong> 기술은 개발자가 로우 레벨 바인딩 제어의 위험한 복잡성에서 벗어나 안정적이고 우아한 소프트웨어 라이프사이클을 누릴 수 있게 해 준 커널의 따뜻한 배려와도 같다.</p>
+<p>커널 내부의 거대한 숲(네트워크 드라이버부터 LSM 보안 통제선까지)을 eBPF라는 렌즈를 통해 통일된 규격으로 바라보고 자유자재로 해킹할 수 있다는 사실은, 시스템 프로그래머에게 말할 수 없는 지적 유희와 엄청난 무기를 쥐여 준 셈이다. 이제 이 무기를 쥐었으니, 다음 장부터 펼쳐질 본격적인 네트워킹(8장)과 보안(9장)의 거친 바다로 나아갈 준비가 완벽히 끝났다고 확신한다.</p>
+<h3 id="참고-문헌">참고 문헌</h3>
+<hr>
+<ul>
+<li>Liz Rice, <a href="https://www.oreilly.com/library/view/learning-ebpf/9781098135119/"><em>Learning eBPF</em></a>, O&rsquo;Reilly Media.</li>
+<li>BPF Compiler Collection (BCC) Reference Guide, <a href="https://github.com/iovisor/bcc/blob/master/docs/reference_guide.md"><em>BPF Program Types</em></a>.</li>
+</ul>
+
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> <a href="mailto:sh95119@gmail.com">Mail</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> <a href="https://github.com/dongwooklee96">Github</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10.5 2C8.015 2 6 4.015 6 6.5v7c0 2.485 2.015 4.5 4.5 4.5s4.5-2.015 4.5-4.5v-7C15 4.015 12.985 2 10.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7zm3.5-11C14.015 2 12 4.015 12 6.5v7c0 2.485 2.015 4.5 4.5 4.5S21 15.985 21 13.5v-7C21 4.015 18.985 2 16.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7z"/></svg> <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a></span>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

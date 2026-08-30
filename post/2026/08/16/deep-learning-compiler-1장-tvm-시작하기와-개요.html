@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer>
+    </script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../../../images/site.webmanifest">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="개발자 이동욱의 블로그 입니다.">
+    <title>Deep Learning Compiler 1장: TVM 시작하기와 개요 | 개발자 이동욱</title>
+    <link rel="stylesheet" href="../../../../css/style.css" />
+    <link rel="stylesheet" href="../../../../css/fonts.css" />
+    <link rel="stylesheet" href="../../../../css/theme-override.css">
+    <header>
+
+  <nav>
+    <ul>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../">개발자 이동욱</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../categories/">카테고리</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../tags/">태그</a>
+      </li>
+      
+      
+      <li class="pull-left ">
+        <a href="../../../../works.html">포트폴리오</a>
+      </li>
+      
+
+    </ul>
+  </nav>
+  
+</header>
+
+    <meta name="google-site-verification" content="8He6x5Jy_qOvk1-o8TaN16TjmT9bZUA07bfm25WJhT0" />
+  
+<script>
+  (function() {
+    var w = window;
+    if (w.ChannelIO) {
+      return (window.console.error || window.console.log || function(){})('ChannelIO script included twice.');
+    }
+    var ch = function() {
+      ch.c(arguments);
+    };
+    ch.q = [];
+    ch.c = function(args) {
+      ch.q.push(args);
+    };
+    w.ChannelIO = ch;
+    function l() {
+      if (w.ChannelIOInitialized) {
+        return;
+      }
+      w.ChannelIOInitialized = true;
+      var s = document.createElement('script');
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = 'https://cdn.channel.io/plugin/ch-plugin-web.js';
+      s.charset = 'UTF-8';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    }
+    if (document.readyState === 'complete') {
+      l();
+    } else if (window.attachEvent) {
+      window.attachEvent('onload', l);
+    } else {
+      window.addEventListener('DOMContentLoaded', l, false);
+      window.addEventListener('load', l, false);
+    }
+  })();
+  ChannelIO('boot', {
+    "pluginKey": "9206e085-d806-4e2a-8f28-852d12262f83"
+  });
+</script>
+<script src="https://buttr.dev/butter.js" data-site-id="bfjtxbyxzd" async></script>
+
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="main-content">
+        <br/>
+
+<div class="article-meta">
+<h1><span class="title">Deep Learning Compiler 1장: TVM 시작하기와 개요</span></h1>
+<h2 class="author">이동욱</h2>
+<h2 class="date">2026/08/16</h2>
+<p class="terms">
+  
+  
+  Categories: <a href="../../../../categories/%EA%B0%9C%EB%B0%9C">개발</a> 
+  
+  
+  
+  Tags: <a href="../../../../tags/tvm">TVM</a> <a href="../../../../tags/%EC%BB%B4%ED%8C%8C%EC%9D%BC%EB%9F%AC">컴파일러</a> <a href="../../../../tags/%EB%94%A5%EB%9F%AC%EB%8B%9D">딥러닝</a> <a href="../../../../tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5">인공지능</a> 
+  
+  
+</p>
+</div>
+
+
+<div class="content-wrapper">
+  <main>
+    <h3 id="시작하며">시작하며</h3>
+<hr>
+<p>최근 인공지능과 딥러닝 모델의 크기가 비대해지고 연산량이 급증함에 따라, 단순히 모델을 설계하는 것을 넘어 다양한 하드웨어 백엔드(CPU, GPU, NPU 등)에서 어떻게 효율적으로 모델을 실행하고 최적화할 것인가에 대한 고민이 깊어졌다. 이 과정에서 모델을 최적의 기계어로 자동 컴파일하여 각 하드웨어의 최대 성능을 끌어내는 <strong>딥러닝 컴파일러(Deep Learning Compiler)</strong> 분야에 큰 매력과 관심을 느끼게 되었다.</p>
+<p>특히 오픈소스이자 대표적인 딥러닝 컴파일러인 <strong>Apache TVM</strong>은 이 분야의 핵심 기술로 자리 잡고 있다. 이에 대해 깊이 있게 이해하고 학습하기 위해 <a href="https://tvm.d2l.ai/"><em>Dive into Deep Learning Compiler</em></a> 교재를 바탕으로 공부를 시작했다. 이 글은 그 첫 단추인 &lsquo;TVM 시작하기(Getting Started)&rsquo; 장을 공부하며 이해한 바를 정리하고 기록한 내용이다.</p>
+<p>해당 책은 현재 개발중에 있고 전체 목차는 다음 <a href="https://docs.google.com/document/d/14Bgo9TgczROlqcTinS5-Y4hyig-ae0Rm8uIFQl9OAEA/edit?tab=t.0">링크</a> 를 참고하면 된다.</p>
+<p>해당 책은 독자들이 NumPy 사용 경험 정도만 갖춘 최소한의 배경 지식을 가지고 있다고 가정합니다. 이를 고려하여,
+내용은 기초부터 차근차근 설명하고, 필요할 때마다 관련 배경 지식을 소개할 것입니다. 하지만 경험이 풍부한 독자분들께도
+이 내용이 유용할 것입니다.</p>
+<h3 id="1장--시작하기">1장 : 시작하기</h3>
+<p>이제 여정을 시작해보자. 배워야 할 내용은 많지만 모든 여정은 어딘가에서 시작된다. 이 부분에서는 다음 내용을 다룰 것이다.</p>
+<ul>
+<li>(거의) 모든 챕터를 직접 실행할 수 있도록 필요한 라이브러리를 설치하는 방법</li>
+<li>두 벡터를 더하는 연산자 작성하기</li>
+<li>추론을 실행하기 위해서 신경망 모델을 컴파일하고, 컴파일된 라이브러리를 저장하는 방법</li>
+</ul>
+<h4 id="11-설치">1.1 설치</h4>
+<p>이 책의 각 섹션은 <code>Jupyter</code> 노트북으로 구성되어 있다. 이를 실행하는 가장 쉬운 방법은 HTML 페이지 우측 상단에 있는 COLAB 버튼을 클릭하는 것이다. 그러면 해당 노트북이 열린 상태로 <code>Google Colab</code> 으로 바로 이동한다.</p>
+<p>첫 번째 코드 셀을 실행하면 호스트 런타임에 연결되며 다음과 같은 경고 메시지가 표시된다. <code>RUN ANYWAY</code> 를 클릭하여 계속 진행할 수 있다.</p>
+<p><img src="https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-16%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.49.31.png" alt=""></p>
+<p>이 섹션의 나머지 부분에서는 파이썬 환경 설정 방법, <code>Jupyter</code> 의 대화형 노트북, 관련 라이브러리, 그리고 이 책을 따라가며 여러분의 컴퓨터에서 직접 실행할 수 있는 코드를 다룰 것이다.</p>
+<h4 id="111-소스-코드">1.1.1 소스 코드</h4>
+<p>모든 노트북이 포함된 소스코드 패키지는 아래에서 확인할 수 있다. 이 패키지를 다운로드 받아서 폴더에 압축을 풀어주세요. 예를 들어 <code>Linux/macOS</code> 에서 <code>wget</code> 과 <code>unzip</code> 이 모두 설치되어 있다면 다음 명령어를 통해서 수행할 수 있다.</p>
+<pre tabindex="0"><code>wget http://tvm.d2l.ai/d2l-tvm.zip
+unzip d2l-tvm.zip -d d2l-tvm
+</code></pre><h4 id="112-실행-환경-설치">1.1.2 실행 환경 설치</h4>
+<p>Python 3.5 이상 버전이 설치되어 있고 pip도 설치되어 있다면, 실행 환경을 설치하는 가장 쉬운 방법은 다음과 같습니다.</p>
+<ul>
+<li><code>Jupyter</code> 및 저장된 코드 블록과 같은 모든 종속성을 위한 <code>d2ltvm</code></li>
+<li>우리가 사용할 딥러닝 컴파일러를 위한 <code>tvm</code></li>
+<li>일부 장에서 기준 모델로 사용할 <code>mxnet</code></li>
+</ul>
+<p>먼저 <code>d2ltvm</code> 패키지를 설치하기 위해서 아래 명령어를 수행합니다.</p>
+<pre tabindex="0"><code>pip install git+https://github.com/d2l-ai/d2l-tvm
+</code></pre><p>그런 다음에 소스코드를 사용하여 <code>tvm</code> 을 컴파일 합니다. <code>tvm</code> 은 사용자의 시스템에 설치된 라이브러리에 크게 의존 하기 때문에 <code>pip</code> 패키지가 제공되지 않는다. <code>tvm</code> 을 설치하려면 <code>tvm.ai</code> 에 있는 지침을 따르세</p>
+<p>이 책에서 사용하는 <code>config.cmake</code> 파일의 구성에는 최소한</p>
+<pre tabindex="0"><code>set(USE_LLVM ON)
+</code></pre><p>를 포함해야 합니다. 또한 만약 <code>Nvidia GPU</code> 를 사용한다면 다음과 같이 <code>USE_CUDA</code> 를 <code>ON</code> 으로 설정해야 합니다.</p>
+<pre tabindex="0"><code>set(USE_CUDA ON)
+</code></pre><p>또한 성능을 향상시켜주는 <code>cpython</code> 을 활성화 하는 것을 잊지 마세요. 단지 <code>TVM</code> 소스 폴더에서 <code>make cpython</code> 명령어를 실행하기만 하면 됩니다.</p>
+<p>현재 저희 소스코드는 <code>tvm-0.7-dev</code> 에서 실행됩니다. 마지막으로
+GPU 를 사용할 수 있다면 <code>MXNet</code> 의 CUDA 버전을 설치하세요</p>
+<pre tabindex="0"><code>pip install mxnet-cu101
+</code></pre><p>사용중인 <code>CUDA</code> 버전에 맞춰서 101을 변경할 수 있습니다. 모든 패키지가 설치되면 다음 명령어를 실행하여 <code>Jupyter</code> 노트북을 열 수 있습니다.</p>
+<pre tabindex="0"><code>jupyter notebook
+</code></pre><p>이 단계에서 브라우저에서 <code>http://localhost:8888</code> 에 접속하여 <code>Jupyter</code> 노트북을 사용할 수 있습니다.</p>
+<h4 id="113-코드">1.1.3 코드</h4>
+<p>이 책 전체에 걸쳐서, 재사용 가능한 코드 블록은 코드 앞에 <code># dwltvm 패키지에 저장</code> 이라는 주석을 추가하여 <code>d2ltvm</code> 패키지에 저장합니다.</p>
+<p>다음 코드는 <code>d2ltvm</code> 패키지에 저장된 코드의 예시입니다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#57606a"># Save to the d2ltvm package.</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">tvm</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">from</span> <span style="color:#24292e">tvm</span> <span style="color:#cf222e">import</span> te
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">time</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">timeit</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">numpy</span> <span style="color:#cf222e">as</span> <span style="color:#24292e">np</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">from</span> <span style="color:#24292e">matplotlib</span> <span style="color:#cf222e">import</span> pyplot <span style="color:#cf222e">as</span> plt
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">from</span> <span style="color:#24292e">IPython</span> <span style="color:#cf222e">import</span> display
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">try</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">import</span> <span style="color:#24292e">mxnet</span> <span style="color:#cf222e">as</span> <span style="color:#24292e">mx</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">except</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">pass</span>
+</span></span></code></pre></div><h3 id="12-벡터-덧셈">1.2 벡터 덧셈</h3>
+<p>이제 모든 라이브러리를 설치했으니, 첫 번째 프로그램을 작성해 볼 것이다. <code>n</code> 차원 벡터 <code>a</code> 와 <code>b</code> 를 더하는 프로그램이다. <code>NumPy</code> 에서는 이 작업이 매우 간단하며 <code>c = a + b</code> 와 같이 간단하게 작성할 수 있다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#24292e">numpy</span> <span style="color:#cf222e">as</span> <span style="color:#24292e">np</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#0550ae">.</span>random<span style="color:#0550ae">.</span>seed<span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>n <span style="color:#0550ae">=</span> <span style="color:#0550ae">100</span>
+</span></span><span style="display:flex;"><span>a <span style="color:#0550ae">=</span> np<span style="color:#0550ae">.</span>random<span style="color:#0550ae">.</span>normal<span style="color:#1f2328">(</span>size<span style="color:#0550ae">=</span>n<span style="color:#1f2328">)</span><span style="color:#0550ae">.</span>astype<span style="color:#1f2328">(</span>np<span style="color:#0550ae">.</span>float32<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>b <span style="color:#0550ae">=</span> np<span style="color:#0550ae">.</span>random<span style="color:#0550ae">.</span>normal<span style="color:#1f2328">(</span>size<span style="color:#0550ae">=</span>n<span style="color:#1f2328">)</span><span style="color:#0550ae">.</span>astype<span style="color:#1f2328">(</span>np<span style="color:#0550ae">.</span>float32<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>c <span style="color:#0550ae">=</span> a <span style="color:#0550ae">+</span> b
+</span></span></code></pre></div><p>여기서는 길이가 100 인 두 개의 임의 벡터를 생성하고, 요소별로 합산한다. <code>Numpy</code> 는 기본적으로 64비트 부동소수점 또는 64비트 정수를 사용하는데, 이는 딥러닝에서 일반적으로 사용되는 32비트 부동 소수점과 다르므로, 데이터 형을 명시적으로 변환한다.</p>
+<p><code>Numpy</code> 의 내장 &lsquo;+&rsquo; 연산자를 사용하여 요소별 덧셈을 구현할 수도 있지만, 이번에는 스칼라 연산자만 사용하여 이를 구현해볼 것이다. 이렇게 하면 TVM 을 이용한 구현 방식을 이해하는데 도움이 될 것이다. 다음 함수는 <code>for-루프</code> 를 사용하여 벡터의 모든 요소를 순회한 다음에, 매번 스칼라 &lsquo;+&rsquo; 연산자를 사용하여 두 요소를 더한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">vector_add</span><span style="color:#1f2328">(</span>a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> c<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">for</span> i <span style="color:#0550ae">in</span> <span style="color:#6639ba">range</span><span style="color:#1f2328">(</span>n<span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>        c<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> a<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]</span> <span style="color:#0550ae">+</span> b<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>d <span style="color:#0550ae">=</span> np<span style="color:#0550ae">.</span>empty<span style="color:#1f2328">(</span>shape<span style="color:#0550ae">=</span>n<span style="color:#1f2328">,</span> dtype<span style="color:#0550ae">=</span>np<span style="color:#0550ae">.</span>float32<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>vector_add<span style="color:#1f2328">(</span>a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> d<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>np<span style="color:#0550ae">.</span>testing<span style="color:#0550ae">.</span>assert_array_equal<span style="color:#1f2328">(</span>c<span style="color:#1f2328">,</span> d<span style="color:#1f2328">)</span>
+</span></span></code></pre></div><p>다음 장들에서 결과를 저장하기 위해 두 개의 임의의 <code>ndarray</code> 와 또 다른 빈 <code>ndarray</code> 를 자주 생성하게 될 것이므로, 나중에 재사용할 수 있도록 이 루틴을 저장해 둔다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#57606a"># SAVE TO d2ltvm package.</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">def</span> <span style="color:#6639ba">get_abc</span><span style="color:#1f2328">(</span>shape<span style="color:#1f2328">,</span> constructor<span style="color:#0550ae">=</span><span style="color:#cf222e">None</span><span style="color:#1f2328">):</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0a3069">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    Return random, a, b and empty c with sampe shape.
+</span></span></span><span style="display:flex;"><span><span style="color:#0a3069">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    np<span style="color:#0550ae">.</span>random_seed<span style="color:#1f2328">(</span><span style="color:#0550ae">0</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    a <span style="color:#0550ae">=</span> np<span style="color:#0550ae">.</span>random<span style="color:#0550ae">.</span>normal<span style="color:#1f2328">(</span>size<span style="color:#0550ae">=</span>shape<span style="color:#1f2328">)</span><span style="color:#0550ae">.</span>astype<span style="color:#1f2328">(</span>np<span style="color:#0550ae">.</span>float32<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    b <span style="color:#0550ae">=</span> np<span style="color:#0550ae">.</span>random<span style="color:#0550ae">.</span>normal<span style="color:#1f2328">(</span>size<span style="color:#0550ae">=</span>shape<span style="color:#1f2328">)</span><span style="color:#0550ae">.</span>astype<span style="color:#1f2328">(</span>np<span style="color:#0550ae">.</span>float32<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    c <span style="color:#0550ae">=</span> np<span style="color:#0550ae">.</span>empty_like<span style="color:#1f2328">(</span>a<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">if</span> constructor<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>        a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> c <span style="color:#0550ae">=</span> <span style="color:#1f2328">[</span>constructor<span style="color:#1f2328">(</span>x<span style="color:#1f2328">)</span> <span style="color:#cf222e">for</span> x <span style="color:#0550ae">in</span> <span style="color:#1f2328">(</span>a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> c<span style="color:#1f2328">)]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#cf222e">return</span> a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> c
+</span></span></code></pre></div><p><code>Numpy</code>, <code>TVM</code> 및 기타 라이브러리 간의 비교를 용이하게 하기 위해서 항상 동일한 결과가 나오도록 난수 시드를 고정해 두었음을 유의하시기 바랍니다.
+또한, 데이터를 다른 형식으로 변환하기 위한 선택적 생성자를 지원합니다.</p>
+<h4 id="122-tvm-계산-정의">1.2.2 TVM 계산 정의</h4>
+<p>이제 TVM 에서 <code>vector_add</code> 를 구현해볼 것이다.
+TVM 구현은 위와 같은 두 가지 점에서 다르다.</p>
+<ol>
+<li>함수 전체를 작성할 필요는 없으며, 출력의 각 요소 즉 <code>c[i]</code> 가 어떻게 계산되는지만 저장하면 된다.</li>
+<li>
+<ol start="2">
+<li><code>TVM</code> 은 기호적이므로, 기호 변수의 차원을 지정하여 생성하고, 프로그램이 어떻게 계산될지 정의한다.</li>
+</ol>
+</li>
+</ol>
+<p>다음 프로그램에서는 먼저 <code>tvm.te.placeholder</code> 를 통해 두 입력에 대한 플레이스 홀더 <code>A</code> 와 <code>B</code> 의 모양 <code>(n,)</code> 을 지정하여 선언합니다. <code>A</code> 와 <code>B</code> 는 모두 <code>Tensor</code> 객체이며, 나중에 여기에 데이터를 입력할 수 있다. 나중에 프로그램을 읽기 쉽게 출력할 수 있도록 이들에게 이름을 지정한다.</p>
+<p><img src="https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.40.14.png" alt=""></p>
+<p>A, B, C 는 모두 텐서 (Tensor) 객체이며, 이는 <code>Numpy</code> 의 <code>ndarray</code> 를 기호적으로 표현한 것으로 볼 수 있다. 데이터 유형이나 모양과 같은 변수의 속성에 접근할 수 있다. 하지만 이러한 속성들은 현재로서는 구체적인 값을 가지고 있지 않다.</p>
+<p><img src="https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.43.09.png" alt=""></p>
+<p>텐서 객체를 생성하는 연산은 <code>A.op</code> 를 통해서 접근할 수 있다.</p>
+<p>A, C 에 대한 연산의 유형은 다르지만, 둘 다 텐서 객체를 생성하는 연산을 나타내는 기본 클래스 <code>Operation</code> 을 공유하고 있음을 알 수 있다.</p>
+<p><img src="https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.45.23.png" alt=""></p>
+<h3 id="123-스케줄링-작성하기">1.2.3 스케줄링 작성하기</h3>
+<p>계산을 실행하려면 프로그램의 실행 방식, 예를 들어 데이터에 접근하는 순서나 멀티 스레드 병렬화를 수행하는 방법 등을 지정해야 한다. 이러한 실행 계획을 &lsquo;스케줄&rsquo; 이라고 합니다. <code>C</code> 가 출력 텐서이므로, 해당 연산자에 대한 기본 스케줄을 생성하고 의사 코드를 출력해보자.</p>
+<pre tabindex="0"><code>s = te.create_schedule(C.op)
+</code></pre><blockquote>
+<p>참고: 해당 구식 Tensor Expression API의 한계로 인해서 제거 되었다. 최신 방식은 TVM Script 로 구현한다.</p>
+</blockquote>
+<p>스케줄은 여러 단계로 구성된다. 각 단계는 스케줄이 어떻게 편성되는지 설명하는 작업에 해당한다. 특정 단계에는 <code>s[C]</code> 또는 <code>s[C.op]</code> 를 통해서 접근할 수 있다.</p>
+<p>나중에 하드웨어 리소스를 더 효율적으로 활용하여 성능을 향상 시키기 위해서 실행 계획을 변경하는 방법을 살펴볼 것이다. 여기선느 C 언어와 유사한 의사 코드를 출력하여 기본 실행 계획을 확인해볼 것이다.</p>
+<pre tabindex="0"><code>tvm.lower(s, [A, B, C], simple_mode=True)
+</code></pre><div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>produce c <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#cf222e">for</span> <span style="color:#1f2328">(</span>i<span style="color:#1f2328">,</span> <span style="color:#0550ae">0</span><span style="color:#1f2328">,</span> <span style="color:#0550ae">100</span><span style="color:#1f2328">)</span> <span style="color:#1f2328">{</span>
+</span></span><span style="display:flex;"><span>  c<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]</span> <span style="color:#0550ae">=</span> <span style="color:#1f2328">(</span>a<span style="color:#1f2328">[</span>i<span style="color:#1f2328">]</span> <span style="color:#0550ae">+</span> b<span style="color:#1f2328">[</span>i<span style="color:#1f2328">])</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#1f2328">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">}</span>
+</span></span></code></pre></div><p>아래의 메서드는 스케줄과 입력 및 출력 텐서를 인수로 받는다. <code>simple_mode=True</code> 를 사용하여 간단한 의사 코드를 출력한다.
+해당 프로그램은 출력 모양에 따라서 적절한 <code>for</code> 루프를 생성했다는 점에 유의하세요. 전반적으로, 이는 이전에 봤던 함수인 <code>vector_add</code> 와 유사한 방식으로 동작한다.</p>
+<p>이제 <code>TVM</code> 이 계산과 스케줄을 분리한다는 것을 알 수 있었다. 계산은 결과가 어떻게 산출되는지를 정의하며, 이는 프로그램을 어떤 하드웨어 플랫폼에서 실행하든 변하지 않는다. 반면 효율적인 스케줄은 종종 하드웨어에 의존적이지만, 스케줄을 변경하더라도 정확성에는 영향을 미치지 않는다. 계산과 스케줄을 분리하는 이 개념은 <code>TVM</code> 이 <code>Halide</code> 에서 계승한 것이다.</p>
+<h3 id="124-컴파일-및-실행">1.2.4 컴파일 및 실행</h3>
+<p>계산과 스케줄이 모두 정의되면 <code>tvm.build</code> 를 사용하여 이를 실행 가능한 모듈로 컴파일 할 수 있습니다. 이 함수는 <code>tvm.lower</code> 와 동일한 인수를 받는다. 사실, 이 함수는 먼저 <code>tvm.lower</code> 를 호출하여 프로그램을 생성한 다음에, 이를 기계어로 컴파일 한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>mod <span style="color:#0550ae">=</span> tvm<span style="color:#0550ae">.</span>build<span style="color:#1f2328">(</span>s<span style="color:#1f2328">,</span> <span style="color:#1f2328">[</span>A<span style="color:#1f2328">,</span> B<span style="color:#1f2328">,</span> C<span style="color:#1f2328">])</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">type</span><span style="color:#1f2328">(</span>mod<span style="color:#1f2328">)</span>
+</span></span></code></pre></div><blockquote>
+<p><code>tvm.runtime.module.Module</code></p>
+</blockquote>
+<p>실행 가능한 모듈 객체를 반환한다. 이제 <code>A, B, C</code> 에 데이터를 입력하여 실행할 수 있습니다. 텐서 데이터는 <code>tvm.ndarray.NDArray</code> 객체여야 합니다. 가장 쉬운 방법은 먼저 <code>NumPy</code> <code>ndarray</code> 객체를 생성한 다음에 <code>tvm.nd.array</code> 를 사용하여 이를 <code>TVM</code> <code>ndarray</code> 로 변환하는 것이다. <code>asnumpy</code> 메서드를 사용하면 이를 다시 <code>NumPy</code> 로 변환할 수 있다.</p>
+<pre tabindex="0"><code>x = np.ones(2)
+y = tvm.nd.array(x)
+type(y), y.asnumpy()
+</code></pre><blockquote>
+<p><code>(tvm.runtime.ndarray.NDArray, array([1., 1.]))</code></p>
+</blockquote>
+<p>이제 데이터를 생성하고 이를 <code>TVM</code> <code>ndarray</code> 로 반환해 봅시다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> c <span style="color:#0550ae">=</span> get_abc<span style="color:#1f2328">(</span><span style="color:#0550ae">100</span><span style="color:#1f2328">,</span> tvm<span style="color:#0550ae">.</span>nd<span style="color:#0550ae">.</span>array<span style="color:#1f2328">)</span>
+</span></span></code></pre></div><p>이제 계산을 수행하고 결과를 확인한다.</p>
+<pre tabindex="0"><code>mod(a, b, c)
+np.testing.assert_array_equal(a.asnumpy() + b.asnumpy(), c.asnumpy())
+</code></pre><h3 id="125-인자-제약-조건">1.2.5 인자 제약 조건</h3>
+<p>A 와 B 를 선언할 때 두 입력 모두 길이가 100 인 벡터로 지정했다는 점을 기억하십시오.</p>
+<pre tabindex="0"><code>A.shape, B.shape, C.shape
+
+&gt; ([100], [100], [100])
+</code></pre><p>TVM 은 입력이 해당 사양을 충족하는지 확인한다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">try</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>  a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> c <span style="color:#0550ae">=</span> get_abc<span style="color:#1f2328">(</span><span style="color:#0550ae">200</span><span style="color:#1f2328">,</span> tvm<span style="color:#0550ae">.</span>nd<span style="color:#0550ae">.</span>array<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>  mod<span style="color:#1f2328">(</span>a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> c<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">except</span> tvm<span style="color:#0550ae">.</span>TVMError <span style="color:#cf222e">as</span> e<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span>e<span style="color:#1f2328">)</span>
+</span></span></code></pre></div><p><img src="https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%201.20.12.png" alt=""></p>
+<p>TVM 의 기본 데이터 타입은 <code>float32</code> 입니다.</p>
+<pre tabindex="0"><code>A.dtype, B.dtype, C.dtype
+&gt; (&#39;float32&#39;, &#39;float32&#39; ,&#39;float32&#39;)
+</code></pre><p>데이터 유형이 다른 값을 입력하면 오류가 발생합니다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#cf222e">try</span><span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>  a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> c <span style="color:#0550ae">=</span> get_abc<span style="color:#1f2328">(</span><span style="color:#0550ae">100</span><span style="color:#1f2328">,</span> tvm<span style="color:#0550ae">.</span>nd<span style="color:#0550ae">.</span>array<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span>  a <span style="color:#0550ae">=</span> tvm<span style="color:#0550ae">.</span>nd<span style="color:#0550ae">.</span>array<span style="color:#1f2328">(</span>a<span style="color:#0550ae">.</span>asnumpy<span style="color:#1f2328">()</span><span style="color:#0550ae">.</span>astype<span style="color:#1f2328">(</span><span style="color:#0a3069">&#39;float64&#39;</span><span style="color:#1f2328">))</span>
+</span></span><span style="display:flex;"><span>  mod<span style="color:#1f2328">(</span>a<span style="color:#1f2328">,</span> b<span style="color:#1f2328">,</span> c<span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">except</span> tvm<span style="color:#0550ae">.</span>TVMError <span style="color:#cf222e">as</span> e<span style="color:#1f2328">:</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#6639ba">print</span><span style="color:#1f2328">(</span>e<span style="color:#1f2328">)</span>
+</span></span></code></pre></div><p><img src="https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%201.23.26.png" alt=""></p>
+<h4 id="126-모듈-저장-및-불러오기">1.2.6 모듈 저장 및 불러오기</h4>
+<p>컴파일된 모듈은 디스크에 저장할 수 있다.</p>
+<pre tabindex="0"><code>mod_fname = &#39;vector-add.tar&#39;
+mod.export_library(mod_fname)
+</code></pre><p>그리고 나중에 다시 불러올 수 있다.</p>
+<pre tabindex="0"><code>loaded_mod = tvm.runtime.load_module(mod_fname)
+</code></pre><p>결과를 확인하면 같다.</p>
+<pre tabindex="0"><code>a, b, c = get_abc(100, tvm.nd.array)
+loaded_mod(a, b, c)
+np.testing.assert_array_equal(a.asnumpy() + b.asnumpy(), c.asnumpy())
+</code></pre><h3 id="127-마무리">1.2.7 마무리</h3>
+<p>TVM 을 사용하여 오퍼레이터를 구현하는 과정은 아래와 같다.</p>
+<ol>
+<li>입력 및 출력 형태와 각 출력 요소의 계산 방식을 지정하여 계산을 선언한다.</li>
+<li>(가급적) 시스템 자원을 최대한 활용할 수 있도록 스케줄을 생성한다.</li>
+<li>하드웨어 대상 플랫폼으로 컴파일 합니다. 또한, 컴파일된 모듈을 디스크에 저장해 두었다가 나중에 다시 불러올 수 있다.</li>
+</ol>
+<h3 id="13-신경망-추론">1.3 신경망 추론</h3>
+<p>1.2 절에서는 간단한 벡터 덧셈에 대해서 오퍼레이터를 구현하고 컴파일 하는 방법을 살펴보았다. 이제 우리는 더 나아가서 일련의 연산자로 구성된 사전 학습된 신경망 전체를 컴파일 하여 추론을 해볼 것이다.</p>
+<pre tabindex="0"><code>import numpy as np
+import mxnet as mx
+from PIL import Image
+import tvm
+from tvm import relay
+</code></pre><p>이 장에서는 이전 장에 비해 세 가지 모듈이 추가로 도입됩니다. PIL 을 사용하여 이미지를 읽고, <code>mxnet</code> 을 통해서 사전 훈련된 신경망을 확보하며, <code>TVM</code> 의 릴레이 모듈을 사용하여 신경망을 변환하고 최적화 할 것이다. 릴레이는 <code>TVM</code> 에서 신경망을 표현하기 위한 고수준 중간 언어(IR) 입니다.</p>
+<h3 id="131-사전-학습된-모델-확보">1.3.1 사전 학습된 모델 확보</h3>
+<p>사전 훈련된 모델이란 데이터 세트를 통해서 매개변수가 훈련된 신경망을 의미한다. 여기서는 <code>MxNet</code> 의 모델 동물원에서 <code>pretrained=True</code> 옵션을 사용하여 사전 훈련된 모델을 확보한다.
+이 모델에 대한 자세한 내용을 알고 싶다면 다른 부분을 참고하세요. 더 많은 모델은 <code>MXNet</code> 모델 동물원에서 찾을 수 있습니다.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model <span style="color:#0550ae">=</span> mx<span style="color:#0550ae">.</span>gluon<span style="color:#0550ae">.</span>model_zoo<span style="color:#0550ae">.</span>vision<span style="color:#0550ae">.</span>resnet18_v2<span style="color:#1f2328">(</span>pretrained<span style="color:#0550ae">=</span><span style="color:#cf222e">True</span><span style="color:#1f2328">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#6639ba">len</span><span style="color:#1f2328">(</span>model<span style="color:#0550ae">.</span>features<span style="color:#1f2328">),</span> model<span style="color:#0550ae">.</span>output
+</span></span></code></pre></div><p><img src="https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%201.39.38.png" alt=""></p>
+<p>로드된 모델은 약 100만장의 자연물 이미지를 포함하는 <code>ImageNet 1K</code> 데이터 셋을 기반으로 훈련되었다. 이 데이터 셋은 <code>1,000</code> 개의 클래스로 구성되어 있으며, 모델은 두 부분을으로 이루어져 있으며, 본체인 <code>model.feature</code> 에는 13개의 블록이 포함되어 있고, 출력층은 <code>1,000</code> 개의 출력을 갖는 밀집층이다. 다음 코드 블록은 <code>ImageNet</code> 데이터셋의 각 클래스에 대한 텍스트 레이블을 불러온다.</p>
+<pre tabindex="0"><code>with open(&#39;../data/imagenet1k_labels.txt&#39;) as f:
+labels = eval(f.read())
+</code></pre>
+    <a href="../../../../"> >> Home</a>
+  </main>
+</div>
+      </div> 
+    </div> 
+  <script src="https://utteranc.es/client.js"
+      repo="dongwooklee96/dongwooklee96.github.io"
+      issue-term="pathname"
+      theme="github-light"
+      crossorigin="anonymous"
+      async>
+  </script>
+  <footer>
+      
+<script>
+(function() {
+  function center_el(tagName) {
+    var tags = document.getElementsByTagName(tagName), i, tag;
+    for (i = 0; i < tags.length; i++) {
+      tag = tags[i];
+      var parent = tag.parentElement;
+      
+      if (parent.childNodes.length === 1) {
+        
+        if (parent.nodeName === 'A') {
+          parent = parent.parentElement;
+          if (parent.childNodes.length != 1) continue;
+        }
+        if (parent.nodeName === 'P') parent.style.textAlign = 'center';
+      }
+    }
+  }
+  var tagNames = ['img', 'embed', 'object'];
+  for (var i = 0; i < tagNames.length; i++) {
+    center_el(tagNames[i]);
+  }
+})();
+</script>
+
+      
+      <hr/>
+      <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> <a href="mailto:sh95119@gmail.com">Mail</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg> <a href="https://github.com/dongwooklee96">Github</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> <a href="https://www.linkedin.com/in/michael--lee96/">LinkedIn</a></span> | <span class="footer-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M10.5 2C8.015 2 6 4.015 6 6.5v7c0 2.485 2.015 4.5 4.5 4.5s4.5-2.015 4.5-4.5v-7C15 4.015 12.985 2 10.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7zm3.5-11C14.015 2 12 4.015 12 6.5v7c0 2.485 2.015 4.5 4.5 4.5S21 15.985 21 13.5v-7C21 4.015 18.985 2 16.5 2zm3 11c0 1.654-1.346 3-3 3s-3-1.346-3-3v-7c0-1.654 1.346-3 3-3s3 1.346 3 3v7z"/></svg> <a href="https://www.slideshare.net/DongWookLee57">SlideShare</a></span>
+      
+    </footer>
+    <script>
+(function(f, a, t, h, o, m){
+	a[h]=a[h]||function(){
+		(a[h].q=a[h].q||[]).push(arguments)
+	};
+	o=f.createElement('script'),
+	m=f.getElementsByTagName('script')[0];
+	o.async=1; o.src=t; o.id='fathom-script';
+	m.parentNode.insertBefore(o,m)
+})(document, window, '//analytics.example.com/tracker.js', 'fathom');
+fathom('set', 'siteId', 'ABCDE');
+fathom('trackPageview');
+</script>
+
+  </body>
+  
+</html>

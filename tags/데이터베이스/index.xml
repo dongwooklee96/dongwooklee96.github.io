@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>데이터베이스 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4.html</link>
+    <link>http://localhost:1313/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4.html</link>
     <description>Recent content in 데이터베이스 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Sat, 17 Sep 2022 15:05:24 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 17 Sep 2022 15:05:24 +0900</lastBuildDate><atom:link href="http://localhost:1313/tags/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>사칙 연산을 수행하는 POSTGRES 익스텐션 만들기</title>
-      <link>https://dongwooklee96.github.io/post/2022/09/17/%EC%82%AC%EC%B9%99-%EC%97%B0%EC%82%B0%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
+      <link>http://localhost:1313/post/2022/09/17/%EC%82%AC%EC%B9%99-%EC%97%B0%EC%82%B0%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
       <pubDate>Sat, 17 Sep 2022 15:05:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/09/17/%EC%82%AC%EC%B9%99-%EC%97%B0%EC%82%B0%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
+      <guid>http://localhost:1313/post/2022/09/17/%EC%82%AC%EC%B9%99-%EC%97%B0%EC%82%B0%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
       <description>&lt;!--### 발표할 내용--&gt;
 &lt;!--- 간단한 POSTGRES 익스텐션을 C 언어로 만드는 방법--&gt;
 &lt;!--- POSTGRES 익스텐션을 통해서 사칙 연산을 하는 방법에 대해서 알려줄 것이다.--&gt;
@@ -76,11 +76,74 @@ LANGUAGE C IMMUTABLE STRICT;
     </item>
     
     <item>
+      <title>POSTGRES WAL에 대하여...</title>
+      <link>http://localhost:1313/post/2022/07/15/postgres-wal%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC....html</link>
+      <pubDate>Fri, 15 Jul 2022 09:20:24 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2022/07/15/postgres-wal%EC%97%90-%EB%8C%80%ED%95%98%EC%97%AC....html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;우선 글을 설명하기 앞서 아래 내용은 &lt;a href=&#34;https://www.interdb.jp/pg/pgsql09.html&#34;&gt;Write Ahead Logging - WAL&lt;/a&gt; 헤당 글을 정리하는 식으로 작성되었다는 것을 알려드립니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wal&#34;&gt;WAL&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;POSTGRESQL&lt;/code&gt;에서 WAL이란 WRITE AHEAD LOG의 약자로서, 시스템의 장애가 발생하더라도 데이터가 손실되지 않도록 하기 위한 기능이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 데이터베이스의 &lt;a href=&#34;https://ko.wikipedia.org/wiki/ACID&#34;&gt;ACID&lt;/a&gt; 속성중에 (&lt;code&gt;D&lt;/code&gt;)지속성으로 성공적으로 수행된 트랜잭션은 영원히 반영되어야 됨을 보장한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;WAL이란 용어는 일반적으로 &lt;code&gt;REDO&lt;/code&gt; 로그라고 불리며, &lt;code&gt;XLOG&lt;/code&gt; (트랜잭션 로그)라고 부르는 경우도 있다. 이는 일반적으로 DBMS 종류에 따라서 다르게 부르며 &lt;code&gt;WAL&lt;/code&gt; 이라는 용어는 &lt;code&gt;POSTGRES&lt;/code&gt; 에서 사용하는 용어이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wal이-만약-없다면-어떤일이-발생하는가&#34;&gt;WAL이 만약 없다면 어떤일이 발생하는가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/044bgoq2f3lev7j/Screen%20Shot%202022-07-15%20at%2010.06.39.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;데이터베이스에서 &lt;code&gt;WAL&lt;/code&gt;이 없다면 어떤 일이 발생하는지 예제를 통해서 알아보자.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;우선 위와 같이 &lt;code&gt;TABLE_A&lt;/code&gt;에 데이터를 넣는 두개의 트랜잭션이 있다고 가정을 하자. 먼저 INSERT 문을 수행할 떄 데이터베이스 클러스터에서는 테이블 A의 페이지를 메모리 내 공유 버퍼 풀로 로드하고 튜플을 페이지에 삽입한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이때 삽입된 튜플은 바로 디스크에 저장하지 않고 메모리에 변경되었다는 상태만 기록한다. (더티 페이지)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 나서, 두 번째 INSERT 문을 수행할 때 서버에 장애가 발생하면 삽입된 모든 데이터가 손실되게 된다. 따라서 &lt;code&gt;WAL&lt;/code&gt;이 없으면 장애에 취약하다는 점을 알 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;따라서 데이터베이스는 모든 수정사항을 기록하기 위해서 데이터로 영구 저장소에 기록을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;삽입, 삭제, 수정 같은 변경사항이 일어나면, &lt;code&gt;WAL&lt;/code&gt; 버퍼 내에 기록이 되고, 트랜잭션이 커밋 또는 중단될 떄 WAL 파일에 즉시 기록된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;wal-작동-원리&#34;&gt;WAL 작동 원리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;XLOG&lt;/code&gt; 레코드의 `LSN(Long Sequence Number)는 트랜잭션 로그에서 해당 레코드가 기록되는 위치를 나타낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;레코드의 LSN은 XLOG 레코드의 고유 ID로 사용된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.interdb.jp/pg/pgsql09.html&#34;&gt;Write Ahead Logging - WAL&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Riak 과 맵 리듀스</title>
-      <link>https://dongwooklee96.github.io/post/2022/04/07/riak-%EA%B3%BC-%EB%A7%B5-%EB%A6%AC%EB%93%80%EC%8A%A4.html</link>
+      <link>http://localhost:1313/post/2022/04/07/riak-%EA%B3%BC-%EB%A7%B5-%EB%A6%AC%EB%93%80%EC%8A%A4.html</link>
       <pubDate>Thu, 07 Apr 2022 17:00:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/04/07/riak-%EA%B3%BC-%EB%A7%B5-%EB%A6%AC%EB%93%80%EC%8A%A4.html</guid>
+      <guid>http://localhost:1313/post/2022/04/07/riak-%EA%B3%BC-%EB%A7%B5-%EB%A6%AC%EB%93%80%EC%8A%A4.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;세븐 데이터베이스라는 책을 읽으면서 다양한 유형의 &lt;code&gt;NoSQL&lt;/code&gt;을 설치하고 사용해보고 있다.&lt;/p&gt;
@@ -219,10 +282,10 @@ http: //localhost:10018/mapred --data @-
     
     <item>
       <title>데이터베이스 락킹과 래치의 차이점</title>
-      <link>https://dongwooklee96.github.io/post/2022/03/23/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%9D%BD%ED%82%B9%EA%B3%BC-%EB%9E%98%EC%B9%98%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90.html</link>
+      <link>http://localhost:1313/post/2022/03/23/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%9D%BD%ED%82%B9%EA%B3%BC-%EB%9E%98%EC%B9%98%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90.html</link>
       <pubDate>Wed, 23 Mar 2022 23:32:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/03/23/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%9D%BD%ED%82%B9%EA%B3%BC-%EB%9E%98%EC%B9%98%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90.html</guid>
+      <guid>http://localhost:1313/post/2022/03/23/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%9D%BD%ED%82%B9%EA%B3%BC-%EB%9E%98%EC%B9%98%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/rv4u4kvromaeqcf/Screen%20Shot%202022-03-23%20at%208.54.00.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -264,10 +327,10 @@ http: //localhost:10018/mapred --data @-
     
     <item>
       <title>프로그램을 동적 프로파일링 하자</title>
-      <link>https://dongwooklee96.github.io/post/2022/02/25/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%A7%81-%ED%95%98%EC%9E%90.html</link>
+      <link>http://localhost:1313/post/2022/02/25/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%A7%81-%ED%95%98%EC%9E%90.html</link>
       <pubDate>Fri, 25 Feb 2022 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/02/25/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%A7%81-%ED%95%98%EC%9E%90.html</guid>
+      <guid>http://localhost:1313/post/2022/02/25/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%A8%EC%9D%84-%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%ED%8C%8C%EC%9D%BC%EB%A7%81-%ED%95%98%EC%9E%90.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;최근에 MySQL을 동적으로 프로파일링 하면서, 내부 동작이 어떻게 동작하는지 확인할 수 있는 영상을 시청하였다. &lt;code&gt;ftrace&lt;/code&gt; 부터 시작해서 &lt;code&gt;bpf&lt;/code&gt; 와 같은 툴을 사용하는 것을 확인하고 직접 실습해보았는데 매우 재미 있었다.&lt;/p&gt;
@@ -297,10 +360,10 @@ http: //localhost:10018/mapred --data @-
     
     <item>
       <title>POSTGRES 익스텐션 만들기</title>
-      <link>https://dongwooklee96.github.io/post/2022/02/20/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
+      <link>http://localhost:1313/post/2022/02/20/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</link>
       <pubDate>Sun, 20 Feb 2022 08:00:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/02/20/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
+      <guid>http://localhost:1313/post/2022/02/20/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EB%A7%8C%EB%93%A4%EA%B8%B0.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;다음 &lt;a href=&#34;http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/&#34;&gt;블로그 포스팅&lt;/a&gt;을 참고하여 &lt;code&gt;POSTGRES&lt;/code&gt; 익스텐션을 만드는 과정을 실습해볼 것이다, 우선 소스코드를 다운로드 받고 디렉터리를 확인해보면 다음과 같다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -465,10 +528,10 @@ endif
     
     <item>
       <title>마리아 DB 락 조회 및 해제</title>
-      <link>https://dongwooklee96.github.io/post/2022/01/27/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EB%9D%BD-%EC%A1%B0%ED%9A%8C-%EB%B0%8F-%ED%95%B4%EC%A0%9C.html</link>
+      <link>http://localhost:1313/post/2022/01/27/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EB%9D%BD-%EC%A1%B0%ED%9A%8C-%EB%B0%8F-%ED%95%B4%EC%A0%9C.html</link>
       <pubDate>Thu, 27 Jan 2022 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/01/27/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EB%9D%BD-%EC%A1%B0%ED%9A%8C-%EB%B0%8F-%ED%95%B4%EC%A0%9C.html</guid>
+      <guid>http://localhost:1313/post/2022/01/27/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EB%9D%BD-%EC%A1%B0%ED%9A%8C-%EB%B0%8F-%ED%95%B4%EC%A0%9C.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;최근에 생각없이 UPDATE 문에 조건을 걸지 않고 쿼리를 실행시켰다가 모든 데이터가 변경된 적이 있었다. 물론 테스트 데이터였기 때문에 큰 문제는 없었지만 만약 실 데이터라면 생각만 해도 아찔했다.&lt;/p&gt;
@@ -521,11 +584,87 @@ SELECT * FROM INFORMATION_SCHEMA.INNODB_LOCK_WAITS;
     </item>
     
     <item>
+      <title>데이터베이스 이터레이터, 관계형 연산 그리고 조인</title>
+      <link>http://localhost:1313/post/2022/01/19/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%9D%B4%ED%84%B0%EB%A0%88%EC%9D%B4%ED%84%B0-%EA%B4%80%EA%B3%84%ED%98%95-%EC%97%B0%EC%82%B0-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EC%A1%B0%EC%9D%B8.html</link>
+      <pubDate>Wed, 19 Jan 2022 20:09:39 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2022/01/19/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%9D%B4%ED%84%B0%EB%A0%88%EC%9D%B4%ED%84%B0-%EA%B4%80%EA%B3%84%ED%98%95-%EC%97%B0%EC%82%B0-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EC%A1%B0%EC%9D%B8.html</guid>
+      <description>&lt;h3 id=&#34;이터레이터-관계형-연산-그리고-조인&#34;&gt;이터레이터, 관계형 연산, 그리고 조인&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/27h3lgp5evi0a3n/Screen%20Shot%202022-01-19%20at%2020.59.45.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;쿼리는 내부적으로 관계형 연산으로 변하게 되며 이것은 논리적 쿼리 실행 계획으로 나타나고, 옵티마이저에 의해서 물리적 쿼리 실행 계획으로 변해서 쿼리가 실제로 실행되게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;옵티마이저가 쿼리 실행자를 선택해서 실제 쿼리를 실행하게 된다. 쿼리 실행자는 이터레이터 인터페이스를 구현하여 실제 인스턴스로 존재한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/2ykmebpg75zyt9t/Screen%20Shot%202022-01-19%20at%2021.04.49.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이터레이터 인터페이스는 위와 같이 구성된다. &lt;code&gt;setup()&lt;/code&gt; 메서드는 데이터 그래프를 그릴때 사용되며, 자식 그래프 노드를 포함해서 그린다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;init()&lt;/code&gt;은 이터레이터를 실행하기 위해서 필요한 것을 생성하는 단계다.  &lt;code&gt;next()&lt;/code&gt;는 이터레이터로부터 하나의 튜플을 반환한다. &lt;code&gt;close()&lt;/code&gt;는 이터레이터를 종료하는데 사용된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이터레이터는 캡슐화 되어 있어서 실제 구현이 무엇인지 상관없이 동작할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이터레이터는 내부적으로 상태를 가지고 유지할 수 도 있다. 예를 들어서, 해시 테이블이나, 실행중인 양, 그리고 큰 정렬된 파일과 같은&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;select-쿼리&#34;&gt;SELECT 쿼리&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/t3z4bdzumf07ekf/Screen%20Shot%202022-01-19%20at%2021.13.17.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;처음에 초기화를 하여, 자식 그래프를 불러온 다음에, &lt;code&gt;next()&lt;/code&gt;를 통해서 모두 순회함을 알 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;힙-스캔&#34;&gt;힙 스캔&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/ayt1af2mwz6c8xt/Screen%20Shot%202022-01-19%20at%2021.17.26.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;우선 초기화 단계에서 첫 번째 페이지로부터 첫 번째 슬롯을 읽는다. 그리고 순회하는 단계에서, 현재 페이지가 NULL 이면 바로 종료하고 NULL이 아니라면 현재 슬롯을 페이지의 다음으로 얻어온다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;현재 슬롯이 NULL 이면 다음 페이지로 넘어가고 다음 페이지가 NULL이 아니라면 슬롯을 현재 페이지의 첫 번째 슬롯으로 변경한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그리고 마지막으로 힙 스캔과 관련된 할당된 자원들을 반환한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;힙 스캔은 자식들이 없기 때문에 초기화 하거나, 다음을 찾는 연산을 재귀적으로 하지 않는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정렬-2-패스&#34;&gt;정렬 (2 패스)&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/r7a6bmqz1u075md/Screen%20Shot%202022-01-19%20at%2021.24.06.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;init()&lt;/code&gt;으로 자식들을 모두 &lt;code&gt;init()&lt;/code&gt; 한다. 그리고 반복적으로 &lt;code&gt;child.next()&lt;/code&gt;를 순회하여 디스크에서 정렬을 시도한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;정렬된 파일이 버퍼에 로드된다. 이것이 1 패쓰이다. 그리고 나서, 버퍼들 중에 가장 적은 튜플을 선택해서 병합한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;정렬된-값이-들어올-때-그룹바이-연산&#34;&gt;정렬된 값이 들어올 때 그룹바이 연산&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/8s84prns8wbxdrz/Screen%20Shot%202022-01-19%20at%2021.33.20.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/playlist?list=PLzzVuDSjP25RQb_VhEBFWFiB7oS9APM7h&#34;&gt;Iterators and Joins (Lecture 11)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>마리아 DB 이벤트 등록하는 법</title>
-      <link>https://dongwooklee96.github.io/post/2022/01/19/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</link>
+      <link>http://localhost:1313/post/2022/01/19/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</link>
       <pubDate>Wed, 19 Jan 2022 13:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/01/19/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
+      <guid>http://localhost:1313/post/2022/01/19/%EB%A7%88%EB%A6%AC%EC%95%84-db-%EC%9D%B4%EB%B2%A4%ED%8A%B8-%EB%93%B1%EB%A1%9D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;데브 옵스에서 메일 서버가 ECS에서 제대로 돌지 않아 장기간 테스트를 해보고 싶다고 해서 1시간 마다, 메일 전송 요청을 하는 코드를 요청했다.&lt;/p&gt;
@@ -570,11 +709,270 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     </item>
     
     <item>
+      <title>그래프 알고리즘 (1)</title>
+      <link>http://localhost:1313/post/2022/01/10/%EA%B7%B8%EB%9E%98%ED%94%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-1.html</link>
+      <pubDate>Mon, 10 Jan 2022 09:20:24 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2022/01/10/%EA%B7%B8%EB%9E%98%ED%94%84-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-1.html</guid>
+      <description>&lt;h3 id=&#34;그래프란&#34;&gt;그래프란&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그래프는 레온하르트 오일러가 &amp;lsquo;쾨니히스베르크의 일곱 개 다리&amp;rsquo; 문제로부터 유래되었다. 그래프는 수학에서 유래되었고 데이터를 모델링하고 분석하는 실용적이고 충실한 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래프를 구성하는 객체를 노드 또는 정점이라고 하며 이들 사이의 링크를 관계, 링크, 또는 엣지라고 한다. 이 책에서는 노드와 관계라는 용어를 사용한다. 노드는 문장 내에서 명사로, 관계는 노드에 콘텍스트를 제공하는 동사로 생각할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래프는 실제 세계에 쉽게 맵핑 되고, &amp;lsquo;화이트보드 친화적&amp;rsquo;이기 때문에, 매력적이기도 하다. 이는 데이터 모델링과 분석을 조정하는데 도움이 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;그래프-분석과-알고리즘은-무엇인가&#34;&gt;그래프 분석과 알고리즘은 무엇인가?&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그래프 알고리즘은 그래프 분석 도구의 서브 집합이다. 그래프 분석은 사용자가 하는 일로, 그래프 기반의 연결 데이터를 분석한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사용자가 분석하려고 다양한 방법을 사용할 수 있다. 그래프 데이터를 질의하거나, 기본 통계를 사용하거나, 그래프를 시각적으로 탐색하거나, 그래프를 머신러닝 작업에 통합할 수 있다. 그래프 패턴 기반 질의는 종종 로컬 데이터 분석에 사용되는 반면에 그래프 계산 알고리즘은 일반적으로 더 글로벌하고 반복적인 분석을 참조한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크 과학자들은 그래프 알고리즘을 사용해 숨겨진 정보를 발견하고, 가설을 테스트하고, 행동을 예측한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;olpt-와-olap&#34;&gt;OLPT 와 OLAP&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;OLTP은 일반적으로 티켓 예약, 계정 입금, 판매 예약과 같은 짧은 동작을 의미한다. OLPT는 방대한 저지연 질의 프로세싱과 높은 데이터 무결성을 가짐을 의미한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;OLTP는 트랜잭션당 적은 수의 레코드만 포함할 수 있지만 시스템은 많은 트랜잭션을 동시에 처리한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;반면에 OLAP은 많은 레코드에 대해서 더 적지만 오래 동작하는 트랜잭션을 처리한다. OLAP은 OLTP에서 발견되는 트랜잭션 업데이트를 고려하지 않고, 더 빠른 읽기에 집중하며 배치 지향 작업을 일반적으로 처리한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러나 최근에 OLAP과 OLTP 사이의 경계가 모호해지기 시작했고 최근 데이터 집약적 애플리케이션은 실시간 트랜잭션 작업과 분석을 결합한다. 이러한 애플리케이션의 병합은 확장 가능한 트랜잭션 관리 및 증분 스트림 인스턴스와 같은 소프트웨어의 여러 발견과 저렴한 대용량 하드웨어의 의해서 촉진됐다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;그래프-알고리즘에-관심을-가져야하는-이유&#34;&gt;그래프 알고리즘에 관심을 가져야하는 이유&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그래프 알고리즘은 연결 데이터의 이해를 돕는데 사용된다. 우리는 단백질 상호작용에서 소셜 네트워크까지, 통신 시스템에서 전력망에 이르기까지, 실세 시스템의 관계를 볼 수 있다. 네트워크와 네트워크 내부의 연결을 이용하면 여러 통찰력과 혁신을 위한 놀라운 잠재력을 얻을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터가 더 많이 연결되고, 데이터 관계와 상호 종속성의 이해가 점점 더 중요해지고 있다. 네트워크의 성장을 연구하는 과학자들은 시간이 지날 수록 연결성이 증가하지만 균일하지는 않다고 밝혀냈다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;많은 타입의 그래프와 많은 실제 네트워크가 집중되어 있다. 여행 및 소셜 네트워크와 같은 그래프와 마찬가지로 웹은 몇 개의 노드가 고도로 연결되고 대부분의 노드가 적당히 연결되는 멱법칙 분포를 가진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;그래프-이론과-개념&#34;&gt;그래프 이론과 개념&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;레이블이 있는 그래프는 그래프 데이터를 모델링하는 가장 인기 있는 방법 중 하나다. &amp;lsquo;레이블&amp;rsquo;은 노드를 그룹의 일부로 표시한다. (분류를 위한 레이블을 가질 수 있다. 레이블은 본연의 인덱스를 사용한다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;관계느 관계 타입에 따라서 분류한다. (타입과 방향으로 노드의 관련성을 나타낸다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프로퍼티는 속성과 같으며 숫자와 문자열에서 공간 및 시간 데이터에 이르기까지 다양한 데이터타입을 포함할 수 있다. (노드와 관계의 속성, 이름 - 값 쌍으로 저장, 보통의 인덱스와 복합 인덱스를 저장할 수 있다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서브 그래프는 큰 그래프 내의 그래프다. 서브 그래프는 집중 분석을 위해 특정 특성을 가진 서브 집합이 필요한 경우의 필터로 사용되기에 유용하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래프는 타입, 모양, 크기, 분석에 사용할 수 있는 속성의 종류가 다르다. 다음으로 그래프 알고리즘에 가장 적합한 그래프 종류를 설명한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;그래프-타입과-구조&#34;&gt;그래프 타입과 구조&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/9pqh7zj84onxwbn/img.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;고전적인 그래프 이론에서 그래프라는 용어는 노드 간에 하나의 관계만 있는 단순한 그래프와 동일하다. 그러나 대부분의 실제 그래프는 노드 사이에 많은 관계와 심지어 자체 참조 관계를 가진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그래프는 다양한 형태를 취한다. 아래에서 세가지 대표적인 네트워크 타입을 보여준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;랜덤-네트워크&#34;&gt;랜덤 네트워크&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;연결의 완전한 평균 분포에서 랜덤 네트워크는 계층 구조가 없다. 이러한 타입의 무형 그래프는 식별 가능한 패턴이 없는 &amp;lsquo;평평&amp;rsquo; 한 모습을 가진다. 모든 노드는 다른 노드에 연결될 확률이 같다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;작은-세상-네트워크&#34;&gt;작은 세상 네트워크&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;작은 세상 네트워크는 소셜 네트워크에서 매우 일반적이다. 현지화된 연결과 일부 허브와 스포크 패턴을 보여준다. &amp;lsquo;케빈 베이컨의 여섯 다리&amp;rsquo; 게임은 작은 세상의 효과에 잘 알려진 예일 수 있다. 소수의 친구와 어울려도 그 친구가 유명배우이거나 지구 반대편에 있더라도 먼 관계가 아니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;척도-독립-네트워크&#34;&gt;척도 독립 네트워크&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;척도 독립 네트워크는 멱 법칙 분포가 있고 월드 와이드 웹과 같이 규모에 관계없이 허브와 스포크 아키텍처를 가질 때 만들 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 네트워크 타입은 고유한 구조, 분포, 동작을 갖는 그래프를 만든다. 그래프 알고리즘을 사용하면, 결과에서 유사한 패턴을 볼 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;그래프가-갖는-여러-특징&#34;&gt;그래프가 갖는 여러 특징&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;그래프 알고리즘을 최대한 활용하려면, 접하게 될 가장 특징적인 그래프에 익숙해지는 것이 중요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;그래프 속성&lt;/th&gt;
+          &lt;th&gt;키 팩터 (핵심 내용)&lt;/th&gt;
+          &lt;th&gt;알고리즘 고려 사항&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;연결과 비연결&lt;/td&gt;
+          &lt;td&gt;거리에 관계없이 그래프에서 두 노드 상이에 경로가 있는지 여부&lt;/td&gt;
+          &lt;td&gt;노드의 섬은 비연결 구성 요소에 갇히거나 처리 실패와 같은 예기치 않은 동작을 유발할 수 있다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;가중과 비가중&lt;/td&gt;
+          &lt;td&gt;관계 또는 노드에 (도메인 특정) 값이 있는지 여부&lt;/td&gt;
+          &lt;td&gt;많은 알고리즘이 가중치를 예상하며, 무시할 경우엔 성능과 결과에 상당한 차이가 있다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;지시와 비지시&lt;/td&gt;
+          &lt;td&gt;관계가 시작과 끝 노드를 명시적으로 정의하는지 여부&lt;/td&gt;
+          &lt;td&gt;추가적인 의미를 추론하려고 풍부한 콘텍스트를 추가한다. 일부 알고리즘에서는 방향을 하나 또는 둘 다 사용하거나, 사용하지 않게 명시적으로 설정할 수 있다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;순환과 비순환&lt;/td&gt;
+          &lt;td&gt;경로가 동일한 노드에서 시작하고 끝나는지 여부&lt;/td&gt;
+          &lt;td&gt;순환 그래프는 일반적이지만 알고리즘의 사용은 일반적이지 않다. (일반적으로는 순회 상태를 저장). 주의 깊게 사용하지 않으면 순환이 종료를 막을 수 있다. 비순환 그래프(또는 신장 트리)는 많은 그래프 알고리즘의 기초다&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;희소와 밀집&lt;/td&gt;
+          &lt;td&gt;노드 비율에 대한 관계&lt;/td&gt;
+          &lt;td&gt;매우 밀집하거나 매우 희소한 연결 그래프는 다른 결과를 유발 할 수 있다. 도메인이 본질적으로 밀집이나 희소가 아니라고 가정하면 데이터 모델링이 도움이 될 수 있다.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;일분, 이분, K분&lt;/td&gt;
+          &lt;td&gt;노드가 하나의 다른 노드 타입에만 연결되는지 (예, 영화를 좋아하는 사용자) 또는 많은 다른 노드 타입 (예, 영화를 좋아하는 사용자를 좋아하는 사용자)에 연결되는지 여부&lt;/td&gt;
+          &lt;td&gt;좀 더 유용한 그래프를 분석하고 투영할 관계를 생성하는데 유용하다.&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;연결과-비연결-그래프&#34;&gt;연결과 비연결 그래프&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/3d8ohtahj7inva2/202201111017.jpg&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 노드 사이에 경로가 있는 경우 그래프는 연결된다. 그래프에 섬이 있으면 비연결이다. 섬의 노드에 연결돼 있으면 컴포넌트 (또는 클러스터) 라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;비가중-그래프와-가중-그래프&#34;&gt;비가중 그래프와 가중 그래프&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/lp23h5rssxo9zfn/202201111020.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;비가중 그래프에는 노드나 관계에 가중치 값이 할당되지 않는다. 가중 그래프의 경우 이러한 값은 비용, 시간, 거리, 용량, 도메인 별 우선순위와 같은 다양한 측정 값을 나타낸다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;기본 그래프 알고리즘은 실행에 대한 가중치를 관계의 강도나 가치에 대한 표현으로 사용할 수 있다. 많은 알고리즘이 후속 작업을 위한 가중치로 사용할 수 있는 내림수를 계산한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일부 알고리즘은 누적 합계, 최저 값 또는 최적 값을 찾으려고 계속 가중치 값을 업데이트한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가중 그래프의 고전적인 사용은 경로 찾기 알고리즘에 있다. 이러한 알고리즘은 휴대폰의 맵핑 애플리케이션을 뒷받침하고 있고 위치 간 가장 짧고 / 가장 저렴한 / 가장 빠른 전송 경로를 계산한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가중치가 없는 경우에는 가장 짧은 경로는 관계수가 되겠지만, 가중치가 있는 경우에는 총 합이 적은 방향으로 이동하게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;비방향성-그래프와-방향성-그래프&#34;&gt;비방향성 그래프와 방향성 그래프&lt;/h4&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/n8tre1sn1q9k74z/202201111029.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;비방향성 그래프에서 관계는 양방향 (예, 우정)으로 간주된다. 방향성 그래프에서 관계는 특정한 방향을 가진다. 노드를 가리키는 관계는 인링크라고 하며, 당연히 아웃링크는 노드에서 시작된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;방향은 정보의 또 다른 차원을 추가한다. 동일한 타입이지만 반대 방향의 관계는 서로 다른 의미론적 의미를 전달하고 종속성을 표현하거나 흐름을 나타내며 신뢰성이나 그룹 강도의 지표로 사용될 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도로망은 두 가지 타입의 그래프를 모두 사용하려는 이유를 보여준다. 예를 들어서 도시간 고속도로는 종종 양방향으로 이동한다. 그러나 도시 내 일부 도로는 일방통행 도로 형태를 가진다. (일부 정보 흐름도 마찬가지다).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;방향성과 비교해 비빙향성 방식으로 알고리즘을 실행하면 다른 결과를 얻는다. 예를 들어 고속도로나 우정의 경우 비방향성 그래프에서 모든 관계는 항상 양방향으로 진행된다고 가정한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;비순환-그래프와-순환-그래프&#34;&gt;비순환 그래프와 순환 그래프&lt;/h4&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/i3z4a76obf65hmo/202201111035.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그래프 이론에서 순환은 동일한 노드에서 시작하고 끝나는 관계와 노드를 가진 경로다. 비순환 그래프에서는 그러한 순환이 없다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;방향성 비순환 그래프는 정의에 따라서 항상 막다른 끝 (리프 노드)을 가진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사이클의 사용은 일반적이며, 때때로 순환 그래프를 비순환 그래프로 변환해야 한다 (관계를 절단). 방향성 비순환 그래프는 일정, 계보, 버전 기록에서 자연스럽게 얻을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;트리&#34;&gt;트리&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;고전적인 그래프 이론에서 방향성이 없는 비순환 그래프를 &amp;lsquo;트리&amp;rsquo;라고 한다. 컴퓨터 과학에서 트리는 방향성을 가질 수 있다. 트리의 더 포괄적인 정의는 두 노드가 하나의 경로로만 연결되는 그래프다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;트리는 그래프 구조와 많은 알고리즘을 이해하는 데 중요하다. 네트워크, 데이터 구조와 검색 최적화를 설계해 분류 또는 조직 계층을 개선하는데 핵심적인 역할을 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;트리에는 많은 변형이 있는데 특히 신장 트리가 이 책과 가장 관련이 높으며, 신장 트리는 더 큰 비순환 그래프의 모든 노드를 포함하지만, 관계는 포함하지 않는 비순환 서브 그래프이다. 최소 신장 트리는 그래프의 모든 노드를 최소 홉 수나 최소 가중치 경로로 연결한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;희소-그래프와-밀집-그래프&#34;&gt;희소 그래프와 밀집 그래프&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;그래프의 희소성은 모든 노드 쌍 사이에 관계가 있을 경우 발생할 수 있는 최대 가능한 관계 수와 비교한 관계수를 기반으로 한다. 모든 노드가 다른 모든 노드와 관계가 있는 그래프를 완전 그래프 또는 구성 요소의 클릭이라고 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;예를 들면 모든 친구가 서로를 안다면, 그것은 클릭이 된다. 그래프의 최대 밀도는 완전 그래프에서 가능한 관계의 수 다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;엄격한 구분선은 없지만 실제 밀도가 최대 밀도에 가까워지는 그래프는 밀도가 높은 것으로 간주한다. 실제 네트워크를 기반으로 한 대부분의 그래프는 전체 노드와 전체 관계의 희소한 선형 상관 관계를 가진다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;많은 와이어, 파이프, 도로 또는 우정이 한 지점으로 몰릴 때 실질적인 제한과 같은 물리적 요소가 사용되는 경우가 해당한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일부 알고리즘은 극도로 희소하거나 밀집 그래프에서 실행될 때 의미 없는 결과를 반환한다. 그래프가 너무 희소하면 알고리즘이 유용한 결과를 계산하기에 충분한 관계가 없을 수 있다. 또한 매우 밀집된 연결 노드는 연결성이 높기 때문에 추가 정보를 많이 가지지 않고 있고 고밀도는 일부 결과를 왜곡하거나 계산 복잡성을 추가할 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이러한 상황에서 서브 그래프를 필터링 하는 것이 실용적인 방법이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;일분-이분-k분-그래프&#34;&gt;일분, 이분, K분 그래프&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;대부분의 네트워크는 여러 노드와 관계형 데이터를 포함한다. 그러나 그래프 알고리즘은 하나의 노드 유형과 하나의 관계 유형만을 고려하는 경우가 많다. 하나의 노드 타입과 관계 타입이 있는 그래프를 일분이라고도 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이분 그래프는 노드를 두 세트로 나눌 수 있는 그래프로 관계는 한 세트의 노드와 다른 세트의 노드만 연결한다. (여기서 멈춤&amp;hellip;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.aladin.co.kr/shop/wproduct.aspx?ItemId=275429358&#34;&gt;그래프 알고리즘&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>데이터베이스 소팅과 해싱에 대해서 정리</title>
-      <link>https://dongwooklee96.github.io/post/2022/01/05/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%86%8C%ED%8C%85%EA%B3%BC-%ED%95%B4%EC%8B%B1%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC.html</link>
+      <link>http://localhost:1313/post/2022/01/05/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%86%8C%ED%8C%85%EA%B3%BC-%ED%95%B4%EC%8B%B1%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC.html</link>
       <pubDate>Wed, 05 Jan 2022 19:00:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2022/01/05/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%86%8C%ED%8C%85%EA%B3%BC-%ED%95%B4%EC%8B%B1%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC.html</guid>
+      <guid>http://localhost:1313/post/2022/01/05/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%86%8C%ED%8C%85%EA%B3%BC-%ED%95%B4%EC%8B%B1%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%A0%95%EB%A6%AC.html</guid>
       <description>&lt;h3 id=&#34;데이터베이스에서-정렬이-중요한-이유&#34;&gt;데이터베이스에서 정렬이 중요한 이유&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -682,10 +1080,10 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     
     <item>
       <title>데이터베이스 버퍼매니저(BUFFER MANAGER)란 무엇인가?</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/29/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%B2%84%ED%8D%BC%EB%A7%A4%EB%8B%88%EC%A0%80buffer-manager%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.html</link>
+      <link>http://localhost:1313/post/2021/12/29/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%B2%84%ED%8D%BC%EB%A7%A4%EB%8B%88%EC%A0%80buffer-manager%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.html</link>
       <pubDate>Wed, 29 Dec 2021 21:40:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/29/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%B2%84%ED%8D%BC%EB%A7%A4%EB%8B%88%EC%A0%80buffer-manager%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.html</guid>
+      <guid>http://localhost:1313/post/2021/12/29/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EB%B2%84%ED%8D%BC%EB%A7%A4%EB%8B%88%EC%A0%80buffer-manager%EB%9E%80-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80.html</guid>
       <description>&lt;h3 id=&#34;버퍼-매니저&#34;&gt;버퍼 매니저&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/a6e5b0tdkf9ii4m/Screen%20Shot%202021-12-29%20at%209.24.10%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -843,10 +1241,10 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     
     <item>
       <title>인덱스 (INDEX) 정리 2</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/25/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-2.html</link>
+      <link>http://localhost:1313/post/2021/12/25/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-2.html</link>
       <pubDate>Sat, 25 Dec 2021 16:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/25/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-2.html</guid>
+      <guid>http://localhost:1313/post/2021/12/25/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-2.html</guid>
       <description>&lt;h3 id=&#34;인덱스가-지원하는-연산&#34;&gt;인덱스가 지원하는 연산&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -996,10 +1394,10 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     
     <item>
       <title>인덱스 (INDEX) 정리 1</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-1.html</link>
+      <link>http://localhost:1313/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-1.html</link>
       <pubDate>Wed, 22 Dec 2021 11:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-1.html</guid>
+      <guid>http://localhost:1313/post/2021/12/22/%EC%9D%B8%EB%8D%B1%EC%8A%A4-index-%EC%A0%95%EB%A6%AC-1.html</guid>
       <description>&lt;h3 id=&#34;데이터에-접근하는-두-가지-방법&#34;&gt;데이터에 접근하는 두 가지 방법&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/kochddz88kb868o/Screen%20Shot%202021-12-22%20at%209.59.14%20PM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -1129,10 +1527,10 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     
     <item>
       <title>MYSQL 클라이언트로 RDS 접속하는 법</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/20/mysql-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%A1%9C-rds-%EC%A0%91%EC%86%8D%ED%95%98%EB%8A%94-%EB%B2%95.html</link>
+      <link>http://localhost:1313/post/2021/12/20/mysql-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%A1%9C-rds-%EC%A0%91%EC%86%8D%ED%95%98%EB%8A%94-%EB%B2%95.html</link>
       <pubDate>Mon, 20 Dec 2021 15:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/20/mysql-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%A1%9C-rds-%EC%A0%91%EC%86%8D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
+      <guid>http://localhost:1313/post/2021/12/20/mysql-%ED%81%B4%EB%9D%BC%EC%9D%B4%EC%96%B8%ED%8A%B8%EB%A1%9C-rds-%EC%A0%91%EC%86%8D%ED%95%98%EB%8A%94-%EB%B2%95.html</guid>
       <description>&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mysql -h mysql–instance1.123456789012.us-east-1.rds.amazonaws.com -P 3306 -u root -p
 &lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
 &lt;li&gt;접속할 수 있는 &lt;code&gt;mysql&lt;/code&gt; 클라이언트를 설치한다 그리고 나서, 위의 명령어를 주소와 유저를 알맞게 입력하면 접속된다.&lt;/li&gt;
@@ -1147,10 +1545,10 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     
     <item>
       <title>데이터베이스 페이지 및 레코드 구조</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%8F-%EB%A0%88%EC%BD%94%EB%93%9C-%EA%B5%AC%EC%A1%B0.html</link>
+      <link>http://localhost:1313/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%8F-%EB%A0%88%EC%BD%94%EB%93%9C-%EA%B5%AC%EC%A1%B0.html</link>
       <pubDate>Thu, 16 Dec 2021 15:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%8F-%EB%A0%88%EC%BD%94%EB%93%9C-%EA%B5%AC%EC%A1%B0.html</guid>
+      <guid>http://localhost:1313/post/2021/12/16/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8E%98%EC%9D%B4%EC%A7%80-%EB%B0%8F-%EB%A0%88%EC%BD%94%EB%93%9C-%EA%B5%AC%EC%A1%B0.html</guid>
       <description>&lt;h3 id=&#34;페이지-구조&#34;&gt;페이지 구조&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/xqzsbjzfgo3bbht/Screen%20Shot%202021-12-16%20at%2011.36.21%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -1265,10 +1663,10 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     
     <item>
       <title>데이터베이스 파일 구조 방식</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/15/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0-%EB%B0%A9%EC%8B%9D.html</link>
+      <link>http://localhost:1313/post/2021/12/15/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0-%EB%B0%A9%EC%8B%9D.html</link>
       <pubDate>Wed, 15 Dec 2021 10:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/15/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0-%EB%B0%A9%EC%8B%9D.html</guid>
+      <guid>http://localhost:1313/post/2021/12/15/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8C%8C%EC%9D%BC-%EA%B5%AC%EC%A1%B0-%EB%B0%A9%EC%8B%9D.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;파일은 페이지의 집합으로 구성이 되는데 페이지를 구성하는 많은 방식이 있다. 그 중에서 정렬되지 않은 힙 파일 구조에 대해서 자세히 살펴볼 것이다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1356,10 +1754,10 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     
     <item>
       <title>버클리 대학의 데이터베이스 강의를 수강신청하였다</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/09/%EB%B2%84%ED%81%B4%EB%A6%AC-%EB%8C%80%ED%95%99%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B0%95%EC%9D%98%EB%A5%BC-%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD%ED%95%98%EC%98%80%EB%8B%A4.html</link>
+      <link>http://localhost:1313/post/2021/12/09/%EB%B2%84%ED%81%B4%EB%A6%AC-%EB%8C%80%ED%95%99%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B0%95%EC%9D%98%EB%A5%BC-%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD%ED%95%98%EC%98%80%EB%8B%A4.html</link>
       <pubDate>Thu, 09 Dec 2021 11:23:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/09/%EB%B2%84%ED%81%B4%EB%A6%AC-%EB%8C%80%ED%95%99%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B0%95%EC%9D%98%EB%A5%BC-%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD%ED%95%98%EC%98%80%EB%8B%A4.html</guid>
+      <guid>http://localhost:1313/post/2021/12/09/%EB%B2%84%ED%81%B4%EB%A6%AC-%EB%8C%80%ED%95%99%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EA%B0%95%EC%9D%98%EB%A5%BC-%EC%88%98%EA%B0%95%EC%8B%A0%EC%B2%AD%ED%95%98%EC%98%80%EB%8B%A4.html</guid>
       <description>&lt;h3 id=&#34;cs186-barkeyley&#34;&gt;CS186 Barkeyley&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/qtrne7wyyqgk6yy/Screen%20Shot%202021-12-09%20at%2011.30.02%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
@@ -1433,10 +1831,10 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     
     <item>
       <title>DBMS 랭킹 사이트</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/09/dbms-%EB%9E%AD%ED%82%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</link>
+      <link>http://localhost:1313/post/2021/12/09/dbms-%EB%9E%AD%ED%82%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</link>
       <pubDate>Thu, 09 Dec 2021 10:19:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/09/dbms-%EB%9E%AD%ED%82%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</guid>
+      <guid>http://localhost:1313/post/2021/12/09/dbms-%EB%9E%AD%ED%82%B9-%EC%82%AC%EC%9D%B4%ED%8A%B8.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://dl.dropbox.com/s/hjfkvkme0fxlt4v/Screen%20Shot%202021-12-09%20at%2010.18.58%20AM.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -1458,10 +1856,10 @@ DROP EVENT LOOP_INSERT_SCH_EMAIL
     
     <item>
       <title>데이터베이스 테스트를 위한 더미 데이터 생성 방법</title>
-      <link>https://dongwooklee96.github.io/post/2021/12/08/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%8D%94%EB%AF%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%83%9D%EC%84%B1-%EB%B0%A9%EB%B2%95.html</link>
+      <link>http://localhost:1313/post/2021/12/08/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%8D%94%EB%AF%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%83%9D%EC%84%B1-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Wed, 08 Dec 2021 10:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/12/08/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%8D%94%EB%AF%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%83%9D%EC%84%B1-%EB%B0%A9%EB%B2%95.html</guid>
+      <guid>http://localhost:1313/post/2021/12/08/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%85%8C%EC%8A%A4%ED%8A%B8%EB%A5%BC-%EC%9C%84%ED%95%9C-%EB%8D%94%EB%AF%B8-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%83%9D%EC%84%B1-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;우아한 형제들 기술 블로그를 보다가, &lt;code&gt;MySQL&lt;/code&gt;, &lt;code&gt;PostgreSQL&lt;/code&gt;을 비교하는 글을 보게 되었다.&lt;/p&gt;
@@ -1517,10 +1915,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>데이터베이스를 공부할 때 TRACING을 하는 법을 먼저 배우자</title>
-      <link>https://dongwooklee96.github.io/post/2021/11/25/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-tracing%EC%9D%84-%ED%95%98%EB%8A%94-%EB%B2%95%EC%9D%84-%EB%A8%BC%EC%A0%80-%EB%B0%B0%EC%9A%B0%EC%9E%90.html</link>
+      <link>http://localhost:1313/post/2021/11/25/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-tracing%EC%9D%84-%ED%95%98%EB%8A%94-%EB%B2%95%EC%9D%84-%EB%A8%BC%EC%A0%80-%EB%B0%B0%EC%9A%B0%EC%9E%90.html</link>
       <pubDate>Thu, 25 Nov 2021 18:00:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/11/25/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-tracing%EC%9D%84-%ED%95%98%EB%8A%94-%EB%B2%95%EC%9D%84-%EB%A8%BC%EC%A0%80-%EB%B0%B0%EC%9A%B0%EC%9E%90.html</guid>
+      <guid>http://localhost:1313/post/2021/11/25/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EB%A5%BC-%EA%B3%B5%EB%B6%80%ED%95%A0-%EB%95%8C-tracing%EC%9D%84-%ED%95%98%EB%8A%94-%EB%B2%95%EC%9D%84-%EB%A8%BC%EC%A0%80-%EB%B0%B0%EC%9A%B0%EC%9E%90.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;오라클 성능 고도화라는 강의를 들을 때, &lt;code&gt;AUTO TRACE&lt;/code&gt; 도구로 실제 실행한 쿼리에서 읽은 네트워크 시간 및 IO에 대한 통계를 측정할 수 있는 도구가 있었다.&lt;/p&gt;
@@ -1547,10 +1945,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>POSTGRES 소스코드로부터 빌드하는 방법</title>
-      <link>https://dongwooklee96.github.io/post/2021/11/22/postgres-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EB%B9%8C%EB%93%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
+      <link>http://localhost:1313/post/2021/11/22/postgres-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EB%B9%8C%EB%93%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Mon, 22 Nov 2021 08:00:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/11/22/postgres-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EB%B9%8C%EB%93%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
+      <guid>http://localhost:1313/post/2021/11/22/postgres-%EC%86%8C%EC%8A%A4%EC%BD%94%EB%93%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EB%B9%8C%EB%93%9C%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://stackoverflow.com/questions/51279446/how-to-install-the-cube-function-for-postgresql&#34;&gt;PostgreSQL: сборка из исходников и настройка под Linux&lt;/a&gt;&lt;/li&gt;
@@ -1560,10 +1958,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>[MOBILE] 플러터에서 위젯이란?</title>
-      <link>https://dongwooklee96.github.io/post/2021/11/14/mobile-%ED%94%8C%EB%9F%AC%ED%84%B0%EC%97%90%EC%84%9C-%EC%9C%84%EC%A0%AF%EC%9D%B4%EB%9E%80.html</link>
+      <link>http://localhost:1313/post/2021/11/14/mobile-%ED%94%8C%EB%9F%AC%ED%84%B0%EC%97%90%EC%84%9C-%EC%9C%84%EC%A0%AF%EC%9D%B4%EB%9E%80.html</link>
       <pubDate>Sun, 14 Nov 2021 12:00:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/11/14/mobile-%ED%94%8C%EB%9F%AC%ED%84%B0%EC%97%90%EC%84%9C-%EC%9C%84%EC%A0%AF%EC%9D%B4%EB%9E%80.html</guid>
+      <guid>http://localhost:1313/post/2021/11/14/mobile-%ED%94%8C%EB%9F%AC%ED%84%B0%EC%97%90%EC%84%9C-%EC%9C%84%EC%A0%AF%EC%9D%B4%EB%9E%80.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;플러터 애플리케이션은 위젯으로 만들어지고, 위젯들은 사용자 인터페이스의 일부를 말한다.&lt;/p&gt;
@@ -1587,10 +1985,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>POSTGRES 익스텐션 설치 방법</title>
-      <link>https://dongwooklee96.github.io/post/2021/11/12/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95.html</link>
+      <link>http://localhost:1313/post/2021/11/12/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Fri, 12 Nov 2021 10:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/11/12/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95.html</guid>
+      <guid>http://localhost:1313/post/2021/11/12/postgres-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98-%EC%84%A4%EC%B9%98-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;최근에 &lt;code&gt;POSTGRES&lt;/code&gt;에서 익스텐션을 설치할 일이 있어서 설치하는 방법을 찾아보았다.&lt;/p&gt;
@@ -1611,11 +2009,72 @@ from mysql.innodb_index_stats
     </item>
     
     <item>
+      <title>인덱스 및 B-Tree에 대해서 알아보자</title>
+      <link>http://localhost:1313/post/2021/10/14/%EC%9D%B8%EB%8D%B1%EC%8A%A4-%EB%B0%8F-b-tree%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.html</link>
+      <pubDate>Thu, 14 Oct 2021 09:20:24 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2021/10/14/%EC%9D%B8%EB%8D%B1%EC%8A%A4-%EB%B0%8F-b-tree%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90.html</guid>
+      <description>&lt;h3 id=&#34;인덱스된-순차적인-파일-접근과-btree&#34;&gt;인덱스된 순차적인 파일 접근과 B+TREE&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;순차적인-인덱스-접근&#34;&gt;순차적인 인덱스 접근&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;인덱스된 순차적인 파일 구조는 두 가지 관점중에 하나를 선택한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;인덱스된 : 파일은 키로 색인된 레코드 집합으로 볼 수 있다.
+순차적인 : 파일에 순차적으로 액세스 할 수 있으며, 키별로 레코드를 순서대로 반환할 수 있다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;결과적으로 우리는 모든 레코드를 키로 순서대로 검색하고자 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;파일 시스템의 레코드는 엔트리 시퀀스가 있으므로 정렬하지 않고, 키로 순서대로 검색하는 유일한 방법은 바로 인덱스를 통해서 검색하는 것이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;b-트리&#34;&gt;B 트리&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;B트리는 디스크나 다른 직접 접근 보조 기억 장치에서 잘 동작하도록 설계된 균형이 잡힌 검색 트리이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;B-트리는 레드 블랙 트리와 비슷하지만, 디스크 입출력(I/O) 연산을 최소화하는데 있어서 더 낫다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;B-트리는 B-트리의 노드가 자식을 수십개에서 수 천개까지 가질 수 있다는 점에서, 레드 블랙 트리와는 다르다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;B-트리의 내부 노드가 N 개의 키를 포함한다면 N + 1의 자식을 가지게 된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;노드에 있는 키들은 노드의 의해서 처리되는 키의 범위를 N + 1개의 부분 범위로 분할하는데 사용된다. 그리고 각각의 부분 범위는 자식에 의해서 처리된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.yes24.com/Product/Goods/496974&#34;&gt;File Structures: An Object-Oriented Approach with C++ By Michael J. Folk, Bill Zoellick, Greg Riccardi&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.geeksforgeeks.org/difference-between-b-tree-and-b-tree/&#34;&gt;Difference between B tree and B+ tree&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cs.usfca.edu/~galles/visualization/BTree.html&#34;&gt;B-Tree visualization&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.cs.usfca.edu/~galles/visualization/BPlusTree.htm://www.cs.usfca.edu/~galles/visualization/BPlusTree.html&#34;&gt;B+Tree visualization&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Write-Scale Out MariaDB Xpand (10 node cluster) 세미나를 듣고 기록한 내용</title>
-      <link>https://dongwooklee96.github.io/post/2021/09/08/write-scale-out-mariadb-xpand-10-node-cluster-%EC%84%B8%EB%AF%B8%EB%82%98%EB%A5%BC-%EB%93%A3%EA%B3%A0-%EA%B8%B0%EB%A1%9D%ED%95%9C-%EB%82%B4%EC%9A%A9.html</link>
+      <link>http://localhost:1313/post/2021/09/08/write-scale-out-mariadb-xpand-10-node-cluster-%EC%84%B8%EB%AF%B8%EB%82%98%EB%A5%BC-%EB%93%A3%EA%B3%A0-%EA%B8%B0%EB%A1%9D%ED%95%9C-%EB%82%B4%EC%9A%A9.html</link>
       <pubDate>Wed, 08 Sep 2021 14:10:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/09/08/write-scale-out-mariadb-xpand-10-node-cluster-%EC%84%B8%EB%AF%B8%EB%82%98%EB%A5%BC-%EB%93%A3%EA%B3%A0-%EA%B8%B0%EB%A1%9D%ED%95%9C-%EB%82%B4%EC%9A%A9.html</guid>
+      <guid>http://localhost:1313/post/2021/09/08/write-scale-out-mariadb-xpand-10-node-cluster-%EC%84%B8%EB%AF%B8%EB%82%98%EB%A5%BC-%EB%93%A3%EA%B3%A0-%EA%B8%B0%EB%A1%9D%ED%95%9C-%EB%82%B4%EC%9A%A9.html</guid>
       <description>&lt;h3 id=&#34;세미나&#34;&gt;세미나&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -1666,10 +2125,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>데드락이란? (DeadLock) (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft.html</link>
+      <link>http://localhost:1313/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft.html</link>
       <pubDate>Thu, 24 Jun 2021 11:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft.html</guid>
+      <guid>http://localhost:1313/post/2021/06/24/%EB%8D%B0%EB%93%9C%EB%9D%BD%EC%9D%B4%EB%9E%80-deadlock-draft.html</guid>
       <description>&lt;h2 id=&#34;배경&#34;&gt;배경&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/123192882-b8038a00-d4de-11eb-91a0-5e434f43c548.png&#34; alt=&#34;ScreenShot 2021-06-24 at 11 23 29 AM&#34;&gt;&lt;/p&gt;
@@ -1737,10 +2196,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>쿼리 캐시란? (MARIADB)</title>
-      <link>https://dongwooklee96.github.io/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb.html</link>
+      <link>http://localhost:1313/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb.html</link>
       <pubDate>Fri, 04 Jun 2021 15:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb.html</guid>
+      <guid>http://localhost:1313/post/2021/06/04/%EC%BF%BC%EB%A6%AC-%EC%BA%90%EC%8B%9C%EB%9E%80-mariadb.html</guid>
       <description>&lt;h3 id=&#34;쿼리-캐시&#34;&gt;쿼리 캐시&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -1880,11 +2339,44 @@ from mysql.innodb_index_stats
     </item>
     
     <item>
+      <title>마리아 DB Row Size too Large 에러</title>
+      <link>http://localhost:1313/post/2021/05/12/%EB%A7%88%EB%A6%AC%EC%95%84-db-row-size-too-large-%EC%97%90%EB%9F%AC.html</link>
+      <pubDate>Wed, 12 May 2021 16:20:24 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2021/05/12/%EB%A7%88%EB%A6%AC%EC%95%84-db-row-size-too-large-%EC%97%90%EB%9F%AC.html</guid>
+      <description>&lt;h3 id=&#34;배경&#34;&gt;배경&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;기존에 존재하던 테이블에, 컬럼 값을 추가하다가 마주친 에러이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Row size too large (&amp;gt; 8126). Changing some columns to TEXT or BLOB may help. In current row format, BLOB prefix of 0 bytes is stored inline.
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/117938052-96d94680-b341-11eb-9df5-2fe8cd4f7076.png&#34; alt=&#34;Cannot create a certain table: Row size too large&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;그러던 중에, 비슷한 현상을 겪는 사람이 커뮤니티에 글을 올려 놓았고, 원인을 찾을 수 있었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;원인&#34;&gt;원인&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;문제는 &lt;code&gt;InnoDB&lt;/code&gt;에서 최대 로우 사이즈가 정해져있기 때문이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;InnoDB&lt;/code&gt;에서 가변 길이의 컬럼은 오버 플로 페이지에 저장한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://jira.mariadb.org/browse/MDEV-20346&#34;&gt;Cannot create a certain table: Row size too large&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>오라클 성능 고도화 강의 (1)</title>
-      <link>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1.html</link>
+      <link>http://localhost:1313/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1.html</link>
       <pubDate>Sat, 08 May 2021 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1.html</guid>
+      <guid>http://localhost:1313/post/2021/05/08/%EC%98%A4%EB%9D%BC%ED%81%B4-%EC%84%B1%EB%8A%A5-%EA%B3%A0%EB%8F%84%ED%99%94-%EA%B0%95%EC%9D%98-1.html</guid>
       <description>&lt;h3 id=&#34;오라클-성능-고도화-강의&#34;&gt;오라클 성능 고도화 강의&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/117525284-6ec5ac80-affc-11eb-8e4f-f245c5ef8828.jpeg&#34; alt=&#34;IMG_5C71B9160877-1&#34;&gt;&lt;/p&gt;
@@ -1961,10 +2453,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>윈도우 함수에서 WHERE 절을 사용하지 못하는 이유(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft.html</link>
+      <link>http://localhost:1313/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft.html</link>
       <pubDate>Tue, 13 Apr 2021 15:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft.html</guid>
+      <guid>http://localhost:1313/post/2021/04/13/%EC%9C%88%EB%8F%84%EC%9A%B0-%ED%95%A8%EC%88%98%EC%97%90%EC%84%9C-where-%EC%A0%88%EC%9D%84-%EC%82%AC%EC%9A%A9%ED%95%98%EC%A7%80-%EB%AA%BB%ED%95%98%EB%8A%94-%EC%9D%B4%EC%9C%A0draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://learnsql.com/blog/window-functions-not-allowed-in-where/&#34;&gt;Why Window Functions Are Not Allowed in WHERE Clauses&lt;/a&gt;&lt;/li&gt;
@@ -1974,10 +2466,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>TWO-PHASE-LOCK(2PL)이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft.html</link>
+      <link>http://localhost:1313/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Wed, 07 Apr 2021 18:05:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft.html</guid>
+      <guid>http://localhost:1313/post/2021/04/07/two-phase-lock2pl%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;two-phase-lock&#34;&gt;TWO PHASE LOCK&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113949645-b4028d00-984a-11eb-98e5-e1d592569831.png&#34; alt=&#34;100518_0439_DBMSConcurr1&#34;&gt;&lt;/p&gt;
@@ -2031,10 +2523,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>ARIES란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft.html</link>
+      <link>http://localhost:1313/post/2021/03/31/aries%EB%9E%80-draft.html</link>
       <pubDate>Wed, 31 Mar 2021 22:56:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/31/aries%EB%9E%80-draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/31/aries%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Algorithms_for_Recovery_and_Isolation_Exploiting_Semantics&#34;&gt;WIKI - ARIES&lt;/a&gt;&lt;/li&gt;
@@ -2044,10 +2536,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>POSTGRESQL 익스텐션을 만드는데 참고할 만한 좋은글 목록</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/31/postgresql-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%B0%B8%EA%B3%A0%ED%95%A0-%EB%A7%8C%ED%95%9C-%EC%A2%8B%EC%9D%80%EA%B8%80-%EB%AA%A9%EB%A1%9D.html</link>
+      <link>http://localhost:1313/post/2021/03/31/postgresql-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%B0%B8%EA%B3%A0%ED%95%A0-%EB%A7%8C%ED%95%9C-%EC%A2%8B%EC%9D%80%EA%B8%80-%EB%AA%A9%EB%A1%9D.html</link>
       <pubDate>Wed, 31 Mar 2021 22:56:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/31/postgresql-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%B0%B8%EA%B3%A0%ED%95%A0-%EB%A7%8C%ED%95%9C-%EC%A2%8B%EC%9D%80%EA%B8%80-%EB%AA%A9%EB%A1%9D.html</guid>
+      <guid>http://localhost:1313/post/2021/03/31/postgresql-%EC%9D%B5%EC%8A%A4%ED%85%90%EC%85%98%EC%9D%84-%EB%A7%8C%EB%93%9C%EB%8A%94%EB%8D%B0-%EC%B0%B8%EA%B3%A0%ED%95%A0-%EB%A7%8C%ED%95%9C-%EC%A2%8B%EC%9D%80%EA%B8%80-%EB%AA%A9%EB%A1%9D.html</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;http://big-elephants.com/2015-10/writing-postgres-extensions-part-i/&#34;&gt;Writing Postgres Extensions - the Basics&lt;/a&gt;&lt;/p&gt;
@@ -2071,10 +2563,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>데이터베이스에 대해서 배울 수 있는 좋은 강의 (CS186Berkeley)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley.html</link>
+      <link>http://localhost:1313/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley.html</link>
       <pubDate>Wed, 31 Mar 2021 20:40:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley.html</guid>
+      <guid>http://localhost:1313/post/2021/03/31/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%EC%97%90-%EB%8C%80%ED%95%B4%EC%84%9C-%EB%B0%B0%EC%9A%B8-%EC%88%98-%EC%9E%88%EB%8A%94-%EC%A2%8B%EC%9D%80-%EA%B0%95%EC%9D%98-cs186berkeley.html</guid>
       <description>&lt;p&gt;우연히 유튜브에서 데이터베이스에 대해서 체계적이고 좋은 영상이 있는 것을 발견하였다.&lt;/p&gt;
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
       &lt;iframe allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen&#34; loading=&#34;eager&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; src=&#34;https://www.youtube.com/embed/ZLtwOp8pz_Q?autoplay=0&amp;amp;controls=1&amp;amp;end=0&amp;amp;loop=0&amp;amp;mute=0&amp;amp;start=0&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; title=&#34;YouTube video&#34;&gt;&lt;/iframe&gt;
@@ -2106,10 +2598,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>슬로우 쿼리란? (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft.html</link>
+      <link>http://localhost:1313/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft.html</link>
       <pubDate>Mon, 29 Mar 2021 20:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/29/%EC%8A%AC%EB%A1%9C%EC%9A%B0-%EC%BF%BC%EB%A6%AC%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;슬로우-쿼리란&#34;&gt;슬로우 쿼리란&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -2121,10 +2613,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>리플리케이션이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft.html</link>
+      <link>http://localhost:1313/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Sun, 28 Mar 2021 17:43:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/28/%EB%A6%AC%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;gelera-리플리케이션&#34;&gt;Gelera 리플리케이션&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113364491-a05caf80-938e-11eb-8a11-e5933db7f28d.png&#34; alt=&#34;Screen Shot 2021-04-02 at 8 36 21 AM&#34;&gt;&lt;/p&gt;
@@ -2173,20 +2665,20 @@ from mysql.innodb_index_stats
     
     <item>
       <title>쿼리 오프 로딩이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft.html</link>
+      <link>http://localhost:1313/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Sun, 28 Mar 2021 17:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/28/%EC%BF%BC%EB%A6%AC-%EC%98%A4%ED%94%84-%EB%A1%9C%EB%94%A9%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 </description>
     </item>
     
     <item>
       <title>데이터베이스 스토리지 티어링이란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft.html</link>
+      <link>http://localhost:1313/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft.html</link>
       <pubDate>Sat, 27 Mar 2021 23:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/27/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%86%A0%EB%A6%AC%EC%A7%80-%ED%8B%B0%EC%96%B4%EB%A7%81%EC%9D%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;스토리지-티어링이란&#34;&gt;스토리지 티어링이란&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -2195,10 +2687,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>샤딩이란(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft.html</link>
+      <link>http://localhost:1313/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft.html</link>
       <pubDate>Sat, 27 Mar 2021 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/27/%EC%83%A4%EB%94%A9%EC%9D%B4%EB%9E%80draft.html</guid>
       <description>&lt;h3 id=&#34;샤딩&#34;&gt;샤딩&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -2210,10 +2702,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>클러스터링이란?(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft.html</link>
+      <link>http://localhost:1313/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft.html</link>
       <pubDate>Sat, 27 Mar 2021 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/27/%ED%81%B4%EB%9F%AC%EC%8A%A4%ED%84%B0%EB%A7%81%EC%9D%B4%EB%9E%80draft.html</guid>
       <description>&lt;h3 id=&#34;클러스터링&#34;&gt;클러스터링&lt;/h3&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
@@ -2236,10 +2728,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>CONCURRENCY(동시성)와 PARALLELISM(병행성) (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft.html</link>
+      <link>http://localhost:1313/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft.html</link>
       <pubDate>Sat, 27 Mar 2021 01:09:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/27/concurrency%EB%8F%99%EC%8B%9C%EC%84%B1%EC%99%80-parallelism%EB%B3%91%ED%96%89%EC%84%B1-draft.html</guid>
       <description>&lt;h3 id=&#34;concurrency동시성와-parallelism병행성&#34;&gt;CONCURRENCY(동시성)와 PARALLELISM(병행성)&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112660338-af2bf980-8e98-11eb-8aec-e165f24e7fde.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
@@ -2282,10 +2774,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>트랜잭션과 ACID</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid.html</link>
+      <link>http://localhost:1313/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid.html</link>
       <pubDate>Fri, 26 Mar 2021 23:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid.html</guid>
+      <guid>http://localhost:1313/post/2021/03/26/%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98%EA%B3%BC-acid.html</guid>
       <description>&lt;p&gt;누군가 트랜잭션에 대해서 물어보았을 때, 분명히 알고 있다고 생각한 것인데도 제대로 답변하지 못했다. 이건 평소에 생각이 정리되지 않아서 그런 것 같다. 따라서 이참에 이에 대해서 정리를 해보도록 했다.&lt;/p&gt;
 &lt;h3 id=&#34;트랜잭션이란&#34;&gt;트랜잭션이란&lt;/h3&gt;
 &lt;hr&gt;
@@ -2338,10 +2830,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>CAP 이론이란?</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80.html</link>
+      <link>http://localhost:1313/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80.html</guid>
+      <guid>http://localhost:1313/post/2021/03/26/cap-%EC%9D%B4%EB%A1%A0%EC%9D%B4%EB%9E%80.html</guid>
       <description>&lt;h3 id=&#34;cap-정리&#34;&gt;CAP 정리&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/112651209-86533680-8e8f-11eb-9579-2d9a2389ce27.png&#34; alt=&#34;download&#34;&gt;&lt;/p&gt;
@@ -2387,20 +2879,20 @@ from mysql.innodb_index_stats
     
     <item>
       <title>MVCC(다중 버전 동시성 제어)란 (draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft.html</link>
+      <link>http://localhost:1313/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/26/mvcc%EB%8B%A4%EC%A4%91-%EB%B2%84%EC%A0%84-%EB%8F%99%EC%8B%9C%EC%84%B1-%EC%A0%9C%EC%96%B4%EB%9E%80-draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 </description>
     </item>
     
     <item>
       <title>TWO-PHASE COMMIT 이란?</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80.html</link>
+      <link>http://localhost:1313/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80.html</guid>
+      <guid>http://localhost:1313/post/2021/03/26/two-phase-commit-%EC%9D%B4%EB%9E%80.html</guid>
       <description>&lt;h3 id=&#34;two-phase-커밋이란&#34;&gt;TWO-PHASE 커밋이란?&lt;/h3&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/113822026-dd260d80-97b7-11eb-8ea8-b3c939d08cec.png&#34; alt=&#34;95&#34;&gt;&lt;/p&gt;
@@ -2455,10 +2947,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>합의(Consensus) 알고리즘이란(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft.html</link>
+      <link>http://localhost:1313/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft.html</link>
       <pubDate>Fri, 26 Mar 2021 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/26/%ED%95%A9%EC%9D%98consensus-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98%EC%9D%B4%EB%9E%80draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -2482,10 +2974,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>SQLAlchemy 세션(draft)</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft.html</link>
+      <link>http://localhost:1313/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft.html</link>
       <pubDate>Fri, 19 Mar 2021 16:40:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft.html</guid>
+      <guid>http://localhost:1313/post/2021/03/19/sqlalchemy-%EC%84%B8%EC%85%98draft.html</guid>
       <description>&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://docs.sqlalchemy.org/en/13/orm/session_transaction.html#transactions-and-connection-management&#34;&gt;Transactions and Connection Management&lt;/a&gt;&lt;/li&gt;
@@ -2495,10 +2987,10 @@ from mysql.innodb_index_stats
     
     <item>
       <title>SQLAlchemy에서 트랜잭션 사용법</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95.html</link>
+      <link>http://localhost:1313/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95.html</link>
       <pubDate>Thu, 18 Mar 2021 13:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95.html</guid>
+      <guid>http://localhost:1313/post/2021/03/18/sqlalchemy%EC%97%90%EC%84%9C-%ED%8A%B8%EB%9E%9C%EC%9E%AD%EC%85%98-%EC%82%AC%EC%9A%A9%EB%B2%95.html</guid>
       <description>&lt;p&gt;회사에서 이슈 진행을 하다가, 트랜잭션를 이용하여 처리해야하는 부분을 발견하였다.
 따라서 &lt;code&gt;SQLAlchemy&lt;/code&gt;에서는 트랜잭션을 어떻게 사용하는지 정리해보도록 하겟다.&lt;/p&gt;
 &lt;h2 id=&#34;트랜잭션-관리하기&#34;&gt;트랜잭션 관리하기&lt;/h2&gt;
@@ -2648,10 +3140,10 @@ with sess.begin():
     
     <item>
       <title>mariadb 유니크 인덱스</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4.html</link>
+      <link>http://localhost:1313/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4.html</link>
       <pubDate>Tue, 09 Mar 2021 09:20:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4.html</guid>
+      <guid>http://localhost:1313/post/2021/03/09/mariadb-%EC%9C%A0%EB%8B%88%ED%81%AC-%EC%9D%B8%EB%8D%B1%EC%8A%A4.html</guid>
       <description>&lt;h2 id=&#34;유니크-인덱스&#34;&gt;유니크 인덱스&lt;/h2&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110399859-ed17d800-80b9-11eb-933e-d71a182abcb7.png&#34; alt=&#34;unique&#34;&gt;&lt;/p&gt;
@@ -2670,10 +3162,10 @@ with sess.begin():
     
     <item>
       <title>DBMS를 분석하는 방법</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
+      <link>http://localhost:1313/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</link>
       <pubDate>Wed, 03 Mar 2021 23:32:24 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
+      <guid>http://localhost:1313/post/2021/03/03/dbms%EB%A5%BC-%EB%B6%84%EC%84%9D%ED%95%98%EB%8A%94-%EB%B0%A9%EB%B2%95.html</guid>
       <description>&lt;h3 id=&#34;kcd-2020&#34;&gt;KCD 2020&lt;/h3&gt;
 &lt;hr&gt;
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
@@ -2737,10 +3229,10 @@ with sess.begin():
     
     <item>
       <title>데이터베이스 스키마를 관리하는 도구, Flyway</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway.html</link>
+      <link>http://localhost:1313/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway.html</link>
       <pubDate>Wed, 03 Mar 2021 20:09:39 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway.html</guid>
+      <guid>http://localhost:1313/post/2021/03/03/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%8A%A4%ED%82%A4%EB%A7%88%EB%A5%BC-%EA%B4%80%EB%A6%AC%ED%95%98%EB%8A%94-%EB%8F%84%EA%B5%AC-flyway.html</guid>
       <description>&lt;h1 id=&#34;데이터베이스-스키마-관리의-필요성&#34;&gt;데이터베이스 스키마 관리의 필요성&lt;/h1&gt;
 &lt;hr&gt;
 &lt;p&gt;최근에 회사에서 기존에 &lt;code&gt;AWS&lt;/code&gt;에서 서비스하던 서비스를 &lt;code&gt;ALI&lt;/code&gt; 클라우드에서 제공해야하는 일이 있었다. 따라서 데이터베이스 스키마와 마스터 데이터를 새로운 클라우드 환경으로 이전을 시켜줘야 했다.&lt;/p&gt;

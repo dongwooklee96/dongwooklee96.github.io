@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>BLE on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/ble.html</link>
+    <link>http://localhost:1313/tags/ble.html</link>
     <description>Recent content in BLE on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Mon, 16 Mar 2026 10:00:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/ble/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Mar 2026 10:00:00 +0900</lastBuildDate><atom:link href="http://localhost:1313/tags/ble/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>NU40 &#43; Zephyr로 BLE 페어링하기</title>
-      <link>https://dongwooklee96.github.io/post/2026/03/16/nu40--zephyr%EB%A1%9C-ble-%ED%8E%98%EC%96%B4%EB%A7%81%ED%95%98%EA%B8%B0.html</link>
+      <link>http://localhost:1313/post/2026/03/16/nu40--zephyr%EB%A1%9C-ble-%ED%8E%98%EC%96%B4%EB%A7%81%ED%95%98%EA%B8%B0.html</link>
       <pubDate>Mon, 16 Mar 2026 10:00:00 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2026/03/16/nu40--zephyr%EB%A1%9C-ble-%ED%8E%98%EC%96%B4%EB%A7%81%ED%95%98%EA%B8%B0.html</guid>
+      <guid>http://localhost:1313/post/2026/03/16/nu40--zephyr%EB%A1%9C-ble-%ED%8E%98%EC%96%B4%EB%A7%81%ED%95%98%EA%B8%B0.html</guid>
       <description>&lt;h3 id=&#34;시작하며&#34;&gt;시작하며&lt;/h3&gt;
 &lt;p&gt;NU40 보드와 Zephyr RTOS로 프로젝틀르 구성하였고, 블루투스(BLE)를 통해 보드에서 1, 2, 3, 4 버튼으로 바이브 코딩에서 선택하는 기능이 필요해졌다.&lt;/p&gt;
 &lt;p&gt;따라서 해당 기능에 대해서 정리하는 글을 작성해보았다.&lt;/p&gt;

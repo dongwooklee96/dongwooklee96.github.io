@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IoT on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/iot.html</link>
+    <link>http://localhost:1313/tags/iot.html</link>
     <description>Recent content in IoT on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Sun, 15 Mar 2026 22:45:00 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/iot/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 15 Mar 2026 22:45:00 +0900</lastBuildDate><atom:link href="http://localhost:1313/tags/iot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>임베디드 정복 스터디 커리큘럼</title>
-      <link>https://dongwooklee96.github.io/post/2026/03/15/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C-%EC%A0%95%EB%B3%B5-%EC%8A%A4%ED%84%B0%EB%94%94-%EC%BB%A4%EB%A6%AC%ED%81%98%EB%9F%BC.html</link>
+      <link>http://localhost:1313/post/2026/03/15/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C-%EC%A0%95%EB%B3%B5-%EC%8A%A4%ED%84%B0%EB%94%94-%EC%BB%A4%EB%A6%AC%ED%81%98%EB%9F%BC.html</link>
       <pubDate>Sun, 15 Mar 2026 22:45:00 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2026/03/15/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C-%EC%A0%95%EB%B3%B5-%EC%8A%A4%ED%84%B0%EB%94%94-%EC%BB%A4%EB%A6%AC%ED%81%98%EB%9F%BC.html</guid>
+      <guid>http://localhost:1313/post/2026/03/15/%EC%9E%84%EB%B2%A0%EB%94%94%EB%93%9C-%EC%A0%95%EB%B3%B5-%EC%8A%A4%ED%84%B0%EB%94%94-%EC%BB%A4%EB%A6%AC%ED%81%98%EB%9F%BC.html</guid>
       <description>&lt;h3 id=&#34;시작하며-진짜-하드웨어를-제어해보고-싶다&#34;&gt;시작하며: 진짜 하드웨어를 제어해보고 싶다&lt;/h3&gt;
 &lt;p&gt;소프트웨어 개발을 하다 보면 화면 속 세상이 아닌, 현실 세계의 물리적인 움직임을 직접 제어해보고 싶다는 갈증이 생길 때가 있다. 웹이나 앱을 넘어 모터가 돌아가고, 센서로 주변 환경을 인식하며, 최종적으로는 하늘을 나는 드론까지 내 손으로 만들어보고 싶어졌다.&lt;/p&gt;
 &lt;p&gt;그래서 이번 기회에 임베디드 시스템의 기초부터 심화까지 제대로 파고들기 위한 나만의 스터디 커리큘럼을 짜보았다. 특정 보드에 종속되기보다는 업계 표준으로 많이 쓰이는 MCU들을 다루며 범용적인 하드웨어 제어 능력을 기르는 것이 목표다.&lt;/p&gt;
@@ -28,10 +28,10 @@
     
     <item>
       <title>NU40 DK - BLE5.4 nRF52840 개발환경 셋팅하기</title>
-      <link>https://dongwooklee96.github.io/post/2026/03/10/nu40-dk-ble5.4-nrf52840-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-%EC%85%8B%ED%8C%85%ED%95%98%EA%B8%B0.html</link>
+      <link>http://localhost:1313/post/2026/03/10/nu40-dk-ble5.4-nrf52840-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-%EC%85%8B%ED%8C%85%ED%95%98%EA%B8%B0.html</link>
       <pubDate>Tue, 10 Mar 2026 00:00:00 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2026/03/10/nu40-dk-ble5.4-nrf52840-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-%EC%85%8B%ED%8C%85%ED%95%98%EA%B8%B0.html</guid>
+      <guid>http://localhost:1313/post/2026/03/10/nu40-dk-ble5.4-nrf52840-%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD-%EC%85%8B%ED%8C%85%ED%95%98%EA%B8%B0.html</guid>
       <description>&lt;h3 id=&#34;튜토리얼-누코드-개발-입문&#34;&gt;튜토리얼: 누코드 개발 입문&lt;/h3&gt;
 &lt;p&gt;누코드의 NU-40DK 보드를 가지고 개발을 시작하는 기본 흐름을 정리하는 글이다. 현재 누코드 보드 관련 글 작성 모임에 참여하고 있는데, 그 스터디에서 누코드를 가지고 개발을 하면서 직접 따라 해보고 기록해볼 필요를 느껴 이번 작업을 시작하게 되었다.&lt;/p&gt;
 &lt;p&gt;이 글은 간단하게 개발환경을 셋팅한 과정을 정리한 글이다. 앞으로는 이 환경을 바탕으로 실제 프로젝트를 만들어 진행하려고 한다.&lt;/p&gt;

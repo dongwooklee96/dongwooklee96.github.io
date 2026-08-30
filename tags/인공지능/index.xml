@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>인공지능 on 개발자 이동욱</title>
+    <link>http://localhost:1313/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5.html</link>
+    <description>Recent content in 인공지능 on 개발자 이동욱</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ko-KR</language>
+    <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
+    <webMaster>sh95119@gmail.com (이동욱)</webMaster>
+    <lastBuildDate>Sun, 16 Aug 2026 11:15:00 +0900</lastBuildDate><atom:link href="http://localhost:1313/tags/%EC%9D%B8%EA%B3%B5%EC%A7%80%EB%8A%A5/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deep Learning Compiler 1장: TVM 시작하기와 개요</title>
+      <link>http://localhost:1313/post/2026/08/16/deep-learning-compiler-1%EC%9E%A5-tvm-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0%EC%99%80-%EA%B0%9C%EC%9A%94.html</link>
+      <pubDate>Sun, 16 Aug 2026 11:15:00 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2026/08/16/deep-learning-compiler-1%EC%9E%A5-tvm-%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0%EC%99%80-%EA%B0%9C%EC%9A%94.html</guid>
+      <description>&lt;h3 id=&#34;시작하며&#34;&gt;시작하며&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;최근 인공지능과 딥러닝 모델의 크기가 비대해지고 연산량이 급증함에 따라, 단순히 모델을 설계하는 것을 넘어 다양한 하드웨어 백엔드(CPU, GPU, NPU 등)에서 어떻게 효율적으로 모델을 실행하고 최적화할 것인가에 대한 고민이 깊어졌다. 이 과정에서 모델을 최적의 기계어로 자동 컴파일하여 각 하드웨어의 최대 성능을 끌어내는 &lt;strong&gt;딥러닝 컴파일러(Deep Learning Compiler)&lt;/strong&gt; 분야에 큰 매력과 관심을 느끼게 되었다.&lt;/p&gt;
+&lt;p&gt;특히 오픈소스이자 대표적인 딥러닝 컴파일러인 &lt;strong&gt;Apache TVM&lt;/strong&gt;은 이 분야의 핵심 기술로 자리 잡고 있다. 이에 대해 깊이 있게 이해하고 학습하기 위해 &lt;a href=&#34;https://tvm.d2l.ai/&#34;&gt;&lt;em&gt;Dive into Deep Learning Compiler&lt;/em&gt;&lt;/a&gt; 교재를 바탕으로 공부를 시작했다. 이 글은 그 첫 단추인 &amp;lsquo;TVM 시작하기(Getting Started)&amp;rsquo; 장을 공부하며 이해한 바를 정리하고 기록한 내용이다.&lt;/p&gt;
+&lt;p&gt;해당 책은 현재 개발중에 있고 전체 목차는 다음 &lt;a href=&#34;https://docs.google.com/document/d/14Bgo9TgczROlqcTinS5-Y4hyig-ae0Rm8uIFQl9OAEA/edit?tab=t.0&#34;&gt;링크&lt;/a&gt; 를 참고하면 된다.&lt;/p&gt;
+&lt;p&gt;해당 책은 독자들이 NumPy 사용 경험 정도만 갖춘 최소한의 배경 지식을 가지고 있다고 가정합니다. 이를 고려하여,
+내용은 기초부터 차근차근 설명하고, 필요할 때마다 관련 배경 지식을 소개할 것입니다. 하지만 경험이 풍부한 독자분들께도
+이 내용이 유용할 것입니다.&lt;/p&gt;
+&lt;h3 id=&#34;1장--시작하기&#34;&gt;1장 : 시작하기&lt;/h3&gt;
+&lt;p&gt;이제 여정을 시작해보자. 배워야 할 내용은 많지만 모든 여정은 어딘가에서 시작된다. 이 부분에서는 다음 내용을 다룰 것이다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(거의) 모든 챕터를 직접 실행할 수 있도록 필요한 라이브러리를 설치하는 방법&lt;/li&gt;
+&lt;li&gt;두 벡터를 더하는 연산자 작성하기&lt;/li&gt;
+&lt;li&gt;추론을 실행하기 위해서 신경망 모델을 컴파일하고, 컴파일된 라이브러리를 저장하는 방법&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;11-설치&#34;&gt;1.1 설치&lt;/h4&gt;
+&lt;p&gt;이 책의 각 섹션은 &lt;code&gt;Jupyter&lt;/code&gt; 노트북으로 구성되어 있다. 이를 실행하는 가장 쉬운 방법은 HTML 페이지 우측 상단에 있는 COLAB 버튼을 클릭하는 것이다. 그러면 해당 노트북이 열린 상태로 &lt;code&gt;Google Colab&lt;/code&gt; 으로 바로 이동한다.&lt;/p&gt;
+&lt;p&gt;첫 번째 코드 셀을 실행하면 호스트 런타임에 연결되며 다음과 같은 경고 메시지가 표시된다. &lt;code&gt;RUN ANYWAY&lt;/code&gt; 를 클릭하여 계속 진행할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-16%20%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE%2011.49.31.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;이 섹션의 나머지 부분에서는 파이썬 환경 설정 방법, &lt;code&gt;Jupyter&lt;/code&gt; 의 대화형 노트북, 관련 라이브러리, 그리고 이 책을 따라가며 여러분의 컴퓨터에서 직접 실행할 수 있는 코드를 다룰 것이다.&lt;/p&gt;
+&lt;h4 id=&#34;111-소스-코드&#34;&gt;1.1.1 소스 코드&lt;/h4&gt;
+&lt;p&gt;모든 노트북이 포함된 소스코드 패키지는 아래에서 확인할 수 있다. 이 패키지를 다운로드 받아서 폴더에 압축을 풀어주세요. 예를 들어 &lt;code&gt;Linux/macOS&lt;/code&gt; 에서 &lt;code&gt;wget&lt;/code&gt; 과 &lt;code&gt;unzip&lt;/code&gt; 이 모두 설치되어 있다면 다음 명령어를 통해서 수행할 수 있다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;wget http://tvm.d2l.ai/d2l-tvm.zip
+unzip d2l-tvm.zip -d d2l-tvm
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&#34;112-실행-환경-설치&#34;&gt;1.1.2 실행 환경 설치&lt;/h4&gt;
+&lt;p&gt;Python 3.5 이상 버전이 설치되어 있고 pip도 설치되어 있다면, 실행 환경을 설치하는 가장 쉬운 방법은 다음과 같습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Jupyter&lt;/code&gt; 및 저장된 코드 블록과 같은 모든 종속성을 위한 &lt;code&gt;d2ltvm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;우리가 사용할 딥러닝 컴파일러를 위한 &lt;code&gt;tvm&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;일부 장에서 기준 모델로 사용할 &lt;code&gt;mxnet&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;먼저 &lt;code&gt;d2ltvm&lt;/code&gt; 패키지를 설치하기 위해서 아래 명령어를 수행합니다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;pip install git+https://github.com/d2l-ai/d2l-tvm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;그런 다음에 소스코드를 사용하여 &lt;code&gt;tvm&lt;/code&gt; 을 컴파일 합니다. &lt;code&gt;tvm&lt;/code&gt; 은 사용자의 시스템에 설치된 라이브러리에 크게 의존 하기 때문에 &lt;code&gt;pip&lt;/code&gt; 패키지가 제공되지 않는다. &lt;code&gt;tvm&lt;/code&gt; 을 설치하려면 &lt;code&gt;tvm.ai&lt;/code&gt; 에 있는 지침을 따르세&lt;/p&gt;
+&lt;p&gt;이 책에서 사용하는 &lt;code&gt;config.cmake&lt;/code&gt; 파일의 구성에는 최소한&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set(USE_LLVM ON)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;를 포함해야 합니다. 또한 만약 &lt;code&gt;Nvidia GPU&lt;/code&gt; 를 사용한다면 다음과 같이 &lt;code&gt;USE_CUDA&lt;/code&gt; 를 &lt;code&gt;ON&lt;/code&gt; 으로 설정해야 합니다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;set(USE_CUDA ON)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;또한 성능을 향상시켜주는 &lt;code&gt;cpython&lt;/code&gt; 을 활성화 하는 것을 잊지 마세요. 단지 &lt;code&gt;TVM&lt;/code&gt; 소스 폴더에서 &lt;code&gt;make cpython&lt;/code&gt; 명령어를 실행하기만 하면 됩니다.&lt;/p&gt;
+&lt;p&gt;현재 저희 소스코드는 &lt;code&gt;tvm-0.7-dev&lt;/code&gt; 에서 실행됩니다. 마지막으로
+GPU 를 사용할 수 있다면 &lt;code&gt;MXNet&lt;/code&gt; 의 CUDA 버전을 설치하세요&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;pip install mxnet-cu101
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;사용중인 &lt;code&gt;CUDA&lt;/code&gt; 버전에 맞춰서 101을 변경할 수 있습니다. 모든 패키지가 설치되면 다음 명령어를 실행하여 &lt;code&gt;Jupyter&lt;/code&gt; 노트북을 열 수 있습니다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;jupyter notebook
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;이 단계에서 브라우저에서 &lt;code&gt;http://localhost:8888&lt;/code&gt; 에 접속하여 &lt;code&gt;Jupyter&lt;/code&gt; 노트북을 사용할 수 있습니다.&lt;/p&gt;
+&lt;h4 id=&#34;113-코드&#34;&gt;1.1.3 코드&lt;/h4&gt;
+&lt;p&gt;이 책 전체에 걸쳐서, 재사용 가능한 코드 블록은 코드 앞에 &lt;code&gt;# dwltvm 패키지에 저장&lt;/code&gt; 이라는 주석을 추가하여 &lt;code&gt;d2ltvm&lt;/code&gt; 패키지에 저장합니다.&lt;/p&gt;
+&lt;p&gt;다음 코드는 &lt;code&gt;d2ltvm&lt;/code&gt; 패키지에 저장된 코드의 예시입니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# Save to the d2ltvm package.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;tvm&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;tvm&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; te
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;time&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;timeit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;numpy&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;np&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;matplotlib&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; pyplot &lt;span style=&#34;color:#cf222e&#34;&gt;as&lt;/span&gt; plt
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;IPython&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; display
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;try&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;mxnet&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;mx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;12-벡터-덧셈&#34;&gt;1.2 벡터 덧셈&lt;/h3&gt;
+&lt;p&gt;이제 모든 라이브러리를 설치했으니, 첫 번째 프로그램을 작성해 볼 것이다. &lt;code&gt;n&lt;/code&gt; 차원 벡터 &lt;code&gt;a&lt;/code&gt; 와 &lt;code&gt;b&lt;/code&gt; 를 더하는 프로그램이다. &lt;code&gt;NumPy&lt;/code&gt; 에서는 이 작업이 매우 간단하며 &lt;code&gt;c = a + b&lt;/code&gt; 와 같이 간단하게 작성할 수 있다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;numpy&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color:#24292e&#34;&gt;np&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;seed&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;n &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;a &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;normal&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;size&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;n&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;astype&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;float32&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;b &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;normal&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;size&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;n&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;astype&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;float32&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;c &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; a &lt;span style=&#34;color:#0550ae&#34;&gt;+&lt;/span&gt; b
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;여기서는 길이가 100 인 두 개의 임의 벡터를 생성하고, 요소별로 합산한다. &lt;code&gt;Numpy&lt;/code&gt; 는 기본적으로 64비트 부동소수점 또는 64비트 정수를 사용하는데, 이는 딥러닝에서 일반적으로 사용되는 32비트 부동 소수점과 다르므로, 데이터 형을 명시적으로 변환한다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;Numpy&lt;/code&gt; 의 내장 &amp;lsquo;+&amp;rsquo; 연산자를 사용하여 요소별 덧셈을 구현할 수도 있지만, 이번에는 스칼라 연산자만 사용하여 이를 구현해볼 것이다. 이렇게 하면 TVM 을 이용한 구현 방식을 이해하는데 도움이 될 것이다. 다음 함수는 &lt;code&gt;for-루프&lt;/code&gt; 를 사용하여 벡터의 모든 요소를 순회한 다음에, 매번 스칼라 &amp;lsquo;+&amp;rsquo; 연산자를 사용하여 두 요소를 더한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;vector_add&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; c&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;for&lt;/span&gt; i &lt;span style=&#34;color:#0550ae&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;range&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;n&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        c&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; a&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;+&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;d &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;empty&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;shape&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;n&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; dtype&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;float32&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;vector_add&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; d&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;testing&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;assert_array_equal&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;c&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; d&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;다음 장들에서 결과를 저장하기 위해 두 개의 임의의 &lt;code&gt;ndarray&lt;/code&gt; 와 또 다른 빈 &lt;code&gt;ndarray&lt;/code&gt; 를 자주 생성하게 될 것이므로, 나중에 재사용할 수 있도록 이 루틴을 저장해 둔다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#57606a&#34;&gt;# SAVE TO d2ltvm package.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#6639ba&#34;&gt;get_abc&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;shape&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; constructor&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;None&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#34;&amp;#34;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    Return random, a, b and empty c with sampe shape.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;    &amp;#34;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;random_seed&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    a &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;normal&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;size&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;shape&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;astype&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;float32&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    b &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;random&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;normal&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;size&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;shape&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;astype&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;float32&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    c &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; np&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;empty_like&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;a&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;if&lt;/span&gt; constructor&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; c &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;constructor&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;x&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#cf222e&#34;&gt;for&lt;/span&gt; x &lt;span style=&#34;color:#0550ae&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; c&lt;span style=&#34;color:#1f2328&#34;&gt;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#cf222e&#34;&gt;return&lt;/span&gt; a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; c
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;Numpy&lt;/code&gt;, &lt;code&gt;TVM&lt;/code&gt; 및 기타 라이브러리 간의 비교를 용이하게 하기 위해서 항상 동일한 결과가 나오도록 난수 시드를 고정해 두었음을 유의하시기 바랍니다.
+또한, 데이터를 다른 형식으로 변환하기 위한 선택적 생성자를 지원합니다.&lt;/p&gt;
+&lt;h4 id=&#34;122-tvm-계산-정의&#34;&gt;1.2.2 TVM 계산 정의&lt;/h4&gt;
+&lt;p&gt;이제 TVM 에서 &lt;code&gt;vector_add&lt;/code&gt; 를 구현해볼 것이다.
+TVM 구현은 위와 같은 두 가지 점에서 다르다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;함수 전체를 작성할 필요는 없으며, 출력의 각 요소 즉 &lt;code&gt;c[i]&lt;/code&gt; 가 어떻게 계산되는지만 저장하면 된다.&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;&lt;code&gt;TVM&lt;/code&gt; 은 기호적이므로, 기호 변수의 차원을 지정하여 생성하고, 프로그램이 어떻게 계산될지 정의한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;다음 프로그램에서는 먼저 &lt;code&gt;tvm.te.placeholder&lt;/code&gt; 를 통해 두 입력에 대한 플레이스 홀더 &lt;code&gt;A&lt;/code&gt; 와 &lt;code&gt;B&lt;/code&gt; 의 모양 &lt;code&gt;(n,)&lt;/code&gt; 을 지정하여 선언합니다. &lt;code&gt;A&lt;/code&gt; 와 &lt;code&gt;B&lt;/code&gt; 는 모두 &lt;code&gt;Tensor&lt;/code&gt; 객체이며, 나중에 여기에 데이터를 입력할 수 있다. 나중에 프로그램을 읽기 쉽게 출력할 수 있도록 이들에게 이름을 지정한다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.40.14.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;A, B, C 는 모두 텐서 (Tensor) 객체이며, 이는 &lt;code&gt;Numpy&lt;/code&gt; 의 &lt;code&gt;ndarray&lt;/code&gt; 를 기호적으로 표현한 것으로 볼 수 있다. 데이터 유형이나 모양과 같은 변수의 속성에 접근할 수 있다. 하지만 이러한 속성들은 현재로서는 구체적인 값을 가지고 있지 않다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.43.09.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;텐서 객체를 생성하는 연산은 &lt;code&gt;A.op&lt;/code&gt; 를 통해서 접근할 수 있다.&lt;/p&gt;
+&lt;p&gt;A, C 에 대한 연산의 유형은 다르지만, 둘 다 텐서 객체를 생성하는 연산을 나타내는 기본 클래스 &lt;code&gt;Operation&lt;/code&gt; 을 공유하고 있음을 알 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%2012.45.23.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;123-스케줄링-작성하기&#34;&gt;1.2.3 스케줄링 작성하기&lt;/h3&gt;
+&lt;p&gt;계산을 실행하려면 프로그램의 실행 방식, 예를 들어 데이터에 접근하는 순서나 멀티 스레드 병렬화를 수행하는 방법 등을 지정해야 한다. 이러한 실행 계획을 &amp;lsquo;스케줄&amp;rsquo; 이라고 합니다. &lt;code&gt;C&lt;/code&gt; 가 출력 텐서이므로, 해당 연산자에 대한 기본 스케줄을 생성하고 의사 코드를 출력해보자.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;s = te.create_schedule(C.op)
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;참고: 해당 구식 Tensor Expression API의 한계로 인해서 제거 되었다. 최신 방식은 TVM Script 로 구현한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;스케줄은 여러 단계로 구성된다. 각 단계는 스케줄이 어떻게 편성되는지 설명하는 작업에 해당한다. 특정 단계에는 &lt;code&gt;s[C]&lt;/code&gt; 또는 &lt;code&gt;s[C.op]&lt;/code&gt; 를 통해서 접근할 수 있다.&lt;/p&gt;
+&lt;p&gt;나중에 하드웨어 리소스를 더 효율적으로 활용하여 성능을 향상 시키기 위해서 실행 계획을 변경하는 방법을 살펴볼 것이다. 여기선느 C 언어와 유사한 의사 코드를 출력하여 기본 실행 계획을 확인해볼 것이다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;tvm.lower(s, [A, B, C], simple_mode=True)
+&lt;/code&gt;&lt;/pre&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;produce c &lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#cf222e&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;i&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  c&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;a&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#1f2328&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#0550ae&#34;&gt;+&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#1f2328&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;아래의 메서드는 스케줄과 입력 및 출력 텐서를 인수로 받는다. &lt;code&gt;simple_mode=True&lt;/code&gt; 를 사용하여 간단한 의사 코드를 출력한다.
+해당 프로그램은 출력 모양에 따라서 적절한 &lt;code&gt;for&lt;/code&gt; 루프를 생성했다는 점에 유의하세요. 전반적으로, 이는 이전에 봤던 함수인 &lt;code&gt;vector_add&lt;/code&gt; 와 유사한 방식으로 동작한다.&lt;/p&gt;
+&lt;p&gt;이제 &lt;code&gt;TVM&lt;/code&gt; 이 계산과 스케줄을 분리한다는 것을 알 수 있었다. 계산은 결과가 어떻게 산출되는지를 정의하며, 이는 프로그램을 어떤 하드웨어 플랫폼에서 실행하든 변하지 않는다. 반면 효율적인 스케줄은 종종 하드웨어에 의존적이지만, 스케줄을 변경하더라도 정확성에는 영향을 미치지 않는다. 계산과 스케줄을 분리하는 이 개념은 &lt;code&gt;TVM&lt;/code&gt; 이 &lt;code&gt;Halide&lt;/code&gt; 에서 계승한 것이다.&lt;/p&gt;
+&lt;h3 id=&#34;124-컴파일-및-실행&#34;&gt;1.2.4 컴파일 및 실행&lt;/h3&gt;
+&lt;p&gt;계산과 스케줄이 모두 정의되면 &lt;code&gt;tvm.build&lt;/code&gt; 를 사용하여 이를 실행 가능한 모듈로 컴파일 할 수 있습니다. 이 함수는 &lt;code&gt;tvm.lower&lt;/code&gt; 와 동일한 인수를 받는다. 사실, 이 함수는 먼저 &lt;code&gt;tvm.lower&lt;/code&gt; 를 호출하여 프로그램을 생성한 다음에, 이를 기계어로 컴파일 한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;mod &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; tvm&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;build&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;s&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#1f2328&#34;&gt;[&lt;/span&gt;A&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; B&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; C&lt;span style=&#34;color:#1f2328&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;type&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;mod&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;tvm.runtime.module.Module&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;실행 가능한 모듈 객체를 반환한다. 이제 &lt;code&gt;A, B, C&lt;/code&gt; 에 데이터를 입력하여 실행할 수 있습니다. 텐서 데이터는 &lt;code&gt;tvm.ndarray.NDArray&lt;/code&gt; 객체여야 합니다. 가장 쉬운 방법은 먼저 &lt;code&gt;NumPy&lt;/code&gt; &lt;code&gt;ndarray&lt;/code&gt; 객체를 생성한 다음에 &lt;code&gt;tvm.nd.array&lt;/code&gt; 를 사용하여 이를 &lt;code&gt;TVM&lt;/code&gt; &lt;code&gt;ndarray&lt;/code&gt; 로 변환하는 것이다. &lt;code&gt;asnumpy&lt;/code&gt; 메서드를 사용하면 이를 다시 &lt;code&gt;NumPy&lt;/code&gt; 로 변환할 수 있다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;x = np.ones(2)
+y = tvm.nd.array(x)
+type(y), y.asnumpy()
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;(tvm.runtime.ndarray.NDArray, array([1., 1.]))&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;이제 데이터를 생성하고 이를 &lt;code&gt;TVM&lt;/code&gt; &lt;code&gt;ndarray&lt;/code&gt; 로 반환해 봅시다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; c &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; get_abc&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; tvm&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;nd&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;array&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;이제 계산을 수행하고 결과를 확인한다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mod(a, b, c)
+np.testing.assert_array_equal(a.asnumpy() + b.asnumpy(), c.asnumpy())
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;125-인자-제약-조건&#34;&gt;1.2.5 인자 제약 조건&lt;/h3&gt;
+&lt;p&gt;A 와 B 를 선언할 때 두 입력 모두 길이가 100 인 벡터로 지정했다는 점을 기억하십시오.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;A.shape, B.shape, C.shape
+
+&amp;gt; ([100], [100], [100])
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;TVM 은 입력이 해당 사양을 충족하는지 확인한다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;try&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; c &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; get_abc&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;200&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; tvm&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;nd&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;array&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  mod&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; c&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt; tvm&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;TVMError &lt;span style=&#34;color:#cf222e&#34;&gt;as&lt;/span&gt; e&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;e&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%201.20.12.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;TVM 의 기본 데이터 타입은 &lt;code&gt;float32&lt;/code&gt; 입니다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;A.dtype, B.dtype, C.dtype
+&amp;gt; (&amp;#39;float32&amp;#39;, &amp;#39;float32&amp;#39; ,&amp;#39;float32&amp;#39;)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;데이터 유형이 다른 값을 입력하면 오류가 발생합니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;try&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; c &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; get_abc&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; tvm&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;nd&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;array&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  a &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; tvm&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;nd&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;array&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;a&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;asnumpy&lt;span style=&#34;color:#1f2328&#34;&gt;()&lt;/span&gt;&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;astype&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#0a3069&#34;&gt;&amp;#39;float64&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  mod&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;a&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; b&lt;span style=&#34;color:#1f2328&#34;&gt;,&lt;/span&gt; c&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;except&lt;/span&gt; tvm&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;TVMError &lt;span style=&#34;color:#cf222e&#34;&gt;as&lt;/span&gt; e&lt;span style=&#34;color:#1f2328&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#6639ba&#34;&gt;print&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;e&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%201.23.26.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;h4 id=&#34;126-모듈-저장-및-불러오기&#34;&gt;1.2.6 모듈 저장 및 불러오기&lt;/h4&gt;
+&lt;p&gt;컴파일된 모듈은 디스크에 저장할 수 있다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;mod_fname = &amp;#39;vector-add.tar&amp;#39;
+mod.export_library(mod_fname)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;그리고 나중에 다시 불러올 수 있다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;loaded_mod = tvm.runtime.load_module(mod_fname)
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;결과를 확인하면 같다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;a, b, c = get_abc(100, tvm.nd.array)
+loaded_mod(a, b, c)
+np.testing.assert_array_equal(a.asnumpy() + b.asnumpy(), c.asnumpy())
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;127-마무리&#34;&gt;1.2.7 마무리&lt;/h3&gt;
+&lt;p&gt;TVM 을 사용하여 오퍼레이터를 구현하는 과정은 아래와 같다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;입력 및 출력 형태와 각 출력 요소의 계산 방식을 지정하여 계산을 선언한다.&lt;/li&gt;
+&lt;li&gt;(가급적) 시스템 자원을 최대한 활용할 수 있도록 스케줄을 생성한다.&lt;/li&gt;
+&lt;li&gt;하드웨어 대상 플랫폼으로 컴파일 합니다. 또한, 컴파일된 모듈을 디스크에 저장해 두었다가 나중에 다시 불러올 수 있다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;13-신경망-추론&#34;&gt;1.3 신경망 추론&lt;/h3&gt;
+&lt;p&gt;1.2 절에서는 간단한 벡터 덧셈에 대해서 오퍼레이터를 구현하고 컴파일 하는 방법을 살펴보았다. 이제 우리는 더 나아가서 일련의 연산자로 구성된 사전 학습된 신경망 전체를 컴파일 하여 추론을 해볼 것이다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;import numpy as np
+import mxnet as mx
+from PIL import Image
+import tvm
+from tvm import relay
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;이 장에서는 이전 장에 비해 세 가지 모듈이 추가로 도입됩니다. PIL 을 사용하여 이미지를 읽고, &lt;code&gt;mxnet&lt;/code&gt; 을 통해서 사전 훈련된 신경망을 확보하며, &lt;code&gt;TVM&lt;/code&gt; 의 릴레이 모듈을 사용하여 신경망을 변환하고 최적화 할 것이다. 릴레이는 &lt;code&gt;TVM&lt;/code&gt; 에서 신경망을 표현하기 위한 고수준 중간 언어(IR) 입니다.&lt;/p&gt;
+&lt;h3 id=&#34;131-사전-학습된-모델-확보&#34;&gt;1.3.1 사전 학습된 모델 확보&lt;/h3&gt;
+&lt;p&gt;사전 훈련된 모델이란 데이터 세트를 통해서 매개변수가 훈련된 신경망을 의미한다. 여기서는 &lt;code&gt;MxNet&lt;/code&gt; 의 모델 동물원에서 &lt;code&gt;pretrained=True&lt;/code&gt; 옵션을 사용하여 사전 훈련된 모델을 확보한다.
+이 모델에 대한 자세한 내용을 알고 싶다면 다른 부분을 참고하세요. 더 많은 모델은 &lt;code&gt;MXNet&lt;/code&gt; 모델 동물원에서 찾을 수 있습니다.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;background-color:#f7f7f7;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;model &lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt; mx&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;gluon&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;model_zoo&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;vision&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;resnet18_v2&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;pretrained&lt;span style=&#34;color:#0550ae&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#cf222e&#34;&gt;True&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#6639ba&#34;&gt;len&lt;/span&gt;&lt;span style=&#34;color:#1f2328&#34;&gt;(&lt;/span&gt;model&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;features&lt;span style=&#34;color:#1f2328&#34;&gt;),&lt;/span&gt; model&lt;span style=&#34;color:#0550ae&#34;&gt;.&lt;/span&gt;output
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://mike-home.com/20260816/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA%202026-08-17%20%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB%201.39.38.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;로드된 모델은 약 100만장의 자연물 이미지를 포함하는 &lt;code&gt;ImageNet 1K&lt;/code&gt; 데이터 셋을 기반으로 훈련되었다. 이 데이터 셋은 &lt;code&gt;1,000&lt;/code&gt; 개의 클래스로 구성되어 있으며, 모델은 두 부분을으로 이루어져 있으며, 본체인 &lt;code&gt;model.feature&lt;/code&gt; 에는 13개의 블록이 포함되어 있고, 출력층은 &lt;code&gt;1,000&lt;/code&gt; 개의 출력을 갖는 밀집층이다. 다음 코드 블록은 &lt;code&gt;ImageNet&lt;/code&gt; 데이터셋의 각 클래스에 대한 텍스트 레이블을 불러온다.&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;with open(&amp;#39;../data/imagenet1k_labels.txt&amp;#39;) as f:
+labels = eval(f.read())
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

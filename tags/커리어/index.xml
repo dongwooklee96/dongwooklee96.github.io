@@ -2,19 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>커리어 on 개발자 이동욱</title>
-    <link>https://dongwooklee96.github.io/tags/%EC%BB%A4%EB%A6%AC%EC%96%B4.html</link>
+    <link>http://localhost:1313/tags/%EC%BB%A4%EB%A6%AC%EC%96%B4.html</link>
     <description>Recent content in 커리어 on 개발자 이동욱</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ko-KR</language>
     <managingEditor>sh95119@gmail.com (이동욱)</managingEditor>
     <webMaster>sh95119@gmail.com (이동욱)</webMaster>
-    <lastBuildDate>Tue, 10 Aug 2021 19:15:14 +0900</lastBuildDate><atom:link href="https://dongwooklee96.github.io/tags/%EC%BB%A4%EB%A6%AC%EC%96%B4/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Aug 2021 19:15:14 +0900</lastBuildDate><atom:link href="http://localhost:1313/tags/%EC%BB%A4%EB%A6%AC%EC%96%B4/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>동적 프로그래밍 문제 파악</title>
-      <link>https://dongwooklee96.github.io/post/2021/08/10/%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%AC%B8%EC%A0%9C-%ED%8C%8C%EC%95%85.html</link>
+      <link>http://localhost:1313/post/2021/08/10/%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%AC%B8%EC%A0%9C-%ED%8C%8C%EC%95%85.html</link>
       <pubDate>Tue, 10 Aug 2021 19:15:14 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/08/10/%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%AC%B8%EC%A0%9C-%ED%8C%8C%EC%95%85.html</guid>
+      <guid>http://localhost:1313/post/2021/08/10/%EB%8F%99%EC%A0%81-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D-%EB%AC%B8%EC%A0%9C-%ED%8C%8C%EC%95%85.html</guid>
       <description>&lt;h3 id=&#34;동적-프로그래밍-문제-파악&#34;&gt;동적 프로그래밍 문제 파악&lt;/h3&gt;
 &lt;hr&gt;
 &lt;ul&gt;
@@ -44,11 +44,783 @@
     </item>
     
     <item>
+      <title>더 개발자 인터뷰 가이드 - 코딩 테스트 (4)</title>
+      <link>http://localhost:1313/post/2021/03/14/%EB%8D%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EA%B0%80%EC%9D%B4%EB%93%9C-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-4.html</link>
+      <pubDate>Sun, 14 Mar 2021 21:10:14 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2021/03/14/%EB%8D%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EA%B0%80%EC%9D%B4%EB%93%9C-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-4.html</guid>
+      <description>&lt;h3 id=&#34;코딩-인터뷰-파트-소개&#34;&gt;코딩 인터뷰 파트 소개&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;코딩 인터뷰 주요 목적&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;지원자가 선택한 프로그래밍 언어를 얼마나 잘 사용하는가?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;업무에 필요한 학습 능력 및 적응력을 갖추고 있는가?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;문제 분석 및 해결 능력을 가지고 있는가?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;논리적으로 생각하고 그것을 코드로 옮길 수 있는가?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;협업에 필요한 의사소통 능력을 갖추고 있는가?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;코딩 테스트는 문제를 푸는 과정 전반을 보는 것이다. 지원자가 문제가 주어졌을 때 문제를 바로 푸는 것은 안좋은 신호이다. 문제를 먼저 정의하고 제약사항이 없는지 먼제 확인하는 절차를 거쳐야 한다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;타당한 절차를 거치는지.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실제 업무를 주어질 때도, 바로 코딩을 하는 것이 아니라, 문맥 및 상황 그리고 제약조건은 없는지를 고려 해야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코딩테스트 하나의 작은 업무라고 생각을 하면서 접근해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;면접관과 지원자가 코딩 테스트 문제를 같이 푼다고 생각을 하고 또한 회사일을 한다고 생각하고 협업을 하고 있다고 생각을 하면서 풀어야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;면접관이 힌트를 주었을 때는 반응을 해야한다. 내가 풀고 있는 문제와 어떠한 연관이 있는지..&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;만약 면접관의 힌트를 무시한다면 안좋은 신호이다, 문제를 풀도고 떨어질 수 있다. 협업이라는 자세가 중요한데, 피드백을 받지 않는 것은 협업을 할 때 좋지 않은 자세이다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;코딩-인터뷰-프레임워크&#34;&gt;코딩 인터뷰 프레임워크&lt;/h3&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;문제를 푸는 것 만이 목적이 아니라, 문제를 동료와 같이 해결하는 과정이 중요하다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;다만, 여기서 문제를 풀어나가는 주체가 &amp;ldquo;지원자&amp;rdquo;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&amp;ldquo;면접관&amp;quot;을 동료로 생각하고 같이 문제를 풀어나가야 한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;문제 풀이 프레임워크&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;문제를 명확히 이해했는지 확인한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;가정하고 있거나, 가정할 수 있는 것들을 확인한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;실제 예를 들어가며 다시 확인한다. (나중에 테스트 케이스로 활용할 수 있다.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;문제 해결책을 고민한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;해결책을 설명하고 해당 시간과 공간 알고리즘 복잡도를 설명한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;코드를 작성한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;앞서 예시로 사용했던 입력값을 케이스로 삼아 코드를 테스트한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.inflearn.com/course/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0/dashboard&#34;&gt;더 개발자, 인터뷰 가이드&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>더 개발자 인터뷰 가이드 - 핵심 역량 (3)</title>
+      <link>http://localhost:1313/post/2021/03/13/%EB%8D%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EA%B0%80%EC%9D%B4%EB%93%9C-%ED%95%B5%EC%8B%AC-%EC%97%AD%EB%9F%89-3.html</link>
+      <pubDate>Sat, 13 Mar 2021 23:10:14 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2021/03/13/%EB%8D%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EA%B0%80%EC%9D%B4%EB%93%9C-%ED%95%B5%EC%8B%AC-%EC%97%AD%EB%9F%89-3.html</guid>
+      <description>&lt;h3 id=&#34;핵심-역량-파트-소개&#34;&gt;핵심 역량 파트 소개&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;흔히 소프트 스킬이라고 말하는 의사소통 또는 가치관, 업무 태도를 다루겠다.
+&lt;ul&gt;
+&lt;li&gt;평상시 업무 또는 학습 중에 고민해 보면 좋다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;거짓말을 하지 마라, 티가 난다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;실수를 했더라도, 그 실수로부터 무언가를 배웠다면 그것도 정답이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;핵심 가치&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.jobs/en/principles&#34;&gt;아마존 리더쉽 원칙&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.microsoft.com/en-us/diversity/default.aspx&#34;&gt;마이크로소프트, 다양성과 포용력&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;6가지 주요 소프트 스킬&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;고객 중심 (Customer Obsession, Customer Focus)&lt;/li&gt;
+&lt;li&gt;결과 도출 (Deliver Results, Bias for Action, Drive for Results)&lt;/li&gt;
+&lt;li&gt;영향력 (Insist on the Highest Standards, Influencing for Implact)&lt;/li&gt;
+&lt;li&gt;적응력 (Disagree and Commit, Dive Deep, Adaptibillity)&lt;/li&gt;
+&lt;li&gt;판단력 (Think Big, Are Right, A Lot, Judgement)&lt;/li&gt;
+&lt;li&gt;협업 (Earn Trust, Collaboration)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;1-고객-중심&#34;&gt;1. 고객 중심&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;고객 중심적인 사고를 가지고 일하는지 확인할 것&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;고객의 이슈 파악 및 해결&lt;/li&gt;
+&lt;li&gt;고객의 요구 파악 및 기대치 만족 또는 뛰어 넘기&lt;/li&gt;
+&lt;li&gt;꼭 기업 외부 고객일 필요는 없고 사내 다른 팀의 직원도 고객일 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;나의 경우에는 &lt;code&gt;PM&lt;/code&gt; 및 &lt;code&gt;QA&lt;/code&gt; 및 다른 개발자들이 나의 고객이라고 생각을 하면 될 것 같다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;고객 중심 역량 파악 질문 예&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;외부 또는 내부 고객의 요구를 만족시켰던 서비스를 제공한 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;또는 반대로 외부 또는 내부 고객의 기대에 만족하는 서비스를 제공하기 힘들었던 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;고객이 가지고 있는 문제를 해결한 경험 및 업무를 해본 경험이 있는지?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;후속 질문&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;어떻게 해당 업무에 참여했으며 그 결과는 어떠했는지?&lt;/li&gt;
+&lt;li&gt;(성공적인 경험담이였다면) 그 업무가 그렇게 성공적일 수 있었던 핵심적인 이유는 무엇이라고 생각하는지?&lt;/li&gt;
+&lt;li&gt;(실패한 경험이었다면) 다시 그런 업무를 하게 된다면 어떻게 다르게 접근할 수 있는지?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;좋지 못한 답변 특징&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해당 경험이 없어서 사례를 제공하지 못한다.&lt;/li&gt;
+&lt;li&gt;해당 업무에 적극적으로 참여하지 않았다.&lt;/li&gt;
+&lt;li&gt;스스로 고객의 이슈를 해결하지 못하고 도움을 받거나 다른 팀원에게 일을 넘겼다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;좋은 답변 특징&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;책임감을 가지고 주기적으로 고객의 요구와 이슈를 파악하려는 시도를 했던 경험이 있다.&lt;/li&gt;
+&lt;li&gt;고객의 요구와 기대를 조사하기 위한 피드백 시스템을 구축하거나 운영했다.&lt;/li&gt;
+&lt;li&gt;고객의 요구와 기대를 조사해 제품이나 서비스에 적용한 경험이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;코딩 문제를 잘 푸는 사람들은 많다 따라서, 핵심 역량 질문에 대한 답변을 잘 하는 것이 중요하다!&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;2-결과-도출&#34;&gt;2. 결과 도출&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;비즈니스에 필수적으로 필요한 업무에 집중하고 적절한 품질과 기간 내에 결과를 만들어 내는 역량&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;문제를 효율적으로 해결할 것&lt;/li&gt;
+&lt;li&gt;책임감을 가지고 일할 것&lt;/li&gt;
+&lt;li&gt;비즈니스에 필요하며 도전적인 업무를 맡을 것.&lt;/li&gt;
+&lt;li&gt;동료가 신뢰할 수 있는 행동을 할 것.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;결과 도출 역량 파악 질문 리스트&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;프로젝트 목표를 달성하기 어려웠던 경험에 대해서 설명해주세요. 어떤 문제가 있었나요?&lt;/li&gt;
+&lt;li&gt;장기적인 프로젝트에서 오너쉽을 가지고 일한 경험이 있나요? 각각의 마일 스톤을 재때 맞추기 위해 어떤 노력을 했었나요?&lt;/li&gt;
+&lt;li&gt;도전적인 프로젝트였지만, 동료들과 함께 해낸 경험이 있나요?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;후속 질문&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해당 프로젝트에는 어떻게 참여하게 되었나요?&lt;/li&gt;
+&lt;li&gt;그런 과정 중에 어떤 문제가 있었으며 어떻게 해결했나요?&lt;/li&gt;
+&lt;li&gt;다시 돌아봤을 때, 어떤 점 때문에 해당 프로젝트를 성공적으로 마칠 수 있었다고 생각하나요? 아니면 &lt;strong&gt;다르게 시도해 보고 싶은 것이 있나요?&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;좋지 못한 답변 특징&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;주도적인 다른 동료의 지시에 따르기만 한 경우&lt;/li&gt;
+&lt;li&gt;충분한 회의나 분석을 거치지 않고 문제 해결을 시도하는데 급급한 경우&lt;/li&gt;
+&lt;li&gt;프로젝트 또는 업무의 기한을 맞추는데 필요한 중요한 의사소통 결여.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;좋은 답변 특징&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;예정됐던 일정 안에 긍정적인 결과를 만들어 낸 경우.&lt;/li&gt;
+&lt;li&gt;문제를 해결하는데 필요한 정량적인 데이터를 수집해 본 경험.&lt;/li&gt;
+&lt;li&gt;목표를 달성하는데 필요한 업무를 주관적으로 제안하고 실행에 옮긴 경험.&lt;/li&gt;
+&lt;li&gt;지속적으로 목표 달성에 필요한 데이터를 모니터 해본 경험.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;평상시에 업무를 하면서 이러한 행동을 하려고 노력을 하고, 이와 같은 사례를 기록하는 것도 좋을 것 같다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;3-영향력&#34;&gt;3. 영향력&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;다른 동료 도는 팀을 설득하고, 좋은 영향을 주는 능력&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;커뮤니케이션을 효율적이고 논리적으로 하는 능력&lt;/li&gt;
+&lt;li&gt;긍정적인 관계 형성으로 업무 효율을 높이는 능력&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;영향력 파악 질문 예&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;업무를 위해 누군가를 설득하거나 당신의 입장을 이해시켜야만 했던 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;같이 일하는 동료와의 좋은 관계 형성으로 프로젝트에 긍정적인 영향을 끼친 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;다양한 견해를 가지고 있는 주요 관계자들의 요구를 성공적으로 만족시킨 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;동료나 다른 팀을 설득해 비효율적인 프로세스를 개선해야 했던 경험이 있나요?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;좋지 못한 답변의 특징&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;설득에 필요한 정량적인 데이터를 활용하지 못한 경험.&lt;/li&gt;
+&lt;li&gt;주요 관계자와 신뢰를 쌓지 못한 경험.&lt;/li&gt;
+&lt;li&gt;개인 관심사를 중심으로 업무를 진행한 경험.&lt;/li&gt;
+&lt;li&gt;비효율적이거나 논리적이지 않은 방법으로 관계를 형성하려 했던 경험.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;좋은 답변 특징&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터를 근거 삼아 설득한 경험&lt;/li&gt;
+&lt;li&gt;주요 관계자와 강한 신뢰를 쌓은 경험.&lt;/li&gt;
+&lt;li&gt;주요 관계자들의 견해와 입장을 이해하고 그런 이해를 바탕으로 업무에 도움을 준 경험.&lt;/li&gt;
+&lt;li&gt;설득을 통해 본인의 팀 또는 다른 팀까지 좋은 영향을 주었던 경험.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-적응력&#34;&gt;4. 적응력&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;변화하는 환경에 효율적으로 반응하는 능력&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;끊임없이 탐구하고 학습한다.&lt;/li&gt;
+&lt;li&gt;스트레스가 심한 상황에서도 건설적인 자세를 유지한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;적응력 파악 질문 예&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;조직 개편 (새로운 팀장이 오거나, 팀을 이동하거나) 등으로 스트레스를 받았던 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;업무 처리 방법에 변화를 시도 했던 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;변하는 상황에 맞추려는 노력이 부족했던 경험&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;부적절한 답변&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;스트레스를 잘 처리하지 못한 경험.&lt;/li&gt;
+&lt;li&gt;정보가 부족한 경우 비효율적으로 일을 처리한 경험.&lt;/li&gt;
+&lt;li&gt;변하는 상황에 맞추려는 노력이 부족했던 경험.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;적절한 답변&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;변하는 상황에 효율적으로 또는 즉각적으로 대응했던 경험.&lt;/li&gt;
+&lt;li&gt;정보가 부족한 경우에도 효율적으로 일을 하거나, 그 자체를 새로운 기회로 삼았던 경험.&lt;/li&gt;
+&lt;li&gt;스트레스가 심한 상황에서도 건설적인 자세를 유지했던 경험.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-판단력&#34;&gt;5. 판단력&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;여러 대안과 관점을 고려해서 결정한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해결하려는 문제의 범위를 정의한다.&lt;/li&gt;
+&lt;li&gt;가정하지 않고 근거를 가지고 증명한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;판단력 파악 질문 예&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;업무에서 치명적인 실수를 했던 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;여러가지 대안이 있는 상황에서 어떤 과정을 통해 가장 적절한 방법을 선택했나요?&lt;/li&gt;
+&lt;li&gt;복잡했던 문제를 해결하기 전에, 필요한 지식을 습득해야 했던 경험이 있나요?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;적절한 답변&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;판단에 필요한 정보를 다양한 방법으로 수집하고 검토한 다음 결정했던 경험.&lt;/li&gt;
+&lt;li&gt;필요한 정보를 기반으로 적절한 시간 내에 좋은 판단을 했던 경험.&lt;/li&gt;
+&lt;li&gt;필요한 상황에서 적절한 도움을 요청했던 경험.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-협업&#34;&gt;6. 협업&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;동료 또는 다른 팀간의 팀웍 또는 공조를 통해 업무를 해내는 능력&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;여러 동료 또는 팀의 리소스와 노력을 조합하여 일을 한다.&lt;/li&gt;
+&lt;li&gt;개인의 목표가 아닌 공동의 목표를 달성하려 노력한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;협업 파악 질문 예&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;치명적인 이슈를 해결하는데 필요한 다른 팀과 같이 일했던 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;여러 팀이 함께 일해야 했던 프로젝트가 잘 되지 않았던 경험이 있나요?&lt;/li&gt;
+&lt;li&gt;동료와 마찰이 생겼떤 경험이 있나요?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;부적절한 답변&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;협업이 필요한 상황에서 최소한의 기여만 했던 경험.&lt;/li&gt;
+&lt;li&gt;요청 받은 경우에만 협업했던 경험.&lt;/li&gt;
+&lt;li&gt;협업이 증진시켰던 좋은 사례를 들지 못하는 경우&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;적절한 답변&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;협업에서 의미있고 중요한 업무를 했던 경험.&lt;/li&gt;
+&lt;li&gt;필요한 경우 협업을 제시하거나 주도했던 경험.&lt;/li&gt;
+&lt;li&gt;협업을 증진시켰던 좋은 사례를 제시한 경우.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;star-프레임워크&#34;&gt;STAR 프레임워크&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Situation,_task,_action,_result&#34;&gt;star framework interview&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;S&lt;/strong&gt;ituation: 어떠한 상황에서&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;T&lt;/strong&gt;ask: 어떤 업무(Task) 하거나 또는 목표(target)를 달성해야 했는지.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A&lt;/strong&gt;ction: 그래서 본인이 왜, 무엇을, 어떻게 했으며&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;R&lt;/strong&gt;esult: 결과는 어땠는지, 그 결과로 얻은 성과는? 또는 실패했다면 그로부터 배운것&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/111059714-192cc200-84db-11eb-9d60-5dc4a0156d1b.png&#34; alt=&#34;Screen Shot 2021-03-14 at 3 36 29 PM&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;면접관에게-질문하기&#34;&gt;면접관에게 질문하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;면접이 끝나기 전에 면접관에게 궁금한 것을 물어볼 수 있는 시간이 주어진다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;좋은 질문을 남기면 면접관의 인상에 남기도 하고, 핵심 역량을 들어낼 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;좋은 질문 예&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이곳에서 일하며 배우거나 경험한 가장 중요하거나 가치있는 것은 무엇인가요?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 회사 또는 팀에서 현재 직면한 기술적인 이슈는 무엇인가요?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;새로운 팀원이 합류하면 업무 적응은 어떤 식으로 이루어지나요? 참고할 문서가 잘 정리되어 있거나 멘토를 지정해 주시나요?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사외 또는 사내 고객과 주기적인 회의나 모임을 갖고 있나요? 고객과 어떤 방식으로 의사소통하는지 궁금합니다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;어떤 업무의 해결책이 여러개일 때, 어떤 과정을 통해서 결정하나요?&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;일정은 그래도인데 프로젝트의 요구사항이 계속 바뀐 적이 있나요? 이 팀이나 회사에서는 보통 어떻게 대처하나요?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;그-밖에&#34;&gt;그 밖에&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;사용하는 언어 또는 이야기 수준을 면접관에게 맞추기.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;자세는 상대방 정면을 향하고 얼굴을 마주보며 이야기 할 것.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;면접관이 사용하는 단어 또는 제스처를 따라가기.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;자신감있게 말하기.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;단답형 보다는 서술형으로 하지만 만연체로 말하지 말고 핵심적인 이야기만 할 것.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;수동적이었던 경험 보다는 주도적이었던 경험을 이야기할 것.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.inflearn.com/course/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0/dashboard&#34;&gt;더 개발자, 인터뷰 가이드&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>더 개발자 인터뷰 가이드 - 구직 또는 이직 (2)</title>
+      <link>http://localhost:1313/post/2021/03/13/%EB%8D%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EA%B0%80%EC%9D%B4%EB%93%9C-%EA%B5%AC%EC%A7%81-%EB%98%90%EB%8A%94-%EC%9D%B4%EC%A7%81-2.html</link>
+      <pubDate>Sat, 13 Mar 2021 22:10:14 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2021/03/13/%EB%8D%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EA%B0%80%EC%9D%B4%EB%93%9C-%EA%B5%AC%EC%A7%81-%EB%98%90%EB%8A%94-%EC%9D%B4%EC%A7%81-2.html</guid>
+      <description>&lt;h3 id=&#34;구직-및-이직을-하는-이유&#34;&gt;구직 및 이직을 하는 이유&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;연봉&lt;/li&gt;
+&lt;li&gt;업무&lt;/li&gt;
+&lt;li&gt;협업&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;구직-및-이직시에-선택해야-할-것&#34;&gt;구직 및 이직시에 선택해야 할 것&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;적절한 이직 시기&lt;/li&gt;
+&lt;li&gt;자신의 주요 업종을 정할 것&lt;/li&gt;
+&lt;li&gt;타겟 회사를 정할 것&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;적절한-이직-시기&#34;&gt;적절한 이직 시기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;이직을 하려는 이유에 따라서 이직 시기가 달라진다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;피치 못할 사정이라면, 당장 이직을 준비 해야 한다.&lt;/li&gt;
+&lt;li&gt;더 나은 연봉, 업무 또는 협업 환경을 기대한다면 언제든지 이직을 알아 볼 수 있다.&lt;/li&gt;
+&lt;li&gt;기술 변화에 민감한 업종은 해당 흐름에 따라야 한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;당장 이직에 대한 생각이 없더라도 인터뷰를 볼 수 는 있다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;긍정적인 생각으로 일을 하면서, 항상 조금씩 최악의 상황에 대비를 하는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;주-업종을-정하기&#34;&gt;주 업종을 정하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;업종을 정할 때, 고려할 것
+&lt;ul&gt;
+&lt;li&gt;본인의 취향 및 전공&lt;/li&gt;
+&lt;li&gt;시장의 수요&lt;/li&gt;
+&lt;li&gt;연봉&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;전문 분야를 정하고, 특화된 기술을 익혀야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;취업-또는-이직할-목표-회사-정하기&#34;&gt;취업 또는 이직할 목표 회사 정하기&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;지원할 회사 또는 팀을 선택하는 기준&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;성장 기회&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;개발 문화&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;비즈니스&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;면접 때 자주 질문하는 질문중에는 &amp;ldquo;왜 우리 회사에 지원을 하게 되었는지..&amp;rdquo; 인데 연봉과 복지 때문에 회사를 선택했다고 말하면 별로 매력적이지 않게 보인다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;따라서, 팀을 선택하는 기준을 명확히 정하고, 회사에 지원하게 된 동기에 대해서 설명을 논리적으로 할 수 있어야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;면접-가이드&#34;&gt;면접 가이드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;평상시 준비해오지 않았다면 집중 준비 기간 약 &lt;code&gt;3&lt;/code&gt;개월 정도가 필요하다.
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;자료구조&lt;/strong&gt;와 &lt;strong&gt;알고리즘&lt;/strong&gt; 복습&lt;/li&gt;
+&lt;li&gt;매일 코딩 테스트 문제 한 문제씩 풀기&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;핵심 역량에 대한 예상 질문에 대한 답변&lt;/strong&gt; 준비하기&lt;/li&gt;
+&lt;li&gt;프로그래밍 서적(&lt;strong&gt;운영체제, 네트워크, 데이터베이스&lt;/strong&gt;) 꾸준히 읽기&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;코딩을 꾸준히 하기(사이드 프로젝트, 업무를 진행하면서 해결한 문제 등..)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;자료구조와-알고리즘&#34;&gt;자료구조와 알고리즘&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;코딩 문제를 풀 때마다 &lt;code&gt;Big O&lt;/code&gt; 노테이션으로 효율성을 따져봐야 한다.&lt;/li&gt;
+&lt;li&gt;리스트, 배열, 스택, 큐, 해시 테이블, 힙, 이진 트리 등의 자료 구조.&lt;/li&gt;
+&lt;li&gt;정렬 알고리즘&lt;/li&gt;
+&lt;li&gt;자신이 자신있는 프로그래밍 언어가 제공하는 &lt;code&gt;Collection API&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BFS&lt;/code&gt;, &lt;code&gt;DFS&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;면접-가이드---실전&#34;&gt;면접 가이드 - 실전&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;이력서&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;지원시 필요로 하는 최소한의 개인 정보를 공개하는 것이 좋다.&lt;/li&gt;
+&lt;li&gt;기술과 핵심 역량을 구체적으로 명시할 것&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;면접 시 질문에 답하기&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;동료에게 이야기 하듯이 편안하고, 구체적이고, 솔직하게&lt;/li&gt;
+&lt;li&gt;실제 경험 했던 사례를 구체적으로 설명하기&lt;/li&gt;
+&lt;li&gt;근거를 들어 선택이나 결정이 &lt;strong&gt;논리적으로&lt;/strong&gt; 결정했다는 것을 어필하는 것이 좋다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;코딩 인터뷰 풀기&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;코딩 인터뷰 프레임워크 적용&lt;/li&gt;
+&lt;li&gt;아는 문제가 나온 경우, 바로 문제를 풀면 안된다! (코딩 인터뷰 프레임워크)를 적용해서 풀어야 한다!&lt;/li&gt;
+&lt;li&gt;모르는 문제가 나온 경우(너무 당황하지 않아도 된다, 풀다가 모르는 상황이 나왔을 때 물어보면 된다, 그렇다면 면접관이 힌트를 줄텐데, 힌트를 주의 깊게 들어야한다!, 피드백을 제공했음에도 면접관의 피드백을 적용하지 않았다면 문제를 풀었다고 해도 별로 좋은 점수를 받지는 못한다.)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;면접-가이드---결과&#34;&gt;면접 가이드 - 결과&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;좋은 결과&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;그동안의 노력을 되새기며 기뻐하면 된다!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;안좋은 결과&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;면접은 불특정 다수와의 경쟁이다.&lt;/li&gt;
+&lt;li&gt;기회는 한 번 뿐이 아니다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;이번 면접을 통해서 배운것이 있다면&lt;/strong&gt;, 그것만으로도 이득이다.&lt;/li&gt;
+&lt;li&gt;코딩 문제 뿐만 아니라, 면접관과의 커뮤니케이션에서 놓치고 있는 부분이 있지는 않은지 살펴봐야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;오퍼-수락전에-확인-할-것&#34;&gt;오퍼 수락전에 확인 할 것&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;구체적으로 어떤 일을 하게 될지&lt;/li&gt;
+&lt;li&gt;같은 일을 하게 될 동료 구성원&lt;/li&gt;
+&lt;li&gt;운영 업무와 개발 업무의 비중&lt;/li&gt;
+&lt;li&gt;하루 일과&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;입사-또는-이직-이후-업무-적응-가이드&#34;&gt;입사 또는 이직 이후 업무 적응 가이드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;팀에 잘 적응 할 수록, 더 빨리 중요한 일을 맡을 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;생소한 키워드를 문맥 별로 모아서 물어볼 것&lt;/li&gt;
+&lt;li&gt;간단한 질문이 아니라면 30분에서 ~ 1시간 가량의 미팅을 잡는 것이 좋다.&lt;/li&gt;
+&lt;li&gt;처음부터 너무 많은 정보를 파악하려고 하지 말고 나눠서 정복하는 전략을 사용할 것.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;긍정적인 피드백을 받도록 노력해야 한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;기술적인 다양성과 포용력을 키울 것.&lt;/li&gt;
+&lt;li&gt;맡은 업무에 대한 책임감.&lt;/li&gt;
+&lt;li&gt;결과를 만들어 내려고 최선을 다할 것.&lt;/li&gt;
+&lt;li&gt;장기적으로 또는 단기적으로 개선하고 싶은 것들을 정리해서 공유한다.&lt;/li&gt;
+&lt;li&gt;업무와 관련된 것들을 정확하게 이해하려고 하고, 넘어가려고 하는 모습을 보여준다면 긍정적인 피드백을 얻는데 도움이 될 것이다.&lt;/li&gt;
+&lt;li&gt;툴을 만듬으로서, 전체적인 맥락에서 왜 필요한 건지를 파악하는데도 시간을 들여야하는데 당장 도구만 만드는 경우를 많이 보았다.&lt;/li&gt;
+&lt;li&gt;성장하려면 자기가 맡은 업무 말고도, 배경 및 프로젝트에서 어떤 역할을 하는지에 대한 생각도 해야한다!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;면접-가이드-1&#34;&gt;면접 가이드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;평상시 꾸준히 준비한다면 한 달 또는 최소 약 세달 정도의 집중적인 연습이 필요하다.&lt;/li&gt;
+&lt;li&gt;실전시 긴장하지 말고 논리적이고 구체적으로 대화를 나누며 진행할 것.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.inflearn.com/course/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0/dashboard&#34;&gt;더 개발자, 인터뷰 가이드&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>더 개발자 인터뷰 가이드 - 채용 (1)</title>
+      <link>http://localhost:1313/post/2021/03/13/%EB%8D%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EA%B0%80%EC%9D%B4%EB%93%9C-%EC%B1%84%EC%9A%A9-1.html</link>
+      <pubDate>Sat, 13 Mar 2021 19:15:14 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2021/03/13/%EB%8D%94-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0-%EA%B0%80%EC%9D%B4%EB%93%9C-%EC%B1%84%EC%9A%A9-1.html</guid>
+      <description>&lt;h3 id=&#34;개발자-인터뷰-개요&#34;&gt;개발자 인터뷰 개요&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;단순히 &lt;strong&gt;코딩 실력&lt;/strong&gt;만 보는 것이 아니다!&lt;/li&gt;
+&lt;li&gt;실제로 문제를 잘 풀어도 떨어질 수 있다.&lt;/li&gt;
+&lt;li&gt;면접을 볼 때, 지원자의 기술적인 역량만 보지는 않는다.&lt;/li&gt;
+&lt;li&gt;그 사람이 문제를 잘 푼다고 해도, 실제로 떨어질 수 있다. 이러한 경우는 대다수가 &lt;strong&gt;소프트 스킬&lt;/strong&gt;이 부족했기 때문이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;채용&#34;&gt;채용&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;면접관의 입장에서, 채용을 바라볼 것이다.&lt;/li&gt;
+&lt;li&gt;면접관에게 &lt;strong&gt;절대로 거짓말&lt;/strong&gt;을 하면 안된다, 따라서 평상시에 준비를 하고 이와 같은 행동을 해왔어야 한다.&lt;/li&gt;
+&lt;li&gt;이번 채용을 통해서 배운다라는 생각을 하면 좋다.&lt;/li&gt;
+&lt;li&gt;우리를 채용하고 싶기 때문에, 물어보는 것이고 우리를 떨어뜨리려고 당혹 시키려고 질문하는 것이 아니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;고전적인-채용-절차&#34;&gt;고전적인 채용 절차&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;1. 채용 공고
+2. 이력서 접수 및 검토
+3. 개발자 비대면 면접
+4. 개발자 대면 면접
+5. 임원 면접
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;이력서-접수-및-검토의-문제&#34;&gt;이력서 접수 및 검토의 문제&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;사실 여부 판단이 어렵다.&lt;/li&gt;
+&lt;li&gt;지원자의 기술적인 실력을 가늠하기 어렵다.&lt;/li&gt;
+&lt;li&gt;단편적인 정보들로 인해 편견을 가지기 쉽다.&lt;/li&gt;
+&lt;li&gt;개발자가 검토할 서류가 너무 많다.&lt;/li&gt;
+&lt;li&gt;이력서로 개발자를 필터링하는 것은, 너무 어렵다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;비대면-면접의-문제&#34;&gt;비대면 면접의 문제&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;지원자 당 한시간 정도를 소비하기 때문에 비용이 크다.
+&lt;ul&gt;
+&lt;li&gt;제한된 시간 이내에 충분히 파악하기 힘들다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;단답형 또는 서술형 답변의 기준을 정해둘 필요가 있다.
+&lt;ul&gt;
+&lt;li&gt;주관에 따라서 상대방이 충분하게 답을 했다고 생각했을 수도 있고 충분하게 답변하지 않다고 생각할 수 있다.&lt;/li&gt;
+&lt;li&gt;따라서 기준이 있어야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;지원자의 실력을 가늠하기 충분하지 않다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;대면-면접의-문제&#34;&gt;대면 면접의 문제&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;지원자를 파악하기 좋은 채용 절차이지만, 비용이 크다.&lt;/li&gt;
+&lt;li&gt;지원자가 부족할 수도 있어서 도중에 면접을 중단하는 경우가 있을 수도 있지만, 원칙적으로는 끝까지 봐야한다.&lt;/li&gt;
+&lt;li&gt;지나치게 문제 풀이에만 집중하는 경향이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;임원-면접의-문제&#34;&gt;임원 면접의 문제&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;사내 문화와 잘 어우러 질지, 잘 적응할 수 있는지를 물어본다.&lt;/li&gt;
+&lt;li&gt;과연 임원 면접이 필요한가?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;변하고-있는-채용-절차&#34;&gt;변하고 있는 채용 절차&lt;/h3&gt;
+&lt;hr&gt;
+&lt;pre&gt;&lt;code&gt;1. 채용 공고
+2. 이력서 접수 및 리쿠루팅
+3. 비대면 면접
+4. 대면 면접
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&#34;이력서-접수-및-리크루팅&#34;&gt;이력서 접수 및 리크루팅&lt;/h4&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;적극적인 채용 비중 증가&lt;/li&gt;
+&lt;li&gt;잠재적인 지원자에게 리크루터가 직접 연락&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;비대면-면접-강화&#34;&gt;비대면 면접 강화&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;대면 면접 이전에 미리 기본적인 코딩 능력을 테스트&lt;/li&gt;
+&lt;li&gt;인력 비용을 최소화 할 수 있는 형태로 운영&lt;/li&gt;
+&lt;li&gt;단점도 있지만 이전의 비대면 면접에 비하면 보자 비중이 높아짐&lt;/li&gt;
+&lt;li&gt;비대면 면접에서 실제로 코딩 문제를 풀어야 한다.
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.codility.com&#34;&gt;codility&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;모든 과정이 녹화가 된다.&lt;/strong&gt; 따라서 코드를 작성하는 과정을 따라갈 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;따라서 이력서 접수 이전에도 코딩 테스트 준비를 꾸준하게 해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;대면-면접-강화&#34;&gt;대면 면접 강화&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;개발자 뿐만 아니라, 매니저 트랙의 직원도 면접관으로 참여&lt;/li&gt;
+&lt;li&gt;코딩 스킬 뿐 아니라 커뮤니케이션 또는 비기술적인 역량 검증&lt;/li&gt;
+&lt;li&gt;문제를 푸는 것 뿐 아니라 &lt;strong&gt;&amp;ldquo;어떻게&amp;rdquo;&lt;/strong&gt; 푸는지를 중요하게 보기 시작한다.&lt;/li&gt;
+&lt;li&gt;기술적인 능력 이외에도 같이 일을 해나갈 수 있는지를 검토 해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;대면-면접-구성&#34;&gt;대면 면접 구성&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;45&lt;/code&gt;분 면접 &lt;code&gt;15&lt;/code&gt;분 휴식&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5&lt;/code&gt;분까지 &lt;strong&gt;아이스 브레이킹&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;이전 경력을 보면서 이전 회사에서는 어떤 일을 해왔는지..&lt;/li&gt;
+&lt;li&gt;어떤 프로그래밍 언어에 자신이 있는지..&lt;/li&gt;
+&lt;li&gt;그 언어를 왜 좋아하는지?&amp;hellip;&lt;/li&gt;
+&lt;li&gt;지원자의 긴장을 풀어주는 것이 목적이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;15&lt;/code&gt;분까지 &lt;strong&gt;소프트 스킬&lt;/strong&gt; 검증
+&lt;ul&gt;
+&lt;li&gt;소프트 스킬과 관련된 질문을 한다.&lt;/li&gt;
+&lt;li&gt;지원자의 과거 행동이나 현재 면접에 임하는 자세가 우리 팀 또는 회사가 중요하게 여기는 가치에 부합하는가?, 적합한가를 보는 것이 소프트 스킬을 보는 단계이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;40&lt;/code&gt;분까지 &lt;strong&gt;하드 스킬&lt;/strong&gt; 및 &lt;strong&gt;소프트 스킬&lt;/strong&gt; 검증
+&lt;ul&gt;
+&lt;li&gt;문제를 푸는 것도 중요하지만, &lt;strong&gt;풀어가는 과정&lt;/strong&gt;도 중요하다.&lt;/li&gt;
+&lt;li&gt;보다 자세한 &lt;strong&gt;문제 풀이 프레임워크&lt;/strong&gt;에 대해서는 &lt;strong&gt;하드 스킬&lt;/strong&gt; 파트에서 확인&lt;/li&gt;
+&lt;li&gt;주제만 &lt;strong&gt;코딩 퀴즈&lt;/strong&gt;일 뿐, 실제로 동료와 업무를 하는 과정과 비슷하다고 생각하는 것이 좋다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;실제로 동료와 업무를 하는 과정과 비슷하다고 생각하는 것이 좋다.&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;만약 게시판을 동료와 같이 구현하는데, 동료가 코딩 부터 뚝딱뚝딱 해서, 완성했네요! 하면 어떻겠는가?.. 따라서 구현하기 전에 궁금하고 물어봐야할 것을 같이 검토를 해야한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;하드 스킬을 검증하는 것 처럼 보이지만, 사실 소프트 스킬을 같이 검토하는 단계이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;45&lt;/code&gt;분까지 질문 받기
+&lt;ul&gt;
+&lt;li&gt;간략하게 질문을 받을 수 있다.&lt;/li&gt;
+&lt;li&gt;지원자가 이 회사의 잠재적인 고객이자 동료가 될 수도 있다는 생각으로 대할 것이다.&lt;/li&gt;
+&lt;li&gt;지원자에게는 면접관의 이미지가 곧 그 회사를 대표하는 이미지라는 생각으로 임할 것.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;이력서-검토-가이드&#34;&gt;이력서 검토 가이드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;경력 및 이력이 채용 공고의 필수 자격 요건에 준하는지 확인.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이력서에 기술 및 경험을 구체적으로 서술하고 있는지 확인.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;업무에 충실하게 임했다면 해당 하는 업무를 통해서 어떠한 성과가 있었으며, 어떠한 기술을 사용하고 있고, 팀에서 어떤 역할을 맡았는지를 구체적으로 기술할 수 있다. 하지만 성실하게 임하지 못했던 개발자라면 구체적으로 임할 수 없다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;회사 또는 팁에서 추구하는 중요한 가치가 드러나는지 확인.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이러한 이력서가 정말 좋은 이력서이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;주의할 사항&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;무의식 또는 의식적인 편견에 주의할 것.&lt;/li&gt;
+&lt;li&gt;이력서에 적힌 기술, 경험 및 가치관 이외의 사항은 무시할 것.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;면접-가이드&#34;&gt;면접 가이드&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;지원자의 면접 경험&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;일관된 면접 기법이나 방식을 사용할 것.&lt;/li&gt;
+&lt;li&gt;편안하고 일상적인 억양으로 말할 것.&lt;/li&gt;
+&lt;li&gt;본론에 집중할 것.&lt;/li&gt;
+&lt;li&gt;지원자의 역량에 집중할 것.&lt;/li&gt;
+&lt;li&gt;직무와 관련있는 질문만 할 것.&lt;/li&gt;
+&lt;li&gt;눈을 마주하고 이야기 할 것.&lt;/li&gt;
+&lt;li&gt;주의깊게 듣고 지원자의 말이 끝날때까지 기다릴 것.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;이해하지 못한 것을 이해한 척 하지 말고 다시 확인할 것.&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;지원자-평가-방법&#34;&gt;지원자 평가 방법&lt;/h3&gt;
+&lt;hr&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;지원자를 평가할 때는 다양한 시각으로 기술적인 역량과 경험을 검토해야한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;지원자의 기술적인 역량이나 경험을 바탕으로 판단할 것&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;평가 기준으로 여기지 말아야 할 것.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;태도 (적극적, 소극적, 악수하는 방법, 바디 랭귀지 등)&lt;/li&gt;
+&lt;li&gt;외모 (복장, 스타일, 헤어, 문신 등)&lt;/li&gt;
+&lt;li&gt;행동 (말하는 스타일, 속도, 억양 등)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;중요하게 여겨야 할 핵심 역량&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;판단력&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;적응력&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;결과를 만들어내는 노력&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;협업&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;영향력&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;고객 중심&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다양한 시각을 가진 면접 팀을 구성할 것&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;개발자와 매니저.&lt;/li&gt;
+&lt;li&gt;다양한 경력의 개발자.&lt;/li&gt;
+&lt;li&gt;여러 팀의 개발자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;피드백-공유&#34;&gt;피드백 공유&lt;/h3&gt;
+&lt;hr&gt;
+&lt;p&gt;객관적이고, 공정한 피드백을 공유&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 면접관의 면접이 끝나기 전에 서로의 피드백을 공유하지 않는다.&lt;/li&gt;
+&lt;li&gt;피드백을 면접팀과 공유하며, 객관적인 평가를 내렸는지 점검한다.&lt;/li&gt;
+&lt;li&gt;어떤 지원자에게 대해 강한 반응이나 가정을 기반으로 결정을 내린 경우 대화로 풀어야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.inflearn.com/course/%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9D%B8%ED%84%B0%EB%B7%B0/dashboard&#34;&gt;더 개발자, 인터뷰 가이드&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>자바 스프링 세미나 요약 (1)</title>
+      <link>http://localhost:1313/post/2021/03/10/%EC%9E%90%EB%B0%94-%EC%8A%A4%ED%94%84%EB%A7%81-%EC%84%B8%EB%AF%B8%EB%82%98-%EC%9A%94%EC%95%BD-1.html</link>
+      <pubDate>Wed, 10 Mar 2021 22:15:14 +0900</pubDate>
+      <author>sh95119@gmail.com (이동욱)</author>
+      <guid>http://localhost:1313/post/2021/03/10/%EC%9E%90%EB%B0%94-%EC%8A%A4%ED%94%84%EB%A7%81-%EC%84%B8%EB%AF%B8%EB%82%98-%EC%9A%94%EC%95%BD-1.html</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;디버깅 실력을 늘리기 위해서라면, 디스패치 서블릿을 분석해보는 것이 좋다.&lt;/li&gt;
+&lt;li&gt;웹 서버와 웹 애플리케이션 서버의 차이 정적 컨텐츠, 동적 컨텐츠이다.&lt;/li&gt;
+&lt;li&gt;요즘에는 2-tier 구조를 잘 안가져간다.&lt;/li&gt;
+&lt;li&gt;서블릿 컨테이너의 몸집을 가볍게 했다.&lt;/li&gt;
+&lt;li&gt;언더 토우, 논블록킹 IO 이다.&lt;/li&gt;
+&lt;li&gt;스프링은 서버가 아니다! 스프링은 POJO를 기반으로 하는 경량의 자바 컨테이너로 엔터프라이즈급 애플리케이션을 개발하기 위한 모든 기능을 종합적으로 제공하는 도구입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;참고-문헌&#34;&gt;참고 문헌&lt;/h3&gt;
+</description>
+    </item>
+    
+    <item>
       <title>네이버 신입 공채 체크 포인트 및 준비해야할 것들</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4.html</link>
+      <link>http://localhost:1313/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4.html</link>
       <pubDate>Sun, 07 Mar 2021 22:15:14 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4.html</guid>
+      <guid>http://localhost:1313/post/2021/03/07/%EB%84%A4%EC%9D%B4%EB%B2%84-%EC%8B%A0%EC%9E%85-%EA%B3%B5%EC%B1%84-%EC%B2%B4%ED%81%AC-%ED%8F%AC%EC%9D%B8%ED%8A%B8-%EB%B0%8F-%EC%A4%80%EB%B9%84%ED%95%B4%EC%95%BC%ED%95%A0-%EA%B2%83%EB%93%A4.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/110241534-b7c59a00-7f94-11eb-8b8c-3038b005cff4.png&#34; alt=&#34;Screen Shot 2021-03-07 at 10 29 29 PM&#34;&gt;&lt;/p&gt;
 &lt;p&gt;네이버에서 신입을 뽑을 때 고려하는 부분을 알 수 있을 것 같아서 읽어보았다. 물론 다른 기업들도 이러한 점을 고려해서 신입을 뽑을 것이다.&lt;/p&gt;
 &lt;ul&gt;
@@ -151,10 +923,10 @@
     
     <item>
       <title>우아한 테크 코드 지원 후기 및 회고</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%85%8C%ED%81%AC-%EC%BD%94%EB%93%9C-%EC%A7%80%EC%9B%90-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%ED%9A%8C%EA%B3%A0.html</link>
+      <link>http://localhost:1313/post/2021/03/03/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%85%8C%ED%81%AC-%EC%BD%94%EB%93%9C-%EC%A7%80%EC%9B%90-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%ED%9A%8C%EA%B3%A0.html</link>
       <pubDate>Wed, 03 Mar 2021 23:15:14 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%85%8C%ED%81%AC-%EC%BD%94%EB%93%9C-%EC%A7%80%EC%9B%90-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%ED%9A%8C%EA%B3%A0.html</guid>
+      <guid>http://localhost:1313/post/2021/03/03/%EC%9A%B0%EC%95%84%ED%95%9C-%ED%85%8C%ED%81%AC-%EC%BD%94%EB%93%9C-%EC%A7%80%EC%9B%90-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%ED%9A%8C%EA%B3%A0.html</guid>
       <description>&lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109818546-707a9900-7c76-11eb-857b-2ee77f773bf0.png&#34; alt=&#34;Screen Shot 2021-03-03 at 11 15 58 PM&#34;&gt;&lt;/p&gt;
 &lt;p&gt;이전에 우아한 테크코스에 지원을 하여 코딩 테스트를 본 적이 있었다. 비록 탈락했지만 다음에 더 잘할 수 있도록 피드백을 주셨다.&lt;/p&gt;
 &lt;h3 id=&#34;코딩-테스트&#34;&gt;코딩 테스트&lt;/h3&gt;
@@ -187,10 +959,10 @@
     
     <item>
       <title>라인 개발자 입사기를 읽고 느낀점</title>
-      <link>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</link>
+      <link>http://localhost:1313/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</link>
       <pubDate>Wed, 03 Mar 2021 21:49:39 +0900</pubDate>
       <author>sh95119@gmail.com (이동욱)</author>
-      <guid>https://dongwooklee96.github.io/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</guid>
+      <guid>http://localhost:1313/post/2021/03/03/%EB%9D%BC%EC%9D%B8-%EA%B0%9C%EB%B0%9C%EC%9E%90-%EC%9E%85%EC%82%AC%EA%B8%B0%EB%A5%BC-%EC%9D%BD%EA%B3%A0-%EB%8A%90%EB%82%80%EC%A0%90.html</guid>
       <description>&lt;h1 id=&#34;지원서-작성할-때-참고할-부분&#34;&gt;지원서 작성할 때, 참고할 부분&lt;/h1&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;img src=&#34;https://user-images.githubusercontent.com/14002238/109811374-1a095c80-7c6e-11eb-9077-d4d5a18b0768.png&#34; alt=&#34;Screen Shot 2021-03-03 at 10 16 05 PM&#34;&gt;&lt;/p&gt;
